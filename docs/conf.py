@@ -290,32 +290,32 @@ texinfo_documents = [
 
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None}
+#intersphinx_mapping = {'https://docs.python.org/': None}
 
 # Autoapi ocnfiguration
 autoapi_type = 'dotnet'
 autoapi_dirs = [
-    '../caching/src',
-    '../configuration/src',
-    '../dataprotection/src',
-    '../dependencyinjection/src',
-    '../diagnostics/src',
-    '../eventnotification/src',
-    '../filesystem/src',
+#    '../caching/src',
+#    '../configuration/src',
+#    '../dataprotection/src',
+#    '../dependencyinjection/src',
+#    '../diagnostics/src',
+#    '../eventnotification/src',
+#    '../filesystem/src',
     '../hosting/src',
     '../httpabstractions/src',
-    '../iisintegration/src',
-    '../jsonpatch/src',
-    '../kestrelhttpserver/src',
-    '../localization/src',
-    '../logging/src',
-    '../options/src',
-    '../proxy/src',
-    '../routing/src',
-    '../security/src',
-    '../session/src',
-    '../staticfiles/src',
-    '../testing/src',
-    '../websockets/src'
+#    '../iisintegration/src',
+#    '../jsonpatch/src',
+#    '../kestrelhttpserver/src',
+#    '../localization/src',
+#    '../logging/src',
+#    '../options/src',
+#    '../proxy/src',
+#    '../routing/src',
+#    '../security/src',
+#    '../session/src',
+#    '../staticfiles/src',
+#    '../testing/src',
+#    '../websockets/src'
 ]
 autoapi_keep_files = True
