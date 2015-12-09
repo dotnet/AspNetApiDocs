@@ -9,7 +9,9 @@ Welcome to ASP.NET API Reference's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 2
+  :maxdepth: 2
+  
+  autoapi/index
 
 
 
