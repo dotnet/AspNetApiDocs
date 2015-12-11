@@ -299,4 +299,4 @@ texinfo_documents = [
 autoapi_type = 'dotnet'
 autoapi_file_patterns = [ 'docfx.json' ]
 autoapi_dirs = [ '..' ]
-autoapi_keep_files = False
+autoapi_keep_files = True
