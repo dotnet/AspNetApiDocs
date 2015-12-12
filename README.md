@@ -7,12 +7,12 @@ This repo uses Git submodules to include the various ASP.NET repos. You should c
 ## Setup
 
 After cloning you need to do the following setup steps:
-1. [Install DNX (64 bit)](http://docs.asp.net/en/latest/getting-started/index.html)
-2. Restore packages for all submodules by running `dnu restore --parallel aspnet`
-3. Install the latest build of [docfx](https://github.com/dotnet/docfx) from the [docfx dev feed](https://myget.org/gallery/docfx-dev) by running `dnu commands install docfx`
-4. Install [Python](http://python.org)
-5. Install [Sphinx](http://sphinx-doc.org) and the required extensions by running `pip install -r requirements.txt`
-6. TEMPORARY WORKAROUND: Modify the .NET AutoAPI mapper in your `site_packages` folder to comment out the call to docfx:
+  1. [Install DNX (64 bit)](http://docs.asp.net/en/latest/getting-started/index.html)
+  2. Restore packages for all submodules by running `dnu restore --parallel aspnet`
+  3. Install the latest build of [docfx](https://github.com/dotnet/docfx) from the [docfx dev  feed](https://myget.org/gallery/docfx-dev) by running `dnu commands install docfx`
+  4. Install [Python](http://python.org)
+  5. Install [Sphinx](http://sphinx-doc.org) and the required extensions by running `pip install -r requirements.txt`
+  6. TEMPORARY WORKAROUND: Modify the .NET AutoAPI mapper in your `site_packages` folder to comment out the call to docfx:
 
 ```python
 def load(self, patterns, dirs, ignore=None, **kwargs):
@@ -54,8 +54,8 @@ def load(self, patterns, dirs, ignore=None, **kwargs):
 ```
 
 To build the ASP.NET API docs:
-1. Run `docfx` to pregenerate the API reference metadata
-2. Run `make` from the `docs` folder to build the .rst files
+  1. Run `docfx` to pregenerate the API reference metadata
+  2. Run `make` from the `docs` folder to build the .rst files
 
 The generated reStructuredText files will be in the `docs/autoapi` folder. The metadata output from docfx can be found in the `docs/_api_` folder.
 
