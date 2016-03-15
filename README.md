@@ -61,7 +61,7 @@ The generated reStructuredText files will be in the `docs/autoapi` folder. The m
 
 You can control which repos and projects you want to generate API docs for by modifying docfx.json.
 
-## Known Issus
+## Known Issues
 
 - Restore fails for some build dependencies in the Kestrel and MVC repos. The failures can be ignored.
 - Running docfx on all of the ASP.NET projects is very memory intensive and requires a 64-bit process or you will get `OutOfMemoryExceptions`.
