@@ -32,7 +32,7 @@ import shlex
 # ones.
 extensions = [
     'sphinx.ext.intersphinx',
-    'autoapi.extension',
+ #   'autoapi.extension',
     'sphinxcontrib.dotnetdomain'
 ]
 
