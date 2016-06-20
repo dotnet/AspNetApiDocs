@@ -1,6 +1,6 @@
 # ASP.NET API Docs
 
-This repo is used to generate the ASP.NET API docs using the [Sphinx AutoAPI](https://gitub.com/rtfd/sphinx-autoapi) extension.
+This repo is used to generate the ASP.NET API docs using the [Sphinx AutoAPI](https://github.com/rtfd/sphinx-autoapi) extension.
 
 This repo uses Git submodules to include the various ASP.NET repos. You should clone this repo using a recursive clone (`git clone --recursive https://github.com/aspnet/apidocs`) so that all of the submodules are included.
 
