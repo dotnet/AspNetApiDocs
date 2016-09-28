@@ -1,0 +1,164 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  commentId: T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  id: IActionInvokerProvider
+  parent: Microsoft.AspNetCore.Mvc.Abstractions
+  children:
+  - Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  - Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  - Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order
+  langs:
+  - csharp
+  - vb
+  name: IActionInvokerProvider
+  nameWithType: IActionInvokerProvider
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  type: Interface
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: IActionInvokerProvider
+    path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+    startLine: 26
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.Abstractions
+  summary: "\nDefines an interface for components that can create an <see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker\"></see> for the\ncurrent request.\n"
+  remarks: "\n<p>\n<see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider\"></see> instances form a pipeline that results in the creation of an\n<see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker\"></see>. The <see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider\"></see> instances are ordered by\nan ascending sort of the <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see>.  \n</p>\n<p>\nTo create an <see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvoker\"></see>, each provider has its <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> method\ncalled in sequence and given the same instance of <see cref=\"T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext\"></see>. Then each\nprovider has its <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> method called in the reverse order. The result is\nthe value of <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext.Result\"></see>.  \n</p>\n<p>\nAs providers are called in a predefined sequence, each provider has a chance to observe and decorate the\nresult of the providers that have already run. \n</p>\n"
+  example: []
+  syntax:
+    content: public interface IActionInvokerProvider
+    content.vb: Public Interface IActionInvokerProvider
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order
+  id: Order
+  parent: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  langs:
+  - csharp
+  - vb
+  name: Order
+  nameWithType: IActionInvokerProvider.Order
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: Order
+    path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+    startLine: 47
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.Abstractions
+  summary: "\nGets the order value for determining the order of execution of providers. Providers execute in\nascending numeric value of the <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see> property.\n"
+  remarks: "\n<p>\nProviders are executed in an ordering determined by an ascending sort of the <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see> property.\nA provider with a lower numeric value of <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see> will have its\n<see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> called before that of a provider with a higher numeric value of\n<see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see>. The <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> method is called in the reverse ordering after\nall calls to <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see>. A provider with a lower numeric value of\n<see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see> will have its <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> method called after that of a provider\nwith a higher numeric value of <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see>.\n</p>\n<p>\nIf two providers have the same numeric value of <see cref=\"P:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.Order\"></see>, then their relative execution order\nis undefined.\n</p>\n"
+  example: []
+  syntax:
+    content: int Order { get; }
+    content.vb: ReadOnly Property Order As Integer
+    parameters: []
+    return:
+      type: System.Int32
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  id: OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  parent: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  langs:
+  - csharp
+  - vb
+  name: OnProvidersExecuting(ActionInvokerProviderContext)
+  nameWithType: IActionInvokerProvider.OnProvidersExecuting(ActionInvokerProviderContext)
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: OnProvidersExecuting
+    path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+    startLine: 53
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.Abstractions
+  summary: "\nCalled to execute the provider. \n"
+  example: []
+  syntax:
+    content: void OnProvidersExecuting(ActionInvokerProviderContext context)
+    content.vb: Sub OnProvidersExecuting(context As ActionInvokerProviderContext)
+    parameters:
+    - id: context
+      type: Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext
+      description: The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext"></see>.
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  id: OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  parent: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider
+  langs:
+  - csharp
+  - vb
+  name: OnProvidersExecuted(ActionInvokerProviderContext)
+  nameWithType: IActionInvokerProvider.OnProvidersExecuted(ActionInvokerProviderContext)
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: OnProvidersExecuted
+    path: src/Microsoft.AspNetCore.Mvc.Abstractions/Abstractions/IActionInvokerProvider.cs
+    startLine: 60
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.Abstractions
+  summary: "\nCalled to execute the provider, after the <see cref=\"M:Microsoft.AspNetCore.Mvc.Abstractions.IActionInvokerProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext)\"></see> methods of all providers,\nhave been called.\n"
+  example: []
+  syntax:
+    content: void OnProvidersExecuted(ActionInvokerProviderContext context)
+    content.vb: Sub OnProvidersExecuted(context As ActionInvokerProviderContext)
+    parameters:
+    - id: context
+      type: Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext
+      description: The <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext"></see>.
+references:
+- uid: Microsoft.AspNetCore.Mvc.Abstractions
+  commentId: N:Microsoft.AspNetCore.Mvc.Abstractions
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Abstractions
+  nameWithType: Microsoft.AspNetCore.Mvc.Abstractions
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext
+  parent: Microsoft.AspNetCore.Mvc.Abstractions
+  isExternal: false
+  name: ActionInvokerProviderContext
+  nameWithType: ActionInvokerProviderContext
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.ActionInvokerProviderContext

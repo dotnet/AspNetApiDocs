@@ -1,0 +1,886 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser
+  commentId: T:Microsoft.AspNetCore.Razor.RazorEditorParser
+  id: RazorEditorParser
+  parent: Microsoft.AspNetCore.Razor
+  children:
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.#ctor(Microsoft.AspNetCore.Razor.RazorEngineHost,System.String)
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose(System.Boolean)
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.FileName
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.GetAutoCompleteString
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.Host
+  - Microsoft.AspNetCore.Razor.RazorEditorParser.LastResultProvisional
+  langs:
+  - csharp
+  - vb
+  name: RazorEditorParser
+  nameWithType: RazorEditorParser
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser
+  type: Class
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: RazorEditorParser
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 74
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  summary: "\nParser used by editors to avoid reparsing the entire document on each text change.\n"
+  remarks: "\n<p>\nThis parser is designed to allow editors to avoid having to worry about incremental parsing.\nThe <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> method can be called with every change made by a user in an editor\nand the parser will provide a result indicating if it was able to incrementally apply the change.\n</p>\n<p>\nThe general workflow for editors with this parser is:\n<ol><li>User edits document.</li><li>Editor builds a <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see> structure describing the edit and providing a\nreference to the <em>updated</em> text buffer.</li><li>Editor calls <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> passing in that change.\n</li><li>Parser determines if the change can be simply applied to an existing parse tree node.\n</li></ol>\nNOTE: Additional flags can be applied to the <see cref=\"T:Microsoft.AspNetCore.Razor.PartialParseResult\"></see>, see that <code>enum</code> for more\ndetails. However, the <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\"></see> or <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see>\nflags will ALWAYS be present.\n</p>\n<p>\nA change can only be incrementally parsed if a single, unique, <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> (see\n<see cref=\"N:Microsoft.AspNetCore.Razor.Parser.SyntaxTree\"></see>) in the syntax tree can be identified as owning the entire change.\nFor example, if a change overlaps with multiple <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see>s, the change cannot be parsed incrementally\nand a full reparse is necessary. A <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> \"owns\" a change if the change occurs either a) entirely\nwithin it's boundaries or b) it is a pure insertion (see <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see>) at the end of a\n<see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> whose <see cref=\"P:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span.EditHandler\"></see> can accept the change (see\n<see cref=\"M:Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>).\n</p>\n<p>\nWhen the <see cref=\"T:Microsoft.AspNetCore.Razor.RazorEditorParser\"></see> returns <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\"></see>, it updates\n<see cref=\"P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\"></see> immediately. However, the editor is expected to update it's own data structures\nindependently. It can use <see cref=\"P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\"></see> to do this, as soon as the editor returns from\n<see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, but it should (ideally) have logic for doing so without needing the new\ntree.\n</p>\n<p>\nWhen <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see> is returned by <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, a\nbackground parse task has <em>already</em> been started. When that task finishes, the\n<see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> event will be fired containing the new generated code, parse tree and a\nreference to the original <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see> that caused the reparse, to allow the editor to resolve the\nnew tree against any changes made since calling <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>.\n</p>\n<p>\nIf a call to <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> occurs while a reparse is already in-progress, the reparse\nis canceled IMMEDIATELY and <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see> is returned without attempting to\nreparse. This means that if a consumer calls <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, which returns\n<see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see>, then calls it again before <see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> is\nfired, it will only receive one <see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> event, for the second change.\n</p>\n"
+  example: []
+  syntax:
+    content: 'public class RazorEditorParser : IDisposable'
+    content.vb: >-
+      Public Class RazorEditorParser
+          Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.#ctor(Microsoft.AspNetCore.Razor.RazorEngineHost,System.String)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.#ctor(Microsoft.AspNetCore.Razor.RazorEngineHost,System.String)
+  id: '#ctor(Microsoft.AspNetCore.Razor.RazorEngineHost,System.String)'
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: RazorEditorParser(RazorEngineHost, String)
+  nameWithType: RazorEditorParser.RazorEditorParser(RazorEngineHost, String)
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.RazorEditorParser(Microsoft.AspNetCore.Razor.RazorEngineHost, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: .ctor
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 90
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  summary: "\nConstructs the editor parser. One instance should be used per active editor. This\ninstance <em>can</em> be shared among reparses, but should <em>never</em> be shared between documents.\n"
+  example: []
+  syntax:
+    content: public RazorEditorParser(RazorEngineHost host, string sourceFileName)
+    content.vb: Public Sub New(host As RazorEngineHost, sourceFileName As String)
+    parameters:
+    - id: host
+      type: Microsoft.AspNetCore.Razor.RazorEngineHost
+      description: >-
+        The <see cref="T:Microsoft.AspNetCore.Razor.RazorEngineHost"></see> which defines the environment in which the generated
+
+        code will live. <see cref="P:Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode"></see> should be set if design-time behavior is
+
+        desired.
+    - id: sourceFileName
+      type: System.String
+      description: The physical path to use in line pragmas.
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
+  commentId: E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
+  id: DocumentParseComplete
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: DocumentParseComplete
+  nameWithType: RazorEditorParser.DocumentParseComplete
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
+  type: Event
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: DocumentParseComplete
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 112
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  summary: "\nEvent fired when a full reparse of the document completes.\n"
+  example: []
+  syntax:
+    content: public event EventHandler<DocumentParseCompleteEventArgs> DocumentParseComplete
+    content.vb: Public Event DocumentParseComplete As EventHandler(Of DocumentParseCompleteEventArgs)
+    return:
+      type: System.EventHandler{Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs}
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.Host
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEditorParser.Host
+  id: Host
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: Host
+  nameWithType: RazorEditorParser.Host
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.Host
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: Host
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 114
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: public RazorEngineHost Host { get; }
+    content.vb: Public ReadOnly Property Host As RazorEngineHost
+    parameters: []
+    return:
+      type: Microsoft.AspNetCore.Razor.RazorEngineHost
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.FileName
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEditorParser.FileName
+  id: FileName
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: FileName
+  nameWithType: RazorEditorParser.FileName
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.FileName
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: FileName
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 115
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: public string FileName { get; }
+    content.vb: Public ReadOnly Property FileName As String
+    parameters: []
+    return:
+      type: System.String
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.LastResultProvisional
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEditorParser.LastResultProvisional
+  id: LastResultProvisional
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: LastResultProvisional
+  nameWithType: RazorEditorParser.LastResultProvisional
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.LastResultProvisional
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: LastResultProvisional
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 116
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: public bool LastResultProvisional { get; }
+    content.vb: Public ReadOnly Property LastResultProvisional As Boolean
+    parameters: []
+    return:
+      type: System.Boolean
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+  id: CurrentParseTree
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: CurrentParseTree
+  nameWithType: RazorEditorParser.CurrentParseTree
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: CurrentParseTree
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 117
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: public Block CurrentParseTree { get; }
+    content.vb: Public ReadOnly Property CurrentParseTree As Block
+    parameters: []
+    return:
+      type: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Block
+  modifiers.csharp:
+  - public
+  - get
+  modifiers.vb:
+  - Public
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.GetAutoCompleteString
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.GetAutoCompleteString
+  id: GetAutoCompleteString
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: GetAutoCompleteString()
+  nameWithType: RazorEditorParser.GetAutoCompleteString()
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.GetAutoCompleteString()
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: GetAutoCompleteString
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 122
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: public virtual string GetAutoCompleteString()
+    content.vb: Public Overridable Function GetAutoCompleteString As String
+    return:
+      type: System.String
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  id: CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: CheckForStructureChanges(TextChange)
+  nameWithType: RazorEditorParser.CheckForStructureChanges(TextChange)
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: CheckForStructureChanges
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 145
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  summary: "\nDetermines if a change will cause a structural change to the document and if not, applies it to the\nexisting tree. If a structural change would occur, automatically starts a reparse.\n"
+  remarks: "\nNOTE: The initial incremental parsing check and actual incremental parsing (if possible) occurs\non the caller's thread. However, if a full reparse is needed, this occurs on a background thread.\n"
+  example: []
+  syntax:
+    content: public virtual PartialParseResult CheckForStructureChanges(TextChange change)
+    content.vb: Public Overridable Function CheckForStructureChanges(change As TextChange) As PartialParseResult
+    parameters:
+    - id: change
+      type: Microsoft.AspNetCore.Razor.Text.TextChange
+      description: The change to apply to the parse tree.
+    return:
+      type: Microsoft.AspNetCore.Razor.PartialParseResult
+      description: A <see cref="T:Microsoft.AspNetCore.Razor.PartialParseResult"></see> value indicating the result of the incremental parse.
+  modifiers.csharp:
+  - public
+  - virtual
+  modifiers.vb:
+  - Public
+  - Overridable
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose
+  id: Dispose
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: RazorEditorParser.Dispose()
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose()
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: Dispose
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 209
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  summary: "\nDisposes of this parser. Should be called when the editor window is closed and the document is unloaded.\n"
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose
+  implements:
+  - System.IDisposable.Dispose
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose(System.Boolean)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose(System.Boolean)
+  id: Dispose(System.Boolean)
+  parent: Microsoft.AspNetCore.Razor.RazorEditorParser
+  langs:
+  - csharp
+  - vb
+  name: Dispose(Boolean)
+  nameWithType: RazorEditorParser.Dispose(Boolean)
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser.Dispose(System.Boolean)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+      branch: dev
+      repo: https://github.com/aspnet/razor
+    id: Dispose
+    path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
+    startLine: 215
+  assemblies:
+  - Microsoft.AspNetCore.Razor
+  namespace: Microsoft.AspNetCore.Razor
+  syntax:
+    content: protected virtual void Dispose(bool disposing)
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
+    parameters:
+    - id: disposing
+      type: System.Boolean
+  modifiers.csharp:
+  - protected
+  - virtual
+  modifiers.vb:
+  - Protected
+  - Overridable
+references:
+- uid: Microsoft.AspNetCore.Razor
+  commentId: N:Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor
+  nameWithType: Microsoft.AspNetCore.Razor
+  fullName: Microsoft.AspNetCore.Razor
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost
+  commentId: T:Microsoft.AspNetCore.Razor.RazorEngineHost
+  parent: Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: RazorEngineHost
+  nameWithType: RazorEngineHost
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.EventHandler{Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs}
+  commentId: T:System.EventHandler{Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs}
+  parent: System
+  definition: System.EventHandler`1
+  name: EventHandler<DocumentParseCompleteEventArgs>
+  nameWithType: EventHandler<DocumentParseCompleteEventArgs>
+  fullName: System.EventHandler<Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs>
+  nameWithType.vb: EventHandler(Of DocumentParseCompleteEventArgs)
+  fullname.vb: System.EventHandler(Of Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs)
+  name.vb: EventHandler(Of DocumentParseCompleteEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs
+    name: DocumentParseCompleteEventArgs
+    nameWithType: DocumentParseCompleteEventArgs
+    fullName: Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs
+    name: DocumentParseCompleteEventArgs
+    nameWithType: DocumentParseCompleteEventArgs
+    fullName: Microsoft.AspNetCore.Razor.DocumentParseCompleteEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.EventHandler`1
+  commentId: T:System.EventHandler`1
+  isExternal: true
+  name: EventHandler<TEventArgs>
+  nameWithType: EventHandler<TEventArgs>
+  fullName: System.EventHandler<TEventArgs>
+  nameWithType.vb: EventHandler(Of TEventArgs)
+  fullname.vb: System.EventHandler(Of TEventArgs)
+  name.vb: EventHandler(Of TEventArgs)
+  spec.csharp:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.EventHandler`1
+    name: EventHandler
+    nameWithType: EventHandler
+    fullName: System.EventHandler
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TEventArgs
+    nameWithType: TEventArgs
+    fullName: TEventArgs
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Block
+  commentId: T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Block
+  parent: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  isExternal: false
+  name: Block
+  nameWithType: Block
+  fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Block
+- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  commentId: N:Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  nameWithType: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+- uid: Microsoft.AspNetCore.Razor.Text.TextChange
+  commentId: T:Microsoft.AspNetCore.Razor.Text.TextChange
+  parent: Microsoft.AspNetCore.Razor.Text
+  isExternal: false
+  name: TextChange
+  nameWithType: TextChange
+  fullName: Microsoft.AspNetCore.Razor.Text.TextChange
+- uid: Microsoft.AspNetCore.Razor.PartialParseResult
+  commentId: T:Microsoft.AspNetCore.Razor.PartialParseResult
+  parent: Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: PartialParseResult
+  nameWithType: PartialParseResult
+  fullName: Microsoft.AspNetCore.Razor.PartialParseResult
+- uid: Microsoft.AspNetCore.Razor.Text
+  commentId: N:Microsoft.AspNetCore.Razor.Text
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Text
+  nameWithType: Microsoft.AspNetCore.Razor.Text
+  fullName: Microsoft.AspNetCore.Razor.Text
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    nameWithType: IDisposable.Dispose
+    fullName: System.IDisposable.Dispose
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )

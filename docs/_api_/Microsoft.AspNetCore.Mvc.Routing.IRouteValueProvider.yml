@@ -1,0 +1,127 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider
+  commentId: T:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider
+  id: IRouteValueProvider
+  parent: Microsoft.AspNetCore.Mvc.Routing
+  children:
+  - Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey
+  - Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteValue
+  langs:
+  - csharp
+  - vb
+  name: IRouteValueProvider
+  nameWithType: IRouteValueProvider
+  fullName: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider
+  type: Interface
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: IRouteValueProvider
+    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    startLine: 71
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Core
+  namespace: Microsoft.AspNetCore.Mvc.Routing
+  summary: "\n<p>\nA metadata interface which specifies a route value which is required for the action selector to\nchoose an action. When applied to an action using attribute routing, the route value will be added\nto the <see cref=\"P:Microsoft.AspNetCore.Routing.RouteData.Values\"></see> when the action is selected.\n</p>\n<p>\nWhen an <see cref=\"T:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\"></see> is used to provide a new route value to an action, all\nactions in the application must also have a value associated with that key, or have an implicit value\nof <code>null</code>. See remarks for more details.\n</p>\n"
+  remarks: "\n<p>\nThe typical scheme for action selection in an MVC application is that an action will require the\nmatching values for its <see cref=\"P:Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ControllerName\"></see> and\n<see cref=\"P:Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ActionName\"></see>\n</p>\n<example>\nFor an action like <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>, in order to be selected, the\n<see cref=\"P:Microsoft.AspNetCore.Routing.RouteData.Values\"></see> must contain the values\n{ \n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n</example>\n<p>\nIf areas are in use in the application (see <see cref=\"T:Microsoft.AspNetCore.Mvc.AreaAttribute\"></see> which implements\n<see cref=\"T:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\"></see>) then all actions are consider either in an area by having a\nnon-<code>null</code> area value (specified by <see cref=\"T:Microsoft.AspNetCore.Mvc.AreaAttribute\"></see> or another \n<see cref=\"T:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\"></see>) or are considered 'outside' of areas by having the value <code>null</code>.\n</p>\n<example>\nConsider an application with two controllers, each with an <pre><code>Index</code></pre> action method:\n    - <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>\n    - <pre><code>MyApp.Areas.Blog.Controllers.HomeController.Index()</code></pre>\nwhere <pre><code>MyApp.Areas.Blog.Controllers.HomeController</code></pre> has an area attribute\n<pre><code>[Area(\"Blog\")]</code></pre>.\n\nFor <see cref=\"P:Microsoft.AspNetCore.Routing.RouteData.Values\"></see> like:\n{ \n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> is not considered eligible because the\n<see cref=\"P:Microsoft.AspNetCore.Routing.RouteData.Values\"></see> does not contain the value 'Blog' for 'area'.\n\nFor <see cref=\"P:Microsoft.AspNetCore.Routing.RouteData.Values\"></see> like:\n{\n    \"area\": \"Blog\",\n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> is not considered eligible because the route values\ncontain a value for 'area'. <pre><code>MyApp.Controllers.HomeController.Index()</code></pre> cannot match any value\nfor 'area' other than <code>null</code>.\n</example>\n"
+  example: []
+  syntax:
+    content: public interface IRouteValueProvider
+    content.vb: Public Interface IRouteValueProvider
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey
+  commentId: P:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey
+  id: RouteKey
+  parent: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider
+  langs:
+  - csharp
+  - vb
+  name: RouteKey
+  nameWithType: IRouteValueProvider.RouteKey
+  fullName: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: RouteKey
+    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    startLine: 76
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Core
+  namespace: Microsoft.AspNetCore.Mvc.Routing
+  summary: "\nThe route value key.\n"
+  example: []
+  syntax:
+    content: string RouteKey { get; }
+    content.vb: ReadOnly Property RouteKey As String
+    parameters: []
+    return:
+      type: System.String
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteValue
+  commentId: P:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteValue
+  id: RouteValue
+  parent: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider
+  langs:
+  - csharp
+  - vb
+  name: RouteValue
+  nameWithType: IRouteValueProvider.RouteValue
+  fullName: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteValue
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+      branch: dev
+      repo: https://github.com/aspnet/mvc
+    id: RouteValue
+    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    startLine: 82
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Core
+  namespace: Microsoft.AspNetCore.Mvc.Routing
+  summary: "\nThe route value. If <code>null</code> or empty, requires the route value associated with <see cref=\"P:Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey\"></see>\nto be missing or <code>null</code>.\n"
+  example: []
+  syntax:
+    content: string RouteValue { get; }
+    content.vb: ReadOnly Property RouteValue As String
+    parameters: []
+    return:
+      type: System.String
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+references:
+- uid: Microsoft.AspNetCore.Mvc.Routing
+  commentId: N:Microsoft.AspNetCore.Mvc.Routing
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Routing
+  nameWithType: Microsoft.AspNetCore.Mvc.Routing
+  fullName: Microsoft.AspNetCore.Mvc.Routing
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
