@@ -7,7 +7,6 @@ items:
   children:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IBufferSizeControl)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.AbortAwaiting
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.CheckFinOrThrow
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.CompleteAwaiting
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.ConsumingComplete(Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.ConsumingStart
@@ -15,10 +14,13 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.GetAwaiter
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.GetResult
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingComplete(System.Int32,System.Exception)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingData(System.Byte[],System.Int32,System.Int32)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingDeferred
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingFin
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingStart
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IsCompleted
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.OnCompleted(System.Action)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.RemoteIntakeFin
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.UnsafeOnCompleted(System.Action)
   langs:
   - csharp
@@ -30,11 +32,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: SocketInput
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -59,7 +61,6 @@ items:
   - System.Object.MemberwiseClone
   extensionMethods:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.ReadAsync(System.Byte[],System.Int32,System.Int32)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
   modifiers.csharp:
   - public
   - class
@@ -80,8 +81,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
     startLine: 35
@@ -102,6 +103,40 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.RemoteIntakeFin
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.RemoteIntakeFin
+  id: RemoteIntakeFin
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
+  langs:
+  - csharp
+  - vb
+  name: RemoteIntakeFin
+  nameWithType: SocketInput.RemoteIntakeFin
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.RemoteIntakeFin
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: RemoteIntakeFin
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+    startLine: 43
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  syntax:
+    content: public bool RemoteIntakeFin { get; set; }
+    content.vb: Public Property RemoteIntakeFin As Boolean
+    parameters: []
+    return:
+      type: System.Boolean
+  modifiers.csharp:
+  - public
+  - get
+  - set
+  modifiers.vb:
+  - Public
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IsCompleted
   commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IsCompleted
   id: IsCompleted
@@ -116,11 +151,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: IsCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 43
+    startLine: 45
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -136,37 +171,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.CheckFinOrThrow
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.CheckFinOrThrow
-  id: CheckFinOrThrow
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  langs:
-  - csharp
-  - vb
-  name: CheckFinOrThrow()
-  nameWithType: SocketInput.CheckFinOrThrow()
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.CheckFinOrThrow()
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: CheckFinOrThrow
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 47
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public bool CheckFinOrThrow()
-    content.vb: Public Function CheckFinOrThrow As Boolean
-    return:
-      type: System.Boolean
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingStart
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingStart
   id: IncomingStart
@@ -181,11 +185,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: IncomingStart
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 53
+    startLine: 47
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -198,6 +202,45 @@ items:
   - public
   modifiers.vb:
   - Public
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingData(System.Byte[],System.Int32,System.Int32)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingData(System.Byte[],System.Int32,System.Int32)
+  id: IncomingData(System.Byte[],System.Int32,System.Int32)
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
+  langs:
+  - csharp
+  - vb
+  name: IncomingData(Byte[], Int32, Int32)
+  nameWithType: SocketInput.IncomingData(Byte[], Int32, Int32)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingData(System.Byte[], System.Int32, System.Int32)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: IncomingData
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+    startLine: 63
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  syntax:
+    content: public void IncomingData(byte[] buffer, int offset, int count)
+    content.vb: Public Sub IncomingData(buffer As Byte(), offset As Integer, count As Integer)
+    parameters:
+    - id: buffer
+      type: System.Byte[]
+    - id: offset
+      type: System.Int32
+    - id: count
+      type: System.Int32
+  nameWithType.vb: SocketInput.IncomingData(Byte(), Int32, Int32)
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingData(System.Byte(), System.Int32, System.Int32)
+  name.vb: IncomingData(Byte(), Int32, Int32)
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingComplete(System.Int32,System.Exception)
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingComplete(System.Int32,System.Exception)
   id: IncomingComplete(System.Int32,System.Exception)
@@ -212,11 +255,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: IncomingComplete
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 72
+    startLine: 96
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -246,17 +289,46 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: IncomingDeferred
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 113
+    startLine: 137
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public void IncomingDeferred()
     content.vb: Public Sub IncomingDeferred
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingFin
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingFin
+  id: IncomingFin
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
+  langs:
+  - csharp
+  - vb
+  name: IncomingFin()
+  nameWithType: SocketInput.IncomingFin()
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.IncomingFin()
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: IncomingFin
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
+    startLine: 152
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  syntax:
+    content: public void IncomingFin()
+    content.vb: Public Sub IncomingFin
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -275,11 +347,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConsumingStart
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 146
+    startLine: 173
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -306,11 +378,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConsumingComplete
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 159
+    startLine: 186
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -340,11 +412,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: CompleteAwaiting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 232
+    startLine: 247
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -369,11 +441,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: AbortAwaiting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 237
+    startLine: 252
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -398,11 +470,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: GetAwaiter
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 243
+    startLine: 259
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -429,11 +501,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: OnCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 248
+    startLine: 264
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -463,11 +535,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: UnsafeOnCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 278
+    startLine: 294
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -497,11 +569,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: GetResult
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 283
+    startLine: 299
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -526,11 +598,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Dispose
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketInput.cs
-    startLine: 293
+    startLine: 316
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -937,35 +1009,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions
-  definition: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-  name: PeekAsync()
-  nameWithType: SocketInputExtensions.PeekAsync()
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-    name: PeekAsync
-    nameWithType: SocketInputExtensions.PeekAsync
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-    name: PeekAsync
-    nameWithType: SocketInputExtensions.PeekAsync
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1078,42 +1121,6 @@ references:
   name: SocketInputExtensions
   nameWithType: SocketInputExtensions
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-  isExternal: false
-  name: PeekAsync(SocketInput)
-  nameWithType: SocketInputExtensions.PeekAsync(SocketInput)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-    name: PeekAsync
-    nameWithType: SocketInputExtensions.PeekAsync
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-    name: SocketInput
-    nameWithType: SocketInput
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput)
-    name: PeekAsync
-    nameWithType: SocketInputExtensions.PeekAsync
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInputExtensions.PeekAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-    name: SocketInput
-    nameWithType: SocketInput
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
@@ -1155,6 +1162,31 @@ references:
   name: MemoryPoolBlock
   nameWithType: MemoryPoolBlock
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolBlock
+- uid: System.Byte[]
+  name: Byte[]
+  nameWithType: Byte[]
+  fullName: System.Byte[]
+  nameWithType.vb: Byte()
+  fullname.vb: System.Byte()
+  name.vb: Byte()
+  spec.csharp:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: '[]'
+    nameWithType: '[]'
+    fullName: '[]'
+  spec.vb:
+  - uid: System.Byte
+    name: Byte
+    nameWithType: Byte
+    fullName: System.Byte
+    isExternal: true
+  - name: ()
+    nameWithType: ()
+    fullName: ()
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System

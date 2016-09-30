@@ -25,8 +25,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: RazorEditorParser
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 74
@@ -34,7 +34,7 @@ items:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor
   summary: "\nParser used by editors to avoid reparsing the entire document on each text change.\n"
-  remarks: "\n<p>\nThis parser is designed to allow editors to avoid having to worry about incremental parsing.\nThe <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> method can be called with every change made by a user in an editor\nand the parser will provide a result indicating if it was able to incrementally apply the change.\n</p>\n<p>\nThe general workflow for editors with this parser is:\n<ol><li>User edits document.</li><li>Editor builds a <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see> structure describing the edit and providing a\nreference to the <em>updated</em> text buffer.</li><li>Editor calls <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> passing in that change.\n</li><li>Parser determines if the change can be simply applied to an existing parse tree node.\n</li></ol>\nNOTE: Additional flags can be applied to the <see cref=\"T:Microsoft.AspNetCore.Razor.PartialParseResult\"></see>, see that <code>enum</code> for more\ndetails. However, the <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\"></see> or <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see>\nflags will ALWAYS be present.\n</p>\n<p>\nA change can only be incrementally parsed if a single, unique, <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> (see\n<see cref=\"N:Microsoft.AspNetCore.Razor.Parser.SyntaxTree\"></see>) in the syntax tree can be identified as owning the entire change.\nFor example, if a change overlaps with multiple <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see>s, the change cannot be parsed incrementally\nand a full reparse is necessary. A <see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> \"owns\" a change if the change occurs either a) entirely\nwithin it's boundaries or b) it is a pure insertion (see <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see>) at the end of a\n<see cref=\"T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\"></see> whose <see cref=\"P:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span.EditHandler\"></see> can accept the change (see\n<see cref=\"M:Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>).\n</p>\n<p>\nWhen the <see cref=\"T:Microsoft.AspNetCore.Razor.RazorEditorParser\"></see> returns <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\"></see>, it updates\n<see cref=\"P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\"></see> immediately. However, the editor is expected to update it's own data structures\nindependently. It can use <see cref=\"P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\"></see> to do this, as soon as the editor returns from\n<see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, but it should (ideally) have logic for doing so without needing the new\ntree.\n</p>\n<p>\nWhen <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see> is returned by <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, a\nbackground parse task has <em>already</em> been started. When that task finishes, the\n<see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> event will be fired containing the new generated code, parse tree and a\nreference to the original <see cref=\"T:Microsoft.AspNetCore.Razor.Text.TextChange\"></see> that caused the reparse, to allow the editor to resolve the\nnew tree against any changes made since calling <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>.\n</p>\n<p>\nIf a call to <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see> occurs while a reparse is already in-progress, the reparse\nis canceled IMMEDIATELY and <see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see> is returned without attempting to\nreparse. This means that if a consumer calls <see cref=\"M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\"></see>, which returns\n<see cref=\"F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\"></see>, then calls it again before <see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> is\nfired, it will only receive one <see cref=\"E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\"></see> event, for the second change.\n</p>\n"
+  remarks: "\n<p>\nThis parser is designed to allow editors to avoid having to worry about incremental parsing.\nThe <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref> method can be called with every change made by a user in an editor\nand the parser will provide a result indicating if it was able to incrementally apply the change.\n</p>\n<p>\nThe general workflow for editors with this parser is:\n<ol><li>User edits document.</li><li>Editor builds a <xref href=\"Microsoft.AspNetCore.Razor.Text.TextChange\" data-throw-if-not-resolved=\"false\"></xref> structure describing the edit and providing a\nreference to the <em>updated</em> text buffer.</li><li>Editor calls <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref> passing in that change.\n</li><li>Parser determines if the change can be simply applied to an existing parse tree node.\n</li></ol>\nNOTE: Additional flags can be applied to the <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult\" data-throw-if-not-resolved=\"false\"></xref>, see that <code>enum</code> for more\ndetails. However, the <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\" data-throw-if-not-resolved=\"false\"></xref>\nflags will ALWAYS be present.\n</p>\n<p>\nA change can only be incrementally parsed if a single, unique, <xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\" data-throw-if-not-resolved=\"false\"></xref> (see\n<xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree\" data-throw-if-not-resolved=\"false\"></xref>) in the syntax tree can be identified as owning the entire change.\nFor example, if a change overlaps with multiple <xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\" data-throw-if-not-resolved=\"false\"></xref>s, the change cannot be parsed incrementally\nand a full reparse is necessary. A <xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\" data-throw-if-not-resolved=\"false\"></xref> \"owns\" a change if the change occurs either a) entirely\nwithin it's boundaries or b) it is a pure insertion (see <xref href=\"Microsoft.AspNetCore.Razor.Text.TextChange\" data-throw-if-not-resolved=\"false\"></xref>) at the end of a\n<xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span\" data-throw-if-not-resolved=\"false\"></xref> whose <xref href=\"Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span.EditHandler\" data-throw-if-not-resolved=\"false\"></xref> can accept the change (see\n<xref href=\"Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span%2cMicrosoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref>).\n</p>\n<p>\nWhen the <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser\" data-throw-if-not-resolved=\"false\"></xref> returns <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Accepted\" data-throw-if-not-resolved=\"false\"></xref>, it updates\n<xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\" data-throw-if-not-resolved=\"false\"></xref> immediately. However, the editor is expected to update it's own data structures\nindependently. It can use <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree\" data-throw-if-not-resolved=\"false\"></xref> to do this, as soon as the editor returns from\n<xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref>, but it should (ideally) have logic for doing so without needing the new\ntree.\n</p>\n<p>\nWhen <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\" data-throw-if-not-resolved=\"false\"></xref> is returned by <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref>, a\nbackground parse task has <em>already</em> been started. When that task finishes, the\n<xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\" data-throw-if-not-resolved=\"false\"></xref> event will be fired containing the new generated code, parse tree and a\nreference to the original <xref href=\"Microsoft.AspNetCore.Razor.Text.TextChange\" data-throw-if-not-resolved=\"false\"></xref> that caused the reparse, to allow the editor to resolve the\nnew tree against any changes made since calling <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nIf a call to <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref> occurs while a reparse is already in-progress, the reparse\nis canceled IMMEDIATELY and <xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\" data-throw-if-not-resolved=\"false\"></xref> is returned without attempting to\nreparse. This means that if a consumer calls <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)\" data-throw-if-not-resolved=\"false\"></xref>, which returns\n<xref href=\"Microsoft.AspNetCore.Razor.PartialParseResult.Rejected\" data-throw-if-not-resolved=\"false\"></xref>, then calls it again before <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\" data-throw-if-not-resolved=\"false\"></xref> is\nfired, it will only receive one <xref href=\"Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete\" data-throw-if-not-resolved=\"false\"></xref> event, for the second change.\n</p>\n"
   example: []
   syntax:
     content: 'public class RazorEditorParser : IDisposable'
@@ -73,8 +73,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 90
@@ -90,9 +90,9 @@ items:
     - id: host
       type: Microsoft.AspNetCore.Razor.RazorEngineHost
       description: >-
-        The <see cref="T:Microsoft.AspNetCore.Razor.RazorEngineHost"></see> which defines the environment in which the generated
+        The <xref href="Microsoft.AspNetCore.Razor.RazorEngineHost" data-throw-if-not-resolved="false"></xref> which defines the environment in which the generated
 
-        code will live. <see cref="P:Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode"></see> should be set if design-time behavior is
+        code will live. <xref href="Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode" data-throw-if-not-resolved="false"></xref> should be set if design-time behavior is
 
         desired.
     - id: sourceFileName
@@ -116,8 +116,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: DocumentParseComplete
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 112
@@ -149,8 +149,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: Host
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 114
@@ -183,8 +183,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: FileName
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 115
@@ -217,8 +217,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: LastResultProvisional
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 116
@@ -251,8 +251,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: CurrentParseTree
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 117
@@ -285,8 +285,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: GetAutoCompleteString
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 122
@@ -318,8 +318,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: CheckForStructureChanges
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
     startLine: 145
@@ -338,7 +338,7 @@ items:
       description: The change to apply to the parse tree.
     return:
       type: Microsoft.AspNetCore.Razor.PartialParseResult
-      description: A <see cref="T:Microsoft.AspNetCore.Razor.PartialParseResult"></see> value indicating the result of the incremental parse.
+      description: A <xref href="Microsoft.AspNetCore.Razor.PartialParseResult" data-throw-if-not-resolved="false"></xref> value indicating the result of the incremental parse.
   modifiers.csharp:
   - public
   - virtual
@@ -359,11 +359,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: Dispose
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-    startLine: 209
+    startLine: 206
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor
@@ -392,11 +392,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-      branch: dev
-      repo: https://github.com/aspnet/razor
+      branch: master
+      repo: https://github.com/aspnet/Razor.git
     id: Dispose
     path: src/Microsoft.AspNetCore.Razor/RazorEditorParser.cs
-    startLine: 215
+    startLine: 212
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor
@@ -413,6 +413,102 @@ items:
   - Protected
   - Overridable
 references:
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEditorParser.CheckForStructureChanges(Microsoft.AspNetCore.Razor.Text.TextChange)
+- uid: Microsoft.AspNetCore.Razor.Text.TextChange
+  commentId: T:Microsoft.AspNetCore.Razor.Text.TextChange
+  parent: Microsoft.AspNetCore.Razor.Text
+  isExternal: false
+  name: TextChange
+  nameWithType: TextChange
+  fullName: Microsoft.AspNetCore.Razor.Text.TextChange
+- uid: Microsoft.AspNetCore.Razor.PartialParseResult
+  commentId: T:Microsoft.AspNetCore.Razor.PartialParseResult
+  parent: Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: PartialParseResult
+  nameWithType: PartialParseResult
+  fullName: Microsoft.AspNetCore.Razor.PartialParseResult
+- uid: Microsoft.AspNetCore.Razor.PartialParseResult.Accepted
+  commentId: F:Microsoft.AspNetCore.Razor.PartialParseResult.Accepted
+- uid: Microsoft.AspNetCore.Razor.PartialParseResult.Rejected
+  commentId: F:Microsoft.AspNetCore.Razor.PartialParseResult.Rejected
+- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+  commentId: T:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+  parent: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  isExternal: false
+  name: Span
+  nameWithType: Span
+  fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  commentId: N:Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  nameWithType: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+  fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
+- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span.EditHandler
+  commentId: P:Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span.EditHandler
+- uid: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)
+  commentId: M:Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)
+  parent: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler
+  isExternal: false
+  name: CanAcceptChange(Span, TextChange)
+  nameWithType: SpanEditHandler.CanAcceptChange(Span, TextChange)
+  fullName: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span, Microsoft.AspNetCore.Razor.Text.TextChange)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)
+    name: CanAcceptChange
+    nameWithType: SpanEditHandler.CanAcceptChange
+    fullName: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+    name: Span
+    nameWithType: Span
+    fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.Text.TextChange
+    name: TextChange
+    nameWithType: TextChange
+    fullName: Microsoft.AspNetCore.Razor.Text.TextChange
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange(Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span,Microsoft.AspNetCore.Razor.Text.TextChange)
+    name: CanAcceptChange
+    nameWithType: SpanEditHandler.CanAcceptChange
+    fullName: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler.CanAcceptChange
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+    name: Span
+    nameWithType: Span
+    fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Span
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.Text.TextChange
+    name: TextChange
+    nameWithType: TextChange
+    fullName: Microsoft.AspNetCore.Razor.Text.TextChange
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser
+  commentId: T:Microsoft.AspNetCore.Razor.RazorEditorParser
+  isExternal: false
+  name: RazorEditorParser
+  nameWithType: RazorEditorParser
+  fullName: Microsoft.AspNetCore.Razor.RazorEditorParser
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEditorParser.CurrentParseTree
+- uid: Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
+  commentId: E:Microsoft.AspNetCore.Razor.RazorEditorParser.DocumentParseComplete
 - uid: Microsoft.AspNetCore.Razor
   commentId: N:Microsoft.AspNetCore.Razor
   isExternal: false
@@ -712,12 +808,31 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Razor.Text
+  commentId: N:Microsoft.AspNetCore.Razor.Text
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Text
+  nameWithType: Microsoft.AspNetCore.Razor.Text
+  fullName: Microsoft.AspNetCore.Razor.Text
+- uid: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler
+  commentId: T:Microsoft.AspNetCore.Razor.Editor.SpanEditHandler
+  parent: Microsoft.AspNetCore.Razor.Editor
+  isExternal: false
+  name: SpanEditHandler
+  nameWithType: SpanEditHandler
+  fullName: Microsoft.AspNetCore.Razor.Editor.SpanEditHandler
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Razor.Editor
+  commentId: N:Microsoft.AspNetCore.Razor.Editor
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Editor
+  nameWithType: Microsoft.AspNetCore.Razor.Editor
+  fullName: Microsoft.AspNetCore.Razor.Editor
 - uid: Microsoft.AspNetCore.Razor.RazorEngineHost
   commentId: T:Microsoft.AspNetCore.Razor.RazorEngineHost
   parent: Microsoft.AspNetCore.Razor
@@ -725,6 +840,13 @@ references:
   name: RazorEngineHost
   nameWithType: RazorEngineHost
   fullName: Microsoft.AspNetCore.Razor.RazorEngineHost
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DesignTimeMode
+  nameWithType: RazorEngineHost.DesignTimeMode
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -827,32 +949,6 @@ references:
   name: Block
   nameWithType: Block
   fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree.Block
-- uid: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
-  commentId: N:Microsoft.AspNetCore.Razor.Parser.SyntaxTree
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
-  nameWithType: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
-  fullName: Microsoft.AspNetCore.Razor.Parser.SyntaxTree
-- uid: Microsoft.AspNetCore.Razor.Text.TextChange
-  commentId: T:Microsoft.AspNetCore.Razor.Text.TextChange
-  parent: Microsoft.AspNetCore.Razor.Text
-  isExternal: false
-  name: TextChange
-  nameWithType: TextChange
-  fullName: Microsoft.AspNetCore.Razor.Text.TextChange
-- uid: Microsoft.AspNetCore.Razor.PartialParseResult
-  commentId: T:Microsoft.AspNetCore.Razor.PartialParseResult
-  parent: Microsoft.AspNetCore.Razor
-  isExternal: false
-  name: PartialParseResult
-  nameWithType: PartialParseResult
-  fullName: Microsoft.AspNetCore.Razor.PartialParseResult
-- uid: Microsoft.AspNetCore.Razor.Text
-  commentId: N:Microsoft.AspNetCore.Razor.Text
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor.Text
-  nameWithType: Microsoft.AspNetCore.Razor.Text
-  fullName: Microsoft.AspNetCore.Razor.Text
 - uid: System.IDisposable.Dispose
   commentId: M:System.IDisposable.Dispose
   parent: System.IDisposable

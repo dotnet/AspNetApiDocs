@@ -6,18 +6,13 @@ items:
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   children:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort(System.Exception)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#CancelTimeout
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#End(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ProduceEndType)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#Pause
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#Resume
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.OnSocketClosed
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.ServerOptions
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Start
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.StopAsync
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Tick(System.Int64)
   langs:
   - csharp
   - vb
@@ -28,11 +23,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Connection
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 16
+    startLine: 15
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -44,11 +39,12 @@ items:
           Implements IConnectionControl
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
   inheritedMembers:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketOutput
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
@@ -56,6 +52,17 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -83,11 +90,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 45
+    startLine: 46
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -103,40 +110,6 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.ServerOptions
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.ServerOptions
-  id: ServerOptions
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
-  langs:
-  - csharp
-  - vb
-  name: ServerOptions
-  nameWithType: Connection.ServerOptions
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.ServerOptions
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ServerOptions
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 77
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public KestrelServerOptions ServerOptions { get; }
-    content.vb: Public ReadOnly Property ServerOptions As KestrelServerOptions
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Start
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Start
   id: Start
@@ -151,11 +124,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Start
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 84
+    startLine: 68
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -180,11 +153,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: StopAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 135
+    startLine: 141
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -197,34 +170,31 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort(System.Exception)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort(System.Exception)
-  id: Abort(System.Exception)
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort
+  id: Abort
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
   langs:
   - csharp
   - vb
-  name: Abort(Exception)
-  nameWithType: Connection.Abort(Exception)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort(System.Exception)
+  name: Abort()
+  nameWithType: Connection.Abort()
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Abort()
   type: Method
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Abort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 143
+    startLine: 163
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public virtual void Abort(Exception error = null)
-    content.vb: Public Overridable Sub Abort(error As Exception = Nothing)
-    parameters:
-    - id: error
-      type: System.Exception
+    content: public virtual void Abort()
+    content.vb: Public Overridable Sub Abort
   modifiers.csharp:
   - public
   - virtual
@@ -245,11 +215,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: OnSocketClosed
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 154
+    startLine: 186
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -262,38 +232,6 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Tick(System.Int64)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Tick(System.Int64)
-  id: Tick(System.Int64)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
-  langs:
-  - csharp
-  - vb
-  name: Tick(Int64)
-  nameWithType: Connection.Tick(Int64)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Tick(System.Int64)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Tick
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 171
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public void Tick(long timestamp)
-    content.vb: Public Sub Tick(timestamp As Long)
-    parameters:
-    - id: timestamp
-      type: System.Int64
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#Pause
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#Pause
   id: Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#Pause
@@ -309,11 +247,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.Pause
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 272
+    startLine: 317
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -339,11 +277,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.Resume
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 278
+    startLine: 323
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -369,11 +307,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.End
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 294
+    startLine: 339
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -387,106 +325,6 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.End(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ProduceEndType)
   nameWithType.vb: Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.End(ProduceEndType)
   name.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.End(ProduceEndType)
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  id: Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  isEii: true
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
-  langs:
-  - csharp
-  - vb
-  name: IConnectionControl.SetTimeout(Int64, TimeoutAction)
-  nameWithType: Connection.IConnectionControl.SetTimeout(Int64, TimeoutAction)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 309
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: void IConnectionControl.SetTimeout(long milliseconds, TimeoutAction timeoutAction)
-    content.vb: Sub Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(milliseconds As Long, timeoutAction As TimeoutAction) Implements IConnectionControl.SetTimeout
-    parameters:
-    - id: milliseconds
-      type: System.Int64
-    - id: timeoutAction
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  implements:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  nameWithType.vb: Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(Int64, TimeoutAction)
-  name.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(Int64, TimeoutAction)
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  id: Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  isEii: true
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
-  langs:
-  - csharp
-  - vb
-  name: IConnectionControl.ResetTimeout(Int64, TimeoutAction)
-  nameWithType: Connection.IConnectionControl.ResetTimeout(Int64, TimeoutAction)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 316
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: void IConnectionControl.ResetTimeout(long milliseconds, TimeoutAction timeoutAction)
-    content.vb: Sub Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(milliseconds As Long, timeoutAction As TimeoutAction) Implements IConnectionControl.ResetTimeout
-    parameters:
-    - id: milliseconds
-      type: System.Int64
-    - id: timeoutAction
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  implements:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  nameWithType.vb: Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(Int64, TimeoutAction)
-  name.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(Int64, TimeoutAction)
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#CancelTimeout
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#CancelTimeout
-  id: Microsoft#AspNetCore#Server#Kestrel#Internal#Http#IConnectionControl#CancelTimeout
-  isEii: true
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
-  langs:
-  - csharp
-  - vb
-  name: IConnectionControl.CancelTimeout()
-  nameWithType: Connection.IConnectionControl.CancelTimeout()
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout()
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Connection.cs
-    startLine: 321
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: void IConnectionControl.CancelTimeout()
-    content.vb: Sub Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout Implements IConnectionControl.CancelTimeout
-  implements:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-  nameWithType.vb: Connection.Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout()
-  name.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout()
 references:
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -501,6 +339,20 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: ServiceContext
+  nameWithType: ServiceContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: ListenerContext
+  nameWithType: ListenerContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -515,13 +367,6 @@ references:
   name: IConnectionControl
   nameWithType: IConnectionControl
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
-  isExternal: false
-  name: ListenerContext
-  nameWithType: ConnectionContext.ListenerContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
   commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
@@ -571,6 +416,83 @@ references:
   name: PrepareRequest
   nameWithType: ConnectionContext.PrepareRequest
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ServerAddress
+  nameWithType: ListenerContext.ServerAddress
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Thread
+  nameWithType: ListenerContext.Thread
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Memory
+  nameWithType: ListenerContext.Memory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ConnectionManager
+  nameWithType: ListenerContext.ConnectionManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: WriteReqPool
+  nameWithType: ListenerContext.WriteReqPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: AppLifetime
+  nameWithType: ServiceContext.AppLifetime
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: Log
+  nameWithType: ServiceContext.Log
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ThreadPool
+  nameWithType: ServiceContext.ThreadPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: FrameFactory
+  nameWithType: ServiceContext.FrameFactory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: DateHeaderValueManager
+  nameWithType: ServiceContext.DateHeaderValueManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ServerOptions
+  nameWithType: ServiceContext.ServerOptions
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -856,13 +778,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal
+  commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal
   isExternal: false
-  name: ListenerContext
-  nameWithType: ListenerContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  name: Microsoft.AspNetCore.Server.Kestrel.Internal
+  nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking
@@ -876,19 +797,6 @@ references:
   name: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking
   nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking
-- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-  parent: Microsoft.AspNetCore.Server.Kestrel
-  isExternal: false
-  name: KestrelServerOptions
-  nameWithType: KestrelServerOptions
-  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-- uid: Microsoft.AspNetCore.Server.Kestrel
-  commentId: N:Microsoft.AspNetCore.Server.Kestrel
-  isExternal: false
-  name: Microsoft.AspNetCore.Server.Kestrel
-  nameWithType: Microsoft.AspNetCore.Server.Kestrel
-  fullName: Microsoft.AspNetCore.Server.Kestrel
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -902,20 +810,6 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: System.Exception
-  commentId: T:System.Exception
-  parent: System
-  isExternal: true
-  name: Exception
-  nameWithType: Exception
-  fullName: System.Exception
-- uid: System.Int64
-  commentId: T:System.Int64
-  parent: System
-  isExternal: true
-  name: Int64
-  nameWithType: Int64
-  fullName: System.Int64
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.Pause
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.Pause
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
@@ -1018,145 +912,3 @@ references:
   name: ProduceEndType
   nameWithType: ProduceEndType
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ProduceEndType
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  isExternal: true
-  name: SetTimeout(Int64, TimeoutAction)
-  nameWithType: IConnectionControl.SetTimeout(Int64, TimeoutAction)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-    name: SetTimeout
-    nameWithType: IConnectionControl.SetTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-    name: TimeoutAction
-    nameWithType: TimeoutAction
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-    name: SetTimeout
-    nameWithType: IConnectionControl.SetTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.SetTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-    name: TimeoutAction
-    nameWithType: TimeoutAction
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: TimeoutAction
-  nameWithType: TimeoutAction
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  isExternal: true
-  name: ResetTimeout(Int64, TimeoutAction)
-  nameWithType: IConnectionControl.ResetTimeout(Int64, TimeoutAction)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-    name: ResetTimeout
-    nameWithType: IConnectionControl.ResetTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-    name: TimeoutAction
-    nameWithType: TimeoutAction
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout(System.Int64,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction)
-    name: ResetTimeout
-    nameWithType: IConnectionControl.ResetTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.ResetTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-    name: TimeoutAction
-    nameWithType: TimeoutAction
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.TimeoutAction
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  isExternal: false
-  name: CancelTimeout()
-  nameWithType: IConnectionControl.CancelTimeout()
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-    name: CancelTimeout
-    nameWithType: IConnectionControl.CancelTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-    name: CancelTimeout
-    nameWithType: IConnectionControl.CancelTimeout
-    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl.CancelTimeout
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )

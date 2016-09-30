@@ -6,10 +6,10 @@ items:
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   children:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.#ctor
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.RemoteEndPoint
@@ -25,8 +25,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConnectionContext
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
     startLine: 9
@@ -34,11 +34,26 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public class ConnectionContext
-    content.vb: Public Class ConnectionContext
+    content: 'public class ConnectionContext : ListenerContext'
+    content.vb: >-
+      Public Class ConnectionContext
+          Inherits ListenerContext
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
   inheritedMembers:
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -66,8 +81,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
     startLine: 11
@@ -95,8 +110,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
     startLine: 15
@@ -113,38 +128,36 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
-  id: ListenerContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
+  id: '#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)'
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   langs:
   - csharp
   - vb
-  name: ListenerContext
-  nameWithType: ConnectionContext.ListenerContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ListenerContext
-  type: Property
+  name: ConnectionContext(ConnectionContext)
+  nameWithType: ConnectionContext.ConnectionContext(ConnectionContext)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionContext(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
+  type: Constructor
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ListenerContext
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 20
+    startLine: 19
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public ListenerContext ListenerContext { get; set; }
-    content.vb: Public Property ListenerContext As ListenerContext
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+    content: public ConnectionContext(ConnectionContext context)
+    content.vb: Public Sub New(context As ConnectionContext)
+    parameters:
+    - id: context
+      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   modifiers.csharp:
   - public
-  - get
-  - set
   modifiers.vb:
   - Public
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
@@ -161,11 +174,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: SocketInput
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 22
+    startLine: 30
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -195,11 +208,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: SocketOutput
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 24
+    startLine: 32
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -229,11 +242,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConnectionControl
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 26
+    startLine: 34
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -263,11 +276,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RemoteEndPoint
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 28
+    startLine: 36
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -297,11 +310,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: LocalEndPoint
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 30
+    startLine: 38
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -331,11 +344,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConnectionId
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 32
+    startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -365,11 +378,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: PrepareRequest
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/ConnectionContext.cs
-    startLine: 34
+    startLine: 42
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -399,6 +412,97 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: ServiceContext
+  nameWithType: ServiceContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: ListenerContext
+  nameWithType: ListenerContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ServerAddress
+  nameWithType: ListenerContext.ServerAddress
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Thread
+  nameWithType: ListenerContext.Thread
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Memory
+  nameWithType: ListenerContext.Memory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ConnectionManager
+  nameWithType: ListenerContext.ConnectionManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: WriteReqPool
+  nameWithType: ListenerContext.WriteReqPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: AppLifetime
+  nameWithType: ServiceContext.AppLifetime
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: Log
+  nameWithType: ServiceContext.Log
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ThreadPool
+  nameWithType: ServiceContext.ThreadPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: FrameFactory
+  nameWithType: ServiceContext.FrameFactory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: DateHeaderValueManager
+  nameWithType: ServiceContext.DateHeaderValueManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ServerOptions
+  nameWithType: ServiceContext.ServerOptions
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -684,13 +788,19 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal
+  commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: Microsoft.AspNetCore.Server.Kestrel.Internal
+  nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   isExternal: false
-  name: ListenerContext
-  nameWithType: ListenerContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  name: ConnectionContext
+  nameWithType: ConnectionContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http

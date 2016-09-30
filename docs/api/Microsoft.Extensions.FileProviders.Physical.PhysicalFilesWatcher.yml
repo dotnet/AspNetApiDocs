@@ -18,16 +18,14 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: PhysicalFilesWatcher
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-    startLine: 24
+    startLine: 16
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders.Physical
-  summary: "\n<p>\nA file watcher that watches a physical filesystem for changes.\n</p>\n<p>\nTriggers events on <see cref=\"T:Microsoft.Extensions.Primitives.IChangeToken\"></see> when files are created, change, renamed, or deleted.\n</p>\n"
-  example: []
   syntax:
     content: 'public class PhysicalFilesWatcher : IDisposable'
     content.vb: >-
@@ -65,29 +63,24 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: .ctor
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-    startLine: 44
+    startLine: 25
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders.Physical
-  summary: "\nInitializes an instance of <see cref=\"T:Microsoft.Extensions.FileProviders.Physical.PhysicalFilesWatcher\"></see> that watches files in <em>rootDirectory</em>.\nWraps an instance of <see cref=\"T:System.IO.FileSystemWatcher\"></see>\n"
-  example: []
   syntax:
-    content: public PhysicalFilesWatcher(string rootDirectory, FileSystemWatcher fileSystemWatcher, bool pollForChanges)
-    content.vb: Public Sub New(rootDirectory As String, fileSystemWatcher As FileSystemWatcher, pollForChanges As Boolean)
+    content: public PhysicalFilesWatcher(string root, FileSystemWatcher fileSystemWatcher, bool pollForChanges)
+    content.vb: Public Sub New(root As String, fileSystemWatcher As FileSystemWatcher, pollForChanges As Boolean)
     parameters:
-    - id: rootDirectory
+    - id: root
       type: System.String
-      description: Root directory for the watcher
     - id: fileSystemWatcher
       type: System.IO.FileSystemWatcher
-      description: The wrapped watcher that is watching <em>rootDirectory</em>
     - id: pollForChanges
       type: System.Boolean
-      description: "\nTrue when the watcher should use polling to trigger instances of\n<see cref=\"T:Microsoft.Extensions.Primitives.IChangeToken\"></see> created by <see cref=\"M:Microsoft.Extensions.FileProviders.Physical.PhysicalFilesWatcher.CreateFileChangeToken(System.String)\"></see>\n"
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -106,30 +99,22 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: CreateFileChangeToken
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-    startLine: 75
+    startLine: 42
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders.Physical
-  summary: "\n<p>\nCreates an instance of <see cref=\"T:Microsoft.Extensions.Primitives.IChangeToken\"></see> for all files and directories that match the\n<em>filter</em>\n</p>\n<p>\nGlobbing patterns are relative to the root directory given in the constructor\n<seealso cref=\"M:Microsoft.Extensions.FileProviders.Physical.PhysicalFilesWatcher.#ctor(System.String,System.IO.FileSystemWatcher,System.Boolean)\"></seealso>. Globbing patterns \nare interpreted by <seealso cref=\"T:Microsoft.Extensions.FileSystemGlobbing.Matcher\"></seealso>.\n</p>\n"
-  example: []
   syntax:
     content: public IChangeToken CreateFileChangeToken(string filter)
     content.vb: Public Function CreateFileChangeToken(filter As String) As IChangeToken
     parameters:
     - id: filter
       type: System.String
-      description: A globbing pattern for files and directories to watch
     return:
       type: Microsoft.Extensions.Primitives.IChangeToken
-      description: A change token for all files that match the filter
-  exceptions:
-  - type: System.ArgumentNullException
-    commentId: T:System.ArgumentNullException
-    description: When <em>filter</em> is null
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -148,16 +133,14 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: Dispose
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFilesWatcher.cs
-    startLine: 155
+    startLine: 119
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders.Physical
-  summary: "\nDisposes the file watcher\n"
-  example: []
   syntax:
     content: public void Dispose()
     content.vb: Public Sub Dispose
@@ -500,8 +483,6 @@ references:
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
-- uid: System.ArgumentNullException
-  commentId: T:System.ArgumentNullException
 - uid: Microsoft.Extensions.Primitives.IChangeToken
   commentId: T:Microsoft.Extensions.Primitives.IChangeToken
   parent: Microsoft.Extensions.Primitives

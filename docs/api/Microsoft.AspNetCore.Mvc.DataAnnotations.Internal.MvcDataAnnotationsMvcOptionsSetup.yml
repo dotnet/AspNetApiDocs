@@ -5,9 +5,8 @@ items:
   id: MvcDataAnnotationsMvcOptionsSetup
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   children:
-  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions})
-  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions},Microsoft.Extensions.Localization.IStringLocalizerFactory)
-  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(System.IServiceProvider)
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,System.IServiceProvider)
   langs:
   - csharp
   - vb
@@ -18,26 +17,30 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
     id: MvcDataAnnotationsMvcOptionsSetup
     path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-    startLine: 12
+    startLine: 13
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
   namespace: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
-  summary: "\nSets up default options for <see cref=\"T:Microsoft.AspNetCore.Mvc.MvcOptions\"></see>.\n"
+  summary: "\nSets up default options for <xref href=\"Microsoft.AspNetCore.Mvc.MvcOptions\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: 'public class MvcDataAnnotationsMvcOptionsSetup : IConfigureOptions<MvcOptions>'
+    content: 'public class MvcDataAnnotationsMvcOptionsSetup : ConfigureOptions<MvcOptions>, IConfigureOptions<MvcOptions>'
     content.vb: >-
       Public Class MvcDataAnnotationsMvcOptionsSetup
+          Inherits ConfigureOptions(Of MvcOptions)
           Implements IConfigureOptions(Of MvcOptions)
   inheritance:
   - System.Object
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   implements:
   - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   inheritedMembers:
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -51,117 +54,82 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions})
-  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions})
-  id: '#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions})'
+- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(System.IServiceProvider)
+  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(System.IServiceProvider)
+  id: '#ctor(System.IServiceProvider)'
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup
   langs:
   - csharp
   - vb
-  name: MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions>)
-  nameWithType: MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions>)
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions>)
+  name: MvcDataAnnotationsMvcOptionsSetup(IServiceProvider)
+  nameWithType: MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(IServiceProvider)
+  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(System.IServiceProvider)
   type: Constructor
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-    startLine: 18
+    startLine: 15
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
   namespace: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   syntax:
-    content: public MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider validationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions)
-    content.vb: Public Sub New(validationAttributeAdapterProvider As IValidationAttributeAdapterProvider, dataAnnotationLocalizationOptions As IOptions(Of MvcDataAnnotationsLocalizationOptions))
+    content: public MvcDataAnnotationsMvcOptionsSetup(IServiceProvider serviceProvider)
+    content.vb: Public Sub New(serviceProvider As IServiceProvider)
     parameters:
-    - id: validationAttributeAdapterProvider
-      type: Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-    - id: dataAnnotationLocalizationOptions
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions}
-  nameWithType.vb: MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions(Of MvcDataAnnotationsLocalizationOptions))
+    - id: serviceProvider
+      type: System.IServiceProvider
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions))
-  name.vb: MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions(Of MvcDataAnnotationsLocalizationOptions))
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions},Microsoft.Extensions.Localization.IStringLocalizerFactory)
-  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions},Microsoft.Extensions.Localization.IStringLocalizerFactory)
-  id: '#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions},Microsoft.Extensions.Localization.IStringLocalizerFactory)'
+- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,System.IServiceProvider)
+  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,System.IServiceProvider)
+  id: ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,System.IServiceProvider)
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup
   langs:
   - csharp
   - vb
-  name: MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions>, IStringLocalizerFactory)
-  nameWithType: MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions>, IStringLocalizerFactory)
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions>, Microsoft.Extensions.Localization.IStringLocalizerFactory)
-  type: Constructor
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
-    id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-    startLine: 36
-  assemblies:
-  - Microsoft.AspNetCore.Mvc.DataAnnotations
-  namespace: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
-  syntax:
-    content: public MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider validationAttributeAdapterProvider, IOptions<MvcDataAnnotationsLocalizationOptions> dataAnnotationLocalizationOptions, IStringLocalizerFactory stringLocalizerFactory)
-    content.vb: Public Sub New(validationAttributeAdapterProvider As IValidationAttributeAdapterProvider, dataAnnotationLocalizationOptions As IOptions(Of MvcDataAnnotationsLocalizationOptions), stringLocalizerFactory As IStringLocalizerFactory)
-    parameters:
-    - id: validationAttributeAdapterProvider
-      type: Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-    - id: dataAnnotationLocalizationOptions
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions}
-    - id: stringLocalizerFactory
-      type: Microsoft.Extensions.Localization.IStringLocalizerFactory
-  nameWithType.vb: MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions(Of MvcDataAnnotationsLocalizationOptions), IStringLocalizerFactory)
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.MvcDataAnnotationsMvcOptionsSetup(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions), Microsoft.Extensions.Localization.IStringLocalizerFactory)
-  name.vb: MvcDataAnnotationsMvcOptionsSetup(IValidationAttributeAdapterProvider, IOptions(Of MvcDataAnnotationsLocalizationOptions), IStringLocalizerFactory)
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  id: Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup
-  langs:
-  - csharp
-  - vb
-  name: Configure(MvcOptions)
-  nameWithType: MvcDataAnnotationsMvcOptionsSetup.Configure(MvcOptions)
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  name: ConfigureMvc(MvcOptions, IServiceProvider)
+  nameWithType: MvcDataAnnotationsMvcOptionsSetup.ConfigureMvc(MvcOptions, IServiceProvider)
+  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MvcDataAnnotationsMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions, System.IServiceProvider)
   type: Method
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
-    id: Configure
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: ConfigureMvc
     path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/MvcDataAnnotationsMvcOptionsSetup.cs
-    startLine: 45
+    startLine: 20
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
   namespace: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   syntax:
-    content: public void Configure(MvcOptions options)
-    content.vb: Public Sub Configure(options As MvcOptions)
+    content: public static void ConfigureMvc(MvcOptions options, IServiceProvider serviceProvider)
+    content.vb: Public Shared Sub ConfigureMvc(options As MvcOptions, serviceProvider As IServiceProvider)
     parameters:
     - id: options
       type: Microsoft.AspNetCore.Mvc.MvcOptions
-  implements:
-  - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+    - id: serviceProvider
+      type: System.IServiceProvider
   modifiers.csharp:
   - public
+  - static
   modifiers.vb:
   - Public
+  - Shared
 references:
+- uid: Microsoft.AspNetCore.Mvc.MvcOptions
+  commentId: T:Microsoft.AspNetCore.Mvc.MvcOptions
+  parent: Microsoft.AspNetCore.Mvc
+  isExternal: false
+  name: MvcOptions
+  nameWithType: MvcOptions
+  fullName: Microsoft.AspNetCore.Mvc.MvcOptions
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   commentId: N:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   isExternal: false
@@ -175,6 +143,48 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  commentId: T:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1
+  name: ConfigureOptions<MvcOptions>
+  nameWithType: ConfigureOptions<MvcOptions>
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>
+  nameWithType.vb: ConfigureOptions(Of MvcOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions)
+  name.vb: ConfigureOptions(Of MvcOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   commentId: T:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   parent: Microsoft.Extensions.Options
@@ -217,6 +227,56 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  commentId: M:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  parent: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+  name: Configure(MvcOptions)
+  nameWithType: ConfigureOptions<MvcOptions>.Configure(MvcOptions)
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  nameWithType.vb: ConfigureOptions(Of MvcOptions).Configure(MvcOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions<MvcOptions>.Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions(Of MvcOptions).Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
+  commentId: P:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
+  parent: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1.Action
+  name: Action
+  nameWithType: ConfigureOptions<MvcOptions>.Action
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Action
+  nameWithType.vb: ConfigureOptions(Of MvcOptions).Action
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Action
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -496,12 +556,61 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Mvc
+  commentId: N:Microsoft.AspNetCore.Mvc
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc
+  nameWithType: Microsoft.AspNetCore.Mvc
+  fullName: Microsoft.AspNetCore.Mvc
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1
+  commentId: T:Microsoft.Extensions.Options.ConfigureOptions`1
+  isExternal: false
+  name: ConfigureOptions<TOptions>
+  nameWithType: ConfigureOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>
+  nameWithType.vb: ConfigureOptions(Of TOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions)
+  name.vb: ConfigureOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options
+  commentId: N:Microsoft.Extensions.Options
+  isExternal: false
+  name: Microsoft.Extensions.Options
+  nameWithType: Microsoft.Extensions.Options
+  fullName: Microsoft.Extensions.Options
 - uid: Microsoft.Extensions.Options.IConfigureOptions`1
   commentId: T:Microsoft.Extensions.Options.IConfigureOptions`1
   isExternal: false
@@ -539,178 +648,19 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
-  isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-  commentId: T:Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-  parent: Microsoft.AspNetCore.Mvc.DataAnnotations
-  isExternal: false
-  name: IValidationAttributeAdapterProvider
-  nameWithType: IValidationAttributeAdapterProvider
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
-- uid: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions}
-  commentId: T:Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions}
-  parent: Microsoft.Extensions.Options
-  definition: Microsoft.Extensions.Options.IOptions`1
-  name: IOptions<MvcDataAnnotationsLocalizationOptions>
-  nameWithType: IOptions<MvcDataAnnotationsLocalizationOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions>
-  nameWithType.vb: IOptions(Of MvcDataAnnotationsLocalizationOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions)
-  name.vb: IOptions(Of MvcDataAnnotationsLocalizationOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
-    name: IOptions
-    nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions
-    name: MvcDataAnnotationsLocalizationOptions
-    nameWithType: MvcDataAnnotationsLocalizationOptions
-    fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
-    name: IOptions
-    nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions
-    name: MvcDataAnnotationsLocalizationOptions
-    nameWithType: MvcDataAnnotationsLocalizationOptions
-    fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.MvcDataAnnotationsLocalizationOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations
-  commentId: N:Microsoft.AspNetCore.Mvc.DataAnnotations
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.DataAnnotations
-  nameWithType: Microsoft.AspNetCore.Mvc.DataAnnotations
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations
-- uid: Microsoft.Extensions.Options.IOptions`1
-  commentId: T:Microsoft.Extensions.Options.IOptions`1
-  isExternal: false
-  name: IOptions<TOptions>
-  nameWithType: IOptions<TOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
-  nameWithType.vb: IOptions(Of TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
-  name.vb: IOptions(Of TOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
-    name: IOptions
-    nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
-    name: IOptions
-    nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Localization.IStringLocalizerFactory
-  commentId: T:Microsoft.Extensions.Localization.IStringLocalizerFactory
-  parent: Microsoft.Extensions.Localization
-  isExternal: false
-  name: IStringLocalizerFactory
-  nameWithType: IStringLocalizerFactory
-  fullName: Microsoft.Extensions.Localization.IStringLocalizerFactory
-- uid: Microsoft.Extensions.Localization
-  commentId: N:Microsoft.Extensions.Localization
-  isExternal: false
-  name: Microsoft.Extensions.Localization
-  nameWithType: Microsoft.Extensions.Localization
-  fullName: Microsoft.Extensions.Localization
-- uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  commentId: M:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  parent: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
-  definition: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-  name: Configure(MvcOptions)
-  nameWithType: IConfigureOptions<MvcOptions>.Configure(MvcOptions)
-  fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  nameWithType.vb: IConfigureOptions(Of MvcOptions).Configure(MvcOptions)
-  fullname.vb: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions<MvcOptions>.Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
-    name: MvcOptions
-    nameWithType: MvcOptions
-    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions(Of MvcOptions).Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
-    name: MvcOptions
-    nameWithType: MvcOptions
-    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.MvcOptions
-  commentId: T:Microsoft.AspNetCore.Mvc.MvcOptions
-  parent: Microsoft.AspNetCore.Mvc
-  isExternal: false
-  name: MvcOptions
-  nameWithType: MvcOptions
-  fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-- uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-  commentId: M:Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+  commentId: M:Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
   isExternal: false
   name: Configure(TOptions)
-  nameWithType: IConfigureOptions<TOptions>.Configure(TOptions)
-  fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>.Configure(TOptions)
-  nameWithType.vb: IConfigureOptions(Of TOptions).Configure(TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions).Configure(TOptions)
+  nameWithType: ConfigureOptions<TOptions>.Configure(TOptions)
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Configure(TOptions)
+  nameWithType.vb: ConfigureOptions(Of TOptions).Configure(TOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Configure(TOptions)
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
     name: Configure
-    nameWithType: IConfigureOptions<TOptions>.Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>.Configure
+    nameWithType: ConfigureOptions<TOptions>.Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Configure
   - name: (
     nameWithType: (
     fullName: (
@@ -721,10 +671,10 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
     name: Configure
-    nameWithType: IConfigureOptions(Of TOptions).Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions).Configure
+    nameWithType: ConfigureOptions(Of TOptions).Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Configure
   - name: (
     nameWithType: (
     fullName: (
@@ -734,9 +684,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Mvc
-  commentId: N:Microsoft.AspNetCore.Mvc
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1.Action
+  commentId: P:Microsoft.Extensions.Options.ConfigureOptions`1.Action
   isExternal: false
-  name: Microsoft.AspNetCore.Mvc
-  nameWithType: Microsoft.AspNetCore.Mvc
-  fullName: Microsoft.AspNetCore.Mvc
+  name: Action
+  nameWithType: ConfigureOptions<TOptions>.Action
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Action
+  nameWithType.vb: ConfigureOptions(Of TOptions).Action
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Action
+- uid: System.IServiceProvider
+  commentId: T:System.IServiceProvider
+  parent: System
+  isExternal: true
+  name: IServiceProvider
+  nameWithType: IServiceProvider
+  fullName: System.IServiceProvider

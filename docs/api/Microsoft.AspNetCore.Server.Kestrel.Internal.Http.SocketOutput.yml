@@ -5,8 +5,9 @@ items:
   id: SocketOutput
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   children:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool,System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq})
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.End(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ProduceEndType)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.MaxPooledWriteReqs
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#ISocketOutput#Write(System.ArraySegment{System.Byte},System.Boolean)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#ISocketOutput#WriteAsync(System.ArraySegment{System.Byte},System.Boolean,System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.ProducingComplete(Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator)
@@ -22,11 +23,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: SocketOutput
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 15
+    startLine: 14
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -53,22 +54,55 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool)
-  id: '#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool)'
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.MaxPooledWriteReqs
+  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.MaxPooledWriteReqs
+  id: MaxPooledWriteReqs
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput
   langs:
   - csharp
   - vb
-  name: SocketOutput(KestrelThread, UvStreamHandle, Connection, String, IKestrelTrace, IThreadPool)
-  nameWithType: SocketOutput.SocketOutput(KestrelThread, UvStreamHandle, Connection, String, IKestrelTrace, IThreadPool)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.SocketOutput(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread, Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection, System.String, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool)
+  name: MaxPooledWriteReqs
+  nameWithType: SocketOutput.MaxPooledWriteReqs
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.MaxPooledWriteReqs
+  type: Field
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: MaxPooledWriteReqs
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
+    startLine: 16
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  syntax:
+    content: public const int MaxPooledWriteReqs = 1024
+    content.vb: Public Const MaxPooledWriteReqs As Integer = 1024
+    return:
+      type: System.Int32
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool,System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq})
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool,System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq})
+  id: '#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread,Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection,System.String,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace,Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool,System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq})'
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput
+  langs:
+  - csharp
+  - vb
+  name: SocketOutput(KestrelThread, UvStreamHandle, MemoryPool, Connection, String, IKestrelTrace, IThreadPool, Queue<UvWriteReq>)
+  nameWithType: SocketOutput.SocketOutput(KestrelThread, UvStreamHandle, MemoryPool, Connection, String, IKestrelTrace, IThreadPool, Queue<UvWriteReq>)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.SocketOutput(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread, Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection, System.String, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool, System.Collections.Generic.Queue<Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq>)
   type: Constructor
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
     startLine: 61
@@ -76,13 +110,15 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public SocketOutput(KestrelThread thread, UvStreamHandle socket, Connection connection, string connectionId, IKestrelTrace log, IThreadPool threadPool)
-    content.vb: Public Sub New(thread As KestrelThread, socket As UvStreamHandle, connection As Connection, connectionId As String, log As IKestrelTrace, threadPool As IThreadPool)
+    content: public SocketOutput(KestrelThread thread, UvStreamHandle socket, MemoryPool memory, Connection connection, string connectionId, IKestrelTrace log, IThreadPool threadPool, Queue<UvWriteReq> writeReqPool)
+    content.vb: Public Sub New(thread As KestrelThread, socket As UvStreamHandle, memory As MemoryPool, connection As Connection, connectionId As String, log As IKestrelTrace, threadPool As IThreadPool, writeReqPool As Queue(Of UvWriteReq))
     parameters:
     - id: thread
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread
     - id: socket
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle
+    - id: memory
+      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
     - id: connection
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
     - id: connectionId
@@ -91,10 +127,15 @@ items:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
     - id: threadPool
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
+    - id: writeReqPool
+      type: System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq}
+  nameWithType.vb: SocketOutput.SocketOutput(KestrelThread, UvStreamHandle, MemoryPool, Connection, String, IKestrelTrace, IThreadPool, Queue(Of UvWriteReq))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
+  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.SocketOutput(Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread, Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool, Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection, System.String, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace, Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool, System.Collections.Generic.Queue(Of Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq))
+  name.vb: SocketOutput(KestrelThread, UvStreamHandle, MemoryPool, Connection, String, IKestrelTrace, IThreadPool, Queue(Of UvWriteReq))
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.WriteAsync(System.ArraySegment{System.Byte},System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.WriteAsync(System.ArraySegment{System.Byte},System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
   id: WriteAsync(System.ArraySegment{System.Byte},System.Threading.CancellationToken,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
@@ -109,11 +150,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: WriteAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 81
+    startLine: 85
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -156,11 +197,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: End
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 204
+    startLine: 210
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -188,11 +229,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ProducingStart
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 225
+    startLine: 231
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -221,8 +262,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ProducingComplete
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
     startLine: 248
@@ -256,11 +297,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.Write
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 503
+    startLine: 502
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -292,11 +333,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.WriteAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/SocketOutput.cs
-    startLine: 508
+    startLine: 507
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -623,6 +664,13 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -637,6 +685,13 @@ references:
   name: UvStreamHandle
   nameWithType: UvStreamHandle
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvStreamHandle
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
+  isExternal: false
+  name: MemoryPool
+  nameWithType: MemoryPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Connection
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -665,6 +720,48 @@ references:
   name: IThreadPool
   nameWithType: IThreadPool
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
+- uid: System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq}
+  commentId: T:System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.Queue`1
+  name: Queue<UvWriteReq>
+  nameWithType: Queue<UvWriteReq>
+  fullName: System.Collections.Generic.Queue<Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq>
+  nameWithType.vb: Queue(Of UvWriteReq)
+  fullname.vb: System.Collections.Generic.Queue(Of Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq)
+  name.vb: Queue(Of UvWriteReq)
+  spec.csharp:
+  - uid: System.Collections.Generic.Queue`1
+    name: Queue
+    nameWithType: Queue
+    fullName: System.Collections.Generic.Queue
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq
+    name: UvWriteReq
+    nameWithType: UvWriteReq
+    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Queue`1
+    name: Queue
+    nameWithType: Queue
+    fullName: System.Collections.Generic.Queue
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq
+    name: UvWriteReq
+    nameWithType: UvWriteReq
+    fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal
   commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal
   isExternal: false
@@ -683,6 +780,51 @@ references:
   name: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
   nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
+- uid: System.Collections.Generic.Queue`1
+  commentId: T:System.Collections.Generic.Queue`1
+  isExternal: true
+  name: Queue<T>
+  nameWithType: Queue<T>
+  fullName: System.Collections.Generic.Queue<T>
+  nameWithType.vb: Queue(Of T)
+  fullname.vb: System.Collections.Generic.Queue(Of T)
+  name.vb: Queue(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.Queue`1
+    name: Queue
+    nameWithType: Queue
+    fullName: System.Collections.Generic.Queue
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.Queue`1
+    name: Queue
+    nameWithType: Queue
+    fullName: System.Collections.Generic.Queue
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: false
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
 - uid: System.ArraySegment{System.Byte}
   commentId: T:System.ArraySegment{System.Byte}
   parent: System
