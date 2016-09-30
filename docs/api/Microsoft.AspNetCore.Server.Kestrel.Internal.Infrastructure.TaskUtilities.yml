@@ -5,9 +5,10 @@ items:
   id: TaskUtilities
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
   children:
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.CompletedTask
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetCancelledTask(System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetCancelledZeroTask(System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetFaultedTask(System.Exception)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.ZeroTask
   langs:
   - csharp
   - vb
@@ -18,11 +19,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: TaskUtilities
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-    startLine: 9
+    startLine: 8
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
@@ -46,6 +47,72 @@ items:
   modifiers.vb:
   - Public
   - Module
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.CompletedTask
+  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.CompletedTask
+  id: CompletedTask
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities
+  langs:
+  - csharp
+  - vb
+  name: CompletedTask
+  nameWithType: TaskUtilities.CompletedTask
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.CompletedTask
+  type: Field
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: CompletedTask
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
+    startLine: 13
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
+  syntax:
+    content: public static Task CompletedTask
+    content.vb: Public Shared CompletedTask As Task
+    return:
+      type: System.Threading.Tasks.Task
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.ZeroTask
+  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.ZeroTask
+  id: ZeroTask
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities
+  langs:
+  - csharp
+  - vb
+  name: ZeroTask
+  nameWithType: TaskUtilities.ZeroTask
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.ZeroTask
+  type: Field
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: ZeroTask
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
+    startLine: 15
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
+  syntax:
+    content: public static Task<int> ZeroTask
+    content.vb: Public Shared ZeroTask As Task(Of Integer)
+    return:
+      type: System.Threading.Tasks.Task{System.Int32}
+  modifiers.csharp:
+  - public
+  - static
+  modifiers.vb:
+  - Public
+  - Shared
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetCancelledTask(System.Threading.CancellationToken)
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetCancelledTask(System.Threading.CancellationToken)
   id: GetCancelledTask(System.Threading.CancellationToken)
@@ -60,11 +127,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: GetCancelledTask
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-    startLine: 11
+    startLine: 17
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
@@ -96,11 +163,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: GetCancelledZeroTask
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-    startLine: 22
+    startLine: 28
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
@@ -110,42 +177,6 @@ items:
     parameters:
     - id: cancellationToken
       type: System.Threading.CancellationToken
-    return:
-      type: System.Threading.Tasks.Task{System.Int32}
-  modifiers.csharp:
-  - public
-  - static
-  modifiers.vb:
-  - Public
-  - Shared
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetFaultedTask(System.Exception)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetFaultedTask(System.Exception)
-  id: GetFaultedTask(System.Exception)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities
-  langs:
-  - csharp
-  - vb
-  name: GetFaultedTask(Exception)
-  nameWithType: TaskUtilities.GetFaultedTask(Exception)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.TaskUtilities.GetFaultedTask(System.Exception)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: GetFaultedTask
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Infrastructure/TaskUtilities.cs
-    startLine: 38
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  syntax:
-    content: public static Task<int> GetFaultedTask(Exception error)
-    content.vb: Public Shared Function GetFaultedTask(error As Exception) As Task(Of Integer)
-    parameters:
-    - id: error
-      type: System.Exception
     return:
       type: System.Threading.Tasks.Task{System.Int32}
   modifiers.csharp:
@@ -453,13 +484,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: System.Threading.CancellationToken
-  commentId: T:System.Threading.CancellationToken
-  parent: System.Threading
-  isExternal: true
-  name: CancellationToken
-  nameWithType: CancellationToken
-  fullName: System.Threading.CancellationToken
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -467,12 +491,6 @@ references:
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
-- uid: System.Threading
-  commentId: N:System.Threading
-  isExternal: false
-  name: System.Threading
-  nameWithType: System.Threading
-  fullName: System.Threading
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: false
@@ -562,10 +580,16 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Exception
-  commentId: T:System.Exception
-  parent: System
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
   isExternal: true
-  name: Exception
-  nameWithType: Exception
-  fullName: System.Exception
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: false
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading

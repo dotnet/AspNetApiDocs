@@ -6,7 +6,7 @@ items:
   parent: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   children:
   - Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.#ctor(Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.MvcJsonOptions},System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
-  - Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  - Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,Newtonsoft.Json.JsonSerializerSettings,Microsoft.Extensions.Logging.ILoggerFactory,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   langs:
   - csharp
   - vb
@@ -17,26 +17,30 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
     id: MvcJsonMvcOptionsSetup
     path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-    startLine: 18
+    startLine: 17
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
-  summary: "\nSets up JSON formatter options for <see cref=\"T:Microsoft.AspNetCore.Mvc.MvcOptions\"></see>.\n"
+  summary: "\nSets up JSON formatter options for <xref href=\"Microsoft.AspNetCore.Mvc.MvcOptions\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: 'public class MvcJsonMvcOptionsSetup : IConfigureOptions<MvcOptions>'
+    content: 'public class MvcJsonMvcOptionsSetup : ConfigureOptions<MvcOptions>, IConfigureOptions<MvcOptions>'
     content.vb: >-
       Public Class MvcJsonMvcOptionsSetup
+          Inherits ConfigureOptions(Of MvcOptions)
           Implements IConfigureOptions(Of MvcOptions)
   inheritance:
   - System.Object
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   implements:
   - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   inheritedMembers:
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  - Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -64,26 +68,32 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-    startLine: 25
+    startLine: 26
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
+  summary: "\nIntiailizes a new instance of <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
   syntax:
     content: public MvcJsonMvcOptionsSetup(ILoggerFactory loggerFactory, IOptions<MvcJsonOptions> jsonOptions, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
     content.vb: Public Sub New(loggerFactory As ILoggerFactory, jsonOptions As IOptions(Of MvcJsonOptions), charPool As ArrayPool(Of Char), objectPoolProvider As ObjectPoolProvider)
     parameters:
     - id: loggerFactory
       type: Microsoft.Extensions.Logging.ILoggerFactory
+      description: The <xref href="Microsoft.Extensions.Logging.ILoggerFactory" data-throw-if-not-resolved="false"></xref>.
     - id: jsonOptions
       type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.MvcJsonOptions}
+      description: ''
     - id: charPool
       type: System.Buffers.ArrayPool{System.Char}
+      description: ''
     - id: objectPoolProvider
       type: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+      description: ''
   nameWithType.vb: MvcJsonMvcOptionsSetup.MvcJsonMvcOptionsSetup(ILoggerFactory, IOptions(Of MvcJsonOptions), ArrayPool(Of Char), ObjectPoolProvider)
   modifiers.csharp:
   - public
@@ -91,41 +101,59 @@ items:
   - Public
   fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.MvcJsonMvcOptionsSetup(Microsoft.Extensions.Logging.ILoggerFactory, Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.MvcJsonOptions), System.Buffers.ArrayPool(Of System.Char), Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   name.vb: MvcJsonMvcOptionsSetup(ILoggerFactory, IOptions(Of MvcJsonOptions), ArrayPool(Of Char), ObjectPoolProvider)
-- uid: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  id: Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,Newtonsoft.Json.JsonSerializerSettings,Microsoft.Extensions.Logging.ILoggerFactory,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,Newtonsoft.Json.JsonSerializerSettings,Microsoft.Extensions.Logging.ILoggerFactory,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
+  id: ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions,Newtonsoft.Json.JsonSerializerSettings,Microsoft.Extensions.Logging.ILoggerFactory,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   parent: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup
   langs:
   - csharp
   - vb
-  name: Configure(MvcOptions)
-  nameWithType: MvcJsonMvcOptionsSetup.Configure(MvcOptions)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  name: ConfigureMvc(MvcOptions, JsonSerializerSettings, ILoggerFactory, ArrayPool<Char>, ObjectPoolProvider)
+  nameWithType: MvcJsonMvcOptionsSetup.ConfigureMvc(MvcOptions, JsonSerializerSettings, ILoggerFactory, ArrayPool<Char>, ObjectPoolProvider)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions, Newtonsoft.Json.JsonSerializerSettings, Microsoft.Extensions.Logging.ILoggerFactory, System.Buffers.ArrayPool<System.Char>, Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   type: Method
   source:
     remote:
       path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-      branch: dev
-      repo: https://github.com/aspnet/mvc
-    id: Configure
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: ConfigureMvc
     path: src/Microsoft.AspNetCore.Mvc.Formatters.Json/Internal/MvcJsonMvcOptionsSetup.cs
-    startLine: 57
+    startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   syntax:
-    content: public void Configure(MvcOptions options)
-    content.vb: Public Sub Configure(options As MvcOptions)
+    content: public static void ConfigureMvc(MvcOptions options, JsonSerializerSettings serializerSettings, ILoggerFactory loggerFactory, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
+    content.vb: Public Shared Sub ConfigureMvc(options As MvcOptions, serializerSettings As JsonSerializerSettings, loggerFactory As ILoggerFactory, charPool As ArrayPool(Of Char), objectPoolProvider As ObjectPoolProvider)
     parameters:
     - id: options
       type: Microsoft.AspNetCore.Mvc.MvcOptions
-  implements:
-  - Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+    - id: serializerSettings
+      type: Newtonsoft.Json.JsonSerializerSettings
+    - id: loggerFactory
+      type: Microsoft.Extensions.Logging.ILoggerFactory
+    - id: charPool
+      type: System.Buffers.ArrayPool{System.Char}
+    - id: objectPoolProvider
+      type: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+  nameWithType.vb: MvcJsonMvcOptionsSetup.ConfigureMvc(MvcOptions, JsonSerializerSettings, ILoggerFactory, ArrayPool(Of Char), ObjectPoolProvider)
   modifiers.csharp:
   - public
+  - static
   modifiers.vb:
   - Public
+  - Shared
+  fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup.ConfigureMvc(Microsoft.AspNetCore.Mvc.MvcOptions, Newtonsoft.Json.JsonSerializerSettings, Microsoft.Extensions.Logging.ILoggerFactory, System.Buffers.ArrayPool(Of System.Char), Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
+  name.vb: ConfigureMvc(MvcOptions, JsonSerializerSettings, ILoggerFactory, ArrayPool(Of Char), ObjectPoolProvider)
 references:
+- uid: Microsoft.AspNetCore.Mvc.MvcOptions
+  commentId: T:Microsoft.AspNetCore.Mvc.MvcOptions
+  parent: Microsoft.AspNetCore.Mvc
+  isExternal: false
+  name: MvcOptions
+  nameWithType: MvcOptions
+  fullName: Microsoft.AspNetCore.Mvc.MvcOptions
 - uid: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   commentId: N:Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   isExternal: false
@@ -139,6 +167,48 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  commentId: T:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  parent: Microsoft.Extensions.Options
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1
+  name: ConfigureOptions<MvcOptions>
+  nameWithType: ConfigureOptions<MvcOptions>
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>
+  nameWithType.vb: ConfigureOptions(Of MvcOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions)
+  name.vb: ConfigureOptions(Of MvcOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   commentId: T:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
   parent: Microsoft.Extensions.Options
@@ -181,6 +251,56 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  commentId: M:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  parent: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+  name: Configure(MvcOptions)
+  nameWithType: ConfigureOptions<MvcOptions>.Configure(MvcOptions)
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  nameWithType.vb: ConfigureOptions(Of MvcOptions).Configure(MvcOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions<MvcOptions>.Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions(Of MvcOptions).Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
+    name: MvcOptions
+    nameWithType: MvcOptions
+    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
+  commentId: P:Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Action
+  parent: Microsoft.Extensions.Options.ConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
+  definition: Microsoft.Extensions.Options.ConfigureOptions`1.Action
+  name: Action
+  nameWithType: ConfigureOptions<MvcOptions>.Action
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Action
+  nameWithType.vb: ConfigureOptions(Of MvcOptions).Action
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Action
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -460,12 +580,61 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Mvc
+  commentId: N:Microsoft.AspNetCore.Mvc
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc
+  nameWithType: Microsoft.AspNetCore.Mvc
+  fullName: Microsoft.AspNetCore.Mvc
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1
+  commentId: T:Microsoft.Extensions.Options.ConfigureOptions`1
+  isExternal: false
+  name: ConfigureOptions<TOptions>
+  nameWithType: ConfigureOptions<TOptions>
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>
+  nameWithType.vb: ConfigureOptions(Of TOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions)
+  name.vb: ConfigureOptions(Of TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1
+    name: ConfigureOptions
+    nameWithType: ConfigureOptions
+    fullName: Microsoft.Extensions.Options.ConfigureOptions
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options
+  commentId: N:Microsoft.Extensions.Options
+  isExternal: false
+  name: Microsoft.Extensions.Options
+  nameWithType: Microsoft.Extensions.Options
+  fullName: Microsoft.Extensions.Options
 - uid: Microsoft.Extensions.Options.IConfigureOptions`1
   commentId: T:Microsoft.Extensions.Options.IConfigureOptions`1
   isExternal: false
@@ -503,12 +672,56 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+  commentId: M:Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
   isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
+  name: Configure(TOptions)
+  nameWithType: ConfigureOptions<TOptions>.Configure(TOptions)
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Configure(TOptions)
+  nameWithType.vb: ConfigureOptions(Of TOptions).Configure(TOptions)
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Configure(TOptions)
+  spec.csharp:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions<TOptions>.Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.Extensions.Options.ConfigureOptions`1.Configure(`0)
+    name: Configure
+    nameWithType: ConfigureOptions(Of TOptions).Configure
+    fullName: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Configure
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: TOptions
+    nameWithType: TOptions
+    fullName: TOptions
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.Options.ConfigureOptions`1.Action
+  commentId: P:Microsoft.Extensions.Options.ConfigureOptions`1.Action
+  isExternal: false
+  name: Action
+  nameWithType: ConfigureOptions<TOptions>.Action
+  fullName: Microsoft.Extensions.Options.ConfigureOptions<TOptions>.Action
+  nameWithType.vb: ConfigureOptions(Of TOptions).Action
+  fullname.vb: Microsoft.Extensions.Options.ConfigureOptions(Of TOptions).Action
+- uid: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup
+  isExternal: false
+  name: MvcJsonMvcOptionsSetup
+  nameWithType: MvcJsonMvcOptionsSetup
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.MvcJsonMvcOptionsSetup
 - uid: Microsoft.Extensions.Logging.ILoggerFactory
   commentId: T:Microsoft.Extensions.Logging.ILoggerFactory
   parent: Microsoft.Extensions.Logging
@@ -703,93 +916,16 @@ references:
   name: Microsoft.Extensions.ObjectPool
   nameWithType: Microsoft.Extensions.ObjectPool
   fullName: Microsoft.Extensions.ObjectPool
-- uid: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  commentId: M:Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  parent: Microsoft.Extensions.Options.IConfigureOptions{Microsoft.AspNetCore.Mvc.MvcOptions}
-  definition: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-  name: Configure(MvcOptions)
-  nameWithType: IConfigureOptions<MvcOptions>.Configure(MvcOptions)
-  fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  nameWithType.vb: IConfigureOptions(Of MvcOptions).Configure(MvcOptions)
-  fullname.vb: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure(Microsoft.AspNetCore.Mvc.MvcOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions<MvcOptions>.Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions<Microsoft.AspNetCore.Mvc.MvcOptions>.Configure
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
-    name: MvcOptions
-    nameWithType: MvcOptions
-    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions(Of MvcOptions).Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions(Of Microsoft.AspNetCore.Mvc.MvcOptions).Configure
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.MvcOptions
-    name: MvcOptions
-    nameWithType: MvcOptions
-    fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.MvcOptions
-  commentId: T:Microsoft.AspNetCore.Mvc.MvcOptions
-  parent: Microsoft.AspNetCore.Mvc
+- uid: Newtonsoft.Json.JsonSerializerSettings
+  commentId: T:Newtonsoft.Json.JsonSerializerSettings
+  parent: Newtonsoft.Json
+  isExternal: true
+  name: JsonSerializerSettings
+  nameWithType: JsonSerializerSettings
+  fullName: Newtonsoft.Json.JsonSerializerSettings
+- uid: Newtonsoft.Json
+  commentId: N:Newtonsoft.Json
   isExternal: false
-  name: MvcOptions
-  nameWithType: MvcOptions
-  fullName: Microsoft.AspNetCore.Mvc.MvcOptions
-- uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-  commentId: M:Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-  isExternal: false
-  name: Configure(TOptions)
-  nameWithType: IConfigureOptions<TOptions>.Configure(TOptions)
-  fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>.Configure(TOptions)
-  nameWithType.vb: IConfigureOptions(Of TOptions).Configure(TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions).Configure(TOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions<TOptions>.Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions<TOptions>.Configure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Options.IConfigureOptions`1.Configure(`0)
-    name: Configure
-    nameWithType: IConfigureOptions(Of TOptions).Configure
-    fullName: Microsoft.Extensions.Options.IConfigureOptions(Of TOptions).Configure
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc
-  commentId: N:Microsoft.AspNetCore.Mvc
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc
-  nameWithType: Microsoft.AspNetCore.Mvc
-  fullName: Microsoft.AspNetCore.Mvc
+  name: Newtonsoft.Json
+  nameWithType: Newtonsoft.Json
+  fullName: Newtonsoft.Json

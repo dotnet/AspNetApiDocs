@@ -7,17 +7,14 @@ items:
   children:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._applicationException
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._httpVersion
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._keepAlive
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._keepAliveMilliseconds
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._onCompleted
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._onStarting
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestAborted
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestProcessingStatus
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestProcessingStopping
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestRejected
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort(System.Exception)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionContext
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionControl
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionIdFeature
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.DuplexStream
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.FireOnCompleted
@@ -33,7 +30,6 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.InitializeStreams(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.MessageBody)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.LocalIpAddress
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.LocalPort
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Log
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Method
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Microsoft#AspNetCore#Http#Features#IFeatureCollection#Get``1
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Microsoft#AspNetCore#Http#Features#IFeatureCollection#IsReadOnly
@@ -70,15 +66,13 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Path
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PathBase
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PauseStreams
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PrepareRequest
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ProduceContinue
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ProduceEnd
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ProduceStartAndFireOnStarting
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.QueryString
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RawTarget
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ReasonPhrase
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason,System.String)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(System.String)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RemoteIpAddress
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RemotePort
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ReportApplicationError(System.Exception)
@@ -93,9 +87,6 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ResumeStreams
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Scheme
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.BadHttpRequestException)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketInput
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketOutput
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Start
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.StatusCanHaveBody(System.Int32)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.StatusCode
@@ -119,8 +110,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.Generated.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Frame
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.Generated.cs
     startLine: 6
@@ -128,12 +119,16 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: 'public abstract class Frame : IFrameControl, IFeatureCollection, IEnumerable<KeyValuePair<Type, object>>, IEnumerable, IHttpRequestFeature, IHttpResponseFeature, IHttpUpgradeFeature, IHttpConnectionFeature, IHttpRequestLifetimeFeature'
+    content: 'public abstract class Frame : ConnectionContext, IFrameControl, IFeatureCollection, IEnumerable<KeyValuePair<Type, object>>, IEnumerable, IHttpRequestFeature, IHttpResponseFeature, IHttpUpgradeFeature, IHttpConnectionFeature, IHttpRequestLifetimeFeature'
     content.vb: >-
       Public MustInherit Class Frame
+          Inherits ConnectionContext
           Implements IFrameControl, IFeatureCollection, IEnumerable(Of KeyValuePair(Of Type, Object)), IEnumerable, IHttpRequestFeature, IHttpResponseFeature, IHttpUpgradeFeature, IHttpConnectionFeature, IHttpRequestLifetimeFeature
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IFrameControl
   - Microsoft.AspNetCore.Http.Features.IFeatureCollection
@@ -145,6 +140,24 @@ items:
   - Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature
   - Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature
   inheritedMembers:
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketOutput
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.RemoteEndPoint
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -174,11 +187,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _requestRejected
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 48
+    startLine: 45
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -205,19 +218,19 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _onStarting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 51
+    startLine: 48
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: protected Stack<KeyValuePair<Func<object, Task>, object>> _onStarting
-    content.vb: Protected _onStarting As Stack(Of KeyValuePair(Of Func(Of Object, Task), Object))
+    content: protected List<KeyValuePair<Func<object, Task>, object>> _onStarting
+    content.vb: Protected _onStarting As List(Of KeyValuePair(Of Func(Of Object, Task), Object))
     return:
-      type: System.Collections.Generic.Stack{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
+      type: System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -236,19 +249,19 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _onCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 52
+    startLine: 50
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: protected Stack<KeyValuePair<Func<object, Task>, object>> _onCompleted
-    content.vb: Protected _onCompleted As Stack(Of KeyValuePair(Of Func(Of Object, Task), Object))
+    content: protected List<KeyValuePair<Func<object, Task>, object>> _onCompleted
+    content.vb: Protected _onCompleted As List(Of KeyValuePair(Of Func(Of Object, Task), Object))
     return:
-      type: System.Collections.Generic.Stack{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
+      type: System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -267,11 +280,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _requestProcessingStopping
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 55
+    startLine: 53
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -299,11 +312,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _requestAborted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 56
+    startLine: 54
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -312,6 +325,37 @@ items:
     content.vb: Protected _requestAborted As Integer
     return:
       type: System.Int32
+  modifiers.csharp:
+  - protected
+  modifiers.vb:
+  - Protected
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestProcessingStatus
+  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestProcessingStatus
+  id: _requestProcessingStatus
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
+  langs:
+  - csharp
+  - vb
+  name: _requestProcessingStatus
+  nameWithType: Frame._requestProcessingStatus
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._requestProcessingStatus
+  type: Field
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
+    id: _requestProcessingStatus
+    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
+    startLine: 58
+  assemblies:
+  - Microsoft.AspNetCore.Server.Kestrel
+  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  syntax:
+    content: protected Frame.RequestProcessingStatus _requestProcessingStatus
+    content.vb: Protected _requestProcessingStatus As Frame.RequestProcessingStatus
+    return:
+      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestProcessingStatus
   modifiers.csharp:
   - protected
   modifiers.vb:
@@ -330,11 +374,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _keepAlive
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 61
+    startLine: 59
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -361,11 +405,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: _applicationException
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 63
+    startLine: 61
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -378,70 +422,6 @@ items:
   - protected
   modifiers.vb:
   - Protected
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._httpVersion
-  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._httpVersion
-  id: _httpVersion
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: _httpVersion
-  nameWithType: Frame._httpVersion
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._httpVersion
-  type: Field
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: _httpVersion
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 65
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: protected HttpVersion _httpVersion
-    content.vb: Protected _httpVersion As HttpVersion
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.HttpVersion
-  modifiers.csharp:
-  - protected
-  modifiers.vb:
-  - Protected
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._keepAliveMilliseconds
-  commentId: F:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._keepAliveMilliseconds
-  id: _keepAliveMilliseconds
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: _keepAliveMilliseconds
-  nameWithType: Frame._keepAliveMilliseconds
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame._keepAliveMilliseconds
-  type: Field
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: _keepAliveMilliseconds
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 72
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: protected readonly long _keepAliveMilliseconds
-    content.vb: Protected ReadOnly _keepAliveMilliseconds As Long
-    return:
-      type: System.Int64
-  modifiers.csharp:
-  - protected
-  - readonly
-  modifiers.vb:
-  - Protected
-  - ReadOnly
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)
   id: '#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext)'
@@ -456,11 +436,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 75
+    startLine: 67
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -474,210 +454,6 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionContext
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionContext
-  id: ConnectionContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: ConnectionContext
-  nameWithType: Frame.ConnectionContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionContext
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ConnectionContext
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 90
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public ConnectionContext ConnectionContext { get; }
-    content.vb: Public ReadOnly Property ConnectionContext As ConnectionContext
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketInput
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketInput
-  id: SocketInput
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: SocketInput
-  nameWithType: Frame.SocketInput
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketInput
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: SocketInput
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 91
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public SocketInput SocketInput { get; set; }
-    content.vb: Public Property SocketInput As SocketInput
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketOutput
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketOutput
-  id: SocketOutput
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: SocketOutput
-  nameWithType: Frame.SocketOutput
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SocketOutput
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: SocketOutput
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 92
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public ISocketOutput SocketOutput { get; set; }
-    content.vb: Public Property SocketOutput As ISocketOutput
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PrepareRequest
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PrepareRequest
-  id: PrepareRequest
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: PrepareRequest
-  nameWithType: Frame.PrepareRequest
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.PrepareRequest
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: PrepareRequest
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 93
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public Action<IFeatureCollection> PrepareRequest { get; set; }
-    content.vb: Public Property PrepareRequest As Action(Of IFeatureCollection)
-    parameters: []
-    return:
-      type: System.Action{Microsoft.AspNetCore.Http.Features.IFeatureCollection}
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionControl
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionControl
-  id: ConnectionControl
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: ConnectionControl
-  nameWithType: Frame.ConnectionControl
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionControl
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ConnectionControl
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 105
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: protected IConnectionControl ConnectionControl { get; }
-    content.vb: Protected ReadOnly Property ConnectionControl As IConnectionControl
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  modifiers.csharp:
-  - protected
-  - get
-  modifiers.vb:
-  - Protected
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Log
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Log
-  id: Log
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: Log
-  nameWithType: Frame.Log
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Log
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Log
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 106
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: protected IKestrelTrace Log { get; }
-    content.vb: Protected ReadOnly Property Log As IKestrelTrace
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  modifiers.csharp:
-  - protected
-  - get
-  modifiers.vb:
-  - Protected
-  - ReadOnly
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionIdFeature
   commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.ConnectionIdFeature
   id: ConnectionIdFeature
@@ -692,11 +468,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ConnectionIdFeature
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 116
+    startLine: 76
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -726,11 +502,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RemoteIpAddress
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 117
+    startLine: 77
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -760,11 +536,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RemotePort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 118
+    startLine: 78
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -794,11 +570,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: LocalIpAddress
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 119
+    startLine: 79
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -828,11 +604,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: LocalPort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 120
+    startLine: 80
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -862,11 +638,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Scheme
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 121
+    startLine: 81
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -896,11 +672,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Method
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 122
+    startLine: 82
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -930,11 +706,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: PathBase
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 123
+    startLine: 83
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -964,11 +740,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Path
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 124
+    startLine: 84
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -998,11 +774,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: QueryString
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 125
+    startLine: 85
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1032,11 +808,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RawTarget
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 126
+    startLine: 86
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1066,11 +842,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: HttpVersion
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 127
+    startLine: 87
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1100,11 +876,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RequestHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 159
+    startLine: 119
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1134,11 +910,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RequestBody
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 160
+    startLine: 120
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1168,11 +944,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: StatusCode
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 163
+    startLine: 123
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1202,11 +978,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ReasonPhrase
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 181
+    startLine: 141
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1236,11 +1012,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ResponseHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 198
+    startLine: 158
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1270,11 +1046,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ResponseBody
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 199
+    startLine: 159
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1304,11 +1080,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: DuplexStream
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 201
+    startLine: 161
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1338,11 +1114,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RequestAborted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 203
+    startLine: 163
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1372,11 +1148,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: HasResponseStarted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 253
+    startLine: 213
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1406,11 +1182,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FrameRequestHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 255
+    startLine: 218
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1440,11 +1216,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FrameResponseHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 257
+    startLine: 220
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1474,11 +1250,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: InitializeHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 259
+    startLine: 222
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1503,11 +1279,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: InitializeStreams
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 276
+    startLine: 239
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1535,11 +1311,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: PauseStreams
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 291
+    startLine: 254
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1564,11 +1340,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ResumeStreams
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 297
+    startLine: 260
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1593,11 +1369,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: StopStreams
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 303
+    startLine: 266
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1622,11 +1398,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Reset
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 309
+    startLine: 272
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1651,11 +1427,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Start
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 352
+    startLine: 312
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1682,11 +1458,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Stop
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 370
+    startLine: 329
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1701,36 +1477,33 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort(System.Exception)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort(System.Exception)
-  id: Abort(System.Exception)
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort
+  id: Abort
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
   langs:
   - csharp
   - vb
-  name: Abort(Exception)
-  nameWithType: Frame.Abort(Exception)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort(System.Exception)
+  name: Abort()
+  nameWithType: Frame.Abort()
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.Abort()
   type: Method
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Abort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 383
+    startLine: 341
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   summary: "\nImmediate kill the connection and poison the request and response streams.\n"
   example: []
   syntax:
-    content: public void Abort(Exception error = null)
-    content.vb: Public Sub Abort(error As Exception = Nothing)
-    parameters:
-    - id: error
-      type: System.Exception
+    content: public void Abort()
+    content.vb: Public Sub Abort
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1749,11 +1522,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RequestProcessingAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 419
+    startLine: 377
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1784,11 +1557,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: OnStarting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 421
+    startLine: 379
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1821,11 +1594,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: OnCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 438
+    startLine: 391
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1858,11 +1631,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FireOnStarting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 450
+    startLine: 403
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1889,11 +1662,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FireOnCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 474
+    startLine: 427
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1920,11 +1693,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Flush
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 498
+    startLine: 451
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1951,11 +1724,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FlushAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 504
+    startLine: 457
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -1987,11 +1760,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Write
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 510
+    startLine: 463
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2024,11 +1797,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: WriteAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 528
+    startLine: 481
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2065,11 +1838,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: WriteAsyncAwaited
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 549
+    startLine: 502
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2104,11 +1877,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ProduceContinue
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 588
+    startLine: 541
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2135,11 +1908,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ProduceStartAndFireOnStarting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 604
+    startLine: 557
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2166,11 +1939,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: TryProduceInvalidRequestResponse
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 651
+    startLine: 609
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2197,11 +1970,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ProduceEnd
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 666
+    startLine: 624
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2228,26 +2001,26 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: TakeStartLine
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 822
+    startLine: 791
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public Frame.RequestLineStatus TakeStartLine(SocketInput input)
-    content.vb: Public Function TakeStartLine(input As SocketInput) As Frame.RequestLineStatus
+    content: protected Frame.RequestLineStatus TakeStartLine(SocketInput input)
+    content.vb: Protected Function TakeStartLine(input As SocketInput) As Frame.RequestLineStatus
     parameters:
     - id: input
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
     return:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestLineStatus
   modifiers.csharp:
-  - public
+  - protected
   modifiers.vb:
-  - Public
+  - Protected
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.TakeMessageHeaders(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.FrameRequestHeaders)
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.TakeMessageHeaders(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.FrameRequestHeaders)
   id: TakeMessageHeaders(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput,Microsoft.AspNetCore.Server.Kestrel.Internal.Http.FrameRequestHeaders)
@@ -2262,11 +2035,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: TakeMessageHeaders
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1084
+    startLine: 1037
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2298,11 +2071,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: StatusCanHaveBody
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1248
+    startLine: 1196
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2318,100 +2091,34 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  id: RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(System.String)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(System.String)
+  id: RejectRequest(System.String)
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
   langs:
   - csharp
   - vb
-  name: RejectRequest(RequestRejectionReason)
-  nameWithType: Frame.RejectRequest(RequestRejectionReason)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
+  name: RejectRequest(String)
+  nameWithType: Frame.RejectRequest(String)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(System.String)
   type: Method
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: RejectRequest
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1269
+    startLine: 1205
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
-    content: public void RejectRequest(RequestRejectionReason reason)
-    content.vb: Public Sub RejectRequest(reason As RequestRejectionReason)
+    content: public void RejectRequest(string message)
+    content.vb: Public Sub RejectRequest(message As String)
     parameters:
-    - id: reason
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason,System.String)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason,System.String)
-  id: RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason,System.String)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: RejectRequest(RequestRejectionReason, String)
-  nameWithType: Frame.RejectRequest(RequestRejectionReason, String)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RejectRequest(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason, System.String)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: RejectRequest
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1276
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public void RejectRequest(RequestRejectionReason reason, string value)
-    content.vb: Public Sub RejectRequest(reason As RequestRejectionReason, value As String)
-    parameters:
-    - id: reason
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
-    - id: value
+    - id: message
       type: System.String
-  modifiers.csharp:
-  - public
-  modifiers.vb:
-  - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  id: SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame
-  langs:
-  - csharp
-  - vb
-  name: SetBadRequestState(RequestRejectionReason)
-  nameWithType: Frame.SetBadRequestState(RequestRejectionReason)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.SetBadRequestState(Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason)
-  type: Method
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: SetBadRequestState
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1283
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  syntax:
-    content: public void SetBadRequestState(RequestRejectionReason reason)
-    content.vb: Public Sub SetBadRequestState(reason As RequestRejectionReason)
-    parameters:
-    - id: reason
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -2430,11 +2137,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: SetBadRequestState
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1288
+    startLine: 1212
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2462,11 +2169,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ReportApplicationError
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.cs
-    startLine: 1303
+    startLine: 1219
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -2494,8 +2201,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: ResetFeatureCollection
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 32
@@ -2523,8 +2230,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: FrameControl
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 74
@@ -2558,8 +2265,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Protocol
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 76
@@ -2594,8 +2301,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Scheme
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 89
@@ -2630,8 +2337,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Method
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 102
@@ -2666,8 +2373,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.PathBase
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 115
@@ -2702,8 +2409,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Path
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 128
@@ -2738,8 +2445,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.QueryString
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 141
@@ -2774,8 +2481,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.RawTarget
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 154
@@ -2810,8 +2517,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Headers
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 166
@@ -2846,8 +2553,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestFeature.Body
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 179
@@ -2882,8 +2589,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.StatusCode
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 192
@@ -2918,8 +2625,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.ReasonPhrase
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 205
@@ -2954,8 +2661,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.Headers
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 218
@@ -2990,8 +2697,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.Body
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 231
@@ -3026,8 +2733,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature.RequestAborted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 244
@@ -3062,8 +2769,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.HasStarted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 256
@@ -3099,8 +2806,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature.IsUpgradableRequest
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 261
@@ -3136,8 +2843,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IFeatureCollection.IsReadOnly
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 274
@@ -3173,8 +2880,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IFeatureCollection.Revision
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 276
@@ -3210,8 +2917,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.RemoteIpAddress
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 278
@@ -3246,8 +2953,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.LocalIpAddress
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 284
@@ -3282,8 +2989,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.RemotePort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 290
@@ -3318,8 +3025,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.LocalPort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 296
@@ -3354,8 +3061,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.ConnectionId
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 302
@@ -3390,8 +3097,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IFeatureCollection.this[]
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 308
@@ -3429,8 +3136,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IFeatureCollection.Get
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 314
@@ -3464,8 +3171,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IFeatureCollection.Set
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 319
@@ -3500,8 +3207,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnStarting
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 324
@@ -3536,8 +3243,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpResponseFeature.OnCompleted
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 329
@@ -3572,8 +3279,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature.UpgradeAsync
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 334
@@ -3604,8 +3311,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Type,System.Object>>.GetEnumerator
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 353
@@ -3637,8 +3344,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: System.Collections.IEnumerable.GetEnumerator
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 355
@@ -3669,8 +3376,8 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature.Abort
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/Http/Frame.FeatureCollection.cs
     startLine: 357
@@ -3698,6 +3405,27 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: ServiceContext
+  nameWithType: ServiceContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: ListenerContext
+  nameWithType: ListenerContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: ConnectionContext
+  nameWithType: ConnectionContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IFrameControl
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IFrameControl
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -3836,6 +3564,132 @@ references:
   name: IHttpRequestLifetimeFeature
   nameWithType: IHttpRequestLifetimeFeature
   fullName: Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: SocketInput
+  nameWithType: ConnectionContext.SocketInput
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketInput
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketOutput
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketOutput
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: SocketOutput
+  nameWithType: ConnectionContext.SocketOutput
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.SocketOutput
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: ConnectionControl
+  nameWithType: ConnectionContext.ConnectionControl
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionControl
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.RemoteEndPoint
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.RemoteEndPoint
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: RemoteEndPoint
+  nameWithType: ConnectionContext.RemoteEndPoint
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.RemoteEndPoint
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: LocalEndPoint
+  nameWithType: ConnectionContext.LocalEndPoint
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.LocalEndPoint
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: ConnectionId
+  nameWithType: ConnectionContext.ConnectionId
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.ConnectionId
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
+  isExternal: false
+  name: PrepareRequest
+  nameWithType: ConnectionContext.PrepareRequest
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext.PrepareRequest
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ServerAddress
+  nameWithType: ListenerContext.ServerAddress
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ServerAddress
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Thread
+  nameWithType: ListenerContext.Thread
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Thread
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: Memory
+  nameWithType: ListenerContext.Memory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.Memory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: ConnectionManager
+  nameWithType: ListenerContext.ConnectionManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.ConnectionManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext
+  isExternal: false
+  name: WriteReqPool
+  nameWithType: ListenerContext.WriteReqPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ListenerContext.WriteReqPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: AppLifetime
+  nameWithType: ServiceContext.AppLifetime
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: Log
+  nameWithType: ServiceContext.Log
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ThreadPool
+  nameWithType: ServiceContext.ThreadPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: FrameFactory
+  nameWithType: ServiceContext.FrameFactory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: DateHeaderValueManager
+  nameWithType: ServiceContext.DateHeaderValueManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ServerOptions
+  nameWithType: ServiceContext.ServerOptions
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -4121,6 +3975,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal
+  commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: Microsoft.AspNetCore.Server.Kestrel.Internal
+  nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal
 - uid: Microsoft.AspNetCore.Http.Features
   commentId: N:Microsoft.AspNetCore.Http.Features
   isExternal: false
@@ -4185,21 +4045,21 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: System.Collections.Generic.Stack{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
-  commentId: T:System.Collections.Generic.Stack{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
+- uid: System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
+  commentId: T:System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.Func{System.Object,System.Threading.Tasks.Task},System.Object}}
   parent: System.Collections.Generic
-  definition: System.Collections.Generic.Stack`1
-  name: Stack<KeyValuePair<Func<Object, Task>, Object>>
-  nameWithType: Stack<KeyValuePair<Func<Object, Task>, Object>>
-  fullName: System.Collections.Generic.Stack<System.Collections.Generic.KeyValuePair<System.Func<System.Object, System.Threading.Tasks.Task>, System.Object>>
-  nameWithType.vb: Stack(Of KeyValuePair(Of Func(Of Object, Task), Object))
-  fullname.vb: System.Collections.Generic.Stack(Of System.Collections.Generic.KeyValuePair(Of System.Func(Of System.Object, System.Threading.Tasks.Task), System.Object))
-  name.vb: Stack(Of KeyValuePair(Of Func(Of Object, Task), Object))
+  definition: System.Collections.Generic.List`1
+  name: List<KeyValuePair<Func<Object, Task>, Object>>
+  nameWithType: List<KeyValuePair<Func<Object, Task>, Object>>
+  fullName: System.Collections.Generic.List<System.Collections.Generic.KeyValuePair<System.Func<System.Object, System.Threading.Tasks.Task>, System.Object>>
+  nameWithType.vb: List(Of KeyValuePair(Of Func(Of Object, Task), Object))
+  fullname.vb: System.Collections.Generic.List(Of System.Collections.Generic.KeyValuePair(Of System.Func(Of System.Object, System.Threading.Tasks.Task), System.Object))
+  name.vb: List(Of KeyValuePair(Of Func(Of Object, Task), Object))
   spec.csharp:
-  - uid: System.Collections.Generic.Stack`1
-    name: Stack
-    nameWithType: Stack
-    fullName: System.Collections.Generic.Stack
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
     isExternal: true
   - name: <
     nameWithType: <
@@ -4251,10 +4111,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.Stack`1
-    name: Stack
-    nameWithType: Stack
-    fullName: System.Collections.Generic.Stack
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -4305,20 +4165,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.Stack`1
-  commentId: T:System.Collections.Generic.Stack`1
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
   isExternal: true
-  name: Stack<T>
-  nameWithType: Stack<T>
-  fullName: System.Collections.Generic.Stack<T>
-  nameWithType.vb: Stack(Of T)
-  fullname.vb: System.Collections.Generic.Stack(Of T)
-  name.vb: Stack(Of T)
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullname.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
   spec.csharp:
-  - uid: System.Collections.Generic.Stack`1
-    name: Stack
-    nameWithType: Stack
-    fullName: System.Collections.Generic.Stack
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
     isExternal: true
   - name: <
     nameWithType: <
@@ -4330,10 +4190,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.Stack`1
-    name: Stack
-    nameWithType: Stack
-    fullName: System.Collections.Generic.Stack
+  - uid: System.Collections.Generic.List`1
+    name: List
+    nameWithType: List
+    fullName: System.Collections.Generic.List
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -4351,6 +4211,13 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestProcessingStatus
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestProcessingStatus
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: Frame.RequestProcessingStatus
+  nameWithType: Frame.RequestProcessingStatus
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestProcessingStatus
 - uid: System.Exception
   commentId: T:System.Exception
   parent: System
@@ -4358,144 +4225,6 @@ references:
   name: Exception
   nameWithType: Exception
   fullName: System.Exception
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.HttpVersion
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.HttpVersion
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: HttpVersion
-  nameWithType: HttpVersion
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.HttpVersion
-- uid: System.Int64
-  commentId: T:System.Int64
-  parent: System
-  isExternal: true
-  name: Int64
-  nameWithType: Int64
-  fullName: System.Int64
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: ConnectionContext
-  nameWithType: ConnectionContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ConnectionContext
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: SocketInput
-  nameWithType: SocketInput
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: ISocketOutput
-  nameWithType: ISocketOutput
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput
-- uid: System.Action{Microsoft.AspNetCore.Http.Features.IFeatureCollection}
-  commentId: T:System.Action{Microsoft.AspNetCore.Http.Features.IFeatureCollection}
-  parent: System
-  definition: System.Action`1
-  name: Action<IFeatureCollection>
-  nameWithType: Action<IFeatureCollection>
-  fullName: System.Action<Microsoft.AspNetCore.Http.Features.IFeatureCollection>
-  nameWithType.vb: Action(Of IFeatureCollection)
-  fullname.vb: System.Action(Of Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  name.vb: Action(Of IFeatureCollection)
-  spec.csharp:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Action`1
-  commentId: T:System.Action`1
-  isExternal: true
-  name: Action<T>
-  nameWithType: Action<T>
-  fullName: System.Action<T>
-  nameWithType.vb: Action(Of T)
-  fullname.vb: System.Action(Of T)
-  name.vb: Action(Of T)
-  spec.csharp:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: System.Action`1
-    name: Action
-    nameWithType: Action
-    fullName: System.Action
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: IConnectionControl
-  nameWithType: IConnectionControl
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.IConnectionControl
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  isExternal: false
-  name: IKestrelTrace
-  nameWithType: IKestrelTrace
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  isExternal: false
-  name: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -5024,6 +4753,13 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
+  isExternal: false
+  name: SocketInput
+  nameWithType: SocketInput
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketInput
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestLineStatus
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestLineStatus
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
@@ -5031,13 +4767,6 @@ references:
   name: Frame.RequestLineStatus
   nameWithType: Frame.RequestLineStatus
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.Frame.RequestLineStatus
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
-  isExternal: false
-  name: RequestRejectionReason
-  nameWithType: RequestRejectionReason
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.RequestRejectionReason
 - uid: Microsoft.AspNetCore.Server.Kestrel.BadHttpRequestException
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.BadHttpRequestException
   parent: Microsoft.AspNetCore.Server.Kestrel

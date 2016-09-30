@@ -6,15 +6,10 @@ items:
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal
   children:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.#ctor(Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.AppLifetime
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.CreateServer(Microsoft.AspNetCore.Server.Kestrel.ServerAddress)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Dispose
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Libuv
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Log
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServerOptions
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServiceContext
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Start(System.Int32)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ThreadPool
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Threads
   langs:
   - csharp
@@ -26,24 +21,32 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: KestrelEngine
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 15
+    startLine: 11
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
-    content: 'public class KestrelEngine : IDisposable'
+    content: 'public class KestrelEngine : ServiceContext, IDisposable'
     content.vb: >-
       Public Class KestrelEngine
+          Inherits ServiceContext
           Implements IDisposable
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
   implements:
   - System.IDisposable
   inheritedMembers:
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -71,11 +74,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: .ctor
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 17
+    startLine: 13
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -103,11 +106,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Libuv
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 29
+    startLine: 25
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -123,40 +126,6 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServiceContext
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServiceContext
-  id: ServiceContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine
-  langs:
-  - csharp
-  - vb
-  name: ServiceContext
-  nameWithType: KestrelEngine.ServiceContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServiceContext
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ServiceContext
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 30
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
-  syntax:
-    content: public ServiceContext ServiceContext { get; set; }
-    content.vb: Public Property ServiceContext As ServiceContext
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
-  modifiers.csharp:
-  - public
-  - get
-  - set
-  modifiers.vb:
-  - Public
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Threads
   commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Threads
   id: Threads
@@ -171,11 +140,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Threads
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 31
+    startLine: 26
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -185,142 +154,6 @@ items:
     parameters: []
     return:
       type: System.Collections.Generic.List{Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread}
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.AppLifetime
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.AppLifetime
-  id: AppLifetime
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine
-  langs:
-  - csharp
-  - vb
-  name: AppLifetime
-  nameWithType: KestrelEngine.AppLifetime
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.AppLifetime
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: AppLifetime
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 33
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
-  syntax:
-    content: public IApplicationLifetime AppLifetime { get; }
-    content.vb: Public ReadOnly Property AppLifetime As IApplicationLifetime
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Hosting.IApplicationLifetime
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Log
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Log
-  id: Log
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine
-  langs:
-  - csharp
-  - vb
-  name: Log
-  nameWithType: KestrelEngine.Log
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.Log
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: Log
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 34
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
-  syntax:
-    content: public IKestrelTrace Log { get; }
-    content.vb: Public ReadOnly Property Log As IKestrelTrace
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ThreadPool
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ThreadPool
-  id: ThreadPool
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine
-  langs:
-  - csharp
-  - vb
-  name: ThreadPool
-  nameWithType: KestrelEngine.ThreadPool
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ThreadPool
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ThreadPool
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 35
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
-  syntax:
-    content: public IThreadPool ThreadPool { get; }
-    content.vb: Public ReadOnly Property ThreadPool As IThreadPool
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
-  modifiers.csharp:
-  - public
-  - get
-  modifiers.vb:
-  - Public
-  - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServerOptions
-  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServerOptions
-  id: ServerOptions
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine
-  langs:
-  - csharp
-  - vb
-  name: ServerOptions
-  nameWithType: KestrelEngine.ServerOptions
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelEngine.ServerOptions
-  type: Property
-  source:
-    remote:
-      path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
-    id: ServerOptions
-    path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 36
-  assemblies:
-  - Microsoft.AspNetCore.Server.Kestrel
-  namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
-  syntax:
-    content: public KestrelServerOptions ServerOptions { get; }
-    content.vb: Public ReadOnly Property ServerOptions As KestrelServerOptions
-    parameters: []
-    return:
-      type: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
   modifiers.csharp:
   - public
   - get
@@ -341,11 +174,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Start
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 38
+    startLine: 28
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -373,11 +206,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: Dispose
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 51
+    startLine: 41
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -404,11 +237,11 @@ items:
   source:
     remote:
       path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-      branch: dev
-      repo: https://github.com/aspnet/kestrelhttpserver
+      branch: master
+      repo: https://github.com/aspnet/KestrelHttpServer.git
     id: CreateServer
     path: src/Microsoft.AspNetCore.Server.Kestrel/Internal/KestrelEngine.cs
-    startLine: 63
+    startLine: 50
   assemblies:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
@@ -438,6 +271,13 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal
+  isExternal: false
+  name: ServiceContext
+  nameWithType: ServiceContext
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
 - uid: System.IDisposable
   commentId: T:System.IDisposable
   parent: System
@@ -445,6 +285,48 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: AppLifetime
+  nameWithType: ServiceContext.AppLifetime
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.AppLifetime
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: Log
+  nameWithType: ServiceContext.Log
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.Log
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ThreadPool
+  nameWithType: ServiceContext.ThreadPool
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ThreadPool
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: FrameFactory
+  nameWithType: ServiceContext.FrameFactory
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.FrameFactory
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: DateHeaderValueManager
+  nameWithType: ServiceContext.DateHeaderValueManager
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.DateHeaderValueManager
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  commentId: P:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
+  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
+  isExternal: false
+  name: ServerOptions
+  nameWithType: ServiceContext.ServerOptions
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext.ServerOptions
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -730,13 +612,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal
-  isExternal: false
-  name: ServiceContext
-  nameWithType: ServiceContext
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.ServiceContext
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.Libuv
   commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.Libuv
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Networking
@@ -837,52 +712,6 @@ references:
   name: System.Collections.Generic
   nameWithType: System.Collections.Generic
   fullName: System.Collections.Generic
-- uid: Microsoft.AspNetCore.Hosting.IApplicationLifetime
-  commentId: T:Microsoft.AspNetCore.Hosting.IApplicationLifetime
-  parent: Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: IApplicationLifetime
-  nameWithType: IApplicationLifetime
-  fullName: Microsoft.AspNetCore.Hosting.IApplicationLifetime
-- uid: Microsoft.AspNetCore.Hosting
-  commentId: N:Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting
-  nameWithType: Microsoft.AspNetCore.Hosting
-  fullName: Microsoft.AspNetCore.Hosting
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  isExternal: false
-  name: IKestrelTrace
-  nameWithType: IKestrelTrace
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  commentId: N:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  isExternal: false
-  name: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
-  parent: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-  isExternal: false
-  name: IThreadPool
-  nameWithType: IThreadPool
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
-- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-  commentId: T:Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-  parent: Microsoft.AspNetCore.Server.Kestrel
-  isExternal: false
-  name: KestrelServerOptions
-  nameWithType: KestrelServerOptions
-  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
-- uid: Microsoft.AspNetCore.Server.Kestrel
-  commentId: N:Microsoft.AspNetCore.Server.Kestrel
-  isExternal: false
-  name: Microsoft.AspNetCore.Server.Kestrel
-  nameWithType: Microsoft.AspNetCore.Server.Kestrel
-  fullName: Microsoft.AspNetCore.Server.Kestrel
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
@@ -928,3 +757,9 @@ references:
   name: ServerAddress
   nameWithType: ServerAddress
   fullName: Microsoft.AspNetCore.Server.Kestrel.ServerAddress
+- uid: Microsoft.AspNetCore.Server.Kestrel
+  commentId: N:Microsoft.AspNetCore.Server.Kestrel
+  isExternal: false
+  name: Microsoft.AspNetCore.Server.Kestrel
+  nameWithType: Microsoft.AspNetCore.Server.Kestrel
+  fullName: Microsoft.AspNetCore.Server.Kestrel

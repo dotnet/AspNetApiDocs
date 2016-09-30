@@ -21,16 +21,15 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: PhysicalFileProvider
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 18
+    startLine: 15
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
   summary: "\nLooks up files using the on-disk file system\n"
-  remarks: "\nWhen the environment variable \"DOTNET_USE_POLLING_FILE_WATCHER\" is set to \"1\" or \"true\", calls to\n<see cref=\"M:Microsoft.Extensions.FileProviders.PhysicalFileProvider.Watch(System.String)\"></see> will use <see cref=\"T:Microsoft.Extensions.FileProviders.Physical.PollingFileChangeToken\"></see>.\n"
   example: []
   syntax:
     content: 'public class PhysicalFileProvider : IFileProvider, IDisposable'
@@ -70,15 +69,15 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: .ctor
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 37
+    startLine: 27
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
-  summary: "\nInitializes a new instance of a PhysicalFileProvider at the given root directory.\n"
+  summary: "\nCreates a new instance of a PhysicalFileProvider at the given root directory.\n"
   example: []
   syntax:
     content: public PhysicalFileProvider(string root)
@@ -105,16 +104,14 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: Dispose
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 72
+    startLine: 59
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
-  summary: "\nDisposes the provider. Change tokens may not trigger after the provider is disposed.\n"
-  example: []
   syntax:
     content: public void Dispose()
     content.vb: Public Sub Dispose
@@ -138,11 +135,11 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: Root
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 80
+    startLine: 67
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
@@ -174,11 +171,11 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: GetFileInfo
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 167
+    startLine: 140
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
@@ -214,11 +211,11 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: GetDirectoryContents
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 207
+    startLine: 179
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
@@ -230,10 +227,10 @@ items:
     parameters:
     - id: subpath
       type: System.String
-      description: A path under the root directory. Leading slashes are ignored.
+      description: A path under the root directory
     return:
       type: Microsoft.Extensions.FileProviders.IDirectoryContents
-      description: "\nContents of the directory. Caller must check Exists property. <see cref=\"T:Microsoft.Extensions.FileProviders.NotFoundDirectoryContents\"></see> if\n<em>subpath</em> is absolute, if the directory does not exist, or <em>subpath</em> has invalid\ncharacters.\n"
+      description: Contents of the directory. Caller must check Exists property.
   implements:
   - Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
   modifiers.csharp:
@@ -254,26 +251,22 @@ items:
   source:
     remote:
       path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-      branch: dev
-      repo: https://github.com/aspnet/filesystem
+      branch: master
+      repo: https://github.com/aspnet/FileSystem.git
     id: Watch
     path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
-    startLine: 275
+    startLine: 238
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
-  summary: "\n<p>Creates a <see cref=\"T:Microsoft.Extensions.Primitives.IChangeToken\"></see> for the specified <em>filter</em>.</p>\n<p>Globbing patterns are interpreted by <seealso cref=\"T:Microsoft.Extensions.FileSystemGlobbing.Matcher\"></seealso>.</p>\n"
-  example: []
   syntax:
     content: public IChangeToken Watch(string filter)
     content.vb: Public Function Watch(filter As String) As IChangeToken
     parameters:
     - id: filter
       type: System.String
-      description: "\nFilter string used to determine what files or folders to monitor. Example: **/*.cs, *.*,\nsubFolder/**/*.cshtml.\n"
     return:
       type: Microsoft.Extensions.Primitives.IChangeToken
-      description: "\nAn <see cref=\"T:Microsoft.Extensions.Primitives.IChangeToken\"></see> that is notified when a file matching <em>filter</em> is added,\nmodified or deleted. Returns a <see cref=\"T:Microsoft.Extensions.FileProviders.NullChangeToken\"></see> if <em>filter</em> has invalid filter\ncharacters or if <em>filter</em> is an absolute path or outside the root directory specified in the\nconstructor <seealso cref=\"M:Microsoft.Extensions.FileProviders.PhysicalFileProvider.#ctor(System.String)\"></seealso>.\n"
   implements:
   - Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
   modifiers.csharp:
