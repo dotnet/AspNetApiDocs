@@ -126,8 +126,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
    <td></td>
 </tr>
 <tr>
-   <td>@Microsoft.Extensions.Caching <br/>
-      @Microsoft.Extensions.Caching.Distributed <br/>
+   <td>@Microsoft.Extensions.Caching.Distributed <br/>
       @Microsoft.Extensions.Caching.Memory <br/>
       @Microsoft.Extensions.Caching.Redis <br/>
       @Microsoft.Extensions.Caching.SqlServer <br/>
