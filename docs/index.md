@@ -46,7 +46,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
    <td></td>
 </tr>
 <tr>
-   <td>@Microsoft.AspNetCore.Cors</td>
+   <td>@Microsoft.AspNetCore.Cors </td>
    <td>Support for defining and enforcing CORS policies. </td>
 </tr>
 <tr>
