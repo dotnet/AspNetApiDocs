@@ -106,10 +106,6 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
    <td>Support for request routing.</td>
 </tr>
 <tr>
-   <td>@Microsoft.AspNetCore.Server </td>
-   <td>Server implementations and integrations for ASP.NET Core.</td>
-</tr>
-<tr>
    <td>@Microsoft.AspNetCore.Session </td>
    <td></td>
 </tr>
@@ -130,11 +126,16 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
    <td></td>
 </tr>
 <tr>
-   <td>@Microsoft.Extensions.Caching </td>
+   <td>@Microsoft.Extensions.Caching <br/>
+      @Microsoft.Extensions.Caching.Distributed <br/>
+      @Microsoft.Extensions.Caching.Memory <br/>
+      @Microsoft.Extensions.Caching.Redis <br/>
+      @Microsoft.Extensions.Caching.SqlServer <br/>
+   </td>
    <td>Support for in-memory and distributed caching.</td>
 </tr>
 <tr>
-   <td>@Microsoft.Extensions.Cli </td>
+   <td>@Microsoft.Extensions.Cli.Utils </td>
    <td></td>
 </tr>
 <tr>
