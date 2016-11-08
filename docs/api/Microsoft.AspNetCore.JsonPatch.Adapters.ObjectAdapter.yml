@@ -89,6 +89,7 @@ items:
     - id: logErrorAction
       type: System.Action{Microsoft.AspNetCore.JsonPatch.JsonPatchError}
       description: The <xref href="System.Action" data-throw-if-not-resolved="false"></xref> for logging <xref href="Microsoft.AspNetCore.JsonPatch.JsonPatchError" data-throw-if-not-resolved="false"></xref>.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.#ctor*
   nameWithType.vb: ObjectAdapter.ObjectAdapter(IContractResolver, Action(Of JsonPatchError))
   modifiers.csharp:
   - public
@@ -126,6 +127,7 @@ items:
     parameters: []
     return:
       type: Newtonsoft.Json.Serialization.IContractResolver
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.ContractResolver*
   modifiers.csharp:
   - public
   - get
@@ -162,6 +164,7 @@ items:
     parameters: []
     return:
       type: System.Action{Microsoft.AspNetCore.JsonPatch.JsonPatchError}
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.LogErrorAction*
   modifiers.csharp:
   - public
   - get
@@ -190,7 +193,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.JsonPatch
   namespace: Microsoft.AspNetCore.JsonPatch.Adapters
-  summary: "\nThe \"add\" operation performs one of the following functions,\ndepending upon what the target location references:\n\no  If the target location specifies an array index, a new value is\n   inserted into the array at the specified index.\n\no  If the target location specifies an object member that does not\n   already exist, a new member is added to the object.\n\no  If the target location specifies an object member that does exist,\n   that member's value is replaced.\n\nThe operation object MUST contain a \"value\" member whose content\nspecifies the value to be added.\n\nFor example:\n\n{ \"op\": \"add\", \"path\": \"/a/b/c\", \"value\": [ \"foo\", \"bar\" ] }\n\nWhen the operation is applied, the target location MUST reference one\nof:\n\no  The root of the target document - whereupon the specified value\n   becomes the entire content of the target document.\n\no  A member to add to an existing object - whereupon the supplied\n   value is added to that object at the indicated location.  If the\n   member already exists, it is replaced by the specified value.\n\no  An element to add to an existing array - whereupon the supplied\n   value is added to the array at the indicated location.  Any\n   elements at or above the specified index are shifted one position\n   to the right.  The specified index MUST NOT be greater than the\n   number of elements in the array.  If the \"-\" character is used to\n   index the end of the array (see [RFC6901]), this has the effect of\n   appending the value to the array.\n\nBecause this operation is designed to add to existing objects and\narrays, its target location will often not exist.  Although the\npointer's error handling algorithm will thus be invoked, this\nspecification defines the error handling behavior for \"add\" pointers\nto ignore that error and add the value as specified.\n\nHowever, the object itself or an array containing it does need to\nexist, and it remains an error for that not to be the case.  For\nexample, an \"add\" with a target location of \"/a/b\" starting with this\ndocument:\n\n{ \"a\": { \"foo\": 1 } }\n\nis not an error, because \"a\" exists, and \"b\" will be added to its\nvalue.  It is an error in this document:\n\n{ \"q\": { \"bar\": 2 } }\n\nbecause \"a\" does not exist.\n"
+  summary: "\nThe \"add\" operation performs one of the following functions,\ndepending upon what the target location references:\n\no  If the target location specifies an array index, a new value is\ninserted into the array at the specified index.\n\no  If the target location specifies an object member that does not\nalready exist, a new member is added to the object.\n\no  If the target location specifies an object member that does exist,\nthat member's value is replaced.\n\nThe operation object MUST contain a \"value\" member whose content\nspecifies the value to be added.\n\nFor example:\n\n{ \"op\": \"add\", \"path\": \"/a/b/c\", \"value\": [ \"foo\", \"bar\" ] }\n\nWhen the operation is applied, the target location MUST reference one\nof:\n\no  The root of the target document - whereupon the specified value\nbecomes the entire content of the target document.\n\no  A member to add to an existing object - whereupon the supplied\nvalue is added to that object at the indicated location.  If the\nmember already exists, it is replaced by the specified value.\n\no  An element to add to an existing array - whereupon the supplied\nvalue is added to the array at the indicated location.  Any\nelements at or above the specified index are shifted one position\nto the right.  The specified index MUST NOT be greater than the\nnumber of elements in the array.  If the \"-\" character is used to\nindex the end of the array (see [RFC6901]), this has the effect of\nappending the value to the array.\n\nBecause this operation is designed to add to existing objects and\narrays, its target location will often not exist.  Although the\npointer's error handling algorithm will thus be invoked, this\nspecification defines the error handling behavior for \"add\" pointers\nto ignore that error and add the value as specified.\n\nHowever, the object itself or an array containing it does need to\nexist, and it remains an error for that not to be the case.  For\nexample, an \"add\" with a target location of \"/a/b\" starting with this\ndocument:\n\n{ \"a\": { \"foo\": 1 } }\n\nis not an error, because \"a\" exists, and \"b\" will be added to its\nvalue.  It is an error in this document:\n\n{ \"q\": { \"bar\": 2 } }\n\nbecause \"a\" does not exist.\n"
   example: []
   syntax:
     content: public void Add(Operation operation, object objectToApplyTo)
@@ -202,6 +205,7 @@ items:
     - id: objectToApplyTo
       type: System.Object
       description: Object to apply the operation to.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Add*
   implements:
   - Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Add(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   modifiers.csharp:
@@ -242,6 +246,7 @@ items:
     - id: objectToApplyTo
       type: System.Object
       description: Object to apply the operation to.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Move*
   implements:
   - Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Move(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   modifiers.csharp:
@@ -282,6 +287,7 @@ items:
     - id: objectToApplyTo
       type: System.Object
       description: Object to apply the operation to.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove*
   implements:
   - Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Remove(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   modifiers.csharp:
@@ -322,6 +328,7 @@ items:
     - id: objectToApplyTo
       type: System.Object
       description: Object to apply the operation to.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Replace*
   implements:
   - Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Replace(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   modifiers.csharp:
@@ -350,7 +357,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.JsonPatch
   namespace: Microsoft.AspNetCore.JsonPatch.Adapters
-  summary: "\n The \"copy\" operation copies the value at a specified location to the\n target location.\n\n The operation object MUST contain a \"from\" member, which is a string\n containing a JSON Pointer value that references the location in the\n target document to copy the value from.\n\n The \"from\" location MUST exist for the operation to be successful.\n\n For example:\n\n { \"op\": \"copy\", \"from\": \"/a/b/c\", \"path\": \"/a/b/e\" }\n\n This operation is functionally identical to an \"add\" operation at the\n target location using the value specified in the \"from\" member.\n\n Note: even though it's the same functionally, we do not call add with\n the value specified in from for performance reasons (multiple checks of same requirements).\n"
+  summary: "\nThe \"copy\" operation copies the value at a specified location to the\ntarget location.\n\nThe operation object MUST contain a \"from\" member, which is a string\ncontaining a JSON Pointer value that references the location in the\ntarget document to copy the value from.\n\nThe \"from\" location MUST exist for the operation to be successful.\n\nFor example:\n\n{ \"op\": \"copy\", \"from\": \"/a/b/c\", \"path\": \"/a/b/e\" }\n\nThis operation is functionally identical to an \"add\" operation at the\ntarget location using the value specified in the \"from\" member.\n\nNote: even though it's the same functionally, we do not call add with\nthe value specified in from for performance reasons (multiple checks of same requirements).\n"
   example: []
   syntax:
     content: public void Copy(Operation operation, object objectToApplyTo)
@@ -362,6 +369,7 @@ items:
     - id: objectToApplyTo
       type: System.Object
       description: Object to apply the operation to.
+  overload: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Copy*
   implements:
   - Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Copy(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   modifiers.csharp:
@@ -701,6 +709,12 @@ references:
   name: JsonPatchError
   nameWithType: JsonPatchError
   fullName: Microsoft.AspNetCore.JsonPatch.JsonPatchError
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.#ctor*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.#ctor
+  isExternal: false
+  name: ObjectAdapter
+  nameWithType: ObjectAdapter.ObjectAdapter
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.ObjectAdapter
 - uid: System.Action{Microsoft.AspNetCore.JsonPatch.JsonPatchError}
   commentId: T:System.Action{Microsoft.AspNetCore.JsonPatch.JsonPatchError}
   parent: System
@@ -794,6 +808,24 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.ContractResolver*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.ContractResolver
+  isExternal: false
+  name: ContractResolver
+  nameWithType: ObjectAdapter.ContractResolver
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.ContractResolver
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.LogErrorAction*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.LogErrorAction
+  isExternal: false
+  name: LogErrorAction
+  nameWithType: ObjectAdapter.LogErrorAction
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.LogErrorAction
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Add*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Add
+  isExternal: false
+  name: Add
+  nameWithType: ObjectAdapter.Add
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Add
 - uid: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Add(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   commentId: M:Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Add(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   parent: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter
@@ -860,6 +892,12 @@ references:
   name: Microsoft.AspNetCore.JsonPatch.Operations
   nameWithType: Microsoft.AspNetCore.JsonPatch.Operations
   fullName: Microsoft.AspNetCore.JsonPatch.Operations
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Move*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Move
+  isExternal: false
+  name: Move
+  nameWithType: ObjectAdapter.Move
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Move
 - uid: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Move(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   commentId: M:Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Move(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   parent: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter
@@ -913,6 +951,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove
+  isExternal: false
+  name: Remove
+  nameWithType: ObjectAdapter.Remove
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Remove
 - uid: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Remove(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   commentId: M:Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Remove(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   parent: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter
@@ -966,6 +1010,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Replace*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Replace
+  isExternal: false
+  name: Replace
+  nameWithType: ObjectAdapter.Replace
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Replace
 - uid: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Replace(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   commentId: M:Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Replace(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   parent: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter
@@ -1019,6 +1069,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Copy*
+  commentId: Overload:Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Copy
+  isExternal: false
+  name: Copy
+  nameWithType: ObjectAdapter.Copy
+  fullName: Microsoft.AspNetCore.JsonPatch.Adapters.ObjectAdapter.Copy
 - uid: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Copy(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   commentId: M:Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter.Copy(Microsoft.AspNetCore.JsonPatch.Operations.Operation,System.Object)
   parent: Microsoft.AspNetCore.JsonPatch.Adapters.IObjectAdapter
@@ -1072,3 +1128,4 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+shouldSkipMarkup: true
