@@ -107,11 +107,11 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.Session </td>
-   <td></td>
+   <td>Support for session state.</td>
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.StaticFiles </td>
-   <td>Support for session state.</td>
+   <td></td>
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.TestHost </td>
