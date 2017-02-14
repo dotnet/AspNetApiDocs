@@ -145,6 +145,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nWhen a set of<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> s are executed, their<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)\" data-throw-if-not-resolved=\"false\"></xref>'s\nare first invoked in the specified <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>; then their\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)\" data-throw-if-not-resolved=\"false\"></xref>'s are invoked in the specified\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>. Lower values are executed first.\n"
+  remarks: Default order is <code>0</code>.
   example: []
   syntax:
     content: public override int Order { get; }
@@ -362,6 +364,11 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nInitializes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span>. Additions to\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.Items\" data-throw-if-not-resolved=\"false\"></xref> should be done within this method to ensure they're added prior to\nexecuting the children.\n"
+  remarks: >
+    When more than one <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref> runs on the same element,
+
+    <xref href="TagHelperOutput.GetChildContentAsync" data-throw-if-not-resolved="false"></xref> may be invoked prior to <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public override void Init(TagHelperContext context)
@@ -369,6 +376,7 @@ items:
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
   overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper.Init*
   modifiers.csharp:
@@ -399,6 +407,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nSynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
   remarks: Does nothing if <xref href="Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper.For" data-throw-if-not-resolved="false"></xref> is <code>null</code>.
   example: []
   syntax:
@@ -407,8 +416,10 @@ items:
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
     - id: output
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+      description: A stateful HTML element used to generate an HTML tag.
   overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper.Process*
   modifiers.csharp:
@@ -896,7 +907,7 @@ references:
   nameWithType: IEnumerable<SelectListItem>
   fullName: System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.Rendering.SelectListItem>
   nameWithType.vb: IEnumerable(Of SelectListItem)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Microsoft.AspNetCore.Mvc.Rendering.SelectListItem)
   name.vb: IEnumerable(Of SelectListItem)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -937,7 +948,7 @@ references:
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
   nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
   name.vb: IEnumerable(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1

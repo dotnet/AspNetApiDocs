@@ -108,12 +108,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates a new random cookie token.\n"
   example: []
   syntax:
     content: public AntiforgeryToken GenerateCookieToken()
     content.vb: Public Function GenerateCookieToken As AntiforgeryToken
     return:
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: An <xref href="Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken" data-throw-if-not-resolved="false"></xref>.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateCookieToken*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateCookieToken
@@ -143,6 +145,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates a request token corresponding to <span class=\"paramref\">cookieToken</span>.\n"
   example: []
   syntax:
     content: public AntiforgeryToken GenerateRequestToken(HttpContext httpContext, AntiforgeryToken cookieToken)
@@ -150,10 +153,13 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A valid cookie token.
     return:
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: An <xref href="Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken" data-throw-if-not-resolved="false"></xref>.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
@@ -183,6 +189,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nAttempts to validate a cookie token.\n"
   example: []
   syntax:
     content: public bool IsCookieTokenValid(AntiforgeryToken cookieToken)
@@ -190,8 +197,10 @@ items:
     parameters:
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A valid cookie token.
     return:
       type: System.Boolean
+      description: <code>true</code> if the cookie token is valid, otherwise <code>false</code>.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.IsCookieTokenValid*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.IsCookieTokenValid(Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
@@ -221,6 +230,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nAttempts to validate a cookie and request token set for the given <span class=\"paramref\">httpContext</span>.\n"
   example: []
   syntax:
     content: public bool TryValidateTokenSet(HttpContext httpContext, AntiforgeryToken cookieToken, AntiforgeryToken requestToken, out string message)
@@ -228,14 +238,19 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A cookie token.
     - id: requestToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A request token.
     - id: message
       type: System.String
+      description: "\nWill be set to the validation message if the tokens are invalid, otherwise <code>null</code>.\n"
     return:
       type: System.Boolean
+      description: <code>true</code> if the tokens are valid, otherwise <code>false</code>.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)

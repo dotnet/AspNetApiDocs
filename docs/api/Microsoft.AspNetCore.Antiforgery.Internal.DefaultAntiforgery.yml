@@ -120,6 +120,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates an <xref href=\"Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet\" data-throw-if-not-resolved=\"false\"></xref> for this request and stores the cookie token\nin the response.\n"
+  remarks: "\nThis method has a side effect:\nA response cookie is set if there is no valid cookie associated with the request.\n"
   example: []
   syntax:
     content: public AntiforgeryTokenSet GetAndStoreTokens(HttpContext httpContext)
@@ -127,8 +129,10 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     return:
       type: Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet
+      description: An <xref href="Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet" data-throw-if-not-resolved="false"></xref> with tokens for the response.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.GetAndStoreTokens*
   implements:
   - Microsoft.AspNetCore.Antiforgery.IAntiforgery.GetAndStoreTokens(Microsoft.AspNetCore.Http.HttpContext)
@@ -158,6 +162,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates an <xref href=\"Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet\" data-throw-if-not-resolved=\"false\"></xref> for this request.\n"
+  remarks: "\nUnlike <xref href=\"Microsoft.AspNetCore.Antiforgery.IAntiforgery.GetAndStoreTokens(Microsoft.AspNetCore.Http.HttpContext)\" data-throw-if-not-resolved=\"false\"></xref>, this method has no side effect. The caller\nis responsible for setting the response cookie and injecting the returned\nform token as appropriate.\n"
   example: []
   syntax:
     content: public AntiforgeryTokenSet GetTokens(HttpContext httpContext)
@@ -165,6 +171,7 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     return:
       type: Microsoft.AspNetCore.Antiforgery.AntiforgeryTokenSet
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.GetTokens*
@@ -196,6 +203,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nAsynchronously returns a value indicating whether the request passes antiforgery validation. If the\nrequest uses a safe HTTP method (GET, HEAD, OPTIONS, TRACE), the antiforgery token is not validated.\n"
   example: []
   syntax:
     content: public Task<bool> IsRequestValidAsync(HttpContext httpContext)
@@ -203,8 +211,10 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+      description: "\nA <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref> that, when completed, returns <code>true</code> if the is requst uses a safe HTTP\nmethod or contains a value antiforgery token, otherwise returns <code>false</code>.\n"
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.IsRequestValidAsync*
   implements:
   - Microsoft.AspNetCore.Antiforgery.IAntiforgery.IsRequestValidAsync(Microsoft.AspNetCore.Http.HttpContext)
@@ -234,6 +244,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nValidates an antiforgery token that was supplied as part of the request.\n"
   example: []
   syntax:
     content: public Task ValidateRequestAsync(HttpContext httpContext)
@@ -241,9 +252,14 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
     return:
       type: System.Threading.Tasks.Task
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.ValidateRequestAsync*
+  exceptions:
+  - type: Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException
+    commentId: T:Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException
+    description: "\nThrown when the request does not include a valid antiforgery token.\n"
   implements:
   - Microsoft.AspNetCore.Antiforgery.IAntiforgery.ValidateRequestAsync(Microsoft.AspNetCore.Http.HttpContext)
   modifiers.csharp:
@@ -272,6 +288,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates and stores an antiforgery cookie token if one is not available or not valid.\n"
   example: []
   syntax:
     content: public void SetCookieTokenAndHeader(HttpContext httpContext)
@@ -279,6 +296,7 @@ items:
     parameters:
     - id: httpContext
       type: Microsoft.AspNetCore.Http.HttpContext
+      description: The <xref href="Microsoft.AspNetCore.Http.HttpContext" data-throw-if-not-resolved="false"></xref> associated with the current request.
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgery.SetCookieTokenAndHeader*
   implements:
   - Microsoft.AspNetCore.Antiforgery.IAntiforgery.SetCookieTokenAndHeader(Microsoft.AspNetCore.Http.HttpContext)
@@ -612,7 +630,7 @@ references:
   nameWithType: IOptions<AntiforgeryOptions>
   fullName: Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions>
   nameWithType.vb: IOptions(Of AntiforgeryOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions)
   name.vb: IOptions(Of AntiforgeryOptions)
   spec.csharp:
   - uid: Microsoft.Extensions.Options.IOptions`1
@@ -681,7 +699,7 @@ references:
   nameWithType: IOptions<TOptions>
   fullName: Microsoft.Extensions.Options.IOptions<TOptions>
   nameWithType.vb: IOptions(Of TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
   name.vb: IOptions(Of TOptions)
   spec.csharp:
   - uid: Microsoft.Extensions.Options.IOptions`1
@@ -886,7 +904,7 @@ references:
   nameWithType: Task<Boolean>
   fullName: System.Threading.Tasks.Task<System.Boolean>
   nameWithType.vb: Task(Of Boolean)
-  fullname.vb: System.Threading.Tasks.Task(Of System.Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of System.Boolean)
   name.vb: Task(Of Boolean)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -929,7 +947,7 @@ references:
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
   nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
   name.vb: Task(Of TResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -1012,6 +1030,12 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException
+  commentId: T:Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException
+  isExternal: false
+  name: AntiforgeryValidationException
+  nameWithType: AntiforgeryValidationException
+  fullName: Microsoft.AspNetCore.Antiforgery.AntiforgeryValidationException
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks

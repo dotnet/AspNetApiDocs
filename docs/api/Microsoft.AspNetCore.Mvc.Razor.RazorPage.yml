@@ -194,6 +194,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets the application base relative path to the page.\n"
   example: []
   syntax:
     content: public string Path { get; set; }
@@ -232,6 +233,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets or sets the view context of the renderign view.\n"
   example: []
   syntax:
     content: public ViewContext ViewContext { get; set; }
@@ -270,6 +272,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets or sets the path of a layout page.\n"
   example: []
   syntax:
     content: public string Layout { get; set; }
@@ -535,6 +538,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets or sets the body content.\n"
   example: []
   syntax:
     content: public IHtmlContent BodyContent { get; set; }
@@ -573,6 +577,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets or sets a flag that determines if the layout of this page is being rendered.\n"
+  remarks: "\nSections defined in a page are deferred and executed as part of the layout page.\nWhen this flag is set, all write operations performed by the page are part of a\nsection being rendered.\n"
   example: []
   syntax:
     content: public bool IsLayoutBeingRendered { get; set; }
@@ -611,6 +617,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets or sets the sections that can be rendered by this page.\n"
   example: []
   syntax:
     content: public IDictionary<string, RenderAsyncDelegate> PreviousSectionWriters { get; set; }
@@ -649,6 +656,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets the sections that are defined by this page.\n"
   example: []
   syntax:
     content: public IDictionary<string, RenderAsyncDelegate> SectionWriters { get; }
@@ -687,12 +695,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nRenders the page and writes the output to the <xref href=\"Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public abstract Task ExecuteAsync()
     content.vb: Public MustOverride Function ExecuteAsync As Task
     return:
       type: System.Threading.Tasks.Task
+      description: A task representing the result of executing the page.
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.ExecuteAsync*
   implements:
   - Microsoft.AspNetCore.Mvc.Razor.IRazorPage.ExecuteAsync
@@ -2078,11 +2088,19 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nVerifies that all sections defined in <xref href=\"Microsoft.AspNetCore.Mvc.Razor.IRazorPage.PreviousSectionWriters\" data-throw-if-not-resolved=\"false\"></xref> were rendered, or\nthe body was rendered if no sections were defined.\n"
   example: []
   syntax:
     content: public void EnsureRenderedBodyOrSections()
     content.vb: Public Sub EnsureRenderedBodyOrSections
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EnsureRenderedBodyOrSections*
+  exceptions:
+  - type: System.InvalidOperationException
+    commentId: T:System.InvalidOperationException
+    description: >-
+      if one or more sections were not rendered or if no sections were
+
+      defined and the body was not rendered.
   implements:
   - Microsoft.AspNetCore.Mvc.Razor.IRazorPage.EnsureRenderedBodyOrSections
   modifiers.csharp:
@@ -2768,7 +2786,7 @@ references:
   nameWithType: IDictionary<String, RenderAsyncDelegate>
   fullName: System.Collections.Generic.IDictionary<System.String, Microsoft.AspNetCore.Mvc.Razor.RenderAsyncDelegate>
   nameWithType.vb: IDictionary(Of String, RenderAsyncDelegate)
-  fullname.vb: System.Collections.Generic.IDictionary(Of System.String, Microsoft.AspNetCore.Mvc.Razor.RenderAsyncDelegate)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, Microsoft.AspNetCore.Mvc.Razor.RenderAsyncDelegate)
   name.vb: IDictionary(Of String, RenderAsyncDelegate)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
@@ -2825,7 +2843,7 @@ references:
   nameWithType: IDictionary<TKey, TValue>
   fullName: System.Collections.Generic.IDictionary<TKey, TValue>
   nameWithType.vb: IDictionary(Of TKey, TValue)
-  fullname.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
+  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
   name.vb: IDictionary(Of TKey, TValue)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
@@ -3506,7 +3524,7 @@ references:
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
   nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
   name.vb: Task(Of TResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -3552,7 +3570,7 @@ references:
   nameWithType: Task<HtmlString>
   fullName: System.Threading.Tasks.Task<Microsoft.AspNetCore.Html.HtmlString>
   nameWithType.vb: Task(Of HtmlString)
-  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Html.HtmlString)
+  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Html.HtmlString)
   name.vb: Task(Of HtmlString)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
