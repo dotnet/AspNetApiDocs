@@ -6,7 +6,7 @@ items:
   parent: Microsoft.AspNetCore.Routing.Constraints
   children:
   - Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.#ctor(System.Int32)
-  - Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
+  - Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(HttpContext,IRouter,System.String,RouteValueDictionary,RouteDirection)
   - Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.MinLength
   langs:
   - csharp
@@ -32,19 +32,9 @@ items:
     content: 'public class MinLengthRouteConstraint : IRouteConstraint'
     content.vb: >-
       Public Class MinLengthRouteConstraint
-          Implements IRouteConstraint
+          Inherits IRouteConstraint
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Routing.IRouteConstraint
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -77,11 +67,11 @@ items:
   example: []
   syntax:
     content: public MinLengthRouteConstraint(int minLength)
-    content.vb: Public Sub New(minLength As Integer)
     parameters:
     - id: minLength
       type: System.Int32
       description: The minimum length allowed for the route parameter.
+    content.vb: Public Sub New(minLength As Integer)
   overload: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.#ctor*
   modifiers.csharp:
   - public
@@ -113,10 +103,10 @@ items:
   example: []
   syntax:
     content: public int MinLength { get; }
-    content.vb: Public ReadOnly Property MinLength As Integer
     parameters: []
     return:
       type: System.Int32
+    content.vb: Public ReadOnly Property MinLength As Integer
   overload: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.MinLength*
   modifiers.csharp:
   - public
@@ -124,16 +114,16 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-  commentId: M:Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-  id: Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
+- uid: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(HttpContext,IRouter,System.String,RouteValueDictionary,RouteDirection)
+  commentId: M:Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(HttpContext,IRouter,System.String,RouteValueDictionary,RouteDirection)
+  id: Match(HttpContext,IRouter,System.String,RouteValueDictionary,RouteDirection)
   parent: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint
   langs:
   - csharp
   - vb
   name: Match(HttpContext, IRouter, String, RouteValueDictionary, RouteDirection)
   nameWithType: MinLengthRouteConstraint.Match(HttpContext, IRouter, String, RouteValueDictionary, RouteDirection)
-  fullName: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Routing.IRouter, System.String, Microsoft.AspNetCore.Routing.RouteValueDictionary, Microsoft.AspNetCore.Routing.RouteDirection)
+  fullName: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match(HttpContext, IRouter, System.String, RouteValueDictionary, RouteDirection)
   type: Method
   source:
     remote:
@@ -146,33 +136,24 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Routing
   namespace: Microsoft.AspNetCore.Routing.Constraints
-  summary: "\nDetermines whether the URL parameter contains a valid value for this constraint.\n"
   example: []
   syntax:
     content: public bool Match(HttpContext httpContext, IRouter route, string routeKey, RouteValueDictionary values, RouteDirection routeDirection)
-    content.vb: Public Function Match(httpContext As HttpContext, route As IRouter, routeKey As String, values As RouteValueDictionary, routeDirection As RouteDirection) As Boolean
     parameters:
     - id: httpContext
-      type: Microsoft.AspNetCore.Http.HttpContext
-      description: An object that encapsulates information about the HTTP request.
+      type: HttpContext
     - id: route
-      type: Microsoft.AspNetCore.Routing.IRouter
-      description: The router that this constraint belongs to.
+      type: IRouter
     - id: routeKey
       type: System.String
-      description: The name of the parameter that is being checked.
     - id: values
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
-      description: A dictionary that contains the parameters for the URL.
+      type: RouteValueDictionary
     - id: routeDirection
-      type: Microsoft.AspNetCore.Routing.RouteDirection
-      description: "\nAn object that indicates whether the constraint check is being performed\nwhen an incoming request is being handled or when a URL is being generated.\n"
+      type: RouteDirection
     return:
       type: System.Boolean
-      description: <code>true</code> if the URL parameter contains a valid value; otherwise, <code>false</code>.
+    content.vb: Public Function Match(httpContext As HttpContext, route As IRouter, routeKey As String, values As RouteValueDictionary, routeDirection As RouteDirection) As Boolean
   overload: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match*
-  implements:
-  - Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -191,304 +172,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Routing.IRouteConstraint
-  commentId: T:Microsoft.AspNetCore.Routing.IRouteConstraint
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
-  name: IRouteConstraint
-  nameWithType: IRouteConstraint
-  fullName: Microsoft.AspNetCore.Routing.IRouteConstraint
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Routing
-  commentId: N:Microsoft.AspNetCore.Routing
-  isExternal: false
-  name: Microsoft.AspNetCore.Routing
-  nameWithType: Microsoft.AspNetCore.Routing
-  fullName: Microsoft.AspNetCore.Routing
 - uid: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint
   commentId: T:Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint
   isExternal: false
@@ -520,117 +209,16 @@ references:
   name: Match
   nameWithType: MinLengthRouteConstraint.Match
   fullName: Microsoft.AspNetCore.Routing.Constraints.MinLengthRouteConstraint.Match
-- uid: Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-  commentId: M:Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-  parent: Microsoft.AspNetCore.Routing.IRouteConstraint
+- uid: HttpContext
   isExternal: true
-  name: Match(HttpContext, IRouter, String, RouteValueDictionary, RouteDirection)
-  nameWithType: IRouteConstraint.Match(HttpContext, IRouter, String, RouteValueDictionary, RouteDirection)
-  fullName: Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Routing.IRouter, System.String, Microsoft.AspNetCore.Routing.RouteValueDictionary, Microsoft.AspNetCore.Routing.RouteDirection)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-    name: Match
-    nameWithType: IRouteConstraint.Match
-    fullName: Microsoft.AspNetCore.Routing.IRouteConstraint.Match
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
-    name: HttpContext
-    nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.IRouter
-    name: IRouter
-    nameWithType: IRouter
-    fullName: Microsoft.AspNetCore.Routing.IRouter
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.RouteValueDictionary
-    name: RouteValueDictionary
-    nameWithType: RouteValueDictionary
-    fullName: Microsoft.AspNetCore.Routing.RouteValueDictionary
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.RouteDirection
-    name: RouteDirection
-    nameWithType: RouteDirection
-    fullName: Microsoft.AspNetCore.Routing.RouteDirection
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)
-    name: Match
-    nameWithType: IRouteConstraint.Match
-    fullName: Microsoft.AspNetCore.Routing.IRouteConstraint.Match
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
-    name: HttpContext
-    nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.IRouter
-    name: IRouter
-    nameWithType: IRouter
-    fullName: Microsoft.AspNetCore.Routing.IRouter
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.RouteValueDictionary
-    name: RouteValueDictionary
-    nameWithType: RouteValueDictionary
-    fullName: Microsoft.AspNetCore.Routing.RouteValueDictionary
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.RouteDirection
-    name: RouteDirection
-    nameWithType: RouteDirection
-    fullName: Microsoft.AspNetCore.Routing.RouteDirection
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpContext
-  commentId: T:Microsoft.AspNetCore.Http.HttpContext
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
   name: HttpContext
   nameWithType: HttpContext
-  fullName: Microsoft.AspNetCore.Http.HttpContext
-- uid: Microsoft.AspNetCore.Routing.IRouter
-  commentId: T:Microsoft.AspNetCore.Routing.IRouter
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+  fullName: HttpContext
+- uid: IRouter
+  isExternal: true
   name: IRouter
   nameWithType: IRouter
-  fullName: Microsoft.AspNetCore.Routing.IRouter
+  fullName: IRouter
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -638,20 +226,16 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.AspNetCore.Routing.RouteValueDictionary
-  commentId: T:Microsoft.AspNetCore.Routing.RouteValueDictionary
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+- uid: RouteValueDictionary
+  isExternal: true
   name: RouteValueDictionary
   nameWithType: RouteValueDictionary
-  fullName: Microsoft.AspNetCore.Routing.RouteValueDictionary
-- uid: Microsoft.AspNetCore.Routing.RouteDirection
-  commentId: T:Microsoft.AspNetCore.Routing.RouteDirection
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+  fullName: RouteValueDictionary
+- uid: RouteDirection
+  isExternal: true
   name: RouteDirection
   nameWithType: RouteDirection
-  fullName: Microsoft.AspNetCore.Routing.RouteDirection
+  fullName: RouteDirection
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -659,10 +243,4 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
 shouldSkipMarkup: true

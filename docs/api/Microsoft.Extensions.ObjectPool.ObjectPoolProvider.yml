@@ -76,11 +76,11 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public ObjectPool<T> Create<T>()where T : class, new ()'
-    content.vb: Public Function Create(Of T As {Class, New}) As ObjectPool(Of T)
     typeParameters:
     - id: T
     return:
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public Function Create(Of T As {Class, New}) As ObjectPool(Of T)
   overload: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*
   nameWithType.vb: ObjectPoolProvider.Create(Of T)()
   modifiers.csharp:
@@ -113,7 +113,6 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public abstract ObjectPool<T> Create<T>(IPooledObjectPolicy<T> policy)where T : class'
-    content.vb: Public MustOverride Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
     parameters:
     - id: policy
       type: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}
@@ -121,6 +120,7 @@ items:
     - id: T
     return:
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public MustOverride Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
   overload: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*
   nameWithType.vb: ObjectPoolProvider.Create(Of T)(IPooledObjectPolicy(Of T))
   modifiers.csharp:

@@ -35,11 +35,11 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: 'public abstract class SymbolBase<TType> : ISymbol where TType : struct'
+    typeParameters:
+    - id: TType
     content.vb: >-
       Public MustInherit Class SymbolBase(Of TType As Structure)
           Implements ISymbol
-    typeParameters:
-    - id: TType
   inheritance:
   - System.Object
   derivedClasses:
@@ -89,7 +89,6 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: protected SymbolBase(SourceLocation start, string content, TType type, IReadOnlyList<RazorError> errors)
-    content.vb: Protected Sub New(start As SourceLocation, content As String, type As TType, errors As IReadOnlyList(Of RazorError))
     parameters:
     - id: start
       type: Microsoft.AspNetCore.Razor.SourceLocation
@@ -99,6 +98,7 @@ items:
       type: '{TType}'
     - id: errors
       type: System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Razor.RazorError}
+    content.vb: Protected Sub New(start As SourceLocation, content As String, type As TType, errors As IReadOnlyList(Of RazorError))
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.#ctor*
   nameWithType.vb: SymbolBase(Of TType).SymbolBase(SourceLocation, String, TType, IReadOnlyList(Of RazorError))
   modifiers.csharp:
@@ -131,10 +131,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public SourceLocation Start { get; }
-    content.vb: Public ReadOnly Property Start As SourceLocation
     parameters: []
     return:
       type: Microsoft.AspNetCore.Razor.SourceLocation
+    content.vb: Public ReadOnly Property Start As SourceLocation
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.Start*
   implements:
   - Microsoft.AspNetCore.Razor.Tokenizer.Symbols.ISymbol.Start
@@ -170,10 +170,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public string Content { get; }
-    content.vb: Public ReadOnly Property Content As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Content As String
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.Content*
   implements:
   - Microsoft.AspNetCore.Razor.Tokenizer.Symbols.ISymbol.Content
@@ -209,10 +209,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public IReadOnlyList<RazorError> Errors { get; }
-    content.vb: Public ReadOnly Property Errors As IReadOnlyList(Of RazorError)
     parameters: []
     return:
       type: System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Razor.RazorError}
+    content.vb: Public ReadOnly Property Errors As IReadOnlyList(Of RazorError)
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.Errors*
   nameWithType.vb: SymbolBase(Of TType).Errors
   modifiers.csharp:
@@ -246,10 +246,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public TType Type { get; }
-    content.vb: Public ReadOnly Property Type As TType
     parameters: []
     return:
       type: '{TType}'
+    content.vb: Public ReadOnly Property Type As TType
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.Type*
   nameWithType.vb: SymbolBase(Of TType).Type
   modifiers.csharp:
@@ -283,12 +283,12 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public override bool Equals(object obj)
-    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
     parameters:
     - id: obj
       type: System.Object
     return:
       type: System.Boolean
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
   overridden: System.Object.Equals(System.Object)
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.Equals*
   nameWithType.vb: SymbolBase(Of TType).Equals(Object)
@@ -323,9 +323,9 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public override int GetHashCode()
-    content.vb: Public Overrides Function GetHashCode As Integer
     return:
       type: System.Int32
+    content.vb: Public Overrides Function GetHashCode As Integer
   overridden: System.Object.GetHashCode
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.GetHashCode*
   nameWithType.vb: SymbolBase(Of TType).GetHashCode()
@@ -360,9 +360,9 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public override string ToString()
-    content.vb: Public Overrides Function ToString As String
     return:
       type: System.String
+    content.vb: Public Overrides Function ToString As String
   overridden: System.Object.ToString
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.ToString*
   nameWithType.vb: SymbolBase(Of TType).ToString()
@@ -397,10 +397,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public void OffsetStart(SourceLocation documentStart)
-    content.vb: Public Sub OffsetStart(documentStart As SourceLocation)
     parameters:
     - id: documentStart
       type: Microsoft.AspNetCore.Razor.SourceLocation
+    content.vb: Public Sub OffsetStart(documentStart As SourceLocation)
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.OffsetStart*
   implements:
   - Microsoft.AspNetCore.Razor.Tokenizer.Symbols.ISymbol.OffsetStart(Microsoft.AspNetCore.Razor.SourceLocation)
@@ -434,10 +434,10 @@ items:
   namespace: Microsoft.AspNetCore.Razor.Tokenizer.Symbols
   syntax:
     content: public void ChangeStart(SourceLocation newStart)
-    content.vb: Public Sub ChangeStart(newStart As SourceLocation)
     parameters:
     - id: newStart
       type: Microsoft.AspNetCore.Razor.SourceLocation
+    content.vb: Public Sub ChangeStart(newStart As SourceLocation)
   overload: Microsoft.AspNetCore.Razor.Tokenizer.Symbols.SymbolBase`1.ChangeStart*
   implements:
   - Microsoft.AspNetCore.Razor.Tokenizer.Symbols.ISymbol.ChangeStart(Microsoft.AspNetCore.Razor.SourceLocation)

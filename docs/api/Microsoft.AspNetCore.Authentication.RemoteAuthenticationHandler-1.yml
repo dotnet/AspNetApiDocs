@@ -5,15 +5,15 @@ items:
   id: RemoteAuthenticationHandler`1
   parent: Microsoft.AspNetCore.Authentication
   children:
-  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(AuthenticationProperties)
   - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleAuthenticateAsync
-  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
   - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRemoteAuthenticateAsync
   - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRemoteCallbackAsync
   - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRequestAsync
-  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(SignInContext)
+  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
+  - Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(AuthenticationProperties)
   langs:
   - csharp
   - vb
@@ -33,21 +33,15 @@ items:
   - Microsoft.AspNetCore.Authentication
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
-    content: 'public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHandler<TOptions>, IAuthenticationHandler where TOptions : RemoteAuthenticationOptions'
+    content: 'public abstract class RemoteAuthenticationHandler<TOptions> : AuthenticationHandler<TOptions> where TOptions : RemoteAuthenticationOptions'
+    typeParameters:
+    - id: TOptions
     content.vb: >-
       Public MustInherit Class RemoteAuthenticationHandler(Of TOptions As RemoteAuthenticationOptions)
           Inherits AuthenticationHandler(Of TOptions)
-          Implements IAuthenticationHandler
-    typeParameters:
-    - id: TOptions
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  derivedClasses:
-  - Microsoft.AspNetCore.Authentication.OAuth.OAuthHandler`1
-  - Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectHandler
-  implements:
-  - Microsoft.AspNetCore.Http.Features.Authentication.IAuthenticationHandler
   inheritedMembers:
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAccepted
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignOutAccepted
@@ -62,24 +56,17 @@ items:
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.PriorHandler
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.CurrentUri
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.Options
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.InitializeAsync({TOptions},Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.InitializeAsync({TOptions},HttpContext,ILogger,UrlEncoder)
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.BuildRedirectUri(System.String)
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.FinishResponseAsync
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.GetDescriptions(DescribeSchemesContext)
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.ShouldHandleScheme(System.String,System.Boolean)
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.AuthenticateAsync(AuthenticateContext)
   - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleAuthenticateOnceAsync
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAsync(SignInContext)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignOutAsync(SignOutContext)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleUnauthorizedAsync(ChallengeContext)
+  - Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.ChallengeAsync(ChallengeContext)
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions)
   modifiers.csharp:
   - public
@@ -115,9 +102,9 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public override Task<bool> HandleRequestAsync()
-    content.vb: Public Overrides Function HandleRequestAsync As Task(Of Boolean)
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+    content.vb: Public Overrides Function HandleRequestAsync As Task(Of Boolean)
   overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleRequestAsync
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRequestAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleRequestAsync()
@@ -152,9 +139,9 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected virtual Task<bool> HandleRemoteCallbackAsync()
-    content.vb: Protected Overridable Function HandleRemoteCallbackAsync As Task(Of Boolean)
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
+    content.vb: Protected Overridable Function HandleRemoteCallbackAsync As Task(Of Boolean)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRemoteCallbackAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleRemoteCallbackAsync()
   modifiers.csharp:
@@ -188,9 +175,9 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected abstract Task<AuthenticateResult> HandleRemoteAuthenticateAsync()
-    content.vb: Protected MustOverride Function HandleRemoteAuthenticateAsync As Task(Of AuthenticateResult)
     return:
       type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Authentication.AuthenticateResult}
+    content.vb: Protected MustOverride Function HandleRemoteAuthenticateAsync As Task(Of AuthenticateResult)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRemoteAuthenticateAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleRemoteAuthenticateAsync()
   modifiers.csharp:
@@ -224,9 +211,9 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-    content.vb: Protected Overrides Function HandleAuthenticateAsync As Task(Of AuthenticateResult)
     return:
       type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Authentication.AuthenticateResult}
+    content.vb: Protected Overrides Function HandleAuthenticateAsync As Task(Of AuthenticateResult)
   overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleAuthenticateAsync
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleAuthenticateAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleAuthenticateAsync()
@@ -237,16 +224,16 @@ items:
   - Protected
   - Overrides
   fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleAuthenticateAsync()
-- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  id: HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
+  id: HandleSignOutAsync(SignOutContext)
   parent: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1
   langs:
   - csharp
   - vb
   name: HandleSignOutAsync(SignOutContext)
   nameWithType: RemoteAuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
-  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
   type: Method
   source:
     remote:
@@ -261,13 +248,13 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected override Task HandleSignOutAsync(SignOutContext context)
-    content.vb: Protected Overrides Function HandleSignOutAsync(context As SignOutContext) As Task
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+      type: SignOutContext
     return:
       type: System.Threading.Tasks.Task
-  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+    content.vb: Protected Overrides Function HandleSignOutAsync(context As SignOutContext) As Task
+  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignOutAsync(SignOutContext)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignOutAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
   modifiers.csharp:
@@ -276,17 +263,17 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  id: HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(SignInContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync(SignInContext)
+  id: HandleSignInAsync(SignInContext)
   parent: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1
   langs:
   - csharp
   - vb
   name: HandleSignInAsync(SignInContext)
   nameWithType: RemoteAuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
-  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
   type: Method
   source:
     remote:
@@ -301,13 +288,13 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected override Task HandleSignInAsync(SignInContext context)
-    content.vb: Protected Overrides Function HandleSignInAsync(context As SignInContext) As Task
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+      type: SignInContext
     return:
       type: System.Threading.Tasks.Task
-  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+    content.vb: Protected Overrides Function HandleSignInAsync(context As SignInContext) As Task
+  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignInAsync(SignInContext)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleSignInAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
   modifiers.csharp:
@@ -316,17 +303,17 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  id: HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
+- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
+  id: HandleForbiddenAsync(ChallengeContext)
   parent: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1
   langs:
   - csharp
   - vb
   name: HandleForbiddenAsync(ChallengeContext)
   nameWithType: RemoteAuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
   type: Method
   source:
     remote:
@@ -341,13 +328,13 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected override Task<bool> HandleForbiddenAsync(ChallengeContext context)
-    content.vb: Protected Overrides Function HandleForbiddenAsync(context As ChallengeContext) As Task(Of Boolean)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+      type: ChallengeContext
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
-  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+    content.vb: Protected Overrides Function HandleForbiddenAsync(context As ChallengeContext) As Task(Of Boolean)
+  overridden: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleForbiddenAsync(ChallengeContext)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleForbiddenAsync*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
   modifiers.csharp:
@@ -356,17 +343,17 @@ items:
   modifiers.vb:
   - Protected
   - Overrides
-  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-  id: GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(AuthenticationProperties)
+  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId(AuthenticationProperties)
+  id: GenerateCorrelationId(AuthenticationProperties)
   parent: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1
   langs:
   - csharp
   - vb
   name: GenerateCorrelationId(AuthenticationProperties)
   nameWithType: RemoteAuthenticationHandler<TOptions>.GenerateCorrelationId(AuthenticationProperties)
-  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.GenerateCorrelationId(AuthenticationProperties)
   type: Method
   source:
     remote:
@@ -381,10 +368,10 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected virtual void GenerateCorrelationId(AuthenticationProperties properties)
-    content.vb: Protected Overridable Sub GenerateCorrelationId(properties As AuthenticationProperties)
     parameters:
     - id: properties
-      type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
+      type: AuthenticationProperties
+    content.vb: Protected Overridable Sub GenerateCorrelationId(properties As AuthenticationProperties)
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.GenerateCorrelationId*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).GenerateCorrelationId(AuthenticationProperties)
   modifiers.csharp:
@@ -393,17 +380,17 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).GenerateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-  id: ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).GenerateCorrelationId(AuthenticationProperties)
+- uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(AuthenticationProperties)
+  commentId: M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId(AuthenticationProperties)
+  id: ValidateCorrelationId(AuthenticationProperties)
   parent: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1
   langs:
   - csharp
   - vb
   name: ValidateCorrelationId(AuthenticationProperties)
   nameWithType: RemoteAuthenticationHandler<TOptions>.ValidateCorrelationId(AuthenticationProperties)
-  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.ValidateCorrelationId(AuthenticationProperties)
   type: Method
   source:
     remote:
@@ -418,12 +405,12 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected virtual bool ValidateCorrelationId(AuthenticationProperties properties)
-    content.vb: Protected Overridable Function ValidateCorrelationId(properties As AuthenticationProperties) As Boolean
     parameters:
     - id: properties
-      type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
+      type: AuthenticationProperties
     return:
       type: System.Boolean
+    content.vb: Protected Overridable Function ValidateCorrelationId(properties As AuthenticationProperties) As Boolean
   overload: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId*
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).ValidateCorrelationId(AuthenticationProperties)
   modifiers.csharp:
@@ -432,7 +419,7 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).ValidateCorrelationId(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
+  fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).ValidateCorrelationId(AuthenticationProperties)
 references:
 - uid: Microsoft.AspNetCore.Authentication
   commentId: N:Microsoft.AspNetCore.Authentication
@@ -485,13 +472,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.IAuthenticationHandler
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.IAuthenticationHandler
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
-  name: IAuthenticationHandler
-  nameWithType: IAuthenticationHandler
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.IAuthenticationHandler
 - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAccepted
   commentId: P:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.SignInAccepted
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
@@ -609,17 +589,17 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.Options
   nameWithType.vb: AuthenticationHandler(Of TOptions).Options
   fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).Options
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.InitializeAsync({TOptions},Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.InitializeAsync({TOptions},HttpContext,ILogger,UrlEncoder)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
   name: InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   nameWithType: AuthenticationHandler<TOptions>.InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync(TOptions, Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Logging.ILogger, System.Text.Encodings.Web.UrlEncoder)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   nameWithType.vb: AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Logging.ILogger, System.Text.Encodings.Web.UrlEncoder)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
     name: InitializeAsync
     nameWithType: AuthenticationHandler<TOptions>.InitializeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync
@@ -632,32 +612,32 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.ILogger
+  - uid: ILogger
     name: ILogger
     nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
+    fullName: ILogger
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.UrlEncoder
+  - uid: UrlEncoder
     name: UrlEncoder
     nameWithType: UrlEncoder
-    fullName: System.Text.Encodings.Web.UrlEncoder
+    fullName: UrlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
     name: InitializeAsync
     nameWithType: AuthenticationHandler(Of TOptions).InitializeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync
@@ -670,26 +650,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.ILogger
+  - uid: ILogger
     name: ILogger
     nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
+    fullName: ILogger
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.UrlEncoder
+  - uid: UrlEncoder
     name: UrlEncoder
     nameWithType: UrlEncoder
-    fullName: System.Text.Encodings.Web.UrlEncoder
+    fullName: UrlEncoder
     isExternal: true
   - name: )
     nameWithType: )
@@ -766,43 +746,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.GetDescriptions(DescribeSchemesContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.GetDescriptions(DescribeSchemesContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
   name: GetDescriptions(DescribeSchemesContext)
   nameWithType: AuthenticationHandler<TOptions>.GetDescriptions(DescribeSchemesContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions(DescribeSchemesContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).GetDescriptions(DescribeSchemesContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions(DescribeSchemesContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
     name: GetDescriptions
     nameWithType: AuthenticationHandler<TOptions>.GetDescriptions
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+  - uid: DescribeSchemesContext
     name: DescribeSchemesContext
     nameWithType: DescribeSchemesContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+    fullName: DescribeSchemesContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
     name: GetDescriptions
     nameWithType: AuthenticationHandler(Of TOptions).GetDescriptions
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+  - uid: DescribeSchemesContext
     name: DescribeSchemesContext
     nameWithType: DescribeSchemesContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+    fullName: DescribeSchemesContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -864,43 +844,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.AuthenticateAsync(AuthenticateContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.AuthenticateAsync(AuthenticateContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
   name: AuthenticateAsync(AuthenticateContext)
   nameWithType: AuthenticationHandler<TOptions>.AuthenticateAsync(AuthenticateContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync(AuthenticateContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).AuthenticateAsync(AuthenticateContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync(AuthenticateContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
     name: AuthenticateAsync
     nameWithType: AuthenticationHandler<TOptions>.AuthenticateAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+  - uid: AuthenticateContext
     name: AuthenticateContext
     nameWithType: AuthenticateContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+    fullName: AuthenticateContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
     name: AuthenticateAsync
     nameWithType: AuthenticationHandler(Of TOptions).AuthenticateAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+  - uid: AuthenticateContext
     name: AuthenticateContext
     nameWithType: AuthenticateContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+    fullName: AuthenticateContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -936,446 +916,167 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignInAsync(SignInContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.SignInAsync(SignInContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
   name: SignInAsync(SignInContext)
   nameWithType: AuthenticationHandler<TOptions>.SignInAsync(SignInContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync(SignInContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).SignInAsync(SignInContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync(SignInContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
     name: SignInAsync
     nameWithType: AuthenticationHandler<TOptions>.SignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
     name: SignInAsync
     nameWithType: AuthenticationHandler(Of TOptions).SignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.SignOutAsync(SignOutContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.SignOutAsync(SignOutContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
   name: SignOutAsync(SignOutContext)
   nameWithType: AuthenticationHandler<TOptions>.SignOutAsync(SignOutContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync(SignOutContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).SignOutAsync(SignOutContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync(SignOutContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
     name: SignOutAsync
     nameWithType: AuthenticationHandler<TOptions>.SignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
     name: SignOutAsync
     nameWithType: AuthenticationHandler(Of TOptions).SignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleUnauthorizedAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleUnauthorizedAsync(ChallengeContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
   name: HandleUnauthorizedAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
     name: HandleUnauthorizedAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleUnauthorizedAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
     name: HandleUnauthorizedAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.ChallengeAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.ChallengeAsync(ChallengeContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
   name: ChallengeAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.ChallengeAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).ChallengeAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
     name: ChallengeAsync
     nameWithType: AuthenticationHandler<TOptions>.ChallengeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
     name: ChallengeAsync
     nameWithType: AuthenticationHandler(Of TOptions).ChallengeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
   - name: )
     nameWithType: )
     fullName: )
@@ -1422,12 +1123,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Http.Features.Authentication
-  commentId: N:Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features.Authentication
-  nameWithType: Microsoft.AspNetCore.Http.Features.Authentication
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication
 - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAccepted
   commentId: P:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAccepted
   isExternal: false
@@ -1532,16 +1227,16 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.Options
   nameWithType.vb: AuthenticationHandler(Of TOptions).Options
   fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).Options
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
   isExternal: true
   name: InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   nameWithType: AuthenticationHandler<TOptions>.InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync(TOptions, Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Logging.ILogger, System.Text.Encodings.Web.UrlEncoder)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   nameWithType.vb: AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, Microsoft.AspNetCore.Http.HttpContext, Microsoft.Extensions.Logging.ILogger, System.Text.Encodings.Web.UrlEncoder)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync(TOptions, HttpContext, ILogger, UrlEncoder)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
     name: InitializeAsync
     nameWithType: AuthenticationHandler<TOptions>.InitializeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.InitializeAsync
@@ -1554,32 +1249,32 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.ILogger
+  - uid: ILogger
     name: ILogger
     nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
+    fullName: ILogger
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.UrlEncoder
+  - uid: UrlEncoder
     name: UrlEncoder
     nameWithType: UrlEncoder
-    fullName: System.Text.Encodings.Web.UrlEncoder
+    fullName: UrlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,Microsoft.AspNetCore.Http.HttpContext,Microsoft.Extensions.Logging.ILogger,System.Text.Encodings.Web.UrlEncoder)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.InitializeAsync(`0,HttpContext,ILogger,UrlEncoder)
     name: InitializeAsync
     nameWithType: AuthenticationHandler(Of TOptions).InitializeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).InitializeAsync
@@ -1592,26 +1287,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.ILogger
+  - uid: ILogger
     name: ILogger
     nameWithType: ILogger
-    fullName: Microsoft.Extensions.Logging.ILogger
+    fullName: ILogger
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.UrlEncoder
+  - uid: UrlEncoder
     name: UrlEncoder
     nameWithType: UrlEncoder
-    fullName: System.Text.Encodings.Web.UrlEncoder
+    fullName: UrlEncoder
     isExternal: true
   - name: )
     nameWithType: )
@@ -1686,42 +1381,42 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
   isExternal: true
   name: GetDescriptions(DescribeSchemesContext)
   nameWithType: AuthenticationHandler<TOptions>.GetDescriptions(DescribeSchemesContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions(DescribeSchemesContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).GetDescriptions(DescribeSchemesContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions(DescribeSchemesContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
     name: GetDescriptions
     nameWithType: AuthenticationHandler<TOptions>.GetDescriptions
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.GetDescriptions
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+  - uid: DescribeSchemesContext
     name: DescribeSchemesContext
     nameWithType: DescribeSchemesContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+    fullName: DescribeSchemesContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.GetDescriptions(DescribeSchemesContext)
     name: GetDescriptions
     nameWithType: AuthenticationHandler(Of TOptions).GetDescriptions
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).GetDescriptions
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+  - uid: DescribeSchemesContext
     name: DescribeSchemesContext
     nameWithType: DescribeSchemesContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.DescribeSchemesContext
+    fullName: DescribeSchemesContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -1782,42 +1477,42 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
   isExternal: true
   name: AuthenticateAsync(AuthenticateContext)
   nameWithType: AuthenticationHandler<TOptions>.AuthenticateAsync(AuthenticateContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync(AuthenticateContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).AuthenticateAsync(AuthenticateContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync(AuthenticateContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
     name: AuthenticateAsync
     nameWithType: AuthenticationHandler<TOptions>.AuthenticateAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.AuthenticateAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+  - uid: AuthenticateContext
     name: AuthenticateContext
     nameWithType: AuthenticateContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+    fullName: AuthenticateContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.AuthenticateAsync(AuthenticateContext)
     name: AuthenticateAsync
     nameWithType: AuthenticationHandler(Of TOptions).AuthenticateAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).AuthenticateAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+  - uid: AuthenticateContext
     name: AuthenticateContext
     nameWithType: AuthenticateContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+    fullName: AuthenticateContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -1852,162 +1547,162 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
   isExternal: true
   name: SignInAsync(SignInContext)
   nameWithType: AuthenticationHandler<TOptions>.SignInAsync(SignInContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync(SignInContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).SignInAsync(SignInContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync(SignInContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
     name: SignInAsync
     nameWithType: AuthenticationHandler<TOptions>.SignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignInAsync(SignInContext)
     name: SignInAsync
     nameWithType: AuthenticationHandler(Of TOptions).SignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
   isExternal: true
   name: SignOutAsync(SignOutContext)
   nameWithType: AuthenticationHandler<TOptions>.SignOutAsync(SignOutContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync(SignOutContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).SignOutAsync(SignOutContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync(SignOutContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
     name: SignOutAsync
     nameWithType: AuthenticationHandler<TOptions>.SignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.SignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.SignOutAsync(SignOutContext)
     name: SignOutAsync
     nameWithType: AuthenticationHandler(Of TOptions).SignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).SignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
   isExternal: true
   name: HandleUnauthorizedAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
     name: HandleUnauthorizedAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleUnauthorizedAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleUnauthorizedAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleUnauthorizedAsync(ChallengeContext)
     name: HandleUnauthorizedAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleUnauthorizedAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
   isExternal: true
   name: ChallengeAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.ChallengeAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).ChallengeAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
     name: ChallengeAsync
     nameWithType: AuthenticationHandler<TOptions>.ChallengeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.ChallengeAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(ChallengeContext)
     name: ChallengeAsync
     nameWithType: AuthenticationHandler(Of TOptions).ChallengeAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).ChallengeAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -2297,43 +1992,43 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignOutAsync(SignOutContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleSignOutAsync(SignOutContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
   name: HandleSignOutAsync(SignOutContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
     name: HandleSignOutAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleSignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
     name: HandleSignOutAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleSignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -2346,13 +2041,11 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignOutAsync
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleSignOutAsync
   fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignOutAsync
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
+- uid: SignOutContext
+  isExternal: true
   name: SignOutContext
   nameWithType: SignOutContext
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  fullName: SignOutContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -2360,83 +2053,83 @@ references:
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
   isExternal: true
   name: HandleSignOutAsync(SignOutContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync(SignOutContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync(SignOutContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
     name: HandleSignOutAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleSignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignOutAsync(SignOutContext)
     name: HandleSignOutAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleSignOutAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignOutAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+  - uid: SignOutContext
     name: SignOutContext
     nameWithType: SignOutContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignOutContext
+    fullName: SignOutContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleSignInAsync(SignInContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleSignInAsync(SignInContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
   name: HandleSignInAsync(SignInContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
     name: HandleSignInAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleSignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
     name: HandleSignInAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleSignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -2449,90 +2142,88 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleSignInAsync
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleSignInAsync
   fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleSignInAsync
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
+- uid: SignInContext
+  isExternal: true
   name: SignInContext
   nameWithType: SignInContext
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: SignInContext
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
   isExternal: true
   name: HandleSignInAsync(SignInContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync(SignInContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync(SignInContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
     name: HandleSignInAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleSignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleSignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(Microsoft.AspNetCore.Http.Features.Authentication.SignInContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleSignInAsync(SignInContext)
     name: HandleSignInAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleSignInAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleSignInAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+  - uid: SignInContext
     name: SignInContext
     nameWithType: SignInContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.SignInContext
+    fullName: SignInContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}.HandleForbiddenAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler{`0}.HandleForbiddenAsync(ChallengeContext)
   parent: Microsoft.AspNetCore.Authentication.AuthenticationHandler{{TOptions}}
-  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  definition: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
   name: HandleForbiddenAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
     name: HandleForbiddenAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleForbiddenAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
     name: HandleForbiddenAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleForbiddenAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -2545,49 +2236,47 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.HandleForbiddenAsync
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).HandleForbiddenAsync
   fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).HandleForbiddenAsync
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
+- uid: ChallengeContext
+  isExternal: true
   name: ChallengeContext
   nameWithType: ChallengeContext
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
-- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: ChallengeContext
+- uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
   isExternal: true
   name: HandleForbiddenAsync(ChallengeContext)
   nameWithType: AuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
-  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync(ChallengeContext)
   nameWithType.vb: AuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
-  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  fullName.vb: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync(ChallengeContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
     name: HandleForbiddenAsync
     nameWithType: AuthenticationHandler<TOptions>.HandleForbiddenAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler<TOptions>.HandleForbiddenAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext)
+  - uid: Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.HandleForbiddenAsync(ChallengeContext)
     name: HandleForbiddenAsync
     nameWithType: AuthenticationHandler(Of TOptions).HandleForbiddenAsync
     fullName: Microsoft.AspNetCore.Authentication.AuthenticationHandler(Of TOptions).HandleForbiddenAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+  - uid: ChallengeContext
     name: ChallengeContext
     nameWithType: ChallengeContext
-    fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeContext
+    fullName: ChallengeContext
     isExternal: true
   - name: )
     nameWithType: )
@@ -2600,19 +2289,11 @@ references:
   fullName: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler<TOptions>.GenerateCorrelationId
   nameWithType.vb: RemoteAuthenticationHandler(Of TOptions).GenerateCorrelationId
   fullName.vb: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler(Of TOptions).GenerateCorrelationId
-- uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-  commentId: T:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-  parent: Microsoft.AspNetCore.Http.Authentication
-  isExternal: false
+- uid: AuthenticationProperties
+  isExternal: true
   name: AuthenticationProperties
   nameWithType: AuthenticationProperties
-  fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
-- uid: Microsoft.AspNetCore.Http.Authentication
-  commentId: N:Microsoft.AspNetCore.Http.Authentication
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Authentication
-  nameWithType: Microsoft.AspNetCore.Http.Authentication
-  fullName: Microsoft.AspNetCore.Http.Authentication
+  fullName: AuthenticationProperties
 - uid: Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId*
   commentId: Overload:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.ValidateCorrelationId
   isExternal: false

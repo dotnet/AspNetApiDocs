@@ -5,11 +5,11 @@ items:
   id: ConfigurationBinder
   parent: Microsoft.Extensions.Configuration
   children:
-  - Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
+  - Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(IConfiguration,System.Object)
+  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String)
+  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String,System.Object)
+  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String)
+  - Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String,``0)
   langs:
   - csharp
   - vb
@@ -31,18 +31,12 @@ items:
   summary: "\nStatic helper class that allows binding strongly typed objects to configuration values.\n"
   example: []
   syntax:
-    content: public static class ConfigurationBinder
-    content.vb: Public Module ConfigurationBinder
+    content: 'public static class ConfigurationBinder : object'
+    content.vb: >-
+      Public Module ConfigurationBinder
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - static
@@ -50,9 +44,9 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  id: Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
+- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(IConfiguration,System.Object)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(IConfiguration,System.Object)
+  id: Bind(IConfiguration,System.Object)
   isExtensionMethod: true
   parent: Microsoft.Extensions.Configuration.ConfigurationBinder
   langs:
@@ -60,7 +54,7 @@ items:
   - vb
   name: Bind(IConfiguration, Object)
   nameWithType: ConfigurationBinder.Bind(IConfiguration, Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration, System.Object)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(IConfiguration, System.Object)
   type: Method
   source:
     remote:
@@ -77,17 +71,17 @@ items:
   example: []
   syntax:
     content: public static void Bind(this IConfiguration configuration, object instance)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Sub Bind(configuration As IConfiguration, instance As Object)
     parameters:
     - id: configuration
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
       description: The configuration instance to bind.
     - id: instance
       type: System.Object
       description: The object to bind.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Sub Bind(configuration As IConfiguration, instance As Object)
   overload: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*
   modifiers.csharp:
   - public
@@ -95,9 +89,9 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  id: GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
+- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String)
+  id: GetValue``1(IConfiguration,System.String)
   isExtensionMethod: true
   parent: Microsoft.Extensions.Configuration.ConfigurationBinder
   langs:
@@ -105,7 +99,7 @@ items:
   - vb
   name: GetValue<T>(IConfiguration, String)
   nameWithType: ConfigurationBinder.GetValue<T>(IConfiguration, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(Microsoft.Extensions.Configuration.IConfiguration, System.String)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(IConfiguration, System.String)
   type: Method
   source:
     remote:
@@ -122,13 +116,9 @@ items:
   example: []
   syntax:
     content: public static T GetValue<T>(this IConfiguration configuration, string key)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function GetValue(Of T)(configuration As IConfiguration, key As String) As T
     parameters:
     - id: configuration
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
       description: The configuration.
     - id: key
       type: System.String
@@ -139,6 +129,10 @@ items:
     return:
       type: '{T}'
       description: The converted value.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetValue(Of T)(configuration As IConfiguration, key As String) As T
   overload: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*
   nameWithType.vb: ConfigurationBinder.GetValue(Of T)(IConfiguration, String)
   modifiers.csharp:
@@ -147,11 +141,11 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(Microsoft.Extensions.Configuration.IConfiguration, System.String)
+  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(IConfiguration, System.String)
   name.vb: GetValue(Of T)(IConfiguration, String)
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  id: GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
+- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String,``0)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(IConfiguration,System.String,``0)
+  id: GetValue``1(IConfiguration,System.String,``0)
   isExtensionMethod: true
   parent: Microsoft.Extensions.Configuration.ConfigurationBinder
   langs:
@@ -159,7 +153,7 @@ items:
   - vb
   name: GetValue<T>(IConfiguration, String, T)
   nameWithType: ConfigurationBinder.GetValue<T>(IConfiguration, String, T)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(Microsoft.Extensions.Configuration.IConfiguration, System.String, T)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(IConfiguration, System.String, T)
   type: Method
   source:
     remote:
@@ -176,13 +170,9 @@ items:
   example: []
   syntax:
     content: public static T GetValue<T>(this IConfiguration configuration, string key, T defaultValue)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function GetValue(Of T)(configuration As IConfiguration, key As String, defaultValue As T) As T
     parameters:
     - id: configuration
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
       description: The configuration.
     - id: key
       type: System.String
@@ -196,6 +186,10 @@ items:
     return:
       type: '{T}'
       description: The converted value.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetValue(Of T)(configuration As IConfiguration, key As String, defaultValue As T) As T
   overload: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*
   nameWithType.vb: ConfigurationBinder.GetValue(Of T)(IConfiguration, String, T)
   modifiers.csharp:
@@ -204,11 +198,11 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(Microsoft.Extensions.Configuration.IConfiguration, System.String, T)
+  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(IConfiguration, System.String, T)
   name.vb: GetValue(Of T)(IConfiguration, String, T)
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  id: GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
+- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String)
+  id: GetValue(IConfiguration,Type,System.String)
   isExtensionMethod: true
   parent: Microsoft.Extensions.Configuration.ConfigurationBinder
   langs:
@@ -216,7 +210,7 @@ items:
   - vb
   name: GetValue(IConfiguration, Type, String)
   nameWithType: ConfigurationBinder.GetValue(IConfiguration, Type, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration, System.Type, System.String)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration, Type, System.String)
   type: Method
   source:
     remote:
@@ -233,16 +227,12 @@ items:
   example: []
   syntax:
     content: public static object GetValue(this IConfiguration configuration, Type type, string key)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function GetValue(configuration As IConfiguration, type As Type, key As String) As Object
     parameters:
     - id: configuration
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
       description: The configuration.
     - id: type
-      type: System.Type
+      type: Type
       description: The type to convert the value to.
     - id: key
       type: System.String
@@ -250,6 +240,10 @@ items:
     return:
       type: System.Object
       description: The converted value.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetValue(configuration As IConfiguration, type As Type, key As String) As Object
   overload: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*
   modifiers.csharp:
   - public
@@ -257,9 +251,9 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  id: GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
+- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String,System.Object)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration,Type,System.String,System.Object)
+  id: GetValue(IConfiguration,Type,System.String,System.Object)
   isExtensionMethod: true
   parent: Microsoft.Extensions.Configuration.ConfigurationBinder
   langs:
@@ -267,7 +261,7 @@ items:
   - vb
   name: GetValue(IConfiguration, Type, String, Object)
   nameWithType: ConfigurationBinder.GetValue(IConfiguration, Type, String, Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration, System.Type, System.String, System.Object)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(IConfiguration, Type, System.String, System.Object)
   type: Method
   source:
     remote:
@@ -284,16 +278,12 @@ items:
   example: []
   syntax:
     content: public static object GetValue(this IConfiguration configuration, Type type, string key, object defaultValue)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function GetValue(configuration As IConfiguration, type As Type, key As String, defaultValue As Object) As Object
     parameters:
     - id: configuration
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
       description: The configuration.
     - id: type
-      type: System.Type
+      type: Type
       description: The type to convert the value to.
     - id: key
       type: System.String
@@ -304,6 +294,10 @@ items:
     return:
       type: System.Object
       description: The converted value.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function GetValue(configuration As IConfiguration, type As Type, key As String, defaultValue As Object) As Object
   overload: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*
   modifiers.csharp:
   - public
@@ -325,285 +319,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -616,13 +331,11 @@ references:
   name: Bind
   nameWithType: ConfigurationBinder.Bind
   fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind
-- uid: Microsoft.Extensions.Configuration.IConfiguration
-  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
+- uid: IConfiguration
+  isExternal: true
   name: IConfiguration
   nameWithType: IConfiguration
-  fullName: Microsoft.Extensions.Configuration.IConfiguration
+  fullName: IConfiguration
 - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
   isExternal: false
@@ -647,11 +360,9 @@ references:
   name: T
   nameWithType: T
   fullName: T
-- uid: System.Type
-  commentId: T:System.Type
-  parent: System
+- uid: Type
   isExternal: true
   name: Type
   nameWithType: Type
-  fullName: System.Type
+  fullName: Type
 shouldSkipMarkup: true

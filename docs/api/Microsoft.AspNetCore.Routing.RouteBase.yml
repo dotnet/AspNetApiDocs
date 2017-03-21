@@ -5,19 +5,19 @@ items:
   id: RouteBase
   parent: Microsoft.AspNetCore.Routing
   children:
-  - Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,Microsoft.AspNetCore.Routing.RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  - Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},RouteValueDictionary)
   - Microsoft.AspNetCore.Routing.RouteBase.ConstraintResolver
   - Microsoft.AspNetCore.Routing.RouteBase.Constraints
   - Microsoft.AspNetCore.Routing.RouteBase.DataTokens
   - Microsoft.AspNetCore.Routing.RouteBase.Defaults
   - Microsoft.AspNetCore.Routing.RouteBase.GetConstraints(Microsoft.AspNetCore.Routing.IInlineConstraintResolver,Microsoft.AspNetCore.Routing.Template.RouteTemplate,System.Collections.Generic.IDictionary{System.String,System.Object})
-  - Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  - Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
+  - Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,RouteValueDictionary)
+  - Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(VirtualPathContext)
   - Microsoft.AspNetCore.Routing.RouteBase.Name
-  - Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(Microsoft.AspNetCore.Routing.RouteContext)
-  - Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(Microsoft.AspNetCore.Routing.VirtualPathContext)
+  - Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(RouteContext)
+  - Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(VirtualPathContext)
   - Microsoft.AspNetCore.Routing.RouteBase.ParsedTemplate
-  - Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
+  - Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(RouteContext)
   - Microsoft.AspNetCore.Routing.RouteBase.ToString
   langs:
   - csharp
@@ -38,9 +38,10 @@ items:
   - Microsoft.AspNetCore.Routing
   namespace: Microsoft.AspNetCore.Routing
   syntax:
-    content: 'public abstract class RouteBase : INamedRouter, IRouter'
+    content: 'public abstract class RouteBase : IRouter, INamedRouter, IRouter'
     content.vb: >-
       Public MustInherit Class RouteBase
+          Inherits IRouter
           Implements INamedRouter, IRouter
   inheritance:
   - System.Object
@@ -48,14 +49,6 @@ items:
   - Microsoft.AspNetCore.Routing.Route
   implements:
   - Microsoft.AspNetCore.Routing.INamedRouter
-  - Microsoft.AspNetCore.Routing.IRouter
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - abstract
@@ -64,16 +57,16 @@ items:
   - Public
   - MustInherit
   - Class
-- uid: Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,Microsoft.AspNetCore.Routing.RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,Microsoft.AspNetCore.Routing.RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  id: '#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,Microsoft.AspNetCore.Routing.RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},Microsoft.AspNetCore.Routing.RouteValueDictionary)'
+- uid: Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},RouteValueDictionary)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},RouteValueDictionary)
+  id: '#ctor(System.String,System.String,Microsoft.AspNetCore.Routing.IInlineConstraintResolver,RouteValueDictionary,System.Collections.Generic.IDictionary{System.String,System.Object},RouteValueDictionary)'
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: RouteBase(String, String, IInlineConstraintResolver, RouteValueDictionary, IDictionary<String, Object>, RouteValueDictionary)
   nameWithType: RouteBase.RouteBase(String, String, IInlineConstraintResolver, RouteValueDictionary, IDictionary<String, Object>, RouteValueDictionary)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.RouteBase(System.String, System.String, Microsoft.AspNetCore.Routing.IInlineConstraintResolver, Microsoft.AspNetCore.Routing.RouteValueDictionary, System.Collections.Generic.IDictionary<System.String, System.Object>, Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.RouteBase(System.String, System.String, Microsoft.AspNetCore.Routing.IInlineConstraintResolver, RouteValueDictionary, System.Collections.Generic.IDictionary<System.String, System.Object>, RouteValueDictionary)
   type: Constructor
   source:
     remote:
@@ -88,7 +81,6 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public RouteBase(string template, string name, IInlineConstraintResolver constraintResolver, RouteValueDictionary defaults, IDictionary<string, object> constraints, RouteValueDictionary dataTokens)
-    content.vb: Public Sub New(template As String, name As String, constraintResolver As IInlineConstraintResolver, defaults As RouteValueDictionary, constraints As IDictionary(Of String, Object), dataTokens As RouteValueDictionary)
     parameters:
     - id: template
       type: System.String
@@ -97,18 +89,19 @@ items:
     - id: constraintResolver
       type: Microsoft.AspNetCore.Routing.IInlineConstraintResolver
     - id: defaults
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
     - id: constraints
       type: System.Collections.Generic.IDictionary{System.String,System.Object}
     - id: dataTokens
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
+    content.vb: Public Sub New(template As String, name As String, constraintResolver As IInlineConstraintResolver, defaults As RouteValueDictionary, constraints As IDictionary(Of String, Object), dataTokens As RouteValueDictionary)
   overload: Microsoft.AspNetCore.Routing.RouteBase.#ctor*
   nameWithType.vb: RouteBase.RouteBase(String, String, IInlineConstraintResolver, RouteValueDictionary, IDictionary(Of String, Object), RouteValueDictionary)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Routing.RouteBase.RouteBase(System.String, System.String, Microsoft.AspNetCore.Routing.IInlineConstraintResolver, Microsoft.AspNetCore.Routing.RouteValueDictionary, System.Collections.Generic.IDictionary(Of System.String, System.Object), Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  fullName.vb: Microsoft.AspNetCore.Routing.RouteBase.RouteBase(System.String, System.String, Microsoft.AspNetCore.Routing.IInlineConstraintResolver, RouteValueDictionary, System.Collections.Generic.IDictionary(Of System.String, System.Object), RouteValueDictionary)
   name.vb: RouteBase(String, String, IInlineConstraintResolver, RouteValueDictionary, IDictionary(Of String, Object), RouteValueDictionary)
 - uid: Microsoft.AspNetCore.Routing.RouteBase.Constraints
   commentId: P:Microsoft.AspNetCore.Routing.RouteBase.Constraints
@@ -134,10 +127,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public virtual IDictionary<string, IRouteConstraint> Constraints { get; protected set; }
-    content.vb: Public Overridable Property Constraints As IDictionary(Of String, IRouteConstraint)
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.String,Microsoft.AspNetCore.Routing.IRouteConstraint}
+      type: System.Collections.Generic.IDictionary{System.String,IRouteConstraint}
+    content.vb: Public Overridable Property Constraints As IDictionary(Of String, IRouteConstraint)
   overload: Microsoft.AspNetCore.Routing.RouteBase.Constraints*
   modifiers.csharp:
   - public
@@ -173,10 +166,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: protected virtual IInlineConstraintResolver ConstraintResolver { get; set; }
-    content.vb: Protected Overridable Property ConstraintResolver As IInlineConstraintResolver
     parameters: []
     return:
       type: Microsoft.AspNetCore.Routing.IInlineConstraintResolver
+    content.vb: Protected Overridable Property ConstraintResolver As IInlineConstraintResolver
   overload: Microsoft.AspNetCore.Routing.RouteBase.ConstraintResolver*
   modifiers.csharp:
   - protected
@@ -210,10 +203,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public virtual RouteValueDictionary DataTokens { get; protected set; }
-    content.vb: Public Overridable Property DataTokens As RouteValueDictionary
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
+    content.vb: Public Overridable Property DataTokens As RouteValueDictionary
   overload: Microsoft.AspNetCore.Routing.RouteBase.DataTokens*
   modifiers.csharp:
   - public
@@ -249,10 +242,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public virtual RouteValueDictionary Defaults { get; protected set; }
-    content.vb: Public Overridable Property Defaults As RouteValueDictionary
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
+    content.vb: Public Overridable Property Defaults As RouteValueDictionary
   overload: Microsoft.AspNetCore.Routing.RouteBase.Defaults*
   modifiers.csharp:
   - public
@@ -288,10 +281,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public virtual string Name { get; protected set; }
-    content.vb: Public Overridable Property Name As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Overridable Property Name As String
   overload: Microsoft.AspNetCore.Routing.RouteBase.Name*
   implements:
   - Microsoft.AspNetCore.Routing.INamedRouter.Name
@@ -329,10 +322,10 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public virtual RouteTemplate ParsedTemplate { get; protected set; }
-    content.vb: Public Overridable Property ParsedTemplate As RouteTemplate
     parameters: []
     return:
       type: Microsoft.AspNetCore.Routing.Template.RouteTemplate
+    content.vb: Public Overridable Property ParsedTemplate As RouteTemplate
   overload: Microsoft.AspNetCore.Routing.RouteBase.ParsedTemplate*
   modifiers.csharp:
   - public
@@ -344,16 +337,16 @@ items:
   - Overridable
   - Get
   - Protected Set
-- uid: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(Microsoft.AspNetCore.Routing.RouteContext)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(Microsoft.AspNetCore.Routing.RouteContext)
-  id: OnRouteMatched(Microsoft.AspNetCore.Routing.RouteContext)
+- uid: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(RouteContext)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(RouteContext)
+  id: OnRouteMatched(RouteContext)
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: OnRouteMatched(RouteContext)
   nameWithType: RouteBase.OnRouteMatched(RouteContext)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(Microsoft.AspNetCore.Routing.RouteContext)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched(RouteContext)
   type: Method
   source:
     remote:
@@ -368,12 +361,12 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: protected abstract Task OnRouteMatched(RouteContext context)
-    content.vb: Protected MustOverride Function OnRouteMatched(context As RouteContext) As Task
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Routing.RouteContext
+      type: RouteContext
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Protected MustOverride Function OnRouteMatched(context As RouteContext) As Task
   overload: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched*
   modifiers.csharp:
   - protected
@@ -381,16 +374,16 @@ items:
   modifiers.vb:
   - Protected
   - MustOverride
-- uid: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  id: OnVirtualPathGenerated(Microsoft.AspNetCore.Routing.VirtualPathContext)
+- uid: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(VirtualPathContext)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(VirtualPathContext)
+  id: OnVirtualPathGenerated(VirtualPathContext)
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: OnVirtualPathGenerated(VirtualPathContext)
   nameWithType: RouteBase.OnVirtualPathGenerated(VirtualPathContext)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(Microsoft.AspNetCore.Routing.VirtualPathContext)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated(VirtualPathContext)
   type: Method
   source:
     remote:
@@ -405,12 +398,12 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: protected abstract VirtualPathData OnVirtualPathGenerated(VirtualPathContext context)
-    content.vb: Protected MustOverride Function OnVirtualPathGenerated(context As VirtualPathContext) As VirtualPathData
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Routing.VirtualPathContext
+      type: VirtualPathContext
     return:
-      type: Microsoft.AspNetCore.Routing.VirtualPathData
+      type: VirtualPathData
+    content.vb: Protected MustOverride Function OnVirtualPathGenerated(context As VirtualPathContext) As VirtualPathData
   overload: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated*
   modifiers.csharp:
   - protected
@@ -418,16 +411,16 @@ items:
   modifiers.vb:
   - Protected
   - MustOverride
-- uid: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-  id: RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
+- uid: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(RouteContext)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(RouteContext)
+  id: RouteAsync(RouteContext)
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: RouteAsync(RouteContext)
   nameWithType: RouteBase.RouteAsync(RouteContext)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync(RouteContext)
   type: Method
   source:
     remote:
@@ -443,31 +436,29 @@ items:
   example: []
   syntax:
     content: public virtual Task RouteAsync(RouteContext context)
-    content.vb: Public Overridable Function RouteAsync(context As RouteContext) As Task
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Routing.RouteContext
+      type: RouteContext
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function RouteAsync(context As RouteContext) As Task
   overload: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync*
-  implements:
-  - Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
   modifiers.csharp:
   - public
   - virtual
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  id: GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
+- uid: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(VirtualPathContext)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(VirtualPathContext)
+  id: GetVirtualPath(VirtualPathContext)
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: GetVirtualPath(VirtualPathContext)
   nameWithType: RouteBase.GetVirtualPath(VirtualPathContext)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath(VirtualPathContext)
   type: Method
   source:
     remote:
@@ -483,15 +474,13 @@ items:
   example: []
   syntax:
     content: public virtual VirtualPathData GetVirtualPath(VirtualPathContext context)
-    content.vb: Public Overridable Function GetVirtualPath(context As VirtualPathContext) As VirtualPathData
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Routing.VirtualPathContext
+      type: VirtualPathContext
     return:
-      type: Microsoft.AspNetCore.Routing.VirtualPathData
+      type: VirtualPathData
+    content.vb: Public Overridable Function GetVirtualPath(context As VirtualPathContext) As VirtualPathData
   overload: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath*
-  implements:
-  - Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
   modifiers.csharp:
   - public
   - virtual
@@ -522,7 +511,6 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: protected static IDictionary<string, IRouteConstraint> GetConstraints(IInlineConstraintResolver inlineConstraintResolver, RouteTemplate parsedTemplate, IDictionary<string, object> constraints)
-    content.vb: Protected Shared Function GetConstraints(inlineConstraintResolver As IInlineConstraintResolver, parsedTemplate As RouteTemplate, constraints As IDictionary(Of String, Object)) As IDictionary(Of String, IRouteConstraint)
     parameters:
     - id: inlineConstraintResolver
       type: Microsoft.AspNetCore.Routing.IInlineConstraintResolver
@@ -531,7 +519,8 @@ items:
     - id: constraints
       type: System.Collections.Generic.IDictionary{System.String,System.Object}
     return:
-      type: System.Collections.Generic.IDictionary{System.String,Microsoft.AspNetCore.Routing.IRouteConstraint}
+      type: System.Collections.Generic.IDictionary{System.String,IRouteConstraint}
+    content.vb: Protected Shared Function GetConstraints(inlineConstraintResolver As IInlineConstraintResolver, parsedTemplate As RouteTemplate, constraints As IDictionary(Of String, Object)) As IDictionary(Of String, IRouteConstraint)
   overload: Microsoft.AspNetCore.Routing.RouteBase.GetConstraints*
   nameWithType.vb: RouteBase.GetConstraints(IInlineConstraintResolver, RouteTemplate, IDictionary(Of String, Object))
   modifiers.csharp:
@@ -542,16 +531,16 @@ items:
   - Shared
   fullName.vb: Microsoft.AspNetCore.Routing.RouteBase.GetConstraints(Microsoft.AspNetCore.Routing.IInlineConstraintResolver, Microsoft.AspNetCore.Routing.Template.RouteTemplate, System.Collections.Generic.IDictionary(Of System.String, System.Object))
   name.vb: GetConstraints(IInlineConstraintResolver, RouteTemplate, IDictionary(Of String, Object))
-- uid: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  id: GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,Microsoft.AspNetCore.Routing.RouteValueDictionary)
+- uid: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,RouteValueDictionary)
+  commentId: M:Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,RouteValueDictionary)
+  id: GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate,RouteValueDictionary)
   parent: Microsoft.AspNetCore.Routing.RouteBase
   langs:
   - csharp
   - vb
   name: GetDefaults(RouteTemplate, RouteValueDictionary)
   nameWithType: RouteBase.GetDefaults(RouteTemplate, RouteValueDictionary)
-  fullName: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate, Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  fullName: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults(Microsoft.AspNetCore.Routing.Template.RouteTemplate, RouteValueDictionary)
   type: Method
   source:
     remote:
@@ -566,14 +555,14 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: protected static RouteValueDictionary GetDefaults(RouteTemplate parsedTemplate, RouteValueDictionary defaults)
-    content.vb: Protected Shared Function GetDefaults(parsedTemplate As RouteTemplate, defaults As RouteValueDictionary) As RouteValueDictionary
     parameters:
     - id: parsedTemplate
       type: Microsoft.AspNetCore.Routing.Template.RouteTemplate
     - id: defaults
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
     return:
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
+    content.vb: Protected Shared Function GetDefaults(parsedTemplate As RouteTemplate, defaults As RouteValueDictionary) As RouteValueDictionary
   overload: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults*
   modifiers.csharp:
   - protected
@@ -605,10 +594,9 @@ items:
   namespace: Microsoft.AspNetCore.Routing
   syntax:
     content: public override string ToString()
-    content.vb: Public Overrides Function ToString As String
     return:
       type: System.String
-  overridden: System.Object.ToString
+    content.vb: Public Overrides Function ToString As String
   overload: Microsoft.AspNetCore.Routing.RouteBase.ToString*
   modifiers.csharp:
   - public
@@ -637,261 +625,6 @@ references:
   name: INamedRouter
   nameWithType: INamedRouter
   fullName: Microsoft.AspNetCore.Routing.INamedRouter
-- uid: Microsoft.AspNetCore.Routing.IRouter
-  commentId: T:Microsoft.AspNetCore.Routing.IRouter
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
-  name: IRouter
-  nameWithType: IRouter
-  fullName: Microsoft.AspNetCore.Routing.IRouter
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -918,13 +651,11 @@ references:
   name: IInlineConstraintResolver
   nameWithType: IInlineConstraintResolver
   fullName: Microsoft.AspNetCore.Routing.IInlineConstraintResolver
-- uid: Microsoft.AspNetCore.Routing.RouteValueDictionary
-  commentId: T:Microsoft.AspNetCore.Routing.RouteValueDictionary
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+- uid: RouteValueDictionary
+  isExternal: true
   name: RouteValueDictionary
   nameWithType: RouteValueDictionary
-  fullName: Microsoft.AspNetCore.Routing.RouteValueDictionary
+  fullName: RouteValueDictionary
 - uid: System.Collections.Generic.IDictionary{System.String,System.Object}
   commentId: T:System.Collections.Generic.IDictionary{System.String,System.Object}
   parent: System.Collections.Generic
@@ -1048,15 +779,15 @@ references:
   name: Constraints
   nameWithType: RouteBase.Constraints
   fullName: Microsoft.AspNetCore.Routing.RouteBase.Constraints
-- uid: System.Collections.Generic.IDictionary{System.String,Microsoft.AspNetCore.Routing.IRouteConstraint}
-  commentId: T:System.Collections.Generic.IDictionary{System.String,Microsoft.AspNetCore.Routing.IRouteConstraint}
+- uid: System.Collections.Generic.IDictionary{System.String,IRouteConstraint}
+  commentId: T:System.Collections.Generic.IDictionary{System.String,IRouteConstraint}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IDictionary`2
   name: IDictionary<String, IRouteConstraint>
   nameWithType: IDictionary<String, IRouteConstraint>
-  fullName: System.Collections.Generic.IDictionary<System.String, Microsoft.AspNetCore.Routing.IRouteConstraint>
+  fullName: System.Collections.Generic.IDictionary<System.String, IRouteConstraint>
   nameWithType.vb: IDictionary(Of String, IRouteConstraint)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, Microsoft.AspNetCore.Routing.IRouteConstraint)
+  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, IRouteConstraint)
   name.vb: IDictionary(Of String, IRouteConstraint)
   spec.csharp:
   - uid: System.Collections.Generic.IDictionary`2
@@ -1075,10 +806,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.IRouteConstraint
+  - uid: IRouteConstraint
     name: IRouteConstraint
     nameWithType: IRouteConstraint
-    fullName: Microsoft.AspNetCore.Routing.IRouteConstraint
+    fullName: IRouteConstraint
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1099,10 +831,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.AspNetCore.Routing.IRouteConstraint
+  - uid: IRouteConstraint
     name: IRouteConstraint
     nameWithType: IRouteConstraint
-    fullName: Microsoft.AspNetCore.Routing.IRouteConstraint
+    fullName: IRouteConstraint
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -1162,13 +895,11 @@ references:
   name: OnRouteMatched
   nameWithType: RouteBase.OnRouteMatched
   fullName: Microsoft.AspNetCore.Routing.RouteBase.OnRouteMatched
-- uid: Microsoft.AspNetCore.Routing.RouteContext
-  commentId: T:Microsoft.AspNetCore.Routing.RouteContext
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+- uid: RouteContext
+  isExternal: true
   name: RouteContext
   nameWithType: RouteContext
-  fullName: Microsoft.AspNetCore.Routing.RouteContext
+  fullName: RouteContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -1188,106 +919,28 @@ references:
   name: OnVirtualPathGenerated
   nameWithType: RouteBase.OnVirtualPathGenerated
   fullName: Microsoft.AspNetCore.Routing.RouteBase.OnVirtualPathGenerated
-- uid: Microsoft.AspNetCore.Routing.VirtualPathContext
-  commentId: T:Microsoft.AspNetCore.Routing.VirtualPathContext
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+- uid: VirtualPathContext
+  isExternal: true
   name: VirtualPathContext
   nameWithType: VirtualPathContext
-  fullName: Microsoft.AspNetCore.Routing.VirtualPathContext
-- uid: Microsoft.AspNetCore.Routing.VirtualPathData
-  commentId: T:Microsoft.AspNetCore.Routing.VirtualPathData
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+  fullName: VirtualPathContext
+- uid: VirtualPathData
+  isExternal: true
   name: VirtualPathData
   nameWithType: VirtualPathData
-  fullName: Microsoft.AspNetCore.Routing.VirtualPathData
+  fullName: VirtualPathData
 - uid: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync*
   commentId: Overload:Microsoft.AspNetCore.Routing.RouteBase.RouteAsync
   isExternal: false
   name: RouteAsync
   nameWithType: RouteBase.RouteAsync
   fullName: Microsoft.AspNetCore.Routing.RouteBase.RouteAsync
-- uid: Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-  commentId: M:Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-  parent: Microsoft.AspNetCore.Routing.IRouter
-  isExternal: false
-  name: RouteAsync(RouteContext)
-  nameWithType: IRouter.RouteAsync(RouteContext)
-  fullName: Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-    name: RouteAsync
-    nameWithType: IRouter.RouteAsync
-    fullName: Microsoft.AspNetCore.Routing.IRouter.RouteAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Routing.RouteContext
-    name: RouteContext
-    nameWithType: RouteContext
-    fullName: Microsoft.AspNetCore.Routing.RouteContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Routing.IRouter.RouteAsync(Microsoft.AspNetCore.Routing.RouteContext)
-    name: RouteAsync
-    nameWithType: IRouter.RouteAsync
-    fullName: Microsoft.AspNetCore.Routing.IRouter.RouteAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Routing.RouteContext
-    name: RouteContext
-    nameWithType: RouteContext
-    fullName: Microsoft.AspNetCore.Routing.RouteContext
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath*
   commentId: Overload:Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath
   isExternal: false
   name: GetVirtualPath
   nameWithType: RouteBase.GetVirtualPath
   fullName: Microsoft.AspNetCore.Routing.RouteBase.GetVirtualPath
-- uid: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  commentId: M:Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  parent: Microsoft.AspNetCore.Routing.IRouter
-  isExternal: false
-  name: GetVirtualPath(VirtualPathContext)
-  nameWithType: IRouter.GetVirtualPath(VirtualPathContext)
-  fullName: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-    name: GetVirtualPath
-    nameWithType: IRouter.GetVirtualPath
-    fullName: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Routing.VirtualPathContext
-    name: VirtualPathContext
-    nameWithType: VirtualPathContext
-    fullName: Microsoft.AspNetCore.Routing.VirtualPathContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath(Microsoft.AspNetCore.Routing.VirtualPathContext)
-    name: GetVirtualPath
-    nameWithType: IRouter.GetVirtualPath
-    fullName: Microsoft.AspNetCore.Routing.IRouter.GetVirtualPath
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Routing.VirtualPathContext
-    name: VirtualPathContext
-    nameWithType: VirtualPathContext
-    fullName: Microsoft.AspNetCore.Routing.VirtualPathContext
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Routing.RouteBase.GetConstraints*
   commentId: Overload:Microsoft.AspNetCore.Routing.RouteBase.GetConstraints
   isExternal: false
@@ -1300,37 +953,6 @@ references:
   name: GetDefaults
   nameWithType: RouteBase.GetDefaults
   fullName: Microsoft.AspNetCore.Routing.RouteBase.GetDefaults
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Routing.RouteBase.ToString*
   commentId: Overload:Microsoft.AspNetCore.Routing.RouteBase.ToString
   isExternal: false

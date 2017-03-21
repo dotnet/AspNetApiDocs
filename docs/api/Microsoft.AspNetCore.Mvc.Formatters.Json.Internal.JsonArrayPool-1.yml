@@ -28,11 +28,11 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   syntax:
     content: 'public class JsonArrayPool<T> : IArrayPool<T>'
+    typeParameters:
+    - id: T
     content.vb: >-
       Public Class JsonArrayPool(Of T)
           Implements IArrayPool(Of T)
-    typeParameters:
-    - id: T
   inheritance:
   - System.Object
   implements:
@@ -78,10 +78,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   syntax:
     content: public JsonArrayPool(ArrayPool<T> inner)
-    content.vb: Public Sub New(inner As ArrayPool(Of T))
     parameters:
     - id: inner
       type: System.Buffers.ArrayPool{{T}}
+    content.vb: Public Sub New(inner As ArrayPool(Of T))
   overload: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonArrayPool`1.#ctor*
   nameWithType.vb: JsonArrayPool(Of T).JsonArrayPool(ArrayPool(Of T))
   modifiers.csharp:
@@ -114,12 +114,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   syntax:
     content: public T[] Rent(int minimumLength)
-    content.vb: Public Function Rent(minimumLength As Integer) As T()
     parameters:
     - id: minimumLength
       type: System.Int32
     return:
       type: '{T}[]'
+    content.vb: Public Function Rent(minimumLength As Integer) As T()
   overload: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonArrayPool`1.Rent*
   implements:
   - Newtonsoft.Json.IArrayPool{{T}}.Rent(System.Int32)
@@ -153,10 +153,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal
   syntax:
     content: public void Return(T[] array)
-    content.vb: Public Sub Return(array As T())
     parameters:
     - id: array
       type: '{T}[]'
+    content.vb: Public Sub Return(array As T())
   overload: Microsoft.AspNetCore.Mvc.Formatters.Json.Internal.JsonArrayPool`1.Return*
   implements:
   - Newtonsoft.Json.IArrayPool{{T}}.Return({T}[])

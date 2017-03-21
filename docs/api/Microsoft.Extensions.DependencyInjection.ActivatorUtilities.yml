@@ -5,11 +5,11 @@ items:
   id: ActivatorUtilities
   parent: Microsoft.Extensions.DependencyInjection
   children:
-  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(System.Type,System.Type[])
-  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(System.IServiceProvider,System.Type,System.Object[])
-  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(System.IServiceProvider,System.Object[])
-  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(System.IServiceProvider,System.Type)
-  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(System.IServiceProvider)
+  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type,Type[])
+  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider,Type,System.Object[])
+  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(IServiceProvider,System.Object[])
+  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(IServiceProvider,Type)
+  - Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(IServiceProvider)
   langs:
   - csharp
   - vb
@@ -31,18 +31,12 @@ items:
   summary: "\nHelper code for the various activator services.\n"
   example: []
   syntax:
-    content: public static class ActivatorUtilities
-    content.vb: Public Module ActivatorUtilities
+    content: 'public static class ActivatorUtilities : object'
+    content.vb: >-
+      Public Module ActivatorUtilities
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - static
@@ -50,16 +44,16 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(System.IServiceProvider,System.Type,System.Object[])
-  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(System.IServiceProvider,System.Type,System.Object[])
-  id: CreateInstance(System.IServiceProvider,System.Type,System.Object[])
+- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider,Type,System.Object[])
+  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider,Type,System.Object[])
+  id: CreateInstance(IServiceProvider,Type,System.Object[])
   parent: Microsoft.Extensions.DependencyInjection.ActivatorUtilities
   langs:
   - csharp
   - vb
   name: CreateInstance(IServiceProvider, Type, Object[])
   nameWithType: ActivatorUtilities.CreateInstance(IServiceProvider, Type, Object[])
-  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(System.IServiceProvider, System.Type, System.Object[])
+  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider, Type, System.Object[])
   type: Method
   source:
     remote:
@@ -72,17 +66,16 @@ items:
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Abstractions
   namespace: Microsoft.Extensions.DependencyInjection
-  summary: "\nInstantiate a type with constructor arguments provided directly and/or from an <xref href=\"System.IServiceProvider\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nInstantiate a type with constructor arguments provided directly and/or from an <see cref=\"!:IServiceProvider\"></see>.\n"
   example: []
   syntax:
     content: public static object CreateInstance(IServiceProvider provider, Type instanceType, params object[] parameters)
-    content.vb: Public Shared Function CreateInstance(provider As IServiceProvider, instanceType As Type, ParamArray parameters As Object()) As Object
     parameters:
     - id: provider
-      type: System.IServiceProvider
+      type: IServiceProvider
       description: The service provider used to resolve dependencies
     - id: instanceType
-      type: System.Type
+      type: Type
       description: The type to activate
     - id: parameters
       type: System.Object[]
@@ -90,6 +83,7 @@ items:
     return:
       type: System.Object
       description: An activated object of type instanceType
+    content.vb: Public Shared Function CreateInstance(provider As IServiceProvider, instanceType As Type, ParamArray parameters As Object()) As Object
   overload: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance*
   nameWithType.vb: ActivatorUtilities.CreateInstance(IServiceProvider, Type, Object())
   modifiers.csharp:
@@ -98,18 +92,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(System.IServiceProvider, System.Type, System.Object())
+  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(IServiceProvider, Type, System.Object())
   name.vb: CreateInstance(IServiceProvider, Type, Object())
-- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(System.Type,System.Type[])
-  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(System.Type,System.Type[])
-  id: CreateFactory(System.Type,System.Type[])
+- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type,Type[])
+  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type,Type[])
+  id: CreateFactory(Type,Type[])
   parent: Microsoft.Extensions.DependencyInjection.ActivatorUtilities
   langs:
   - csharp
   - vb
   name: CreateFactory(Type, Type[])
   nameWithType: ActivatorUtilities.CreateFactory(Type, Type[])
-  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(System.Type, System.Type[])
+  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type, Type[])
   type: Method
   source:
     remote:
@@ -122,21 +116,21 @@ items:
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Abstractions
   namespace: Microsoft.Extensions.DependencyInjection
-  summary: "\nCreate a delegate that will instantiate a type with constructor arguments provided directly\nand/or from an <xref href=\"System.IServiceProvider\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nCreate a delegate that will instantiate a type with constructor arguments provided directly\nand/or from an <see cref=\"!:IServiceProvider\"></see>.\n"
   example: []
   syntax:
     content: public static ObjectFactory CreateFactory(Type instanceType, Type[] argumentTypes)
-    content.vb: Public Shared Function CreateFactory(instanceType As Type, argumentTypes As Type()) As ObjectFactory
     parameters:
     - id: instanceType
-      type: System.Type
+      type: Type
       description: The type to activate
     - id: argumentTypes
-      type: System.Type[]
+      type: Type[]
       description: "\nThe types of objects, in order, that will be passed to the returned function as its second parameter\n"
     return:
       type: Microsoft.Extensions.DependencyInjection.ObjectFactory
-      description: "\nA factory that will instantiate instanceType using an <xref href=\"System.IServiceProvider\" data-throw-if-not-resolved=\"false\"></xref>\nand an argument array containing objects matching the types defined in argumentTypes\n"
+      description: "\nA factory that will instantiate instanceType using an <see cref=\"!:IServiceProvider\"></see>\nand an argument array containing objects matching the types defined in argumentTypes\n"
+    content.vb: Public Shared Function CreateFactory(instanceType As Type, argumentTypes As Type()) As ObjectFactory
   overload: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory*
   nameWithType.vb: ActivatorUtilities.CreateFactory(Type, Type())
   modifiers.csharp:
@@ -145,18 +139,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(System.Type, System.Type())
+  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory(Type, Type())
   name.vb: CreateFactory(Type, Type())
-- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(System.IServiceProvider,System.Object[])
-  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(System.IServiceProvider,System.Object[])
-  id: CreateInstance``1(System.IServiceProvider,System.Object[])
+- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(IServiceProvider,System.Object[])
+  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance``1(IServiceProvider,System.Object[])
+  id: CreateInstance``1(IServiceProvider,System.Object[])
   parent: Microsoft.Extensions.DependencyInjection.ActivatorUtilities
   langs:
   - csharp
   - vb
   name: CreateInstance<T>(IServiceProvider, Object[])
   nameWithType: ActivatorUtilities.CreateInstance<T>(IServiceProvider, Object[])
-  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance<T>(System.IServiceProvider, System.Object[])
+  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance<T>(IServiceProvider, System.Object[])
   type: Method
   source:
     remote:
@@ -169,14 +163,13 @@ items:
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Abstractions
   namespace: Microsoft.Extensions.DependencyInjection
-  summary: "\nInstantiate a type with constructor arguments provided directly and/or from an <xref href=\"System.IServiceProvider\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nInstantiate a type with constructor arguments provided directly and/or from an <see cref=\"!:IServiceProvider\"></see>.\n"
   example: []
   syntax:
     content: public static T CreateInstance<T>(IServiceProvider provider, params object[] parameters)
-    content.vb: Public Shared Function CreateInstance(Of T)(provider As IServiceProvider, ParamArray parameters As Object()) As T
     parameters:
     - id: provider
-      type: System.IServiceProvider
+      type: IServiceProvider
       description: The service provider used to resolve dependencies
     - id: parameters
       type: System.Object[]
@@ -187,6 +180,7 @@ items:
     return:
       type: '{T}'
       description: An activated object of type T
+    content.vb: Public Shared Function CreateInstance(Of T)(provider As IServiceProvider, ParamArray parameters As Object()) As T
   overload: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance*
   nameWithType.vb: ActivatorUtilities.CreateInstance(Of T)(IServiceProvider, Object())
   modifiers.csharp:
@@ -195,18 +189,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(Of T)(System.IServiceProvider, System.Object())
+  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance(Of T)(IServiceProvider, System.Object())
   name.vb: CreateInstance(Of T)(IServiceProvider, Object())
-- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(System.IServiceProvider)
-  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(System.IServiceProvider)
-  id: GetServiceOrCreateInstance``1(System.IServiceProvider)
+- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(IServiceProvider)
+  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance``1(IServiceProvider)
+  id: GetServiceOrCreateInstance``1(IServiceProvider)
   parent: Microsoft.Extensions.DependencyInjection.ActivatorUtilities
   langs:
   - csharp
   - vb
   name: GetServiceOrCreateInstance<T>(IServiceProvider)
   nameWithType: ActivatorUtilities.GetServiceOrCreateInstance<T>(IServiceProvider)
-  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance<T>(System.IServiceProvider)
+  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance<T>(IServiceProvider)
   type: Method
   source:
     remote:
@@ -223,10 +217,9 @@ items:
   example: []
   syntax:
     content: public static T GetServiceOrCreateInstance<T>(IServiceProvider provider)
-    content.vb: Public Shared Function GetServiceOrCreateInstance(Of T)(provider As IServiceProvider) As T
     parameters:
     - id: provider
-      type: System.IServiceProvider
+      type: IServiceProvider
       description: The service provider used to resolve dependencies
     typeParameters:
     - id: T
@@ -234,6 +227,7 @@ items:
     return:
       type: '{T}'
       description: The resolved service or created instance
+    content.vb: Public Shared Function GetServiceOrCreateInstance(Of T)(provider As IServiceProvider) As T
   overload: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance*
   nameWithType.vb: ActivatorUtilities.GetServiceOrCreateInstance(Of T)(IServiceProvider)
   modifiers.csharp:
@@ -242,18 +236,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(Of T)(System.IServiceProvider)
+  fullName.vb: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(Of T)(IServiceProvider)
   name.vb: GetServiceOrCreateInstance(Of T)(IServiceProvider)
-- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(System.IServiceProvider,System.Type)
-  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(System.IServiceProvider,System.Type)
-  id: GetServiceOrCreateInstance(System.IServiceProvider,System.Type)
+- uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(IServiceProvider,Type)
+  commentId: M:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(IServiceProvider,Type)
+  id: GetServiceOrCreateInstance(IServiceProvider,Type)
   parent: Microsoft.Extensions.DependencyInjection.ActivatorUtilities
   langs:
   - csharp
   - vb
   name: GetServiceOrCreateInstance(IServiceProvider, Type)
   nameWithType: ActivatorUtilities.GetServiceOrCreateInstance(IServiceProvider, Type)
-  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(System.IServiceProvider, System.Type)
+  fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance(IServiceProvider, Type)
   type: Method
   source:
     remote:
@@ -270,17 +264,17 @@ items:
   example: []
   syntax:
     content: public static object GetServiceOrCreateInstance(IServiceProvider provider, Type type)
-    content.vb: Public Shared Function GetServiceOrCreateInstance(provider As IServiceProvider, type As Type) As Object
     parameters:
     - id: provider
-      type: System.IServiceProvider
+      type: IServiceProvider
       description: The service provider
     - id: type
-      type: System.Type
+      type: Type
       description: The type of the service
     return:
       type: System.Object
       description: The resolved service or created instance
+    content.vb: Public Shared Function GetServiceOrCreateInstance(provider As IServiceProvider, type As Type) As Object
   overload: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetServiceOrCreateInstance*
   modifiers.csharp:
   - public
@@ -302,311 +296,28 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: System.IServiceProvider
-  commentId: T:System.IServiceProvider
-  parent: System
-  isExternal: true
-  name: IServiceProvider
-  nameWithType: IServiceProvider
-  fullName: System.IServiceProvider
 - uid: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance*
   commentId: Overload:Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance
   isExternal: false
   name: CreateInstance
   nameWithType: ActivatorUtilities.CreateInstance
   fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance
-- uid: System.Type
-  commentId: T:System.Type
-  parent: System
+- uid: IServiceProvider
+  isExternal: true
+  name: IServiceProvider
+  nameWithType: IServiceProvider
+  fullName: IServiceProvider
+- uid: Type
   isExternal: true
   name: Type
   nameWithType: Type
-  fullName: System.Type
+  fullName: Type
 - uid: System.Object[]
   name: Object[]
   nameWithType: Object[]
@@ -638,27 +349,27 @@ references:
   name: CreateFactory
   nameWithType: ActivatorUtilities.CreateFactory
   fullName: Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateFactory
-- uid: System.Type[]
+- uid: Type[]
   name: Type[]
   nameWithType: Type[]
-  fullName: System.Type[]
+  fullName: Type[]
   nameWithType.vb: Type()
-  fullName.vb: System.Type()
+  fullName.vb: Type()
   name.vb: Type()
   spec.csharp:
-  - uid: System.Type
+  - uid: Type
     name: Type
     nameWithType: Type
-    fullName: System.Type
+    fullName: Type
     isExternal: true
   - name: '[]'
     nameWithType: '[]'
     fullName: '[]'
   spec.vb:
-  - uid: System.Type
+  - uid: Type
     name: Type
     nameWithType: Type
-    fullName: System.Type
+    fullName: Type
     isExternal: true
   - name: ()
     nameWithType: ()

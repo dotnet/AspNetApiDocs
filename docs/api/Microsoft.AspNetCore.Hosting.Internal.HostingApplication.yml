@@ -5,8 +5,8 @@ items:
   id: HostingApplication
   parent: Microsoft.AspNetCore.Hosting.Internal
   children:
-  - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger,System.Diagnostics.DiagnosticSource,Microsoft.AspNetCore.Http.IHttpContextFactory)
-  - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
+  - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(RequestDelegate,ILogger,DiagnosticSource,IHttpContextFactory)
+  - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(IFeatureCollection)
   - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context,System.Exception)
   - Microsoft.AspNetCore.Hosting.Internal.HostingApplication.ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
   langs:
@@ -31,35 +31,25 @@ items:
     content: 'public class HostingApplication : IHttpApplication<HostingApplication.Context>'
     content.vb: >-
       Public Class HostingApplication
-          Implements IHttpApplication(Of HostingApplication.Context)
+          Inherits IHttpApplication(Of HostingApplication.Context)
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger,System.Diagnostics.DiagnosticSource,Microsoft.AspNetCore.Http.IHttpContextFactory)
-  commentId: M:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger,System.Diagnostics.DiagnosticSource,Microsoft.AspNetCore.Http.IHttpContextFactory)
-  id: '#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILogger,System.Diagnostics.DiagnosticSource,Microsoft.AspNetCore.Http.IHttpContextFactory)'
+- uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(RequestDelegate,ILogger,DiagnosticSource,IHttpContextFactory)
+  commentId: M:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor(RequestDelegate,ILogger,DiagnosticSource,IHttpContextFactory)
+  id: '#ctor(RequestDelegate,ILogger,DiagnosticSource,IHttpContextFactory)'
   parent: Microsoft.AspNetCore.Hosting.Internal.HostingApplication
   langs:
   - csharp
   - vb
   name: HostingApplication(RequestDelegate, ILogger, DiagnosticSource, IHttpContextFactory)
   nameWithType: HostingApplication.HostingApplication(RequestDelegate, ILogger, DiagnosticSource, IHttpContextFactory)
-  fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.HostingApplication(Microsoft.AspNetCore.Http.RequestDelegate, Microsoft.Extensions.Logging.ILogger, System.Diagnostics.DiagnosticSource, Microsoft.AspNetCore.Http.IHttpContextFactory)
+  fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.HostingApplication(RequestDelegate, ILogger, DiagnosticSource, IHttpContextFactory)
   type: Constructor
   source:
     remote:
@@ -74,31 +64,31 @@ items:
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public HostingApplication(RequestDelegate application, ILogger logger, DiagnosticSource diagnosticSource, IHttpContextFactory httpContextFactory)
-    content.vb: Public Sub New(application As RequestDelegate, logger As ILogger, diagnosticSource As DiagnosticSource, httpContextFactory As IHttpContextFactory)
     parameters:
     - id: application
-      type: Microsoft.AspNetCore.Http.RequestDelegate
+      type: RequestDelegate
     - id: logger
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
     - id: diagnosticSource
-      type: System.Diagnostics.DiagnosticSource
+      type: DiagnosticSource
     - id: httpContextFactory
-      type: Microsoft.AspNetCore.Http.IHttpContextFactory
+      type: IHttpContextFactory
+    content.vb: Public Sub New(application As RequestDelegate, logger As ILogger, diagnosticSource As DiagnosticSource, httpContextFactory As IHttpContextFactory)
   overload: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  commentId: M:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  id: CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
+- uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(IFeatureCollection)
+  commentId: M:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(IFeatureCollection)
+  id: CreateContext(IFeatureCollection)
   parent: Microsoft.AspNetCore.Hosting.Internal.HostingApplication
   langs:
   - csharp
   - vb
   name: CreateContext(IFeatureCollection)
   nameWithType: HostingApplication.CreateContext(IFeatureCollection)
-  fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
+  fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext(IFeatureCollection)
   type: Method
   source:
     remote:
@@ -113,15 +103,13 @@ items:
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public HostingApplication.Context CreateContext(IFeatureCollection contextFeatures)
-    content.vb: Public Function CreateContext(contextFeatures As IFeatureCollection) As HostingApplication.Context
     parameters:
     - id: contextFeatures
-      type: Microsoft.AspNetCore.Http.Features.IFeatureCollection
+      type: IFeatureCollection
     return:
       type: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
+    content.vb: Public Function CreateContext(contextFeatures As IFeatureCollection) As HostingApplication.Context
   overload: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext*
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -150,15 +138,13 @@ items:
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public void DisposeContext(HostingApplication.Context context, Exception exception)
-    content.vb: Public Sub DisposeContext(context As HostingApplication.Context, exception As Exception)
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
     - id: exception
       type: System.Exception
+    content.vb: Public Sub DisposeContext(context As HostingApplication.Context, exception As Exception)
   overload: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.DisposeContext*
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context,System.Exception)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -187,15 +173,13 @@ items:
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public Task ProcessRequestAsync(HostingApplication.Context context)
-    content.vb: Public Function ProcessRequestAsync(context As HostingApplication.Context) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function ProcessRequestAsync(context As HostingApplication.Context) As Task
   overload: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.ProcessRequestAsync*
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -214,480 +198,50 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  parent: Microsoft.AspNetCore.Hosting.Server
-  definition: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-  name: IHttpApplication<HostingApplication.Context>
-  nameWithType: IHttpApplication<HostingApplication.Context>
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>
-  nameWithType.vb: IHttpApplication(Of HostingApplication.Context)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
-  name.vb: IHttpApplication(Of HostingApplication.Context)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-  commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-  isExternal: false
-  name: IHttpApplication<TContext>
-  nameWithType: IHttpApplication<TContext>
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>
-  nameWithType.vb: IHttpApplication(Of TContext)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
-  name.vb: IHttpApplication(Of TContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.Server
-  commentId: N:Microsoft.AspNetCore.Hosting.Server
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting.Server
-  nameWithType: Microsoft.AspNetCore.Hosting.Server
-  fullName: Microsoft.AspNetCore.Hosting.Server
 - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.#ctor
   isExternal: false
   name: HostingApplication
   nameWithType: HostingApplication.HostingApplication
   fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.HostingApplication
-- uid: Microsoft.AspNetCore.Http.RequestDelegate
-  commentId: T:Microsoft.AspNetCore.Http.RequestDelegate
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: RequestDelegate
+  isExternal: true
   name: RequestDelegate
   nameWithType: RequestDelegate
-  fullName: Microsoft.AspNetCore.Http.RequestDelegate
-- uid: Microsoft.Extensions.Logging.ILogger
-  commentId: T:Microsoft.Extensions.Logging.ILogger
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+  fullName: RequestDelegate
+- uid: ILogger
+  isExternal: true
   name: ILogger
   nameWithType: ILogger
-  fullName: Microsoft.Extensions.Logging.ILogger
-- uid: System.Diagnostics.DiagnosticSource
-  commentId: T:System.Diagnostics.DiagnosticSource
-  parent: System.Diagnostics
+  fullName: ILogger
+- uid: DiagnosticSource
   isExternal: true
   name: DiagnosticSource
   nameWithType: DiagnosticSource
-  fullName: System.Diagnostics.DiagnosticSource
-- uid: Microsoft.AspNetCore.Http.IHttpContextFactory
-  commentId: T:Microsoft.AspNetCore.Http.IHttpContextFactory
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+  fullName: DiagnosticSource
+- uid: IHttpContextFactory
+  commentId: '!:IHttpContextFactory'
+  isExternal: true
   name: IHttpContextFactory
   nameWithType: IHttpContextFactory
-  fullName: Microsoft.AspNetCore.Http.IHttpContextFactory
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
-- uid: System.Diagnostics
-  commentId: N:System.Diagnostics
-  isExternal: false
-  name: System.Diagnostics
-  nameWithType: System.Diagnostics
-  fullName: System.Diagnostics
+  fullName: IHttpContextFactory
 - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext
   isExternal: false
   name: CreateContext
   nameWithType: HostingApplication.CreateContext
   fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.CreateContext
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  parent: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  definition: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  name: CreateContext(IFeatureCollection)
-  nameWithType: IHttpApplication<HostingApplication.Context>.CreateContext(IFeatureCollection)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  nameWithType.vb: IHttpApplication(Of HostingApplication.Context).CreateContext(IFeatureCollection)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-    name: CreateContext
-    nameWithType: IHttpApplication<HostingApplication.Context>.CreateContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.CreateContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-    name: CreateContext
-    nameWithType: IHttpApplication(Of HostingApplication.Context).CreateContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).CreateContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  commentId: T:Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  parent: Microsoft.AspNetCore.Http.Features
-  isExternal: false
+- uid: IFeatureCollection
+  isExternal: true
   name: IFeatureCollection
   nameWithType: IFeatureCollection
-  fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
+  fullName: IFeatureCollection
 - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
   commentId: T:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
   parent: Microsoft.AspNetCore.Hosting.Internal
@@ -695,113 +249,12 @@ references:
   name: HostingApplication.Context
   nameWithType: HostingApplication.Context
   fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  isExternal: true
-  name: CreateContext(IFeatureCollection)
-  nameWithType: IHttpApplication<TContext>.CreateContext(IFeatureCollection)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  nameWithType.vb: IHttpApplication(Of TContext).CreateContext(IFeatureCollection)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-    name: CreateContext
-    nameWithType: IHttpApplication<TContext>.CreateContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.CreateContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.CreateContext(Microsoft.AspNetCore.Http.Features.IFeatureCollection)
-    name: CreateContext
-    nameWithType: IHttpApplication(Of TContext).CreateContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).CreateContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    name: IFeatureCollection
-    nameWithType: IFeatureCollection
-    fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.Features
-  commentId: N:Microsoft.AspNetCore.Http.Features
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features
-  nameWithType: Microsoft.AspNetCore.Http.Features
-  fullName: Microsoft.AspNetCore.Http.Features
 - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.DisposeContext*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.DisposeContext
   isExternal: false
   name: DisposeContext
   nameWithType: HostingApplication.DisposeContext
   fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.DisposeContext
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context,System.Exception)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context,System.Exception)
-  parent: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  definition: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-  name: DisposeContext(HostingApplication.Context, Exception)
-  nameWithType: IHttpApplication<HostingApplication.Context>.DisposeContext(HostingApplication.Context, Exception)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context, System.Exception)
-  nameWithType.vb: IHttpApplication(Of HostingApplication.Context).DisposeContext(HostingApplication.Context, Exception)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).DisposeContext(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context, System.Exception)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-    name: DisposeContext
-    nameWithType: IHttpApplication<HostingApplication.Context>.DisposeContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.DisposeContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-    name: DisposeContext
-    nameWithType: IHttpApplication(Of HostingApplication.Context).DisposeContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).DisposeContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Exception
   commentId: T:System.Exception
   parent: System
@@ -809,103 +262,12 @@ references:
   name: Exception
   nameWithType: Exception
   fullName: System.Exception
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-  isExternal: true
-  name: DisposeContext(TContext, Exception)
-  nameWithType: IHttpApplication<TContext>.DisposeContext(TContext, Exception)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.DisposeContext(TContext, System.Exception)
-  nameWithType.vb: IHttpApplication(Of TContext).DisposeContext(TContext, Exception)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).DisposeContext(TContext, System.Exception)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-    name: DisposeContext
-    nameWithType: IHttpApplication<TContext>.DisposeContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.DisposeContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.DisposeContext(`0,System.Exception)
-    name: DisposeContext
-    nameWithType: IHttpApplication(Of TContext).DisposeContext
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).DisposeContext
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.ProcessRequestAsync*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.HostingApplication.ProcessRequestAsync
   isExternal: false
   name: ProcessRequestAsync
   nameWithType: HostingApplication.ProcessRequestAsync
   fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.ProcessRequestAsync
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}.ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
-  parent: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context}
-  definition: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-  name: ProcessRequestAsync(HostingApplication.Context)
-  nameWithType: IHttpApplication<HostingApplication.Context>.ProcessRequestAsync(HostingApplication.Context)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
-  nameWithType.vb: IHttpApplication(Of HostingApplication.Context).ProcessRequestAsync(HostingApplication.Context)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).ProcessRequestAsync(Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-    name: ProcessRequestAsync
-    nameWithType: IHttpApplication<HostingApplication.Context>.ProcessRequestAsync
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context>.ProcessRequestAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-    name: ProcessRequestAsync
-    nameWithType: IHttpApplication(Of HostingApplication.Context).ProcessRequestAsync
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context).ProcessRequestAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-    name: HostingApplication.Context
-    nameWithType: HostingApplication.Context
-    fullName: Microsoft.AspNetCore.Hosting.Internal.HostingApplication.Context
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -913,42 +275,6 @@ references:
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-  isExternal: false
-  name: ProcessRequestAsync(TContext)
-  nameWithType: IHttpApplication<TContext>.ProcessRequestAsync(TContext)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.ProcessRequestAsync(TContext)
-  nameWithType.vb: IHttpApplication(Of TContext).ProcessRequestAsync(TContext)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).ProcessRequestAsync(TContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-    name: ProcessRequestAsync
-    nameWithType: IHttpApplication<TContext>.ProcessRequestAsync
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>.ProcessRequestAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1.ProcessRequestAsync(`0)
-    name: ProcessRequestAsync
-    nameWithType: IHttpApplication(Of TContext).ProcessRequestAsync
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext).ProcessRequestAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks
   commentId: N:System.Threading.Tasks
   isExternal: false

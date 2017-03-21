@@ -32,12 +32,12 @@ items:
   example: []
   syntax:
     content: 'public abstract class ValidationAttributeAdapter<TAttribute> : IClientModelValidator where TAttribute : ValidationAttribute'
-    content.vb: >-
-      Public MustInherit Class ValidationAttributeAdapter(Of TAttribute As ValidationAttribute)
-          Implements IClientModelValidator
     typeParameters:
     - id: TAttribute
       description: The type of the attribute.
+    content.vb: >-
+      Public MustInherit Class ValidationAttributeAdapter(Of TAttribute As ValidationAttribute)
+          Implements IClientModelValidator
   inheritance:
   - System.Object
   derivedClasses:
@@ -89,7 +89,6 @@ items:
   example: []
   syntax:
     content: public ValidationAttributeAdapter(TAttribute attribute, IStringLocalizer stringLocalizer)
-    content.vb: Public Sub New(attribute As TAttribute, stringLocalizer As IStringLocalizer)
     parameters:
     - id: attribute
       type: '{TAttribute}'
@@ -97,6 +96,7 @@ items:
     - id: stringLocalizer
       type: Microsoft.Extensions.Localization.IStringLocalizer
       description: The <xref href="Microsoft.Extensions.Localization.IStringLocalizer" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(attribute As TAttribute, stringLocalizer As IStringLocalizer)
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.#ctor*
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).ValidationAttributeAdapter(TAttribute, IStringLocalizer)
   modifiers.csharp:
@@ -130,10 +130,10 @@ items:
   example: []
   syntax:
     content: public TAttribute Attribute { get; }
-    content.vb: Public ReadOnly Property Attribute As TAttribute
     parameters: []
     return:
       type: '{TAttribute}'
+    content.vb: Public ReadOnly Property Attribute As TAttribute
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.Attribute*
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).Attribute
   modifiers.csharp:
@@ -168,10 +168,10 @@ items:
   example: []
   syntax:
     content: public abstract void AddValidation(ClientModelValidationContext context)
-    content.vb: Public MustOverride Sub AddValidation(context As ClientModelValidationContext)
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext
+    content.vb: Public MustOverride Sub AddValidation(context As ClientModelValidationContext)
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.AddValidation*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IClientModelValidator.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
@@ -209,7 +209,6 @@ items:
   example: []
   syntax:
     content: protected static bool MergeAttribute(IDictionary<string, string> attributes, string key, string value)
-    content.vb: Protected Shared Function MergeAttribute(attributes As IDictionary(Of String, String), key As String, value As String) As Boolean
     parameters:
     - id: attributes
       type: System.Collections.Generic.IDictionary{System.String,System.String}
@@ -223,6 +222,7 @@ items:
     return:
       type: System.Boolean
       description: <code>true</code> if an attribute was added, otherwise <code>false</code>.
+    content.vb: Protected Shared Function MergeAttribute(attributes As IDictionary(Of String, String), key As String, value As String) As Boolean
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.MergeAttribute*
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).MergeAttribute(IDictionary(Of String, String), String, String)
   modifiers.csharp:
@@ -259,7 +259,6 @@ items:
   example: []
   syntax:
     content: protected virtual string GetErrorMessage(ModelMetadata modelMetadata, params object[] arguments)
-    content.vb: Protected Overridable Function GetErrorMessage(modelMetadata As ModelMetadata, ParamArray arguments As Object()) As String
     parameters:
     - id: modelMetadata
       type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
@@ -273,6 +272,7 @@ items:
     return:
       type: System.String
       description: Formatted error string.
+    content.vb: Protected Overridable Function GetErrorMessage(modelMetadata As ModelMetadata, ParamArray arguments As Object()) As String
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.GetErrorMessage*
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(ModelMetadata, Object())
   modifiers.csharp:

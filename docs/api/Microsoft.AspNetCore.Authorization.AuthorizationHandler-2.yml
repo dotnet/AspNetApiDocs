@@ -29,14 +29,14 @@ items:
   example: []
   syntax:
     content: 'public abstract class AuthorizationHandler<TRequirement, TResource> : IAuthorizationHandler where TRequirement : IAuthorizationRequirement'
-    content.vb: >-
-      Public MustInherit Class AuthorizationHandler(Of TRequirement As IAuthorizationRequirement, TResource)
-          Implements IAuthorizationHandler
     typeParameters:
     - id: TRequirement
       description: The type of the requirement to evaluate.
     - id: TResource
       description: The type of the resource to evaluate.
+    content.vb: >-
+      Public MustInherit Class AuthorizationHandler(Of TRequirement As IAuthorizationRequirement, TResource)
+          Implements IAuthorizationHandler
   inheritance:
   - System.Object
   implements:
@@ -86,13 +86,13 @@ items:
   example: []
   syntax:
     content: public virtual Task HandleAsync(AuthorizationHandlerContext context)
-    content.vb: Public Overridable Function HandleAsync(context As AuthorizationHandlerContext) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext
       description: The authorization context.
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function HandleAsync(context As AuthorizationHandlerContext) As Task
   overload: Microsoft.AspNetCore.Authorization.AuthorizationHandler`2.HandleAsync*
   implements:
   - Microsoft.AspNetCore.Authorization.IAuthorizationHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)
@@ -130,7 +130,6 @@ items:
   example: []
   syntax:
     content: protected abstract Task HandleRequirementAsync(AuthorizationHandlerContext context, TRequirement requirement, TResource resource)
-    content.vb: Protected MustOverride Function HandleRequirementAsync(context As AuthorizationHandlerContext, requirement As TRequirement, resource As TResource) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext
@@ -143,6 +142,7 @@ items:
       description: The resource to evaluate.
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Protected MustOverride Function HandleRequirementAsync(context As AuthorizationHandlerContext, requirement As TRequirement, resource As TResource) As Task
   overload: Microsoft.AspNetCore.Authorization.AuthorizationHandler`2.HandleRequirementAsync*
   nameWithType.vb: AuthorizationHandler(Of TRequirement, TResource).HandleRequirementAsync(AuthorizationHandlerContext, TRequirement, TResource)
   modifiers.csharp:

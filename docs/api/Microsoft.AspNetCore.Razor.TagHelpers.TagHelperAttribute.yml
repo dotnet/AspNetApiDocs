@@ -7,16 +7,16 @@ items:
   children:
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String)
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object)
-  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
-  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,HtmlAttributeValueStyle)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(IHtmlContentBuilder)
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Equals(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute)
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Equals(System.Object)
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.GetHashCode
-  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(IHtmlContentBuilder)
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value
   - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle
-  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,HtmlEncoder)
   langs:
   - csharp
   - vb
@@ -38,21 +38,12 @@ items:
   summary: "\nAn HTML tag helper attribute.\n"
   example: []
   syntax:
-    content: 'public class TagHelperAttribute : IHtmlContentContainer, IHtmlContent'
+    content: 'public class TagHelperAttribute : IHtmlContentContainer'
     content.vb: >-
       Public Class TagHelperAttribute
-          Implements IHtmlContentContainer, IHtmlContent
+          Inherits IHtmlContentContainer
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Html.IHtmlContentContainer
-  - Microsoft.AspNetCore.Html.IHtmlContent
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -81,15 +72,15 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> with the specified <span class=\"paramref\">name</span>.\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle\" data-throw-if-not-resolved=\"false\"></xref> is set to <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.Minimized\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value\" data-throw-if-not-resolved=\"false\"></xref> to\n<code>null</code>.\n"
+  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> with the specified <span class=\"paramref\">name</span>.\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle\" data-throw-if-not-resolved=\"false\"></xref> is set to <see cref=\"!:HtmlAttributeValueStyle.Minimized\"></see> and <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value\" data-throw-if-not-resolved=\"false\"></xref> to\n<code>null</code>.\n"
   example: []
   syntax:
     content: public TagHelperAttribute(string name)
-    content.vb: Public Sub New(name As String)
     parameters:
     - id: name
       type: System.String
       description: The <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name" data-throw-if-not-resolved="false"></xref> of the attribute.
+    content.vb: Public Sub New(name As String)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor*
   modifiers.csharp:
   - public
@@ -117,11 +108,10 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> with the specified <span class=\"paramref\">name</span>\nand <span class=\"paramref\">value</span>. <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle\" data-throw-if-not-resolved=\"false\"></xref> is set to <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> with the specified <span class=\"paramref\">name</span>\nand <span class=\"paramref\">value</span>. <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle\" data-throw-if-not-resolved=\"false\"></xref> is set to <see cref=\"!:HtmlAttributeValueStyle.DoubleQuotes\"></see>.\n"
   example: []
   syntax:
     content: public TagHelperAttribute(string name, object value)
-    content.vb: Public Sub New(name As String, value As Object)
     parameters:
     - id: name
       type: System.String
@@ -129,21 +119,22 @@ items:
     - id: value
       type: System.Object
       description: The <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value" data-throw-if-not-resolved="false"></xref> of the attribute.
+    content.vb: Public Sub New(name As String, value As Object)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
-  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
-  id: '#ctor(System.String,System.Object,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)'
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,HtmlAttributeValueStyle)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor(System.String,System.Object,HtmlAttributeValueStyle)
+  id: '#ctor(System.String,System.Object,HtmlAttributeValueStyle)'
   parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   langs:
   - csharp
   - vb
   name: TagHelperAttribute(String, Object, HtmlAttributeValueStyle)
   nameWithType: TagHelperAttribute.TagHelperAttribute(String, Object, HtmlAttributeValueStyle)
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.TagHelperAttribute(System.String, System.Object, Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.TagHelperAttribute(System.String, System.Object, HtmlAttributeValueStyle)
   type: Constructor
   source:
     remote:
@@ -158,13 +149,12 @@ items:
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
   summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> with the specified <span class=\"paramref\">name</span>,\n<span class=\"paramref\">value</span> and <span class=\"paramref\">valueStyle</span>.\n"
   remarks: >-
-    If <span class="paramref">valueStyle</span> is <xref href="Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.Minimized" data-throw-if-not-resolved="false"></xref>,
+    If <span class="paramref">valueStyle</span> is <see cref="!:HtmlAttributeValueStyle.Minimized"></see>,
 
     <span class="paramref">value</span> is ignored when this instance is rendered.
   example: []
   syntax:
     content: public TagHelperAttribute(string name, object value, HtmlAttributeValueStyle valueStyle)
-    content.vb: Public Sub New(name As String, value As Object, valueStyle As HtmlAttributeValueStyle)
     parameters:
     - id: name
       type: System.String
@@ -173,8 +163,9 @@ items:
       type: System.Object
       description: The <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value" data-throw-if-not-resolved="false"></xref> of the new instance.
     - id: valueStyle
-      type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
+      type: HtmlAttributeValueStyle
       description: The <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle" data-throw-if-not-resolved="false"></xref> of the new instance.
+    content.vb: Public Sub New(name As String, value As Object, valueStyle As HtmlAttributeValueStyle)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.#ctor*
   modifiers.csharp:
   - public
@@ -206,10 +197,10 @@ items:
   example: []
   syntax:
     content: public string Name { get; }
-    content.vb: Public ReadOnly Property Name As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Name As String
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name*
   modifiers.csharp:
   - public
@@ -243,10 +234,10 @@ items:
   example: []
   syntax:
     content: public object Value { get; }
-    content.vb: Public ReadOnly Property Value As Object
     parameters: []
     return:
       type: System.Object
+    content.vb: Public ReadOnly Property Value As Object
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value*
   modifiers.csharp:
   - public
@@ -280,10 +271,10 @@ items:
   example: []
   syntax:
     content: public HtmlAttributeValueStyle ValueStyle { get; }
-    content.vb: Public ReadOnly Property ValueStyle As HtmlAttributeValueStyle
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
+      type: HtmlAttributeValueStyle
+    content.vb: Public ReadOnly Property ValueStyle As HtmlAttributeValueStyle
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle*
   modifiers.csharp:
   - public
@@ -317,27 +308,27 @@ items:
   example: []
   syntax:
     content: public bool Equals(TagHelperAttribute other)
-    content.vb: Public Function Equals(other As TagHelperAttribute) As Boolean
     parameters:
     - id: other
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
     return:
       type: System.Boolean
+    content.vb: Public Function Equals(other As TagHelperAttribute) As Boolean
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Equals*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  id: WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter,HtmlEncoder)
+  id: WriteTo(System.IO.TextWriter,HtmlEncoder)
   parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   langs:
   - csharp
   - vb
   name: WriteTo(TextWriter, HtmlEncoder)
   nameWithType: TagHelperAttribute.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo(System.IO.TextWriter, HtmlEncoder)
   type: Method
   source:
     remote:
@@ -350,35 +341,30 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nWrites the content by encoding it with the specified <span class=\"paramref\">encoder</span>\nto the specified <span class=\"paramref\">writer</span>.\n"
   example: []
   syntax:
     content: public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-    content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
     parameters:
     - id: writer
       type: System.IO.TextWriter
-      description: The <xref href="System.IO.TextWriter" data-throw-if-not-resolved="false"></xref> to which the content is written.
     - id: encoder
-      type: System.Text.Encodings.Web.HtmlEncoder
-      description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref> which encodes the content to be written.
+      type: HtmlEncoder
+    content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo*
-  implements:
-  - Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  id: CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(IHtmlContentBuilder)
+  id: CopyTo(IHtmlContentBuilder)
   parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   langs:
   - csharp
   - vb
   name: CopyTo(IHtmlContentBuilder)
   nameWithType: TagHelperAttribute.CopyTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo(IHtmlContentBuilder)
   type: Method
   source:
     remote:
@@ -391,31 +377,28 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nCopies the contained content of this <xref href=\"Microsoft.AspNetCore.Html.IHtmlContentContainer\" data-throw-if-not-resolved=\"false\"></xref> into <span class=\"paramref\">builder</span>.\n"
   example: []
   syntax:
     content: public void CopyTo(IHtmlContentBuilder destination)
-    content.vb: Public Sub CopyTo(destination As IHtmlContentBuilder)
     parameters:
     - id: destination
-      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      type: IHtmlContentBuilder
+    content.vb: Public Sub CopyTo(destination As IHtmlContentBuilder)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo*
-  implements:
-  - Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  id: MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(IHtmlContentBuilder)
+  id: MoveTo(IHtmlContentBuilder)
   parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   langs:
   - csharp
   - vb
   name: MoveTo(IHtmlContentBuilder)
   nameWithType: TagHelperAttribute.MoveTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo(IHtmlContentBuilder)
   type: Method
   source:
     remote:
@@ -428,17 +411,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\n<p>\nMoves the contained content of this <xref href=\"Microsoft.AspNetCore.Html.IHtmlContentContainer\" data-throw-if-not-resolved=\"false\"></xref> into <span class=\"paramref\">builder</span>.\n</p>\n<p>\nAfter <xref href=\"Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)\" data-throw-if-not-resolved=\"false\"></xref> is called, this <xref href=\"Microsoft.AspNetCore.Html.IHtmlContentContainer\" data-throw-if-not-resolved=\"false\"></xref> instance should be left\nin an empty state.\n</p>\n"
   example: []
   syntax:
     content: public void MoveTo(IHtmlContentBuilder destination)
-    content.vb: Public Sub MoveTo(destination As IHtmlContentBuilder)
     parameters:
     - id: destination
-      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      type: IHtmlContentBuilder
+    content.vb: Public Sub MoveTo(destination As IHtmlContentBuilder)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo*
-  implements:
-  - Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -468,13 +448,12 @@ items:
   example: []
   syntax:
     content: public override bool Equals(object obj)
-    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
     parameters:
     - id: obj
       type: System.Object
     return:
       type: System.Boolean
-  overridden: System.Object.Equals(System.Object)
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Equals*
   modifiers.csharp:
   - public
@@ -507,10 +486,9 @@ items:
   example: []
   syntax:
     content: public override int GetHashCode()
-    content.vb: Public Overrides Function GetHashCode As Integer
     return:
       type: System.Int32
-  overridden: System.Object.GetHashCode
+    content.vb: Public Overrides Function GetHashCode As Integer
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.GetHashCode*
   modifiers.csharp:
   - public
@@ -532,239 +510,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer
-  commentId: T:Microsoft.AspNetCore.Html.IHtmlContentContainer
-  parent: Microsoft.AspNetCore.Html
-  isExternal: false
-  name: IHtmlContentContainer
-  nameWithType: IHtmlContentContainer
-  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer
-- uid: Microsoft.AspNetCore.Html.IHtmlContent
-  commentId: T:Microsoft.AspNetCore.Html.IHtmlContent
-  parent: Microsoft.AspNetCore.Html
-  isExternal: false
-  name: IHtmlContent
-  nameWithType: IHtmlContent
-  fullName: Microsoft.AspNetCore.Html.IHtmlContent
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Html
-  commentId: N:Microsoft.AspNetCore.Html
-  isExternal: false
-  name: Microsoft.AspNetCore.Html
-  nameWithType: Microsoft.AspNetCore.Html
-  fullName: Microsoft.AspNetCore.Html
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
   parent: Microsoft.AspNetCore.Razor.TagHelpers
@@ -774,8 +525,6 @@ references:
   fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle
   commentId: P:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.ValueStyle
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.Minimized
-  commentId: F:Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.Minimized
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value
   commentId: P:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Value
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name
@@ -793,15 +542,11 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes
-  commentId: F:Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
-  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
-  parent: Microsoft.AspNetCore.Razor.TagHelpers
-  isExternal: false
+- uid: HtmlAttributeValueStyle
+  isExternal: true
   name: HtmlAttributeValueStyle
   nameWithType: HtmlAttributeValueStyle
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
+  fullName: HtmlAttributeValueStyle
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name*
   commentId: Overload:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.Name
   isExternal: false
@@ -839,61 +584,6 @@ references:
   name: WriteTo
   nameWithType: TagHelperAttribute.WriteTo
   fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.WriteTo
-- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  parent: Microsoft.AspNetCore.Html.IHtmlContent
-  isExternal: true
-  name: WriteTo(TextWriter, HtmlEncoder)
-  nameWithType: IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-    name: WriteTo
-    nameWithType: IHtmlContent.WriteTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.TextWriter
-    name: TextWriter
-    nameWithType: TextWriter
-    fullName: System.IO.TextWriter
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
-    name: HtmlEncoder
-    nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-    name: WriteTo
-    nameWithType: IHtmlContent.WriteTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.TextWriter
-    name: TextWriter
-    nameWithType: TextWriter
-    fullName: System.IO.TextWriter
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
-    name: HtmlEncoder
-    nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IO.TextWriter
   commentId: T:System.IO.TextWriter
   parent: System.IO
@@ -901,190 +591,34 @@ references:
   name: TextWriter
   nameWithType: TextWriter
   fullName: System.IO.TextWriter
-- uid: System.Text.Encodings.Web.HtmlEncoder
-  commentId: T:System.Text.Encodings.Web.HtmlEncoder
-  parent: System.Text.Encodings.Web
+- uid: HtmlEncoder
   isExternal: true
   name: HtmlEncoder
   nameWithType: HtmlEncoder
-  fullName: System.Text.Encodings.Web.HtmlEncoder
+  fullName: HtmlEncoder
 - uid: System.IO
   commentId: N:System.IO
   isExternal: false
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
-- uid: System.Text.Encodings.Web
-  commentId: N:System.Text.Encodings.Web
-  isExternal: false
-  name: System.Text.Encodings.Web
-  nameWithType: System.Text.Encodings.Web
-  fullName: System.Text.Encodings.Web
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo*
   commentId: Overload:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo
   isExternal: false
   name: CopyTo
   nameWithType: TagHelperAttribute.CopyTo
   fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.CopyTo
-- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  parent: Microsoft.AspNetCore.Html.IHtmlContentContainer
-  isExternal: false
-  name: CopyTo(IHtmlContentBuilder)
-  nameWithType: IHtmlContentContainer.CopyTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-    name: CopyTo
-    nameWithType: IHtmlContentContainer.CopyTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-    name: IHtmlContentBuilder
-    nameWithType: IHtmlContentBuilder
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-    name: CopyTo
-    nameWithType: IHtmlContentContainer.CopyTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-    name: IHtmlContentBuilder
-    nameWithType: IHtmlContentBuilder
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  commentId: T:Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  parent: Microsoft.AspNetCore.Html
-  isExternal: false
+- uid: IHtmlContentBuilder
+  isExternal: true
   name: IHtmlContentBuilder
   nameWithType: IHtmlContentBuilder
-  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  fullName: IHtmlContentBuilder
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo*
   commentId: Overload:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo
   isExternal: false
   name: MoveTo
   nameWithType: TagHelperAttribute.MoveTo
   fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.MoveTo
-- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  parent: Microsoft.AspNetCore.Html.IHtmlContentContainer
-  isExternal: false
-  name: MoveTo(IHtmlContentBuilder)
-  nameWithType: IHtmlContentContainer.MoveTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-    name: MoveTo
-    nameWithType: IHtmlContentContainer.MoveTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-    name: IHtmlContentBuilder
-    nameWithType: IHtmlContentBuilder
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
-    name: MoveTo
-    nameWithType: IHtmlContentContainer.MoveTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-    name: IHtmlContentBuilder
-    nameWithType: IHtmlContentBuilder
-    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.GetHashCode*
   commentId: Overload:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute.GetHashCode
   isExternal: false

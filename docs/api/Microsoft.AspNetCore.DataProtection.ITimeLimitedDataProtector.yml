@@ -30,18 +30,14 @@ items:
   remarks: "\nIt is intended that payload lifetimes be somewhat short. Payloads protected\nvia this mechanism are not intended for long-term persistence (e.g., longer\nthan a few weeks).\n"
   example: []
   syntax:
-    content: 'public interface ITimeLimitedDataProtector : IDataProtector, IDataProtectionProvider'
+    content: 'public interface ITimeLimitedDataProtector : IDataProtector'
     content.vb: >-
       Public Interface ITimeLimitedDataProtector
           Inherits IDataProtector
-  inheritedMembers:
-  - Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-  - Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
   extensionMethods:
   - Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(System.Byte[],System.TimeSpan)
   - Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(System.String,System.DateTimeOffset)
   - Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(System.String,System.TimeSpan)
-  - Microsoft.AspNetCore.DataProtection.IDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
   - Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Unprotect(System.String,System.DateTimeOffset@)
   modifiers.csharp:
   - public
@@ -76,7 +72,6 @@ items:
   example: []
   syntax:
     content: ITimeLimitedDataProtector CreateProtector(string purpose)
-    content.vb: Function CreateProtector(purpose As String) As ITimeLimitedDataProtector
     parameters:
     - id: purpose
       type: System.String
@@ -84,6 +79,7 @@ items:
     return:
       type: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector
       description: An <xref href="Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" data-throw-if-not-resolved="false"></xref> tied to the provided purpose.
+    content.vb: Function CreateProtector(purpose As String) As ITimeLimitedDataProtector
   overload: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.CreateProtector*
 - uid: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Protect(System.Byte[],System.DateTimeOffset)
   commentId: M:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Protect(System.Byte[],System.DateTimeOffset)
@@ -111,7 +107,6 @@ items:
   example: []
   syntax:
     content: byte[] Protect(byte[] plaintext, DateTimeOffset expiration)
-    content.vb: Function Protect(plaintext As Byte(), expiration As DateTimeOffset) As Byte()
     parameters:
     - id: plaintext
       type: System.Byte[]
@@ -122,6 +117,7 @@ items:
     return:
       type: System.Byte[]
       description: The protected form of the plaintext data.
+    content.vb: Function Protect(plaintext As Byte(), expiration As DateTimeOffset) As Byte()
   overload: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Protect*
   nameWithType.vb: ITimeLimitedDataProtector.Protect(Byte(), DateTimeOffset)
   fullName.vb: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Protect(System.Byte(), System.DateTimeOffset)
@@ -152,7 +148,6 @@ items:
   example: []
   syntax:
     content: byte[] Unprotect(byte[] protectedData, out DateTimeOffset expiration)
-    content.vb: Function Unprotect(protectedData As Byte(), ByRef expiration As DateTimeOffset) As Byte()
     parameters:
     - id: protectedData
       type: System.Byte[]
@@ -166,6 +161,7 @@ items:
     return:
       type: System.Byte[]
       description: The plaintext form of the protected data.
+    content.vb: Function Unprotect(protectedData As Byte(), ByRef expiration As DateTimeOffset) As Byte()
   overload: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Unprotect*
   exceptions:
   - type: System.Security.Cryptography.CryptographicException
@@ -181,102 +177,6 @@ references:
   name: Microsoft.AspNetCore.DataProtection
   nameWithType: Microsoft.AspNetCore.DataProtection
   fullName: Microsoft.AspNetCore.DataProtection
-- uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-  commentId: M:Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-  parent: Microsoft.AspNetCore.DataProtection.IDataProtector
-  isExternal: true
-  name: Protect(Byte[])
-  nameWithType: IDataProtector.Protect(Byte[])
-  fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-  nameWithType.vb: IDataProtector.Protect(Byte())
-  fullName.vb: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte())
-  name.vb: Protect(Byte())
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-    name: Protect
-    nameWithType: IDataProtector.Protect
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])
-    name: Protect
-    nameWithType: IDataProtector.Protect
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Protect
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
-  commentId: M:Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
-  parent: Microsoft.AspNetCore.DataProtection.IDataProtector
-  isExternal: true
-  name: Unprotect(Byte[])
-  nameWithType: IDataProtector.Unprotect(Byte[])
-  fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
-  nameWithType.vb: IDataProtector.Unprotect(Byte())
-  fullName.vb: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte())
-  name.vb: Unprotect(Byte())
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
-    name: Unprotect
-    nameWithType: IDataProtector.Unprotect
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])
-    name: Unprotect
-    nameWithType: IDataProtector.Unprotect
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(System.Byte[],System.TimeSpan)
   commentId: M:Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector,System.Byte[],System.TimeSpan)
   parent: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions
@@ -451,35 +351,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.DataProtection.IDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-  commentId: M:Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-  parent: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions
-  definition: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-  name: ToTimeLimitedDataProtector()
-  nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector()
-  fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    name: ToTimeLimitedDataProtector
-    nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    name: ToTimeLimitedDataProtector
-    nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Unprotect(System.String,System.DateTimeOffset@)
   commentId: M:Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Unprotect(Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector,System.String,System.DateTimeOffset@)
   parent: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions
@@ -535,13 +406,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.DataProtection.IDataProtector
-  commentId: T:Microsoft.AspNetCore.DataProtection.IDataProtector
-  parent: Microsoft.AspNetCore.DataProtection
-  isExternal: false
-  name: IDataProtector
-  nameWithType: IDataProtector
-  fullName: Microsoft.AspNetCore.DataProtection.IDataProtector
 - uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector,System.Byte[],System.TimeSpan)
   commentId: M:Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.Protect(Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector,System.Byte[],System.TimeSpan)
   isExternal: true
@@ -759,42 +623,6 @@ references:
     nameWithType: TimeSpan
     fullName: System.TimeSpan
     isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-  commentId: M:Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-  isExternal: false
-  name: ToTimeLimitedDataProtector(IDataProtector)
-  nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(IDataProtector)
-  fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-    name: ToTimeLimitedDataProtector
-    nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector
-    name: IDataProtector
-    nameWithType: IDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector(Microsoft.AspNetCore.DataProtection.IDataProtector)
-    name: ToTimeLimitedDataProtector
-    nameWithType: DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.DataProtectionAdvancedExtensions.ToTimeLimitedDataProtector
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.DataProtection.IDataProtector
-    name: IDataProtector
-    nameWithType: IDataProtector
-    fullName: Microsoft.AspNetCore.DataProtection.IDataProtector
   - name: )
     nameWithType: )
     fullName: )

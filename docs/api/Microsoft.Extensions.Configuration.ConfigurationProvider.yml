@@ -7,7 +7,7 @@ items:
   children:
   - Microsoft.Extensions.Configuration.ConfigurationProvider.#ctor
   - Microsoft.Extensions.Configuration.ConfigurationProvider.Data
-  - Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
+  - Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(IEnumerable{System.String},System.String)
   - Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken
   - Microsoft.Extensions.Configuration.ConfigurationProvider.Load
   - Microsoft.Extensions.Configuration.ConfigurationProvider.OnReload
@@ -31,30 +31,17 @@ items:
   assemblies:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
-  summary: "\nBase helper class for implementing an <xref href=\"Microsoft.Extensions.Configuration.IConfigurationProvider\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: "\nBase helper class for implementing an <see cref=\"!:IConfigurationProvider\"></see>\n"
   example: []
   syntax:
     content: 'public abstract class ConfigurationProvider : IConfigurationProvider'
     content.vb: >-
       Public MustInherit Class ConfigurationProvider
-          Implements IConfigurationProvider
+          Inherits IConfigurationProvider
   inheritance:
   - System.Object
   derivedClasses:
-  - Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider
-  - Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider
-  - Microsoft.Extensions.Configuration.FileConfigurationProvider
   - Microsoft.Extensions.Configuration.Memory.MemoryConfigurationProvider
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - abstract
@@ -85,7 +72,7 @@ items:
   assemblies:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
-  summary: "\nInitializes a new <xref href=\"Microsoft.Extensions.Configuration.IConfigurationProvider\" data-throw-if-not-resolved=\"false\"></xref>\n"
+  summary: "\nInitializes a new <see cref=\"!:IConfigurationProvider\"></see>\n"
   example: []
   syntax:
     content: protected ConfigurationProvider()
@@ -121,10 +108,10 @@ items:
   example: []
   syntax:
     content: protected IDictionary<string, string> Data { get; set; }
-    content.vb: Protected Property Data As IDictionary(Of String, String)
     parameters: []
     return:
-      type: System.Collections.Generic.IDictionary{System.String,System.String}
+      type: IDictionary{System.String,System.String}
+    content.vb: Protected Property Data As IDictionary(Of String, String)
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.Data*
   modifiers.csharp:
   - protected
@@ -158,7 +145,6 @@ items:
   example: []
   syntax:
     content: public virtual bool TryGet(string key, out string value)
-    content.vb: Public Overridable Function TryGet(key As String, ByRef value As String) As Boolean
     parameters:
     - id: key
       type: System.String
@@ -169,9 +155,8 @@ items:
     return:
       type: System.Boolean
       description: True if key has a value, false otherwise.
+    content.vb: Public Overridable Function TryGet(key As String, ByRef value As String) As Boolean
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.TryGet*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)
   nameWithType.vb: ConfigurationProvider.TryGet(String, ByRef String)
   modifiers.csharp:
   - public
@@ -207,7 +192,6 @@ items:
   example: []
   syntax:
     content: public virtual void Set(string key, string value)
-    content.vb: Public Overridable Sub Set(key As String, value As String)
     parameters:
     - id: key
       type: System.String
@@ -215,9 +199,8 @@ items:
     - id: value
       type: System.String
       description: The value to set.
+    content.vb: Public Overridable Sub Set(key As String, value As String)
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.Set*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String,System.String)
   modifiers.csharp:
   - public
   - virtual
@@ -252,24 +235,22 @@ items:
     content: public virtual void Load()
     content.vb: Public Overridable Sub Load
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.Load*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider.Load
   modifiers.csharp:
   - public
   - virtual
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-  id: GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
+- uid: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(IEnumerable{System.String},System.String)
+  commentId: M:Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(IEnumerable{System.String},System.String)
+  id: GetChildKeys(IEnumerable{System.String},System.String)
   parent: Microsoft.Extensions.Configuration.ConfigurationProvider
   langs:
   - csharp
   - vb
   name: GetChildKeys(IEnumerable<String>, String)
   nameWithType: ConfigurationProvider.GetChildKeys(IEnumerable<String>, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable<System.String>, System.String)
+  fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(IEnumerable<System.String>, System.String)
   type: Method
   source:
     remote:
@@ -286,20 +267,18 @@ items:
   example: []
   syntax:
     content: public virtual IEnumerable<string> GetChildKeys(IEnumerable<string> earlierKeys, string parentPath)
-    content.vb: Public Overridable Function GetChildKeys(earlierKeys As IEnumerable(Of String), parentPath As String) As IEnumerable(Of String)
     parameters:
     - id: earlierKeys
-      type: System.Collections.Generic.IEnumerable{System.String}
+      type: IEnumerable{System.String}
       description: The earlier keys that other providers contain.
     - id: parentPath
       type: System.String
       description: The path for the parent IConfiguration.
     return:
-      type: System.Collections.Generic.IEnumerable{System.String}
+      type: IEnumerable{System.String}
       description: The list of keys for this provider.
+    content.vb: Public Overridable Function GetChildKeys(earlierKeys As IEnumerable(Of String), parentPath As String) As IEnumerable(Of String)
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
   nameWithType.vb: ConfigurationProvider.GetChildKeys(IEnumerable(Of String), String)
   modifiers.csharp:
   - public
@@ -307,7 +286,7 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable(Of System.String), System.String)
+  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys(IEnumerable(Of System.String), System.String)
   name.vb: GetChildKeys(IEnumerable(Of String), String)
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken
   commentId: M:Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken
@@ -331,17 +310,15 @@ items:
   assemblies:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
-  summary: "\nReturns a <xref href=\"Microsoft.Extensions.Primitives.IChangeToken\" data-throw-if-not-resolved=\"false\"></xref> that can be used to listen when this provider is reloaded.\n"
+  summary: "\nReturns a <see cref=\"!:IChangeToken\"></see> that can be used to listen when this provider is reloaded.\n"
   example: []
   syntax:
     content: public IChangeToken GetReloadToken()
-    content.vb: Public Function GetReloadToken As IChangeToken
     return:
-      type: Microsoft.Extensions.Primitives.IChangeToken
+      type: IChangeToken
       description: ''
+    content.vb: Public Function GetReloadToken As IChangeToken
   overload: Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -379,13 +356,6 @@ items:
   modifiers.vb:
   - Protected
 references:
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider
-  commentId: T:Microsoft.Extensions.Configuration.IConfigurationProvider
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
-  name: IConfigurationProvider
-  nameWithType: IConfigurationProvider
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider
 - uid: Microsoft.Extensions.Configuration
   commentId: N:Microsoft.Extensions.Configuration
   isExternal: false
@@ -399,285 +369,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -696,21 +387,20 @@ references:
   name: Data
   nameWithType: ConfigurationProvider.Data
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.Data
-- uid: System.Collections.Generic.IDictionary{System.String,System.String}
-  commentId: T:System.Collections.Generic.IDictionary{System.String,System.String}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IDictionary`2
+- uid: IDictionary{System.String,System.String}
+  commentId: '!:IDictionary{System.String,System.String}'
+  definition: IDictionary`2
   name: IDictionary<String, String>
   nameWithType: IDictionary<String, String>
-  fullName: System.Collections.Generic.IDictionary<System.String, System.String>
+  fullName: IDictionary<System.String, System.String>
   nameWithType.vb: IDictionary(Of String, String)
-  fullName.vb: System.Collections.Generic.IDictionary(Of System.String, System.String)
+  fullName.vb: IDictionary(Of System.String, System.String)
   name.vb: IDictionary(Of String, String)
   spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: <
     nameWithType: <
@@ -732,10 +422,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -756,124 +446,62 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IDictionary`2
-  commentId: T:System.Collections.Generic.IDictionary`2
+- uid: IDictionary`2
   isExternal: true
-  name: IDictionary<TKey, TValue>
-  nameWithType: IDictionary<TKey, TValue>
-  fullName: System.Collections.Generic.IDictionary<TKey, TValue>
-  nameWithType.vb: IDictionary(Of TKey, TValue)
-  fullName.vb: System.Collections.Generic.IDictionary(Of TKey, TValue)
-  name.vb: IDictionary(Of TKey, TValue)
+  name: IDictionary<, >
+  nameWithType: IDictionary<, >
+  fullName: IDictionary<, >
+  nameWithType.vb: IDictionary(Of , )
+  fullName.vb: IDictionary(Of , )
+  name.vb: IDictionary(Of , )
   spec.csharp:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IDictionary`2
+  - uid: IDictionary`2
     name: IDictionary
     nameWithType: IDictionary
-    fullName: System.Collections.Generic.IDictionary
+    fullName: IDictionary
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TKey
-    nameWithType: TKey
-    fullName: TKey
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TValue
-    nameWithType: TValue
-    fullName: TValue
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.TryGet*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationProvider.TryGet
   isExternal: false
   name: TryGet
   nameWithType: ConfigurationProvider.TryGet
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.TryGet
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)
-  commentId: M:Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)
-  parent: Microsoft.Extensions.Configuration.IConfigurationProvider
-  isExternal: true
-  name: TryGet(String, String)
-  nameWithType: IConfigurationProvider.TryGet(String, String)
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String, System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)
-    name: TryGet
-    nameWithType: IConfigurationProvider.TryGet
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet(System.String,System.String@)
-    name: TryGet
-    nameWithType: IConfigurationProvider.TryGet
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.TryGet
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -894,197 +522,32 @@ references:
   name: Set
   nameWithType: ConfigurationProvider.Set
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.Set
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String,System.String)
-  parent: Microsoft.Extensions.Configuration.IConfigurationProvider
-  isExternal: true
-  name: Set(String, String)
-  nameWithType: IConfigurationProvider.Set(String, String)
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String, System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String,System.String)
-    name: Set
-    nameWithType: IConfigurationProvider.Set
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Set
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Set(System.String,System.String)
-    name: Set
-    nameWithType: IConfigurationProvider.Set
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Set
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.Load*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationProvider.Load
   isExternal: false
   name: Load
   nameWithType: ConfigurationProvider.Load
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.Load
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-  commentId: M:Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-  parent: Microsoft.Extensions.Configuration.IConfigurationProvider
-  isExternal: false
-  name: Load()
-  nameWithType: IConfigurationProvider.Load()
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Load()
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-    name: Load
-    nameWithType: IConfigurationProvider.Load
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-    name: Load
-    nameWithType: IConfigurationProvider.Load
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.Load
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys
   isExternal: false
   name: GetChildKeys
   nameWithType: ConfigurationProvider.GetChildKeys
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.GetChildKeys
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-  commentId: M:Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-  parent: Microsoft.Extensions.Configuration.IConfigurationProvider
-  isExternal: true
-  name: GetChildKeys(IEnumerable<String>, String)
-  nameWithType: IConfigurationProvider.GetChildKeys(IEnumerable<String>, String)
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable<System.String>, System.String)
-  nameWithType.vb: IConfigurationProvider.GetChildKeys(IEnumerable(Of String), String)
-  fullName.vb: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable(Of System.String), System.String)
-  name.vb: GetChildKeys(IEnumerable(Of String), String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-    name: GetChildKeys
-    nameWithType: IConfigurationProvider.GetChildKeys
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys(System.Collections.Generic.IEnumerable{System.String},System.String)
-    name: GetChildKeys
-    nameWithType: IConfigurationProvider.GetChildKeys
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetChildKeys
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Collections.Generic.IEnumerable`1
-    name: IEnumerable
-    nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic.IEnumerable{System.String}
-  commentId: T:System.Collections.Generic.IEnumerable{System.String}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable{System.String}
+  commentId: '!:IEnumerable{System.String}'
+  definition: IEnumerable`1
   name: IEnumerable<String>
   nameWithType: IEnumerable<String>
-  fullName: System.Collections.Generic.IEnumerable<System.String>
+  fullName: IEnumerable<System.String>
   nameWithType.vb: IEnumerable(Of String)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of System.String)
+  fullName.vb: IEnumerable(Of System.String)
   name.vb: IEnumerable(Of String)
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
@@ -1098,10 +561,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1114,93 +577,55 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IEnumerable`1
-  commentId: T:System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable`1
   isExternal: true
-  name: IEnumerable<T>
-  nameWithType: IEnumerable<T>
-  fullName: System.Collections.Generic.IEnumerable<T>
-  nameWithType.vb: IEnumerable(Of T)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
-  name.vb: IEnumerable(Of T)
+  name: IEnumerable<>
+  nameWithType: IEnumerable<>
+  fullName: IEnumerable<>
+  nameWithType.vb: IEnumerable(Of )
+  fullName.vb: IEnumerable(Of )
+  name.vb: IEnumerable(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Primitives.IChangeToken
-  commentId: T:Microsoft.Extensions.Primitives.IChangeToken
-  parent: Microsoft.Extensions.Primitives
-  isExternal: false
-  name: IChangeToken
-  nameWithType: IChangeToken
-  fullName: Microsoft.Extensions.Primitives.IChangeToken
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken
   isExternal: false
   name: GetReloadToken
   nameWithType: ConfigurationProvider.GetReloadToken
   fullName: Microsoft.Extensions.Configuration.ConfigurationProvider.GetReloadToken
-- uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-  commentId: M:Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-  parent: Microsoft.Extensions.Configuration.IConfigurationProvider
-  isExternal: false
-  name: GetReloadToken()
-  nameWithType: IConfigurationProvider.GetReloadToken()
-  fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken()
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-    name: GetReloadToken
-    nameWithType: IConfigurationProvider.GetReloadToken
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-    name: GetReloadToken
-    nameWithType: IConfigurationProvider.GetReloadToken
-    fullName: Microsoft.Extensions.Configuration.IConfigurationProvider.GetReloadToken
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Primitives
-  commentId: N:Microsoft.Extensions.Primitives
-  isExternal: false
-  name: Microsoft.Extensions.Primitives
-  nameWithType: Microsoft.Extensions.Primitives
-  fullName: Microsoft.Extensions.Primitives
+- uid: IChangeToken
+  isExternal: true
+  name: IChangeToken
+  nameWithType: IChangeToken
+  fullName: IChangeToken
 - uid: Microsoft.Extensions.Configuration.ConfigurationProvider.OnReload*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationProvider.OnReload
   isExternal: false

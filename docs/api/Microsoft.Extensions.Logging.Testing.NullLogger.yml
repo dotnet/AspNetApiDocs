@@ -7,8 +7,8 @@ items:
   children:
   - Microsoft.Extensions.Logging.Testing.NullLogger.BeginScope``1(``0)
   - Microsoft.Extensions.Logging.Testing.NullLogger.Instance
-  - Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  - Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+  - Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(LogLevel)
+  - Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(LogLevel,EventId,``0,Exception,Func{``0,Exception,System.String})
   langs:
   - csharp
   - vb
@@ -31,19 +31,9 @@ items:
     content: 'public class NullLogger : ILogger'
     content.vb: >-
       Public Class NullLogger
-          Implements ILogger
+          Inherits ILogger
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Logging.ILogger
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
@@ -74,9 +64,9 @@ items:
   namespace: Microsoft.Extensions.Logging.Testing
   syntax:
     content: public static readonly NullLogger Instance
-    content.vb: Public Shared ReadOnly Instance As NullLogger
     return:
       type: Microsoft.Extensions.Logging.Testing.NullLogger
+    content.vb: Public Shared ReadOnly Instance As NullLogger
   modifiers.csharp:
   - public
   - static
@@ -109,17 +99,15 @@ items:
   namespace: Microsoft.Extensions.Logging.Testing
   syntax:
     content: public IDisposable BeginScope<TState>(TState state)
-    content.vb: Public Function BeginScope(Of TState)(state As TState) As IDisposable
     parameters:
     - id: state
       type: '{TState}'
     typeParameters:
     - id: TState
     return:
-      type: System.IDisposable
+      type: IDisposable
+    content.vb: Public Function BeginScope(Of TState)(state As TState) As IDisposable
   overload: Microsoft.Extensions.Logging.Testing.NullLogger.BeginScope*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.BeginScope``1({TState})
   nameWithType.vb: NullLogger.BeginScope(Of TState)(TState)
   modifiers.csharp:
   - public
@@ -127,16 +115,16 @@ items:
   - Public
   fullName.vb: Microsoft.Extensions.Logging.Testing.NullLogger.BeginScope(Of TState)(TState)
   name.vb: BeginScope(Of TState)(TState)
-- uid: Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  commentId: M:Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  id: Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+- uid: Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(LogLevel,EventId,``0,Exception,Func{``0,Exception,System.String})
+  commentId: M:Microsoft.Extensions.Logging.Testing.NullLogger.Log``1(LogLevel,EventId,``0,Exception,Func{``0,Exception,System.String})
+  id: Log``1(LogLevel,EventId,``0,Exception,Func{``0,Exception,System.String})
   parent: Microsoft.Extensions.Logging.Testing.NullLogger
   langs:
   - csharp
   - vb
   name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
   nameWithType: NullLogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.Extensions.Logging.Testing.NullLogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
+  fullName: Microsoft.Extensions.Logging.Testing.NullLogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, System.String>)
   type: Method
   source:
     remote:
@@ -151,40 +139,38 @@ items:
   namespace: Microsoft.Extensions.Logging.Testing
   syntax:
     content: public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-    content.vb: Public Sub Log(Of TState)(logLevel As LogLevel, eventId As EventId, state As TState, exception As Exception, formatter As Func(Of TState, Exception, String))
     parameters:
     - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+      type: LogLevel
     - id: eventId
-      type: Microsoft.Extensions.Logging.EventId
+      type: EventId
     - id: state
       type: '{TState}'
     - id: exception
-      type: System.Exception
+      type: Exception
     - id: formatter
-      type: System.Func{{TState},System.Exception,System.String}
+      type: Func{{TState},Exception,System.String}
     typeParameters:
     - id: TState
+    content.vb: Public Sub Log(Of TState)(logLevel As LogLevel, eventId As EventId, state As TState, exception As Exception, formatter As Func(Of TState, Exception, String))
   overload: Microsoft.Extensions.Logging.Testing.NullLogger.Log*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,{TState},System.Exception,System.Func{{TState},System.Exception,System.String})
   nameWithType.vb: NullLogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Logging.Testing.NullLogger.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
+  fullName.vb: Microsoft.Extensions.Logging.Testing.NullLogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, System.String))
   name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-- uid: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  id: IsEnabled(Microsoft.Extensions.Logging.LogLevel)
+- uid: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(LogLevel)
+  commentId: M:Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(LogLevel)
+  id: IsEnabled(LogLevel)
   parent: Microsoft.Extensions.Logging.Testing.NullLogger
   langs:
   - csharp
   - vb
   name: IsEnabled(LogLevel)
   nameWithType: NullLogger.IsEnabled(LogLevel)
-  fullName: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
+  fullName: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled(LogLevel)
   type: Method
   source:
     remote:
@@ -199,15 +185,13 @@ items:
   namespace: Microsoft.Extensions.Logging.Testing
   syntax:
     content: public bool IsEnabled(LogLevel logLevel)
-    content.vb: Public Function IsEnabled(logLevel As LogLevel) As Boolean
     parameters:
     - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+      type: LogLevel
     return:
       type: System.Boolean
+    content.vb: Public Function IsEnabled(logLevel As LogLevel) As Boolean
   overload: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -226,304 +210,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.Extensions.Logging.ILogger
-  commentId: T:Microsoft.Extensions.Logging.ILogger
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
-  name: ILogger
-  nameWithType: ILogger
-  fullName: Microsoft.Extensions.Logging.ILogger
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
 - uid: Microsoft.Extensions.Logging.Testing.NullLogger
   commentId: T:Microsoft.Extensions.Logging.Testing.NullLogger
   parent: Microsoft.Extensions.Logging.Testing
@@ -537,94 +229,17 @@ references:
   name: BeginScope
   nameWithType: NullLogger.BeginScope
   fullName: Microsoft.Extensions.Logging.Testing.NullLogger.BeginScope
-- uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1({TState})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  parent: Microsoft.Extensions.Logging.ILogger
-  definition: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  name: BeginScope<TState>(TState)
-  nameWithType: ILogger.BeginScope<TState>(TState)
-  fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState)
-  nameWithType.vb: ILogger.BeginScope(Of TState)(TState)
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)(TState)
-  name.vb: BeginScope(Of TState)(TState)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope<TState>
-    nameWithType: ILogger.BeginScope<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope(Of TState)
-    nameWithType: ILogger.BeginScope(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: '{TState}'
   commentId: '!:TState'
   definition: TState
   name: TState
   nameWithType: TState
   fullName: TState
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
+- uid: IDisposable
   isExternal: true
   name: IDisposable
   nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  commentId: M:Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  isExternal: false
-  name: BeginScope<TState>(TState)
-  nameWithType: ILogger.BeginScope<TState>(TState)
-  fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState)
-  nameWithType.vb: ILogger.BeginScope(Of TState)(TState)
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)(TState)
-  name.vb: BeginScope(Of TState)(TState)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope<TState>
-    nameWithType: ILogger.BeginScope<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope(Of TState)
-    nameWithType: ILogger.BeginScope(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
+  fullName: IDisposable
 - uid: TState
   isExternal: false
   name: TState
@@ -636,190 +251,36 @@ references:
   name: Log
   nameWithType: NullLogger.Log
   fullName: Microsoft.Extensions.Logging.Testing.NullLogger.Log
-- uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,{TState},System.Exception,System.Func{{TState},System.Exception,System.String})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  parent: Microsoft.Extensions.Logging.ILogger
-  definition: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  nameWithType: ILogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
-  nameWithType.vb: ILogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
-  name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log<TState>
-    nameWithType: ILogger.Log<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log(Of TState)
-    nameWithType: ILogger.Log(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.Log(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+- uid: LogLevel
+  commentId: M:LogLevel
+  isExternal: true
   name: LogLevel
   nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging.EventId
-  commentId: T:Microsoft.Extensions.Logging.EventId
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+  fullName: LogLevel
+- uid: EventId
+  isExternal: true
   name: EventId
   nameWithType: EventId
-  fullName: Microsoft.Extensions.Logging.EventId
-- uid: System.Exception
-  commentId: T:System.Exception
-  parent: System
+  fullName: EventId
+- uid: Exception
   isExternal: true
   name: Exception
   nameWithType: Exception
-  fullName: System.Exception
-- uid: System.Func{{TState},System.Exception,System.String}
-  commentId: T:System.Func{``0,System.Exception,System.String}
-  parent: System
-  definition: System.Func`3
+  fullName: Exception
+- uid: Func{{TState},Exception,System.String}
+  commentId: '!:Func{``0,Exception,System.String}'
+  definition: Func`3
   name: Func<TState, Exception, String>
   nameWithType: Func<TState, Exception, String>
-  fullName: System.Func<TState, System.Exception, System.String>
+  fullName: Func<TState, Exception, System.String>
   nameWithType.vb: Func(Of TState, Exception, String)
-  fullName.vb: System.Func(Of TState, System.Exception, System.String)
+  fullName.vb: Func(Of TState, Exception, System.String)
   name.vb: Func(Of TState, Exception, String)
   spec.csharp:
-  - uid: System.Func`3
+  - uid: Func`3
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
@@ -830,10 +291,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Exception
+  - uid: Exception
     name: Exception
     nameWithType: Exception
-    fullName: System.Exception
+    fullName: Exception
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -847,10 +308,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Func`3
+  - uid: Func`3
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -861,10 +322,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Exception
+  - uid: Exception
     name: Exception
     nameWithType: Exception
-    fullName: System.Exception
+    fullName: Exception
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -877,213 +338,65 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+- uid: Func`3
   isExternal: true
-  name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  nameWithType: ILogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
-  nameWithType.vb: ILogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
-  name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
+  name: Func<, , >
+  nameWithType: Func<, , >
+  fullName: Func<, , >
+  nameWithType.vb: Func(Of , , )
+  fullName.vb: Func(Of , , )
+  name.vb: Func(Of , , )
   spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log<TState>
-    nameWithType: ILogger.Log<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
+  - uid: Func`3
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TState
-    nameWithType: TState
-    fullName: TState
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log(Of TState)
-    nameWithType: ILogger.Log(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.Log(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Func`3
-  commentId: T:System.Func`3
-  isExternal: true
-  name: Func<T1, T2, TResult>
-  nameWithType: Func<T1, T2, TResult>
-  fullName: System.Func<T1, T2, TResult>
-  nameWithType.vb: Func(Of T1, T2, TResult)
-  fullName.vb: System.Func(Of T1, T2, TResult)
-  name.vb: Func(Of T1, T2, TResult)
-  spec.csharp:
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: T1
-    nameWithType: T1
-    fullName: T1
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Func`3
+  - uid: Func`3
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T1
-    nameWithType: T1
-    fullName: T1
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: T2
-    nameWithType: T2
-    fullName: T2
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
@@ -1093,43 +406,6 @@ references:
   name: IsEnabled
   nameWithType: NullLogger.IsEnabled
   fullName: Microsoft.Extensions.Logging.Testing.NullLogger.IsEnabled
-- uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  parent: Microsoft.Extensions.Logging.ILogger
-  isExternal: false
-  name: IsEnabled(LogLevel)
-  nameWithType: ILogger.IsEnabled(LogLevel)
-  fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-    name: IsEnabled
-    nameWithType: ILogger.IsEnabled
-    fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-    name: IsEnabled
-    nameWithType: ILogger.IsEnabled
-    fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System

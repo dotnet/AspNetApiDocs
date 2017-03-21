@@ -34,29 +34,12 @@ items:
   summary: "\nRepresents a section of application configuration values.\n"
   example: []
   syntax:
-    content: 'public class ConfigurationSection : IConfigurationSection, IConfiguration'
+    content: 'public class ConfigurationSection : IConfigurationSection'
     content.vb: >-
       Public Class ConfigurationSection
-          Implements IConfigurationSection, IConfiguration
+          Inherits IConfigurationSection
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationSection
-  - Microsoft.Extensions.Configuration.IConfiguration
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
-  extensionMethods:
-  - Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(System.Object)
-  - Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String)
-  - Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String,{T})
-  - Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String)
-  - Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String,System.Object)
   modifiers.csharp:
   - public
   - class
@@ -89,7 +72,6 @@ items:
   example: []
   syntax:
     content: public ConfigurationSection(ConfigurationRoot root, string path)
-    content.vb: Public Sub New(root As ConfigurationRoot, path As String)
     parameters:
     - id: root
       type: Microsoft.Extensions.Configuration.ConfigurationRoot
@@ -97,6 +79,7 @@ items:
     - id: path
       type: System.String
       description: The path to this section.
+    content.vb: Public Sub New(root As ConfigurationRoot, path As String)
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.#ctor*
   modifiers.csharp:
   - public
@@ -124,17 +107,15 @@ items:
   assemblies:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
-  summary: "\nGets the full path to this section from the <xref href=\"Microsoft.Extensions.Configuration.IConfigurationRoot\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nGets the full path to this section from the <see cref=\"!:IConfigurationRoot\"></see>.\n"
   example: []
   syntax:
     content: public string Path { get; }
-    content.vb: Public ReadOnly Property Path As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Path As String
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.Path*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationSection.Path
   modifiers.csharp:
   - public
   - get
@@ -167,13 +148,11 @@ items:
   example: []
   syntax:
     content: public string Key { get; }
-    content.vb: Public ReadOnly Property Key As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Key As String
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.Key*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationSection.Key
   modifiers.csharp:
   - public
   - get
@@ -206,13 +185,11 @@ items:
   example: []
   syntax:
     content: public string Value { get; set; }
-    content.vb: Public Property Value As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property Value As String
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.Value*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfigurationSection.Value
   modifiers.csharp:
   - public
   - get
@@ -245,7 +222,6 @@ items:
   example: []
   syntax:
     content: public string this[string key] { get; set; }
-    content.vb: Public Property Item(key As String) As String
     parameters:
     - id: key
       type: System.String
@@ -253,9 +229,8 @@ items:
     return:
       type: System.String
       description: The configuration value.
+    content.vb: Public Property Item(key As String) As String
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.Item*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
   nameWithType.vb: ConfigurationSection.Item(String)
   modifiers.csharp:
   - public
@@ -288,21 +263,19 @@ items:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
   summary: "\nGets a configuration sub-section with the specified key.\n"
-  remarks: "\nThis method will never return <code>null</code>. If no matching sub-section is found with the specified key,\nan empty <xref href=\"Microsoft.Extensions.Configuration.IConfigurationSection\" data-throw-if-not-resolved=\"false\"></xref> will be returned.\n"
+  remarks: "\nThis method will never return <code>null</code>. If no matching sub-section is found with the specified key,\nan empty <see cref=\"!:IConfigurationSection\"></see> will be returned.\n"
   example: []
   syntax:
     content: public IConfigurationSection GetSection(string key)
-    content.vb: Public Function GetSection(key As String) As IConfigurationSection
     parameters:
     - id: key
       type: System.String
       description: The key of the configuration section.
     return:
-      type: Microsoft.Extensions.Configuration.IConfigurationSection
-      description: The <xref href="Microsoft.Extensions.Configuration.IConfigurationSection" data-throw-if-not-resolved="false"></xref>.
+      type: IConfigurationSection
+      description: The <see cref="!:IConfigurationSection"></see>.
+    content.vb: Public Function GetSection(key As String) As IConfigurationSection
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -333,13 +306,11 @@ items:
   example: []
   syntax:
     content: public IEnumerable<IConfigurationSection> GetChildren()
-    content.vb: Public Function GetChildren As IEnumerable(Of IConfigurationSection)
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.Extensions.Configuration.IConfigurationSection}
+      type: IEnumerable{IConfigurationSection}
       description: The configuration sub-sections.
+    content.vb: Public Function GetChildren As IEnumerable(Of IConfigurationSection)
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.GetChildren*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfiguration.GetChildren
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -366,17 +337,15 @@ items:
   assemblies:
   - Microsoft.Extensions.Configuration
   namespace: Microsoft.Extensions.Configuration
-  summary: "\nReturns a <xref href=\"Microsoft.Extensions.Primitives.IChangeToken\" data-throw-if-not-resolved=\"false\"></xref> that can be used to observe when this configuration is reloaded.\n"
+  summary: "\nReturns a <see cref=\"!:IChangeToken\"></see> that can be used to observe when this configuration is reloaded.\n"
   example: []
   syntax:
     content: public IChangeToken GetReloadToken()
-    content.vb: Public Function GetReloadToken As IChangeToken
     return:
-      type: Microsoft.Extensions.Primitives.IChangeToken
+      type: IChangeToken
       description: ''
+    content.vb: Public Function GetReloadToken As IChangeToken
   overload: Microsoft.Extensions.Configuration.ConfigurationSection.GetReloadToken*
-  implements:
-  - Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -395,899 +364,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.Extensions.Configuration.IConfigurationSection
-  commentId: T:Microsoft.Extensions.Configuration.IConfigurationSection
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
-  name: IConfigurationSection
-  nameWithType: IConfigurationSection
-  fullName: Microsoft.Extensions.Configuration.IConfigurationSection
-- uid: Microsoft.Extensions.Configuration.IConfiguration
-  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
-  name: IConfiguration
-  nameWithType: IConfiguration
-  fullName: Microsoft.Extensions.Configuration.IConfiguration
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  parent: Microsoft.Extensions.Configuration.ConfigurationBinder
-  definition: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  name: Bind(Object)
-  nameWithType: ConfigurationBinder.Bind(Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(System.Object)
-    name: Bind
-    nameWithType: ConfigurationBinder.Bind
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(System.Object)
-    name: Bind
-    nameWithType: ConfigurationBinder.Bind
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  parent: Microsoft.Extensions.Configuration.ConfigurationBinder
-  definition: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  name: GetValue<T>(String)
-  nameWithType: ConfigurationBinder.GetValue<T>(String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(System.String)
-  nameWithType.vb: ConfigurationBinder.GetValue(Of T)(String)
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(System.String)
-  name.vb: GetValue(Of T)(String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String)
-    name: GetValue<T>
-    nameWithType: ConfigurationBinder.GetValue<T>
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String)
-    name: GetValue(Of T)
-    nameWithType: ConfigurationBinder.GetValue(Of T)
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String,{T})
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  parent: Microsoft.Extensions.Configuration.ConfigurationBinder
-  definition: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  name: GetValue<T>(String, T)
-  nameWithType: ConfigurationBinder.GetValue<T>(String, T)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(System.String, T)
-  nameWithType.vb: ConfigurationBinder.GetValue(Of T)(String, T)
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(System.String, T)
-  name.vb: GetValue(Of T)(String, T)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String,``0)
-    name: GetValue<T>
-    nameWithType: ConfigurationBinder.GetValue<T>
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(System.String,``0)
-    name: GetValue(Of T)
-    nameWithType: ConfigurationBinder.GetValue(Of T)
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  parent: Microsoft.Extensions.Configuration.ConfigurationBinder
-  definition: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  name: GetValue(Type, String)
-  nameWithType: ConfigurationBinder.GetValue(Type, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type, System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String,System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  parent: Microsoft.Extensions.Configuration.ConfigurationBinder
-  definition: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  name: GetValue(Type, String, Object)
-  nameWithType: ConfigurationBinder.GetValue(Type, String, Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type, System.String, System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String,System.Object)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(System.Type,System.String,System.Object)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-  isExternal: true
-  name: Bind(IConfiguration, Object)
-  nameWithType: ConfigurationBinder.Bind(IConfiguration, Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration, System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-    name: Bind
-    nameWithType: ConfigurationBinder.Bind
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind(Microsoft.Extensions.Configuration.IConfiguration,System.Object)
-    name: Bind
-    nameWithType: ConfigurationBinder.Bind
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.Bind
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder
-  commentId: T:Microsoft.Extensions.Configuration.ConfigurationBinder
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
-  name: ConfigurationBinder
-  nameWithType: ConfigurationBinder
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-  isExternal: true
-  name: GetValue<T>(IConfiguration, String)
-  nameWithType: ConfigurationBinder.GetValue<T>(IConfiguration, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(Microsoft.Extensions.Configuration.IConfiguration, System.String)
-  nameWithType.vb: ConfigurationBinder.GetValue(Of T)(IConfiguration, String)
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(Microsoft.Extensions.Configuration.IConfiguration, System.String)
-  name.vb: GetValue(Of T)(IConfiguration, String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-    name: GetValue<T>
-    nameWithType: ConfigurationBinder.GetValue<T>
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String)
-    name: GetValue(Of T)
-    nameWithType: ConfigurationBinder.GetValue(Of T)
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-  isExternal: true
-  name: GetValue<T>(IConfiguration, String, T)
-  nameWithType: ConfigurationBinder.GetValue<T>(IConfiguration, String, T)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>(Microsoft.Extensions.Configuration.IConfiguration, System.String, T)
-  nameWithType.vb: ConfigurationBinder.GetValue(Of T)(IConfiguration, String, T)
-  fullName.vb: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)(Microsoft.Extensions.Configuration.IConfiguration, System.String, T)
-  name.vb: GetValue(Of T)(IConfiguration, String, T)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-    name: GetValue<T>
-    nameWithType: ConfigurationBinder.GetValue<T>
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue<T>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue``1(Microsoft.Extensions.Configuration.IConfiguration,System.String,``0)
-    name: GetValue(Of T)
-    nameWithType: ConfigurationBinder.GetValue(Of T)
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Of T)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: T
-    nameWithType: T
-    fullName: T
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-  isExternal: true
-  name: GetValue(IConfiguration, Type, String)
-  nameWithType: ConfigurationBinder.GetValue(IConfiguration, Type, String)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration, System.Type, System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  commentId: M:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-  isExternal: true
-  name: GetValue(IConfiguration, Type, String, Object)
-  nameWithType: ConfigurationBinder.GetValue(IConfiguration, Type, String, Object)
-  fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration, System.Type, System.String, System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue(Microsoft.Extensions.Configuration.IConfiguration,System.Type,System.String,System.Object)
-    name: GetValue
-    nameWithType: ConfigurationBinder.GetValue
-    fullName: Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Configuration.IConfiguration
-    name: IConfiguration
-    nameWithType: IConfiguration
-    fullName: Microsoft.Extensions.Configuration.IConfiguration
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.#ctor*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.#ctor
   isExternal: false
@@ -1308,313 +390,137 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.Extensions.Configuration.IConfigurationRoot
-  commentId: T:Microsoft.Extensions.Configuration.IConfigurationRoot
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
-  name: IConfigurationRoot
-  nameWithType: IConfigurationRoot
-  fullName: Microsoft.Extensions.Configuration.IConfigurationRoot
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.Path*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.Path
   isExternal: false
   name: Path
   nameWithType: ConfigurationSection.Path
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.Path
-- uid: Microsoft.Extensions.Configuration.IConfigurationSection.Path
-  commentId: P:Microsoft.Extensions.Configuration.IConfigurationSection.Path
-  parent: Microsoft.Extensions.Configuration.IConfigurationSection
-  isExternal: false
-  name: Path
-  nameWithType: IConfigurationSection.Path
-  fullName: Microsoft.Extensions.Configuration.IConfigurationSection.Path
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.Key*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.Key
   isExternal: false
   name: Key
   nameWithType: ConfigurationSection.Key
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.Key
-- uid: Microsoft.Extensions.Configuration.IConfigurationSection.Key
-  commentId: P:Microsoft.Extensions.Configuration.IConfigurationSection.Key
-  parent: Microsoft.Extensions.Configuration.IConfigurationSection
-  isExternal: false
-  name: Key
-  nameWithType: IConfigurationSection.Key
-  fullName: Microsoft.Extensions.Configuration.IConfigurationSection.Key
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.Value*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.Value
   isExternal: false
   name: Value
   nameWithType: ConfigurationSection.Value
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.Value
-- uid: Microsoft.Extensions.Configuration.IConfigurationSection.Value
-  commentId: P:Microsoft.Extensions.Configuration.IConfigurationSection.Value
-  parent: Microsoft.Extensions.Configuration.IConfigurationSection
-  isExternal: false
-  name: Value
-  nameWithType: IConfigurationSection.Value
-  fullName: Microsoft.Extensions.Configuration.IConfigurationSection.Value
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.Item*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.Item
   isExternal: false
   name: Item
   nameWithType: ConfigurationSection.Item
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.Item
-- uid: Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
-  commentId: P:Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
-  parent: Microsoft.Extensions.Configuration.IConfiguration
-  isExternal: true
-  name: Item[String]
-  nameWithType: IConfiguration.Item[String]
-  fullName: Microsoft.Extensions.Configuration.IConfiguration.Item[System.String]
-  nameWithType.vb: IConfiguration.Item(String)
-  fullName.vb: Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
-  name.vb: Item(String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
-    name: Item
-    nameWithType: IConfiguration.Item
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.Item
-  - name: '['
-    nameWithType: '['
-    fullName: '['
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ']'
-    nameWithType: ']'
-    fullName: ']'
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.Item(System.String)
-    name: Item
-    nameWithType: IConfiguration.Item
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.Item
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection
   isExternal: false
   name: GetSection
   nameWithType: ConfigurationSection.GetSection
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.GetSection
-- uid: Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
-  commentId: M:Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
-  parent: Microsoft.Extensions.Configuration.IConfiguration
+- uid: IConfigurationSection
   isExternal: true
-  name: GetSection(String)
-  nameWithType: IConfiguration.GetSection(String)
-  fullName: Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
-    name: GetSection
-    nameWithType: IConfiguration.GetSection
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetSection
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetSection(System.String)
-    name: GetSection
-    nameWithType: IConfiguration.GetSection
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetSection
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: IConfigurationSection
+  nameWithType: IConfigurationSection
+  fullName: IConfigurationSection
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.GetChildren*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.GetChildren
   isExternal: false
   name: GetChildren
   nameWithType: ConfigurationSection.GetChildren
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.GetChildren
-- uid: Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-  commentId: M:Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-  parent: Microsoft.Extensions.Configuration.IConfiguration
-  isExternal: false
-  name: GetChildren()
-  nameWithType: IConfiguration.GetChildren()
-  fullName: Microsoft.Extensions.Configuration.IConfiguration.GetChildren()
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-    name: GetChildren
-    nameWithType: IConfiguration.GetChildren
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-    name: GetChildren
-    nameWithType: IConfiguration.GetChildren
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetChildren
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Collections.Generic.IEnumerable{Microsoft.Extensions.Configuration.IConfigurationSection}
-  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.Extensions.Configuration.IConfigurationSection}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable{IConfigurationSection}
+  commentId: '!:IEnumerable{IConfigurationSection}'
+  definition: IEnumerable`1
   name: IEnumerable<IConfigurationSection>
   nameWithType: IEnumerable<IConfigurationSection>
-  fullName: System.Collections.Generic.IEnumerable<Microsoft.Extensions.Configuration.IConfigurationSection>
+  fullName: IEnumerable<IConfigurationSection>
   nameWithType.vb: IEnumerable(Of IConfigurationSection)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of Microsoft.Extensions.Configuration.IConfigurationSection)
+  fullName.vb: IEnumerable(Of IConfigurationSection)
   name.vb: IEnumerable(Of IConfigurationSection)
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Extensions.Configuration.IConfigurationSection
+  - uid: IConfigurationSection
     name: IConfigurationSection
     nameWithType: IConfigurationSection
-    fullName: Microsoft.Extensions.Configuration.IConfigurationSection
+    fullName: IConfigurationSection
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Extensions.Configuration.IConfigurationSection
+  - uid: IConfigurationSection
     name: IConfigurationSection
     nameWithType: IConfigurationSection
-    fullName: Microsoft.Extensions.Configuration.IConfigurationSection
+    fullName: IConfigurationSection
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IEnumerable`1
-  commentId: T:System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable`1
   isExternal: true
-  name: IEnumerable<T>
-  nameWithType: IEnumerable<T>
-  fullName: System.Collections.Generic.IEnumerable<T>
-  nameWithType.vb: IEnumerable(Of T)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
-  name.vb: IEnumerable(Of T)
+  name: IEnumerable<>
+  nameWithType: IEnumerable<>
+  fullName: IEnumerable<>
+  nameWithType.vb: IEnumerable(Of )
+  fullName.vb: IEnumerable(Of )
+  name.vb: IEnumerable(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
-- uid: Microsoft.Extensions.Primitives.IChangeToken
-  commentId: T:Microsoft.Extensions.Primitives.IChangeToken
-  parent: Microsoft.Extensions.Primitives
-  isExternal: false
-  name: IChangeToken
-  nameWithType: IChangeToken
-  fullName: Microsoft.Extensions.Primitives.IChangeToken
 - uid: Microsoft.Extensions.Configuration.ConfigurationSection.GetReloadToken*
   commentId: Overload:Microsoft.Extensions.Configuration.ConfigurationSection.GetReloadToken
   isExternal: false
   name: GetReloadToken
   nameWithType: ConfigurationSection.GetReloadToken
   fullName: Microsoft.Extensions.Configuration.ConfigurationSection.GetReloadToken
-- uid: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-  commentId: M:Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-  parent: Microsoft.Extensions.Configuration.IConfiguration
-  isExternal: false
-  name: GetReloadToken()
-  nameWithType: IConfiguration.GetReloadToken()
-  fullName: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken()
-  spec.csharp:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-    name: GetReloadToken
-    nameWithType: IConfiguration.GetReloadToken
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-    name: GetReloadToken
-    nameWithType: IConfiguration.GetReloadToken
-    fullName: Microsoft.Extensions.Configuration.IConfiguration.GetReloadToken
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Primitives
-  commentId: N:Microsoft.Extensions.Primitives
-  isExternal: false
-  name: Microsoft.Extensions.Primitives
-  nameWithType: Microsoft.Extensions.Primitives
-  fullName: Microsoft.Extensions.Primitives
+- uid: IChangeToken
+  isExternal: true
+  name: IChangeToken
+  nameWithType: IChangeToken
+  fullName: IChangeToken
 shouldSkipMarkup: true

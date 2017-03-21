@@ -33,14 +33,14 @@ items:
   example: []
   syntax:
     content: 'public class DelegatingEnumerator<TWrapped, TDeclared> : IEnumerator<TWrapped>, IDisposable, IEnumerator'
-    content.vb: >-
-      Public Class DelegatingEnumerator(Of TWrapped, TDeclared)
-          Implements IEnumerator(Of TWrapped), IDisposable, IEnumerator
     typeParameters:
     - id: TWrapped
       description: The type to which the individual elements need to be wrapped to.
     - id: TDeclared
       description: The original type of the element being wrapped.
+    content.vb: >-
+      Public Class DelegatingEnumerator(Of TWrapped, TDeclared)
+          Implements IEnumerator(Of TWrapped), IDisposable, IEnumerator
   inheritance:
   - System.Object
   implements:
@@ -90,7 +90,6 @@ items:
   example: []
   syntax:
     content: public DelegatingEnumerator(IEnumerator<TDeclared> inner, IWrapperProvider wrapperProvider)
-    content.vb: Public Sub New(inner As IEnumerator(Of TDeclared), wrapperProvider As IWrapperProvider)
     parameters:
     - id: inner
       type: System.Collections.Generic.IEnumerator{{TDeclared}}
@@ -98,6 +97,7 @@ items:
     - id: wrapperProvider
       type: Microsoft.AspNetCore.Mvc.Formatters.Xml.IWrapperProvider
       description: The wrapper provider to wrap individual elements.
+    content.vb: Public Sub New(inner As IEnumerator(Of TDeclared), wrapperProvider As IWrapperProvider)
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerator`2.#ctor*
   nameWithType.vb: DelegatingEnumerator(Of TWrapped, TDeclared).DelegatingEnumerator(IEnumerator(Of TDeclared), IWrapperProvider)
   modifiers.csharp:
@@ -131,10 +131,10 @@ items:
   example: []
   syntax:
     content: public TWrapped Current { get; }
-    content.vb: Public ReadOnly Property Current As TWrapped
     parameters: []
     return:
       type: '{TWrapped}'
+    content.vb: Public ReadOnly Property Current As TWrapped
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerator`2.Current*
   implements:
   - System.Collections.Generic.IEnumerator{{TWrapped}}.Current
@@ -172,10 +172,10 @@ items:
   example: []
   syntax:
     content: object IEnumerator.Current { get; }
-    content.vb: ReadOnly WriteOnly Property System.Collections.IEnumerator.Current As Object Implements IEnumerator.Current
     parameters: []
     return:
       type: System.Object
+    content.vb: ReadOnly WriteOnly Property System.Collections.IEnumerator.Current As Object Implements IEnumerator.Current
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerator`2.System#Collections#IEnumerator#Current*
   implements:
   - System.Collections.IEnumerator.Current
@@ -246,9 +246,9 @@ items:
   example: []
   syntax:
     content: public bool MoveNext()
-    content.vb: Public Function MoveNext As Boolean
     return:
       type: System.Boolean
+    content.vb: Public Function MoveNext As Boolean
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerator`2.MoveNext*
   implements:
   - System.Collections.IEnumerator.MoveNext

@@ -37,19 +37,9 @@ items:
     content: 'public class FormFile : IFormFile'
     content.vb: >-
       Public Class FormFile
-          Implements IFormFile
+          Inherits IFormFile
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -80,7 +70,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Internal
   syntax:
     content: public FormFile(Stream baseStream, long baseStreamOffset, long length, string name, string fileName)
-    content.vb: Public Sub New(baseStream As Stream, baseStreamOffset As Long, length As Long, name As String, fileName As String)
     parameters:
     - id: baseStream
       type: System.IO.Stream
@@ -92,6 +81,7 @@ items:
       type: System.String
     - id: fileName
       type: System.String
+    content.vb: Public Sub New(baseStream As Stream, baseStreamOffset As Long, length As Long, name As String, fileName As String)
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.#ctor*
   modifiers.csharp:
   - public
@@ -123,13 +113,11 @@ items:
   example: []
   syntax:
     content: public string ContentDisposition { get; set; }
-    content.vb: Public Property ContentDisposition As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property ContentDisposition As String
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.ContentDisposition*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.ContentDisposition
   modifiers.csharp:
   - public
   - get
@@ -162,13 +150,11 @@ items:
   example: []
   syntax:
     content: public string ContentType { get; set; }
-    content.vb: Public Property ContentType As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property ContentType As String
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.ContentType*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.ContentType
   modifiers.csharp:
   - public
   - get
@@ -201,13 +187,11 @@ items:
   example: []
   syntax:
     content: public IHeaderDictionary Headers { get; set; }
-    content.vb: Public Property Headers As IHeaderDictionary
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.IHeaderDictionary
+      type: IHeaderDictionary
+    content.vb: Public Property Headers As IHeaderDictionary
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.Headers*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.Headers
   modifiers.csharp:
   - public
   - get
@@ -240,13 +224,11 @@ items:
   example: []
   syntax:
     content: public long Length { get; }
-    content.vb: Public ReadOnly Property Length As Long
     parameters: []
     return:
       type: System.Int64
+    content.vb: Public ReadOnly Property Length As Long
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.Length*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.Length
   modifiers.csharp:
   - public
   - get
@@ -279,13 +261,11 @@ items:
   example: []
   syntax:
     content: public string Name { get; }
-    content.vb: Public ReadOnly Property Name As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Name As String
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.Name*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.Name
   modifiers.csharp:
   - public
   - get
@@ -318,13 +298,11 @@ items:
   example: []
   syntax:
     content: public string FileName { get; }
-    content.vb: Public ReadOnly Property FileName As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property FileName As String
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.FileName*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.FileName
   modifiers.csharp:
   - public
   - get
@@ -357,12 +335,10 @@ items:
   example: []
   syntax:
     content: public Stream OpenReadStream()
-    content.vb: Public Function OpenReadStream As Stream
     return:
       type: System.IO.Stream
+    content.vb: Public Function OpenReadStream As Stream
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.OpenReadStream*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -393,14 +369,12 @@ items:
   example: []
   syntax:
     content: public void CopyTo(Stream target)
-    content.vb: Public Sub CopyTo(target As Stream)
     parameters:
     - id: target
       type: System.IO.Stream
       description: The stream to copy the file contents to.
+    content.vb: Public Sub CopyTo(target As Stream)
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.CopyTo*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -431,7 +405,6 @@ items:
   example: []
   syntax:
     content: public Task CopyToAsync(Stream target, CancellationToken cancellationToken = null)
-    content.vb: Public Function CopyToAsync(target As Stream, cancellationToken As CancellationToken = Nothing) As Task
     parameters:
     - id: target
       type: System.IO.Stream
@@ -441,9 +414,8 @@ items:
       description: ''
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function CopyToAsync(target As Stream, cancellationToken As CancellationToken = Nothing) As Task
   overload: Microsoft.AspNetCore.Http.Internal.FormFile.CopyToAsync*
-  implements:
-  - Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -462,304 +434,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Http.IFormFile
-  commentId: T:Microsoft.AspNetCore.Http.IFormFile
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: IFormFile
-  nameWithType: IFormFile
-  fullName: Microsoft.AspNetCore.Http.IFormFile
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.#ctor
   isExternal: false
@@ -799,226 +479,59 @@ references:
   name: ContentDisposition
   nameWithType: FormFile.ContentDisposition
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.ContentDisposition
-- uid: Microsoft.AspNetCore.Http.IFormFile.ContentDisposition
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.ContentDisposition
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: ContentDisposition
-  nameWithType: IFormFile.ContentDisposition
-  fullName: Microsoft.AspNetCore.Http.IFormFile.ContentDisposition
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.ContentType*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.ContentType
   isExternal: false
   name: ContentType
   nameWithType: FormFile.ContentType
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.ContentType
-- uid: Microsoft.AspNetCore.Http.IFormFile.ContentType
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.ContentType
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: ContentType
-  nameWithType: IFormFile.ContentType
-  fullName: Microsoft.AspNetCore.Http.IFormFile.ContentType
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.Headers*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.Headers
   isExternal: false
   name: Headers
   nameWithType: FormFile.Headers
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.Headers
-- uid: Microsoft.AspNetCore.Http.IFormFile.Headers
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.Headers
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: Headers
-  nameWithType: IFormFile.Headers
-  fullName: Microsoft.AspNetCore.Http.IFormFile.Headers
-- uid: Microsoft.AspNetCore.Http.IHeaderDictionary
-  commentId: T:Microsoft.AspNetCore.Http.IHeaderDictionary
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: IHeaderDictionary
+  isExternal: true
   name: IHeaderDictionary
   nameWithType: IHeaderDictionary
-  fullName: Microsoft.AspNetCore.Http.IHeaderDictionary
+  fullName: IHeaderDictionary
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.Length*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.Length
   isExternal: false
   name: Length
   nameWithType: FormFile.Length
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.Length
-- uid: Microsoft.AspNetCore.Http.IFormFile.Length
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.Length
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: Length
-  nameWithType: IFormFile.Length
-  fullName: Microsoft.AspNetCore.Http.IFormFile.Length
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.Name*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.Name
   isExternal: false
   name: Name
   nameWithType: FormFile.Name
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.Name
-- uid: Microsoft.AspNetCore.Http.IFormFile.Name
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.Name
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: Name
-  nameWithType: IFormFile.Name
-  fullName: Microsoft.AspNetCore.Http.IFormFile.Name
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.FileName*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.FileName
   isExternal: false
   name: FileName
   nameWithType: FormFile.FileName
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.FileName
-- uid: Microsoft.AspNetCore.Http.IFormFile.FileName
-  commentId: P:Microsoft.AspNetCore.Http.IFormFile.FileName
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: FileName
-  nameWithType: IFormFile.FileName
-  fullName: Microsoft.AspNetCore.Http.IFormFile.FileName
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.OpenReadStream*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.OpenReadStream
   isExternal: false
   name: OpenReadStream
   nameWithType: FormFile.OpenReadStream
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.OpenReadStream
-- uid: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-  commentId: M:Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: false
-  name: OpenReadStream()
-  nameWithType: IFormFile.OpenReadStream()
-  fullName: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-    name: OpenReadStream
-    nameWithType: IFormFile.OpenReadStream
-    fullName: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-    name: OpenReadStream
-    nameWithType: IFormFile.OpenReadStream
-    fullName: Microsoft.AspNetCore.Http.IFormFile.OpenReadStream
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.CopyTo*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.CopyTo
   isExternal: false
   name: CopyTo
   nameWithType: FormFile.CopyTo
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.CopyTo
-- uid: Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
-  commentId: M:Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: true
-  name: CopyTo(Stream)
-  nameWithType: IFormFile.CopyTo(Stream)
-  fullName: Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
-    name: CopyTo
-    nameWithType: IFormFile.CopyTo
-    fullName: Microsoft.AspNetCore.Http.IFormFile.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.CopyTo(System.IO.Stream)
-    name: CopyTo
-    nameWithType: IFormFile.CopyTo
-    fullName: Microsoft.AspNetCore.Http.IFormFile.CopyTo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Http.Internal.FormFile.CopyToAsync*
   commentId: Overload:Microsoft.AspNetCore.Http.Internal.FormFile.CopyToAsync
   isExternal: false
   name: CopyToAsync
   nameWithType: FormFile.CopyToAsync
   fullName: Microsoft.AspNetCore.Http.Internal.FormFile.CopyToAsync
-- uid: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Http.IFormFile
-  isExternal: true
-  name: CopyToAsync(Stream, CancellationToken)
-  nameWithType: IFormFile.CopyToAsync(Stream, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-    name: CopyToAsync
-    nameWithType: IFormFile.CopyToAsync
-    fullName: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync(System.IO.Stream,System.Threading.CancellationToken)
-    name: CopyToAsync
-    nameWithType: IFormFile.CopyToAsync
-    fullName: Microsoft.AspNetCore.Http.IFormFile.CopyToAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.Stream
-    name: Stream
-    nameWithType: Stream
-    fullName: System.IO.Stream
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.CancellationToken
   commentId: T:System.Threading.CancellationToken
   parent: System.Threading

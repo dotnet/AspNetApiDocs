@@ -5,7 +5,7 @@ items:
   id: RoleStore`2
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   children:
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,IdentityErrorDescriber)
   langs:
   - csharp
   - vb
@@ -27,25 +27,20 @@ items:
   summary: "\nCreates a new instance of a persistence store for roles.\n"
   example: []
   syntax:
-    content: 'public class RoleStore<TRole, TContext> : RoleStore<TRole, TContext, string>, IQueryableRoleStore<TRole>, IRoleClaimStore<TRole>, IRoleStore<TRole>, IDisposable where TRole : IdentityRole<string> where TContext : DbContext'
-    content.vb: >-
-      Public Class RoleStore(Of TRole As IdentityRole(Of String), TContext As DbContext)
-          Inherits RoleStore(Of TRole, TContext, String)
-          Implements IQueryableRoleStore(Of TRole), IRoleClaimStore(Of TRole), IRoleStore(Of TRole), IDisposable
+    content: 'public class RoleStore<TRole, TContext> : RoleStore<TRole, TContext, string>, IQueryableRoleStore<TRole>, IRoleClaimStore<TRole> where TRole : IdentityRole<string> where TContext : DbContext'
     typeParameters:
     - id: TRole
       description: The type of the class representing a role.
     - id: TContext
       description: The type of the data context class used to access the store.
+    content.vb: >-
+      Public Class RoleStore(Of TRole As IdentityRole(Of String), TContext As DbContext)
+          Inherits RoleStore(Of TRole, TContext, String)
+          Implements IQueryableRoleStore(Of TRole), IRoleClaimStore(Of TRole)
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String}
-  implements:
-  - Microsoft.AspNetCore.Identity.IQueryableRoleStore{{TRole}}
-  - Microsoft.AspNetCore.Identity.IRoleClaimStore{{TRole}}
-  - Microsoft.AspNetCore.Identity.IRoleStore{{TRole}}
-  - System.IDisposable
   inheritedMembers:
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
@@ -70,13 +65,6 @@ items:
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   nameWithType.vb: RoleStore(Of TRole, TContext)
   modifiers.csharp:
   - public
@@ -86,16 +74,16 @@ items:
   - Class
   fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext)
   name.vb: RoleStore(Of TRole, TContext)
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
-  id: '#ctor(`1,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)'
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,IdentityErrorDescriber)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor(`1,IdentityErrorDescriber)
+  id: '#ctor(`1,IdentityErrorDescriber)'
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2
   langs:
   - csharp
   - vb
   name: RoleStore(TContext, IdentityErrorDescriber)
   nameWithType: RoleStore<TRole, TContext>.RoleStore(TContext, IdentityErrorDescriber)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext>.RoleStore(TContext, Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext>.RoleStore(TContext, IdentityErrorDescriber)
   type: Constructor
   source:
     remote:
@@ -110,19 +98,19 @@ items:
   namespace: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   syntax:
     content: public RoleStore(TContext context, IdentityErrorDescriber describer = null)
-    content.vb: Public Sub New(context As TContext, describer As IdentityErrorDescriber = Nothing)
     parameters:
     - id: context
       type: '{TContext}'
     - id: describer
-      type: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
+      type: IdentityErrorDescriber
+    content.vb: Public Sub New(context As TContext, describer As IdentityErrorDescriber = Nothing)
   overload: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`2.#ctor*
   nameWithType.vb: RoleStore(Of TRole, TContext).RoleStore(TContext, IdentityErrorDescriber)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext).RoleStore(TContext, Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext).RoleStore(TContext, IdentityErrorDescriber)
 references:
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   commentId: N:Microsoft.AspNetCore.Identity.EntityFrameworkCore
@@ -341,127 +329,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IQueryableRoleStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-  name: IQueryableRoleStore<TRole>
-  nameWithType: IQueryableRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore<TRole>
-  nameWithType.vb: IQueryableRoleStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IQueryableRoleStore(Of TRole)
-  name.vb: IQueryableRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-    name: IQueryableRoleStore
-    nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-    name: IQueryableRoleStore
-    nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleClaimStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleClaimStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-  name: IRoleClaimStore<TRole>
-  nameWithType: IRoleClaimStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore<TRole>
-  nameWithType.vb: IRoleClaimStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IRoleClaimStore(Of TRole)
-  name.vb: IRoleClaimStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-    name: IRoleClaimStore
-    nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-    name: IRoleClaimStore
-    nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IRoleStore`1
-  name: IRoleStore<TRole>
-  nameWithType: IRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleStore<TRole>
-  nameWithType.vb: IRoleStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IRoleStore(Of TRole)
-  name.vb: IRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
   commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,`1,System.String}.CreateRoleClaim(`0,System.Security.Claims.Claim)
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},{TContext},System.String}
@@ -1509,285 +1376,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1937,123 +1525,6 @@ references:
   - name: TKey
     nameWithType: TKey
     fullName: TKey
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-  isExternal: false
-  name: IQueryableRoleStore<TRole>
-  nameWithType: IQueryableRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore<TRole>
-  nameWithType.vb: IQueryableRoleStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IQueryableRoleStore(Of TRole)
-  name.vb: IQueryableRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-    name: IQueryableRoleStore
-    nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-    name: IQueryableRoleStore
-    nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity
-  commentId: N:Microsoft.AspNetCore.Identity
-  isExternal: false
-  name: Microsoft.AspNetCore.Identity
-  nameWithType: Microsoft.AspNetCore.Identity
-  fullName: Microsoft.AspNetCore.Identity
-- uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-  isExternal: false
-  name: IRoleClaimStore<TRole>
-  nameWithType: IRoleClaimStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore<TRole>
-  nameWithType.vb: IRoleClaimStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IRoleClaimStore(Of TRole)
-  name.vb: IRoleClaimStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-    name: IRoleClaimStore
-    nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-    name: IRoleClaimStore
-    nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleStore`1
-  isExternal: false
-  name: IRoleStore<TRole>
-  nameWithType: IRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleStore<TRole>
-  nameWithType.vb: IRoleStore(Of TRole)
-  fullName.vb: Microsoft.AspNetCore.Identity.IRoleStore(Of TRole)
-  name.vb: IRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
   - name: )
     nameWithType: )
     fullName: )
@@ -3091,13 +2562,11 @@ references:
   name: TContext
   nameWithType: TContext
   fullName: TContext
-- uid: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
-  commentId: T:Microsoft.AspNetCore.Identity.IdentityErrorDescriber
-  parent: Microsoft.AspNetCore.Identity
-  isExternal: false
+- uid: IdentityErrorDescriber
+  isExternal: true
   name: IdentityErrorDescriber
   nameWithType: IdentityErrorDescriber
-  fullName: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
+  fullName: IdentityErrorDescriber
 - uid: TContext
   isExternal: false
   name: TContext

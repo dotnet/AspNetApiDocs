@@ -30,13 +30,13 @@ items:
   example: []
   syntax:
     content: 'public class NegotiatedContentResult<T> : ObjectResult, IActionResult'
+    typeParameters:
+    - id: T
+      description: The type of content in the entity body.
     content.vb: >-
       Public Class NegotiatedContentResult(Of T)
           Inherits ObjectResult
           Implements IActionResult
-    typeParameters:
-    - id: T
-      description: The type of content in the entity body.
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Mvc.ActionResult
@@ -93,7 +93,6 @@ items:
   example: []
   syntax:
     content: public NegotiatedContentResult(HttpStatusCode statusCode, T content)
-    content.vb: Public Sub New(statusCode As HttpStatusCode, content As T)
     parameters:
     - id: statusCode
       type: System.Net.HttpStatusCode
@@ -101,6 +100,7 @@ items:
     - id: content
       type: '{T}'
       description: The content value to negotiate and format in the entity body.
+    content.vb: Public Sub New(statusCode As HttpStatusCode, content As T)
   overload: System.Web.Http.NegotiatedContentResult`1.#ctor*
   nameWithType.vb: NegotiatedContentResult(Of T).NegotiatedContentResult(HttpStatusCode, T)
   modifiers.csharp:
@@ -134,10 +134,10 @@ items:
   example: []
   syntax:
     content: public T Content { get; }
-    content.vb: Public ReadOnly Property Content As T
     parameters: []
     return:
       type: '{T}'
+    content.vb: Public ReadOnly Property Content As T
   overload: System.Web.Http.NegotiatedContentResult`1.Content*
   nameWithType.vb: NegotiatedContentResult(Of T).Content
   modifiers.csharp:
@@ -172,12 +172,12 @@ items:
   example: []
   syntax:
     content: public override Task ExecuteResultAsync(ActionContext context)
-    content.vb: Public Overrides Function ExecuteResultAsync(context As ActionContext) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.ActionContext
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overrides Function ExecuteResultAsync(context As ActionContext) As Task
   overridden: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   overload: System.Web.Http.NegotiatedContentResult`1.ExecuteResultAsync*
   nameWithType.vb: NegotiatedContentResult(Of T).ExecuteResultAsync(ActionContext)

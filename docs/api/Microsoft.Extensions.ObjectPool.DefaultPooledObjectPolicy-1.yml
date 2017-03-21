@@ -27,11 +27,11 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public class DefaultPooledObjectPolicy<T> : IPooledObjectPolicy<T> where T : class, new ()'
+    typeParameters:
+    - id: T
     content.vb: >-
       Public Class DefaultPooledObjectPolicy(Of T As {Class, New})
           Implements IPooledObjectPolicy(Of T)
-    typeParameters:
-    - id: T
   inheritance:
   - System.Object
   implements:
@@ -77,9 +77,9 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public T Create()
-    content.vb: Public Function Create As T
     return:
       type: '{T}'
+    content.vb: Public Function Create As T
   overload: Microsoft.Extensions.ObjectPool.DefaultPooledObjectPolicy`1.Create*
   implements:
   - Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}.Create
@@ -113,12 +113,12 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public bool Return(T obj)
-    content.vb: Public Function Return(obj As T) As Boolean
     parameters:
     - id: obj
       type: '{T}'
     return:
       type: System.Boolean
+    content.vb: Public Function Return(obj As T) As Boolean
   overload: Microsoft.Extensions.ObjectPool.DefaultPooledObjectPolicy`1.Return*
   implements:
   - Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}.Return({T})

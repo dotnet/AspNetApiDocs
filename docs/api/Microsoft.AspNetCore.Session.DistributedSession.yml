@@ -5,7 +5,7 @@ items:
   id: DistributedSession
   parent: Microsoft.AspNetCore.Session
   children:
-  - Microsoft.AspNetCore.Session.DistributedSession.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean)
+  - Microsoft.AspNetCore.Session.DistributedSession.#ctor(IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},ILoggerFactory,System.Boolean)
   - Microsoft.AspNetCore.Session.DistributedSession.Clear
   - Microsoft.AspNetCore.Session.DistributedSession.CommitAsync
   - Microsoft.AspNetCore.Session.DistributedSession.Id
@@ -37,35 +37,25 @@ items:
     content: 'public class DistributedSession : ISession'
     content.vb: >-
       Public Class DistributedSession
-          Implements ISession
+          Inherits ISession
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Http.ISession
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Session.DistributedSession.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean)
-  commentId: M:Microsoft.AspNetCore.Session.DistributedSession.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean)
-  id: '#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},Microsoft.Extensions.Logging.ILoggerFactory,System.Boolean)'
+- uid: Microsoft.AspNetCore.Session.DistributedSession.#ctor(IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},ILoggerFactory,System.Boolean)
+  commentId: M:Microsoft.AspNetCore.Session.DistributedSession.#ctor(IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},ILoggerFactory,System.Boolean)
+  id: '#ctor(IDistributedCache,System.String,System.TimeSpan,System.Func{System.Boolean},ILoggerFactory,System.Boolean)'
   parent: Microsoft.AspNetCore.Session.DistributedSession
   langs:
   - csharp
   - vb
   name: DistributedSession(IDistributedCache, String, TimeSpan, Func<Boolean>, ILoggerFactory, Boolean)
   nameWithType: DistributedSession.DistributedSession(IDistributedCache, String, TimeSpan, Func<Boolean>, ILoggerFactory, Boolean)
-  fullName: Microsoft.AspNetCore.Session.DistributedSession.DistributedSession(Microsoft.Extensions.Caching.Distributed.IDistributedCache, System.String, System.TimeSpan, System.Func<System.Boolean>, Microsoft.Extensions.Logging.ILoggerFactory, System.Boolean)
+  fullName: Microsoft.AspNetCore.Session.DistributedSession.DistributedSession(IDistributedCache, System.String, System.TimeSpan, System.Func<System.Boolean>, ILoggerFactory, System.Boolean)
   type: Constructor
   source:
     remote:
@@ -80,10 +70,9 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public DistributedSession(IDistributedCache cache, string sessionKey, TimeSpan idleTimeout, Func<bool> tryEstablishSession, ILoggerFactory loggerFactory, bool isNewSessionKey)
-    content.vb: Public Sub New(cache As IDistributedCache, sessionKey As String, idleTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), loggerFactory As ILoggerFactory, isNewSessionKey As Boolean)
     parameters:
     - id: cache
-      type: Microsoft.Extensions.Caching.Distributed.IDistributedCache
+      type: IDistributedCache
     - id: sessionKey
       type: System.String
     - id: idleTimeout
@@ -91,16 +80,17 @@ items:
     - id: tryEstablishSession
       type: System.Func{System.Boolean}
     - id: loggerFactory
-      type: Microsoft.Extensions.Logging.ILoggerFactory
+      type: ILoggerFactory
     - id: isNewSessionKey
       type: System.Boolean
+    content.vb: Public Sub New(cache As IDistributedCache, sessionKey As String, idleTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), loggerFactory As ILoggerFactory, isNewSessionKey As Boolean)
   overload: Microsoft.AspNetCore.Session.DistributedSession.#ctor*
   nameWithType.vb: DistributedSession.DistributedSession(IDistributedCache, String, TimeSpan, Func(Of Boolean), ILoggerFactory, Boolean)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Session.DistributedSession.DistributedSession(Microsoft.Extensions.Caching.Distributed.IDistributedCache, System.String, System.TimeSpan, System.Func(Of System.Boolean), Microsoft.Extensions.Logging.ILoggerFactory, System.Boolean)
+  fullName.vb: Microsoft.AspNetCore.Session.DistributedSession.DistributedSession(IDistributedCache, System.String, System.TimeSpan, System.Func(Of System.Boolean), ILoggerFactory, System.Boolean)
   name.vb: DistributedSession(IDistributedCache, String, TimeSpan, Func(Of Boolean), ILoggerFactory, Boolean)
 - uid: Microsoft.AspNetCore.Session.DistributedSession.IsAvailable
   commentId: P:Microsoft.AspNetCore.Session.DistributedSession.IsAvailable
@@ -126,13 +116,11 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public bool IsAvailable { get; }
-    content.vb: Public ReadOnly Property IsAvailable As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property IsAvailable As Boolean
   overload: Microsoft.AspNetCore.Session.DistributedSession.IsAvailable*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.IsAvailable
   modifiers.csharp:
   - public
   - get
@@ -163,13 +151,11 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public string Id { get; }
-    content.vb: Public ReadOnly Property Id As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Id As String
   overload: Microsoft.AspNetCore.Session.DistributedSession.Id*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.Id
   modifiers.csharp:
   - public
   - get
@@ -200,13 +186,11 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public IEnumerable<string> Keys { get; }
-    content.vb: Public ReadOnly Property Keys As IEnumerable(Of String)
     parameters: []
     return:
       type: System.Collections.Generic.IEnumerable{System.String}
+    content.vb: Public ReadOnly Property Keys As IEnumerable(Of String)
   overload: Microsoft.AspNetCore.Session.DistributedSession.Keys*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.Keys
   modifiers.csharp:
   - public
   - get
@@ -237,7 +221,6 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public bool TryGetValue(string key, out byte[] value)
-    content.vb: Public Function TryGetValue(key As String, ByRef value As Byte()) As Boolean
     parameters:
     - id: key
       type: System.String
@@ -245,9 +228,8 @@ items:
       type: System.Byte[]
     return:
       type: System.Boolean
+    content.vb: Public Function TryGetValue(key As String, ByRef value As Byte()) As Boolean
   overload: Microsoft.AspNetCore.Session.DistributedSession.TryGetValue*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String,System.Byte[]@)
   nameWithType.vb: DistributedSession.TryGetValue(String, ByRef Byte())
   modifiers.csharp:
   - public
@@ -279,15 +261,13 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public void Set(string key, byte[] value)
-    content.vb: Public Sub Set(key As String, value As Byte())
     parameters:
     - id: key
       type: System.String
     - id: value
       type: System.Byte[]
+    content.vb: Public Sub Set(key As String, value As Byte())
   overload: Microsoft.AspNetCore.Session.DistributedSession.Set*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])
   nameWithType.vb: DistributedSession.Set(String, Byte())
   modifiers.csharp:
   - public
@@ -319,13 +299,11 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public void Remove(string key)
-    content.vb: Public Sub Remove(key As String)
     parameters:
     - id: key
       type: System.String
+    content.vb: Public Sub Remove(key As String)
   overload: Microsoft.AspNetCore.Session.DistributedSession.Remove*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.Remove(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -356,8 +334,6 @@ items:
     content: public void Clear()
     content.vb: Public Sub Clear
   overload: Microsoft.AspNetCore.Session.DistributedSession.Clear*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.Clear
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -386,12 +362,10 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public Task LoadAsync()
-    content.vb: Public Function LoadAsync As Task
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function LoadAsync As Task
   overload: Microsoft.AspNetCore.Session.DistributedSession.LoadAsync*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.LoadAsync
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -420,12 +394,10 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public Task CommitAsync()
-    content.vb: Public Function CommitAsync As Task
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function CommitAsync As Task
   overload: Microsoft.AspNetCore.Session.DistributedSession.CommitAsync*
-  implements:
-  - Microsoft.AspNetCore.Http.ISession.CommitAsync
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -444,317 +416,23 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Http.ISession
-  commentId: T:Microsoft.AspNetCore.Http.ISession
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: ISession
-  nameWithType: ISession
-  fullName: Microsoft.AspNetCore.Http.ISession
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
 - uid: Microsoft.AspNetCore.Session.DistributedSession.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.#ctor
   isExternal: false
   name: DistributedSession
   nameWithType: DistributedSession.DistributedSession
   fullName: Microsoft.AspNetCore.Session.DistributedSession.DistributedSession
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  commentId: T:Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  parent: Microsoft.Extensions.Caching.Distributed
-  isExternal: false
+- uid: IDistributedCache
+  isExternal: true
   name: IDistributedCache
   nameWithType: IDistributedCache
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache
+  fullName: IDistributedCache
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -813,13 +491,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Logging.ILoggerFactory
-  commentId: T:Microsoft.Extensions.Logging.ILoggerFactory
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+- uid: ILoggerFactory
+  isExternal: true
   name: ILoggerFactory
   nameWithType: ILoggerFactory
-  fullName: Microsoft.Extensions.Logging.ILoggerFactory
+  fullName: ILoggerFactory
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -827,12 +503,6 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: Microsoft.Extensions.Caching.Distributed
-  commentId: N:Microsoft.Extensions.Caching.Distributed
-  isExternal: false
-  name: Microsoft.Extensions.Caching.Distributed
-  nameWithType: Microsoft.Extensions.Caching.Distributed
-  fullName: Microsoft.Extensions.Caching.Distributed
 - uid: System.Func`1
   commentId: T:System.Func`1
   isExternal: true
@@ -872,51 +542,24 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
 - uid: Microsoft.AspNetCore.Session.DistributedSession.IsAvailable*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.IsAvailable
   isExternal: false
   name: IsAvailable
   nameWithType: DistributedSession.IsAvailable
   fullName: Microsoft.AspNetCore.Session.DistributedSession.IsAvailable
-- uid: Microsoft.AspNetCore.Http.ISession.IsAvailable
-  commentId: P:Microsoft.AspNetCore.Http.ISession.IsAvailable
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: IsAvailable
-  nameWithType: ISession.IsAvailable
-  fullName: Microsoft.AspNetCore.Http.ISession.IsAvailable
 - uid: Microsoft.AspNetCore.Session.DistributedSession.Id*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.Id
   isExternal: false
   name: Id
   nameWithType: DistributedSession.Id
   fullName: Microsoft.AspNetCore.Session.DistributedSession.Id
-- uid: Microsoft.AspNetCore.Http.ISession.Id
-  commentId: P:Microsoft.AspNetCore.Http.ISession.Id
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: Id
-  nameWithType: ISession.Id
-  fullName: Microsoft.AspNetCore.Http.ISession.Id
 - uid: Microsoft.AspNetCore.Session.DistributedSession.Keys*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.Keys
   isExternal: false
   name: Keys
   nameWithType: DistributedSession.Keys
   fullName: Microsoft.AspNetCore.Session.DistributedSession.Keys
-- uid: Microsoft.AspNetCore.Http.ISession.Keys
-  commentId: P:Microsoft.AspNetCore.Http.ISession.Keys
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: Keys
-  nameWithType: ISession.Keys
-  fullName: Microsoft.AspNetCore.Http.ISession.Keys
 - uid: System.Collections.Generic.IEnumerable{System.String}
   commentId: T:System.Collections.Generic.IEnumerable{System.String}
   parent: System.Collections.Generic
@@ -1012,72 +655,6 @@ references:
   name: TryGetValue
   nameWithType: DistributedSession.TryGetValue
   fullName: Microsoft.AspNetCore.Session.DistributedSession.TryGetValue
-- uid: Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String,System.Byte[]@)
-  commentId: M:Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String,System.Byte[]@)
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: TryGetValue(String, Byte[])
-  nameWithType: ISession.TryGetValue(String, Byte[])
-  fullName: Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String, System.Byte[])
-  nameWithType.vb: ISession.TryGetValue(String, Byte())
-  fullName.vb: Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String, System.Byte())
-  name.vb: TryGetValue(String, Byte())
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String,System.Byte[]@)
-    name: TryGetValue
-    nameWithType: ISession.TryGetValue
-    fullName: Microsoft.AspNetCore.Http.ISession.TryGetValue
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.TryGetValue(System.String,System.Byte[]@)
-    name: TryGetValue
-    nameWithType: ISession.TryGetValue
-    fullName: Microsoft.AspNetCore.Http.ISession.TryGetValue
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Byte[]
   name: Byte[]
   nameWithType: Byte[]
@@ -1109,193 +686,24 @@ references:
   name: Set
   nameWithType: DistributedSession.Set
   fullName: Microsoft.AspNetCore.Session.DistributedSession.Set
-- uid: Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])
-  commentId: M:Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: Set(String, Byte[])
-  nameWithType: ISession.Set(String, Byte[])
-  fullName: Microsoft.AspNetCore.Http.ISession.Set(System.String, System.Byte[])
-  nameWithType.vb: ISession.Set(String, Byte())
-  fullName.vb: Microsoft.AspNetCore.Http.ISession.Set(System.String, System.Byte())
-  name.vb: Set(String, Byte())
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])
-    name: Set
-    nameWithType: ISession.Set
-    fullName: Microsoft.AspNetCore.Http.ISession.Set
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])
-    name: Set
-    nameWithType: ISession.Set
-    fullName: Microsoft.AspNetCore.Http.ISession.Set
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Session.DistributedSession.Remove*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.Remove
   isExternal: false
   name: Remove
   nameWithType: DistributedSession.Remove
   fullName: Microsoft.AspNetCore.Session.DistributedSession.Remove
-- uid: Microsoft.AspNetCore.Http.ISession.Remove(System.String)
-  commentId: M:Microsoft.AspNetCore.Http.ISession.Remove(System.String)
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: Remove(String)
-  nameWithType: ISession.Remove(String)
-  fullName: Microsoft.AspNetCore.Http.ISession.Remove(System.String)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.Remove(System.String)
-    name: Remove
-    nameWithType: ISession.Remove
-    fullName: Microsoft.AspNetCore.Http.ISession.Remove
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.Remove(System.String)
-    name: Remove
-    nameWithType: ISession.Remove
-    fullName: Microsoft.AspNetCore.Http.ISession.Remove
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Session.DistributedSession.Clear*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.Clear
   isExternal: false
   name: Clear
   nameWithType: DistributedSession.Clear
   fullName: Microsoft.AspNetCore.Session.DistributedSession.Clear
-- uid: Microsoft.AspNetCore.Http.ISession.Clear
-  commentId: M:Microsoft.AspNetCore.Http.ISession.Clear
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: Clear()
-  nameWithType: ISession.Clear()
-  fullName: Microsoft.AspNetCore.Http.ISession.Clear()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.Clear
-    name: Clear
-    nameWithType: ISession.Clear
-    fullName: Microsoft.AspNetCore.Http.ISession.Clear
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.Clear
-    name: Clear
-    nameWithType: ISession.Clear
-    fullName: Microsoft.AspNetCore.Http.ISession.Clear
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Session.DistributedSession.LoadAsync*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSession.LoadAsync
   isExternal: false
   name: LoadAsync
   nameWithType: DistributedSession.LoadAsync
   fullName: Microsoft.AspNetCore.Session.DistributedSession.LoadAsync
-- uid: Microsoft.AspNetCore.Http.ISession.LoadAsync
-  commentId: M:Microsoft.AspNetCore.Http.ISession.LoadAsync
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: LoadAsync()
-  nameWithType: ISession.LoadAsync()
-  fullName: Microsoft.AspNetCore.Http.ISession.LoadAsync()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.LoadAsync
-    name: LoadAsync
-    nameWithType: ISession.LoadAsync
-    fullName: Microsoft.AspNetCore.Http.ISession.LoadAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.LoadAsync
-    name: LoadAsync
-    nameWithType: ISession.LoadAsync
-    fullName: Microsoft.AspNetCore.Http.ISession.LoadAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -1315,35 +723,4 @@ references:
   name: CommitAsync
   nameWithType: DistributedSession.CommitAsync
   fullName: Microsoft.AspNetCore.Session.DistributedSession.CommitAsync
-- uid: Microsoft.AspNetCore.Http.ISession.CommitAsync
-  commentId: M:Microsoft.AspNetCore.Http.ISession.CommitAsync
-  parent: Microsoft.AspNetCore.Http.ISession
-  isExternal: true
-  name: CommitAsync()
-  nameWithType: ISession.CommitAsync()
-  fullName: Microsoft.AspNetCore.Http.ISession.CommitAsync()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ISession.CommitAsync
-    name: CommitAsync
-    nameWithType: ISession.CommitAsync
-    fullName: Microsoft.AspNetCore.Http.ISession.CommitAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ISession.CommitAsync
-    name: CommitAsync
-    nameWithType: ISession.CommitAsync
-    fullName: Microsoft.AspNetCore.Http.ISession.CommitAsync
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

@@ -5,7 +5,7 @@ items:
   id: KestrelTrace
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal
   children:
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(Microsoft.Extensions.Logging.ILogger)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(ILogger)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace._logger
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ApplicationError(System.String,System.Exception)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.BeginScope``1(``0)
@@ -24,8 +24,8 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWriteCallback(System.String,System.Int32)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWriteFin(System.String)
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWroteFin(System.String,System.Int32)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(System.LogLevel)
+  - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(System.LogLevel,EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
   - Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.NotAllConnectionsClosedGracefully
   langs:
   - csharp
@@ -56,7 +56,6 @@ items:
   - System.Object
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-  - Microsoft.Extensions.Logging.ILogger
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -95,25 +94,25 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: protected readonly ILogger _logger
-    content.vb: Protected ReadOnly _logger As ILogger
     return:
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
+    content.vb: Protected ReadOnly _logger As ILogger
   modifiers.csharp:
   - protected
   - readonly
   modifiers.vb:
   - Protected
   - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(Microsoft.Extensions.Logging.ILogger)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(Microsoft.Extensions.Logging.ILogger)
-  id: '#ctor(Microsoft.Extensions.Logging.ILogger)'
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(ILogger)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor(ILogger)
+  id: '#ctor(ILogger)'
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace
   langs:
   - csharp
   - vb
   name: KestrelTrace(ILogger)
   nameWithType: KestrelTrace.KestrelTrace(ILogger)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.KestrelTrace(Microsoft.Extensions.Logging.ILogger)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.KestrelTrace(ILogger)
   type: Constructor
   source:
     remote:
@@ -128,10 +127,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public KestrelTrace(ILogger logger)
-    content.vb: Public Sub New(logger As ILogger)
     parameters:
     - id: logger
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
+    content.vb: Public Sub New(logger As ILogger)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor*
   modifiers.csharp:
   - public
@@ -161,10 +160,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionStart(string connectionId)
-    content.vb: Public Overridable Sub ConnectionStart(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionStart(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionStart*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionStart(System.String)
@@ -198,10 +197,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionStop(string connectionId)
-    content.vb: Public Overridable Sub ConnectionStop(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionStop(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionStop*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionStop(System.String)
@@ -235,12 +234,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionRead(string connectionId, int count)
-    content.vb: Public Overridable Sub ConnectionRead(connectionId As String, count As Integer)
     parameters:
     - id: connectionId
       type: System.String
     - id: count
       type: System.Int32
+    content.vb: Public Overridable Sub ConnectionRead(connectionId As String, count As Integer)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionRead*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionRead(System.String,System.Int32)
@@ -274,10 +273,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionPause(string connectionId)
-    content.vb: Public Overridable Sub ConnectionPause(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionPause(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionPause*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionPause(System.String)
@@ -311,10 +310,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionResume(string connectionId)
-    content.vb: Public Overridable Sub ConnectionResume(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionResume(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionResume*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionResume(System.String)
@@ -348,10 +347,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionReadFin(string connectionId)
-    content.vb: Public Overridable Sub ConnectionReadFin(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionReadFin(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionReadFin*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionReadFin(System.String)
@@ -385,10 +384,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionWriteFin(string connectionId)
-    content.vb: Public Overridable Sub ConnectionWriteFin(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionWriteFin(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWriteFin*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionWriteFin(System.String)
@@ -422,12 +421,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionWroteFin(string connectionId, int status)
-    content.vb: Public Overridable Sub ConnectionWroteFin(connectionId As String, status As Integer)
     parameters:
     - id: connectionId
       type: System.String
     - id: status
       type: System.Int32
+    content.vb: Public Overridable Sub ConnectionWroteFin(connectionId As String, status As Integer)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWroteFin*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionWroteFin(System.String,System.Int32)
@@ -461,10 +460,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionKeepAlive(string connectionId)
-    content.vb: Public Overridable Sub ConnectionKeepAlive(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionKeepAlive(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionKeepAlive*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionKeepAlive(System.String)
@@ -498,10 +497,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionDisconnect(string connectionId)
-    content.vb: Public Overridable Sub ConnectionDisconnect(connectionId As String)
     parameters:
     - id: connectionId
       type: System.String
+    content.vb: Public Overridable Sub ConnectionDisconnect(connectionId As String)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionDisconnect*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionDisconnect(System.String)
@@ -535,12 +534,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionWrite(string connectionId, int count)
-    content.vb: Public Overridable Sub ConnectionWrite(connectionId As String, count As Integer)
     parameters:
     - id: connectionId
       type: System.String
     - id: count
       type: System.Int32
+    content.vb: Public Overridable Sub ConnectionWrite(connectionId As String, count As Integer)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWrite*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionWrite(System.String,System.Int32)
@@ -574,12 +573,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionWriteCallback(string connectionId, int status)
-    content.vb: Public Overridable Sub ConnectionWriteCallback(connectionId As String, status As Integer)
     parameters:
     - id: connectionId
       type: System.String
     - id: status
       type: System.Int32
+    content.vb: Public Overridable Sub ConnectionWriteCallback(connectionId As String, status As Integer)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionWriteCallback*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionWriteCallback(System.String,System.Int32)
@@ -613,12 +612,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ApplicationError(string connectionId, Exception ex)
-    content.vb: Public Overridable Sub ApplicationError(connectionId As String, ex As Exception)
     parameters:
     - id: connectionId
       type: System.String
     - id: ex
       type: System.Exception
+    content.vb: Public Overridable Sub ApplicationError(connectionId As String, ex As Exception)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ApplicationError*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ApplicationError(System.String,System.Exception)
@@ -652,12 +651,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionError(string connectionId, Exception ex)
-    content.vb: Public Overridable Sub ConnectionError(connectionId As String, ex As Exception)
     parameters:
     - id: connectionId
       type: System.String
     - id: ex
       type: System.Exception
+    content.vb: Public Overridable Sub ConnectionError(connectionId As String, ex As Exception)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionError*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionError(System.String,System.Exception)
@@ -691,7 +690,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void ConnectionDisconnectedWrite(string connectionId, int count, Exception ex)
-    content.vb: Public Overridable Sub ConnectionDisconnectedWrite(connectionId As String, count As Integer, ex As Exception)
     parameters:
     - id: connectionId
       type: System.String
@@ -699,6 +697,7 @@ items:
       type: System.Int32
     - id: ex
       type: System.Exception
+    content.vb: Public Overridable Sub ConnectionDisconnectedWrite(connectionId As String, count As Integer, ex As Exception)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionDisconnectedWrite*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionDisconnectedWrite(System.String,System.Int32,System.Exception)
@@ -766,12 +765,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public void ConnectionBadRequest(string connectionId, BadHttpRequestException ex)
-    content.vb: Public Sub ConnectionBadRequest(connectionId As String, ex As BadHttpRequestException)
     parameters:
     - id: connectionId
       type: System.String
     - id: ex
       type: Microsoft.AspNetCore.Server.Kestrel.BadHttpRequestException
+    content.vb: Public Sub ConnectionBadRequest(connectionId As String, ex As BadHttpRequestException)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.ConnectionBadRequest*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace.ConnectionBadRequest(System.String,Microsoft.AspNetCore.Server.Kestrel.BadHttpRequestException)
@@ -779,16 +778,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  id: Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(System.LogLevel,EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log``1(System.LogLevel,EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
+  id: Log``1(System.LogLevel,EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace
   langs:
   - csharp
   - vb
   name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
   nameWithType: KestrelTrace.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log<TState>(System.LogLevel, EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
   type: Method
   source:
     remote:
@@ -803,12 +802,11 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
-    content.vb: Public Overridable Sub Log(Of TState)(logLevel As LogLevel, eventId As EventId, state As TState, exception As Exception, formatter As Func(Of TState, Exception, String))
     parameters:
     - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+      type: System.LogLevel
     - id: eventId
-      type: Microsoft.Extensions.Logging.EventId
+      type: EventId
     - id: state
       type: '{TState}'
     - id: exception
@@ -817,9 +815,8 @@ items:
       type: System.Func{{TState},System.Exception,System.String}
     typeParameters:
     - id: TState
+    content.vb: Public Overridable Sub Log(Of TState)(logLevel As LogLevel, eventId As EventId, state As TState, exception As Exception, formatter As Func(Of TState, Exception, String))
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,{TState},System.Exception,System.Func{{TState},System.Exception,System.String})
   nameWithType.vb: KestrelTrace.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
   modifiers.csharp:
   - public
@@ -827,18 +824,18 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
+  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log(Of TState)(System.LogLevel, EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
   name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  id: IsEnabled(Microsoft.Extensions.Logging.LogLevel)
+- uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(System.LogLevel)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(System.LogLevel)
+  id: IsEnabled(System.LogLevel)
   parent: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace
   langs:
   - csharp
   - vb
   name: IsEnabled(LogLevel)
   nameWithType: KestrelTrace.IsEnabled(LogLevel)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled(System.LogLevel)
   type: Method
   source:
     remote:
@@ -853,15 +850,13 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual bool IsEnabled(LogLevel logLevel)
-    content.vb: Public Overridable Function IsEnabled(logLevel As LogLevel) As Boolean
     parameters:
     - id: logLevel
-      type: Microsoft.Extensions.Logging.LogLevel
+      type: System.LogLevel
     return:
       type: System.Boolean
+    content.vb: Public Overridable Function IsEnabled(logLevel As LogLevel) As Boolean
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
   modifiers.csharp:
   - public
   - virtual
@@ -892,7 +887,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal
   syntax:
     content: public virtual IDisposable BeginScope<TState>(TState state)
-    content.vb: Public Overridable Function BeginScope(Of TState)(state As TState) As IDisposable
     parameters:
     - id: state
       type: '{TState}'
@@ -900,9 +894,8 @@ items:
     - id: TState
     return:
       type: System.IDisposable
+    content.vb: Public Overridable Function BeginScope(Of TState)(state As TState) As IDisposable
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.BeginScope*
-  implements:
-  - Microsoft.Extensions.Logging.ILogger.BeginScope``1({TState})
   nameWithType.vb: KestrelTrace.BeginScope(Of TState)(TState)
   modifiers.csharp:
   - public
@@ -933,13 +926,6 @@ references:
   name: IKestrelTrace
   nameWithType: IKestrelTrace
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
-- uid: Microsoft.Extensions.Logging.ILogger
-  commentId: T:Microsoft.Extensions.Logging.ILogger
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
-  name: ILogger
-  nameWithType: ILogger
-  fullName: Microsoft.Extensions.Logging.ILogger
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -1231,12 +1217,11 @@ references:
   name: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
   nameWithType: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+- uid: ILogger
+  isExternal: true
+  name: ILogger
+  nameWithType: ILogger
+  fullName: ILogger
 - uid: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.#ctor
   isExternal: false
@@ -2180,168 +2165,17 @@ references:
   name: Log
   nameWithType: KestrelTrace.Log
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.Log
-- uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,{TState},System.Exception,System.Func{{TState},System.Exception,System.String})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  parent: Microsoft.Extensions.Logging.ILogger
-  definition: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  nameWithType: ILogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
-  nameWithType.vb: ILogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
-  name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log<TState>
-    nameWithType: ILogger.Log<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log(Of TState)
-    nameWithType: ILogger.Log(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.Log(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Logging.LogLevel
-  commentId: T:Microsoft.Extensions.Logging.LogLevel
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+- uid: System.LogLevel
+  commentId: T:System.LogLevel
+  isExternal: true
   name: LogLevel
   nameWithType: LogLevel
-  fullName: Microsoft.Extensions.Logging.LogLevel
-- uid: Microsoft.Extensions.Logging.EventId
-  commentId: T:Microsoft.Extensions.Logging.EventId
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+  fullName: System.LogLevel
+- uid: EventId
+  isExternal: true
   name: EventId
   nameWithType: EventId
-  fullName: Microsoft.Extensions.Logging.EventId
+  fullName: EventId
 - uid: '{TState}'
   commentId: '!:TState'
   definition: TState
@@ -2420,153 +2254,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-  isExternal: true
-  name: Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  nameWithType: ILogger.Log<TState>(LogLevel, EventId, TState, Exception, Func<TState, Exception, String>)
-  fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func<TState, System.Exception, System.String>)
-  nameWithType.vb: ILogger.Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.Log(Of TState)(Microsoft.Extensions.Logging.LogLevel, Microsoft.Extensions.Logging.EventId, TState, System.Exception, System.Func(Of TState, System.Exception, System.String))
-  name.vb: Log(Of TState)(LogLevel, EventId, TState, Exception, Func(Of TState, Exception, String))
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log<TState>
-    nameWithType: ILogger.Log<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.Log<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.Log``1(Microsoft.Extensions.Logging.LogLevel,Microsoft.Extensions.Logging.EventId,``0,System.Exception,System.Func{``0,System.Exception,System.String})
-    name: Log(Of TState)
-    nameWithType: ILogger.Log(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.Log(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Logging.EventId
-    name: EventId
-    nameWithType: EventId
-    fullName: Microsoft.Extensions.Logging.EventId
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Func`3
-    name: Func
-    nameWithType: Func
-    fullName: System.Func
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Exception
-    name: Exception
-    nameWithType: Exception
-    fullName: System.Exception
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: TState
   isExternal: false
   name: TState
@@ -2641,43 +2328,6 @@ references:
   name: IsEnabled
   nameWithType: KestrelTrace.IsEnabled
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.IsEnabled
-- uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  commentId: M:Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  parent: Microsoft.Extensions.Logging.ILogger
-  isExternal: false
-  name: IsEnabled(LogLevel)
-  nameWithType: ILogger.IsEnabled(LogLevel)
-  fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-    name: IsEnabled
-    nameWithType: ILogger.IsEnabled
-    fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.IsEnabled(Microsoft.Extensions.Logging.LogLevel)
-    name: IsEnabled
-    nameWithType: ILogger.IsEnabled
-    fullName: Microsoft.Extensions.Logging.ILogger.IsEnabled
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.Logging.LogLevel
-    name: LogLevel
-    nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -2691,44 +2341,6 @@ references:
   name: BeginScope
   nameWithType: KestrelTrace.BeginScope
   fullName: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelTrace.BeginScope
-- uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1({TState})
-  commentId: M:Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  parent: Microsoft.Extensions.Logging.ILogger
-  definition: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  name: BeginScope<TState>(TState)
-  nameWithType: ILogger.BeginScope<TState>(TState)
-  fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState)
-  nameWithType.vb: ILogger.BeginScope(Of TState)(TState)
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)(TState)
-  name.vb: BeginScope(Of TState)(TState)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope<TState>
-    nameWithType: ILogger.BeginScope<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope(Of TState)
-    nameWithType: ILogger.BeginScope(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.IDisposable
   commentId: T:System.IDisposable
   parent: System
@@ -2736,41 +2348,4 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
-- uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  commentId: M:Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-  isExternal: false
-  name: BeginScope<TState>(TState)
-  nameWithType: ILogger.BeginScope<TState>(TState)
-  fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>(TState)
-  nameWithType.vb: ILogger.BeginScope(Of TState)(TState)
-  fullName.vb: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)(TState)
-  name.vb: BeginScope(Of TState)(TState)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope<TState>
-    nameWithType: ILogger.BeginScope<TState>
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope<TState>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILogger.BeginScope``1(``0)
-    name: BeginScope(Of TState)
-    nameWithType: ILogger.BeginScope(Of TState)
-    fullName: Microsoft.Extensions.Logging.ILogger.BeginScope(Of TState)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: TState
-    nameWithType: TState
-    fullName: TState
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

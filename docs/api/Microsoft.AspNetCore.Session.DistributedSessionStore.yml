@@ -5,7 +5,7 @@ items:
   id: DistributedSessionStore
   parent: Microsoft.AspNetCore.Session
   children:
-  - Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory)
+  - Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(IDistributedCache,ILoggerFactory)
   - Microsoft.AspNetCore.Session.DistributedSessionStore.Create(System.String,System.TimeSpan,System.Func{System.Boolean},System.Boolean)
   langs:
   - csharp
@@ -48,16 +48,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory)
-  commentId: M:Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory)
-  id: '#ctor(Microsoft.Extensions.Caching.Distributed.IDistributedCache,Microsoft.Extensions.Logging.ILoggerFactory)'
+- uid: Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(IDistributedCache,ILoggerFactory)
+  commentId: M:Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor(IDistributedCache,ILoggerFactory)
+  id: '#ctor(IDistributedCache,ILoggerFactory)'
   parent: Microsoft.AspNetCore.Session.DistributedSessionStore
   langs:
   - csharp
   - vb
   name: DistributedSessionStore(IDistributedCache, ILoggerFactory)
   nameWithType: DistributedSessionStore.DistributedSessionStore(IDistributedCache, ILoggerFactory)
-  fullName: Microsoft.AspNetCore.Session.DistributedSessionStore.DistributedSessionStore(Microsoft.Extensions.Caching.Distributed.IDistributedCache, Microsoft.Extensions.Logging.ILoggerFactory)
+  fullName: Microsoft.AspNetCore.Session.DistributedSessionStore.DistributedSessionStore(IDistributedCache, ILoggerFactory)
   type: Constructor
   source:
     remote:
@@ -72,12 +72,12 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public DistributedSessionStore(IDistributedCache cache, ILoggerFactory loggerFactory)
-    content.vb: Public Sub New(cache As IDistributedCache, loggerFactory As ILoggerFactory)
     parameters:
     - id: cache
-      type: Microsoft.Extensions.Caching.Distributed.IDistributedCache
+      type: IDistributedCache
     - id: loggerFactory
-      type: Microsoft.Extensions.Logging.ILoggerFactory
+      type: ILoggerFactory
+    content.vb: Public Sub New(cache As IDistributedCache, loggerFactory As ILoggerFactory)
   overload: Microsoft.AspNetCore.Session.DistributedSessionStore.#ctor*
   modifiers.csharp:
   - public
@@ -107,7 +107,6 @@ items:
   namespace: Microsoft.AspNetCore.Session
   syntax:
     content: public ISession Create(string sessionKey, TimeSpan idleTimeout, Func<bool> tryEstablishSession, bool isNewSessionKey)
-    content.vb: Public Function Create(sessionKey As String, idleTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), isNewSessionKey As Boolean) As ISession
     parameters:
     - id: sessionKey
       type: System.String
@@ -118,7 +117,8 @@ items:
     - id: isNewSessionKey
       type: System.Boolean
     return:
-      type: Microsoft.AspNetCore.Http.ISession
+      type: ISession
+    content.vb: Public Function Create(sessionKey As String, idleTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), isNewSessionKey As Boolean) As ISession
   overload: Microsoft.AspNetCore.Session.DistributedSessionStore.Create*
   implements:
   - Microsoft.AspNetCore.Session.ISessionStore.Create(System.String,System.TimeSpan,System.Func{System.Boolean},System.Boolean)
@@ -441,32 +441,16 @@ references:
   name: DistributedSessionStore
   nameWithType: DistributedSessionStore.DistributedSessionStore
   fullName: Microsoft.AspNetCore.Session.DistributedSessionStore.DistributedSessionStore
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  commentId: T:Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  parent: Microsoft.Extensions.Caching.Distributed
-  isExternal: false
+- uid: IDistributedCache
+  isExternal: true
   name: IDistributedCache
   nameWithType: IDistributedCache
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-- uid: Microsoft.Extensions.Logging.ILoggerFactory
-  commentId: T:Microsoft.Extensions.Logging.ILoggerFactory
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+  fullName: IDistributedCache
+- uid: ILoggerFactory
+  isExternal: true
   name: ILoggerFactory
   nameWithType: ILoggerFactory
-  fullName: Microsoft.Extensions.Logging.ILoggerFactory
-- uid: Microsoft.Extensions.Caching.Distributed
-  commentId: N:Microsoft.Extensions.Caching.Distributed
-  isExternal: false
-  name: Microsoft.Extensions.Caching.Distributed
-  nameWithType: Microsoft.Extensions.Caching.Distributed
-  fullName: Microsoft.Extensions.Caching.Distributed
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  fullName: ILoggerFactory
 - uid: Microsoft.AspNetCore.Session.DistributedSessionStore.Create*
   commentId: Overload:Microsoft.AspNetCore.Session.DistributedSessionStore.Create
   isExternal: false
@@ -650,13 +634,11 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: Microsoft.AspNetCore.Http.ISession
-  commentId: T:Microsoft.AspNetCore.Http.ISession
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: ISession
+  isExternal: true
   name: ISession
   nameWithType: ISession
-  fullName: Microsoft.AspNetCore.Http.ISession
+  fullName: ISession
 - uid: System.Func`1
   commentId: T:System.Func`1
   isExternal: true
@@ -696,10 +678,4 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
 shouldSkipMarkup: true

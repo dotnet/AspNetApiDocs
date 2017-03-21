@@ -33,19 +33,17 @@ items:
     content.vb: >-
       Public Interface IMemoryCache
           Inherits IDisposable
-  inheritedMembers:
-  - System.IDisposable.Dispose
   extensionMethods:
   - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Get(System.Object)
   - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Get``1(System.Object)
   - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.TryGetValue``1(System.Object,{TItem}@)
   - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem})
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},System.DateTimeOffset)
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},System.TimeSpan)
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},Microsoft.Extensions.Primitives.IChangeToken)
+  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},DateTimeOffset)
+  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},TimeSpan)
+  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},IChangeToken)
   - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions)
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,{TItem}})
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{{TItem}}})
+  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,{TItem}})
+  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{{TItem}}})
   modifiers.csharp:
   - public
   - interface
@@ -78,7 +76,6 @@ items:
   example: []
   syntax:
     content: bool TryGetValue(object key, out object value)
-    content.vb: Function TryGetValue(key As Object, ByRef value As Object) As Boolean
     parameters:
     - id: key
       type: System.Object
@@ -89,6 +86,7 @@ items:
     return:
       type: System.Boolean
       description: True if the key was found.
+    content.vb: Function TryGetValue(key As Object, ByRef value As Object) As Boolean
   overload: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue*
   nameWithType.vb: IMemoryCache.TryGetValue(Object, ByRef Object)
   fullName.vb: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object, ByRef System.Object)
@@ -119,7 +117,6 @@ items:
   example: []
   syntax:
     content: ICacheEntry CreateEntry(object key)
-    content.vb: Function CreateEntry(key As Object) As ICacheEntry
     parameters:
     - id: key
       type: System.Object
@@ -127,6 +124,7 @@ items:
     return:
       type: Microsoft.Extensions.Caching.Memory.ICacheEntry
       description: The newly created <xref href="Microsoft.Extensions.Caching.Memory.ICacheEntry" data-throw-if-not-resolved="false"></xref> instance.
+    content.vb: Function CreateEntry(key As Object) As ICacheEntry
   overload: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry*
 - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
   commentId: M:Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
@@ -154,11 +152,11 @@ items:
   example: []
   syntax:
     content: void Remove(object key)
-    content.vb: Sub Remove(key As Object)
     parameters:
     - id: key
       type: System.Object
       description: An object identifying the entry.
+    content.vb: Sub Remove(key As Object)
   overload: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove*
 references:
 - uid: Microsoft.Extensions.Caching.Memory
@@ -167,37 +165,6 @@ references:
   name: Microsoft.Extensions.Caching.Memory
   nameWithType: Microsoft.Extensions.Caching.Memory
   fullName: Microsoft.Extensions.Caching.Memory
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Get(System.Object)
   commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object)
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
@@ -387,18 +354,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},System.DateTimeOffset)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},DateTimeOffset)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
-  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
+  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
   name: Set<TItem>(Object, TItem, DateTimeOffset)
   nameWithType: CacheExtensions.Set<TItem>(Object, TItem, DateTimeOffset)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, System.DateTimeOffset)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, DateTimeOffset)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(Object, TItem, DateTimeOffset)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, System.DateTimeOffset)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, DateTimeOffset)
   name.vb: Set(Of TItem)(Object, TItem, DateTimeOffset)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,DateTimeOffset)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -419,16 +386,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,DateTimeOffset)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -449,26 +416,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
-  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
+  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
   name: Set<TItem>(Object, TItem, TimeSpan)
   nameWithType: CacheExtensions.Set<TItem>(Object, TItem, TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, TimeSpan)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(Object, TItem, TimeSpan)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, System.TimeSpan)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, TimeSpan)
   name.vb: Set(Of TItem)(Object, TItem, TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,TimeSpan)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -489,16 +456,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,TimeSpan)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -519,26 +486,26 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},Microsoft.Extensions.Primitives.IChangeToken)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,{TItem},IChangeToken)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
-  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
   name: Set<TItem>(Object, TItem, IChangeToken)
   nameWithType: CacheExtensions.Set<TItem>(Object, TItem, IChangeToken)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, Microsoft.Extensions.Primitives.IChangeToken)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(System.Object, TItem, IChangeToken)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(Object, TItem, IChangeToken)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, Microsoft.Extensions.Primitives.IChangeToken)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(System.Object, TItem, IChangeToken)
   name.vb: Set(Of TItem)(Object, TItem, IChangeToken)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,IChangeToken)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -559,16 +526,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(System.Object,``0,IChangeToken)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -589,10 +556,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
@@ -665,18 +632,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,{TItem}})
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,{TItem}})
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
-  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
   name: GetOrCreate<TItem>(Object, Func<ICacheEntry, TItem>)
   nameWithType: CacheExtensions.GetOrCreate<TItem>(Object, Func<ICacheEntry, TItem>)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>(System.Object, System.Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem>)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>(System.Object, Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem>)
   nameWithType.vb: CacheExtensions.GetOrCreate(Of TItem)(Object, Func(Of ICacheEntry, TItem))
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)(System.Object, System.Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem))
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)(System.Object, Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem))
   name.vb: GetOrCreate(Of TItem)(Object, Func(Of ICacheEntry, TItem))
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
     name: GetOrCreate<TItem>
     nameWithType: CacheExtensions.GetOrCreate<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>
@@ -691,10 +658,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
@@ -716,7 +683,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
     name: GetOrCreate(Of TItem)
     nameWithType: CacheExtensions.GetOrCreate(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)
@@ -731,10 +698,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -755,18 +722,18 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{{TItem}}})
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{{TItem}}})
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
   parent: Microsoft.Extensions.Caching.Memory.CacheExtensions
-  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+  definition: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
   name: GetOrCreateAsync<TItem>(Object, Func<ICacheEntry, Task<TItem>>)
   nameWithType: CacheExtensions.GetOrCreateAsync<TItem>(Object, Func<ICacheEntry, Task<TItem>>)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>(System.Object, System.Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, System.Threading.Tasks.Task<TItem>>)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>(System.Object, Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, Task<TItem>>)
   nameWithType.vb: CacheExtensions.GetOrCreateAsync(Of TItem)(Object, Func(Of ICacheEntry, Task(Of TItem)))
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)(System.Object, System.Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, System.Threading.Tasks.Task(Of TItem)))
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)(System.Object, Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, Task(Of TItem)))
   name.vb: GetOrCreateAsync(Of TItem)(Object, Func(Of ICacheEntry, Task(Of TItem)))
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
     name: GetOrCreateAsync<TItem>
     nameWithType: CacheExtensions.GetOrCreateAsync<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>
@@ -781,10 +748,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
@@ -796,10 +763,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -817,7 +784,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
     name: GetOrCreateAsync(Of TItem)
     nameWithType: CacheExtensions.GetOrCreateAsync(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)
@@ -832,10 +799,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -847,10 +814,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -867,13 +834,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
 - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Get(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object)
   commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Get(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object)
   isExternal: true
@@ -1122,17 +1082,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
+- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
   isExternal: true
   name: Set<TItem>(IMemoryCache, Object, TItem, DateTimeOffset)
   nameWithType: CacheExtensions.Set<TItem>(IMemoryCache, Object, TItem, DateTimeOffset)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, System.DateTimeOffset)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, DateTimeOffset)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(IMemoryCache, Object, TItem, DateTimeOffset)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, System.DateTimeOffset)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, DateTimeOffset)
   name.vb: Set(Of TItem)(IMemoryCache, Object, TItem, DateTimeOffset)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -1160,16 +1120,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,DateTimeOffset)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -1197,25 +1157,25 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
   isExternal: true
   name: Set<TItem>(IMemoryCache, Object, TItem, TimeSpan)
   nameWithType: CacheExtensions.Set<TItem>(IMemoryCache, Object, TItem, TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, TimeSpan)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(IMemoryCache, Object, TItem, TimeSpan)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, System.TimeSpan)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, TimeSpan)
   name.vb: Set(Of TItem)(IMemoryCache, Object, TItem, TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -1243,16 +1203,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,TimeSpan)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -1280,25 +1240,25 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
   isExternal: true
   name: Set<TItem>(IMemoryCache, Object, TItem, IChangeToken)
   nameWithType: CacheExtensions.Set<TItem>(IMemoryCache, Object, TItem, IChangeToken)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, Microsoft.Extensions.Primitives.IChangeToken)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, IChangeToken)
   nameWithType.vb: CacheExtensions.Set(Of TItem)(IMemoryCache, Object, TItem, IChangeToken)
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, Microsoft.Extensions.Primitives.IChangeToken)
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, TItem, IChangeToken)
   name.vb: Set(Of TItem)(IMemoryCache, Object, TItem, IChangeToken)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
     name: Set<TItem>
     nameWithType: CacheExtensions.Set<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set<TItem>
@@ -1326,16 +1286,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,``0,IChangeToken)
     name: Set(Of TItem)
     nameWithType: CacheExtensions.Set(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.Set(Of TItem)
@@ -1363,10 +1323,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
@@ -1452,17 +1412,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
   isExternal: true
   name: GetOrCreate<TItem>(IMemoryCache, Object, Func<ICacheEntry, TItem>)
   nameWithType: CacheExtensions.GetOrCreate<TItem>(IMemoryCache, Object, Func<ICacheEntry, TItem>)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, System.Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem>)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem>)
   nameWithType.vb: CacheExtensions.GetOrCreate(Of TItem)(IMemoryCache, Object, Func(Of ICacheEntry, TItem))
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, System.Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem))
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, TItem))
   name.vb: GetOrCreate(Of TItem)(IMemoryCache, Object, Func(Of ICacheEntry, TItem))
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
     name: GetOrCreate<TItem>
     nameWithType: CacheExtensions.GetOrCreate<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate<TItem>
@@ -1484,10 +1444,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
@@ -1509,7 +1469,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,``0})
     name: GetOrCreate(Of TItem)
     nameWithType: CacheExtensions.GetOrCreate(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreate(Of TItem)
@@ -1531,10 +1491,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1555,17 +1515,17 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
-  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+- uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
+  commentId: M:Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
   isExternal: true
   name: GetOrCreateAsync<TItem>(IMemoryCache, Object, Func<ICacheEntry, Task<TItem>>)
   nameWithType: CacheExtensions.GetOrCreateAsync<TItem>(IMemoryCache, Object, Func<ICacheEntry, Task<TItem>>)
-  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, System.Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, System.Threading.Tasks.Task<TItem>>)
+  fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, Func<Microsoft.Extensions.Caching.Memory.ICacheEntry, Task<TItem>>)
   nameWithType.vb: CacheExtensions.GetOrCreateAsync(Of TItem)(IMemoryCache, Object, Func(Of ICacheEntry, Task(Of TItem)))
-  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, System.Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, System.Threading.Tasks.Task(Of TItem)))
+  fullName.vb: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)(Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Object, Func(Of Microsoft.Extensions.Caching.Memory.ICacheEntry, Task(Of TItem)))
   name.vb: GetOrCreateAsync(Of TItem)(IMemoryCache, Object, Func(Of ICacheEntry, Task(Of TItem)))
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
     name: GetOrCreateAsync<TItem>
     nameWithType: CacheExtensions.GetOrCreateAsync<TItem>
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync<TItem>
@@ -1587,10 +1547,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: <
     nameWithType: <
@@ -1602,10 +1562,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -1623,7 +1583,7 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,System.Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task{``0}})
+  - uid: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync``1(Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Object,Func{Microsoft.Extensions.Caching.Memory.ICacheEntry,Task{``0}})
     name: GetOrCreateAsync(Of TItem)
     nameWithType: CacheExtensions.GetOrCreateAsync(Of TItem)
     fullName: Microsoft.Extensions.Caching.Memory.CacheExtensions.GetOrCreateAsync(Of TItem)
@@ -1645,10 +1605,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Func`2
+  - uid: Func`2
     name: Func
     nameWithType: Func
-    fullName: System.Func
+    fullName: Func
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1660,10 +1620,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1680,12 +1640,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System
-  commentId: N:System
-  isExternal: false
-  name: System
-  nameWithType: System
-  fullName: System
 - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue
   isExternal: false
@@ -1706,6 +1660,12 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
 - uid: Microsoft.Extensions.Caching.Memory.ICacheEntry
   commentId: T:Microsoft.Extensions.Caching.Memory.ICacheEntry
   parent: Microsoft.Extensions.Caching.Memory

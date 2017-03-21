@@ -29,13 +29,13 @@ items:
   example: []
   syntax:
     content: 'public class EmailTokenProvider<TUser> : TotpSecurityStampBasedTokenProvider<TUser>, IUserTwoFactorTokenProvider<TUser> where TUser : class'
+    typeParameters:
+    - id: TUser
+      description: The type used to represent a user.
     content.vb: >-
       Public Class EmailTokenProvider(Of TUser As Class)
           Inherits TotpSecurityStampBasedTokenProvider(Of TUser)
           Implements IUserTwoFactorTokenProvider(Of TUser)
-    typeParameters:
-    - id: TUser
-      description: The type used to represent a user.
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider{{TUser}}
@@ -86,7 +86,6 @@ items:
   example: []
   syntax:
     content: public override Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user)
-    content.vb: Public Overrides Function CanGenerateTwoFactorTokenAsync(manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
     parameters:
     - id: manager
       type: Microsoft.AspNetCore.Identity.UserManager{{TUser}}
@@ -97,6 +96,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
       description: True if the user has an email address set, otherwise false.
+    content.vb: Public Overrides Function CanGenerateTwoFactorTokenAsync(manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
   overridden: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider{{TUser}}.CanGenerateTwoFactorTokenAsync(Microsoft.AspNetCore.Identity.UserManager{{TUser}},{TUser})
   overload: Microsoft.AspNetCore.Identity.EmailTokenProvider`1.CanGenerateTwoFactorTokenAsync*
   nameWithType.vb: EmailTokenProvider(Of TUser).CanGenerateTwoFactorTokenAsync(UserManager(Of TUser), TUser)
@@ -134,7 +134,6 @@ items:
   example: []
   syntax:
     content: public override Task<string> GetUserModifierAsync(string purpose, UserManager<TUser> manager, TUser user)
-    content.vb: Public Overrides Function GetUserModifierAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
     parameters:
     - id: purpose
       type: System.String
@@ -148,6 +147,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.String}
       description: A string suitable for use as entropy in token generation.
+    content.vb: Public Overrides Function GetUserModifierAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
   overridden: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider{{TUser}}.GetUserModifierAsync(System.String,Microsoft.AspNetCore.Identity.UserManager{{TUser}},{TUser})
   overload: Microsoft.AspNetCore.Identity.EmailTokenProvider`1.GetUserModifierAsync*
   nameWithType.vb: EmailTokenProvider(Of TUser).GetUserModifierAsync(String, UserManager(Of TUser), TUser)

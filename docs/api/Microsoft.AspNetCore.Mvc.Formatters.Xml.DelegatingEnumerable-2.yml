@@ -32,14 +32,14 @@ items:
   example: []
   syntax:
     content: 'public class DelegatingEnumerable<TWrapped, TDeclared> : IEnumerable<TWrapped>, IEnumerable'
-    content.vb: >-
-      Public Class DelegatingEnumerable(Of TWrapped, TDeclared)
-          Implements IEnumerable(Of TWrapped), IEnumerable
     typeParameters:
     - id: TWrapped
       description: "The wrapping or original type of the <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> \nto proxy."
     - id: TDeclared
       description: "The type parameter of the original <xref href=\"System.Collections.Generic.IEnumerable%601\" data-throw-if-not-resolved=\"false\"></xref> \nto proxy."
+    content.vb: >-
+      Public Class DelegatingEnumerable(Of TWrapped, TDeclared)
+          Implements IEnumerable(Of TWrapped), IEnumerable
   inheritance:
   - System.Object
   implements:
@@ -123,7 +123,6 @@ items:
   example: []
   syntax:
     content: public DelegatingEnumerable(IEnumerable<TDeclared> source, IWrapperProvider elementWrapperProvider)
-    content.vb: Public Sub New(source As IEnumerable(Of TDeclared), elementWrapperProvider As IWrapperProvider)
     parameters:
     - id: source
       type: System.Collections.Generic.IEnumerable{{TDeclared}}
@@ -131,6 +130,7 @@ items:
     - id: elementWrapperProvider
       type: Microsoft.AspNetCore.Mvc.Formatters.Xml.IWrapperProvider
       description: The wrapper provider for wrapping individual elements.
+    content.vb: Public Sub New(source As IEnumerable(Of TDeclared), elementWrapperProvider As IWrapperProvider)
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerable`2.#ctor*
   nameWithType.vb: DelegatingEnumerable(Of TWrapped, TDeclared).DelegatingEnumerable(IEnumerable(Of TDeclared), IWrapperProvider)
   modifiers.csharp:
@@ -165,10 +165,10 @@ items:
   example: []
   syntax:
     content: public IEnumerator<TWrapped> GetEnumerator()
-    content.vb: Public Function GetEnumerator As IEnumerator(Of TWrapped)
     return:
       type: System.Collections.Generic.IEnumerator{{TWrapped}}
       description: The delegating enumerator of the original <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> source.
+    content.vb: Public Function GetEnumerator As IEnumerator(Of TWrapped)
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerable`2.GetEnumerator*
   implements:
   - System.Collections.Generic.IEnumerable{{TWrapped}}.GetEnumerator
@@ -204,11 +204,11 @@ items:
   example: []
   syntax:
     content: public void Add(object item)
-    content.vb: Public Sub Add(item As Object)
     parameters:
     - id: item
       type: System.Object
       description: The item to add. Unused.
+    content.vb: Public Sub Add(item As Object)
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerable`2.Add*
   nameWithType.vb: DelegatingEnumerable(Of TWrapped, TDeclared).Add(Object)
   modifiers.csharp:
@@ -243,10 +243,10 @@ items:
   example: []
   syntax:
     content: IEnumerator IEnumerable.GetEnumerator()
-    content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
     return:
       type: System.Collections.IEnumerator
       description: The delegating enumerator of the original <xref href="System.Collections.Generic.IEnumerable%601" data-throw-if-not-resolved="false"></xref> source.
+    content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
   overload: Microsoft.AspNetCore.Mvc.Formatters.Xml.DelegatingEnumerable`2.System#Collections#IEnumerable#GetEnumerator*
   implements:
   - System.Collections.IEnumerable.GetEnumerator

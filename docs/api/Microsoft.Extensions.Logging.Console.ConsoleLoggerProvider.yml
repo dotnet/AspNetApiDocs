@@ -6,7 +6,7 @@ items:
   parent: Microsoft.Extensions.Logging.Console
   children:
   - Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings)
-  - Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean},System.Boolean)
+  - Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,System.LogLevel,System.Boolean},System.Boolean)
   - Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.CreateLogger(System.String)
   - Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.Dispose
   langs:
@@ -28,39 +28,28 @@ items:
   - Microsoft.Extensions.Logging.Console
   namespace: Microsoft.Extensions.Logging.Console
   syntax:
-    content: 'public class ConsoleLoggerProvider : ILoggerProvider, IDisposable'
+    content: 'public class ConsoleLoggerProvider : ILoggerProvider'
     content.vb: >-
       Public Class ConsoleLoggerProvider
-          Implements ILoggerProvider, IDisposable
+          Inherits ILoggerProvider
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Logging.ILoggerProvider
-  - System.IDisposable
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean},System.Boolean)
-  commentId: M:Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean},System.Boolean)
-  id: '#ctor(System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean},System.Boolean)'
+- uid: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,System.LogLevel,System.Boolean},System.Boolean)
+  commentId: M:Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(System.Func{System.String,System.LogLevel,System.Boolean},System.Boolean)
+  id: '#ctor(System.Func{System.String,System.LogLevel,System.Boolean},System.Boolean)'
   parent: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider
   langs:
   - csharp
   - vb
   name: ConsoleLoggerProvider(Func<String, LogLevel, Boolean>, Boolean)
   nameWithType: ConsoleLoggerProvider.ConsoleLoggerProvider(Func<String, LogLevel, Boolean>, Boolean)
-  fullName: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.ConsoleLoggerProvider(System.Func<System.String, Microsoft.Extensions.Logging.LogLevel, System.Boolean>, System.Boolean)
+  fullName: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.ConsoleLoggerProvider(System.Func<System.String, System.LogLevel, System.Boolean>, System.Boolean)
   type: Constructor
   source:
     remote:
@@ -75,19 +64,19 @@ items:
   namespace: Microsoft.Extensions.Logging.Console
   syntax:
     content: public ConsoleLoggerProvider(Func<string, LogLevel, bool> filter, bool includeScopes)
-    content.vb: Public Sub New(filter As Func(Of String, LogLevel, Boolean), includeScopes As Boolean)
     parameters:
     - id: filter
-      type: System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean}
+      type: System.Func{System.String,System.LogLevel,System.Boolean}
     - id: includeScopes
       type: System.Boolean
+    content.vb: Public Sub New(filter As Func(Of String, LogLevel, Boolean), includeScopes As Boolean)
   overload: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor*
   nameWithType.vb: ConsoleLoggerProvider.ConsoleLoggerProvider(Func(Of String, LogLevel, Boolean), Boolean)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.ConsoleLoggerProvider(System.Func(Of System.String, Microsoft.Extensions.Logging.LogLevel, System.Boolean), System.Boolean)
+  fullName.vb: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.ConsoleLoggerProvider(System.Func(Of System.String, System.LogLevel, System.Boolean), System.Boolean)
   name.vb: ConsoleLoggerProvider(Func(Of String, LogLevel, Boolean), Boolean)
 - uid: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings)
   commentId: M:Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor(Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings)
@@ -113,10 +102,10 @@ items:
   namespace: Microsoft.Extensions.Logging.Console
   syntax:
     content: public ConsoleLoggerProvider(IConsoleLoggerSettings settings)
-    content.vb: Public Sub New(settings As IConsoleLoggerSettings)
     parameters:
     - id: settings
       type: Microsoft.Extensions.Logging.Console.IConsoleLoggerSettings
+    content.vb: Public Sub New(settings As IConsoleLoggerSettings)
   overload: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor*
   modifiers.csharp:
   - public
@@ -146,15 +135,13 @@ items:
   namespace: Microsoft.Extensions.Logging.Console
   syntax:
     content: public ILogger CreateLogger(string name)
-    content.vb: Public Function CreateLogger(name As String) As ILogger
     parameters:
     - id: name
       type: System.String
     return:
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
+    content.vb: Public Function CreateLogger(name As String) As ILogger
   overload: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.CreateLogger*
-  implements:
-  - Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -185,8 +172,6 @@ items:
     content: public void Dispose()
     content.vb: Public Sub Dispose
   overload: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.Dispose*
-  implements:
-  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -205,326 +190,27 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.Extensions.Logging.ILoggerProvider
-  commentId: T:Microsoft.Extensions.Logging.ILoggerProvider
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
-  name: ILoggerProvider
-  nameWithType: ILoggerProvider
-  fullName: Microsoft.Extensions.Logging.ILoggerProvider
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
 - uid: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor*
   commentId: Overload:Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.#ctor
   isExternal: false
   name: ConsoleLoggerProvider
   nameWithType: ConsoleLoggerProvider.ConsoleLoggerProvider
   fullName: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.ConsoleLoggerProvider
-- uid: System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean}
-  commentId: T:System.Func{System.String,Microsoft.Extensions.Logging.LogLevel,System.Boolean}
+- uid: System.Func{System.String,System.LogLevel,System.Boolean}
+  commentId: T:System.Func{System.String,System.LogLevel,System.Boolean}
   parent: System
   definition: System.Func`3
   name: Func<String, LogLevel, Boolean>
   nameWithType: Func<String, LogLevel, Boolean>
-  fullName: System.Func<System.String, Microsoft.Extensions.Logging.LogLevel, System.Boolean>
+  fullName: System.Func<System.String, System.LogLevel, System.Boolean>
   nameWithType.vb: Func(Of String, LogLevel, Boolean)
-  fullName.vb: System.Func(Of System.String, Microsoft.Extensions.Logging.LogLevel, System.Boolean)
+  fullName.vb: System.Func(Of System.String, System.LogLevel, System.Boolean)
   name.vb: Func(Of String, LogLevel, Boolean)
   spec.csharp:
   - uid: System.Func`3
@@ -543,10 +229,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.LogLevel
+  - uid: System.LogLevel
     name: LogLevel
     nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
+    fullName: System.LogLevel
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -575,10 +262,11 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Logging.LogLevel
+  - uid: System.LogLevel
     name: LogLevel
     nameWithType: LogLevel
-    fullName: Microsoft.Extensions.Logging.LogLevel
+    fullName: System.LogLevel
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -673,45 +361,6 @@ references:
   name: CreateLogger
   nameWithType: ConsoleLoggerProvider.CreateLogger
   fullName: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.CreateLogger
-- uid: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
-  commentId: M:Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
-  parent: Microsoft.Extensions.Logging.ILoggerProvider
-  isExternal: true
-  name: CreateLogger(String)
-  nameWithType: ILoggerProvider.CreateLogger(String)
-  fullName: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
-    name: CreateLogger
-    nameWithType: ILoggerProvider.CreateLogger
-    fullName: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger(System.String)
-    name: CreateLogger
-    nameWithType: ILoggerProvider.CreateLogger
-    fullName: Microsoft.Extensions.Logging.ILoggerProvider.CreateLogger
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -719,48 +368,15 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.Extensions.Logging.ILogger
-  commentId: T:Microsoft.Extensions.Logging.ILogger
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+- uid: ILogger
+  isExternal: true
   name: ILogger
   nameWithType: ILogger
-  fullName: Microsoft.Extensions.Logging.ILogger
+  fullName: ILogger
 - uid: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.Dispose*
   commentId: Overload:Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.Dispose
   isExternal: false
   name: Dispose
   nameWithType: ConsoleLoggerProvider.Dispose
   fullName: Microsoft.Extensions.Logging.Console.ConsoleLoggerProvider.Dispose
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

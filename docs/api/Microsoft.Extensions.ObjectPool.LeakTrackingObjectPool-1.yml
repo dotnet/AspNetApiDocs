@@ -28,11 +28,11 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public class LeakTrackingObjectPool<T> : ObjectPool<T> where T : class'
+    typeParameters:
+    - id: T
     content.vb: >-
       Public Class LeakTrackingObjectPool(Of T As Class)
           Inherits ObjectPool(Of T)
-    typeParameters:
-    - id: T
   inheritance:
   - System.Object
   - Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
@@ -77,10 +77,10 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public LeakTrackingObjectPool(ObjectPool<T> inner)
-    content.vb: Public Sub New(inner As ObjectPool(Of T))
     parameters:
     - id: inner
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public Sub New(inner As ObjectPool(Of T))
   overload: Microsoft.Extensions.ObjectPool.LeakTrackingObjectPool`1.#ctor*
   nameWithType.vb: LeakTrackingObjectPool(Of T).LeakTrackingObjectPool(ObjectPool(Of T))
   modifiers.csharp:
@@ -113,9 +113,9 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public override T Get()
-    content.vb: Public Overrides Function Get As T
     return:
       type: '{T}'
+    content.vb: Public Overrides Function Get As T
   overridden: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}.Get
   overload: Microsoft.Extensions.ObjectPool.LeakTrackingObjectPool`1.Get*
   nameWithType.vb: LeakTrackingObjectPool(Of T).Get()
@@ -150,10 +150,10 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public override void Return(T obj)
-    content.vb: Public Overrides Sub Return(obj As T)
     parameters:
     - id: obj
       type: '{T}'
+    content.vb: Public Overrides Sub Return(obj As T)
   overridden: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}.Return({T})
   overload: Microsoft.Extensions.ObjectPool.LeakTrackingObjectPool`1.Return*
   nameWithType.vb: LeakTrackingObjectPool(Of T).Return(T)

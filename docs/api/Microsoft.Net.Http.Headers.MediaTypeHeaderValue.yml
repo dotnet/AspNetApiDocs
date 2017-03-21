@@ -21,14 +21,14 @@ items:
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.MediaType
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parameters
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse(System.String)
-  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
+  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(IList{System.String})
+  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(IList{System.String})
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Quality
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.SubType
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ToString
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParse(System.String,Microsoft.Net.Http.Headers.MediaTypeHeaderValue@)
-  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
-  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
   - Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Type
   langs:
   - csharp
@@ -49,15 +49,12 @@ items:
   - Microsoft.Net.Http.Headers
   namespace: Microsoft.Net.Http.Headers
   syntax:
-    content: public class MediaTypeHeaderValue
-    content.vb: Public Class MediaTypeHeaderValue
+    content: 'public class MediaTypeHeaderValue : object'
+    content.vb: >-
+      Public Class MediaTypeHeaderValue
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
   modifiers.csharp:
   - public
   - class
@@ -88,10 +85,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public MediaTypeHeaderValue(string mediaType)
-    content.vb: Public Sub New(mediaType As String)
     parameters:
     - id: mediaType
       type: System.String
+    content.vb: Public Sub New(mediaType As String)
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.#ctor*
   modifiers.csharp:
   - public
@@ -121,12 +118,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public MediaTypeHeaderValue(string mediaType, double quality)
-    content.vb: Public Sub New(mediaType As String, quality As Double)
     parameters:
     - id: mediaType
       type: System.String
     - id: quality
       type: System.Double
+    content.vb: Public Sub New(mediaType As String, quality As Double)
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.#ctor*
   modifiers.csharp:
   - public
@@ -156,10 +153,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string Charset { get; set; }
-    content.vb: Public Property Charset As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property Charset As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Charset*
   modifiers.csharp:
   - public
@@ -191,10 +188,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public Encoding Encoding { get; set; }
-    content.vb: Public Property Encoding As Encoding
     parameters: []
     return:
-      type: System.Text.Encoding
+      type: Encoding
+    content.vb: Public Property Encoding As Encoding
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Encoding*
   modifiers.csharp:
   - public
@@ -226,10 +223,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string Boundary { get; set; }
-    content.vb: Public Property Boundary As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property Boundary As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Boundary*
   modifiers.csharp:
   - public
@@ -261,10 +258,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public IList<NameValueHeaderValue> Parameters { get; }
-    content.vb: Public ReadOnly Property Parameters As IList(Of NameValueHeaderValue)
     parameters: []
     return:
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}
+    content.vb: Public ReadOnly Property Parameters As IList(Of NameValueHeaderValue)
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parameters*
   modifiers.csharp:
   - public
@@ -296,10 +293,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public double ? Quality { get; set; }
-    content.vb: Public Property Quality As Double?
     parameters: []
     return:
       type: System.Nullable{System.Double}
+    content.vb: Public Property Quality As Double?
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Quality*
   modifiers.csharp:
   - public
@@ -331,10 +328,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string MediaType { get; set; }
-    content.vb: Public Property MediaType As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property MediaType As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.MediaType*
   modifiers.csharp:
   - public
@@ -366,10 +363,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string Type { get; }
-    content.vb: Public ReadOnly Property Type As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Type As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Type*
   modifiers.csharp:
   - public
@@ -401,10 +398,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string SubType { get; }
-    content.vb: Public ReadOnly Property SubType As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property SubType As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.SubType*
   modifiers.csharp:
   - public
@@ -438,10 +435,10 @@ items:
   example: []
   syntax:
     content: public bool MatchesAllTypes { get; }
-    content.vb: Public ReadOnly Property MatchesAllTypes As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property MatchesAllTypes As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.MatchesAllTypes*
   modifiers.csharp:
   - public
@@ -475,10 +472,10 @@ items:
   example: []
   syntax:
     content: public bool MatchesAllSubTypes { get; }
-    content.vb: Public ReadOnly Property MatchesAllSubTypes As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property MatchesAllSubTypes As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.MatchesAllSubTypes*
   modifiers.csharp:
   - public
@@ -510,10 +507,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public bool IsReadOnly { get; }
-    content.vb: Public ReadOnly Property IsReadOnly As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property IsReadOnly As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.IsReadOnly*
   modifiers.csharp:
   - public
@@ -548,7 +545,6 @@ items:
   example: []
   syntax:
     content: public bool IsSubsetOf(MediaTypeHeaderValue otherMediaType)
-    content.vb: Public Function IsSubsetOf(otherMediaType As MediaTypeHeaderValue) As Boolean
     parameters:
     - id: otherMediaType
       type: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
@@ -556,6 +552,7 @@ items:
     return:
       type: System.Boolean
       description: "\nA value indicating whether this <xref href=\"Microsoft.Net.Http.Headers.MediaTypeHeaderValue\" data-throw-if-not-resolved=\"false\"></xref> is a subset of\n<span class=\"paramref\">otherMediaType</span>.\n"
+    content.vb: Public Function IsSubsetOf(otherMediaType As MediaTypeHeaderValue) As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.IsSubsetOf*
   modifiers.csharp:
   - public
@@ -587,10 +584,10 @@ items:
   example: []
   syntax:
     content: public MediaTypeHeaderValue Copy()
-    content.vb: Public Function Copy As MediaTypeHeaderValue
     return:
       type: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
       description: A deep copy.
+    content.vb: Public Function Copy As MediaTypeHeaderValue
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Copy*
   modifiers.csharp:
   - public
@@ -622,10 +619,10 @@ items:
   example: []
   syntax:
     content: public MediaTypeHeaderValue CopyAsReadOnly()
-    content.vb: Public Function CopyAsReadOnly As MediaTypeHeaderValue
     return:
       type: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
       description: A deep, read-only, copy.
+    content.vb: Public Function CopyAsReadOnly As MediaTypeHeaderValue
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.CopyAsReadOnly*
   modifiers.csharp:
   - public
@@ -655,10 +652,9 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override string ToString()
-    content.vb: Public Overrides Function ToString As String
     return:
       type: System.String
-  overridden: System.Object.ToString
+    content.vb: Public Overrides Function ToString As String
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ToString*
   modifiers.csharp:
   - public
@@ -690,13 +686,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override bool Equals(object obj)
-    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
     parameters:
     - id: obj
       type: System.Object
     return:
       type: System.Boolean
-  overridden: System.Object.Equals(System.Object)
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Equals*
   modifiers.csharp:
   - public
@@ -728,10 +723,9 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override int GetHashCode()
-    content.vb: Public Overrides Function GetHashCode As Integer
     return:
       type: System.Int32
-  overridden: System.Object.GetHashCode
+    content.vb: Public Overrides Function GetHashCode As Integer
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.GetHashCode*
   modifiers.csharp:
   - public
@@ -763,12 +757,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static MediaTypeHeaderValue Parse(string input)
-    content.vb: Public Shared Function Parse(input As String) As MediaTypeHeaderValue
     parameters:
     - id: input
       type: System.String
     return:
       type: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
+    content.vb: Public Shared Function Parse(input As String) As MediaTypeHeaderValue
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parse*
   modifiers.csharp:
   - public
@@ -800,7 +794,6 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParse(string input, out MediaTypeHeaderValue parsedValue)
-    content.vb: Public Shared Function TryParse(input As String, ByRef parsedValue As MediaTypeHeaderValue) As Boolean
     parameters:
     - id: input
       type: System.String
@@ -808,6 +801,7 @@ items:
       type: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParse(input As String, ByRef parsedValue As MediaTypeHeaderValue) As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParse*
   nameWithType.vb: MediaTypeHeaderValue.TryParse(String, ByRef MediaTypeHeaderValue)
   modifiers.csharp:
@@ -818,16 +812,16 @@ items:
   - Shared
   fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParse(System.String, ByRef Microsoft.Net.Http.Headers.MediaTypeHeaderValue)
   name.vb: TryParse(String, ByRef MediaTypeHeaderValue)
-- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  id: ParseList(System.Collections.Generic.IList{System.String})
+- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(IList{System.String})
+  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(IList{System.String})
+  id: ParseList(IList{System.String})
   parent: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
   langs:
   - csharp
   - vb
   name: ParseList(IList<String>)
   nameWithType: MediaTypeHeaderValue.ParseList(IList<String>)
-  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(System.Collections.Generic.IList<System.String>)
+  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(IList<System.String>)
   type: Method
   source:
     remote:
@@ -842,12 +836,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static IList<MediaTypeHeaderValue> ParseList(IList<string> inputs)
-    content.vb: Public Shared Function ParseList(inputs As IList(Of String)) As IList(Of MediaTypeHeaderValue)
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     return:
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+    content.vb: Public Shared Function ParseList(inputs As IList(Of String)) As IList(Of MediaTypeHeaderValue)
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList*
   nameWithType.vb: MediaTypeHeaderValue.ParseList(IList(Of String))
   modifiers.csharp:
@@ -856,18 +850,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(System.Collections.Generic.IList(Of System.String))
+  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList(IList(Of System.String))
   name.vb: ParseList(IList(Of String))
-- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
-  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
-  id: ParseStrictList(System.Collections.Generic.IList{System.String})
+- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(IList{System.String})
+  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(IList{System.String})
+  id: ParseStrictList(IList{System.String})
   parent: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
   langs:
   - csharp
   - vb
   name: ParseStrictList(IList<String>)
   nameWithType: MediaTypeHeaderValue.ParseStrictList(IList<String>)
-  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(System.Collections.Generic.IList<System.String>)
+  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(IList<System.String>)
   type: Method
   source:
     remote:
@@ -882,12 +876,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static IList<MediaTypeHeaderValue> ParseStrictList(IList<string> inputs)
-    content.vb: Public Shared Function ParseStrictList(inputs As IList(Of String)) As IList(Of MediaTypeHeaderValue)
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     return:
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+    content.vb: Public Shared Function ParseStrictList(inputs As IList(Of String)) As IList(Of MediaTypeHeaderValue)
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList*
   nameWithType.vb: MediaTypeHeaderValue.ParseStrictList(IList(Of String))
   modifiers.csharp:
@@ -896,18 +890,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(System.Collections.Generic.IList(Of System.String))
+  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseStrictList(IList(Of System.String))
   name.vb: ParseStrictList(IList(Of String))
-- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
-  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
-  id: TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  id: TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
   parent: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
   langs:
   - csharp
   - vb
   name: TryParseList(IList<String>, out IList<MediaTypeHeaderValue>)
   nameWithType: MediaTypeHeaderValue.TryParseList(IList<String>, out IList<MediaTypeHeaderValue>)
-  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(System.Collections.Generic.IList<System.String>, out System.Collections.Generic.IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>)
+  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(IList<System.String>, out IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>)
   type: Method
   source:
     remote:
@@ -922,14 +916,14 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParseList(IList<string> inputs, out IList<MediaTypeHeaderValue> parsedValues)
-    content.vb: Public Shared Function TryParseList(inputs As IList(Of String), ByRef parsedValues As IList(Of MediaTypeHeaderValue)) As Boolean
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     - id: parsedValues
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParseList(inputs As IList(Of String), ByRef parsedValues As IList(Of MediaTypeHeaderValue)) As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList*
   nameWithType.vb: MediaTypeHeaderValue.TryParseList(IList(Of String), ByRef IList(Of MediaTypeHeaderValue))
   modifiers.csharp:
@@ -938,18 +932,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(System.Collections.Generic.IList(Of System.String), ByRef System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue))
+  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseList(IList(Of System.String), ByRef IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue))
   name.vb: TryParseList(IList(Of String), ByRef IList(Of MediaTypeHeaderValue))
-- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
-  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
-  id: TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+- uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  commentId: M:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
+  id: TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}@)
   parent: Microsoft.Net.Http.Headers.MediaTypeHeaderValue
   langs:
   - csharp
   - vb
   name: TryParseStrictList(IList<String>, out IList<MediaTypeHeaderValue>)
   nameWithType: MediaTypeHeaderValue.TryParseStrictList(IList<String>, out IList<MediaTypeHeaderValue>)
-  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(System.Collections.Generic.IList<System.String>, out System.Collections.Generic.IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>)
+  fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(IList<System.String>, out IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>)
   type: Method
   source:
     remote:
@@ -964,14 +958,14 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParseStrictList(IList<string> inputs, out IList<MediaTypeHeaderValue> parsedValues)
-    content.vb: Public Shared Function TryParseStrictList(inputs As IList(Of String), ByRef parsedValues As IList(Of MediaTypeHeaderValue)) As Boolean
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     - id: parsedValues
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParseStrictList(inputs As IList(Of String), ByRef parsedValues As IList(Of MediaTypeHeaderValue)) As Boolean
   overload: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList*
   nameWithType.vb: MediaTypeHeaderValue.TryParseStrictList(IList(Of String), ByRef IList(Of MediaTypeHeaderValue))
   modifiers.csharp:
@@ -980,7 +974,7 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(System.Collections.Generic.IList(Of System.String), ByRef System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue))
+  fullName.vb: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.TryParseStrictList(IList(Of System.String), ByRef IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue))
   name.vb: TryParseStrictList(IList(Of String), ByRef IList(Of MediaTypeHeaderValue))
 references:
 - uid: Microsoft.Net.Http.Headers
@@ -996,182 +990,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1210,19 +1028,12 @@ references:
   name: Encoding
   nameWithType: MediaTypeHeaderValue.Encoding
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Encoding
-- uid: System.Text.Encoding
-  commentId: T:System.Text.Encoding
-  parent: System.Text
+- uid: Encoding
+  commentId: '!:Encoding'
   isExternal: true
   name: Encoding
   nameWithType: Encoding
-  fullName: System.Text.Encoding
-- uid: System.Text
-  commentId: N:System.Text
-  isExternal: false
-  name: System.Text
-  nameWithType: System.Text
-  fullName: System.Text
+  fullName: Encoding
 - uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Boundary*
   commentId: Overload:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Boundary
   isExternal: false
@@ -1235,21 +1046,20 @@ references:
   name: Parameters
   nameWithType: MediaTypeHeaderValue.Parameters
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Parameters
-- uid: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}
-  commentId: T:System.Collections.Generic.IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}
+  commentId: '!:IList{Microsoft.Net.Http.Headers.NameValueHeaderValue}'
+  definition: IList`1
   name: IList<NameValueHeaderValue>
   nameWithType: IList<NameValueHeaderValue>
-  fullName: System.Collections.Generic.IList<Microsoft.Net.Http.Headers.NameValueHeaderValue>
+  fullName: IList<Microsoft.Net.Http.Headers.NameValueHeaderValue>
   nameWithType.vb: IList(Of NameValueHeaderValue)
-  fullName.vb: System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.NameValueHeaderValue)
+  fullName.vb: IList(Of Microsoft.Net.Http.Headers.NameValueHeaderValue)
   name.vb: IList(Of NameValueHeaderValue)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -1262,10 +1072,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1277,51 +1087,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IList`1
-  commentId: T:System.Collections.Generic.IList`1
+- uid: IList`1
   isExternal: true
-  name: IList<T>
-  nameWithType: IList<T>
-  fullName: System.Collections.Generic.IList<T>
-  nameWithType.vb: IList(Of T)
-  fullName.vb: System.Collections.Generic.IList(Of T)
-  name.vb: IList(Of T)
+  name: IList<>
+  nameWithType: IList<>
+  fullName: IList<>
+  nameWithType.vb: IList(Of )
+  fullName.vb: IList(Of )
+  name.vb: IList(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Quality*
   commentId: Overload:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Quality
   isExternal: false
@@ -1329,8 +1132,7 @@ references:
   nameWithType: MediaTypeHeaderValue.Quality
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Quality
 - uid: System.Nullable{System.Double}
-  commentId: T:System.Nullable{System.Double}
-  parent: System
+  commentId: '!:System.Nullable{System.Double}'
   definition: System.Nullable`1
   name: Nullable<Double>
   nameWithType: Nullable<Double>
@@ -1479,121 +1281,18 @@ references:
   name: CopyAsReadOnly
   nameWithType: MediaTypeHeaderValue.CopyAsReadOnly
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.CopyAsReadOnly
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ToString*
   commentId: Overload:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ToString
   isExternal: false
   name: ToString
   nameWithType: MediaTypeHeaderValue.ToString
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ToString
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Equals*
   commentId: Overload:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Equals
   isExternal: false
   name: Equals
   nameWithType: MediaTypeHeaderValue.Equals
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.Equals
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.GetHashCode*
   commentId: Overload:Microsoft.Net.Http.Headers.MediaTypeHeaderValue.GetHashCode
   isExternal: false
@@ -1625,21 +1324,20 @@ references:
   name: ParseList
   nameWithType: MediaTypeHeaderValue.ParseList
   fullName: Microsoft.Net.Http.Headers.MediaTypeHeaderValue.ParseList
-- uid: System.Collections.Generic.IList{System.String}
-  commentId: T:System.Collections.Generic.IList{System.String}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{System.String}
+  commentId: '!:IList{System.String}'
+  definition: IList`1
   name: IList<String>
   nameWithType: IList<String>
-  fullName: System.Collections.Generic.IList<System.String>
+  fullName: IList<System.String>
   nameWithType.vb: IList(Of String)
-  fullName.vb: System.Collections.Generic.IList(Of System.String)
+  fullName.vb: IList(Of System.String)
   name.vb: IList(Of String)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -1653,10 +1351,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -1669,21 +1367,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
-  commentId: T:System.Collections.Generic.IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}
+  commentId: '!:IList{Microsoft.Net.Http.Headers.MediaTypeHeaderValue}'
+  definition: IList`1
   name: IList<MediaTypeHeaderValue>
   nameWithType: IList<MediaTypeHeaderValue>
-  fullName: System.Collections.Generic.IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>
+  fullName: IList<Microsoft.Net.Http.Headers.MediaTypeHeaderValue>
   nameWithType.vb: IList(Of MediaTypeHeaderValue)
-  fullName.vb: System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue)
+  fullName.vb: IList(Of Microsoft.Net.Http.Headers.MediaTypeHeaderValue)
   name.vb: IList(Of MediaTypeHeaderValue)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -1696,10 +1393,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

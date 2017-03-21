@@ -75,10 +75,10 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public LeakTrackingObjectPoolProvider(ObjectPoolProvider inner)
-    content.vb: Public Sub New(inner As ObjectPoolProvider)
     parameters:
     - id: inner
       type: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+    content.vb: Public Sub New(inner As ObjectPoolProvider)
   overload: Microsoft.Extensions.ObjectPool.LeakTrackingObjectPoolProvider.#ctor*
   modifiers.csharp:
   - public
@@ -108,7 +108,6 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public override ObjectPool<T> Create<T>(IPooledObjectPolicy<T> policy)where T : class'
-    content.vb: Public Overrides Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
     parameters:
     - id: policy
       type: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}
@@ -116,6 +115,7 @@ items:
     - id: T
     return:
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public Overrides Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
   overridden: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create``1(Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}})
   overload: Microsoft.Extensions.ObjectPool.LeakTrackingObjectPoolProvider.Create*
   nameWithType.vb: LeakTrackingObjectPoolProvider.Create(Of T)(IPooledObjectPolicy(Of T))

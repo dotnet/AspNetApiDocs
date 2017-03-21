@@ -41,11 +41,11 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: 'public class CopyOnWriteList<T> : IList<T>, ICollection<T>, IEnumerable<T>, IEnumerable'
+    typeParameters:
+    - id: T
     content.vb: >-
       Public Class CopyOnWriteList(Of T)
           Implements IList(Of T), ICollection(Of T), IEnumerable(Of T), IEnumerable
-    typeParameters:
-    - id: T
   inheritance:
   - System.Object
   implements:
@@ -94,10 +94,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public CopyOnWriteList(IReadOnlyList<T> source)
-    content.vb: Public Sub New(source As IReadOnlyList(Of T))
     parameters:
     - id: source
       type: System.Collections.Generic.IReadOnlyList{{T}}
+    content.vb: Public Sub New(source As IReadOnlyList(Of T))
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.#ctor*
   nameWithType.vb: CopyOnWriteList(Of T).CopyOnWriteList(IReadOnlyList(Of T))
   modifiers.csharp:
@@ -130,10 +130,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: protected IReadOnlyList<T> Readable { get; }
-    content.vb: Protected ReadOnly Property Readable As IReadOnlyList(Of T)
     parameters: []
     return:
       type: System.Collections.Generic.IReadOnlyList{{T}}
+    content.vb: Protected ReadOnly Property Readable As IReadOnlyList(Of T)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Readable*
   nameWithType.vb: CopyOnWriteList(Of T).Readable
   modifiers.csharp:
@@ -167,10 +167,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: protected List<T> Writable { get; }
-    content.vb: Protected ReadOnly Property Writable As List(Of T)
     parameters: []
     return:
       type: System.Collections.Generic.List{{T}}
+    content.vb: Protected ReadOnly Property Writable As List(Of T)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Writable*
   nameWithType.vb: CopyOnWriteList(Of T).Writable
   modifiers.csharp:
@@ -204,12 +204,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public T this[int index] { get; set; }
-    content.vb: Public Property Item(index As Integer) As T
     parameters:
     - id: index
       type: System.Int32
     return:
       type: '{T}'
+    content.vb: Public Property Item(index As Integer) As T
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Item*
   implements:
   - System.Collections.Generic.IList{{T}}.Item(System.Int32)
@@ -246,10 +246,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public int Count { get; }
-    content.vb: Public ReadOnly Property Count As Integer
     parameters: []
     return:
       type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Count*
   implements:
   - System.Collections.Generic.ICollection{{T}}.Count
@@ -285,10 +285,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public bool IsReadOnly { get; }
-    content.vb: Public ReadOnly Property IsReadOnly As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property IsReadOnly As Boolean
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.IsReadOnly*
   implements:
   - System.Collections.Generic.ICollection{{T}}.IsReadOnly
@@ -324,10 +324,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public void Add(T item)
-    content.vb: Public Sub Add(item As T)
     parameters:
     - id: item
       type: '{T}'
+    content.vb: Public Sub Add(item As T)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Add*
   implements:
   - System.Collections.Generic.ICollection{{T}}.Add({T})
@@ -395,12 +395,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public bool Contains(T item)
-    content.vb: Public Function Contains(item As T) As Boolean
     parameters:
     - id: item
       type: '{T}'
     return:
       type: System.Boolean
+    content.vb: Public Function Contains(item As T) As Boolean
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Contains*
   implements:
   - System.Collections.Generic.ICollection{{T}}.Contains({T})
@@ -434,12 +434,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public void CopyTo(T[] array, int arrayIndex)
-    content.vb: Public Sub CopyTo(array As T(), arrayIndex As Integer)
     parameters:
     - id: array
       type: '{T}[]'
     - id: arrayIndex
       type: System.Int32
+    content.vb: Public Sub CopyTo(array As T(), arrayIndex As Integer)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.CopyTo*
   implements:
   - System.Collections.Generic.ICollection{{T}}.CopyTo({T}[],System.Int32)
@@ -474,9 +474,9 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public IEnumerator<T> GetEnumerator()
-    content.vb: Public Function GetEnumerator As IEnumerator(Of T)
     return:
       type: System.Collections.Generic.IEnumerator{{T}}
+    content.vb: Public Function GetEnumerator As IEnumerator(Of T)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.GetEnumerator*
   implements:
   - System.Collections.Generic.IEnumerable{{T}}.GetEnumerator
@@ -510,12 +510,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public int IndexOf(T item)
-    content.vb: Public Function IndexOf(item As T) As Integer
     parameters:
     - id: item
       type: '{T}'
     return:
       type: System.Int32
+    content.vb: Public Function IndexOf(item As T) As Integer
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.IndexOf*
   implements:
   - System.Collections.Generic.IList{{T}}.IndexOf({T})
@@ -549,12 +549,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public void Insert(int index, T item)
-    content.vb: Public Sub Insert(index As Integer, item As T)
     parameters:
     - id: index
       type: System.Int32
     - id: item
       type: '{T}'
+    content.vb: Public Sub Insert(index As Integer, item As T)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Insert*
   implements:
   - System.Collections.Generic.IList{{T}}.Insert(System.Int32,{T})
@@ -588,12 +588,12 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public bool Remove(T item)
-    content.vb: Public Function Remove(item As T) As Boolean
     parameters:
     - id: item
       type: '{T}'
     return:
       type: System.Boolean
+    content.vb: Public Function Remove(item As T) As Boolean
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.Remove*
   implements:
   - System.Collections.Generic.ICollection{{T}}.Remove({T})
@@ -627,10 +627,10 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public void RemoveAt(int index)
-    content.vb: Public Sub RemoveAt(index As Integer)
     parameters:
     - id: index
       type: System.Int32
+    content.vb: Public Sub RemoveAt(index As Integer)
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.RemoveAt*
   implements:
   - System.Collections.Generic.IList{{T}}.RemoveAt(System.Int32)
@@ -665,9 +665,9 @@ items:
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: IEnumerator IEnumerable.GetEnumerator()
-    content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
     return:
       type: System.Collections.IEnumerator
+    content.vb: Function System.Collections.IEnumerable.GetEnumerator As IEnumerator Implements IEnumerable.GetEnumerator
   overload: Microsoft.AspNetCore.Mvc.Internal.CopyOnWriteList`1.System#Collections#IEnumerable#GetEnumerator*
   implements:
   - System.Collections.IEnumerable.GetEnumerator

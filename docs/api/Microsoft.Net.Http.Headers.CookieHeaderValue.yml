@@ -11,12 +11,12 @@ items:
   - Microsoft.Net.Http.Headers.CookieHeaderValue.GetHashCode
   - Microsoft.Net.Http.Headers.CookieHeaderValue.Name
   - Microsoft.Net.Http.Headers.CookieHeaderValue.Parse(System.String)
-  - Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  - Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
+  - Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(IList{System.String})
+  - Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(IList{System.String})
   - Microsoft.Net.Http.Headers.CookieHeaderValue.ToString
   - Microsoft.Net.Http.Headers.CookieHeaderValue.TryParse(System.String,Microsoft.Net.Http.Headers.CookieHeaderValue@)
-  - Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
-  - Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  - Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  - Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
   - Microsoft.Net.Http.Headers.CookieHeaderValue.Value
   langs:
   - csharp
@@ -37,15 +37,12 @@ items:
   - Microsoft.Net.Http.Headers
   namespace: Microsoft.Net.Http.Headers
   syntax:
-    content: public class CookieHeaderValue
-    content.vb: Public Class CookieHeaderValue
+    content: 'public class CookieHeaderValue : object'
+    content.vb: >-
+      Public Class CookieHeaderValue
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
   modifiers.csharp:
   - public
   - class
@@ -76,10 +73,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public CookieHeaderValue(string name)
-    content.vb: Public Sub New(name As String)
     parameters:
     - id: name
       type: System.String
+    content.vb: Public Sub New(name As String)
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.#ctor*
   modifiers.csharp:
   - public
@@ -109,12 +106,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public CookieHeaderValue(string name, string value)
-    content.vb: Public Sub New(name As String, value As String)
     parameters:
     - id: name
       type: System.String
     - id: value
       type: System.String
+    content.vb: Public Sub New(name As String, value As String)
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.#ctor*
   modifiers.csharp:
   - public
@@ -144,10 +141,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string Name { get; set; }
-    content.vb: Public Property Name As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property Name As String
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.Name*
   modifiers.csharp:
   - public
@@ -179,10 +176,10 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public string Value { get; set; }
-    content.vb: Public Property Value As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public Property Value As String
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.Value*
   modifiers.csharp:
   - public
@@ -214,10 +211,9 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override string ToString()
-    content.vb: Public Overrides Function ToString As String
     return:
       type: System.String
-  overridden: System.Object.ToString
+    content.vb: Public Overrides Function ToString As String
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.ToString*
   modifiers.csharp:
   - public
@@ -249,12 +245,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static CookieHeaderValue Parse(string input)
-    content.vb: Public Shared Function Parse(input As String) As CookieHeaderValue
     parameters:
     - id: input
       type: System.String
     return:
       type: Microsoft.Net.Http.Headers.CookieHeaderValue
+    content.vb: Public Shared Function Parse(input As String) As CookieHeaderValue
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.Parse*
   modifiers.csharp:
   - public
@@ -286,7 +282,6 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParse(string input, out CookieHeaderValue parsedValue)
-    content.vb: Public Shared Function TryParse(input As String, ByRef parsedValue As CookieHeaderValue) As Boolean
     parameters:
     - id: input
       type: System.String
@@ -294,6 +289,7 @@ items:
       type: Microsoft.Net.Http.Headers.CookieHeaderValue
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParse(input As String, ByRef parsedValue As CookieHeaderValue) As Boolean
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParse*
   nameWithType.vb: CookieHeaderValue.TryParse(String, ByRef CookieHeaderValue)
   modifiers.csharp:
@@ -304,16 +300,16 @@ items:
   - Shared
   fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParse(System.String, ByRef Microsoft.Net.Http.Headers.CookieHeaderValue)
   name.vb: TryParse(String, ByRef CookieHeaderValue)
-- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(System.Collections.Generic.IList{System.String})
-  id: ParseList(System.Collections.Generic.IList{System.String})
+- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(IList{System.String})
+  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(IList{System.String})
+  id: ParseList(IList{System.String})
   parent: Microsoft.Net.Http.Headers.CookieHeaderValue
   langs:
   - csharp
   - vb
   name: ParseList(IList<String>)
   nameWithType: CookieHeaderValue.ParseList(IList<String>)
-  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(System.Collections.Generic.IList<System.String>)
+  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(IList<System.String>)
   type: Method
   source:
     remote:
@@ -328,12 +324,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static IList<CookieHeaderValue> ParseList(IList<string> inputs)
-    content.vb: Public Shared Function ParseList(inputs As IList(Of String)) As IList(Of CookieHeaderValue)
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     return:
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+    content.vb: Public Shared Function ParseList(inputs As IList(Of String)) As IList(Of CookieHeaderValue)
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList*
   nameWithType.vb: CookieHeaderValue.ParseList(IList(Of String))
   modifiers.csharp:
@@ -342,18 +338,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(System.Collections.Generic.IList(Of System.String))
+  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList(IList(Of System.String))
   name.vb: ParseList(IList(Of String))
-- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
-  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(System.Collections.Generic.IList{System.String})
-  id: ParseStrictList(System.Collections.Generic.IList{System.String})
+- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(IList{System.String})
+  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(IList{System.String})
+  id: ParseStrictList(IList{System.String})
   parent: Microsoft.Net.Http.Headers.CookieHeaderValue
   langs:
   - csharp
   - vb
   name: ParseStrictList(IList<String>)
   nameWithType: CookieHeaderValue.ParseStrictList(IList<String>)
-  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(System.Collections.Generic.IList<System.String>)
+  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(IList<System.String>)
   type: Method
   source:
     remote:
@@ -368,12 +364,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static IList<CookieHeaderValue> ParseStrictList(IList<string> inputs)
-    content.vb: Public Shared Function ParseStrictList(inputs As IList(Of String)) As IList(Of CookieHeaderValue)
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     return:
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+    content.vb: Public Shared Function ParseStrictList(inputs As IList(Of String)) As IList(Of CookieHeaderValue)
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList*
   nameWithType.vb: CookieHeaderValue.ParseStrictList(IList(Of String))
   modifiers.csharp:
@@ -382,18 +378,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(System.Collections.Generic.IList(Of System.String))
+  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList(IList(Of System.String))
   name.vb: ParseStrictList(IList(Of String))
-- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
-  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
-  id: TryParseList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  id: TryParseList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
   parent: Microsoft.Net.Http.Headers.CookieHeaderValue
   langs:
   - csharp
   - vb
   name: TryParseList(IList<String>, out IList<CookieHeaderValue>)
   nameWithType: CookieHeaderValue.TryParseList(IList<String>, out IList<CookieHeaderValue>)
-  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(System.Collections.Generic.IList<System.String>, out System.Collections.Generic.IList<Microsoft.Net.Http.Headers.CookieHeaderValue>)
+  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(IList<System.String>, out IList<Microsoft.Net.Http.Headers.CookieHeaderValue>)
   type: Method
   source:
     remote:
@@ -408,14 +404,14 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParseList(IList<string> inputs, out IList<CookieHeaderValue> parsedValues)
-    content.vb: Public Shared Function TryParseList(inputs As IList(Of String), ByRef parsedValues As IList(Of CookieHeaderValue)) As Boolean
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     - id: parsedValues
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParseList(inputs As IList(Of String), ByRef parsedValues As IList(Of CookieHeaderValue)) As Boolean
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList*
   nameWithType.vb: CookieHeaderValue.TryParseList(IList(Of String), ByRef IList(Of CookieHeaderValue))
   modifiers.csharp:
@@ -424,18 +420,18 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(System.Collections.Generic.IList(Of System.String), ByRef System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue))
+  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseList(IList(Of System.String), ByRef IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue))
   name.vb: TryParseList(IList(Of String), ByRef IList(Of CookieHeaderValue))
-- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
-  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
-  id: TryParseStrictList(System.Collections.Generic.IList{System.String},System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+- uid: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
+  id: TryParseStrictList(IList{System.String},IList{Microsoft.Net.Http.Headers.CookieHeaderValue}@)
   parent: Microsoft.Net.Http.Headers.CookieHeaderValue
   langs:
   - csharp
   - vb
   name: TryParseStrictList(IList<String>, out IList<CookieHeaderValue>)
   nameWithType: CookieHeaderValue.TryParseStrictList(IList<String>, out IList<CookieHeaderValue>)
-  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(System.Collections.Generic.IList<System.String>, out System.Collections.Generic.IList<Microsoft.Net.Http.Headers.CookieHeaderValue>)
+  fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(IList<System.String>, out IList<Microsoft.Net.Http.Headers.CookieHeaderValue>)
   type: Method
   source:
     remote:
@@ -450,14 +446,14 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public static bool TryParseStrictList(IList<string> inputs, out IList<CookieHeaderValue> parsedValues)
-    content.vb: Public Shared Function TryParseStrictList(inputs As IList(Of String), ByRef parsedValues As IList(Of CookieHeaderValue)) As Boolean
     parameters:
     - id: inputs
-      type: System.Collections.Generic.IList{System.String}
+      type: IList{System.String}
     - id: parsedValues
-      type: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+      type: IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
     return:
       type: System.Boolean
+    content.vb: Public Shared Function TryParseStrictList(inputs As IList(Of String), ByRef parsedValues As IList(Of CookieHeaderValue)) As Boolean
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList*
   nameWithType.vb: CookieHeaderValue.TryParseStrictList(IList(Of String), ByRef IList(Of CookieHeaderValue))
   modifiers.csharp:
@@ -466,7 +462,7 @@ items:
   modifiers.vb:
   - Public
   - Shared
-  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(System.Collections.Generic.IList(Of System.String), ByRef System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue))
+  fullName.vb: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList(IList(Of System.String), ByRef IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue))
   name.vb: TryParseStrictList(IList(Of String), ByRef IList(Of CookieHeaderValue))
 - uid: Microsoft.Net.Http.Headers.CookieHeaderValue.Equals(System.Object)
   commentId: M:Microsoft.Net.Http.Headers.CookieHeaderValue.Equals(System.Object)
@@ -492,13 +488,12 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override bool Equals(object obj)
-    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
     parameters:
     - id: obj
       type: System.Object
     return:
       type: System.Boolean
-  overridden: System.Object.Equals(System.Object)
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.Equals*
   modifiers.csharp:
   - public
@@ -530,10 +525,9 @@ items:
   namespace: Microsoft.Net.Http.Headers
   syntax:
     content: public override int GetHashCode()
-    content.vb: Public Overrides Function GetHashCode As Integer
     return:
       type: System.Int32
-  overridden: System.Object.GetHashCode
+    content.vb: Public Overrides Function GetHashCode As Integer
   overload: Microsoft.Net.Http.Headers.CookieHeaderValue.GetHashCode*
   modifiers.csharp:
   - public
@@ -555,182 +549,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -762,37 +580,6 @@ references:
   name: Value
   nameWithType: CookieHeaderValue.Value
   fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.Value
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ToString*
   commentId: Overload:Microsoft.Net.Http.Headers.CookieHeaderValue.ToString
   isExternal: false
@@ -831,21 +618,20 @@ references:
   name: ParseList
   nameWithType: CookieHeaderValue.ParseList
   fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseList
-- uid: System.Collections.Generic.IList{System.String}
-  commentId: T:System.Collections.Generic.IList{System.String}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{System.String}
+  commentId: '!:IList{System.String}'
+  definition: IList`1
   name: IList<String>
   nameWithType: IList<String>
-  fullName: System.Collections.Generic.IList<System.String>
+  fullName: IList<System.String>
   nameWithType.vb: IList(Of String)
-  fullName.vb: System.Collections.Generic.IList(Of System.String)
+  fullName.vb: IList(Of System.String)
   name.vb: IList(Of String)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -859,10 +645,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -875,21 +661,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
-  commentId: T:System.Collections.Generic.IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{Microsoft.Net.Http.Headers.CookieHeaderValue}
+  commentId: '!:IList{Microsoft.Net.Http.Headers.CookieHeaderValue}'
+  definition: IList`1
   name: IList<CookieHeaderValue>
   nameWithType: IList<CookieHeaderValue>
-  fullName: System.Collections.Generic.IList<Microsoft.Net.Http.Headers.CookieHeaderValue>
+  fullName: IList<Microsoft.Net.Http.Headers.CookieHeaderValue>
   nameWithType.vb: IList(Of CookieHeaderValue)
-  fullName.vb: System.Collections.Generic.IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue)
+  fullName.vb: IList(Of Microsoft.Net.Http.Headers.CookieHeaderValue)
   name.vb: IList(Of CookieHeaderValue)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -902,10 +687,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -917,51 +702,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IList`1
-  commentId: T:System.Collections.Generic.IList`1
+- uid: IList`1
   isExternal: true
-  name: IList<T>
-  nameWithType: IList<T>
-  fullName: System.Collections.Generic.IList<T>
-  nameWithType.vb: IList(Of T)
-  fullName.vb: System.Collections.Generic.IList(Of T)
-  name.vb: IList(Of T)
+  name: IList<>
+  nameWithType: IList<>
+  fullName: IList<>
+  nameWithType.vb: IList(Of )
+  fullName.vb: IList(Of )
+  name.vb: IList(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList*
   commentId: Overload:Microsoft.Net.Http.Headers.CookieHeaderValue.ParseStrictList
   isExternal: false
@@ -980,84 +758,12 @@ references:
   name: TryParseStrictList
   nameWithType: CookieHeaderValue.TryParseStrictList
   fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.TryParseStrictList
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.CookieHeaderValue.Equals*
   commentId: Overload:Microsoft.Net.Http.Headers.CookieHeaderValue.Equals
   isExternal: false
   name: Equals
   nameWithType: CookieHeaderValue.Equals
   fullName: Microsoft.Net.Http.Headers.CookieHeaderValue.Equals
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Net.Http.Headers.CookieHeaderValue.GetHashCode*
   commentId: Overload:Microsoft.Net.Http.Headers.CookieHeaderValue.GetHashCode
   isExternal: false

@@ -5,7 +5,7 @@ items:
   id: SecureDataFormat`1
   parent: Microsoft.AspNetCore.Authentication
   children:
-  - Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},Microsoft.AspNetCore.DataProtection.IDataProtector)
+  - Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},IDataProtector)
   - Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect(`0)
   - Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect(`0,System.String)
   - Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Unprotect(System.String)
@@ -30,11 +30,11 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: 'public class SecureDataFormat<TData> : ISecureDataFormat<TData>'
+    typeParameters:
+    - id: TData
     content.vb: >-
       Public Class SecureDataFormat(Of TData)
           Implements ISecureDataFormat(Of TData)
-    typeParameters:
-    - id: TData
   inheritance:
   - System.Object
   derivedClasses:
@@ -59,16 +59,16 @@ items:
   - Class
   fullName.vb: Microsoft.AspNetCore.Authentication.SecureDataFormat(Of TData)
   name.vb: SecureDataFormat(Of TData)
-- uid: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},Microsoft.AspNetCore.DataProtection.IDataProtector)
-  commentId: M:Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},Microsoft.AspNetCore.DataProtection.IDataProtector)
-  id: '#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},Microsoft.AspNetCore.DataProtection.IDataProtector)'
+- uid: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},IDataProtector)
+  commentId: M:Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},IDataProtector)
+  id: '#ctor(Microsoft.AspNetCore.Authentication.IDataSerializer{`0},IDataProtector)'
   parent: Microsoft.AspNetCore.Authentication.SecureDataFormat`1
   langs:
   - csharp
   - vb
   name: SecureDataFormat(IDataSerializer<TData>, IDataProtector)
   nameWithType: SecureDataFormat<TData>.SecureDataFormat(IDataSerializer<TData>, IDataProtector)
-  fullName: Microsoft.AspNetCore.Authentication.SecureDataFormat<TData>.SecureDataFormat(Microsoft.AspNetCore.Authentication.IDataSerializer<TData>, Microsoft.AspNetCore.DataProtection.IDataProtector)
+  fullName: Microsoft.AspNetCore.Authentication.SecureDataFormat<TData>.SecureDataFormat(Microsoft.AspNetCore.Authentication.IDataSerializer<TData>, IDataProtector)
   type: Constructor
   source:
     remote:
@@ -83,19 +83,19 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public SecureDataFormat(IDataSerializer<TData> serializer, IDataProtector protector)
-    content.vb: Public Sub New(serializer As IDataSerializer(Of TData), protector As IDataProtector)
     parameters:
     - id: serializer
       type: Microsoft.AspNetCore.Authentication.IDataSerializer{{TData}}
     - id: protector
-      type: Microsoft.AspNetCore.DataProtection.IDataProtector
+      type: IDataProtector
+    content.vb: Public Sub New(serializer As IDataSerializer(Of TData), protector As IDataProtector)
   overload: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.#ctor*
   nameWithType.vb: SecureDataFormat(Of TData).SecureDataFormat(IDataSerializer(Of TData), IDataProtector)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Authentication.SecureDataFormat(Of TData).SecureDataFormat(Microsoft.AspNetCore.Authentication.IDataSerializer(Of TData), Microsoft.AspNetCore.DataProtection.IDataProtector)
+  fullName.vb: Microsoft.AspNetCore.Authentication.SecureDataFormat(Of TData).SecureDataFormat(Microsoft.AspNetCore.Authentication.IDataSerializer(Of TData), IDataProtector)
   name.vb: SecureDataFormat(IDataSerializer(Of TData), IDataProtector)
 - uid: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect(`0)
   commentId: M:Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect(`0)
@@ -121,12 +121,12 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public string Protect(TData data)
-    content.vb: Public Function Protect(data As TData) As String
     parameters:
     - id: data
       type: '{TData}'
     return:
       type: System.String
+    content.vb: Public Function Protect(data As TData) As String
   overload: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect*
   implements:
   - Microsoft.AspNetCore.Authentication.ISecureDataFormat{{TData}}.Protect({TData})
@@ -160,7 +160,6 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public string Protect(TData data, string purpose)
-    content.vb: Public Function Protect(data As TData, purpose As String) As String
     parameters:
     - id: data
       type: '{TData}'
@@ -168,6 +167,7 @@ items:
       type: System.String
     return:
       type: System.String
+    content.vb: Public Function Protect(data As TData, purpose As String) As String
   overload: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect*
   implements:
   - Microsoft.AspNetCore.Authentication.ISecureDataFormat{{TData}}.Protect({TData},System.String)
@@ -201,12 +201,12 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public TData Unprotect(string protectedText)
-    content.vb: Public Function Unprotect(protectedText As String) As TData
     parameters:
     - id: protectedText
       type: System.String
     return:
       type: '{TData}'
+    content.vb: Public Function Unprotect(protectedText As String) As TData
   overload: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Unprotect*
   implements:
   - Microsoft.AspNetCore.Authentication.ISecureDataFormat{{TData}}.Unprotect(System.String)
@@ -240,7 +240,6 @@ items:
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public TData Unprotect(string protectedText, string purpose)
-    content.vb: Public Function Unprotect(protectedText As String, purpose As String) As TData
     parameters:
     - id: protectedText
       type: System.String
@@ -248,6 +247,7 @@ items:
       type: System.String
     return:
       type: '{TData}'
+    content.vb: Public Function Unprotect(protectedText As String, purpose As String) As TData
   overload: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Unprotect*
   implements:
   - Microsoft.AspNetCore.Authentication.ISecureDataFormat{{TData}}.Unprotect(System.String,System.String)
@@ -677,13 +677,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.DataProtection.IDataProtector
-  commentId: T:Microsoft.AspNetCore.DataProtection.IDataProtector
-  parent: Microsoft.AspNetCore.DataProtection
-  isExternal: false
+- uid: IDataProtector
+  isExternal: true
   name: IDataProtector
   nameWithType: IDataProtector
-  fullName: Microsoft.AspNetCore.DataProtection.IDataProtector
+  fullName: IDataProtector
 - uid: Microsoft.AspNetCore.Authentication.IDataSerializer`1
   commentId: T:Microsoft.AspNetCore.Authentication.IDataSerializer`1
   isExternal: false
@@ -721,12 +719,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.DataProtection
-  commentId: N:Microsoft.AspNetCore.DataProtection
-  isExternal: false
-  name: Microsoft.AspNetCore.DataProtection
-  nameWithType: Microsoft.AspNetCore.DataProtection
-  fullName: Microsoft.AspNetCore.DataProtection
 - uid: Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect*
   commentId: Overload:Microsoft.AspNetCore.Authentication.SecureDataFormat`1.Protect
   isExternal: false

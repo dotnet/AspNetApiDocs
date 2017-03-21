@@ -5,7 +5,7 @@ items:
   id: MemoryCache
   parent: Microsoft.Extensions.Caching.Memory
   children:
-  - Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
+  - Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
   - Microsoft.Extensions.Caching.Memory.MemoryCache.Compact(System.Double)
   - Microsoft.Extensions.Caching.Memory.MemoryCache.Count
   - Microsoft.Extensions.Caching.Memory.MemoryCache.CreateEntry(System.Object)
@@ -32,42 +32,31 @@ items:
   assemblies:
   - Microsoft.Extensions.Caching.Memory
   namespace: Microsoft.Extensions.Caching.Memory
-  summary: "\nAn implementation of <xref href=\"Microsoft.Extensions.Caching.Memory.IMemoryCache\" data-throw-if-not-resolved=\"false\"></xref> using a dictionary to\nstore its entries.\n"
+  summary: "\nAn implementation of <see cref=\"!:IMemoryCache\"></see> using a dictionary to\nstore its entries.\n"
   example: []
   syntax:
-    content: 'public class MemoryCache : IMemoryCache, IDisposable'
+    content: 'public class MemoryCache : IMemoryCache'
     content.vb: >-
       Public Class MemoryCache
-          Implements IMemoryCache, IDisposable
+          Inherits IMemoryCache
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache
-  - System.IDisposable
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
-  id: '#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})'
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor(IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})
+  id: '#ctor(IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions})'
   parent: Microsoft.Extensions.Caching.Memory.MemoryCache
   langs:
   - csharp
   - vb
   name: MemoryCache(IOptions<MemoryCacheOptions>)
   nameWithType: MemoryCache.MemoryCache(IOptions<MemoryCacheOptions>)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.MemoryCache(Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.MemoryCache(IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>)
   type: Constructor
   source:
     remote:
@@ -84,18 +73,18 @@ items:
   example: []
   syntax:
     content: public MemoryCache(IOptions<MemoryCacheOptions> optionsAccessor)
-    content.vb: Public Sub New(optionsAccessor As IOptions(Of MemoryCacheOptions))
     parameters:
     - id: optionsAccessor
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}
+      type: IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}
       description: The options of the cache.
+    content.vb: Public Sub New(optionsAccessor As IOptions(Of MemoryCacheOptions))
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.#ctor*
   nameWithType.vb: MemoryCache.MemoryCache(IOptions(Of MemoryCacheOptions))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Caching.Memory.MemoryCache.MemoryCache(Microsoft.Extensions.Options.IOptions(Of Microsoft.Extensions.Caching.Memory.MemoryCacheOptions))
+  fullName.vb: Microsoft.Extensions.Caching.Memory.MemoryCache.MemoryCache(IOptions(Of Microsoft.Extensions.Caching.Memory.MemoryCacheOptions))
   name.vb: MemoryCache(IOptions(Of MemoryCacheOptions))
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCache.Finalize
   commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCache.Finalize
@@ -155,10 +144,10 @@ items:
   example: []
   syntax:
     content: public int Count { get; }
-    content.vb: Public ReadOnly Property Count As Integer
     parameters: []
     return:
       type: System.Int32
+    content.vb: Public ReadOnly Property Count As Integer
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.Count*
   modifiers.csharp:
   - public
@@ -188,21 +177,16 @@ items:
   assemblies:
   - Microsoft.Extensions.Caching.Memory
   namespace: Microsoft.Extensions.Caching.Memory
-  summary: "\nCreate or overwrite an entry in the cache.\n"
   example: []
   syntax:
     content: public ICacheEntry CreateEntry(object key)
-    content.vb: Public Function CreateEntry(key As Object) As ICacheEntry
     parameters:
     - id: key
       type: System.Object
-      description: An object identifying the entry.
     return:
-      type: Microsoft.Extensions.Caching.Memory.ICacheEntry
-      description: The newly created <xref href="Microsoft.Extensions.Caching.Memory.ICacheEntry" data-throw-if-not-resolved="false"></xref> instance.
+      type: ICacheEntry
+    content.vb: Public Function CreateEntry(key As Object) As ICacheEntry
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.CreateEntry*
-  implements:
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -229,23 +213,18 @@ items:
   assemblies:
   - Microsoft.Extensions.Caching.Memory
   namespace: Microsoft.Extensions.Caching.Memory
-  summary: "\nGets the item associated with this key if present.\n"
   example: []
   syntax:
     content: public bool TryGetValue(object key, out object result)
-    content.vb: Public Function TryGetValue(key As Object, ByRef result As Object) As Boolean
     parameters:
     - id: key
       type: System.Object
-      description: An object identifying the requested entry.
     - id: result
       type: System.Object
     return:
       type: System.Boolean
-      description: True if the key was found.
+    content.vb: Public Function TryGetValue(key As Object, ByRef result As Object) As Boolean
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.TryGetValue*
-  implements:
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object,System.Object@)
   nameWithType.vb: MemoryCache.TryGetValue(Object, ByRef Object)
   modifiers.csharp:
   - public
@@ -275,18 +254,14 @@ items:
   assemblies:
   - Microsoft.Extensions.Caching.Memory
   namespace: Microsoft.Extensions.Caching.Memory
-  summary: "\nRemoves the object associated with the given key.\n"
   example: []
   syntax:
     content: public void Remove(object key)
-    content.vb: Public Sub Remove(key As Object)
     parameters:
     - id: key
       type: System.Object
-      description: An object identifying the entry.
+    content.vb: Public Sub Remove(key As Object)
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.Remove*
-  implements:
-  - Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -316,10 +291,10 @@ items:
   example: []
   syntax:
     content: public void Compact(double percentage)
-    content.vb: Public Sub Compact(percentage As Double)
     parameters:
     - id: percentage
       type: System.Double
+    content.vb: Public Sub Compact(percentage As Double)
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.Compact*
   modifiers.csharp:
   - public
@@ -351,8 +326,6 @@ items:
     content: public void Dispose()
     content.vb: Public Sub Dispose
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.Dispose*
-  implements:
-  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -381,10 +354,10 @@ items:
   namespace: Microsoft.Extensions.Caching.Memory
   syntax:
     content: protected virtual void Dispose(bool disposing)
-    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
     parameters:
     - id: disposing
       type: System.Boolean
+    content.vb: Protected Overridable Sub Dispose(disposing As Boolean)
   overload: Microsoft.Extensions.Caching.Memory.MemoryCache.Dispose*
   modifiers.csharp:
   - protected
@@ -393,13 +366,6 @@ items:
   - Protected
   - Overridable
 references:
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache
-  commentId: T:Microsoft.Extensions.Caching.Memory.IMemoryCache
-  parent: Microsoft.Extensions.Caching.Memory
-  isExternal: false
-  name: IMemoryCache
-  nameWithType: IMemoryCache
-  fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache
 - uid: Microsoft.Extensions.Caching.Memory
   commentId: N:Microsoft.Extensions.Caching.Memory
   isExternal: false
@@ -413,292 +379,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -717,21 +397,20 @@ references:
   name: MemoryCache
   nameWithType: MemoryCache.MemoryCache
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.MemoryCache
-- uid: Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}
-  commentId: T:Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}
-  parent: Microsoft.Extensions.Options
-  definition: Microsoft.Extensions.Options.IOptions`1
+- uid: IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}
+  commentId: '!:IOptions{Microsoft.Extensions.Caching.Memory.MemoryCacheOptions}'
+  definition: IOptions`1
   name: IOptions<MemoryCacheOptions>
   nameWithType: IOptions<MemoryCacheOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>
+  fullName: IOptions<Microsoft.Extensions.Caching.Memory.MemoryCacheOptions>
   nameWithType.vb: IOptions(Of MemoryCacheOptions)
-  fullName.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)
+  fullName.vb: IOptions(Of Microsoft.Extensions.Caching.Memory.MemoryCacheOptions)
   name.vb: IOptions(Of MemoryCacheOptions)
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: <
     nameWithType: <
@@ -744,10 +423,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -759,49 +438,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options.IOptions`1
-  commentId: T:Microsoft.Extensions.Options.IOptions`1
-  isExternal: false
-  name: IOptions<TOptions>
-  nameWithType: IOptions<TOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
-  nameWithType.vb: IOptions(Of TOptions)
-  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
-  name.vb: IOptions(Of TOptions)
+- uid: IOptions`1
+  isExternal: true
+  name: IOptions<>
+  nameWithType: IOptions<>
+  fullName: IOptions<>
+  nameWithType.vb: IOptions(Of )
+  fullName.vb: IOptions(Of )
+  name.vb: IOptions(Of )
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
-  isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCache.Finalize*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.MemoryCache.Finalize
   isExternal: false
@@ -827,113 +501,18 @@ references:
   name: CreateEntry
   nameWithType: MemoryCache.CreateEntry
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.CreateEntry
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
-  commentId: M:Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
-  parent: Microsoft.Extensions.Caching.Memory.IMemoryCache
+- uid: ICacheEntry
+  commentId: '!:ICacheEntry'
   isExternal: true
-  name: CreateEntry(Object)
-  nameWithType: IMemoryCache.CreateEntry(Object)
-  fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
-    name: CreateEntry
-    nameWithType: IMemoryCache.CreateEntry
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry(System.Object)
-    name: CreateEntry
-    nameWithType: IMemoryCache.CreateEntry
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.CreateEntry
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.ICacheEntry
-  commentId: T:Microsoft.Extensions.Caching.Memory.ICacheEntry
-  parent: Microsoft.Extensions.Caching.Memory
-  isExternal: false
   name: ICacheEntry
   nameWithType: ICacheEntry
-  fullName: Microsoft.Extensions.Caching.Memory.ICacheEntry
+  fullName: ICacheEntry
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCache.TryGetValue*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.MemoryCache.TryGetValue
   isExternal: false
   name: TryGetValue
   nameWithType: MemoryCache.TryGetValue
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.TryGetValue
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object,System.Object@)
-  commentId: M:Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object,System.Object@)
-  parent: Microsoft.Extensions.Caching.Memory.IMemoryCache
-  isExternal: true
-  name: TryGetValue(Object, Object)
-  nameWithType: IMemoryCache.TryGetValue(Object, Object)
-  fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object, System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object,System.Object@)
-    name: TryGetValue
-    nameWithType: IMemoryCache.TryGetValue
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue(System.Object,System.Object@)
-    name: TryGetValue
-    nameWithType: IMemoryCache.TryGetValue
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.TryGetValue
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -947,45 +526,6 @@ references:
   name: Remove
   nameWithType: MemoryCache.Remove
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.Remove
-- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
-  commentId: M:Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
-  parent: Microsoft.Extensions.Caching.Memory.IMemoryCache
-  isExternal: true
-  name: Remove(Object)
-  nameWithType: IMemoryCache.Remove(Object)
-  fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
-    name: Remove
-    nameWithType: IMemoryCache.Remove
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove(System.Object)
-    name: Remove
-    nameWithType: IMemoryCache.Remove
-    fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCache.Compact*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.MemoryCache.Compact
   isExternal: false
@@ -1005,35 +545,4 @@ references:
   name: Dispose
   nameWithType: MemoryCache.Dispose
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCache.Dispose
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

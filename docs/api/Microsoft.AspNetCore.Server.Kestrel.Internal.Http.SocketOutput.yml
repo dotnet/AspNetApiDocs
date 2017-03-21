@@ -78,9 +78,9 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public const int MaxPooledWriteReqs = 1024
-    content.vb: Public Const MaxPooledWriteReqs As Integer = 1024
     return:
       type: System.Int32
+    content.vb: Public Const MaxPooledWriteReqs As Integer = 1024
   modifiers.csharp:
   - public
   - const
@@ -111,7 +111,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public SocketOutput(KestrelThread thread, UvStreamHandle socket, MemoryPool memory, Connection connection, string connectionId, IKestrelTrace log, IThreadPool threadPool, Queue<UvWriteReq> writeReqPool)
-    content.vb: Public Sub New(thread As KestrelThread, socket As UvStreamHandle, memory As MemoryPool, connection As Connection, connectionId As String, log As IKestrelTrace, threadPool As IThreadPool, writeReqPool As Queue(Of UvWriteReq))
     parameters:
     - id: thread
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.KestrelThread
@@ -129,6 +128,7 @@ items:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IThreadPool
     - id: writeReqPool
       type: System.Collections.Generic.Queue{Microsoft.AspNetCore.Server.Kestrel.Internal.Networking.UvWriteReq}
+    content.vb: Public Sub New(thread As KestrelThread, socket As UvStreamHandle, memory As MemoryPool, connection As Connection, connectionId As String, log As IKestrelTrace, threadPool As IThreadPool, writeReqPool As Queue(Of UvWriteReq))
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.#ctor*
   nameWithType.vb: SocketOutput.SocketOutput(KestrelThread, UvStreamHandle, MemoryPool, Connection, String, IKestrelTrace, IThreadPool, Queue(Of UvWriteReq))
   modifiers.csharp:
@@ -161,7 +161,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public Task WriteAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken, bool chunk = false, bool socketShutdownSend = false, bool socketDisconnect = false, bool isSync = false)
-    content.vb: Public Function WriteAsync(buffer As ArraySegment(Of Byte), cancellationToken As CancellationToken, chunk As Boolean = False, socketShutdownSend As Boolean = False, socketDisconnect As Boolean = False, isSync As Boolean = False) As Task
     parameters:
     - id: buffer
       type: System.ArraySegment{System.Byte}
@@ -177,6 +176,7 @@ items:
       type: System.Boolean
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function WriteAsync(buffer As ArraySegment(Of Byte), cancellationToken As CancellationToken, chunk As Boolean = False, socketShutdownSend As Boolean = False, socketDisconnect As Boolean = False, isSync As Boolean = False) As Task
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.WriteAsync*
   nameWithType.vb: SocketOutput.WriteAsync(ArraySegment(Of Byte), CancellationToken, Boolean, Boolean, Boolean, Boolean)
   modifiers.csharp:
@@ -209,10 +209,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public void End(ProduceEndType endType)
-    content.vb: Public Sub End(endType As ProduceEndType)
     parameters:
     - id: endType
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ProduceEndType
+    content.vb: Public Sub End(endType As ProduceEndType)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.End*
   modifiers.csharp:
   - public
@@ -242,9 +242,9 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public MemoryPoolIterator ProducingStart()
-    content.vb: Public Function ProducingStart As MemoryPoolIterator
     return:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator
+    content.vb: Public Function ProducingStart As MemoryPoolIterator
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.ProducingStart*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.ProducingStart
@@ -276,10 +276,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: public void ProducingComplete(MemoryPoolIterator end)
-    content.vb: Public Sub ProducingComplete(end As MemoryPoolIterator)
     parameters:
     - id: end
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator
+    content.vb: Public Sub ProducingComplete(end As MemoryPoolIterator)
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.ProducingComplete*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.ProducingComplete(Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator)
@@ -312,12 +312,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: void ISocketOutput.Write(ArraySegment<byte> buffer, bool chunk)
-    content.vb: Sub Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.Write(buffer As ArraySegment(Of Byte), chunk As Boolean) Implements ISocketOutput.Write
     parameters:
     - id: buffer
       type: System.ArraySegment{System.Byte}
     - id: chunk
       type: System.Boolean
+    content.vb: Sub Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.Write(buffer As ArraySegment(Of Byte), chunk As Boolean) Implements ISocketOutput.Write
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#ISocketOutput#Write*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.Write(System.ArraySegment{System.Byte},System.Boolean)
@@ -349,7 +349,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Internal.Http
   syntax:
     content: Task ISocketOutput.WriteAsync(ArraySegment<byte> buffer, bool chunk, CancellationToken cancellationToken)
-    content.vb: Function Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.WriteAsync(buffer As ArraySegment(Of Byte), chunk As Boolean, cancellationToken As CancellationToken) As Task Implements ISocketOutput.WriteAsync
     parameters:
     - id: buffer
       type: System.ArraySegment{System.Byte}
@@ -359,6 +358,7 @@ items:
       type: System.Threading.CancellationToken
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Function Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.WriteAsync(buffer As ArraySegment(Of Byte), chunk As Boolean, cancellationToken As CancellationToken) As Task Implements ISocketOutput.WriteAsync
   overload: Microsoft.AspNetCore.Server.Kestrel.Internal.Http.SocketOutput.Microsoft#AspNetCore#Server#Kestrel#Internal#Http#ISocketOutput#WriteAsync*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.WriteAsync(System.ArraySegment{System.Byte},System.Boolean,System.Threading.CancellationToken)

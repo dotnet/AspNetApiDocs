@@ -5,11 +5,11 @@ items:
   id: KestrelServer
   parent: Microsoft.AspNetCore.Server.Kestrel
   children:
-  - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},Microsoft.AspNetCore.Hosting.IApplicationLifetime,Microsoft.Extensions.Logging.ILoggerFactory)
+  - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},IApplicationLifetime,ILoggerFactory)
   - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Dispose
   - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features
   - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Options
-  - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
+  - Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(IHttpApplication{``0})
   langs:
   - csharp
   - vb
@@ -29,39 +29,28 @@ items:
   - Microsoft.AspNetCore.Server.Kestrel
   namespace: Microsoft.AspNetCore.Server.Kestrel
   syntax:
-    content: 'public class KestrelServer : IServer, IDisposable'
+    content: 'public class KestrelServer : IServer'
     content.vb: >-
       Public Class KestrelServer
-          Implements IServer, IDisposable
+          Inherits IServer
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IServer
-  - System.IDisposable
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},Microsoft.AspNetCore.Hosting.IApplicationLifetime,Microsoft.Extensions.Logging.ILoggerFactory)
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},Microsoft.AspNetCore.Hosting.IApplicationLifetime,Microsoft.Extensions.Logging.ILoggerFactory)
-  id: '#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},Microsoft.AspNetCore.Hosting.IApplicationLifetime,Microsoft.Extensions.Logging.ILoggerFactory)'
+- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},IApplicationLifetime,ILoggerFactory)
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor(IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},IApplicationLifetime,ILoggerFactory)
+  id: '#ctor(IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions},IApplicationLifetime,ILoggerFactory)'
   parent: Microsoft.AspNetCore.Server.Kestrel.KestrelServer
   langs:
   - csharp
   - vb
   name: KestrelServer(IOptions<KestrelServerOptions>, IApplicationLifetime, ILoggerFactory)
   nameWithType: KestrelServer.KestrelServer(IOptions<KestrelServerOptions>, IApplicationLifetime, ILoggerFactory)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.KestrelServer(Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions>, Microsoft.AspNetCore.Hosting.IApplicationLifetime, Microsoft.Extensions.Logging.ILoggerFactory)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.KestrelServer(IOptions<Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions>, IApplicationLifetime, ILoggerFactory)
   type: Constructor
   source:
     remote:
@@ -76,21 +65,21 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel
   syntax:
     content: public KestrelServer(IOptions<KestrelServerOptions> options, IApplicationLifetime applicationLifetime, ILoggerFactory loggerFactory)
-    content.vb: Public Sub New(options As IOptions(Of KestrelServerOptions), applicationLifetime As IApplicationLifetime, loggerFactory As ILoggerFactory)
     parameters:
     - id: options
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}
+      type: IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}
     - id: applicationLifetime
-      type: Microsoft.AspNetCore.Hosting.IApplicationLifetime
+      type: IApplicationLifetime
     - id: loggerFactory
-      type: Microsoft.Extensions.Logging.ILoggerFactory
+      type: ILoggerFactory
+    content.vb: Public Sub New(options As IOptions(Of KestrelServerOptions), applicationLifetime As IApplicationLifetime, loggerFactory As ILoggerFactory)
   overload: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor*
   nameWithType.vb: KestrelServer.KestrelServer(IOptions(Of KestrelServerOptions), IApplicationLifetime, ILoggerFactory)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.KestrelServer(Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions), Microsoft.AspNetCore.Hosting.IApplicationLifetime, Microsoft.Extensions.Logging.ILoggerFactory)
+  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.KestrelServer(IOptions(Of Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions), IApplicationLifetime, ILoggerFactory)
   name.vb: KestrelServer(IOptions(Of KestrelServerOptions), IApplicationLifetime, ILoggerFactory)
 - uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features
   commentId: P:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features
@@ -116,13 +105,11 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel
   syntax:
     content: public IFeatureCollection Features { get; }
-    content.vb: Public ReadOnly Property Features As IFeatureCollection
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.Features.IFeatureCollection
+      type: IFeatureCollection
+    content.vb: Public ReadOnly Property Features As IFeatureCollection
   overload: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features*
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IServer.Features
   modifiers.csharp:
   - public
   - get
@@ -153,10 +140,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel
   syntax:
     content: public KestrelServerOptions Options { get; }
-    content.vb: Public ReadOnly Property Options As KestrelServerOptions
     parameters: []
     return:
       type: Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions
+    content.vb: Public ReadOnly Property Options As KestrelServerOptions
   overload: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Options*
   modifiers.csharp:
   - public
@@ -164,16 +151,16 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  commentId: M:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  id: Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
+- uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(IHttpApplication{``0})
+  commentId: M:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start``1(IHttpApplication{``0})
+  id: Start``1(IHttpApplication{``0})
   parent: Microsoft.AspNetCore.Server.Kestrel.KestrelServer
   langs:
   - csharp
   - vb
   name: Start<TContext>(IHttpApplication<TContext>)
   nameWithType: KestrelServer.Start<TContext>(IHttpApplication<TContext>)
-  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start<TContext>(Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>)
+  fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start<TContext>(IHttpApplication<TContext>)
   type: Method
   source:
     remote:
@@ -188,21 +175,19 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel
   syntax:
     content: public void Start<TContext>(IHttpApplication<TContext> application)
-    content.vb: Public Sub Start(Of TContext)(application As IHttpApplication(Of TContext))
     parameters:
     - id: application
-      type: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}}
+      type: IHttpApplication{{TContext}}
     typeParameters:
     - id: TContext
+    content.vb: Public Sub Start(Of TContext)(application As IHttpApplication(Of TContext))
   overload: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start*
-  implements:
-  - Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}})
   nameWithType.vb: KestrelServer.Start(Of TContext)(IHttpApplication(Of TContext))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start(Of TContext)(Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext))
+  fullName.vb: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start(Of TContext)(IHttpApplication(Of TContext))
   name.vb: Start(Of TContext)(IHttpApplication(Of TContext))
 - uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Dispose
   commentId: M:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Dispose
@@ -230,8 +215,6 @@ items:
     content: public void Dispose()
     content.vb: Public Sub Dispose
   overload: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Dispose*
-  implements:
-  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -250,332 +233,32 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Hosting.Server.IServer
-  commentId: T:Microsoft.AspNetCore.Hosting.Server.IServer
-  parent: Microsoft.AspNetCore.Hosting.Server
-  isExternal: false
-  name: IServer
-  nameWithType: IServer
-  fullName: Microsoft.AspNetCore.Hosting.Server.IServer
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Hosting.Server
-  commentId: N:Microsoft.AspNetCore.Hosting.Server
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting.Server
-  nameWithType: Microsoft.AspNetCore.Hosting.Server
-  fullName: Microsoft.AspNetCore.Hosting.Server
 - uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.#ctor
   isExternal: false
   name: KestrelServer
   nameWithType: KestrelServer.KestrelServer
   fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.KestrelServer
-- uid: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}
-  commentId: T:Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}
-  parent: Microsoft.Extensions.Options
-  definition: Microsoft.Extensions.Options.IOptions`1
+- uid: IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}
+  commentId: '!:IOptions{Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions}'
+  definition: IOptions`1
   name: IOptions<KestrelServerOptions>
   nameWithType: IOptions<KestrelServerOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions>
+  fullName: IOptions<Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions>
   nameWithType.vb: IOptions(Of KestrelServerOptions)
-  fullName.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions)
+  fullName.vb: IOptions(Of Microsoft.AspNetCore.Server.Kestrel.KestrelServerOptions)
   name.vb: IOptions(Of KestrelServerOptions)
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: <
     nameWithType: <
@@ -588,10 +271,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -603,101 +286,65 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Hosting.IApplicationLifetime
-  commentId: T:Microsoft.AspNetCore.Hosting.IApplicationLifetime
-  parent: Microsoft.AspNetCore.Hosting
-  isExternal: false
+- uid: IApplicationLifetime
+  isExternal: true
   name: IApplicationLifetime
   nameWithType: IApplicationLifetime
-  fullName: Microsoft.AspNetCore.Hosting.IApplicationLifetime
-- uid: Microsoft.Extensions.Logging.ILoggerFactory
-  commentId: T:Microsoft.Extensions.Logging.ILoggerFactory
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+  fullName: IApplicationLifetime
+- uid: ILoggerFactory
+  isExternal: true
   name: ILoggerFactory
   nameWithType: ILoggerFactory
-  fullName: Microsoft.Extensions.Logging.ILoggerFactory
-- uid: Microsoft.Extensions.Options.IOptions`1
-  commentId: T:Microsoft.Extensions.Options.IOptions`1
-  isExternal: false
-  name: IOptions<TOptions>
-  nameWithType: IOptions<TOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
-  nameWithType.vb: IOptions(Of TOptions)
-  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
-  name.vb: IOptions(Of TOptions)
+  fullName: ILoggerFactory
+- uid: IOptions`1
+  isExternal: true
+  name: IOptions<>
+  nameWithType: IOptions<>
+  fullName: IOptions<>
+  nameWithType.vb: IOptions(Of )
+  fullName.vb: IOptions(Of )
+  name.vb: IOptions(Of )
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
-  isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
-- uid: Microsoft.AspNetCore.Hosting
-  commentId: N:Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting
-  nameWithType: Microsoft.AspNetCore.Hosting
-  fullName: Microsoft.AspNetCore.Hosting
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
 - uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features*
   commentId: Overload:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features
   isExternal: false
   name: Features
   nameWithType: KestrelServer.Features
   fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Features
-- uid: Microsoft.AspNetCore.Hosting.Server.IServer.Features
-  commentId: P:Microsoft.AspNetCore.Hosting.Server.IServer.Features
-  parent: Microsoft.AspNetCore.Hosting.Server.IServer
-  isExternal: false
-  name: Features
-  nameWithType: IServer.Features
-  fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Features
-- uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  commentId: T:Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  parent: Microsoft.AspNetCore.Http.Features
-  isExternal: false
+- uid: IFeatureCollection
+  isExternal: true
   name: IFeatureCollection
   nameWithType: IFeatureCollection
-  fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-- uid: Microsoft.AspNetCore.Http.Features
-  commentId: N:Microsoft.AspNetCore.Http.Features
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features
-  nameWithType: Microsoft.AspNetCore.Http.Features
-  fullName: Microsoft.AspNetCore.Http.Features
+  fullName: IFeatureCollection
 - uid: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Options*
   commentId: Overload:Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Options
   isExternal: false
@@ -717,79 +364,21 @@ references:
   name: Start
   nameWithType: KestrelServer.Start
   fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Start
-- uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}})
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  parent: Microsoft.AspNetCore.Hosting.Server.IServer
-  definition: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  name: Start<TContext>(IHttpApplication<TContext>)
-  nameWithType: IServer.Start<TContext>(IHttpApplication<TContext>)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start<TContext>(Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>)
-  nameWithType.vb: IServer.Start(Of TContext)(IHttpApplication(Of TContext))
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)(Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext))
-  name.vb: Start(Of TContext)(IHttpApplication(Of TContext))
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-    name: Start<TContext>
-    nameWithType: IServer.Start<TContext>
-    fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start<TContext>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-    name: Start(Of TContext)
-    nameWithType: IServer.Start(Of TContext)
-    fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}}
-  commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0}
-  parent: Microsoft.AspNetCore.Hosting.Server
-  definition: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
+- uid: IHttpApplication{{TContext}}
+  commentId: '!:IHttpApplication{``0}'
+  definition: IHttpApplication`1
   name: IHttpApplication<TContext>
   nameWithType: IHttpApplication<TContext>
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>
+  fullName: IHttpApplication<TContext>
   nameWithType.vb: IHttpApplication(Of TContext)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
+  fullName.vb: IHttpApplication(Of TContext)
   name.vb: IHttpApplication(Of TContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
+  - uid: IHttpApplication`1
     name: IHttpApplication
     nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
+    fullName: IHttpApplication
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
@@ -800,10 +389,11 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
+  - uid: IHttpApplication`1
     name: IHttpApplication
     nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
+    fullName: IHttpApplication
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -813,97 +403,41 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  commentId: M:Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-  isExternal: false
-  name: Start<TContext>(IHttpApplication<TContext>)
-  nameWithType: IServer.Start<TContext>(IHttpApplication<TContext>)
-  fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start<TContext>(Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>)
-  nameWithType.vb: IServer.Start(Of TContext)(IHttpApplication(Of TContext))
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)(Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext))
-  name.vb: Start(Of TContext)(IHttpApplication(Of TContext))
+- uid: IHttpApplication`1
+  isExternal: true
+  name: IHttpApplication<>
+  nameWithType: IHttpApplication<>
+  fullName: IHttpApplication<>
+  nameWithType.vb: IHttpApplication(Of )
+  fullName.vb: IHttpApplication(Of )
+  name.vb: IHttpApplication(Of )
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-    name: Start<TContext>
-    nameWithType: IServer.Start<TContext>
-    fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start<TContext>
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
+  - uid: IHttpApplication`1
     name: IHttpApplication
     nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
+    fullName: IHttpApplication
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start``1(Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0})
-    name: Start(Of TContext)
-    nameWithType: IServer.Start(Of TContext)
-    fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-  commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-  isExternal: false
-  name: IHttpApplication<TContext>
-  nameWithType: IHttpApplication<TContext>
-  fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>
-  nameWithType.vb: IHttpApplication(Of TContext)
-  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
-  name.vb: IHttpApplication(Of TContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
-    name: IHttpApplication
-    nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
+  - uid: IHttpApplication`1
     name: IHttpApplication
     nameWithType: IHttpApplication
-    fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication
+    fullName: IHttpApplication
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TContext
-    nameWithType: TContext
-    fullName: TContext
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
@@ -913,35 +447,4 @@ references:
   name: Dispose
   nameWithType: KestrelServer.Dispose
   fullName: Microsoft.AspNetCore.Server.Kestrel.KestrelServer.Dispose
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

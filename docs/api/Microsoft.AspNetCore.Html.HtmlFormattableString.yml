@@ -5,9 +5,9 @@ items:
   id: HtmlFormattableString
   parent: Microsoft.AspNetCore.Html
   children:
-  - Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(System.IFormatProvider,System.String,System.Object[])
+  - Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(IFormatProvider,System.String,System.Object[])
   - Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(System.String,System.Object[])
-  - Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(TextWriter,HtmlEncoder)
   langs:
   - csharp
   - vb
@@ -29,22 +29,15 @@ items:
   summary: "\nAn <xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> implementation of composite string formatting\n(see https://msdn.microsoft.com/en-us/library/txafckwd(v=vs.110).aspx) which HTML encodes\nformatted arguments.\n"
   example: []
   syntax:
-    content: 'public class HtmlFormattableString : IHtmlContent'
+    content: 'public class HtmlFormattableString : object, IHtmlContent'
     content.vb: >-
       Public Class HtmlFormattableString
+          Inherits Object
           Implements IHtmlContent
   inheritance:
   - System.Object
   implements:
   - Microsoft.AspNetCore.Html.IHtmlContent
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
@@ -77,7 +70,6 @@ items:
   example: []
   syntax:
     content: public HtmlFormattableString(string format, params object[] args)
-    content.vb: Public Sub New(format As String, ParamArray args As Object())
     parameters:
     - id: format
       type: System.String
@@ -85,6 +77,7 @@ items:
     - id: args
       type: System.Object[]
       description: An array that contains objects to format.
+    content.vb: Public Sub New(format As String, ParamArray args As Object())
   overload: Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor*
   nameWithType.vb: HtmlFormattableString.HtmlFormattableString(String, Object())
   modifiers.csharp:
@@ -93,16 +86,16 @@ items:
   - Public
   fullName.vb: Microsoft.AspNetCore.Html.HtmlFormattableString.HtmlFormattableString(System.String, System.Object())
   name.vb: HtmlFormattableString(String, Object())
-- uid: Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(System.IFormatProvider,System.String,System.Object[])
-  commentId: M:Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(System.IFormatProvider,System.String,System.Object[])
-  id: '#ctor(System.IFormatProvider,System.String,System.Object[])'
+- uid: Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(IFormatProvider,System.String,System.Object[])
+  commentId: M:Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor(IFormatProvider,System.String,System.Object[])
+  id: '#ctor(IFormatProvider,System.String,System.Object[])'
   parent: Microsoft.AspNetCore.Html.HtmlFormattableString
   langs:
   - csharp
   - vb
   name: HtmlFormattableString(IFormatProvider, String, Object[])
   nameWithType: HtmlFormattableString.HtmlFormattableString(IFormatProvider, String, Object[])
-  fullName: Microsoft.AspNetCore.Html.HtmlFormattableString.HtmlFormattableString(System.IFormatProvider, System.String, System.Object[])
+  fullName: Microsoft.AspNetCore.Html.HtmlFormattableString.HtmlFormattableString(IFormatProvider, System.String, System.Object[])
   type: Constructor
   source:
     remote:
@@ -119,10 +112,9 @@ items:
   example: []
   syntax:
     content: public HtmlFormattableString(IFormatProvider formatProvider, string format, params object[] args)
-    content.vb: Public Sub New(formatProvider As IFormatProvider, format As String, ParamArray args As Object())
     parameters:
     - id: formatProvider
-      type: System.IFormatProvider
+      type: IFormatProvider
       description: An object that provides culture-specific formatting information.
     - id: format
       type: System.String
@@ -130,24 +122,25 @@ items:
     - id: args
       type: System.Object[]
       description: An array that contains objects to format.
+    content.vb: Public Sub New(formatProvider As IFormatProvider, format As String, ParamArray args As Object())
   overload: Microsoft.AspNetCore.Html.HtmlFormattableString.#ctor*
   nameWithType.vb: HtmlFormattableString.HtmlFormattableString(IFormatProvider, String, Object())
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Html.HtmlFormattableString.HtmlFormattableString(System.IFormatProvider, System.String, System.Object())
+  fullName.vb: Microsoft.AspNetCore.Html.HtmlFormattableString.HtmlFormattableString(IFormatProvider, System.String, System.Object())
   name.vb: HtmlFormattableString(IFormatProvider, String, Object())
-- uid: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  id: WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+- uid: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(TextWriter,HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(TextWriter,HtmlEncoder)
+  id: WriteTo(TextWriter,HtmlEncoder)
   parent: Microsoft.AspNetCore.Html.HtmlFormattableString
   langs:
   - csharp
   - vb
   name: WriteTo(TextWriter, HtmlEncoder)
   nameWithType: HtmlFormattableString.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo(TextWriter, HtmlEncoder)
   type: Method
   source:
     remote:
@@ -164,17 +157,17 @@ items:
   example: []
   syntax:
     content: public void WriteTo(TextWriter writer, HtmlEncoder encoder)
-    content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
     parameters:
     - id: writer
-      type: System.IO.TextWriter
-      description: The <xref href="System.IO.TextWriter" data-throw-if-not-resolved="false"></xref> to which the content is written.
+      type: TextWriter
+      description: The <see cref="!:TextWriter"></see> to which the content is written.
     - id: encoder
-      type: System.Text.Encodings.Web.HtmlEncoder
-      description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref> which encodes the content to be written.
+      type: HtmlEncoder
+      description: The <see cref="!:HtmlEncoder"></see> which encodes the content to be written.
+    content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo*
   implements:
-  - Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter,HtmlEncoder)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -200,285 +193,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -529,98 +243,80 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
-- uid: System.IFormatProvider
-  commentId: T:System.IFormatProvider
-  parent: System
+- uid: IFormatProvider
   isExternal: true
   name: IFormatProvider
   nameWithType: IFormatProvider
-  fullName: System.IFormatProvider
+  fullName: IFormatProvider
 - uid: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo*
   commentId: Overload:Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo
   isExternal: false
   name: WriteTo
   nameWithType: HtmlFormattableString.WriteTo
   fullName: Microsoft.AspNetCore.Html.HtmlFormattableString.WriteTo
-- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter,HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter,HtmlEncoder)
   parent: Microsoft.AspNetCore.Html.IHtmlContent
   isExternal: true
   name: WriteTo(TextWriter, HtmlEncoder)
   nameWithType: IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter,HtmlEncoder)
     name: WriteTo
     nameWithType: IHtmlContent.WriteTo
     fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.IO.TextWriter
+  - uid: TextWriter
     name: TextWriter
     nameWithType: TextWriter
-    fullName: System.IO.TextWriter
+    fullName: TextWriter
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
+  - uid: HtmlEncoder
     name: HtmlEncoder
     nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
+    fullName: HtmlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(TextWriter,HtmlEncoder)
     name: WriteTo
     nameWithType: IHtmlContent.WriteTo
     fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.IO.TextWriter
+  - uid: TextWriter
     name: TextWriter
     nameWithType: TextWriter
-    fullName: System.IO.TextWriter
+    fullName: TextWriter
     isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
+  - uid: HtmlEncoder
     name: HtmlEncoder
     nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
+    fullName: HtmlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IO.TextWriter
-  commentId: T:System.IO.TextWriter
-  parent: System.IO
+- uid: TextWriter
   isExternal: true
   name: TextWriter
   nameWithType: TextWriter
-  fullName: System.IO.TextWriter
-- uid: System.Text.Encodings.Web.HtmlEncoder
-  commentId: T:System.Text.Encodings.Web.HtmlEncoder
-  parent: System.Text.Encodings.Web
+  fullName: TextWriter
+- uid: HtmlEncoder
   isExternal: true
   name: HtmlEncoder
   nameWithType: HtmlEncoder
-  fullName: System.Text.Encodings.Web.HtmlEncoder
-- uid: System.IO
-  commentId: N:System.IO
-  isExternal: false
-  name: System.IO
-  nameWithType: System.IO
-  fullName: System.IO
-- uid: System.Text.Encodings.Web
-  commentId: N:System.Text.Encodings.Web
-  isExternal: false
-  name: System.Text.Encodings.Web
-  nameWithType: System.Text.Encodings.Web
-  fullName: System.Text.Encodings.Web
+  fullName: HtmlEncoder
 shouldSkipMarkup: true

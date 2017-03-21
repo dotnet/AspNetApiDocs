@@ -31,12 +31,12 @@ items:
   example: []
   syntax:
     content: 'public abstract class TotpSecurityStampBasedTokenProvider<TUser> : IUserTwoFactorTokenProvider<TUser> where TUser : class'
-    content.vb: >-
-      Public MustInherit Class TotpSecurityStampBasedTokenProvider(Of TUser As Class)
-          Implements IUserTwoFactorTokenProvider(Of TUser)
     typeParameters:
     - id: TUser
       description: The type encapsulating a user.
+    content.vb: >-
+      Public MustInherit Class TotpSecurityStampBasedTokenProvider(Of TUser As Class)
+          Implements IUserTwoFactorTokenProvider(Of TUser)
   inheritance:
   - System.Object
   derivedClasses:
@@ -90,7 +90,6 @@ items:
   example: []
   syntax:
     content: public virtual Task<string> GenerateAsync(string purpose, UserManager<TUser> manager, TUser user)
-    content.vb: Public Overridable Function GenerateAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
     parameters:
     - id: purpose
       type: System.String
@@ -104,6 +103,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.String}
       description: "\nThe <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> that represents the asynchronous operation, containing the token for the specified \n<span class=\"paramref\">user</span> and <span class=\"paramref\">purpose</span>.\n"
+    content.vb: Public Overridable Function GenerateAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
   overload: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider`1.GenerateAsync*
   implements:
   - Microsoft.AspNetCore.Identity.IUserTwoFactorTokenProvider{{TUser}}.GenerateAsync(System.String,Microsoft.AspNetCore.Identity.UserManager{{TUser}},{TUser})
@@ -142,7 +142,6 @@ items:
   example: []
   syntax:
     content: public virtual Task<bool> ValidateAsync(string purpose, string token, UserManager<TUser> manager, TUser user)
-    content.vb: Public Overridable Function ValidateAsync(purpose As String, token As String, manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
     parameters:
     - id: purpose
       type: System.String
@@ -159,6 +158,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
       description: "\nThe <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> that represents the asynchronous operation, containing the a flag indicating the result\nof validating the <span class=\"paramref\">token</span><span class=\"paramref\">user</span> and <span class=\"paramref\">purpose</span>.\nThe task will return true if the token is valid, otherwise false.\n"
+    content.vb: Public Overridable Function ValidateAsync(purpose As String, token As String, manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
   overload: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider`1.ValidateAsync*
   implements:
   - Microsoft.AspNetCore.Identity.IUserTwoFactorTokenProvider{{TUser}}.ValidateAsync(System.String,System.String,Microsoft.AspNetCore.Identity.UserManager{{TUser}},{TUser})
@@ -197,7 +197,6 @@ items:
   example: []
   syntax:
     content: public virtual Task<string> GetUserModifierAsync(string purpose, UserManager<TUser> manager, TUser user)
-    content.vb: Public Overridable Function GetUserModifierAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
     parameters:
     - id: purpose
       type: System.String
@@ -211,6 +210,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.String}
       description: "\nThe <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> that represents the asynchronous operation, containing a constant modifier for the specified \n<span class=\"paramref\">user</span> and <span class=\"paramref\">purpose</span>.\n"
+    content.vb: Public Overridable Function GetUserModifierAsync(purpose As String, manager As UserManager(Of TUser), user As TUser) As Task(Of String)
   overload: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider`1.GetUserModifierAsync*
   nameWithType.vb: TotpSecurityStampBasedTokenProvider(Of TUser).GetUserModifierAsync(String, UserManager(Of TUser), TUser)
   modifiers.csharp:
@@ -247,7 +247,6 @@ items:
   example: []
   syntax:
     content: public abstract Task<bool> CanGenerateTwoFactorTokenAsync(UserManager<TUser> manager, TUser user)
-    content.vb: Public MustOverride Function CanGenerateTwoFactorTokenAsync(manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
     parameters:
     - id: manager
       type: Microsoft.AspNetCore.Identity.UserManager{{TUser}}
@@ -258,6 +257,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Boolean}
       description: "\nThe <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> that represents the asynchronous operation, containing the a flag indicating if a two\nfactor token could be generated by this provider for the specified <span class=\"paramref\">user</span>.\nThe task will return true if a two factor authentication token could be generated, otherwise false.\n"
+    content.vb: Public MustOverride Function CanGenerateTwoFactorTokenAsync(manager As UserManager(Of TUser), user As TUser) As Task(Of Boolean)
   overload: Microsoft.AspNetCore.Identity.TotpSecurityStampBasedTokenProvider`1.CanGenerateTwoFactorTokenAsync*
   implements:
   - Microsoft.AspNetCore.Identity.IUserTwoFactorTokenProvider{{TUser}}.CanGenerateTwoFactorTokenAsync(Microsoft.AspNetCore.Identity.UserManager{{TUser}},{TUser})

@@ -45,8 +45,6 @@ items:
     content.vb: Public MustInherit Class HttpResponse
   inheritance:
   - System.Object
-  derivedClasses:
-  - Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -56,12 +54,6 @@ items:
   - System.Object.GetType
   - System.Object.MemberwiseClone
   extensionMethods:
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(System.String,System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(System.String,System.Text.Encoding,System.Threading.CancellationToken)
   modifiers.csharp:
@@ -98,10 +90,10 @@ items:
   example: []
   syntax:
     content: public abstract HttpContext HttpContext { get; }
-    content.vb: Public MustOverride ReadOnly Property HttpContext As HttpContext
     parameters: []
     return:
       type: Microsoft.AspNetCore.Http.HttpContext
+    content.vb: Public MustOverride ReadOnly Property HttpContext As HttpContext
   overload: Microsoft.AspNetCore.Http.HttpResponse.HttpContext*
   modifiers.csharp:
   - public
@@ -137,10 +129,10 @@ items:
   example: []
   syntax:
     content: public abstract int StatusCode { get; set; }
-    content.vb: Public MustOverride Property StatusCode As Integer
     parameters: []
     return:
       type: System.Int32
+    content.vb: Public MustOverride Property StatusCode As Integer
   overload: Microsoft.AspNetCore.Http.HttpResponse.StatusCode*
   modifiers.csharp:
   - public
@@ -176,10 +168,10 @@ items:
   example: []
   syntax:
     content: public abstract IHeaderDictionary Headers { get; }
-    content.vb: Public MustOverride ReadOnly Property Headers As IHeaderDictionary
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.IHeaderDictionary
+      type: IHeaderDictionary
+    content.vb: Public MustOverride ReadOnly Property Headers As IHeaderDictionary
   overload: Microsoft.AspNetCore.Http.HttpResponse.Headers*
   modifiers.csharp:
   - public
@@ -215,10 +207,10 @@ items:
   example: []
   syntax:
     content: public abstract Stream Body { get; set; }
-    content.vb: Public MustOverride Property Body As Stream
     parameters: []
     return:
       type: System.IO.Stream
+    content.vb: Public MustOverride Property Body As Stream
   overload: Microsoft.AspNetCore.Http.HttpResponse.Body*
   modifiers.csharp:
   - public
@@ -254,10 +246,10 @@ items:
   example: []
   syntax:
     content: public abstract long ? ContentLength { get; set; }
-    content.vb: Public MustOverride Property ContentLength As Long?
     parameters: []
     return:
       type: System.Nullable{System.Int64}
+    content.vb: Public MustOverride Property ContentLength As Long?
   overload: Microsoft.AspNetCore.Http.HttpResponse.ContentLength*
   modifiers.csharp:
   - public
@@ -293,10 +285,10 @@ items:
   example: []
   syntax:
     content: public abstract string ContentType { get; set; }
-    content.vb: Public MustOverride Property ContentType As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public MustOverride Property ContentType As String
   overload: Microsoft.AspNetCore.Http.HttpResponse.ContentType*
   modifiers.csharp:
   - public
@@ -332,10 +324,10 @@ items:
   example: []
   syntax:
     content: public abstract IResponseCookies Cookies { get; }
-    content.vb: Public MustOverride ReadOnly Property Cookies As IResponseCookies
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.IResponseCookies
+      type: IResponseCookies
+    content.vb: Public MustOverride ReadOnly Property Cookies As IResponseCookies
   overload: Microsoft.AspNetCore.Http.HttpResponse.Cookies*
   modifiers.csharp:
   - public
@@ -371,10 +363,10 @@ items:
   example: []
   syntax:
     content: public abstract bool HasStarted { get; }
-    content.vb: Public MustOverride ReadOnly Property HasStarted As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public MustOverride ReadOnly Property HasStarted As Boolean
   overload: Microsoft.AspNetCore.Http.HttpResponse.HasStarted*
   modifiers.csharp:
   - public
@@ -410,7 +402,6 @@ items:
   example: []
   syntax:
     content: public abstract void OnStarting(Func<object, Task> callback, object state)
-    content.vb: Public MustOverride Sub OnStarting(callback As Func(Of Object, Task), state As Object)
     parameters:
     - id: callback
       type: System.Func{System.Object,System.Threading.Tasks.Task}
@@ -418,6 +409,7 @@ items:
     - id: state
       type: System.Object
       description: A state object to capture and pass back to the delegate.
+    content.vb: Public MustOverride Sub OnStarting(callback As Func(Of Object, Task), state As Object)
   overload: Microsoft.AspNetCore.Http.HttpResponse.OnStarting*
   nameWithType.vb: HttpResponse.OnStarting(Func(Of Object, Task), Object)
   modifiers.csharp:
@@ -454,11 +446,11 @@ items:
   example: []
   syntax:
     content: public virtual void OnStarting(Func<Task> callback)
-    content.vb: Public Overridable Sub OnStarting(callback As Func(Of Task))
     parameters:
     - id: callback
       type: System.Func{System.Threading.Tasks.Task}
       description: The delegate to execute.
+    content.vb: Public Overridable Sub OnStarting(callback As Func(Of Task))
   overload: Microsoft.AspNetCore.Http.HttpResponse.OnStarting*
   nameWithType.vb: HttpResponse.OnStarting(Func(Of Task))
   modifiers.csharp:
@@ -495,7 +487,6 @@ items:
   example: []
   syntax:
     content: public abstract void OnCompleted(Func<object, Task> callback, object state)
-    content.vb: Public MustOverride Sub OnCompleted(callback As Func(Of Object, Task), state As Object)
     parameters:
     - id: callback
       type: System.Func{System.Object,System.Threading.Tasks.Task}
@@ -503,6 +494,7 @@ items:
     - id: state
       type: System.Object
       description: A state object to capture and pass back to the delegate.
+    content.vb: Public MustOverride Sub OnCompleted(callback As Func(Of Object, Task), state As Object)
   overload: Microsoft.AspNetCore.Http.HttpResponse.OnCompleted*
   nameWithType.vb: HttpResponse.OnCompleted(Func(Of Object, Task), Object)
   modifiers.csharp:
@@ -539,11 +531,11 @@ items:
   example: []
   syntax:
     content: public virtual void RegisterForDispose(IDisposable disposable)
-    content.vb: Public Overridable Sub RegisterForDispose(disposable As IDisposable)
     parameters:
     - id: disposable
       type: System.IDisposable
       description: The object to be disposed.
+    content.vb: Public Overridable Sub RegisterForDispose(disposable As IDisposable)
   overload: Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*
   modifiers.csharp:
   - public
@@ -577,11 +569,11 @@ items:
   example: []
   syntax:
     content: public virtual void OnCompleted(Func<Task> callback)
-    content.vb: Public Overridable Sub OnCompleted(callback As Func(Of Task))
     parameters:
     - id: callback
       type: System.Func{System.Threading.Tasks.Task}
       description: The delegate to invoke.
+    content.vb: Public Overridable Sub OnCompleted(callback As Func(Of Task))
   overload: Microsoft.AspNetCore.Http.HttpResponse.OnCompleted*
   nameWithType.vb: HttpResponse.OnCompleted(Func(Of Task))
   modifiers.csharp:
@@ -618,11 +610,11 @@ items:
   example: []
   syntax:
     content: public virtual void Redirect(string location)
-    content.vb: Public Overridable Sub Redirect(location As String)
     parameters:
     - id: location
       type: System.String
       description: The URL to redirect the client to.
+    content.vb: Public Overridable Sub Redirect(location As String)
   overload: Microsoft.AspNetCore.Http.HttpResponse.Redirect*
   modifiers.csharp:
   - public
@@ -656,7 +648,6 @@ items:
   example: []
   syntax:
     content: public abstract void Redirect(string location, bool permanent)
-    content.vb: Public MustOverride Sub Redirect(location As String, permanent As Boolean)
     parameters:
     - id: location
       type: System.String
@@ -664,6 +655,7 @@ items:
     - id: permanent
       type: System.Boolean
       description: <code>True</code> if the redirect is permanent (301), otherwise <code>false</code> (302).
+    content.vb: Public MustOverride Sub Redirect(location As String, permanent As Boolean)
   overload: Microsoft.AspNetCore.Http.HttpResponse.Redirect*
   modifiers.csharp:
   - public
@@ -964,398 +956,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  commentId: M:Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-  parent: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions
-  definition: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-  name: GetTypedHeaders()
-  nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders()
-  fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-    name: GetTypedHeaders
-    nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders
-    fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-    name: GetTypedHeaders
-    nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders
-    fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  commentId: M:Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-  parent: Microsoft.AspNetCore.Http.ResponseExtensions
-  definition: Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-  name: Clear()
-  nameWithType: ResponseExtensions.Clear()
-  fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-    name: Clear
-    nameWithType: ResponseExtensions.Clear
-    fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-    name: Clear
-    nameWithType: ResponseExtensions.Clear
-    fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  definition: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  name: SendFileAsync(IFileInfo, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(IFileInfo, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  definition: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  name: SendFileAsync(IFileInfo, Int64, Nullable<Int64>, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(IFileInfo, Int64, Nullable<Int64>, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo, System.Int64, System.Nullable<System.Int64>, System.Threading.CancellationToken)
-  nameWithType.vb: SendFileResponseExtensions.SendFileAsync(IFileInfo, Int64, Nullable(Of Int64), CancellationToken)
-  fullName.vb: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo, System.Int64, System.Nullable(Of System.Int64), System.Threading.CancellationToken)
-  name.vb: SendFileAsync(IFileInfo, Int64, Nullable(Of Int64), CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  definition: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-  name: SendFileAsync(String, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  definition: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  name: SendFileAsync(String, Int64, Nullable<Int64>, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(String, Int64, Nullable<Int64>, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String, System.Int64, System.Nullable<System.Int64>, System.Threading.CancellationToken)
-  nameWithType.vb: SendFileResponseExtensions.SendFileAsync(String, Int64, Nullable(Of Int64), CancellationToken)
-  fullName.vb: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String, System.Int64, System.Nullable(Of System.Int64), System.Threading.CancellationToken)
-  name.vb: SendFileAsync(String, Int64, Nullable(Of Int64), CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Http.HttpResponse.Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(System.String,System.Threading.CancellationToken)
   commentId: M:Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
   parent: Microsoft.AspNetCore.Http.HttpResponseWritingExtensions
@@ -1488,485 +1088,6 @@ references:
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-  commentId: M:Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-  isExternal: false
-  name: GetTypedHeaders(HttpResponse)
-  nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders(HttpResponse)
-  fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-    name: GetTypedHeaders
-    nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders
-    fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders(Microsoft.AspNetCore.Http.HttpResponse)
-    name: GetTypedHeaders
-    nameWithType: HeaderDictionaryTypeExtensions.GetTypedHeaders
-    fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions.GetTypedHeaders
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions
-  commentId: T:Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: HeaderDictionaryTypeExtensions
-  nameWithType: HeaderDictionaryTypeExtensions
-  fullName: Microsoft.AspNetCore.Http.HeaderDictionaryTypeExtensions
-- uid: Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-  commentId: M:Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-  isExternal: false
-  name: Clear(HttpResponse)
-  nameWithType: ResponseExtensions.Clear(HttpResponse)
-  fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-    name: Clear
-    nameWithType: ResponseExtensions.Clear
-    fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.ResponseExtensions.Clear(Microsoft.AspNetCore.Http.HttpResponse)
-    name: Clear
-    nameWithType: ResponseExtensions.Clear
-    fullName: Microsoft.AspNetCore.Http.ResponseExtensions.Clear
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.ResponseExtensions
-  commentId: T:Microsoft.AspNetCore.Http.ResponseExtensions
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: ResponseExtensions
-  nameWithType: ResponseExtensions
-  fullName: Microsoft.AspNetCore.Http.ResponseExtensions
-- uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-  isExternal: true
-  name: SendFileAsync(HttpResponse, IFileInfo, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(HttpResponse, IFileInfo, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, Microsoft.Extensions.FileProviders.IFileInfo, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  commentId: T:Microsoft.AspNetCore.Http.SendFileResponseExtensions
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: SendFileResponseExtensions
-  nameWithType: SendFileResponseExtensions
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions
-- uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  isExternal: true
-  name: SendFileAsync(HttpResponse, IFileInfo, Int64, Nullable<Int64>, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(HttpResponse, IFileInfo, Int64, Nullable<Int64>, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, Microsoft.Extensions.FileProviders.IFileInfo, System.Int64, System.Nullable<System.Int64>, System.Threading.CancellationToken)
-  nameWithType.vb: SendFileResponseExtensions.SendFileAsync(HttpResponse, IFileInfo, Int64, Nullable(Of Int64), CancellationToken)
-  fullName.vb: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, Microsoft.Extensions.FileProviders.IFileInfo, System.Int64, System.Nullable(Of System.Int64), System.Threading.CancellationToken)
-  name.vb: SendFileAsync(HttpResponse, IFileInfo, Int64, Nullable(Of Int64), CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,Microsoft.Extensions.FileProviders.IFileInfo,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.FileProviders.IFileInfo
-    name: IFileInfo
-    nameWithType: IFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileInfo
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-  isExternal: true
-  name: SendFileAsync(HttpResponse, String, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(HttpResponse, String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, System.String, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-  isExternal: true
-  name: SendFileAsync(HttpResponse, String, Int64, Nullable<Int64>, CancellationToken)
-  nameWithType: SendFileResponseExtensions.SendFileAsync(HttpResponse, String, Int64, Nullable<Int64>, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, System.String, System.Int64, System.Nullable<System.Int64>, System.Threading.CancellationToken)
-  nameWithType.vb: SendFileResponseExtensions.SendFileAsync(HttpResponse, String, Int64, Nullable(Of Int64), CancellationToken)
-  fullName.vb: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse, System.String, System.Int64, System.Nullable(Of System.Int64), System.Threading.CancellationToken)
-  name.vb: SendFileAsync(HttpResponse, String, Int64, Nullable(Of Int64), CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Int64,System.Nullable{System.Int64},System.Threading.CancellationToken)
-    name: SendFileAsync
-    nameWithType: SendFileResponseExtensions.SendFileAsync
-    fullName: Microsoft.AspNetCore.Http.SendFileResponseExtensions.SendFileAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpResponse
-    name: HttpResponse
-    nameWithType: HttpResponse
-    fullName: Microsoft.AspNetCore.Http.HttpResponse
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Nullable`1
-    name: Nullable
-    nameWithType: Nullable
-    fullName: System.Nullable
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - uid: System.Int64
-    name: Int64
-    nameWithType: Int64
-    fullName: System.Int64
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
   commentId: M:Microsoft.AspNetCore.Http.HttpResponseWritingExtensions.WriteAsync(Microsoft.AspNetCore.Http.HttpResponse,System.String,System.Threading.CancellationToken)
   isExternal: true
@@ -2128,11 +1249,6 @@ references:
     fullName: )
 - uid: Microsoft.AspNetCore.Http.HttpResponse.HttpContext
   commentId: P:Microsoft.AspNetCore.Http.HttpResponse.HttpContext
-  parent: Microsoft.AspNetCore.Http.HttpResponse
-  isExternal: false
-  name: HttpContext
-  nameWithType: HttpResponse.HttpContext
-  fullName: Microsoft.AspNetCore.Http.HttpResponse.HttpContext
 - uid: Microsoft.AspNetCore.Http.HttpResponse.HttpContext*
   commentId: Overload:Microsoft.AspNetCore.Http.HttpResponse.HttpContext
   isExternal: false
@@ -2146,13 +1262,6 @@ references:
   name: HttpContext
   nameWithType: HttpContext
   fullName: Microsoft.AspNetCore.Http.HttpContext
-- uid: Microsoft.AspNetCore.Http.HttpResponse
-  commentId: T:Microsoft.AspNetCore.Http.HttpResponse
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: HttpResponse
-  nameWithType: HttpResponse
-  fullName: Microsoft.AspNetCore.Http.HttpResponse
 - uid: Microsoft.AspNetCore.Http.HttpResponse.StatusCode*
   commentId: Overload:Microsoft.AspNetCore.Http.HttpResponse.StatusCode
   isExternal: false
@@ -2172,13 +1281,11 @@ references:
   name: Headers
   nameWithType: HttpResponse.Headers
   fullName: Microsoft.AspNetCore.Http.HttpResponse.Headers
-- uid: Microsoft.AspNetCore.Http.IHeaderDictionary
-  commentId: T:Microsoft.AspNetCore.Http.IHeaderDictionary
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: IHeaderDictionary
+  isExternal: true
   name: IHeaderDictionary
   nameWithType: IHeaderDictionary
-  fullName: Microsoft.AspNetCore.Http.IHeaderDictionary
+  fullName: IHeaderDictionary
 - uid: System.IO.Stream
   commentId: T:System.IO.Stream
   parent: System.IO
@@ -2306,13 +1413,11 @@ references:
   name: Cookies
   nameWithType: HttpResponse.Cookies
   fullName: Microsoft.AspNetCore.Http.HttpResponse.Cookies
-- uid: Microsoft.AspNetCore.Http.IResponseCookies
-  commentId: T:Microsoft.AspNetCore.Http.IResponseCookies
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: IResponseCookies
+  isExternal: true
   name: IResponseCookies
   nameWithType: IResponseCookies
-  fullName: Microsoft.AspNetCore.Http.IResponseCookies
+  fullName: IResponseCookies
 - uid: Microsoft.AspNetCore.Http.HttpResponse.HasStarted*
   commentId: Overload:Microsoft.AspNetCore.Http.HttpResponse.HasStarted
   isExternal: false

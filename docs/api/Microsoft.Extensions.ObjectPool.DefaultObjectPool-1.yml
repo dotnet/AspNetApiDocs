@@ -29,11 +29,11 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public class DefaultObjectPool<T> : ObjectPool<T> where T : class'
+    typeParameters:
+    - id: T
     content.vb: >-
       Public Class DefaultObjectPool(Of T As Class)
           Inherits ObjectPool(Of T)
-    typeParameters:
-    - id: T
   inheritance:
   - System.Object
   - Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
@@ -78,10 +78,10 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public DefaultObjectPool(IPooledObjectPolicy<T> policy)
-    content.vb: Public Sub New(policy As IPooledObjectPolicy(Of T))
     parameters:
     - id: policy
       type: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}
+    content.vb: Public Sub New(policy As IPooledObjectPolicy(Of T))
   overload: Microsoft.Extensions.ObjectPool.DefaultObjectPool`1.#ctor*
   nameWithType.vb: DefaultObjectPool(Of T).DefaultObjectPool(IPooledObjectPolicy(Of T))
   modifiers.csharp:
@@ -114,12 +114,12 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public DefaultObjectPool(IPooledObjectPolicy<T> policy, int maximumRetained)
-    content.vb: Public Sub New(policy As IPooledObjectPolicy(Of T), maximumRetained As Integer)
     parameters:
     - id: policy
       type: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}
     - id: maximumRetained
       type: System.Int32
+    content.vb: Public Sub New(policy As IPooledObjectPolicy(Of T), maximumRetained As Integer)
   overload: Microsoft.Extensions.ObjectPool.DefaultObjectPool`1.#ctor*
   nameWithType.vb: DefaultObjectPool(Of T).DefaultObjectPool(IPooledObjectPolicy(Of T), Int32)
   modifiers.csharp:
@@ -152,9 +152,9 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public override T Get()
-    content.vb: Public Overrides Function Get As T
     return:
       type: '{T}'
+    content.vb: Public Overrides Function Get As T
   overridden: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}.Get
   overload: Microsoft.Extensions.ObjectPool.DefaultObjectPool`1.Get*
   nameWithType.vb: DefaultObjectPool(Of T).Get()
@@ -189,10 +189,10 @@ items:
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public override void Return(T obj)
-    content.vb: Public Overrides Sub Return(obj As T)
     parameters:
     - id: obj
       type: '{T}'
+    content.vb: Public Overrides Sub Return(obj As T)
   overridden: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}.Return({T})
   overload: Microsoft.Extensions.ObjectPool.DefaultObjectPool`1.Return*
   nameWithType.vb: DefaultObjectPool(Of T).Return(T)

@@ -75,7 +75,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal
   syntax:
     content: public StreamSocketOutput(string connectionId, Stream outputStream, MemoryPool memory, IKestrelTrace logger)
-    content.vb: Public Sub New(connectionId As String, outputStream As Stream, memory As MemoryPool, logger As IKestrelTrace)
     parameters:
     - id: connectionId
       type: System.String
@@ -85,6 +84,7 @@ items:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPool
     - id: logger
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.IKestrelTrace
+    content.vb: Public Sub New(connectionId As String, outputStream As Stream, memory As MemoryPool, logger As IKestrelTrace)
   overload: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal.StreamSocketOutput.#ctor*
   modifiers.csharp:
   - public
@@ -114,12 +114,12 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal
   syntax:
     content: public void Write(ArraySegment<byte> buffer, bool chunk)
-    content.vb: Public Sub Write(buffer As ArraySegment(Of Byte), chunk As Boolean)
     parameters:
     - id: buffer
       type: System.ArraySegment{System.Byte}
     - id: chunk
       type: System.Boolean
+    content.vb: Public Sub Write(buffer As ArraySegment(Of Byte), chunk As Boolean)
   overload: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal.StreamSocketOutput.Write*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.Write(System.ArraySegment{System.Byte},System.Boolean)
@@ -154,7 +154,6 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal
   syntax:
     content: public Task WriteAsync(ArraySegment<byte> buffer, bool chunk, CancellationToken cancellationToken)
-    content.vb: Public Function WriteAsync(buffer As ArraySegment(Of Byte), chunk As Boolean, cancellationToken As CancellationToken) As Task
     parameters:
     - id: buffer
       type: System.ArraySegment{System.Byte}
@@ -164,6 +163,7 @@ items:
       type: System.Threading.CancellationToken
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Function WriteAsync(buffer As ArraySegment(Of Byte), chunk As Boolean, cancellationToken As CancellationToken) As Task
   overload: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal.StreamSocketOutput.WriteAsync*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.WriteAsync(System.ArraySegment{System.Byte},System.Boolean,System.Threading.CancellationToken)
@@ -198,9 +198,9 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal
   syntax:
     content: public MemoryPoolIterator ProducingStart()
-    content.vb: Public Function ProducingStart As MemoryPoolIterator
     return:
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator
+    content.vb: Public Function ProducingStart As MemoryPoolIterator
   overload: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal.StreamSocketOutput.ProducingStart*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.ProducingStart
@@ -232,10 +232,10 @@ items:
   namespace: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal
   syntax:
     content: public void ProducingComplete(MemoryPoolIterator end)
-    content.vb: Public Sub ProducingComplete(end As MemoryPoolIterator)
     parameters:
     - id: end
       type: Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator
+    content.vb: Public Sub ProducingComplete(end As MemoryPoolIterator)
   overload: Microsoft.AspNetCore.Server.Kestrel.Filter.Internal.StreamSocketOutput.ProducingComplete*
   implements:
   - Microsoft.AspNetCore.Server.Kestrel.Internal.Http.ISocketOutput.ProducingComplete(Microsoft.AspNetCore.Server.Kestrel.Internal.Infrastructure.MemoryPoolIterator)

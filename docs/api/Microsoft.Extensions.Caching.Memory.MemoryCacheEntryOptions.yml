@@ -30,24 +30,18 @@ items:
   - Microsoft.Extensions.Caching.Abstractions
   namespace: Microsoft.Extensions.Caching.Memory
   syntax:
-    content: public class MemoryCacheEntryOptions
-    content.vb: Public Class MemoryCacheEntryOptions
+    content: 'public class MemoryCacheEntryOptions : object'
+    content.vb: >-
+      Public Class MemoryCacheEntryOptions
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   extensionMethods:
   - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetPriority(Microsoft.Extensions.Caching.Memory.CacheItemPriority)
-  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Primitives.IChangeToken)
-  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.TimeSpan)
-  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.DateTimeOffset)
-  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(System.TimeSpan)
+  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
+  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
+  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
+  - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
   - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.RegisterPostEvictionCallback(Microsoft.Extensions.Caching.Memory.PostEvictionDelegate)
   - Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.RegisterPostEvictionCallback(Microsoft.Extensions.Caching.Memory.PostEvictionDelegate,System.Object)
   modifiers.csharp:
@@ -82,10 +76,10 @@ items:
   example: []
   syntax:
     content: public DateTimeOffset? AbsoluteExpiration { get; set; }
-    content.vb: Public Property AbsoluteExpiration As DateTimeOffset?
     parameters: []
     return:
-      type: System.Nullable{System.DateTimeOffset}
+      type: System.Nullable{DateTimeOffset}
+    content.vb: Public Property AbsoluteExpiration As DateTimeOffset?
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.AbsoluteExpiration*
   modifiers.csharp:
   - public
@@ -119,10 +113,10 @@ items:
   example: []
   syntax:
     content: public TimeSpan? AbsoluteExpirationRelativeToNow { get; set; }
-    content.vb: Public Property AbsoluteExpirationRelativeToNow As TimeSpan?
     parameters: []
     return:
-      type: System.Nullable{System.TimeSpan}
+      type: System.Nullable{TimeSpan}
+    content.vb: Public Property AbsoluteExpirationRelativeToNow As TimeSpan?
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow*
   modifiers.csharp:
   - public
@@ -156,10 +150,10 @@ items:
   example: []
   syntax:
     content: public TimeSpan? SlidingExpiration { get; set; }
-    content.vb: Public Property SlidingExpiration As TimeSpan?
     parameters: []
     return:
-      type: System.Nullable{System.TimeSpan}
+      type: System.Nullable{TimeSpan}
+    content.vb: Public Property SlidingExpiration As TimeSpan?
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration*
   modifiers.csharp:
   - public
@@ -189,14 +183,14 @@ items:
   assemblies:
   - Microsoft.Extensions.Caching.Abstractions
   namespace: Microsoft.Extensions.Caching.Memory
-  summary: "\nGets the <xref href=\"Microsoft.Extensions.Primitives.IChangeToken\" data-throw-if-not-resolved=\"false\"></xref> instances which cause the cache entry to expire.\n"
+  summary: "\nGets the <see cref=\"!:IChangeToken\"></see> instances which cause the cache entry to expire.\n"
   example: []
   syntax:
     content: public IList<IChangeToken> ExpirationTokens { get; }
-    content.vb: Public ReadOnly Property ExpirationTokens As IList(Of IChangeToken)
     parameters: []
     return:
-      type: System.Collections.Generic.IList{Microsoft.Extensions.Primitives.IChangeToken}
+      type: IList{IChangeToken}
+    content.vb: Public ReadOnly Property ExpirationTokens As IList(Of IChangeToken)
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.ExpirationTokens*
   modifiers.csharp:
   - public
@@ -230,10 +224,10 @@ items:
   example: []
   syntax:
     content: public IList<PostEvictionCallbackRegistration> PostEvictionCallbacks { get; }
-    content.vb: Public ReadOnly Property PostEvictionCallbacks As IList(Of PostEvictionCallbackRegistration)
     parameters: []
     return:
-      type: System.Collections.Generic.IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}
+      type: IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}
+    content.vb: Public ReadOnly Property PostEvictionCallbacks As IList(Of PostEvictionCallbackRegistration)
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.PostEvictionCallbacks*
   modifiers.csharp:
   - public
@@ -267,10 +261,10 @@ items:
   example: []
   syntax:
     content: public CacheItemPriority Priority { get; set; }
-    content.vb: Public Property Priority As CacheItemPriority
     parameters: []
     return:
       type: Microsoft.Extensions.Caching.Memory.CacheItemPriority
+    content.vb: Public Property Priority As CacheItemPriority
   overload: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Priority*
   modifiers.csharp:
   - public
@@ -292,285 +286,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetPriority(Microsoft.Extensions.Caching.Memory.CacheItemPriority)
   commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetPriority(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Caching.Memory.CacheItemPriority)
   parent: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
@@ -608,158 +323,158 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Primitives.IChangeToken)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
   parent: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
-  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
+  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
   name: AddExpirationToken(IChangeToken)
   nameWithType: MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Primitives.IChangeToken)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
     name: AddExpirationToken
     nameWithType: MemoryCacheEntryExtensions.AddExpirationToken
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(IChangeToken)
     name: AddExpirationToken
     nameWithType: MemoryCacheEntryExtensions.AddExpirationToken
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   parent: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
-  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   name: SetAbsoluteExpiration(TimeSpan)
   nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(TimeSpan)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.DateTimeOffset)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
   parent: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
-  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
+  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
   name: SetAbsoluteExpiration(DateTimeOffset)
   nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.DateTimeOffset)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(DateTimeOffset)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   parent: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
-  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  definition: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   name: SetSlidingExpiration(TimeSpan)
   nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
     name: SetSlidingExpiration
     nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(TimeSpan)
     name: SetSlidingExpiration
     nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
@@ -917,14 +632,14 @@ references:
   name: MemoryCacheEntryExtensions
   nameWithType: MemoryCacheEntryExtensions
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
   isExternal: true
   name: AddExpirationToken(MemoryCacheEntryOptions, IChangeToken)
   nameWithType: MemoryCacheEntryExtensions.AddExpirationToken(MemoryCacheEntryOptions, IChangeToken)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, Microsoft.Extensions.Primitives.IChangeToken)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, IChangeToken)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
     name: AddExpirationToken
     nameWithType: MemoryCacheEntryExtensions.AddExpirationToken
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken
@@ -938,16 +653,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,Microsoft.Extensions.Primitives.IChangeToken)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,IChangeToken)
     name: AddExpirationToken
     nameWithType: MemoryCacheEntryExtensions.AddExpirationToken
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.AddExpirationToken
@@ -961,22 +676,22 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   isExternal: true
   name: SetAbsoluteExpiration(MemoryCacheEntryOptions, TimeSpan)
   nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration(MemoryCacheEntryOptions, TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
@@ -990,16 +705,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
@@ -1013,22 +728,22 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
   isExternal: true
   name: SetAbsoluteExpiration(MemoryCacheEntryOptions, DateTimeOffset)
   nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration(MemoryCacheEntryOptions, DateTimeOffset)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, System.DateTimeOffset)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, DateTimeOffset)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
@@ -1042,16 +757,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.DateTimeOffset)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,DateTimeOffset)
     name: SetAbsoluteExpiration
     nameWithType: MemoryCacheEntryExtensions.SetAbsoluteExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetAbsoluteExpiration
@@ -1065,22 +780,22 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
-  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+- uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
+  commentId: M:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
   isExternal: true
   name: SetSlidingExpiration(MemoryCacheEntryOptions, TimeSpan)
   nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration(MemoryCacheEntryOptions, TimeSpan)
-  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, System.TimeSpan)
+  fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions, TimeSpan)
   spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
     name: SetSlidingExpiration
     nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration
@@ -1094,16 +809,16 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,System.TimeSpan)
+  - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration(Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions,TimeSpan)
     name: SetSlidingExpiration
     nameWithType: MemoryCacheEntryExtensions.SetSlidingExpiration
     fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryExtensions.SetSlidingExpiration
@@ -1117,10 +832,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
@@ -1247,15 +962,14 @@ references:
   name: AbsoluteExpiration
   nameWithType: MemoryCacheEntryOptions.AbsoluteExpiration
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.AbsoluteExpiration
-- uid: System.Nullable{System.DateTimeOffset}
-  commentId: T:System.Nullable{System.DateTimeOffset}
-  parent: System
+- uid: System.Nullable{DateTimeOffset}
+  commentId: '!:System.Nullable{DateTimeOffset}'
   definition: System.Nullable`1
   name: Nullable<DateTimeOffset>
   nameWithType: Nullable<DateTimeOffset>
-  fullName: System.Nullable<System.DateTimeOffset>
+  fullName: System.Nullable<DateTimeOffset>
   nameWithType.vb: Nullable(Of DateTimeOffset)
-  fullName.vb: System.Nullable(Of System.DateTimeOffset)
+  fullName.vb: System.Nullable(Of DateTimeOffset)
   name.vb: Nullable(Of DateTimeOffset)
   spec.csharp:
   - uid: System.Nullable`1
@@ -1266,10 +980,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1283,10 +997,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.DateTimeOffset
+  - uid: DateTimeOffset
     name: DateTimeOffset
     nameWithType: DateTimeOffset
-    fullName: System.DateTimeOffset
+    fullName: DateTimeOffset
     isExternal: true
   - name: )
     nameWithType: )
@@ -1336,15 +1050,14 @@ references:
   name: AbsoluteExpirationRelativeToNow
   nameWithType: MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.AbsoluteExpirationRelativeToNow
-- uid: System.Nullable{System.TimeSpan}
-  commentId: T:System.Nullable{System.TimeSpan}
-  parent: System
+- uid: System.Nullable{TimeSpan}
+  commentId: '!:System.Nullable{TimeSpan}'
   definition: System.Nullable`1
   name: Nullable<TimeSpan>
   nameWithType: Nullable<TimeSpan>
-  fullName: System.Nullable<System.TimeSpan>
+  fullName: System.Nullable<TimeSpan>
   nameWithType.vb: Nullable(Of TimeSpan)
-  fullName.vb: System.Nullable(Of System.TimeSpan)
+  fullName.vb: System.Nullable(Of TimeSpan)
   name.vb: Nullable(Of TimeSpan)
   spec.csharp:
   - uid: System.Nullable`1
@@ -1355,10 +1068,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -1372,10 +1085,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: System.TimeSpan
+  - uid: TimeSpan
     name: TimeSpan
     nameWithType: TimeSpan
-    fullName: System.TimeSpan
+    fullName: TimeSpan
     isExternal: true
   - name: )
     nameWithType: )
@@ -1386,135 +1099,113 @@ references:
   name: SlidingExpiration
   nameWithType: MemoryCacheEntryOptions.SlidingExpiration
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.SlidingExpiration
-- uid: Microsoft.Extensions.Primitives.IChangeToken
-  commentId: T:Microsoft.Extensions.Primitives.IChangeToken
-  parent: Microsoft.Extensions.Primitives
-  isExternal: false
-  name: IChangeToken
-  nameWithType: IChangeToken
-  fullName: Microsoft.Extensions.Primitives.IChangeToken
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.ExpirationTokens*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.ExpirationTokens
   isExternal: false
   name: ExpirationTokens
   nameWithType: MemoryCacheEntryOptions.ExpirationTokens
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.ExpirationTokens
-- uid: System.Collections.Generic.IList{Microsoft.Extensions.Primitives.IChangeToken}
-  commentId: T:System.Collections.Generic.IList{Microsoft.Extensions.Primitives.IChangeToken}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{IChangeToken}
+  commentId: '!:IList{IChangeToken}'
+  definition: IList`1
   name: IList<IChangeToken>
   nameWithType: IList<IChangeToken>
-  fullName: System.Collections.Generic.IList<Microsoft.Extensions.Primitives.IChangeToken>
+  fullName: IList<IChangeToken>
   nameWithType.vb: IList(Of IChangeToken)
-  fullName.vb: System.Collections.Generic.IList(Of Microsoft.Extensions.Primitives.IChangeToken)
+  fullName.vb: IList(Of IChangeToken)
   name.vb: IList(Of IChangeToken)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Extensions.Primitives.IChangeToken
+  - uid: IChangeToken
     name: IChangeToken
     nameWithType: IChangeToken
-    fullName: Microsoft.Extensions.Primitives.IChangeToken
+    fullName: IChangeToken
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Primitives
-  commentId: N:Microsoft.Extensions.Primitives
-  isExternal: false
-  name: Microsoft.Extensions.Primitives
-  nameWithType: Microsoft.Extensions.Primitives
-  fullName: Microsoft.Extensions.Primitives
-- uid: System.Collections.Generic.IList`1
-  commentId: T:System.Collections.Generic.IList`1
+- uid: IList`1
   isExternal: true
-  name: IList<T>
-  nameWithType: IList<T>
-  fullName: System.Collections.Generic.IList<T>
-  nameWithType.vb: IList(Of T)
-  fullName.vb: System.Collections.Generic.IList(Of T)
-  name.vb: IList(Of T)
+  name: IList<>
+  nameWithType: IList<>
+  fullName: IList<>
+  nameWithType.vb: IList(Of )
+  fullName.vb: IList(Of )
+  name.vb: IList(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.PostEvictionCallbacks*
   commentId: Overload:Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.PostEvictionCallbacks
   isExternal: false
   name: PostEvictionCallbacks
   nameWithType: MemoryCacheEntryOptions.PostEvictionCallbacks
   fullName: Microsoft.Extensions.Caching.Memory.MemoryCacheEntryOptions.PostEvictionCallbacks
-- uid: System.Collections.Generic.IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}
-  commentId: T:System.Collections.Generic.IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IList`1
+- uid: IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}
+  commentId: '!:IList{Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration}'
+  definition: IList`1
   name: IList<PostEvictionCallbackRegistration>
   nameWithType: IList<PostEvictionCallbackRegistration>
-  fullName: System.Collections.Generic.IList<Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration>
+  fullName: IList<Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration>
   nameWithType.vb: IList(Of PostEvictionCallbackRegistration)
-  fullName.vb: System.Collections.Generic.IList(Of Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration)
+  fullName.vb: IList(Of Microsoft.Extensions.Caching.Memory.PostEvictionCallbackRegistration)
   name.vb: IList(Of PostEvictionCallbackRegistration)
   spec.csharp:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: <
     nameWithType: <
@@ -1527,10 +1218,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IList`1
+  - uid: IList`1
     name: IList
     nameWithType: IList
-    fullName: System.Collections.Generic.IList
+    fullName: IList
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '

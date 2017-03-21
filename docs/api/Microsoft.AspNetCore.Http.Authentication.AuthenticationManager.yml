@@ -5,14 +5,14 @@ items:
   id: AuthenticationManager
   parent: Microsoft.AspNetCore.Http.Authentication
   children:
-  - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(AuthenticateContext)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(System.String)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AutomaticScheme
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
-  - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior)
+  - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,ChallengeBehavior)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync(Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties)
   - Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync(System.String)
@@ -47,8 +47,6 @@ items:
     content.vb: Public MustInherit Class AuthenticationManager
   inheritance:
   - System.Object
-  derivedClasses:
-  - Microsoft.AspNetCore.Http.Authentication.Internal.DefaultAuthenticationManager
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -91,9 +89,9 @@ items:
   example: []
   syntax:
     content: public const string AutomaticScheme = "Automatic"
-    content.vb: Public Const AutomaticScheme As String = "Automatic"
     return:
       type: System.String
+    content.vb: Public Const AutomaticScheme As String = "Automatic"
   modifiers.csharp:
   - public
   - const
@@ -124,10 +122,10 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract HttpContext HttpContext { get; }
-    content.vb: Public MustOverride ReadOnly Property HttpContext As HttpContext
     parameters: []
     return:
       type: Microsoft.AspNetCore.Http.HttpContext
+    content.vb: Public MustOverride ReadOnly Property HttpContext As HttpContext
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.HttpContext*
   modifiers.csharp:
   - public
@@ -161,9 +159,9 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract IEnumerable<AuthenticationDescription> GetAuthenticationSchemes()
-    content.vb: Public MustOverride Function GetAuthenticationSchemes As IEnumerable(Of AuthenticationDescription)
     return:
       type: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Http.Authentication.AuthenticationDescription}
+    content.vb: Public MustOverride Function GetAuthenticationSchemes As IEnumerable(Of AuthenticationDescription)
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.GetAuthenticationSchemes*
   modifiers.csharp:
   - public
@@ -195,12 +193,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract Task<AuthenticateInfo> GetAuthenticateInfoAsync(string authenticationScheme)
-    content.vb: Public MustOverride Function GetAuthenticateInfoAsync(authenticationScheme As String) As Task(Of AuthenticateInfo)
     parameters:
     - id: authenticationScheme
       type: System.String
     return:
       type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Http.Authentication.AuthenticateInfo}
+    content.vb: Public MustOverride Function GetAuthenticateInfoAsync(authenticationScheme As String) As Task(Of AuthenticateInfo)
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.GetAuthenticateInfoAsync*
   modifiers.csharp:
   - public
@@ -208,16 +206,16 @@ items:
   modifiers.vb:
   - Public
   - MustOverride
-- uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
-  commentId: M:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
-  id: AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+- uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(AuthenticateContext)
+  commentId: M:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(AuthenticateContext)
+  id: AuthenticateAsync(AuthenticateContext)
   parent: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager
   langs:
   - csharp
   - vb
   name: AuthenticateAsync(AuthenticateContext)
   nameWithType: AuthenticationManager.AuthenticateAsync(AuthenticateContext)
-  fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext)
+  fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync(AuthenticateContext)
   type: Method
   source:
     remote:
@@ -232,12 +230,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract Task AuthenticateAsync(AuthenticateContext context)
-    content.vb: Public MustOverride Function AuthenticateAsync(context As AuthenticateContext) As Task
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+      type: AuthenticateContext
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public MustOverride Function AuthenticateAsync(context As AuthenticateContext) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync*
   modifiers.csharp:
   - public
@@ -269,12 +267,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task<ClaimsPrincipal> AuthenticateAsync(string authenticationScheme)
-    content.vb: Public Overridable Function AuthenticateAsync(authenticationScheme As String) As Task(Of ClaimsPrincipal)
     parameters:
     - id: authenticationScheme
       type: System.String
     return:
       type: System.Threading.Tasks.Task{System.Security.Claims.ClaimsPrincipal}
+    content.vb: Public Overridable Function AuthenticateAsync(authenticationScheme As String) As Task(Of ClaimsPrincipal)
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync*
   modifiers.csharp:
   - public
@@ -306,9 +304,9 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ChallengeAsync()
-    content.vb: Public Overridable Function ChallengeAsync As Task
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ChallengeAsync As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync*
   modifiers.csharp:
   - public
@@ -340,12 +338,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ChallengeAsync(AuthenticationProperties properties)
-    content.vb: Public Overridable Function ChallengeAsync(properties As AuthenticationProperties) As Task
     parameters:
     - id: properties
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ChallengeAsync(properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync*
   modifiers.csharp:
   - public
@@ -377,12 +375,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ChallengeAsync(string authenticationScheme)
-    content.vb: Public Overridable Function ChallengeAsync(authenticationScheme As String) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ChallengeAsync(authenticationScheme As String) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync*
   modifiers.csharp:
   - public
@@ -414,7 +412,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ChallengeAsync(string authenticationScheme, AuthenticationProperties properties)
-    content.vb: Public Overridable Function ChallengeAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
@@ -422,6 +419,7 @@ items:
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ChallengeAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync*
   modifiers.csharp:
   - public
@@ -453,7 +451,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task SignInAsync(string authenticationScheme, ClaimsPrincipal principal)
-    content.vb: Public Overridable Function SignInAsync(authenticationScheme As String, principal As ClaimsPrincipal) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
@@ -461,6 +458,7 @@ items:
       type: System.Security.Claims.ClaimsPrincipal
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function SignInAsync(authenticationScheme As String, principal As ClaimsPrincipal) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignInAsync*
   modifiers.csharp:
   - public
@@ -490,14 +488,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Http.Abstractions
   namespace: Microsoft.AspNetCore.Http.Authentication
-  summary: "\nCreates a challenge for the authentication manager with <xref href=\"Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior.Forbidden\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nCreates a challenge for the authentication manager with <see cref=\"!:ChallengeBehavior.Forbidden\"></see>.\n"
   example: []
   syntax:
     content: public virtual Task ForbidAsync()
-    content.vb: Public Overridable Function ForbidAsync As Task
     return:
       type: System.Threading.Tasks.Task
       description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that represents the asynchronous challenge operation.
+    content.vb: Public Overridable Function ForbidAsync As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync*
   modifiers.csharp:
   - public
@@ -529,12 +527,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ForbidAsync(string authenticationScheme)
-    content.vb: Public Overridable Function ForbidAsync(authenticationScheme As String) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ForbidAsync(authenticationScheme As String) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync*
   modifiers.csharp:
   - public
@@ -566,7 +564,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task ForbidAsync(string authenticationScheme, AuthenticationProperties properties)
-    content.vb: Public Overridable Function ForbidAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
@@ -574,6 +571,7 @@ items:
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function ForbidAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync*
   modifiers.csharp:
   - public
@@ -603,11 +601,10 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Http.Abstractions
   namespace: Microsoft.AspNetCore.Http.Authentication
-  summary: "\nCreates a challenge for the authentication manager with <xref href=\"Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior.Forbidden\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nCreates a challenge for the authentication manager with <see cref=\"!:ChallengeBehavior.Forbidden\"></see>.\n"
   example: []
   syntax:
     content: public virtual Task ForbidAsync(AuthenticationProperties properties)
-    content.vb: Public Overridable Function ForbidAsync(properties As AuthenticationProperties) As Task
     parameters:
     - id: properties
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
@@ -615,6 +612,7 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that represents the asynchronous challenge operation.
+    content.vb: Public Overridable Function ForbidAsync(properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync*
   modifiers.csharp:
   - public
@@ -622,16 +620,16 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior)
-  commentId: M:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior)
-  id: ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior)
+- uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,ChallengeBehavior)
+  commentId: M:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,ChallengeBehavior)
+  id: ChallengeAsync(System.String,Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties,ChallengeBehavior)
   parent: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager
   langs:
   - csharp
   - vb
   name: ChallengeAsync(String, AuthenticationProperties, ChallengeBehavior)
   nameWithType: AuthenticationManager.ChallengeAsync(String, AuthenticationProperties, ChallengeBehavior)
-  fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String, Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties, Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior)
+  fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync(System.String, Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties, ChallengeBehavior)
   type: Method
   source:
     remote:
@@ -646,16 +644,16 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract Task ChallengeAsync(string authenticationScheme, AuthenticationProperties properties, ChallengeBehavior behavior)
-    content.vb: Public MustOverride Function ChallengeAsync(authenticationScheme As String, properties As AuthenticationProperties, behavior As ChallengeBehavior) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
     - id: properties
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     - id: behavior
-      type: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior
+      type: ChallengeBehavior
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public MustOverride Function ChallengeAsync(authenticationScheme As String, properties As AuthenticationProperties, behavior As ChallengeBehavior) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ChallengeAsync*
   modifiers.csharp:
   - public
@@ -687,7 +685,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract Task SignInAsync(string authenticationScheme, ClaimsPrincipal principal, AuthenticationProperties properties)
-    content.vb: Public MustOverride Function SignInAsync(authenticationScheme As String, principal As ClaimsPrincipal, properties As AuthenticationProperties) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
@@ -697,6 +694,7 @@ items:
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public MustOverride Function SignInAsync(authenticationScheme As String, principal As ClaimsPrincipal, properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignInAsync*
   modifiers.csharp:
   - public
@@ -728,12 +726,12 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public virtual Task SignOutAsync(string authenticationScheme)
-    content.vb: Public Overridable Function SignOutAsync(authenticationScheme As String) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public Overridable Function SignOutAsync(authenticationScheme As String) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignOutAsync*
   modifiers.csharp:
   - public
@@ -765,7 +763,6 @@ items:
   namespace: Microsoft.AspNetCore.Http.Authentication
   syntax:
     content: public abstract Task SignOutAsync(string authenticationScheme, AuthenticationProperties properties)
-    content.vb: Public MustOverride Function SignOutAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
     parameters:
     - id: authenticationScheme
       type: System.String
@@ -773,6 +770,7 @@ items:
       type: Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties
     return:
       type: System.Threading.Tasks.Task
+    content.vb: Public MustOverride Function SignOutAsync(authenticationScheme As String, properties As AuthenticationProperties) As Task
   overload: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignOutAsync*
   modifiers.csharp:
   - public
@@ -1297,13 +1295,11 @@ references:
   name: AuthenticateAsync
   nameWithType: AuthenticationManager.AuthenticateAsync
   fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.AuthenticateAsync
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
+- uid: AuthenticateContext
+  isExternal: true
   name: AuthenticateContext
   nameWithType: AuthenticateContext
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.AuthenticateContext
+  fullName: AuthenticateContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -1311,12 +1307,6 @@ references:
   name: Task
   nameWithType: Task
   fullName: System.Threading.Tasks.Task
-- uid: Microsoft.AspNetCore.Http.Features.Authentication
-  commentId: N:Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features.Authentication
-  nameWithType: Microsoft.AspNetCore.Http.Features.Authentication
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication
 - uid: System.Threading.Tasks.Task{System.Security.Claims.ClaimsPrincipal}
   commentId: T:System.Threading.Tasks.Task{System.Security.Claims.ClaimsPrincipal}
   parent: System.Threading.Tasks
@@ -1393,21 +1383,17 @@ references:
   name: System.Security.Claims
   nameWithType: System.Security.Claims
   fullName: System.Security.Claims
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior.Forbidden
-  commentId: F:Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior.Forbidden
 - uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync*
   commentId: Overload:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync
   isExternal: false
   name: ForbidAsync
   nameWithType: AuthenticationManager.ForbidAsync
   fullName: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.ForbidAsync
-- uid: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior
-  commentId: T:Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior
-  parent: Microsoft.AspNetCore.Http.Features.Authentication
-  isExternal: false
+- uid: ChallengeBehavior
+  isExternal: true
   name: ChallengeBehavior
   nameWithType: ChallengeBehavior
-  fullName: Microsoft.AspNetCore.Http.Features.Authentication.ChallengeBehavior
+  fullName: ChallengeBehavior
 - uid: Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignOutAsync*
   commentId: Overload:Microsoft.AspNetCore.Http.Authentication.AuthenticationManager.SignOutAsync
   isExternal: false
