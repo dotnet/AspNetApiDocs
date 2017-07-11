@@ -24,7 +24,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: MemoryPoolViewBufferScope
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 13
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
@@ -72,16 +72,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: MinimumSize
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 15
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
   syntax:
     content: public static readonly int MinimumSize
-    content.vb: Public Shared ReadOnly MinimumSize As Integer
     return:
       type: System.Int32
+    content.vb: Public Shared ReadOnly MinimumSize As Integer
   modifiers.csharp:
   - public
   - static
@@ -107,7 +107,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 31
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
@@ -116,7 +116,6 @@ items:
   example: []
   syntax:
     content: public MemoryPoolViewBufferScope(ArrayPool<ViewBufferValue> viewBufferPool, ArrayPool<char> charPool)
-    content.vb: Public Sub New(viewBufferPool As ArrayPool(Of ViewBufferValue), charPool As ArrayPool(Of Char))
     parameters:
     - id: viewBufferPool
       type: System.Buffers.ArrayPool{Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue}
@@ -124,6 +123,7 @@ items:
     - id: charPool
       type: System.Buffers.ArrayPool{System.Char}
       description: "\nThe <xref href=\"System.Buffers.ArrayPool%601\" data-throw-if-not-resolved=\"false\"></xref> for creating <xref href=\"Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.PagedBufferedTextWriter\" data-throw-if-not-resolved=\"false\"></xref> instances.\n"
+    content.vb: Public Sub New(viewBufferPool As ArrayPool(Of ViewBufferValue), charPool As ArrayPool(Of Char))
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.MemoryPoolViewBufferScope.#ctor*
   nameWithType.vb: MemoryPoolViewBufferScope.MemoryPoolViewBufferScope(ArrayPool(Of ViewBufferValue), ArrayPool(Of Char))
   modifiers.csharp:
@@ -149,20 +149,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetPage
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 38
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nGets a <xref href=\"ViewBufferValue%5b%5d\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public ViewBufferValue[] GetPage(int pageSize)
-    content.vb: Public Function GetPage(pageSize As Integer) As ViewBufferValue()
     parameters:
     - id: pageSize
       type: System.Int32
+      description: The minimum size of the segment.
     return:
       type: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[]
+      description: The <xref href="ViewBufferValue%5b%5d" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GetPage(pageSize As Integer) As ViewBufferValue()
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.MemoryPoolViewBufferScope.GetPage*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.GetPage(System.Int32)
@@ -187,18 +190,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ReturnSegment
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 80
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nReturns a <xref href=\"ViewBufferValue%5b%5d\" data-throw-if-not-resolved=\"false\"></xref> that can be reused.\n"
   example: []
   syntax:
     content: public void ReturnSegment(ViewBufferValue[] segment)
-    content.vb: Public Sub ReturnSegment(segment As ViewBufferValue())
     parameters:
     - id: segment
       type: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[]
+      description: The <xref href="ViewBufferValue%5b%5d" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub ReturnSegment(segment As ViewBufferValue())
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.MemoryPoolViewBufferScope.ReturnSegment*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.ReturnSegment(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[])
@@ -226,20 +231,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CreateWriter
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 98
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nCreates a <xref href=\"Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.PagedBufferedTextWriter\" data-throw-if-not-resolved=\"false\"></xref> that will delegate to the provided\n<span class=\"paramref\">writer</span>.\n"
   example: []
   syntax:
     content: public PagedBufferedTextWriter CreateWriter(TextWriter writer)
-    content.vb: Public Function CreateWriter(writer As TextWriter) As PagedBufferedTextWriter
     parameters:
     - id: writer
       type: System.IO.TextWriter
+      description: The <xref href="System.IO.TextWriter" data-throw-if-not-resolved="false"></xref>.
     return:
       type: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.PagedBufferedTextWriter
+      description: A <xref href="Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.PagedBufferedTextWriter" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function CreateWriter(writer As TextWriter) As PagedBufferedTextWriter
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.MemoryPoolViewBufferScope.CreateWriter*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.CreateWriter(System.IO.TextWriter)
@@ -264,7 +272,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Dispose
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/Internal/MemoryPoolViewBufferScope.cs
     startLine: 109
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
@@ -613,7 +621,7 @@ references:
   nameWithType: ArrayPool<T>
   fullName: System.Buffers.ArrayPool<T>
   nameWithType.vb: ArrayPool(Of T)
-  fullname.vb: System.Buffers.ArrayPool(Of T)
+  fullName.vb: System.Buffers.ArrayPool(Of T)
   name.vb: ArrayPool(Of T)
   spec.csharp:
   - uid: System.Buffers.ArrayPool`1
@@ -673,7 +681,7 @@ references:
   nameWithType: ArrayPool<ViewBufferValue>
   fullName: System.Buffers.ArrayPool<Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue>
   nameWithType.vb: ArrayPool(Of ViewBufferValue)
-  fullname.vb: System.Buffers.ArrayPool(Of Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue)
+  fullName.vb: System.Buffers.ArrayPool(Of Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue)
   name.vb: ArrayPool(Of ViewBufferValue)
   spec.csharp:
   - uid: System.Buffers.ArrayPool`1
@@ -715,7 +723,7 @@ references:
   nameWithType: ArrayPool<Char>
   fullName: System.Buffers.ArrayPool<System.Char>
   nameWithType.vb: ArrayPool(Of Char)
-  fullname.vb: System.Buffers.ArrayPool(Of System.Char)
+  fullName.vb: System.Buffers.ArrayPool(Of System.Char)
   name.vb: ArrayPool(Of Char)
   spec.csharp:
   - uid: System.Buffers.ArrayPool`1
@@ -807,7 +815,7 @@ references:
   nameWithType: ViewBufferValue[]
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[]
   nameWithType.vb: ViewBufferValue()
-  fullname.vb: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue()
+  fullName.vb: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue()
   name.vb: ViewBufferValue()
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue
@@ -839,7 +847,7 @@ references:
   nameWithType: IViewBufferScope.ReturnSegment(ViewBufferValue[])
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.ReturnSegment(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[])
   nameWithType.vb: IViewBufferScope.ReturnSegment(ViewBufferValue())
-  fullname.vb: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.ReturnSegment(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue())
+  fullName.vb: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.ReturnSegment(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue())
   name.vb: ReturnSegment(ViewBufferValue())
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope.ReturnSegment(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBufferValue[])

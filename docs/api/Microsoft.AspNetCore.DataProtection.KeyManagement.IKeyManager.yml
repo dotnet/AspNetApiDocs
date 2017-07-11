@@ -23,7 +23,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: IKeyManager
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 15
   assemblies:
   - Microsoft.AspNetCore.DataProtection
@@ -57,7 +57,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: CreateNewKey
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 24
   assemblies:
   - Microsoft.AspNetCore.DataProtection
@@ -66,7 +66,6 @@ items:
   example: []
   syntax:
     content: IKey CreateNewKey(DateTimeOffset activationDate, DateTimeOffset expirationDate)
-    content.vb: Function CreateNewKey(activationDate As DateTimeOffset, expirationDate As DateTimeOffset) As IKey
     parameters:
     - id: activationDate
       type: System.DateTimeOffset
@@ -77,6 +76,7 @@ items:
     return:
       type: Microsoft.AspNetCore.DataProtection.KeyManagement.IKey
       description: The newly-created IKey instance.
+    content.vb: Function CreateNewKey(activationDate As DateTimeOffset, expirationDate As DateTimeOffset) As IKey
   overload: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.CreateNewKey*
 - uid: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetAllKeys
   commentId: M:Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetAllKeys
@@ -95,7 +95,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: GetAllKeys
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 30
   assemblies:
   - Microsoft.AspNetCore.DataProtection
@@ -104,10 +104,10 @@ items:
   example: []
   syntax:
     content: IReadOnlyCollection<IKey> GetAllKeys()
-    content.vb: Function GetAllKeys As IReadOnlyCollection(Of IKey)
     return:
       type: System.Collections.Generic.IReadOnlyCollection{Microsoft.AspNetCore.DataProtection.KeyManagement.IKey}
       description: The collection of all keys.
+    content.vb: Function GetAllKeys As IReadOnlyCollection(Of IKey)
   overload: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetAllKeys*
 - uid: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetCacheExpirationToken
   commentId: M:Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetCacheExpirationToken
@@ -126,20 +126,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: GetCacheExpirationToken
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 50
   assemblies:
   - Microsoft.AspNetCore.DataProtection
   namespace: Microsoft.AspNetCore.DataProtection.KeyManagement
   summary: "\nRetrieves a token that signals that callers who have cached the return value of\nGetAllKeys should clear their caches. This could be in response to a call to\nCreateNewKey or RevokeKey, or it could be in response to some other external notification.\nCallers who are interested in observing this token should call this method before the\ncorresponding call to GetAllKeys.\n"
-  remarks: "\nImplementations are free to return 'CancellationToken.None' from this method.\nSince this token is never guaranteed to fire, callers should still manually\nclear their caches at a regular interval.\n"
+  remarks: "\nImplementations are free to return &apos;CancellationToken.None&apos; from this method.\nSince this token is never guaranteed to fire, callers should still manually\nclear their caches at a regular interval.\n"
   example: []
   syntax:
     content: CancellationToken GetCacheExpirationToken()
-    content.vb: Function GetCacheExpirationToken As CancellationToken
     return:
       type: System.Threading.CancellationToken
       description: "\nThe cache expiration token. When an expiration notification is triggered, any\ntokens previously returned by this method will become canceled, and tokens returned by\nfuture invocations of this method will themselves not trigger until the next expiration\nevent.\n"
+    content.vb: Function GetCacheExpirationToken As CancellationToken
   overload: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.GetCacheExpirationToken*
 - uid: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeKey(System.Guid,System.String)
   commentId: M:Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeKey(System.Guid,System.String)
@@ -158,7 +158,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: RevokeKey
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 61
   assemblies:
   - Microsoft.AspNetCore.DataProtection
@@ -168,7 +168,6 @@ items:
   example: []
   syntax:
     content: void RevokeKey(Guid keyId, string reason = null)
-    content.vb: Sub RevokeKey(keyId As Guid, reason As String = Nothing)
     parameters:
     - id: keyId
       type: System.Guid
@@ -176,6 +175,7 @@ items:
     - id: reason
       type: System.String
       description: An optional human-readable reason for revocation.
+    content.vb: Sub RevokeKey(keyId As Guid, reason As String = Nothing)
   overload: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeKey*
 - uid: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeAllKeys(System.DateTimeOffset,System.String)
   commentId: M:Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeAllKeys(System.DateTimeOffset,System.String)
@@ -194,7 +194,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/DataProtection.git
     id: RevokeAllKeys
-    path: src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
+    path: ../aspnet/DataProtection/src/Microsoft.AspNetCore.DataProtection/KeyManagement/IKeyManager.cs
     startLine: 74
   assemblies:
   - Microsoft.AspNetCore.DataProtection
@@ -204,7 +204,6 @@ items:
   example: []
   syntax:
     content: void RevokeAllKeys(DateTimeOffset revocationDate, string reason = null)
-    content.vb: Sub RevokeAllKeys(revocationDate As DateTimeOffset, reason As String = Nothing)
     parameters:
     - id: revocationDate
       type: System.DateTimeOffset
@@ -215,6 +214,7 @@ items:
     - id: reason
       type: System.String
       description: An optional human-readable reason for revocation.
+    content.vb: Sub RevokeAllKeys(revocationDate As DateTimeOffset, reason As String = Nothing)
   overload: Microsoft.AspNetCore.DataProtection.KeyManagement.IKeyManager.RevokeAllKeys*
 references:
 - uid: Microsoft.AspNetCore.DataProtection.KeyManagement
@@ -263,7 +263,7 @@ references:
   nameWithType: IReadOnlyCollection<IKey>
   fullName: System.Collections.Generic.IReadOnlyCollection<Microsoft.AspNetCore.DataProtection.KeyManagement.IKey>
   nameWithType.vb: IReadOnlyCollection(Of IKey)
-  fullname.vb: System.Collections.Generic.IReadOnlyCollection(Of Microsoft.AspNetCore.DataProtection.KeyManagement.IKey)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of Microsoft.AspNetCore.DataProtection.KeyManagement.IKey)
   name.vb: IReadOnlyCollection(Of IKey)
   spec.csharp:
   - uid: System.Collections.Generic.IReadOnlyCollection`1
@@ -304,7 +304,7 @@ references:
   nameWithType: IReadOnlyCollection<T>
   fullName: System.Collections.Generic.IReadOnlyCollection<T>
   nameWithType.vb: IReadOnlyCollection(Of T)
-  fullname.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
   name.vb: IReadOnlyCollection(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IReadOnlyCollection`1

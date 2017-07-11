@@ -8,7 +8,7 @@ items:
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.AttemptingToResolveNonexistentServiceReturnsNull
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ClosedServicesPreferredOverOpenGenericServices
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFuncs
-  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(IServiceCollection)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.DisposingScopeDisposesService
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.FactoryServicesAreCreatedAsPartOfCreatingObjectGraph
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.FactoryServicesCanBeCreatedByGetService
@@ -27,7 +27,7 @@ items:
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ScopedServiceCanBeResolved
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SelfResolveThenDispose
-  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
+  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatchesData
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceInstanceCanBeResolved
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceProviderRegistersServiceScopeFactory
@@ -41,10 +41,10 @@ items:
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TransientServiceCanBeResolvedFromScope
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
-  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(System.Type)
+  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresAllArgumentsCanBeAccepted(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
-  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,System.Type)
+  - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,Type)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRethrowsOriginalExceptionFromConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorWorksWithCtorWithOptionalArgs(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
   - Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorWorksWithStaticCtor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc)
@@ -63,24 +63,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: DependencyInjectionSpecificationTests
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 11
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: public abstract class DependencyInjectionSpecificationTests
-    content.vb: Public MustInherit Class DependencyInjectionSpecificationTests
+    content: 'public abstract class DependencyInjectionSpecificationTests : object'
+    content.vb: >-
+      Public MustInherit Class DependencyInjectionSpecificationTests
+          Inherits Object
   inheritance:
   - System.Object
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - abstract
@@ -106,17 +100,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: CreateInstanceFuncs
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 31
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
     content: public static IEnumerable<object[]> CreateInstanceFuncs { get; }
-    content.vb: Public Shared ReadOnly Property CreateInstanceFuncs As IEnumerable(Of Object())
     parameters: []
     return:
-      type: System.Collections.Generic.IEnumerable{System.Object[]}
+      type: IEnumerable{System.Object[]}
+    content.vb: Public Shared ReadOnly Property CreateInstanceFuncs As IEnumerable(Of Object())
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFuncs*
   modifiers.csharp:
   - public
@@ -143,32 +137,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 40
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -190,32 +170,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 54
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorAcceptsAnyNumberOfAdditionalConstructorParametersToProvide*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -237,32 +203,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorWorksWithStaticCtor
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 72
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorWorksWithStaticCtor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorWorksWithStaticCtor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorWorksWithStaticCtor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorWorksWithStaticCtor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorWorksWithStaticCtor*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -284,32 +236,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorWorksWithCtorWithOptionalArgs
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 83
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorWorksWithCtorWithOptionalArgs(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorWorksWithCtorWithOptionalArgs(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorWorksWithCtorWithOptionalArgs(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorWorksWithCtorWithOptionalArgs(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorWorksWithCtorWithOptionalArgs*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -331,32 +269,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorCanDisambiguateConstructorsWithUniqueArguments
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 99
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorCanDisambiguateConstructorsWithUniqueArguments(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCanDisambiguateConstructorsWithUniqueArguments*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -378,17 +302,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypesWithNonPublicConstructorData
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 118
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
     content: public static IEnumerable<object[]> TypesWithNonPublicConstructorData { get; }
-    content.vb: Public Shared ReadOnly Property TypesWithNonPublicConstructorData As IEnumerable(Of Object())
     parameters: []
     return:
-      type: System.Collections.Generic.IEnumerable{System.Object[]}
+      type: IEnumerable{System.Object[]}
+    content.vb: Public Shared ReadOnly Property TypesWithNonPublicConstructorData As IEnumerable(Of Object())
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypesWithNonPublicConstructorData*
   modifiers.csharp:
   - public
@@ -398,16 +322,16 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,System.Type)
-  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,System.Type)
-  id: TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,System.Type)
+- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,Type)
+  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,Type)
+  id: TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc,Type)
   parent: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests
   langs:
   - csharp
   - vb
   name: TypeActivatorRequiresPublicConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc, Type)
   nameWithType: DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc, Type)
-  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc, System.Type)
+  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor(Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc, Type)
   type: Method
   source:
     remote:
@@ -415,34 +339,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorRequiresPublicConstructor
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 123
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("TypesWithNonPublicConstructorData", new object[]{})]
-
-      public void TypeActivatorRequiresPublicConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc, Type type)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("TypesWithNonPublicConstructorData", New Object() {})>
-
-      Public Sub TypeActivatorRequiresPublicConstructor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc, type As Type)
+    content: public void TypeActivatorRequiresPublicConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc, Type type)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
     - id: type
-      type: System.Type
+      type: Type
+    content.vb: Public Sub TypeActivatorRequiresPublicConstructor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc, type As Type)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -464,32 +374,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorRequiresAllArgumentsCanBeAccepted
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 138
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorRequiresAllArgumentsCanBeAccepted(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorRequiresAllArgumentsCanBeAccepted(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorRequiresAllArgumentsCanBeAccepted(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorRequiresAllArgumentsCanBeAccepted(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresAllArgumentsCanBeAccepted*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -511,46 +407,32 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorRethrowsOriginalExceptionFromConstructor
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 158
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void TypeActivatorRethrowsOriginalExceptionFromConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub TypeActivatorRethrowsOriginalExceptionFromConstructor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void TypeActivatorRethrowsOriginalExceptionFromConstructor(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub TypeActivatorRethrowsOriginalExceptionFromConstructor(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRethrowsOriginalExceptionFromConstructor*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(System.Type)
-  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(System.Type)
-  id: TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(System.Type)
+- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
+  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
+  id: TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
   parent: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests
   langs:
   - csharp
   - vb
   name: TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
   nameWithType: DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
-  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(System.Type)
+  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type)
   type: Method
   source:
     remote:
@@ -558,36 +440,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 174
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [InlineData(new object[]{typeof (string)})]
-
-      [InlineData(new object[]{typeof (int)})]
-
-      public void TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type paramType)
-    content.vb: >-
-      <Theory>
-
-      <InlineData(New Object() {GetType(String)})>
-
-      <InlineData(New Object() {GetType(Integer)})>
-
-      Public Sub TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(paramType As Type)
+    content: public void TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(Type paramType)
     parameters:
     - id: paramType
-      type: System.Type
+      type: Type
+    content.vb: Public Sub TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches(paramType As Type)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorCreateFactoryDoesNotAllowForAmbiguousConstructorMatches*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -609,25 +473,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: GetServiceOrCreateInstanceRegisteredServiceTransient
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 192
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void GetServiceOrCreateInstanceRegisteredServiceTransient()
-    content.vb: >-
-      <Fact>
-
-      Public Sub GetServiceOrCreateInstanceRegisteredServiceTransient
+    content: public void GetServiceOrCreateInstanceRegisteredServiceTransient()
+    content.vb: Public Sub GetServiceOrCreateInstanceRegisteredServiceTransient
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.GetServiceOrCreateInstanceRegisteredServiceTransient*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -649,25 +503,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: GetServiceOrCreateInstanceRegisteredServiceSingleton
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 218
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void GetServiceOrCreateInstanceRegisteredServiceSingleton()
-    content.vb: >-
-      <Fact>
-
-      Public Sub GetServiceOrCreateInstanceRegisteredServiceSingleton
+    content: public void GetServiceOrCreateInstanceRegisteredServiceSingleton()
+    content.vb: Public Sub GetServiceOrCreateInstanceRegisteredServiceSingleton
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.GetServiceOrCreateInstanceRegisteredServiceSingleton*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -689,25 +533,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: GetServiceOrCreateInstanceUnregisteredService
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 245
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void GetServiceOrCreateInstanceUnregisteredService()
-    content.vb: >-
-      <Fact>
-
-      Public Sub GetServiceOrCreateInstanceUnregisteredService
+    content: public void GetServiceOrCreateInstanceUnregisteredService()
+    content.vb: Public Sub GetServiceOrCreateInstanceUnregisteredService
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.GetServiceOrCreateInstanceUnregisteredService*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -729,46 +563,32 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: UnRegisteredServiceAsConstructorParameterThrowsException
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/ActivatorUtilitiesTests.cs
     startLine: 273
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("CreateInstanceFuncs", new object[]{})]
-
-      public void UnRegisteredServiceAsConstructorParameterThrowsException(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("CreateInstanceFuncs", New Object() {})>
-
-      Public Sub UnRegisteredServiceAsConstructorParameterThrowsException(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
+    content: public void UnRegisteredServiceAsConstructorParameterThrowsException(DependencyInjectionSpecificationTests.CreateInstanceFunc createFunc)
     parameters:
     - id: createFunc
       type: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFunc
+    content.vb: Public Sub UnRegisteredServiceAsConstructorParameterThrowsException(createFunc As DependencyInjectionSpecificationTests.CreateInstanceFunc)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.UnRegisteredServiceAsConstructorParameterThrowsException*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
-  id: CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(IServiceCollection)
+  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(IServiceCollection)
+  id: CreateServiceProvider(IServiceCollection)
   parent: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests
   langs:
   - csharp
   - vb
   name: CreateServiceProvider(IServiceCollection)
   nameWithType: DependencyInjectionSpecificationTests.CreateServiceProvider(IServiceCollection)
-  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)
+  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider(IServiceCollection)
   type: Method
   source:
     remote:
@@ -776,19 +596,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: CreateServiceProvider
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 13
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
     content: protected abstract IServiceProvider CreateServiceProvider(IServiceCollection serviceCollection)
-    content.vb: Protected MustOverride Function CreateServiceProvider(serviceCollection As IServiceCollection) As IServiceProvider
     parameters:
     - id: serviceCollection
-      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      type: IServiceCollection
     return:
-      type: System.IServiceProvider
+      type: IServiceProvider
+    content.vb: Protected MustOverride Function CreateServiceProvider(serviceCollection As IServiceCollection) As IServiceProvider
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider*
   modifiers.csharp:
   - protected
@@ -813,25 +633,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServicesRegisteredWithImplementationTypeCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 15
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ServicesRegisteredWithImplementationTypeCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ServicesRegisteredWithImplementationTypeCanBeResolved
+    content: public void ServicesRegisteredWithImplementationTypeCanBeResolved()
+    content.vb: Public Sub ServicesRegisteredWithImplementationTypeCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServicesRegisteredWithImplementationTypeCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -853,25 +663,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 31
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices
+    content: public void ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices()
+    content.vb: Public Sub ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServicesRegisteredWithImplementationType_ReturnDifferentInstancesPerResolution_ForTransientServices*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -893,25 +693,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 49
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons
+    content: public void ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons()
+    content.vb: Public Sub ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServicesRegisteredWithImplementationType_ReturnSameInstancesPerResolution_ForSingletons*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -933,25 +723,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServiceInstanceCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 67
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ServiceInstanceCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ServiceInstanceCanBeResolved
+    content: public void ServiceInstanceCanBeResolved()
+    content.vb: Public Sub ServiceInstanceCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceInstanceCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -973,25 +753,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TransientServiceCanBeResolvedFromProvider
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 83
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void TransientServiceCanBeResolvedFromProvider()
-    content.vb: >-
-      <Fact>
-
-      Public Sub TransientServiceCanBeResolvedFromProvider
+    content: public void TransientServiceCanBeResolvedFromProvider()
+    content.vb: Public Sub TransientServiceCanBeResolvedFromProvider
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TransientServiceCanBeResolvedFromProvider*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1013,25 +783,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: TransientServiceCanBeResolvedFromScope
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 100
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void TransientServiceCanBeResolvedFromScope()
-    content.vb: >-
-      <Fact>
-
-      Public Sub TransientServiceCanBeResolvedFromScope
+    content: public void TransientServiceCanBeResolvedFromScope()
+    content.vb: Public Sub TransientServiceCanBeResolvedFromScope
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TransientServiceCanBeResolvedFromScope*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1053,25 +813,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: SingleServiceCanBeIEnumerableResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 124
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void SingleServiceCanBeIEnumerableResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub SingleServiceCanBeIEnumerableResolved
+    content: public void SingleServiceCanBeIEnumerableResolved()
+    content.vb: Public Sub SingleServiceCanBeIEnumerableResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SingleServiceCanBeIEnumerableResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1093,25 +843,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: MultipleServiceCanBeIEnumerableResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 141
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void MultipleServiceCanBeIEnumerableResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub MultipleServiceCanBeIEnumerableResolved
+    content: public void MultipleServiceCanBeIEnumerableResolved()
+    content.vb: Public Sub MultipleServiceCanBeIEnumerableResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.MultipleServiceCanBeIEnumerableResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1133,25 +873,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 159
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved
+    content: public void RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved()
+    content.vb: Public Sub RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.RegistrationOrderIsPreservedWhenServicesAreIEnumerableResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1173,25 +903,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: OuterServiceCanHaveOtherServicesInjected
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 186
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void OuterServiceCanHaveOtherServicesInjected()
-    content.vb: >-
-      <Fact>
-
-      Public Sub OuterServiceCanHaveOtherServicesInjected
+    content: public void OuterServiceCanHaveOtherServicesInjected()
+    content.vb: Public Sub OuterServiceCanHaveOtherServicesInjected
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.OuterServiceCanHaveOtherServicesInjected*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1213,25 +933,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: FactoryServicesCanBeCreatedByGetService
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 208
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void FactoryServicesCanBeCreatedByGetService()
-    content.vb: >-
-      <Fact>
-
-      Public Sub FactoryServicesCanBeCreatedByGetService
+    content: public void FactoryServicesCanBeCreatedByGetService()
+    content.vb: Public Sub FactoryServicesCanBeCreatedByGetService
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.FactoryServicesCanBeCreatedByGetService*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1253,25 +963,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: FactoryServicesAreCreatedAsPartOfCreatingObjectGraph
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 235
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void FactoryServicesAreCreatedAsPartOfCreatingObjectGraph()
-    content.vb: >-
-      <Fact>
-
-      Public Sub FactoryServicesAreCreatedAsPartOfCreatingObjectGraph
+    content: public void FactoryServicesAreCreatedAsPartOfCreatingObjectGraph()
+    content.vb: Public Sub FactoryServicesAreCreatedAsPartOfCreatingObjectGraph
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.FactoryServicesAreCreatedAsPartOfCreatingObjectGraph*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1293,25 +993,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: LastServiceReplacesPreviousServices
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 279
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void LastServiceReplacesPreviousServices()
-    content.vb: >-
-      <Fact>
-
-      Public Sub LastServiceReplacesPreviousServices
+    content: public void LastServiceReplacesPreviousServices()
+    content.vb: Public Sub LastServiceReplacesPreviousServices
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.LastServiceReplacesPreviousServices*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1333,25 +1023,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: SingletonServiceCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 295
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void SingletonServiceCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub SingletonServiceCanBeResolved
+    content: public void SingletonServiceCanBeResolved()
+    content.vb: Public Sub SingletonServiceCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SingletonServiceCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1373,25 +1053,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServiceProviderRegistersServiceScopeFactory
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 312
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ServiceProviderRegistersServiceScopeFactory()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ServiceProviderRegistersServiceScopeFactory
+    content: public void ServiceProviderRegistersServiceScopeFactory()
+    content.vb: Public Sub ServiceProviderRegistersServiceScopeFactory
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceProviderRegistersServiceScopeFactory*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1413,25 +1083,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ScopedServiceCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 326
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ScopedServiceCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ScopedServiceCanBeResolved
+    content: public void ScopedServiceCanBeResolved()
+    content.vb: Public Sub ScopedServiceCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ScopedServiceCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1453,25 +1113,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: NestedScopedServiceCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 348
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void NestedScopedServiceCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub NestedScopedServiceCanBeResolved
+    content: public void NestedScopedServiceCanBeResolved()
+    content.vb: Public Sub NestedScopedServiceCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.NestedScopedServiceCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1493,25 +1143,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 374
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed
+    content: public void ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed()
+    content.vb: Public Sub ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ScopedServices_FromCachedScopeFactory_CanBeResolvedAndDisposed*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1533,25 +1173,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: DisposingScopeDisposesService
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 411
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void DisposingScopeDisposesService()
-    content.vb: >-
-      <Fact>
-
-      Public Sub DisposingScopeDisposesService
+    content: public void DisposingScopeDisposesService()
+    content.vb: Public Sub DisposingScopeDisposesService
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.DisposingScopeDisposesService*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1573,25 +1203,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: SelfResolveThenDispose
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 456
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void SelfResolveThenDispose()
-    content.vb: >-
-      <Fact>
-
-      Public Sub SelfResolveThenDispose
+    content: public void SelfResolveThenDispose()
+    content.vb: Public Sub SelfResolveThenDispose
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SelfResolveThenDispose*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1613,25 +1233,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: SafelyDisposeNestedProviderReferences
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 471
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void SafelyDisposeNestedProviderReferences()
-    content.vb: >-
-      <Fact>
-
-      Public Sub SafelyDisposeNestedProviderReferences
+    content: public void SafelyDisposeNestedProviderReferences()
+    content.vb: Public Sub SafelyDisposeNestedProviderReferences
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SafelyDisposeNestedProviderReferences*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1653,25 +1263,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: SingletonServicesComeFromRootProvider
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 487
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void SingletonServicesComeFromRootProvider()
-    content.vb: >-
-      <Fact>
-
-      Public Sub SingletonServicesComeFromRootProvider
+    content: public void SingletonServicesComeFromRootProvider()
+    content.vb: Public Sub SingletonServicesComeFromRootProvider
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.SingletonServicesComeFromRootProvider*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1693,25 +1293,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: NestedScopedServiceCanBeResolvedWithNoFallbackProvider
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 519
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void NestedScopedServiceCanBeResolvedWithNoFallbackProvider()
-    content.vb: >-
-      <Fact>
-
-      Public Sub NestedScopedServiceCanBeResolvedWithNoFallbackProvider
+    content: public void NestedScopedServiceCanBeResolvedWithNoFallbackProvider()
+    content.vb: Public Sub NestedScopedServiceCanBeResolvedWithNoFallbackProvider
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.NestedScopedServiceCanBeResolvedWithNoFallbackProvider*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1733,25 +1323,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: OpenGenericServicesCanBeResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 543
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void OpenGenericServicesCanBeResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub OpenGenericServicesCanBeResolved
+    content: public void OpenGenericServicesCanBeResolved()
+    content.vb: Public Sub OpenGenericServicesCanBeResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.OpenGenericServicesCanBeResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1773,25 +1353,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ClosedServicesPreferredOverOpenGenericServices
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 560
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void ClosedServicesPreferredOverOpenGenericServices()
-    content.vb: >-
-      <Fact>
-
-      Public Sub ClosedServicesPreferredOverOpenGenericServices
+    content: public void ClosedServicesPreferredOverOpenGenericServices()
+    content.vb: Public Sub ClosedServicesPreferredOverOpenGenericServices
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ClosedServicesPreferredOverOpenGenericServices*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1813,25 +1383,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: AttemptingToResolveNonexistentServiceReturnsNull
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 577
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void AttemptingToResolveNonexistentServiceReturnsNull()
-    content.vb: >-
-      <Fact>
-
-      Public Sub AttemptingToResolveNonexistentServiceReturnsNull
+    content: public void AttemptingToResolveNonexistentServiceReturnsNull()
+    content.vb: Public Sub AttemptingToResolveNonexistentServiceReturnsNull
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.AttemptingToResolveNonexistentServiceReturnsNull*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1853,25 +1413,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: NonexistentServiceCanBeIEnumerableResolved
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 591
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Fact]
-
-      public void NonexistentServiceCanBeIEnumerableResolved()
-    content.vb: >-
-      <Fact>
-
-      Public Sub NonexistentServiceCanBeIEnumerableResolved
+    content: public void NonexistentServiceCanBeIEnumerableResolved()
+    content.vb: Public Sub NonexistentServiceCanBeIEnumerableResolved
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.NonexistentServiceCanBeIEnumerableResolved*
-  attributes:
-  - type: Xunit.FactAttribute
-    ctor: Xunit.FactAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1893,17 +1443,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServiceContainerPicksConstructorWithLongestMatchesData
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 605
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
     content: public static TheoryData ServiceContainerPicksConstructorWithLongestMatchesData { get; }
-    content.vb: Public Shared ReadOnly Property ServiceContainerPicksConstructorWithLongestMatchesData As TheoryData
     parameters: []
     return:
-      type: Xunit.TheoryData
+      type: TheoryData
+    content.vb: Public Shared ReadOnly Property ServiceContainerPicksConstructorWithLongestMatchesData As TheoryData
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatchesData*
   modifiers.csharp:
   - public
@@ -1913,16 +1463,16 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
-  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
-  id: ServiceContainerPicksConstructorWithLongestMatches(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
+- uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
+  commentId: M:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
+  id: ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection,Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
   parent: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests
   langs:
   - csharp
   - vb
   name: ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection, TypeWithSupersetConstructors)
   nameWithType: DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection, TypeWithSupersetConstructors)
-  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(Microsoft.Extensions.DependencyInjection.IServiceCollection, Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
+  fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection, Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors)
   type: Method
   source:
     remote:
@@ -1930,34 +1480,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/DependencyInjection.git
     id: ServiceContainerPicksConstructorWithLongestMatches
-    path: src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
+    path: ../aspnet/DependencyInjection/src/Microsoft.Extensions.DependencyInjection.Specification.Tests/DependencyInjectionSpecificationTests.cs
     startLine: 651
   assemblies:
   - Microsoft.Extensions.DependencyInjection.Specification.Tests
   namespace: Microsoft.Extensions.DependencyInjection.Specification
   syntax:
-    content: >-
-      [Theory]
-
-      [MemberData("ServiceContainerPicksConstructorWithLongestMatchesData", new object[]{})]
-
-      public void ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection serviceCollection, TypeWithSupersetConstructors expected)
-    content.vb: >-
-      <Theory>
-
-      <MemberData("ServiceContainerPicksConstructorWithLongestMatchesData", New Object() {})>
-
-      Public Sub ServiceContainerPicksConstructorWithLongestMatches(serviceCollection As IServiceCollection, expected As TypeWithSupersetConstructors)
+    content: public void ServiceContainerPicksConstructorWithLongestMatches(IServiceCollection serviceCollection, TypeWithSupersetConstructors expected)
     parameters:
     - id: serviceCollection
-      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      type: IServiceCollection
     - id: expected
       type: Microsoft.Extensions.DependencyInjection.Specification.Fakes.TypeWithSupersetConstructors
+    content.vb: Public Sub ServiceContainerPicksConstructorWithLongestMatches(serviceCollection As IServiceCollection, expected As TypeWithSupersetConstructors)
   overload: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches*
-  attributes:
-  - type: Xunit.TheoryAttribute
-    ctor: Xunit.TheoryAttribute.#ctor
-    arguments: []
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -1976,285 +1512,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -2267,21 +1524,20 @@ references:
   name: CreateInstanceFuncs
   nameWithType: DependencyInjectionSpecificationTests.CreateInstanceFuncs
   fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateInstanceFuncs
-- uid: System.Collections.Generic.IEnumerable{System.Object[]}
-  commentId: T:System.Collections.Generic.IEnumerable{System.Object[]}
-  parent: System.Collections.Generic
-  definition: System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable{System.Object[]}
+  commentId: '!:IEnumerable{System.Object[]}'
+  definition: IEnumerable`1
   name: IEnumerable<Object[]>
   nameWithType: IEnumerable<Object[]>
-  fullName: System.Collections.Generic.IEnumerable<System.Object[]>
+  fullName: IEnumerable<System.Object[]>
   nameWithType.vb: IEnumerable(Of Object())
-  fullname.vb: System.Collections.Generic.IEnumerable(Of System.Object())
+  fullName.vb: IEnumerable(Of System.Object())
   name.vb: IEnumerable(Of Object())
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
@@ -2298,10 +1554,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -2317,51 +1573,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic.IEnumerable`1
-  commentId: T:System.Collections.Generic.IEnumerable`1
+- uid: IEnumerable`1
   isExternal: true
-  name: IEnumerable<T>
-  nameWithType: IEnumerable<T>
-  fullName: System.Collections.Generic.IEnumerable<T>
-  nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
-  name.vb: IEnumerable(Of T)
+  name: IEnumerable<>
+  nameWithType: IEnumerable<>
+  fullName: IEnumerable<>
+  nameWithType.vb: IEnumerable(Of )
+  fullName.vb: IEnumerable(Of )
+  name.vb: IEnumerable(Of )
   spec.csharp:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Collections.Generic.IEnumerable`1
+  - uid: IEnumerable`1
     name: IEnumerable
     nameWithType: IEnumerable
-    fullName: System.Collections.Generic.IEnumerable
+    fullName: IEnumerable
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Collections.Generic
-  commentId: N:System.Collections.Generic
-  isExternal: false
-  name: System.Collections.Generic
-  nameWithType: System.Collections.Generic
-  fullName: System.Collections.Generic
 - uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer*
   commentId: Overload:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorEnablesYouToCreateAnyTypeWithServicesEvenWhenNotInIocContainer
   isExternal: false
@@ -2411,13 +1660,11 @@ references:
   name: TypeActivatorRequiresPublicConstructor
   nameWithType: DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor
   fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresPublicConstructor
-- uid: System.Type
-  commentId: T:System.Type
-  parent: System
+- uid: Type
   isExternal: true
   name: Type
   nameWithType: Type
-  fullName: System.Type
+  fullName: Type
 - uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresAllArgumentsCanBeAccepted*
   commentId: Overload:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.TypeActivatorRequiresAllArgumentsCanBeAccepted
   isExternal: false
@@ -2466,26 +1713,16 @@ references:
   name: CreateServiceProvider
   nameWithType: DependencyInjectionSpecificationTests.CreateServiceProvider
   fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.CreateServiceProvider
-- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
-  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
-  parent: Microsoft.Extensions.DependencyInjection
-  isExternal: false
+- uid: IServiceCollection
+  isExternal: true
   name: IServiceCollection
   nameWithType: IServiceCollection
-  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
-- uid: System.IServiceProvider
-  commentId: T:System.IServiceProvider
-  parent: System
+  fullName: IServiceCollection
+- uid: IServiceProvider
   isExternal: true
   name: IServiceProvider
   nameWithType: IServiceProvider
-  fullName: System.IServiceProvider
-- uid: Microsoft.Extensions.DependencyInjection
-  commentId: N:Microsoft.Extensions.DependencyInjection
-  isExternal: false
-  name: Microsoft.Extensions.DependencyInjection
-  nameWithType: Microsoft.Extensions.DependencyInjection
-  fullName: Microsoft.Extensions.DependencyInjection
+  fullName: IServiceProvider
 - uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServicesRegisteredWithImplementationTypeCanBeResolved*
   commentId: Overload:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServicesRegisteredWithImplementationTypeCanBeResolved
   isExternal: false
@@ -2654,19 +1891,12 @@ references:
   name: ServiceContainerPicksConstructorWithLongestMatchesData
   nameWithType: DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatchesData
   fullName: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatchesData
-- uid: Xunit.TheoryData
-  commentId: T:Xunit.TheoryData
-  parent: Xunit
+- uid: TheoryData
+  commentId: '!:TheoryData'
   isExternal: true
   name: TheoryData
   nameWithType: TheoryData
-  fullName: Xunit.TheoryData
-- uid: Xunit
-  commentId: N:Xunit
-  isExternal: false
-  name: Xunit
-  nameWithType: Xunit
-  fullName: Xunit
+  fullName: TheoryData
 - uid: Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches*
   commentId: Overload:Microsoft.Extensions.DependencyInjection.Specification.DependencyInjectionSpecificationTests.ServiceContainerPicksConstructorWithLongestMatches
   isExternal: false

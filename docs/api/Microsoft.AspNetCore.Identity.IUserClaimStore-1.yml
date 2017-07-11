@@ -23,7 +23,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: IUserClaimStore
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 14
   assemblies:
   - Microsoft.AspNetCore.Identity
@@ -32,12 +32,12 @@ items:
   example: []
   syntax:
     content: 'public interface IUserClaimStore<TUser> : IUserStore<TUser>, IDisposable where TUser : class'
-    content.vb: >-
-      Public Interface IUserClaimStore(Of TUser As Class)
-          Inherits IUserStore(Of TUser)
     typeParameters:
     - id: TUser
       description: The type encapsulating a user.
+    content.vb: >-
+      Public Interface IUserClaimStore(Of TUser As Class)
+          Inherits IUserStore(Of TUser)
   inheritedMembers:
   - Microsoft.AspNetCore.Identity.IUserStore{{TUser}}.GetUserIdAsync({TUser},System.Threading.CancellationToken)
   - Microsoft.AspNetCore.Identity.IUserStore{{TUser}}.GetUserNameAsync({TUser},System.Threading.CancellationToken)
@@ -76,16 +76,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: GetClaimsAsync
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 24
   assemblies:
   - Microsoft.AspNetCore.Identity
   namespace: Microsoft.AspNetCore.Identity
-  summary: "\nGets a list of <xref href=\"System.Security.Claims.Claim\" data-throw-if-not-resolved=\"false\"></xref>s to be belonging to the specified <em>user</em> as an asynchronous operation.\n"
+  summary: "\nGets a list of <xref href=\"System.Security.Claims.Claim\" data-throw-if-not-resolved=\"false\"></xref>s to be belonging to the specified <span class=\"paramref\">user</span> as an asynchronous operation.\n"
   example: []
   syntax:
     content: Task<IList<Claim>> GetClaimsAsync(TUser user, CancellationToken cancellationToken)
-    content.vb: Function GetClaimsAsync(user As TUser, cancellationToken As CancellationToken) As Task(Of IList(Of Claim))
     parameters:
     - id: user
       type: '{TUser}'
@@ -96,6 +95,7 @@ items:
     return:
       type: System.Threading.Tasks.Task{System.Collections.Generic.IList{System.Security.Claims.Claim}}
       description: "\nA <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref> that represents the result of the asynchronous query, a list of <xref href=\"System.Security.Claims.Claim\" data-throw-if-not-resolved=\"false\"></xref>s.\n"
+    content.vb: Function GetClaimsAsync(user As TUser, cancellationToken As CancellationToken) As Task(Of IList(Of Claim))
   overload: Microsoft.AspNetCore.Identity.IUserClaimStore`1.GetClaimsAsync*
   nameWithType.vb: IUserClaimStore(Of TUser).GetClaimsAsync(TUser, CancellationToken)
   fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetClaimsAsync(TUser, System.Threading.CancellationToken)
@@ -116,7 +116,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: AddClaimsAsync
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 33
   assemblies:
   - Microsoft.AspNetCore.Identity
@@ -125,7 +125,6 @@ items:
   example: []
   syntax:
     content: Task AddClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
-    content.vb: Function AddClaimsAsync(user As TUser, claims As IEnumerable(Of Claim), cancellationToken As CancellationToken) As Task
     parameters:
     - id: user
       type: '{TUser}'
@@ -139,6 +138,7 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: The task object representing the asynchronous operation.
+    content.vb: Function AddClaimsAsync(user As TUser, claims As IEnumerable(Of Claim), cancellationToken As CancellationToken) As Task
   overload: Microsoft.AspNetCore.Identity.IUserClaimStore`1.AddClaimsAsync*
   nameWithType.vb: IUserClaimStore(Of TUser).AddClaimsAsync(TUser, IEnumerable(Of Claim), CancellationToken)
   fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).AddClaimsAsync(TUser, System.Collections.Generic.IEnumerable(Of System.Security.Claims.Claim), System.Threading.CancellationToken)
@@ -160,16 +160,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: ReplaceClaimAsync
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 43
   assemblies:
   - Microsoft.AspNetCore.Identity
   namespace: Microsoft.AspNetCore.Identity
-  summary: "\nReplaces the given <em>claim</em> on the specified <em>user</em> with the <em>newClaim</em>\n"
+  summary: "\nReplaces the given <span class=\"paramref\">claim</span> on the specified <span class=\"paramref\">user</span> with the <span class=\"paramref\">newClaim</span>\n"
   example: []
   syntax:
     content: Task ReplaceClaimAsync(TUser user, Claim claim, Claim newClaim, CancellationToken cancellationToken)
-    content.vb: Function ReplaceClaimAsync(user As TUser, claim As Claim, newClaim As Claim, cancellationToken As CancellationToken) As Task
     parameters:
     - id: user
       type: '{TUser}'
@@ -179,13 +178,14 @@ items:
       description: The claim to replace.
     - id: newClaim
       type: System.Security.Claims.Claim
-      description: The new claim to replace the existing <em>claim</em> with.
+      description: The new claim to replace the existing <span class="paramref">claim</span> with.
     - id: cancellationToken
       type: System.Threading.CancellationToken
       description: The <xref href="System.Threading.CancellationToken" data-throw-if-not-resolved="false"></xref> used to propagate notifications that the operation should be canceled.
     return:
       type: System.Threading.Tasks.Task
       description: The task object representing the asynchronous operation.
+    content.vb: Function ReplaceClaimAsync(user As TUser, claim As Claim, newClaim As Claim, cancellationToken As CancellationToken) As Task
   overload: Microsoft.AspNetCore.Identity.IUserClaimStore`1.ReplaceClaimAsync*
   nameWithType.vb: IUserClaimStore(Of TUser).ReplaceClaimAsync(TUser, Claim, Claim, CancellationToken)
   fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).ReplaceClaimAsync(TUser, System.Security.Claims.Claim, System.Security.Claims.Claim, System.Threading.CancellationToken)
@@ -206,20 +206,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: RemoveClaimsAsync
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 52
   assemblies:
   - Microsoft.AspNetCore.Identity
   namespace: Microsoft.AspNetCore.Identity
-  summary: "\nRemoves the specified <em>claims</em> from the given <em>user</em>.\n"
+  summary: "\nRemoves the specified <span class=\"paramref\">claims</span> from the given <span class=\"paramref\">user</span>.\n"
   example: []
   syntax:
     content: Task RemoveClaimsAsync(TUser user, IEnumerable<Claim> claims, CancellationToken cancellationToken)
-    content.vb: Function RemoveClaimsAsync(user As TUser, claims As IEnumerable(Of Claim), cancellationToken As CancellationToken) As Task
     parameters:
     - id: user
       type: '{TUser}'
-      description: The user to remove the specified <em>claims</em> from.
+      description: The user to remove the specified <span class="paramref">claims</span> from.
     - id: claims
       type: System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}
       description: A collection of <xref href="System.Security.Claims.Claim" data-throw-if-not-resolved="false"></xref>s to remove.
@@ -229,6 +228,7 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: The task object representing the asynchronous operation.
+    content.vb: Function RemoveClaimsAsync(user As TUser, claims As IEnumerable(Of Claim), cancellationToken As CancellationToken) As Task
   overload: Microsoft.AspNetCore.Identity.IUserClaimStore`1.RemoveClaimsAsync*
   nameWithType.vb: IUserClaimStore(Of TUser).RemoveClaimsAsync(TUser, IEnumerable(Of Claim), CancellationToken)
   fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).RemoveClaimsAsync(TUser, System.Collections.Generic.IEnumerable(Of System.Security.Claims.Claim), System.Threading.CancellationToken)
@@ -250,7 +250,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: GetUsersForClaimAsync
-    path: src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity/IUserClaimStore.cs
     startLine: 63
   assemblies:
   - Microsoft.AspNetCore.Identity
@@ -259,7 +259,6 @@ items:
   example: []
   syntax:
     content: Task<IList<TUser>> GetUsersForClaimAsync(Claim claim, CancellationToken cancellationToken)
-    content.vb: Function GetUsersForClaimAsync(claim As Claim, cancellationToken As CancellationToken) As Task(Of IList(Of TUser))
     parameters:
     - id: claim
       type: System.Security.Claims.Claim
@@ -269,7 +268,8 @@ items:
       description: The <xref href="System.Threading.CancellationToken" data-throw-if-not-resolved="false"></xref> used to propagate notifications that the operation should be canceled.
     return:
       type: System.Threading.Tasks.Task{System.Collections.Generic.IList{{TUser}}}
-      description: "\nA <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref> that represents the result of the asynchronous query, a list of <em>TUser</em> who\ncontain the specified claim.\n"
+      description: "\nA <xref href=\"System.Threading.Tasks.Task%601\" data-throw-if-not-resolved=\"false\"></xref> that represents the result of the asynchronous query, a list of <span class=\"typeparamref\">TUser</span> who\ncontain the specified claim.\n"
+    content.vb: Function GetUsersForClaimAsync(claim As Claim, cancellationToken As CancellationToken) As Task(Of IList(Of TUser))
   overload: Microsoft.AspNetCore.Identity.IUserClaimStore`1.GetUsersForClaimAsync*
   nameWithType.vb: IUserClaimStore(Of TUser).GetUsersForClaimAsync(Claim, CancellationToken)
   fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetUsersForClaimAsync(System.Security.Claims.Claim, System.Threading.CancellationToken)
@@ -288,7 +288,7 @@ references:
   nameWithType: IUserStore<TUser>.GetUserIdAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetUserIdAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetUserIdAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserIdAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserIdAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetUserIdAsync(`0,System.Threading.CancellationToken)
     name: GetUserIdAsync
@@ -341,7 +341,7 @@ references:
   nameWithType: IUserStore<TUser>.GetUserNameAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetUserNameAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetUserNameAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserNameAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserNameAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetUserNameAsync(`0,System.Threading.CancellationToken)
     name: GetUserNameAsync
@@ -394,7 +394,7 @@ references:
   nameWithType: IUserStore<TUser>.SetUserNameAsync(TUser, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).SetUserNameAsync(TUser, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.SetUserNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetUserNameAsync
@@ -463,7 +463,7 @@ references:
   nameWithType: IUserStore<TUser>.GetNormalizedUserNameAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetNormalizedUserNameAsync(`0,System.Threading.CancellationToken)
     name: GetNormalizedUserNameAsync
@@ -516,7 +516,7 @@ references:
   nameWithType: IUserStore<TUser>.SetNormalizedUserNameAsync(TUser, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.SetNormalizedUserNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetNormalizedUserNameAsync
@@ -585,7 +585,7 @@ references:
   nameWithType: IUserStore<TUser>.CreateAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.CreateAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).CreateAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).CreateAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).CreateAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.CreateAsync(`0,System.Threading.CancellationToken)
     name: CreateAsync
@@ -638,7 +638,7 @@ references:
   nameWithType: IUserStore<TUser>.UpdateAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.UpdateAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).UpdateAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).UpdateAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).UpdateAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.UpdateAsync(`0,System.Threading.CancellationToken)
     name: UpdateAsync
@@ -691,7 +691,7 @@ references:
   nameWithType: IUserStore<TUser>.DeleteAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.DeleteAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).DeleteAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).DeleteAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).DeleteAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.DeleteAsync(`0,System.Threading.CancellationToken)
     name: DeleteAsync
@@ -744,7 +744,7 @@ references:
   nameWithType: IUserStore<TUser>.FindByIdAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.FindByIdAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).FindByIdAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByIdAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByIdAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.FindByIdAsync(System.String,System.Threading.CancellationToken)
     name: FindByIdAsync
@@ -801,7 +801,7 @@ references:
   nameWithType: IUserStore<TUser>.FindByNameAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.FindByNameAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).FindByNameAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByNameAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByNameAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.FindByNameAsync(System.String,System.Threading.CancellationToken)
     name: FindByNameAsync
@@ -888,7 +888,7 @@ references:
   nameWithType: IUserStore<TUser>.GetUserIdAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetUserIdAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetUserIdAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserIdAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserIdAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetUserIdAsync(`0,System.Threading.CancellationToken)
     name: GetUserIdAsync
@@ -941,7 +941,7 @@ references:
   nameWithType: IUserStore<TUser>
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>
   nameWithType.vb: IUserStore(Of TUser)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser)
   name.vb: IUserStore(Of TUser)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1
@@ -978,7 +978,7 @@ references:
   nameWithType: IUserStore<TUser>.GetUserNameAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetUserNameAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetUserNameAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserNameAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetUserNameAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetUserNameAsync(`0,System.Threading.CancellationToken)
     name: GetUserNameAsync
@@ -1030,7 +1030,7 @@ references:
   nameWithType: IUserStore<TUser>.SetUserNameAsync(TUser, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).SetUserNameAsync(TUser, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.SetUserNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetUserNameAsync
@@ -1098,7 +1098,7 @@ references:
   nameWithType: IUserStore<TUser>.GetNormalizedUserNameAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).GetNormalizedUserNameAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.GetNormalizedUserNameAsync(`0,System.Threading.CancellationToken)
     name: GetNormalizedUserNameAsync
@@ -1150,7 +1150,7 @@ references:
   nameWithType: IUserStore<TUser>.SetNormalizedUserNameAsync(TUser, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).SetNormalizedUserNameAsync(TUser, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.SetNormalizedUserNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetNormalizedUserNameAsync
@@ -1218,7 +1218,7 @@ references:
   nameWithType: IUserStore<TUser>.CreateAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.CreateAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).CreateAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).CreateAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).CreateAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.CreateAsync(`0,System.Threading.CancellationToken)
     name: CreateAsync
@@ -1270,7 +1270,7 @@ references:
   nameWithType: IUserStore<TUser>.UpdateAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.UpdateAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).UpdateAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).UpdateAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).UpdateAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.UpdateAsync(`0,System.Threading.CancellationToken)
     name: UpdateAsync
@@ -1322,7 +1322,7 @@ references:
   nameWithType: IUserStore<TUser>.DeleteAsync(TUser, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.DeleteAsync(TUser, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).DeleteAsync(TUser, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).DeleteAsync(TUser, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).DeleteAsync(TUser, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.DeleteAsync(`0,System.Threading.CancellationToken)
     name: DeleteAsync
@@ -1374,7 +1374,7 @@ references:
   nameWithType: IUserStore<TUser>.FindByIdAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.FindByIdAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).FindByIdAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByIdAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByIdAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.FindByIdAsync(System.String,System.Threading.CancellationToken)
     name: FindByIdAsync
@@ -1430,7 +1430,7 @@ references:
   nameWithType: IUserStore<TUser>.FindByNameAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>.FindByNameAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: IUserStore(Of TUser).FindByNameAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByNameAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser).FindByNameAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1.FindByNameAsync(System.String,System.Threading.CancellationToken)
     name: FindByNameAsync
@@ -1493,7 +1493,7 @@ references:
   nameWithType: IUserStore<TUser>
   fullName: Microsoft.AspNetCore.Identity.IUserStore<TUser>
   nameWithType.vb: IUserStore(Of TUser)
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser)
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserStore(Of TUser)
   name.vb: IUserStore(Of TUser)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.IUserStore`1
@@ -1550,7 +1550,7 @@ references:
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
   nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
   name.vb: Task(Of TResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -1589,7 +1589,7 @@ references:
   nameWithType: IUserClaimStore<TUser>.GetClaimsAsync
   fullName: Microsoft.AspNetCore.Identity.IUserClaimStore<TUser>.GetClaimsAsync
   nameWithType.vb: IUserClaimStore(Of TUser).GetClaimsAsync
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetClaimsAsync
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetClaimsAsync
 - uid: '{TUser}'
   commentId: '!:TUser'
   definition: TUser
@@ -1604,7 +1604,7 @@ references:
   nameWithType: Task<IList<Claim>>
   fullName: System.Threading.Tasks.Task<System.Collections.Generic.IList<System.Security.Claims.Claim>>
   nameWithType.vb: Task(Of IList(Of Claim))
-  fullname.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IList(Of System.Security.Claims.Claim))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IList(Of System.Security.Claims.Claim))
   name.vb: Task(Of IList(Of Claim))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -1692,7 +1692,7 @@ references:
   nameWithType: IUserClaimStore<TUser>.AddClaimsAsync
   fullName: Microsoft.AspNetCore.Identity.IUserClaimStore<TUser>.AddClaimsAsync
   nameWithType.vb: IUserClaimStore(Of TUser).AddClaimsAsync
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).AddClaimsAsync
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).AddClaimsAsync
 - uid: System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}
   commentId: T:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}
   parent: System.Collections.Generic
@@ -1701,7 +1701,7 @@ references:
   nameWithType: IEnumerable<Claim>
   fullName: System.Collections.Generic.IEnumerable<System.Security.Claims.Claim>
   nameWithType.vb: IEnumerable(Of Claim)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of System.Security.Claims.Claim)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of System.Security.Claims.Claim)
   name.vb: IEnumerable(Of Claim)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1751,7 +1751,7 @@ references:
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
   nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
   name.vb: IEnumerable(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1796,7 +1796,7 @@ references:
   nameWithType: IUserClaimStore<TUser>.ReplaceClaimAsync
   fullName: Microsoft.AspNetCore.Identity.IUserClaimStore<TUser>.ReplaceClaimAsync
   nameWithType.vb: IUserClaimStore(Of TUser).ReplaceClaimAsync
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).ReplaceClaimAsync
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).ReplaceClaimAsync
 - uid: Microsoft.AspNetCore.Identity.IUserClaimStore`1.RemoveClaimsAsync*
   commentId: Overload:Microsoft.AspNetCore.Identity.IUserClaimStore`1.RemoveClaimsAsync
   isExternal: false
@@ -1804,7 +1804,7 @@ references:
   nameWithType: IUserClaimStore<TUser>.RemoveClaimsAsync
   fullName: Microsoft.AspNetCore.Identity.IUserClaimStore<TUser>.RemoveClaimsAsync
   nameWithType.vb: IUserClaimStore(Of TUser).RemoveClaimsAsync
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).RemoveClaimsAsync
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).RemoveClaimsAsync
 - uid: Microsoft.AspNetCore.Identity.IUserClaimStore`1.GetUsersForClaimAsync*
   commentId: Overload:Microsoft.AspNetCore.Identity.IUserClaimStore`1.GetUsersForClaimAsync
   isExternal: false
@@ -1812,7 +1812,7 @@ references:
   nameWithType: IUserClaimStore<TUser>.GetUsersForClaimAsync
   fullName: Microsoft.AspNetCore.Identity.IUserClaimStore<TUser>.GetUsersForClaimAsync
   nameWithType.vb: IUserClaimStore(Of TUser).GetUsersForClaimAsync
-  fullname.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetUsersForClaimAsync
+  fullName.vb: Microsoft.AspNetCore.Identity.IUserClaimStore(Of TUser).GetUsersForClaimAsync
 - uid: System.Threading.Tasks.Task{System.Collections.Generic.IList{{TUser}}}
   commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.IList{`0}}
   parent: System.Threading.Tasks
@@ -1821,7 +1821,7 @@ references:
   nameWithType: Task<IList<TUser>>
   fullName: System.Threading.Tasks.Task<System.Collections.Generic.IList<TUser>>
   nameWithType.vb: Task(Of IList(Of TUser))
-  fullname.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IList(Of TUser))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.IList(Of TUser))
   name.vb: Task(Of IList(Of TUser))
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1

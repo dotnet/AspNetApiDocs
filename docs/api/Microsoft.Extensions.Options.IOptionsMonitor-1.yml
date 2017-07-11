@@ -6,7 +6,7 @@ items:
   parent: Microsoft.Extensions.Options
   children:
   - Microsoft.Extensions.Options.IOptionsMonitor`1.CurrentValue
-  - Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(System.Action{`0})
+  - Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(Action{`0})
   langs:
   - csharp
   - vb
@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Options.git
     id: IOptionsMonitor
-    path: src/Microsoft.Extensions.Options/IOptionsMonitor.cs
+    path: ../aspnet/Options/src/Microsoft.Extensions.Options/IOptionsMonitor.cs
     startLine: 11
   assemblies:
   - Microsoft.Extensions.Options
@@ -29,10 +29,10 @@ items:
   example: []
   syntax:
     content: public interface IOptionsMonitor<out TOptions>
-    content.vb: Public Interface IOptionsMonitor(Of Out TOptions)
     typeParameters:
     - id: TOptions
       description: The options type.
+    content.vb: Public Interface IOptionsMonitor(Of Out TOptions)
   nameWithType.vb: IOptionsMonitor(Of TOptions)
   modifiers.csharp:
   - public
@@ -59,7 +59,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Options.git
     id: CurrentValue
-    path: src/Microsoft.Extensions.Options/IOptionsMonitor.cs
+    path: ../aspnet/Options/src/Microsoft.Extensions.Options/IOptionsMonitor.cs
     startLine: 16
   assemblies:
   - Microsoft.Extensions.Options
@@ -68,10 +68,10 @@ items:
   example: []
   syntax:
     content: TOptions CurrentValue { get; }
-    content.vb: ReadOnly Property CurrentValue As TOptions
     parameters: []
     return:
       type: '{TOptions}'
+    content.vb: ReadOnly Property CurrentValue As TOptions
   overload: Microsoft.Extensions.Options.IOptionsMonitor`1.CurrentValue*
   nameWithType.vb: IOptionsMonitor(Of TOptions).CurrentValue
   modifiers.csharp:
@@ -79,16 +79,16 @@ items:
   modifiers.vb:
   - ReadOnly
   fullName.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).CurrentValue
-- uid: Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(System.Action{`0})
-  commentId: M:Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(System.Action{`0})
-  id: OnChange(System.Action{`0})
+- uid: Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(Action{`0})
+  commentId: M:Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange(Action{`0})
+  id: OnChange(Action{`0})
   parent: Microsoft.Extensions.Options.IOptionsMonitor`1
   langs:
   - csharp
   - vb
   name: OnChange(Action<TOptions>)
   nameWithType: IOptionsMonitor<TOptions>.OnChange(Action<TOptions>)
-  fullName: Microsoft.Extensions.Options.IOptionsMonitor<TOptions>.OnChange(System.Action<TOptions>)
+  fullName: Microsoft.Extensions.Options.IOptionsMonitor<TOptions>.OnChange(Action<TOptions>)
   type: Method
   source:
     remote:
@@ -96,7 +96,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Options.git
     id: OnChange
-    path: src/Microsoft.Extensions.Options/IOptionsMonitor.cs
+    path: ../aspnet/Options/src/Microsoft.Extensions.Options/IOptionsMonitor.cs
     startLine: 23
   assemblies:
   - Microsoft.Extensions.Options
@@ -105,17 +105,17 @@ items:
   example: []
   syntax:
     content: IDisposable OnChange(Action<TOptions> listener)
-    content.vb: Function OnChange(listener As Action(Of TOptions)) As IDisposable
     parameters:
     - id: listener
-      type: System.Action{{TOptions}}
+      type: Action{{TOptions}}
       description: The action to be invoked when TOptions has changed.
     return:
-      type: System.IDisposable
+      type: IDisposable
       description: An IDisposable which should be disposed to stop listening for changes.
+    content.vb: Function OnChange(listener As Action(Of TOptions)) As IDisposable
   overload: Microsoft.Extensions.Options.IOptionsMonitor`1.OnChange*
   nameWithType.vb: IOptionsMonitor(Of TOptions).OnChange(Action(Of TOptions))
-  fullName.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).OnChange(System.Action(Of TOptions))
+  fullName.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).OnChange(Action(Of TOptions))
   name.vb: OnChange(Action(Of TOptions))
 references:
 - uid: Microsoft.Extensions.Options
@@ -131,7 +131,7 @@ references:
   nameWithType: IOptionsMonitor<TOptions>.CurrentValue
   fullName: Microsoft.Extensions.Options.IOptionsMonitor<TOptions>.CurrentValue
   nameWithType.vb: IOptionsMonitor(Of TOptions).CurrentValue
-  fullname.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).CurrentValue
+  fullName.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).CurrentValue
 - uid: '{TOptions}'
   commentId: '!:TOptions'
   definition: TOptions
@@ -150,22 +150,21 @@ references:
   nameWithType: IOptionsMonitor<TOptions>.OnChange
   fullName: Microsoft.Extensions.Options.IOptionsMonitor<TOptions>.OnChange
   nameWithType.vb: IOptionsMonitor(Of TOptions).OnChange
-  fullname.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).OnChange
-- uid: System.Action{{TOptions}}
-  commentId: T:System.Action{`0}
-  parent: System
-  definition: System.Action`1
+  fullName.vb: Microsoft.Extensions.Options.IOptionsMonitor(Of TOptions).OnChange
+- uid: Action{{TOptions}}
+  commentId: '!:Action{`0}'
+  definition: Action`1
   name: Action<TOptions>
   nameWithType: Action<TOptions>
-  fullName: System.Action<TOptions>
+  fullName: Action<TOptions>
   nameWithType.vb: Action(Of TOptions)
-  fullname.vb: System.Action(Of TOptions)
+  fullName.vb: Action(Of TOptions)
   name.vb: Action(Of TOptions)
   spec.csharp:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: <
     nameWithType: <
@@ -177,10 +176,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -191,56 +190,47 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
+- uid: IDisposable
   isExternal: true
   name: IDisposable
   nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Action`1
-  commentId: T:System.Action`1
+  fullName: IDisposable
+- uid: Action`1
   isExternal: true
-  name: Action<T>
-  nameWithType: Action<T>
-  fullName: System.Action<T>
-  nameWithType.vb: Action(Of T)
-  fullname.vb: System.Action(Of T)
-  name.vb: Action(Of T)
+  name: Action<>
+  nameWithType: Action<>
+  fullName: Action<>
+  nameWithType.vb: Action(Of )
+  fullName.vb: Action(Of )
+  name.vb: Action(Of )
   spec.csharp:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System
-  commentId: N:System
-  isExternal: false
-  name: System
-  nameWithType: System
-  fullName: System
 shouldSkipMarkup: true

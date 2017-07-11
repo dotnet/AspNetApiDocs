@@ -37,22 +37,32 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: CodeVisitor
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 8
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: 'public class CodeVisitor<TWriter> : ChunkVisitor<TWriter>, IChunkVisitor where TWriter : CodeWriter'
+    typeParameters:
+    - id: TWriter
     content.vb: >-
       Public Class CodeVisitor(Of TWriter As CodeWriter)
           Inherits ChunkVisitor(Of TWriter)
           Implements IChunkVisitor
-    typeParameters:
-    - id: TWriter
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.Razor.MvcCSharpChunkVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpBaseTypeVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpCodeVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpDesignTimeCodeVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpTagHelperAttributeValueVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpTagHelperFieldDeclarationVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpTagHelperPropertyInitializationVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpTypeMemberVisitor
+  - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CSharpUsingVisitor
   implements:
   - Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.IChunkVisitor
   inheritedMembers:
@@ -93,19 +103,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 11
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: public CodeVisitor(TWriter writer, CodeGeneratorContext context)
-    content.vb: Public Sub New(writer As TWriter, context As CodeGeneratorContext)
     parameters:
     - id: writer
       type: '{TWriter}'
     - id: context
       type: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+    content.vb: Public Sub New(writer As TWriter, context As CodeGeneratorContext)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.#ctor*
   nameWithType.vb: CodeVisitor(Of TWriter).CodeVisitor(TWriter, CodeGeneratorContext)
   modifiers.csharp:
@@ -130,17 +140,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 25
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(LiteralChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As LiteralChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.LiteralChunk
+    content.vb: Protected Overrides Sub Visit(chunk As LiteralChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(LiteralChunk)
@@ -168,17 +178,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 28
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(ParentLiteralChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As ParentLiteralChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk
+    content.vb: Protected Overrides Sub Visit(chunk As ParentLiteralChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(ParentLiteralChunk)
@@ -206,17 +216,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 31
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(ExpressionBlockChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As ExpressionBlockChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk
+    content.vb: Protected Overrides Sub Visit(chunk As ExpressionBlockChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(ExpressionBlockChunk)
@@ -244,17 +254,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 34
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(ExpressionChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As ExpressionChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk
+    content.vb: Protected Overrides Sub Visit(chunk As ExpressionChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(ExpressionChunk)
@@ -282,17 +292,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 37
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(StatementChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As StatementChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.StatementChunk
+    content.vb: Protected Overrides Sub Visit(chunk As StatementChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(StatementChunk)
@@ -320,17 +330,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(UsingChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As UsingChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.UsingChunk
+    content.vb: Protected Overrides Sub Visit(chunk As UsingChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(UsingChunk)
@@ -358,17 +368,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 43
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(ParentChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As ParentChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.ParentChunk
+    content.vb: Protected Overrides Sub Visit(chunk As ParentChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(ParentChunk)
@@ -396,17 +406,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 46
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(DynamicCodeAttributeChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As DynamicCodeAttributeChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk
+    content.vb: Protected Overrides Sub Visit(chunk As DynamicCodeAttributeChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(DynamicCodeAttributeChunk)
@@ -434,17 +444,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 49
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(TagHelperChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As TagHelperChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk
+    content.vb: Protected Overrides Sub Visit(chunk As TagHelperChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(TagHelperChunk)
@@ -472,17 +482,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 52
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(TagHelperPrefixDirectiveChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As TagHelperPrefixDirectiveChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk
+    content.vb: Protected Overrides Sub Visit(chunk As TagHelperPrefixDirectiveChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(TagHelperPrefixDirectiveChunk)
@@ -510,17 +520,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 55
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(AddTagHelperChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As AddTagHelperChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk
+    content.vb: Protected Overrides Sub Visit(chunk As AddTagHelperChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(AddTagHelperChunk)
@@ -548,17 +558,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 58
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(RemoveTagHelperChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As RemoveTagHelperChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk
+    content.vb: Protected Overrides Sub Visit(chunk As RemoveTagHelperChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(RemoveTagHelperChunk)
@@ -586,17 +596,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 61
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(LiteralCodeAttributeChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As LiteralCodeAttributeChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk
+    content.vb: Protected Overrides Sub Visit(chunk As LiteralCodeAttributeChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(LiteralCodeAttributeChunk)
@@ -624,17 +634,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 64
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(CodeAttributeChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As CodeAttributeChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk
+    content.vb: Protected Overrides Sub Visit(chunk As CodeAttributeChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(CodeAttributeChunk)
@@ -662,17 +672,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 67
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(SectionChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As SectionChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.SectionChunk
+    content.vb: Protected Overrides Sub Visit(chunk As SectionChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(SectionChunk)
@@ -700,17 +710,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 70
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(TypeMemberChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As TypeMemberChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk
+    content.vb: Protected Overrides Sub Visit(chunk As TypeMemberChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(TypeMemberChunk)
@@ -738,17 +748,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 73
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(SetBaseTypeChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As SetBaseTypeChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk
+    content.vb: Protected Overrides Sub Visit(chunk As SetBaseTypeChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(SetBaseTypeChunk)
@@ -776,17 +786,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Visit
-    path: src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor/CodeGenerators/Visitors/CodeVisitor.cs
     startLine: 76
   assemblies:
   - Microsoft.AspNetCore.Razor
   namespace: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors
   syntax:
     content: protected override void Visit(TemplateChunk chunk)
-    content.vb: Protected Overrides Sub Visit(chunk As TemplateChunk)
     parameters:
     - id: chunk
       type: Microsoft.AspNetCore.Razor.Chunks.TemplateChunk
+    content.vb: Protected Overrides Sub Visit(chunk As TemplateChunk)
   overridden: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
   overload: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor`1.Visit*
   nameWithType.vb: CodeVisitor(Of TWriter).Visit(TemplateChunk)
@@ -819,7 +829,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>
   nameWithType.vb: ChunkVisitor(Of TWriter)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter)
   name.vb: ChunkVisitor(Of TWriter)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1
@@ -864,7 +874,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Writer
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Writer
   nameWithType.vb: ChunkVisitor(Of TWriter).Writer
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Writer
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Writer
 - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Context
   commentId: P:Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{`0}.Context
   parent: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}
@@ -873,7 +883,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Context
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Context
   nameWithType.vb: ChunkVisitor(Of TWriter).Context
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Context
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Context
 - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
   commentId: M:Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{`0}.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
   parent: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor{{TWriter}}
@@ -882,7 +892,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Accept(IList<Chunk>)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Accept(System.Collections.Generic.IList<Microsoft.AspNetCore.Razor.Chunks.Chunk>)
   nameWithType.vb: ChunkVisitor(Of TWriter).Accept(IList(Of Chunk))
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(System.Collections.Generic.IList(Of Microsoft.AspNetCore.Razor.Chunks.Chunk))
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(System.Collections.Generic.IList(Of Microsoft.AspNetCore.Razor.Chunks.Chunk))
   name.vb: Accept(IList(Of Chunk))
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
@@ -944,7 +954,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Accept(Chunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Accept(Chunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
     name: Accept
@@ -1267,7 +1277,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>
   nameWithType.vb: ChunkVisitor(Of TWriter)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter)
   name.vb: ChunkVisitor(Of TWriter)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1
@@ -1304,7 +1314,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Writer
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Writer
   nameWithType.vb: ChunkVisitor(Of TWriter).Writer
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Writer
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Writer
 - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Context
   commentId: P:Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Context
   isExternal: false
@@ -1312,7 +1322,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Context
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Context
   nameWithType.vb: ChunkVisitor(Of TWriter).Context
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Context
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Context
 - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
   commentId: M:Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
   isExternal: true
@@ -1320,7 +1330,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Accept(IList<Chunk>)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Accept(System.Collections.Generic.IList<Microsoft.AspNetCore.Razor.Chunks.Chunk>)
   nameWithType.vb: ChunkVisitor(Of TWriter).Accept(IList(Of Chunk))
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(System.Collections.Generic.IList(Of Microsoft.AspNetCore.Razor.Chunks.Chunk))
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(System.Collections.Generic.IList(Of Microsoft.AspNetCore.Razor.Chunks.Chunk))
   name.vb: Accept(IList(Of Chunk))
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(System.Collections.Generic.IList{Microsoft.AspNetCore.Razor.Chunks.Chunk})
@@ -1381,7 +1391,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Accept(Chunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Accept(Chunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Accept(Microsoft.AspNetCore.Razor.Chunks.Chunk)
     name: Accept
@@ -1419,7 +1429,7 @@ references:
   nameWithType: CodeVisitor<TWriter>.CodeVisitor
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor<TWriter>.CodeVisitor
   nameWithType.vb: CodeVisitor(Of TWriter).CodeVisitor
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor(Of TWriter).CodeVisitor
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor(Of TWriter).CodeVisitor
 - uid: '{TWriter}'
   commentId: '!:TWriter'
   definition: TWriter
@@ -1452,7 +1462,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(LiteralChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(LiteralChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
     name: Visit
@@ -1490,7 +1500,7 @@ references:
   nameWithType: CodeVisitor<TWriter>.Visit
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor<TWriter>.Visit
   nameWithType.vb: CodeVisitor(Of TWriter).Visit
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor(Of TWriter).Visit
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.CodeVisitor(Of TWriter).Visit
 - uid: Microsoft.AspNetCore.Razor.Chunks.LiteralChunk
   commentId: T:Microsoft.AspNetCore.Razor.Chunks.LiteralChunk
   parent: Microsoft.AspNetCore.Razor.Chunks
@@ -1505,7 +1515,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(LiteralChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(LiteralChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralChunk)
     name: Visit
@@ -1550,7 +1560,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ParentLiteralChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ParentLiteralChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
     name: Visit
@@ -1595,7 +1605,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ParentLiteralChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ParentLiteralChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentLiteralChunk)
     name: Visit
@@ -1634,7 +1644,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ExpressionBlockChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ExpressionBlockChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
     name: Visit
@@ -1679,7 +1689,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ExpressionBlockChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ExpressionBlockChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionBlockChunk)
     name: Visit
@@ -1718,7 +1728,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ExpressionChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ExpressionChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
     name: Visit
@@ -1763,7 +1773,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ExpressionChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ExpressionChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ExpressionChunk)
     name: Visit
@@ -1802,7 +1812,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(StatementChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(StatementChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
     name: Visit
@@ -1847,7 +1857,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(StatementChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(StatementChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.StatementChunk)
     name: Visit
@@ -1886,7 +1896,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(UsingChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(UsingChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
     name: Visit
@@ -1931,7 +1941,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(UsingChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(UsingChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.UsingChunk)
     name: Visit
@@ -1970,7 +1980,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ParentChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ParentChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
     name: Visit
@@ -2015,7 +2025,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(ParentChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(ParentChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.ParentChunk)
     name: Visit
@@ -2054,7 +2064,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(DynamicCodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(DynamicCodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
     name: Visit
@@ -2099,7 +2109,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(DynamicCodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(DynamicCodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.DynamicCodeAttributeChunk)
     name: Visit
@@ -2138,7 +2148,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
     name: Visit
@@ -2183,7 +2193,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperChunk)
     name: Visit
@@ -2222,7 +2232,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TagHelperPrefixDirectiveChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TagHelperPrefixDirectiveChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
     name: Visit
@@ -2267,7 +2277,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TagHelperPrefixDirectiveChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TagHelperPrefixDirectiveChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TagHelperPrefixDirectiveChunk)
     name: Visit
@@ -2306,7 +2316,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(AddTagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(AddTagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
     name: Visit
@@ -2351,7 +2361,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(AddTagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(AddTagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.AddTagHelperChunk)
     name: Visit
@@ -2390,7 +2400,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(RemoveTagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(RemoveTagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
     name: Visit
@@ -2435,7 +2445,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(RemoveTagHelperChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(RemoveTagHelperChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.RemoveTagHelperChunk)
     name: Visit
@@ -2474,7 +2484,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(LiteralCodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(LiteralCodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
     name: Visit
@@ -2519,7 +2529,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(LiteralCodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(LiteralCodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.LiteralCodeAttributeChunk)
     name: Visit
@@ -2558,7 +2568,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(CodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(CodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
     name: Visit
@@ -2603,7 +2613,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(CodeAttributeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(CodeAttributeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.CodeAttributeChunk)
     name: Visit
@@ -2642,7 +2652,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(SectionChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(SectionChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
     name: Visit
@@ -2687,7 +2697,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(SectionChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(SectionChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.SectionChunk)
     name: Visit
@@ -2726,7 +2736,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TypeMemberChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TypeMemberChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
     name: Visit
@@ -2771,7 +2781,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TypeMemberChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TypeMemberChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TypeMemberChunk)
     name: Visit
@@ -2810,7 +2820,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(SetBaseTypeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(SetBaseTypeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
     name: Visit
@@ -2855,7 +2865,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(SetBaseTypeChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(SetBaseTypeChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.SetBaseTypeChunk)
     name: Visit
@@ -2894,7 +2904,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TemplateChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TemplateChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
     name: Visit
@@ -2939,7 +2949,7 @@ references:
   nameWithType: ChunkVisitor<TWriter>.Visit(TemplateChunk)
   fullName: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor<TWriter>.Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
   nameWithType.vb: ChunkVisitor(Of TWriter).Visit(TemplateChunk)
-  fullname.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
+  fullName.vb: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor(Of TWriter).Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Razor.CodeGenerators.Visitors.ChunkVisitor`1.Visit(Microsoft.AspNetCore.Razor.Chunks.TemplateChunk)
     name: Visit

@@ -23,12 +23,12 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CacheTagHelper
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 20
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
-  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;cache&gt; elements.\n"
+  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;cache> elements.\n"
   example: []
   syntax:
     content: 'public class CacheTagHelper : CacheTagHelperBase, ITagHelper'
@@ -88,7 +88,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CacheKeyPrefix
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 25
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -97,9 +97,9 @@ items:
   example: []
   syntax:
     content: public static readonly string CacheKeyPrefix
-    content.vb: Public Shared ReadOnly CacheKeyPrefix As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly CacheKeyPrefix As String
   modifiers.csharp:
   - public
   - static
@@ -125,7 +125,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 34
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -134,7 +134,6 @@ items:
   example: []
   syntax:
     content: public CacheTagHelper(IMemoryCache memoryCache, HtmlEncoder htmlEncoder)
-    content.vb: Public Sub New(memoryCache As IMemoryCache, htmlEncoder As HtmlEncoder)
     parameters:
     - id: memoryCache
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
@@ -142,6 +141,7 @@ items:
     - id: htmlEncoder
       type: System.Text.Encodings.Web.HtmlEncoder
       description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref> to use.
+    content.vb: Public Sub New(memoryCache As IMemoryCache, htmlEncoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper.#ctor*
   modifiers.csharp:
   - public
@@ -164,7 +164,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: MemoryCache
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 42
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -173,10 +173,10 @@ items:
   example: []
   syntax:
     content: protected IMemoryCache MemoryCache { get; }
-    content.vb: Protected ReadOnly Property MemoryCache As IMemoryCache
     parameters: []
     return:
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+    content.vb: Protected ReadOnly Property MemoryCache As IMemoryCache
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper.MemoryCache*
   modifiers.csharp:
   - protected
@@ -201,7 +201,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Priority
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 47
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -213,13 +213,13 @@ items:
       [HtmlAttributeName("priority")]
 
       public CacheItemPriority? Priority { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{Microsoft.Extensions.Caching.Memory.CacheItemPriority}
     content.vb: >-
       <HtmlAttributeName("priority")>
 
       Public Property Priority As CacheItemPriority?
-    parameters: []
-    return:
-      type: System.Nullable{Microsoft.Extensions.Caching.Memory.CacheItemPriority}
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper.Priority*
   attributes:
   - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
@@ -250,22 +250,27 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ProcessAsync
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/CacheTagHelper.cs
     startLine: 51
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nAsynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
+  remarks: By default this calls into <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
-    content.vb: Public Overrides Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
     - id: output
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+      description: A stateful HTML element used to generate an HTML tag.
     return:
       type: System.Threading.Tasks.Task
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion updates the <span class="paramref">output</span>.
+    content.vb: Public Overrides Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
   overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelper.ProcessAsync*
   modifiers.csharp:
@@ -864,7 +869,7 @@ references:
   nameWithType: Nullable<CacheItemPriority>
   fullName: System.Nullable<Microsoft.Extensions.Caching.Memory.CacheItemPriority>
   nameWithType.vb: Nullable(Of CacheItemPriority)
-  fullname.vb: System.Nullable(Of Microsoft.Extensions.Caching.Memory.CacheItemPriority)
+  fullName.vb: System.Nullable(Of Microsoft.Extensions.Caching.Memory.CacheItemPriority)
   name.vb: Nullable(Of CacheItemPriority)
   spec.csharp:
   - uid: System.Nullable`1
@@ -907,7 +912,7 @@ references:
   nameWithType: Nullable<T>
   fullName: System.Nullable<T>
   nameWithType.vb: Nullable(Of T)
-  fullname.vb: System.Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
   name.vb: Nullable(Of T)
   spec.csharp:
   - uid: System.Nullable`1

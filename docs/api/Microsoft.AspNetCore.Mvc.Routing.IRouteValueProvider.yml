@@ -20,13 +20,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: IRouteValueProvider
-    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
     startLine: 71
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Routing
   summary: "\n<p>\nA metadata interface which specifies a route value which is required for the action selector to\nchoose an action. When applied to an action using attribute routing, the route value will be added\nto the <xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> when the action is selected.\n</p>\n<p>\nWhen an <xref href=\"Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\" data-throw-if-not-resolved=\"false\"></xref> is used to provide a new route value to an action, all\nactions in the application must also have a value associated with that key, or have an implicit value\nof <code>null</code>. See remarks for more details.\n</p>\n"
-  remarks: "\n<p>\nThe typical scheme for action selection in an MVC application is that an action will require the\nmatching values for its <xref href=\"Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ControllerName\" data-throw-if-not-resolved=\"false\"></xref> and\n<xref href=\"Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ActionName\" data-throw-if-not-resolved=\"false\"></xref>\n</p>\n<example>\nFor an action like <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>, in order to be selected, the\n<xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> must contain the values\n{ \n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n</example>\n<p>\nIf areas are in use in the application (see <xref href=\"Microsoft.AspNetCore.Mvc.AreaAttribute\" data-throw-if-not-resolved=\"false\"></xref> which implements\n<xref href=\"Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\" data-throw-if-not-resolved=\"false\"></xref>) then all actions are consider either in an area by having a\nnon-<code>null</code> area value (specified by <xref href=\"Microsoft.AspNetCore.Mvc.AreaAttribute\" data-throw-if-not-resolved=\"false\"></xref> or another \n<xref href=\"Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\" data-throw-if-not-resolved=\"false\"></xref>) or are considered 'outside' of areas by having the value <code>null</code>.\n</p>\n<example>\nConsider an application with two controllers, each with an <pre><code>Index</code></pre> action method:\n    - <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>\n    - <pre><code>MyApp.Areas.Blog.Controllers.HomeController.Index()</code></pre>\nwhere <pre><code>MyApp.Areas.Blog.Controllers.HomeController</code></pre> has an area attribute\n<pre><code>[Area(\"Blog\")]</code></pre>.\n\nFor <xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> like:\n{ \n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> is not considered eligible because the\n<xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> does not contain the value 'Blog' for 'area'.\n\nFor <xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> like:\n{\n    \"area\": \"Blog\",\n    \"action\": \"Index\",\n    \"controller\": \"Home\"\n}\n\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> is not considered eligible because the route values\ncontain a value for 'area'. <pre><code>MyApp.Controllers.HomeController.Index()</code></pre> cannot match any value\nfor 'area' other than <code>null</code>.\n</example>\n"
+  remarks: "\n<p>\nThe typical scheme for action selection in an MVC application is that an action will require the\nmatching values for its <xref href=\"Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ControllerName\" data-throw-if-not-resolved=\"false\"></xref> and\n<xref href=\"Microsoft.AspNetCore.Mvc.Controllers.ControllerActionDescriptor.ActionName\" data-throw-if-not-resolved=\"false\"></xref>\n</p>\n<example>\nFor an action like <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>, in order to be selected, the\n<xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> must contain the values\n{ \n    &quot;action&quot;: &quot;Index&quot;,\n    &quot;controller&quot;: &quot;Home&quot;\n}\n</example>\n<p>\nIf areas are in use in the application (see <xref href=\"Microsoft.AspNetCore.Mvc.AreaAttribute\" data-throw-if-not-resolved=\"false\"></xref> which implements\n<xref href=\"Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\" data-throw-if-not-resolved=\"false\"></xref>) then all actions are consider either in an area by having a\nnon-<code>null</code> area value (specified by <xref href=\"Microsoft.AspNetCore.Mvc.AreaAttribute\" data-throw-if-not-resolved=\"false\"></xref> or another \n<xref href=\"Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider\" data-throw-if-not-resolved=\"false\"></xref>) or are considered &apos;outside&apos; of areas by having the value <code>null</code>.\n</p>\n<example>\nConsider an application with two controllers, each with an <pre><code>Index</code></pre> action method:\n    - <pre><code>MyApp.Controllers.HomeController.Index()</code></pre>\n    - <pre><code>MyApp.Areas.Blog.Controllers.HomeController.Index()</code></pre>\nwhere <pre><code>MyApp.Areas.Blog.Controllers.HomeController</code></pre> has an area attribute\n<pre><code>[Area(&quot;Blog&quot;)]</code></pre>.\n\nFor <xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> like:\n{ \n    &quot;action&quot;: &quot;Index&quot;,\n    &quot;controller&quot;: &quot;Home&quot;\n}\n\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> is not considered eligible because the\n<xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> does not contain the value &apos;Blog&apos; for &apos;area&apos;.\n\nFor <xref href=\"Microsoft.AspNetCore.Routing.RouteData.Values\" data-throw-if-not-resolved=\"false\"></xref> like:\n{\n    &quot;area&quot;: &quot;Blog&quot;,\n    &quot;action&quot;: &quot;Index&quot;,\n    &quot;controller&quot;: &quot;Home&quot;\n}\n\n<pre><code>MyApp.Area.Blog.Controllers.HomeController.Index()</code></pre> will be selected.\n<pre><code>MyApp.Controllers.HomeController.Index()</code></pre> is not considered eligible because the route values\ncontain a value for &apos;area&apos;. <pre><code>MyApp.Controllers.HomeController.Index()</code></pre> cannot match any value\nfor &apos;area&apos; other than <code>null</code>.\n</example>\n"
   example: []
   syntax:
     content: public interface IRouteValueProvider
@@ -54,7 +54,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: RouteKey
-    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
     startLine: 76
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -63,10 +63,10 @@ items:
   example: []
   syntax:
     content: string RouteKey { get; }
-    content.vb: ReadOnly Property RouteKey As String
     parameters: []
     return:
       type: System.String
+    content.vb: ReadOnly Property RouteKey As String
   overload: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteKey*
   modifiers.csharp:
   - get
@@ -89,7 +89,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: RouteValue
-    path: src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Routing/IRouteValueProvider.cs
     startLine: 82
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -98,10 +98,10 @@ items:
   example: []
   syntax:
     content: string RouteValue { get; }
-    content.vb: ReadOnly Property RouteValue As String
     parameters: []
     return:
       type: System.String
+    content.vb: ReadOnly Property RouteValue As String
   overload: Microsoft.AspNetCore.Mvc.Routing.IRouteValueProvider.RouteValue*
   modifiers.csharp:
   - get

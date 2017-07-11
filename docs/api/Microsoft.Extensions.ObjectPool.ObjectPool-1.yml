@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: ObjectPool
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
     startLine: 5
   assemblies:
   - Microsoft.Extensions.ObjectPool
@@ -29,11 +29,14 @@ items:
     content: >-
       public abstract class ObjectPool<T>
           where T : class
-    content.vb: Public MustInherit Class ObjectPool(Of T As Class)
     typeParameters:
     - id: T
+    content.vb: Public MustInherit Class ObjectPool(Of T As Class)
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.Extensions.ObjectPool.DefaultObjectPool`1
+  - Microsoft.Extensions.ObjectPool.LeakTrackingObjectPool`1
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -70,16 +73,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: Get
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
     startLine: 7
   assemblies:
   - Microsoft.Extensions.ObjectPool
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public abstract T Get()
-    content.vb: Public MustOverride Function Get As T
     return:
       type: '{T}'
+    content.vb: Public MustOverride Function Get As T
   overload: Microsoft.Extensions.ObjectPool.ObjectPool`1.Get*
   nameWithType.vb: ObjectPool(Of T).Get()
   modifiers.csharp:
@@ -106,17 +109,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: Return
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPool.cs
     startLine: 9
   assemblies:
   - Microsoft.Extensions.ObjectPool
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: public abstract void Return(T obj)
-    content.vb: Public MustOverride Sub Return(obj As T)
     parameters:
     - id: obj
       type: '{T}'
+    content.vb: Public MustOverride Sub Return(obj As T)
   overload: Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*
   nameWithType.vb: ObjectPool(Of T).Return(T)
   modifiers.csharp:
@@ -432,7 +435,7 @@ references:
   nameWithType: ObjectPool<T>.Get
   fullName: Microsoft.Extensions.ObjectPool.ObjectPool<T>.Get
   nameWithType.vb: ObjectPool(Of T).Get
-  fullname.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T).Get
+  fullName.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T).Get
 - uid: '{T}'
   commentId: '!:T'
   definition: T
@@ -451,5 +454,5 @@ references:
   nameWithType: ObjectPool<T>.Return
   fullName: Microsoft.Extensions.ObjectPool.ObjectPool<T>.Return
   nameWithType.vb: ObjectPool(Of T).Return
-  fullname.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T).Return
+  fullName.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T).Return
 shouldSkipMarkup: true

@@ -26,31 +26,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: ResourceManagerStringLocalizer
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 19
   assemblies:
   - Microsoft.Extensions.Localization
   namespace: Microsoft.Extensions.Localization
-  summary: "\nAn <xref href=\"Microsoft.Extensions.Localization.IStringLocalizer\" data-throw-if-not-resolved=\"false\"></xref> that uses the <xref href=\"System.Resources.ResourceManager\" data-throw-if-not-resolved=\"false\"></xref> and\n<xref href=\"System.Resources.ResourceReader\" data-throw-if-not-resolved=\"false\"></xref> to provide localized strings.\n"
+  summary: "\nAn <see cref=\"!:IStringLocalizer\"></see> that uses the <xref href=\"System.Resources.ResourceManager\" data-throw-if-not-resolved=\"false\"></xref> and\n<xref href=\"System.Resources.ResourceReader\" data-throw-if-not-resolved=\"false\"></xref> to provide localized strings.\n"
   remarks: This type is thread-safe.
   example: []
   syntax:
     content: 'public class ResourceManagerStringLocalizer : IStringLocalizer'
     content.vb: >-
       Public Class ResourceManagerStringLocalizer
-          Implements IStringLocalizer
+          Inherits IStringLocalizer
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Localization.IStringLocalizer
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
+  derivedClasses:
+  - Microsoft.Extensions.Localization.ResourceManagerWithCultureStringLocalizer
   modifiers.csharp:
   - public
   - class
@@ -74,7 +66,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: .ctor
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 34
   assemblies:
   - Microsoft.Extensions.Localization
@@ -83,7 +75,6 @@ items:
   example: []
   syntax:
     content: public ResourceManagerStringLocalizer(ResourceManager resourceManager, Assembly resourceAssembly, string baseName, IResourceNamesCache resourceNamesCache)
-    content.vb: Public Sub New(resourceManager As ResourceManager, resourceAssembly As Assembly, baseName As String, resourceNamesCache As IResourceNamesCache)
     parameters:
     - id: resourceManager
       type: System.Resources.ResourceManager
@@ -97,6 +88,7 @@ items:
     - id: resourceNamesCache
       type: Microsoft.Extensions.Localization.IResourceNamesCache
       description: Cache of the list of strings for a given resource assembly name.
+    content.vb: Public Sub New(resourceManager As ResourceManager, resourceAssembly As Assembly, baseName As String, resourceNamesCache As IResourceNamesCache)
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.#ctor*
   modifiers.csharp:
   - public
@@ -119,7 +111,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: .ctor
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 50
   assemblies:
   - Microsoft.Extensions.Localization
@@ -128,7 +120,6 @@ items:
   example: []
   syntax:
     content: public ResourceManagerStringLocalizer(ResourceManager resourceManager, AssemblyWrapper resourceAssemblyWrapper, string baseName, IResourceNamesCache resourceNamesCache)
-    content.vb: Public Sub New(resourceManager As ResourceManager, resourceAssemblyWrapper As AssemblyWrapper, baseName As String, resourceNamesCache As IResourceNamesCache)
     parameters:
     - id: resourceManager
       type: System.Resources.ResourceManager
@@ -138,6 +129,7 @@ items:
       type: System.String
     - id: resourceNamesCache
       type: Microsoft.Extensions.Localization.IResourceNamesCache
+    content.vb: Public Sub New(resourceManager As ResourceManager, resourceAssemblyWrapper As AssemblyWrapper, baseName As String, resourceNamesCache As IResourceNamesCache)
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.#ctor*
   modifiers.csharp:
   - public
@@ -160,7 +152,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: this[]
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 83
   assemblies:
   - Microsoft.Extensions.Localization
@@ -168,15 +160,13 @@ items:
   example: []
   syntax:
     content: public virtual LocalizedString this[string name] { get; }
-    content.vb: Public Overridable ReadOnly Property Item(name As String) As LocalizedString
     parameters:
     - id: name
       type: System.String
     return:
-      type: Microsoft.Extensions.Localization.LocalizedString
+      type: LocalizedString
+    content.vb: Public Overridable ReadOnly Property Item(name As String) As LocalizedString
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.Item*
-  implements:
-  - Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
   nameWithType.vb: ResourceManagerStringLocalizer.Item(String)
   modifiers.csharp:
   - public
@@ -205,7 +195,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: this[]
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 98
   assemblies:
   - Microsoft.Extensions.Localization
@@ -213,17 +203,15 @@ items:
   example: []
   syntax:
     content: public virtual LocalizedString this[string name, params object[] arguments] { get; }
-    content.vb: Public Overridable ReadOnly Property Item(name As String, ParamArray arguments As Object()) As LocalizedString
     parameters:
     - id: name
       type: System.String
     - id: arguments
       type: System.Object[]
     return:
-      type: Microsoft.Extensions.Localization.LocalizedString
+      type: LocalizedString
+    content.vb: Public Overridable ReadOnly Property Item(name As String, ParamArray arguments As Object()) As LocalizedString
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.Item*
-  implements:
-  - Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String,System.Object[])
   nameWithType.vb: ResourceManagerStringLocalizer.Item(String, Object())
   modifiers.csharp:
   - public
@@ -252,7 +240,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: WithCulture
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 118
   assemblies:
   - Microsoft.Extensions.Localization
@@ -261,17 +249,15 @@ items:
   example: []
   syntax:
     content: public IStringLocalizer WithCulture(CultureInfo culture)
-    content.vb: Public Function WithCulture(culture As CultureInfo) As IStringLocalizer
     parameters:
     - id: culture
       type: System.Globalization.CultureInfo
       description: The <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> to use.
     return:
-      type: Microsoft.Extensions.Localization.IStringLocalizer
+      type: IStringLocalizer
       description: A culture-specific <xref href="Microsoft.Extensions.Localization.ResourceManagerStringLocalizer" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function WithCulture(culture As CultureInfo) As IStringLocalizer
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.WithCulture*
-  implements:
-  - Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -293,7 +279,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: GetAllStrings
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 135
   assemblies:
   - Microsoft.Extensions.Localization
@@ -301,15 +287,13 @@ items:
   example: []
   syntax:
     content: public virtual IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures)
-    content.vb: Public Overridable Function GetAllStrings(includeParentCultures As Boolean) As IEnumerable(Of LocalizedString)
     parameters:
     - id: includeParentCultures
       type: System.Boolean
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.Extensions.Localization.LocalizedString}
+      type: System.Collections.Generic.IEnumerable{LocalizedString}
+    content.vb: Public Overridable Function GetAllStrings(includeParentCultures As Boolean) As IEnumerable(Of LocalizedString)
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.GetAllStrings*
-  implements:
-  - Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
   modifiers.csharp:
   - public
   - virtual
@@ -333,7 +317,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: GetAllStrings
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 144
   assemblies:
   - Microsoft.Extensions.Localization
@@ -342,7 +326,6 @@ items:
   example: []
   syntax:
     content: protected IEnumerable<LocalizedString> GetAllStrings(bool includeParentCultures, CultureInfo culture)
-    content.vb: Protected Function GetAllStrings(includeParentCultures As Boolean, culture As CultureInfo) As IEnumerable(Of LocalizedString)
     parameters:
     - id: includeParentCultures
       type: System.Boolean
@@ -351,8 +334,9 @@ items:
       type: System.Globalization.CultureInfo
       description: The <xref href="System.Globalization.CultureInfo" data-throw-if-not-resolved="false"></xref> to get strings for.
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.Extensions.Localization.LocalizedString}
+      type: System.Collections.Generic.IEnumerable{LocalizedString}
       description: The strings.
+    content.vb: Protected Function GetAllStrings(includeParentCultures As Boolean, culture As CultureInfo) As IEnumerable(Of LocalizedString)
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.GetAllStrings*
   modifiers.csharp:
   - protected
@@ -375,16 +359,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Localization.git
     id: GetStringSafely
-    path: src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
+    path: ../aspnet/Localization/src/Microsoft.Extensions.Localization/ResourceManagerStringLocalizer.cs
     startLine: 176
   assemblies:
   - Microsoft.Extensions.Localization
   namespace: Microsoft.Extensions.Localization
-  summary: "\nGets a resource string from the <xref href=\"Microsoft.Extensions.Localization.ResourceManagerStringLocalizer._resourceManager\" data-throw-if-not-resolved=\"false\"></xref> and returns <code>null</code> instead of\nthrowing exceptions if a match isn't found.\n"
+  summary: "\nGets a resource string from the <xref href=\"Microsoft.Extensions.Localization.ResourceManagerStringLocalizer._resourceManager\" data-throw-if-not-resolved=\"false\"></xref> and returns <code>null</code> instead of\nthrowing exceptions if a match isn&apos;t found.\n"
   example: []
   syntax:
     content: protected string GetStringSafely(string name, CultureInfo culture)
-    content.vb: Protected Function GetStringSafely(name As String, culture As CultureInfo) As String
     parameters:
     - id: name
       type: System.String
@@ -395,19 +378,13 @@ items:
     return:
       type: System.String
       description: The resource string, or <code>null</code> if none was found.
+    content.vb: Protected Function GetStringSafely(name As String, culture As CultureInfo) As String
   overload: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.GetStringSafely*
   modifiers.csharp:
   - protected
   modifiers.vb:
   - Protected
 references:
-- uid: Microsoft.Extensions.Localization.IStringLocalizer
-  commentId: T:Microsoft.Extensions.Localization.IStringLocalizer
-  parent: Microsoft.Extensions.Localization
-  isExternal: false
-  name: IStringLocalizer
-  nameWithType: IStringLocalizer
-  fullName: Microsoft.Extensions.Localization.IStringLocalizer
 - uid: System.Resources.ResourceManager
   commentId: T:System.Resources.ResourceManager
   parent: System.Resources
@@ -430,285 +407,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Resources
   commentId: N:System.Resources
   isExternal: false
@@ -780,125 +478,17 @@ references:
   name: Item
   nameWithType: ResourceManagerStringLocalizer.Item
   fullName: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.Item
-- uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
-  commentId: P:Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
-  parent: Microsoft.Extensions.Localization.IStringLocalizer
+- uid: LocalizedString
   isExternal: true
-  name: Item[String]
-  nameWithType: IStringLocalizer.Item[String]
-  fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item[System.String]
-  nameWithType.vb: IStringLocalizer.Item(String)
-  fullname.vb: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
-  name.vb: Item(String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
-    name: Item
-    nameWithType: IStringLocalizer.Item
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item
-  - name: '['
-    nameWithType: '['
-    fullName: '['
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ']'
-    nameWithType: ']'
-    fullName: ']'
-  spec.vb:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String)
-    name: Item
-    nameWithType: IStringLocalizer.Item
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Localization.LocalizedString
-  commentId: T:Microsoft.Extensions.Localization.LocalizedString
-  parent: Microsoft.Extensions.Localization
-  isExternal: false
   name: LocalizedString
   nameWithType: LocalizedString
-  fullName: Microsoft.Extensions.Localization.LocalizedString
-- uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String,System.Object[])
-  commentId: P:Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String,System.Object[])
-  parent: Microsoft.Extensions.Localization.IStringLocalizer
-  isExternal: true
-  name: Item[String, Object[]]
-  nameWithType: IStringLocalizer.Item[String, Object[]]
-  fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item[System.String, System.Object[]]
-  nameWithType.vb: IStringLocalizer.Item(String, Object())
-  fullname.vb: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String, System.Object())
-  name.vb: Item(String, Object())
-  spec.csharp:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String,System.Object[])
-    name: Item
-    nameWithType: IStringLocalizer.Item
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item
-  - name: '['
-    nameWithType: '['
-    fullName: '['
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: ']'
-    nameWithType: ']'
-    fullName: ']'
-  spec.vb:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.Item(System.String,System.Object[])
-    name: Item
-    nameWithType: IStringLocalizer.Item
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.Item
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: )
-    nameWithType: )
-    fullName: )
+  fullName: LocalizedString
 - uid: System.Object[]
   name: Object[]
   nameWithType: Object[]
   fullName: System.Object[]
   nameWithType.vb: Object()
-  fullname.vb: System.Object()
+  fullName.vb: System.Object()
   name.vb: Object()
   spec.csharp:
   - uid: System.Object
@@ -931,45 +521,11 @@ references:
   name: WithCulture
   nameWithType: ResourceManagerStringLocalizer.WithCulture
   fullName: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.WithCulture
-- uid: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
-  commentId: M:Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
-  parent: Microsoft.Extensions.Localization.IStringLocalizer
+- uid: IStringLocalizer
   isExternal: true
-  name: WithCulture(CultureInfo)
-  nameWithType: IStringLocalizer.WithCulture(CultureInfo)
-  fullName: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
-    name: WithCulture
-    nameWithType: IStringLocalizer.WithCulture
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Globalization.CultureInfo
-    name: CultureInfo
-    nameWithType: CultureInfo
-    fullName: System.Globalization.CultureInfo
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture(System.Globalization.CultureInfo)
-    name: WithCulture
-    nameWithType: IStringLocalizer.WithCulture
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.WithCulture
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Globalization.CultureInfo
-    name: CultureInfo
-    nameWithType: CultureInfo
-    fullName: System.Globalization.CultureInfo
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: IStringLocalizer
+  nameWithType: IStringLocalizer
+  fullName: IStringLocalizer
 - uid: System.Globalization
   commentId: N:System.Globalization
   isExternal: false
@@ -982,45 +538,6 @@ references:
   name: GetAllStrings
   nameWithType: ResourceManagerStringLocalizer.GetAllStrings
   fullName: Microsoft.Extensions.Localization.ResourceManagerStringLocalizer.GetAllStrings
-- uid: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
-  commentId: M:Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
-  parent: Microsoft.Extensions.Localization.IStringLocalizer
-  isExternal: true
-  name: GetAllStrings(Boolean)
-  nameWithType: IStringLocalizer.GetAllStrings(Boolean)
-  fullName: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
-    name: GetAllStrings
-    nameWithType: IStringLocalizer.GetAllStrings
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings(System.Boolean)
-    name: GetAllStrings
-    nameWithType: IStringLocalizer.GetAllStrings
-    fullName: Microsoft.Extensions.Localization.IStringLocalizer.GetAllStrings
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Boolean
-    name: Boolean
-    nameWithType: Boolean
-    fullName: System.Boolean
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -1028,15 +545,15 @@ references:
   name: Boolean
   nameWithType: Boolean
   fullName: System.Boolean
-- uid: System.Collections.Generic.IEnumerable{Microsoft.Extensions.Localization.LocalizedString}
-  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.Extensions.Localization.LocalizedString}
+- uid: System.Collections.Generic.IEnumerable{LocalizedString}
+  commentId: T:System.Collections.Generic.IEnumerable{LocalizedString}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
   name: IEnumerable<LocalizedString>
   nameWithType: IEnumerable<LocalizedString>
-  fullName: System.Collections.Generic.IEnumerable<Microsoft.Extensions.Localization.LocalizedString>
+  fullName: System.Collections.Generic.IEnumerable<LocalizedString>
   nameWithType.vb: IEnumerable(Of LocalizedString)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of Microsoft.Extensions.Localization.LocalizedString)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of LocalizedString)
   name.vb: IEnumerable(Of LocalizedString)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1047,10 +564,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.Extensions.Localization.LocalizedString
+  - uid: LocalizedString
     name: LocalizedString
     nameWithType: LocalizedString
-    fullName: Microsoft.Extensions.Localization.LocalizedString
+    fullName: LocalizedString
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1063,10 +581,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.Extensions.Localization.LocalizedString
+  - uid: LocalizedString
     name: LocalizedString
     nameWithType: LocalizedString
-    fullName: Microsoft.Extensions.Localization.LocalizedString
+    fullName: LocalizedString
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -1077,7 +596,7 @@ references:
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
   nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
   name.vb: IEnumerable(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1

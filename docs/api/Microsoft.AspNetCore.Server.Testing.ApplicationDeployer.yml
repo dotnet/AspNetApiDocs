@@ -5,7 +5,7 @@ items:
   id: ApplicationDeployer
   parent: Microsoft.AspNetCore.Server.Testing
   children:
-  - Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,Microsoft.Extensions.Logging.ILogger)
+  - Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,ILogger)
   - Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.AddEnvironmentVariablesToProcess(System.Diagnostics.ProcessStartInfo)
   - Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.CleanPublishedOutput
   - Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.Deploy
@@ -35,7 +35,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: ApplicationDeployer
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 16
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -49,6 +49,11 @@ items:
           Implements IApplicationDeployer, IDisposable
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.AspNetCore.Server.Testing.IISDeployer
+  - Microsoft.AspNetCore.Server.Testing.IISExpressDeployer
+  - Microsoft.AspNetCore.Server.Testing.RemoteWindowsDeployer
+  - Microsoft.AspNetCore.Server.Testing.SelfHostDeployer
   implements:
   - Microsoft.AspNetCore.Server.Testing.IApplicationDeployer
   - System.IDisposable
@@ -85,16 +90,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: DotnetCommandName
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: public static readonly string DotnetCommandName
-    content.vb: Public Shared ReadOnly DotnetCommandName As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly DotnetCommandName As String
   modifiers.csharp:
   - public
   - static
@@ -120,16 +125,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: DotnetArgumentSeparator
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 22
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: public static readonly string DotnetArgumentSeparator
-    content.vb: Public Shared ReadOnly DotnetArgumentSeparator As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly DotnetArgumentSeparator As String
   modifiers.csharp:
   - public
   - static
@@ -138,16 +143,16 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,Microsoft.Extensions.Logging.ILogger)
-  commentId: M:Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,Microsoft.Extensions.Logging.ILogger)
-  id: '#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,Microsoft.Extensions.Logging.ILogger)'
+- uid: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,ILogger)
+  commentId: M:Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,ILogger)
+  id: '#ctor(Microsoft.AspNetCore.Server.Testing.DeploymentParameters,ILogger)'
   parent: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer
   langs:
   - csharp
   - vb
   name: ApplicationDeployer(DeploymentParameters, ILogger)
   nameWithType: ApplicationDeployer.ApplicationDeployer(DeploymentParameters, ILogger)
-  fullName: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.ApplicationDeployer(Microsoft.AspNetCore.Server.Testing.DeploymentParameters, Microsoft.Extensions.Logging.ILogger)
+  fullName: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.ApplicationDeployer(Microsoft.AspNetCore.Server.Testing.DeploymentParameters, ILogger)
   type: Constructor
   source:
     remote:
@@ -155,19 +160,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 28
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: public ApplicationDeployer(DeploymentParameters deploymentParameters, ILogger logger)
-    content.vb: Public Sub New(deploymentParameters As DeploymentParameters, logger As ILogger)
     parameters:
     - id: deploymentParameters
       type: Microsoft.AspNetCore.Server.Testing.DeploymentParameters
     - id: logger
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
+    content.vb: Public Sub New(deploymentParameters As DeploymentParameters, logger As ILogger)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.#ctor*
   modifiers.csharp:
   - public
@@ -190,17 +195,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: DeploymentParameters
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 34
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected DeploymentParameters DeploymentParameters { get; }
-    content.vb: Protected ReadOnly Property DeploymentParameters As DeploymentParameters
     parameters: []
     return:
       type: Microsoft.AspNetCore.Server.Testing.DeploymentParameters
+    content.vb: Protected ReadOnly Property DeploymentParameters As DeploymentParameters
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.DeploymentParameters*
   modifiers.csharp:
   - protected
@@ -225,17 +230,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Logger
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 36
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected ILogger Logger { get; }
-    content.vb: Protected ReadOnly Property Logger As ILogger
     parameters: []
     return:
-      type: Microsoft.Extensions.Logging.ILogger
+      type: ILogger
+    content.vb: Protected ReadOnly Property Logger As ILogger
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.Logger*
   modifiers.csharp:
   - protected
@@ -260,16 +265,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Deploy
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 38
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: public abstract DeploymentResult Deploy()
-    content.vb: Public MustOverride Function Deploy As DeploymentResult
     return:
       type: Microsoft.AspNetCore.Server.Testing.DeploymentResult
+    content.vb: Public MustOverride Function Deploy As DeploymentResult
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.Deploy*
   implements:
   - Microsoft.AspNetCore.Server.Testing.IApplicationDeployer.Deploy
@@ -296,17 +301,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: DotnetPublish
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected void DotnetPublish(string publishRoot = null)
-    content.vb: Protected Sub DotnetPublish(publishRoot As String = Nothing)
     parameters:
     - id: publishRoot
       type: System.String
+    content.vb: Protected Sub DotnetPublish(publishRoot As String = Nothing)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.DotnetPublish*
   modifiers.csharp:
   - protected
@@ -329,7 +334,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: CleanPublishedOutput
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 81
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -359,17 +364,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: ShutDownIfAnyHostProcess
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 94
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected void ShutDownIfAnyHostProcess(Process hostProcess)
-    content.vb: Protected Sub ShutDownIfAnyHostProcess(hostProcess As Process)
     parameters:
     - id: hostProcess
       type: System.Diagnostics.Process
+    content.vb: Protected Sub ShutDownIfAnyHostProcess(hostProcess As Process)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.ShutDownIfAnyHostProcess*
   modifiers.csharp:
   - protected
@@ -392,17 +397,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: AddEnvironmentVariablesToProcess
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 115
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected void AddEnvironmentVariablesToProcess(ProcessStartInfo startInfo)
-    content.vb: Protected Sub AddEnvironmentVariablesToProcess(startInfo As ProcessStartInfo)
     parameters:
     - id: startInfo
       type: System.Diagnostics.ProcessStartInfo
+    content.vb: Protected Sub AddEnvironmentVariablesToProcess(startInfo As ProcessStartInfo)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.AddEnvironmentVariablesToProcess*
   modifiers.csharp:
   - protected
@@ -425,14 +430,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: SetEnvironmentVariable
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 133
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected void SetEnvironmentVariable(StringDictionary environment, string name, string value)
-    content.vb: Protected Sub SetEnvironmentVariable(environment As StringDictionary, name As String, value As String)
     parameters:
     - id: environment
       type: System.Collections.Specialized.StringDictionary
@@ -440,6 +444,7 @@ items:
       type: System.String
     - id: value
       type: System.String
+    content.vb: Protected Sub SetEnvironmentVariable(environment As StringDictionary, name As String, value As String)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.SetEnvironmentVariable*
   modifiers.csharp:
   - protected
@@ -462,7 +467,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: InvokeUserApplicationCleanup
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 151
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -492,17 +497,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: TriggerHostShutdown
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 167
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected void TriggerHostShutdown(CancellationTokenSource hostShutdownSource)
-    content.vb: Protected Sub TriggerHostShutdown(hostShutdownSource As CancellationTokenSource)
     parameters:
     - id: hostShutdownSource
       type: System.Threading.CancellationTokenSource
+    content.vb: Protected Sub TriggerHostShutdown(hostShutdownSource As CancellationTokenSource)
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.TriggerHostShutdown*
   modifiers.csharp:
   - protected
@@ -525,7 +530,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: StartTimer
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 180
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -555,7 +560,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: StopTimer
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 186
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -585,7 +590,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Dispose
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 192
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
@@ -619,16 +624,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: GetOSPrefix
-    path: src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Server.Testing/Deployers/ApplicationDeployer.cs
     startLine: 194
   assemblies:
   - Microsoft.AspNetCore.Server.Testing
   namespace: Microsoft.AspNetCore.Server.Testing
   syntax:
     content: protected static string GetOSPrefix()
-    content.vb: Protected Shared Function GetOSPrefix As String
     return:
       type: System.String
+    content.vb: Protected Shared Function GetOSPrefix As String
   overload: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.GetOSPrefix*
   modifiers.csharp:
   - protected
@@ -969,19 +974,11 @@ references:
   name: DeploymentParameters
   nameWithType: DeploymentParameters
   fullName: Microsoft.AspNetCore.Server.Testing.DeploymentParameters
-- uid: Microsoft.Extensions.Logging.ILogger
-  commentId: T:Microsoft.Extensions.Logging.ILogger
-  parent: Microsoft.Extensions.Logging
-  isExternal: false
+- uid: ILogger
+  isExternal: true
   name: ILogger
   nameWithType: ILogger
-  fullName: Microsoft.Extensions.Logging.ILogger
-- uid: Microsoft.Extensions.Logging
-  commentId: N:Microsoft.Extensions.Logging
-  isExternal: false
-  name: Microsoft.Extensions.Logging
-  nameWithType: Microsoft.Extensions.Logging
-  fullName: Microsoft.Extensions.Logging
+  fullName: ILogger
 - uid: Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.DeploymentParameters*
   commentId: Overload:Microsoft.AspNetCore.Server.Testing.ApplicationDeployer.DeploymentParameters
   isExternal: false

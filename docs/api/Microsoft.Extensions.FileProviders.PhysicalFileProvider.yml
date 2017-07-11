@@ -24,7 +24,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: PhysicalFileProvider
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 15
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -35,20 +35,12 @@ items:
     content: 'public class PhysicalFileProvider : IFileProvider, IDisposable'
     content.vb: >-
       Public Class PhysicalFileProvider
-          Implements IFileProvider, IDisposable
+          Inherits IFileProvider
+          Implements IDisposable
   inheritance:
   - System.Object
   implements:
-  - Microsoft.Extensions.FileProviders.IFileProvider
   - System.IDisposable
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -72,7 +64,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: .ctor
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 27
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -81,11 +73,11 @@ items:
   example: []
   syntax:
     content: public PhysicalFileProvider(string root)
-    content.vb: Public Sub New(root As String)
     parameters:
     - id: root
       type: System.String
       description: The root directory. This should be an absolute path.
+    content.vb: Public Sub New(root As String)
   overload: Microsoft.Extensions.FileProviders.PhysicalFileProvider.#ctor*
   modifiers.csharp:
   - public
@@ -108,7 +100,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Dispose
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 59
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -140,7 +132,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Root
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 67
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -149,10 +141,10 @@ items:
   example: []
   syntax:
     content: public string Root { get; }
-    content.vb: Public ReadOnly Property Root As String
     parameters: []
     return:
       type: System.String
+    content.vb: Public ReadOnly Property Root As String
   overload: Microsoft.Extensions.FileProviders.PhysicalFileProvider.Root*
   modifiers.csharp:
   - public
@@ -177,7 +169,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: GetFileInfo
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 140
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -186,17 +178,15 @@ items:
   example: []
   syntax:
     content: public IFileInfo GetFileInfo(string subpath)
-    content.vb: Public Function GetFileInfo(subpath As String) As IFileInfo
     parameters:
     - id: subpath
       type: System.String
       description: A path under the root directory
     return:
-      type: Microsoft.Extensions.FileProviders.IFileInfo
+      type: IFileInfo
       description: 'The file information. Caller must check Exists property. '
+    content.vb: Public Function GetFileInfo(subpath As String) As IFileInfo
   overload: Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetFileInfo*
-  implements:
-  - Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -218,7 +208,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: GetDirectoryContents
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 179
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
@@ -227,17 +217,15 @@ items:
   example: []
   syntax:
     content: public IDirectoryContents GetDirectoryContents(string subpath)
-    content.vb: Public Function GetDirectoryContents(subpath As String) As IDirectoryContents
     parameters:
     - id: subpath
       type: System.String
       description: A path under the root directory
     return:
-      type: Microsoft.Extensions.FileProviders.IDirectoryContents
+      type: IDirectoryContents
       description: Contents of the directory. Caller must check Exists property.
+    content.vb: Public Function GetDirectoryContents(subpath As String) As IDirectoryContents
   overload: Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetDirectoryContents*
-  implements:
-  - Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -259,22 +247,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Watch
-    path: src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileProviders.Physical/PhysicalFileProvider.cs
     startLine: 238
   assemblies:
   - Microsoft.Extensions.FileProviders.Physical
   namespace: Microsoft.Extensions.FileProviders
   syntax:
     content: public IChangeToken Watch(string filter)
-    content.vb: Public Function Watch(filter As String) As IChangeToken
     parameters:
     - id: filter
       type: System.String
     return:
-      type: Microsoft.Extensions.Primitives.IChangeToken
+      type: IChangeToken
+    content.vb: Public Function Watch(filter As String) As IChangeToken
   overload: Microsoft.Extensions.FileProviders.PhysicalFileProvider.Watch*
-  implements:
-  - Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -293,13 +279,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.Extensions.FileProviders.IFileProvider
-  commentId: T:Microsoft.Extensions.FileProviders.IFileProvider
-  parent: Microsoft.Extensions.FileProviders
-  isExternal: false
-  name: IFileProvider
-  nameWithType: IFileProvider
-  fullName: Microsoft.Extensions.FileProviders.IFileProvider
 - uid: System.IDisposable
   commentId: T:System.IDisposable
   parent: System
@@ -307,285 +286,6 @@ references:
   name: IDisposable
   nameWithType: IDisposable
   fullName: System.IDisposable
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -654,160 +354,31 @@ references:
   name: GetFileInfo
   nameWithType: PhysicalFileProvider.GetFileInfo
   fullName: Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetFileInfo
-- uid: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
-  commentId: M:Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
-  parent: Microsoft.Extensions.FileProviders.IFileProvider
+- uid: IFileInfo
   isExternal: true
-  name: GetFileInfo(String)
-  nameWithType: IFileProvider.GetFileInfo(String)
-  fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
-    name: GetFileInfo
-    nameWithType: IFileProvider.GetFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo(System.String)
-    name: GetFileInfo
-    nameWithType: IFileProvider.GetFileInfo
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetFileInfo
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.FileProviders.IFileInfo
-  commentId: T:Microsoft.Extensions.FileProviders.IFileInfo
-  parent: Microsoft.Extensions.FileProviders
-  isExternal: false
   name: IFileInfo
   nameWithType: IFileInfo
-  fullName: Microsoft.Extensions.FileProviders.IFileInfo
+  fullName: IFileInfo
 - uid: Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetDirectoryContents*
   commentId: Overload:Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetDirectoryContents
   isExternal: false
   name: GetDirectoryContents
   nameWithType: PhysicalFileProvider.GetDirectoryContents
   fullName: Microsoft.Extensions.FileProviders.PhysicalFileProvider.GetDirectoryContents
-- uid: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
-  commentId: M:Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
-  parent: Microsoft.Extensions.FileProviders.IFileProvider
+- uid: IDirectoryContents
   isExternal: true
-  name: GetDirectoryContents(String)
-  nameWithType: IFileProvider.GetDirectoryContents(String)
-  fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
-    name: GetDirectoryContents
-    nameWithType: IFileProvider.GetDirectoryContents
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents(System.String)
-    name: GetDirectoryContents
-    nameWithType: IFileProvider.GetDirectoryContents
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.GetDirectoryContents
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.FileProviders.IDirectoryContents
-  commentId: T:Microsoft.Extensions.FileProviders.IDirectoryContents
-  parent: Microsoft.Extensions.FileProviders
-  isExternal: false
   name: IDirectoryContents
   nameWithType: IDirectoryContents
-  fullName: Microsoft.Extensions.FileProviders.IDirectoryContents
+  fullName: IDirectoryContents
 - uid: Microsoft.Extensions.FileProviders.PhysicalFileProvider.Watch*
   commentId: Overload:Microsoft.Extensions.FileProviders.PhysicalFileProvider.Watch
   isExternal: false
   name: Watch
   nameWithType: PhysicalFileProvider.Watch
   fullName: Microsoft.Extensions.FileProviders.PhysicalFileProvider.Watch
-- uid: Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
-  commentId: M:Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
-  parent: Microsoft.Extensions.FileProviders.IFileProvider
+- uid: IChangeToken
   isExternal: true
-  name: Watch(String)
-  nameWithType: IFileProvider.Watch(String)
-  fullName: Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
-    name: Watch
-    nameWithType: IFileProvider.Watch
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.Watch
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.FileProviders.IFileProvider.Watch(System.String)
-    name: Watch
-    nameWithType: IFileProvider.Watch
-    fullName: Microsoft.Extensions.FileProviders.IFileProvider.Watch
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Primitives.IChangeToken
-  commentId: T:Microsoft.Extensions.Primitives.IChangeToken
-  parent: Microsoft.Extensions.Primitives
-  isExternal: false
   name: IChangeToken
   nameWithType: IChangeToken
-  fullName: Microsoft.Extensions.Primitives.IChangeToken
-- uid: Microsoft.Extensions.Primitives
-  commentId: N:Microsoft.Extensions.Primitives
-  isExternal: false
-  name: Microsoft.Extensions.Primitives
-  nameWithType: Microsoft.Extensions.Primitives
-  fullName: Microsoft.Extensions.Primitives
+  fullName: IChangeToken
 shouldSkipMarkup: true

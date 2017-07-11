@@ -26,20 +26,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: PatternContext
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 9
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: 'public abstract class PatternContext<TFrame> : IPatternContext'
+    typeParameters:
+    - id: TFrame
     content.vb: >-
       Public MustInherit Class PatternContext(Of TFrame)
           Implements IPatternContext
-    typeParameters:
-    - id: TFrame
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextLinear
+  - Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContextRagged
   implements:
   - Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
   inheritedMembers:
@@ -78,16 +81,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Frame
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 12
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: protected TFrame Frame
-    content.vb: Protected Frame As TFrame
     return:
       type: '{TFrame}'
+    content.vb: Protected Frame As TFrame
   nameWithType.vb: PatternContext(Of TFrame).Frame
   modifiers.csharp:
   - protected
@@ -111,17 +114,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Declare
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 14
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: public virtual void Declare(Action<IPathSegment, bool> declare)
-    content.vb: Public Overridable Sub Declare(declare As Action(Of IPathSegment, Boolean))
     parameters:
     - id: declare
       type: System.Action{Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment,System.Boolean}
+    content.vb: Public Overridable Sub Declare(declare As Action(Of IPathSegment, Boolean))
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.Declare*
   implements:
   - Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action{Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment,System.Boolean})
@@ -151,19 +154,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Test
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 16
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: public abstract PatternTestResult Test(FileInfoBase file)
-    content.vb: Public MustOverride Function Test(file As FileInfoBase) As PatternTestResult
     parameters:
     - id: file
       type: Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase
     return:
       type: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternTestResult
+    content.vb: Public MustOverride Function Test(file As FileInfoBase) As PatternTestResult
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.Test*
   implements:
   - Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Test(Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase)
@@ -192,19 +195,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: Test
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 18
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: public abstract bool Test(DirectoryInfoBase directory)
-    content.vb: Public MustOverride Function Test(directory As DirectoryInfoBase) As Boolean
     parameters:
     - id: directory
       type: Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase
     return:
       type: System.Boolean
+    content.vb: Public MustOverride Function Test(directory As DirectoryInfoBase) As Boolean
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.Test*
   implements:
   - Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Test(Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase)
@@ -233,17 +236,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: PushDirectory
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 20
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: public abstract void PushDirectory(DirectoryInfoBase directory)
-    content.vb: Public MustOverride Sub PushDirectory(directory As DirectoryInfoBase)
     parameters:
     - id: directory
       type: Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase
+    content.vb: Public MustOverride Sub PushDirectory(directory As DirectoryInfoBase)
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.PushDirectory*
   implements:
   - Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.PushDirectory(Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase)
@@ -272,7 +275,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: PopDirectory
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 22
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
@@ -308,17 +311,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: PushDataFrame
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 27
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: protected void PushDataFrame(TFrame frame)
-    content.vb: Protected Sub PushDataFrame(frame As TFrame)
     parameters:
     - id: frame
       type: '{TFrame}'
+    content.vb: Protected Sub PushDataFrame(frame As TFrame)
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.PushDataFrame*
   nameWithType.vb: PatternContext(Of TFrame).PushDataFrame(TFrame)
   modifiers.csharp:
@@ -343,16 +346,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/FileSystem.git
     id: IsStackEmpty
-    path: src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
+    path: ../aspnet/FileSystem/src/Microsoft.Extensions.FileSystemGlobbing/Internal/PatternContexts/PatternContext.cs
     startLine: 33
   assemblies:
   - Microsoft.Extensions.FileSystemGlobbing
   namespace: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts
   syntax:
     content: protected bool IsStackEmpty()
-    content.vb: Protected Function IsStackEmpty As Boolean
     return:
       type: System.Boolean
+    content.vb: Protected Function IsStackEmpty As Boolean
   overload: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.IsStackEmpty*
   nameWithType.vb: PatternContext(Of TFrame).IsStackEmpty()
   modifiers.csharp:
@@ -690,7 +693,7 @@ references:
   nameWithType: PatternContext<TFrame>.Declare
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.Declare
   nameWithType.vb: PatternContext(Of TFrame).Declare
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).Declare
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).Declare
 - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action{Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment,System.Boolean})
   commentId: M:Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action{Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment,System.Boolean})
   parent: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
@@ -699,7 +702,7 @@ references:
   nameWithType: IPatternContext.Declare(Action<IPathSegment, Boolean>)
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action<Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean>)
   nameWithType.vb: IPatternContext.Declare(Action(Of IPathSegment, Boolean))
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action(Of Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean))
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action(Of Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean))
   name.vb: Declare(Action(Of IPathSegment, Boolean))
   spec.csharp:
   - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Declare(System.Action{Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment,System.Boolean})
@@ -777,7 +780,7 @@ references:
   nameWithType: Action<IPathSegment, Boolean>
   fullName: System.Action<Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean>
   nameWithType.vb: Action(Of IPathSegment, Boolean)
-  fullname.vb: System.Action(Of Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean)
+  fullName.vb: System.Action(Of Microsoft.Extensions.FileSystemGlobbing.Internal.IPathSegment, System.Boolean)
   name.vb: Action(Of IPathSegment, Boolean)
   spec.csharp:
   - uid: System.Action`2
@@ -834,7 +837,7 @@ references:
   nameWithType: Action<T1, T2>
   fullName: System.Action<T1, T2>
   nameWithType.vb: Action(Of T1, T2)
-  fullname.vb: System.Action(Of T1, T2)
+  fullName.vb: System.Action(Of T1, T2)
   name.vb: Action(Of T1, T2)
   spec.csharp:
   - uid: System.Action`2
@@ -885,7 +888,7 @@ references:
   nameWithType: PatternContext<TFrame>.Test
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.Test
   nameWithType.vb: PatternContext(Of TFrame).Test
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).Test
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).Test
 - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Test(Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase)
   commentId: M:Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.Test(Microsoft.Extensions.FileSystemGlobbing.Abstractions.FileInfoBase)
   parent: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
@@ -1001,7 +1004,7 @@ references:
   nameWithType: PatternContext<TFrame>.PushDirectory
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.PushDirectory
   nameWithType.vb: PatternContext(Of TFrame).PushDirectory
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PushDirectory
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PushDirectory
 - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.PushDirectory(Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase)
   commentId: M:Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.PushDirectory(Microsoft.Extensions.FileSystemGlobbing.Abstractions.DirectoryInfoBase)
   parent: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
@@ -1046,7 +1049,7 @@ references:
   nameWithType: PatternContext<TFrame>.PopDirectory
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.PopDirectory
   nameWithType.vb: PatternContext(Of TFrame).PopDirectory
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PopDirectory
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PopDirectory
 - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.PopDirectory
   commentId: M:Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext.PopDirectory
   parent: Microsoft.Extensions.FileSystemGlobbing.Internal.IPatternContext
@@ -1083,7 +1086,7 @@ references:
   nameWithType: PatternContext<TFrame>.PushDataFrame
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.PushDataFrame
   nameWithType.vb: PatternContext(Of TFrame).PushDataFrame
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PushDataFrame
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).PushDataFrame
 - uid: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.IsStackEmpty*
   commentId: Overload:Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext`1.IsStackEmpty
   isExternal: false
@@ -1091,5 +1094,5 @@ references:
   nameWithType: PatternContext<TFrame>.IsStackEmpty
   fullName: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext<TFrame>.IsStackEmpty
   nameWithType.vb: PatternContext(Of TFrame).IsStackEmpty
-  fullname.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).IsStackEmpty
+  fullName.vb: Microsoft.Extensions.FileSystemGlobbing.Internal.PatternContexts.PatternContext(Of TFrame).IsStackEmpty
 shouldSkipMarkup: true

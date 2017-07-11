@@ -7,9 +7,9 @@ items:
   children:
   - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.#ctor(Microsoft.AspNetCore.Antiforgery.Internal.IClaimUidExtractor,Microsoft.AspNetCore.Antiforgery.IAntiforgeryAdditionalDataProvider)
   - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateCookieToken
-  - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.IsCookieTokenValid(Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
-  - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  - Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
   langs:
   - csharp
   - vb
@@ -23,28 +23,21 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: DefaultAntiforgeryTokenGenerator
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 11
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
   syntax:
-    content: 'public class DefaultAntiforgeryTokenGenerator : IAntiforgeryTokenGenerator'
+    content: 'public class DefaultAntiforgeryTokenGenerator : object, IAntiforgeryTokenGenerator'
     content.vb: >-
       Public Class DefaultAntiforgeryTokenGenerator
+          Inherits Object
           Implements IAntiforgeryTokenGenerator
   inheritance:
   - System.Object
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
@@ -68,19 +61,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 16
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
   syntax:
     content: public DefaultAntiforgeryTokenGenerator(IClaimUidExtractor claimUidExtractor, IAntiforgeryAdditionalDataProvider additionalDataProvider)
-    content.vb: Public Sub New(claimUidExtractor As IClaimUidExtractor, additionalDataProvider As IAntiforgeryAdditionalDataProvider)
     parameters:
     - id: claimUidExtractor
       type: Microsoft.AspNetCore.Antiforgery.Internal.IClaimUidExtractor
     - id: additionalDataProvider
       type: Microsoft.AspNetCore.Antiforgery.IAntiforgeryAdditionalDataProvider
+    content.vb: Public Sub New(claimUidExtractor As IClaimUidExtractor, additionalDataProvider As IAntiforgeryAdditionalDataProvider)
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.#ctor*
   modifiers.csharp:
   - public
@@ -103,17 +96,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: GenerateCookieToken
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 25
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates a new random cookie token.\n"
   example: []
   syntax:
     content: public AntiforgeryToken GenerateCookieToken()
-    content.vb: Public Function GenerateCookieToken As AntiforgeryToken
     return:
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: An <xref href="Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GenerateCookieToken As AntiforgeryToken
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateCookieToken*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateCookieToken
@@ -121,16 +116,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
-  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
-  id: GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+- uid: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  id: GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   parent: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator
   langs:
   - csharp
   - vb
   name: GenerateRequestToken(HttpContext, AntiforgeryToken)
   nameWithType: DefaultAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext, AntiforgeryToken)
-  fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   type: Method
   source:
     remote:
@@ -138,25 +133,29 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: GenerateRequestToken
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 35
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nGenerates a request token corresponding to <span class=\"paramref\">cookieToken</span>.\n"
   example: []
   syntax:
     content: public AntiforgeryToken GenerateRequestToken(HttpContext httpContext, AntiforgeryToken cookieToken)
-    content.vb: Public Function GenerateRequestToken(httpContext As HttpContext, cookieToken As AntiforgeryToken) As AntiforgeryToken
     parameters:
     - id: httpContext
-      type: Microsoft.AspNetCore.Http.HttpContext
+      type: HttpContext
+      description: The <see cref="!:HttpContext"></see> associated with the current request.
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A valid cookie token.
     return:
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: An <xref href="Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GenerateRequestToken(httpContext As HttpContext, cookieToken As AntiforgeryToken) As AntiforgeryToken
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken*
   implements:
-  - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -178,20 +177,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: IsCookieTokenValid
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 103
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nAttempts to validate a cookie token.\n"
   example: []
   syntax:
     content: public bool IsCookieTokenValid(AntiforgeryToken cookieToken)
-    content.vb: Public Function IsCookieTokenValid(cookieToken As AntiforgeryToken) As Boolean
     parameters:
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A valid cookie token.
     return:
       type: System.Boolean
+      description: <code>true</code> if the cookie token is valid, otherwise <code>false</code>.
+    content.vb: Public Function IsCookieTokenValid(cookieToken As AntiforgeryToken) As Boolean
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.IsCookieTokenValid*
   implements:
   - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.IsCookieTokenValid(Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
@@ -199,16 +201,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
-  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
-  id: TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+- uid: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  id: TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
   parent: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator
   langs:
   - csharp
   - vb
   name: TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, out String)
   nameWithType: DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, out String)
-  fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, out System.String)
+  fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, out System.String)
   type: Method
   source:
     remote:
@@ -216,35 +218,41 @@ items:
       branch: master
       repo: https://github.com/aspnet/Antiforgery.git
     id: TryValidateTokenSet
-    path: src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
+    path: ../aspnet/Antiforgery/src/Microsoft.AspNetCore.Antiforgery/Internal/DefaultAntiforgeryTokenGenerator.cs
     startLine: 109
   assemblies:
   - Microsoft.AspNetCore.Antiforgery
   namespace: Microsoft.AspNetCore.Antiforgery.Internal
+  summary: "\nAttempts to validate a cookie and request token set for the given <span class=\"paramref\">httpContext</span>.\n"
   example: []
   syntax:
     content: public bool TryValidateTokenSet(HttpContext httpContext, AntiforgeryToken cookieToken, AntiforgeryToken requestToken, out string message)
-    content.vb: Public Function TryValidateTokenSet(httpContext As HttpContext, cookieToken As AntiforgeryToken, requestToken As AntiforgeryToken, ByRef message As String) As Boolean
     parameters:
     - id: httpContext
-      type: Microsoft.AspNetCore.Http.HttpContext
+      type: HttpContext
+      description: The <see cref="!:HttpContext"></see> associated with the current request.
     - id: cookieToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A cookie token.
     - id: requestToken
       type: Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken
+      description: A request token.
     - id: message
       type: System.String
+      description: "\nWill be set to the validation message if the tokens are invalid, otherwise <code>null</code>.\n"
     return:
       type: System.Boolean
+      description: <code>true</code> if the tokens are valid, otherwise <code>false</code>.
+    content.vb: Public Function TryValidateTokenSet(httpContext As HttpContext, cookieToken As AntiforgeryToken, requestToken As AntiforgeryToken, ByRef message As String) As Boolean
   overload: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet*
   implements:
-  - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  - Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
   nameWithType.vb: DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, ByRef String)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, ByRef System.String)
+  fullName.vb: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, ByRef System.String)
   name.vb: TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, ByRef String)
 references:
 - uid: Microsoft.AspNetCore.Antiforgery.Internal
@@ -267,285 +275,6 @@ references:
   name: IAntiforgeryTokenGenerator
   nameWithType: IAntiforgeryTokenGenerator
   fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -626,25 +355,25 @@ references:
   name: GenerateRequestToken
   nameWithType: DefaultAntiforgeryTokenGenerator.GenerateRequestToken
   fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.GenerateRequestToken
-- uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
-  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+- uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   parent: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator
   isExternal: true
   name: GenerateRequestToken(HttpContext, AntiforgeryToken)
   nameWithType: IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext, AntiforgeryToken)
-  fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
     name: GenerateRequestToken
     nameWithType: IAntiforgeryTokenGenerator.GenerateRequestToken
     fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -657,17 +386,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
+  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken)
     name: GenerateRequestToken
     nameWithType: IAntiforgeryTokenGenerator.GenerateRequestToken
     fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.GenerateRequestToken
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -679,19 +408,11 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Http.HttpContext
-  commentId: T:Microsoft.AspNetCore.Http.HttpContext
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: HttpContext
+  isExternal: true
   name: HttpContext
   nameWithType: HttpContext
-  fullName: Microsoft.AspNetCore.Http.HttpContext
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
+  fullName: HttpContext
 - uid: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.IsCookieTokenValid*
   commentId: Overload:Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.IsCookieTokenValid
   isExternal: false
@@ -748,25 +469,25 @@ references:
   name: TryValidateTokenSet
   nameWithType: DefaultAntiforgeryTokenGenerator.TryValidateTokenSet
   fullName: Microsoft.AspNetCore.Antiforgery.Internal.DefaultAntiforgeryTokenGenerator.TryValidateTokenSet
-- uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
-  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+- uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  commentId: M:Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
   parent: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator
   isExternal: true
   name: TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, String)
   nameWithType: IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, AntiforgeryToken, AntiforgeryToken, String)
-  fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, System.String)
+  fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken, System.String)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
     name: TryValidateTokenSet
     nameWithType: IAntiforgeryTokenGenerator.TryValidateTokenSet
     fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -794,17 +515,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
+  - uid: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet(HttpContext,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,Microsoft.AspNetCore.Antiforgery.Internal.AntiforgeryToken,System.String@)
     name: TryValidateTokenSet
     nameWithType: IAntiforgeryTokenGenerator.TryValidateTokenSet
     fullName: Microsoft.AspNetCore.Antiforgery.Internal.IAntiforgeryTokenGenerator.TryValidateTokenSet
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Http.HttpContext
+  - uid: HttpContext
     name: HttpContext
     nameWithType: HttpContext
-    fullName: Microsoft.AspNetCore.Http.HttpContext
+    fullName: HttpContext
     isExternal: true
   - name: ', '
     nameWithType: ', '

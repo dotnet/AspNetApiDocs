@@ -24,7 +24,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: TextOutputFormatter
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -40,6 +40,11 @@ items:
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.Formatters.JsonOutputFormatter
+  - Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter
+  - Microsoft.AspNetCore.Mvc.Formatters.XmlDataContractSerializerOutputFormatter
+  - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter
   implements:
   - Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
   - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseTypeMetadataProvider
@@ -81,7 +86,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 25
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -113,7 +118,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: SupportedEncodings
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 35
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -122,10 +127,10 @@ items:
   example: []
   syntax:
     content: public IList<Encoding> SupportedEncodings { get; }
-    content.vb: Public ReadOnly Property SupportedEncodings As IList(Of Encoding)
     parameters: []
     return:
       type: System.Collections.Generic.IList{System.Text.Encoding}
+    content.vb: Public ReadOnly Property SupportedEncodings As IList(Of Encoding)
   overload: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SupportedEncodings*
   modifiers.csharp:
   - public
@@ -150,7 +155,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: SelectCharacterEncoding
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 65
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -159,7 +164,6 @@ items:
   example: []
   syntax:
     content: public virtual Encoding SelectCharacterEncoding(OutputFormatterWriteContext context)
-    content.vb: Public Overridable Function SelectCharacterEncoding(context As OutputFormatterWriteContext) As Encoding
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
@@ -168,6 +172,7 @@ items:
     return:
       type: System.Text.Encoding
       description: The <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> to use when reading the request or writing the response.
+    content.vb: Public Overridable Function SelectCharacterEncoding(context As OutputFormatterWriteContext) As Encoding
   overload: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding*
   modifiers.csharp:
   - public
@@ -192,20 +197,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: WriteAsync
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 108
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nWrites the object represented by <span class=\"paramref\">context</span>&apos;s Object property.\n"
   example: []
   syntax:
     content: public override Task WriteAsync(OutputFormatterWriteContext context)
-    content.vb: Public Overrides Function WriteAsync(context As OutputFormatterWriteContext) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+      description: The formatter context associated with the call.
     return:
       type: System.Threading.Tasks.Task
+      description: A Task that serializes the value to the <span class="paramref">context</span>&apos;s response message.
+    content.vb: Public Overrides Function WriteAsync(context As OutputFormatterWriteContext) As Task
   overridden: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
   overload: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync*
   modifiers.csharp:
@@ -231,20 +239,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: WriteResponseBodyAsync
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 150
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nWrites the response body.\n"
   example: []
   syntax:
     content: public override sealed Task WriteResponseBodyAsync(OutputFormatterWriteContext context)
-    content.vb: Public NotOverridable Overrides Function WriteResponseBodyAsync(context As OutputFormatterWriteContext) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+      description: The formatter context associated with the call.
     return:
       type: System.Threading.Tasks.Task
+      description: A task which can write the response body.
+    content.vb: Public NotOverridable Overrides Function WriteResponseBodyAsync(context As OutputFormatterWriteContext) As Task
   overridden: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
   overload: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync*
   modifiers.csharp:
@@ -272,7 +283,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: WriteResponseBodyAsync
-    path: src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Formatters/TextOutputFormatter.cs
     startLine: 166
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -281,7 +292,6 @@ items:
   example: []
   syntax:
     content: public abstract Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
-    content.vb: Public MustOverride Function WriteResponseBodyAsync(context As OutputFormatterWriteContext, selectedEncoding As Encoding) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
@@ -292,6 +302,7 @@ items:
     return:
       type: System.Threading.Tasks.Task
       description: A task which can write the response body.
+    content.vb: Public MustOverride Function WriteResponseBodyAsync(context As OutputFormatterWriteContext, selectedEncoding As Encoding) As Task
   overload: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync*
   modifiers.csharp:
   - public
@@ -827,7 +838,7 @@ references:
   nameWithType: IList<Encoding>
   fullName: System.Collections.Generic.IList<System.Text.Encoding>
   nameWithType.vb: IList(Of Encoding)
-  fullname.vb: System.Collections.Generic.IList(Of System.Text.Encoding)
+  fullName.vb: System.Collections.Generic.IList(Of System.Text.Encoding)
   name.vb: IList(Of Encoding)
   spec.csharp:
   - uid: System.Collections.Generic.IList`1
@@ -870,7 +881,7 @@ references:
   nameWithType: IList<T>
   fullName: System.Collections.Generic.IList<T>
   nameWithType.vb: IList(Of T)
-  fullname.vb: System.Collections.Generic.IList(Of T)
+  fullName.vb: System.Collections.Generic.IList(Of T)
   name.vb: IList(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IList`1

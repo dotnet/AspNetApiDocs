@@ -22,11 +22,12 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CompositeViewEngine
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
     startLine: 12
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewEngines
+  summary: "\nRepresents an <xref href=\"Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine\" data-throw-if-not-resolved=\"false\"></xref> that delegates to one of a collection of view engines.\n"
   example: []
   syntax:
     content: 'public class CompositeViewEngine : ICompositeViewEngine, IViewEngine'
@@ -69,7 +70,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
@@ -78,11 +79,11 @@ items:
   example: []
   syntax:
     content: public CompositeViewEngine(IOptions<MvcViewOptions> optionsAccessor)
-    content.vb: Public Sub New(optionsAccessor As IOptions(Of MvcViewOptions))
     parameters:
     - id: optionsAccessor
       type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.MvcViewOptions}
       description: The options accessor for <xref href="Microsoft.AspNetCore.Mvc.MvcViewOptions" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(optionsAccessor As IOptions(Of MvcViewOptions))
   overload: Microsoft.AspNetCore.Mvc.ViewEngines.CompositeViewEngine.#ctor*
   nameWithType.vb: CompositeViewEngine.CompositeViewEngine(IOptions(Of MvcViewOptions))
   modifiers.csharp:
@@ -108,18 +109,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ViewEngines
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
     startLine: 24
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewEngines
+  summary: "\nGets the list of <xref href=\"Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine\" data-throw-if-not-resolved=\"false\"></xref> this instance of <xref href=\"Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine\" data-throw-if-not-resolved=\"false\"></xref> delegates\nto.\n"
   example: []
   syntax:
     content: public IReadOnlyList<IViewEngine> ViewEngines { get; }
-    content.vb: Public ReadOnly Property ViewEngines As IReadOnlyList(Of IViewEngine)
     parameters: []
     return:
       type: System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine}
+    content.vb: Public ReadOnly Property ViewEngines As IReadOnlyList(Of IViewEngine)
   overload: Microsoft.AspNetCore.Mvc.ViewEngines.CompositeViewEngine.ViewEngines*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewEngines.ICompositeViewEngine.ViewEngines
@@ -146,24 +148,29 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: FindView
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
     startLine: 27
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewEngines
+  summary: "\nFinds the view with the given <span class=\"paramref\">viewName</span> using view locations and information from the\n<span class=\"paramref\">context</span>.\n"
   example: []
   syntax:
     content: public ViewEngineResult FindView(ActionContext context, string viewName, bool isMainPage)
-    content.vb: Public Function FindView(context As ActionContext, viewName As String, isMainPage As Boolean) As ViewEngineResult
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Mvc.ActionContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ActionContext" data-throw-if-not-resolved="false"></xref>.
     - id: viewName
       type: System.String
+      description: The name of the view.
     - id: isMainPage
       type: System.Boolean
+      description: Determines if the page being found is the main page for an action.
     return:
       type: Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult" data-throw-if-not-resolved="false"></xref> of locating the view.
+    content.vb: Public Function FindView(context As ActionContext, viewName As String, isMainPage As Boolean) As ViewEngineResult
   overload: Microsoft.AspNetCore.Mvc.ViewEngines.CompositeViewEngine.FindView*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine.FindView(Microsoft.AspNetCore.Mvc.ActionContext,System.String,System.Boolean)
@@ -188,24 +195,29 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetView
-    path: src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.ViewFeatures/ViewEngines/CompositeViewEngine.cs
     startLine: 72
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewEngines
+  summary: "\nGets the view with the given <span class=\"paramref\">viewPath</span>, relative to <span class=\"paramref\">executingFilePath</span>\nunless <span class=\"paramref\">viewPath</span> is already absolute.\n"
   example: []
   syntax:
     content: public ViewEngineResult GetView(string executingFilePath, string viewPath, bool isMainPage)
-    content.vb: Public Function GetView(executingFilePath As String, viewPath As String, isMainPage As Boolean) As ViewEngineResult
     parameters:
     - id: executingFilePath
       type: System.String
+      description: The absolute path to the currently-executing view, if any.
     - id: viewPath
       type: System.String
+      description: The path to the view.
     - id: isMainPage
       type: System.Boolean
+      description: Determines if the page being found is the main page for an action.
     return:
       type: Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ViewEngines.ViewEngineResult" data-throw-if-not-resolved="false"></xref> of locating the view.
+    content.vb: Public Function GetView(executingFilePath As String, viewPath As String, isMainPage As Boolean) As ViewEngineResult
   overload: Microsoft.AspNetCore.Mvc.ViewEngines.CompositeViewEngine.GetView*
   implements:
   - Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine.GetView(System.String,System.String,System.Boolean)
@@ -553,7 +565,7 @@ references:
   nameWithType: IOptions<MvcViewOptions>
   fullName: Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Mvc.MvcViewOptions>
   nameWithType.vb: IOptions(Of MvcViewOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.MvcViewOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Mvc.MvcViewOptions)
   name.vb: IOptions(Of MvcViewOptions)
   spec.csharp:
   - uid: Microsoft.Extensions.Options.IOptions`1
@@ -600,7 +612,7 @@ references:
   nameWithType: IOptions<TOptions>
   fullName: Microsoft.Extensions.Options.IOptions<TOptions>
   nameWithType.vb: IOptions(Of TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
+  fullName.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
   name.vb: IOptions(Of TOptions)
   spec.csharp:
   - uid: Microsoft.Extensions.Options.IOptions`1
@@ -657,7 +669,7 @@ references:
   nameWithType: IReadOnlyList<IViewEngine>
   fullName: System.Collections.Generic.IReadOnlyList<Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine>
   nameWithType.vb: IReadOnlyList(Of IViewEngine)
-  fullname.vb: System.Collections.Generic.IReadOnlyList(Of Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Microsoft.AspNetCore.Mvc.ViewEngines.IViewEngine)
   name.vb: IReadOnlyList(Of IViewEngine)
   spec.csharp:
   - uid: System.Collections.Generic.IReadOnlyList`1
@@ -698,7 +710,7 @@ references:
   nameWithType: IReadOnlyList<T>
   fullName: System.Collections.Generic.IReadOnlyList<T>
   nameWithType.vb: IReadOnlyList(Of T)
-  fullname.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
   name.vb: IReadOnlyList(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IReadOnlyList`1

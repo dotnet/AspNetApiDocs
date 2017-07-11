@@ -5,7 +5,7 @@ items:
   id: WebHost
   parent: Microsoft.AspNetCore.Hosting.Internal
   children:
-  - Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,Microsoft.Extensions.Configuration.IConfiguration)
+  - Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,IConfiguration)
   - Microsoft.AspNetCore.Hosting.Internal.WebHost.Dispose
   - Microsoft.AspNetCore.Hosting.Internal.WebHost.Initialize
   - Microsoft.AspNetCore.Hosting.Internal.WebHost.ServerFeatures
@@ -24,49 +24,34 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: WebHost
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 20
   assemblies:
   - Microsoft.AspNetCore.Hosting
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
-    content: 'public class WebHost : IWebHost, IDisposable'
+    content: 'public class WebHost : IWebHost'
     content.vb: >-
       Public Class WebHost
-          Implements IWebHost, IDisposable
+          Inherits IWebHost
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Hosting.IWebHost
-  - System.IDisposable
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  extensionMethods:
-  - Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,Microsoft.Extensions.Configuration.IConfiguration)
-  commentId: M:Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,Microsoft.Extensions.Configuration.IConfiguration)
-  id: '#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,Microsoft.Extensions.Configuration.IConfiguration)'
+- uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,IConfiguration)
+  commentId: M:Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor(IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,IConfiguration)
+  id: '#ctor(IServiceCollection,System.IServiceProvider,Microsoft.AspNetCore.Hosting.Internal.WebHostOptions,IConfiguration)'
   parent: Microsoft.AspNetCore.Hosting.Internal.WebHost
   langs:
   - csharp
   - vb
   name: WebHost(IServiceCollection, IServiceProvider, WebHostOptions, IConfiguration)
   nameWithType: WebHost.WebHost(IServiceCollection, IServiceProvider, WebHostOptions, IConfiguration)
-  fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.WebHost(Microsoft.Extensions.DependencyInjection.IServiceCollection, System.IServiceProvider, Microsoft.AspNetCore.Hosting.Internal.WebHostOptions, Microsoft.Extensions.Configuration.IConfiguration)
+  fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.WebHost(IServiceCollection, System.IServiceProvider, Microsoft.AspNetCore.Hosting.Internal.WebHostOptions, IConfiguration)
   type: Constructor
   source:
     remote:
@@ -74,23 +59,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 41
   assemblies:
   - Microsoft.AspNetCore.Hosting
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public WebHost(IServiceCollection appServices, IServiceProvider hostingServiceProvider, WebHostOptions options, IConfiguration config)
-    content.vb: Public Sub New(appServices As IServiceCollection, hostingServiceProvider As IServiceProvider, options As WebHostOptions, config As IConfiguration)
     parameters:
     - id: appServices
-      type: Microsoft.Extensions.DependencyInjection.IServiceCollection
+      type: IServiceCollection
     - id: hostingServiceProvider
       type: System.IServiceProvider
     - id: options
       type: Microsoft.AspNetCore.Hosting.Internal.WebHostOptions
     - id: config
-      type: Microsoft.Extensions.Configuration.IConfiguration
+      type: IConfiguration
+    content.vb: Public Sub New(appServices As IServiceCollection, hostingServiceProvider As IServiceProvider, options As WebHostOptions, config As IConfiguration)
   overload: Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor*
   modifiers.csharp:
   - public
@@ -113,20 +98,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Services
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 70
   assemblies:
   - Microsoft.AspNetCore.Hosting
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public IServiceProvider Services { get; }
-    content.vb: Public ReadOnly Property Services As IServiceProvider
     parameters: []
     return:
       type: System.IServiceProvider
+    content.vb: Public ReadOnly Property Services As IServiceProvider
   overload: Microsoft.AspNetCore.Hosting.Internal.WebHost.Services*
-  implements:
-  - Microsoft.AspNetCore.Hosting.IWebHost.Services
   modifiers.csharp:
   - public
   - get
@@ -150,20 +133,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: ServerFeatures
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 79
   assemblies:
   - Microsoft.AspNetCore.Hosting
   namespace: Microsoft.AspNetCore.Hosting.Internal
   syntax:
     content: public IFeatureCollection ServerFeatures { get; }
-    content.vb: Public ReadOnly Property ServerFeatures As IFeatureCollection
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.Features.IFeatureCollection
+      type: IFeatureCollection
+    content.vb: Public ReadOnly Property ServerFeatures As IFeatureCollection
   overload: Microsoft.AspNetCore.Hosting.Internal.WebHost.ServerFeatures*
-  implements:
-  - Microsoft.AspNetCore.Hosting.IWebHost.ServerFeatures
   modifiers.csharp:
   - public
   - get
@@ -187,7 +168,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Initialize
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 87
   assemblies:
   - Microsoft.AspNetCore.Hosting
@@ -217,7 +198,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Start
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 95
   assemblies:
   - Microsoft.AspNetCore.Hosting
@@ -226,8 +207,6 @@ items:
     content: public virtual void Start()
     content.vb: Public Overridable Sub Start
   overload: Microsoft.AspNetCore.Hosting.Internal.WebHost.Start*
-  implements:
-  - Microsoft.AspNetCore.Hosting.IWebHost.Start
   modifiers.csharp:
   - public
   - virtual
@@ -251,7 +230,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Dispose
-    path: src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs
     startLine: 210
   assemblies:
   - Microsoft.AspNetCore.Hosting
@@ -260,8 +239,6 @@ items:
     content: public void Dispose()
     content.vb: Public Sub Dispose
   overload: Microsoft.AspNetCore.Hosting.Internal.WebHost.Dispose*
-  implements:
-  - System.IDisposable.Dispose
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -280,565 +257,23 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Hosting.IWebHost
-  commentId: T:Microsoft.AspNetCore.Hosting.IWebHost
-  parent: Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: IWebHost
-  nameWithType: IWebHost
-  fullName: Microsoft.AspNetCore.Hosting.IWebHost
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  commentId: M:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-  parent: Microsoft.AspNetCore.Hosting.WebHostExtensions
-  definition: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-  name: Run()
-  nameWithType: WebHostExtensions.Run()
-  fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Hosting.WebHostExtensions
-  definition: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-  name: Run(CancellationToken)
-  nameWithType: WebHostExtensions.Run(CancellationToken)
-  fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(System.Threading.CancellationToken)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(System.Threading.CancellationToken)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-  commentId: M:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-  parent: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions
-  definition: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-  name: RunAsService()
-  nameWithType: WebHostWindowsServiceExtensions.RunAsService()
-  fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-    name: RunAsService
-    nameWithType: WebHostWindowsServiceExtensions.RunAsService
-    fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-    name: RunAsService
-    nameWithType: WebHostWindowsServiceExtensions.RunAsService
-    fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Hosting
-  commentId: N:Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting
-  nameWithType: Microsoft.AspNetCore.Hosting
-  fullName: Microsoft.AspNetCore.Hosting
-- uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-  commentId: M:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-  isExternal: false
-  name: Run(IWebHost)
-  nameWithType: WebHostExtensions.Run(IWebHost)
-  fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.WebHostExtensions
-  commentId: T:Microsoft.AspNetCore.Hosting.WebHostExtensions
-  parent: Microsoft.AspNetCore.Hosting
-  isExternal: false
-  name: WebHostExtensions
-  nameWithType: WebHostExtensions
-  fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions
-- uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-  isExternal: true
-  name: Run(IWebHost, CancellationToken)
-  nameWithType: WebHostExtensions.Run(IWebHost, CancellationToken)
-  fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost, System.Threading.CancellationToken)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run(Microsoft.AspNetCore.Hosting.IWebHost,System.Threading.CancellationToken)
-    name: Run
-    nameWithType: WebHostExtensions.Run
-    fullName: Microsoft.AspNetCore.Hosting.WebHostExtensions.Run
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Threading.CancellationToken
-    name: CancellationToken
-    nameWithType: CancellationToken
-    fullName: System.Threading.CancellationToken
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-  commentId: M:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-  isExternal: false
-  name: RunAsService(IWebHost)
-  nameWithType: WebHostWindowsServiceExtensions.RunAsService(IWebHost)
-  fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-    name: RunAsService
-    nameWithType: WebHostWindowsServiceExtensions.RunAsService
-    fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService(Microsoft.AspNetCore.Hosting.IWebHost)
-    name: RunAsService
-    nameWithType: WebHostWindowsServiceExtensions.RunAsService
-    fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost
-    name: IWebHost
-    nameWithType: IWebHost
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions
-  commentId: T:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions
-  parent: Microsoft.AspNetCore.Hosting.WindowsServices
-  isExternal: false
-  name: WebHostWindowsServiceExtensions
-  nameWithType: WebHostWindowsServiceExtensions
-  fullName: Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions
-- uid: Microsoft.AspNetCore.Hosting.WindowsServices
-  commentId: N:Microsoft.AspNetCore.Hosting.WindowsServices
-  isExternal: false
-  name: Microsoft.AspNetCore.Hosting.WindowsServices
-  nameWithType: Microsoft.AspNetCore.Hosting.WindowsServices
-  fullName: Microsoft.AspNetCore.Hosting.WindowsServices
 - uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.WebHost.#ctor
   isExternal: false
   name: WebHost
   nameWithType: WebHost.WebHost
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.WebHost
-- uid: Microsoft.Extensions.DependencyInjection.IServiceCollection
-  commentId: T:Microsoft.Extensions.DependencyInjection.IServiceCollection
-  parent: Microsoft.Extensions.DependencyInjection
-  isExternal: false
+- uid: IServiceCollection
+  isExternal: true
   name: IServiceCollection
   nameWithType: IServiceCollection
-  fullName: Microsoft.Extensions.DependencyInjection.IServiceCollection
+  fullName: IServiceCollection
 - uid: System.IServiceProvider
   commentId: T:System.IServiceProvider
   parent: System
@@ -853,64 +288,28 @@ references:
   name: WebHostOptions
   nameWithType: WebHostOptions
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHostOptions
-- uid: Microsoft.Extensions.Configuration.IConfiguration
-  commentId: T:Microsoft.Extensions.Configuration.IConfiguration
-  parent: Microsoft.Extensions.Configuration
-  isExternal: false
+- uid: IConfiguration
+  isExternal: true
   name: IConfiguration
   nameWithType: IConfiguration
-  fullName: Microsoft.Extensions.Configuration.IConfiguration
-- uid: Microsoft.Extensions.DependencyInjection
-  commentId: N:Microsoft.Extensions.DependencyInjection
-  isExternal: false
-  name: Microsoft.Extensions.DependencyInjection
-  nameWithType: Microsoft.Extensions.DependencyInjection
-  fullName: Microsoft.Extensions.DependencyInjection
-- uid: Microsoft.Extensions.Configuration
-  commentId: N:Microsoft.Extensions.Configuration
-  isExternal: false
-  name: Microsoft.Extensions.Configuration
-  nameWithType: Microsoft.Extensions.Configuration
-  fullName: Microsoft.Extensions.Configuration
+  fullName: IConfiguration
 - uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.Services*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.WebHost.Services
   isExternal: false
   name: Services
   nameWithType: WebHost.Services
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.Services
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.Services
-  commentId: P:Microsoft.AspNetCore.Hosting.IWebHost.Services
-  parent: Microsoft.AspNetCore.Hosting.IWebHost
-  isExternal: false
-  name: Services
-  nameWithType: IWebHost.Services
-  fullName: Microsoft.AspNetCore.Hosting.IWebHost.Services
 - uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.ServerFeatures*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.WebHost.ServerFeatures
   isExternal: false
   name: ServerFeatures
   nameWithType: WebHost.ServerFeatures
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.ServerFeatures
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.ServerFeatures
-  commentId: P:Microsoft.AspNetCore.Hosting.IWebHost.ServerFeatures
-  parent: Microsoft.AspNetCore.Hosting.IWebHost
-  isExternal: false
-  name: ServerFeatures
-  nameWithType: IWebHost.ServerFeatures
-  fullName: Microsoft.AspNetCore.Hosting.IWebHost.ServerFeatures
-- uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  commentId: T:Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  parent: Microsoft.AspNetCore.Http.Features
-  isExternal: false
+- uid: IFeatureCollection
+  isExternal: true
   name: IFeatureCollection
   nameWithType: IFeatureCollection
-  fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-- uid: Microsoft.AspNetCore.Http.Features
-  commentId: N:Microsoft.AspNetCore.Http.Features
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features
-  nameWithType: Microsoft.AspNetCore.Http.Features
-  fullName: Microsoft.AspNetCore.Http.Features
+  fullName: IFeatureCollection
 - uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.Initialize*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.WebHost.Initialize
   isExternal: false
@@ -923,70 +322,10 @@ references:
   name: Start
   nameWithType: WebHost.Start
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.Start
-- uid: Microsoft.AspNetCore.Hosting.IWebHost.Start
-  commentId: M:Microsoft.AspNetCore.Hosting.IWebHost.Start
-  parent: Microsoft.AspNetCore.Hosting.IWebHost
-  isExternal: false
-  name: Start()
-  nameWithType: IWebHost.Start()
-  fullName: Microsoft.AspNetCore.Hosting.IWebHost.Start()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost.Start
-    name: Start
-    nameWithType: IWebHost.Start
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost.Start
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Hosting.IWebHost.Start
-    name: Start
-    nameWithType: IWebHost.Start
-    fullName: Microsoft.AspNetCore.Hosting.IWebHost.Start
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Hosting.Internal.WebHost.Dispose*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Internal.WebHost.Dispose
   isExternal: false
   name: Dispose
   nameWithType: WebHost.Dispose
   fullName: Microsoft.AspNetCore.Hosting.Internal.WebHost.Dispose
-- uid: System.IDisposable.Dispose
-  commentId: M:System.IDisposable.Dispose
-  parent: System.IDisposable
-  isExternal: true
-  name: Dispose()
-  nameWithType: IDisposable.Dispose()
-  fullName: System.IDisposable.Dispose()
-  spec.csharp:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.IDisposable.Dispose
-    name: Dispose
-    nameWithType: IDisposable.Dispose
-    fullName: System.IDisposable.Dispose
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

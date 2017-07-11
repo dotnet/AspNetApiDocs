@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: IServer
-    path: src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
     startLine: 11
   assemblies:
   - Microsoft.AspNetCore.Hosting.Server.Abstractions
@@ -57,7 +57,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Features
-    path: src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
     startLine: 16
   assemblies:
   - Microsoft.AspNetCore.Hosting.Server.Abstractions
@@ -66,10 +66,10 @@ items:
   example: []
   syntax:
     content: IFeatureCollection Features { get; }
-    content.vb: ReadOnly Property Features As IFeatureCollection
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.Features.IFeatureCollection
+      type: IFeatureCollection
+    content.vb: ReadOnly Property Features As IFeatureCollection
   overload: Microsoft.AspNetCore.Hosting.Server.IServer.Features*
   modifiers.csharp:
   - get
@@ -92,7 +92,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Hosting.git
     id: Start
-    path: src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
+    path: ../aspnet/Hosting/src/Microsoft.AspNetCore.Hosting.Server.Abstractions/IServer.cs
     startLine: 23
   assemblies:
   - Microsoft.AspNetCore.Hosting.Server.Abstractions
@@ -101,7 +101,6 @@ items:
   example: []
   syntax:
     content: void Start<TContext>(IHttpApplication<TContext> application)
-    content.vb: Sub Start(Of TContext)(application As IHttpApplication(Of TContext))
     parameters:
     - id: application
       type: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}}
@@ -109,6 +108,7 @@ items:
     typeParameters:
     - id: TContext
       description: The context associated with the application.
+    content.vb: Sub Start(Of TContext)(application As IHttpApplication(Of TContext))
   overload: Microsoft.AspNetCore.Hosting.Server.IServer.Start*
   nameWithType.vb: IServer.Start(Of TContext)(IHttpApplication(Of TContext))
   fullName.vb: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)(Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext))
@@ -170,19 +170,11 @@ references:
   name: Features
   nameWithType: IServer.Features
   fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Features
-- uid: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  commentId: T:Microsoft.AspNetCore.Http.Features.IFeatureCollection
-  parent: Microsoft.AspNetCore.Http.Features
-  isExternal: false
+- uid: IFeatureCollection
+  isExternal: true
   name: IFeatureCollection
   nameWithType: IFeatureCollection
-  fullName: Microsoft.AspNetCore.Http.Features.IFeatureCollection
-- uid: Microsoft.AspNetCore.Http.Features
-  commentId: N:Microsoft.AspNetCore.Http.Features
-  isExternal: false
-  name: Microsoft.AspNetCore.Http.Features
-  nameWithType: Microsoft.AspNetCore.Http.Features
-  fullName: Microsoft.AspNetCore.Http.Features
+  fullName: IFeatureCollection
 - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
   commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
   isExternal: false
@@ -190,7 +182,7 @@ references:
   nameWithType: IHttpApplication<TContext>
   fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>
   nameWithType.vb: IHttpApplication(Of TContext)
-  fullname.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
+  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
   name.vb: IHttpApplication(Of TContext)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1
@@ -223,12 +215,9 @@ references:
 - uid: Microsoft.AspNetCore.Hosting.Server.IServer.Start*
   commentId: Overload:Microsoft.AspNetCore.Hosting.Server.IServer.Start
   isExternal: false
-  name: Start<TContext>
-  nameWithType: IServer.Start<TContext>
-  fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start<TContext>
-  nameWithType.vb: IServer.Start(Of TContext)
-  fullname.vb: Microsoft.AspNetCore.Hosting.Server.IServer.Start(Of TContext)
-  name.vb: Start(Of TContext)
+  name: Start
+  nameWithType: IServer.Start
+  fullName: Microsoft.AspNetCore.Hosting.Server.IServer.Start
 - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication{{TContext}}
   commentId: T:Microsoft.AspNetCore.Hosting.Server.IHttpApplication{``0}
   parent: Microsoft.AspNetCore.Hosting.Server
@@ -237,7 +226,7 @@ references:
   nameWithType: IHttpApplication<TContext>
   fullName: Microsoft.AspNetCore.Hosting.Server.IHttpApplication<TContext>
   nameWithType.vb: IHttpApplication(Of TContext)
-  fullname.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
+  fullName.vb: Microsoft.AspNetCore.Hosting.Server.IHttpApplication(Of TContext)
   name.vb: IHttpApplication(Of TContext)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Hosting.Server.IHttpApplication`1

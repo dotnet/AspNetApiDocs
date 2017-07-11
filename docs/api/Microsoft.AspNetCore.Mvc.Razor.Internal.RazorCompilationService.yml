@@ -21,7 +21,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: RazorCompilationService
-    path: src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
     startLine: 21
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
@@ -68,7 +68,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
     startLine: 35
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
@@ -77,7 +77,6 @@ items:
   example: []
   syntax:
     content: public RazorCompilationService(ICompilationService compilationService, IMvcRazorHost razorHost, IRazorViewEngineFileProviderAccessor fileProviderAccessor, ILoggerFactory loggerFactory)
-    content.vb: Public Sub New(compilationService As ICompilationService, razorHost As IMvcRazorHost, fileProviderAccessor As IRazorViewEngineFileProviderAccessor, loggerFactory As ILoggerFactory)
     parameters:
     - id: compilationService
       type: Microsoft.AspNetCore.Mvc.Razor.Compilation.ICompilationService
@@ -91,6 +90,7 @@ items:
     - id: loggerFactory
       type: Microsoft.Extensions.Logging.ILoggerFactory
       description: The <xref href="Microsoft.Extensions.Logging.ILoggerFactory" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(compilationService As ICompilationService, razorHost As IMvcRazorHost, fileProviderAccessor As IRazorViewEngineFileProviderAccessor, loggerFactory As ILoggerFactory)
   overload: Microsoft.AspNetCore.Mvc.Razor.Internal.RazorCompilationService.#ctor*
   modifiers.csharp:
   - public
@@ -113,20 +113,22 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Compile
-    path: src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
     startLine: 48
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor.Internal
+  summary: "\nCompiles the razor file located at <span class=\"paramref\">fileInfo</span>.\n"
   example: []
   syntax:
     content: public CompilationResult Compile(RelativeFileInfo file)
-    content.vb: Public Function Compile(file As RelativeFileInfo) As CompilationResult
     parameters:
     - id: file
       type: Microsoft.AspNetCore.Mvc.Razor.Compilation.RelativeFileInfo
     return:
       type: Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationResult
+      description: "\nA <xref href=\"Microsoft.AspNetCore.Mvc.Razor.Compilation.CompilationResult\" data-throw-if-not-resolved=\"false\"></xref> that represents the results of parsing and compiling the file.\n"
+    content.vb: Public Function Compile(file As RelativeFileInfo) As CompilationResult
   overload: Microsoft.AspNetCore.Mvc.Razor.Internal.RazorCompilationService.Compile*
   implements:
   - Microsoft.AspNetCore.Mvc.Razor.Compilation.IRazorCompilationService.Compile(Microsoft.AspNetCore.Mvc.Razor.Compilation.RelativeFileInfo)
@@ -151,16 +153,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GenerateCode
-    path: src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Razor/Internal/RazorCompilationService.cs
     startLine: 85
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor.Internal
-  summary: "\nGenerate code for the Razor file at <em>relativePath</em> with content\n<em>inputStream</em>.\n"
+  summary: "\nGenerate code for the Razor file at <span class=\"paramref\">relativePath</span> with content\n<span class=\"paramref\">inputStream</span>.\n"
   example: []
   syntax:
     content: protected virtual GeneratorResults GenerateCode(string relativePath, Stream inputStream)
-    content.vb: Protected Overridable Function GenerateCode(relativePath As String, inputStream As Stream) As GeneratorResults
     parameters:
     - id: relativePath
       type: System.String
@@ -171,6 +172,7 @@ items:
     return:
       type: Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults
       description: A <xref href="Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults" data-throw-if-not-resolved="false"></xref> instance containing results of code generation.
+    content.vb: Protected Overridable Function GenerateCode(relativePath As String, inputStream As Stream) As GeneratorResults
   overload: Microsoft.AspNetCore.Mvc.Razor.Internal.RazorCompilationService.GenerateCode*
   modifiers.csharp:
   - protected

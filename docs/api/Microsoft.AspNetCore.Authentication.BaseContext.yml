@@ -5,7 +5,7 @@ items:
   id: BaseContext
   parent: Microsoft.AspNetCore.Authentication
   children:
-  - Microsoft.AspNetCore.Authentication.BaseContext.#ctor(Microsoft.AspNetCore.Http.HttpContext)
+  - Microsoft.AspNetCore.Authentication.BaseContext.#ctor(HttpContext)
   - Microsoft.AspNetCore.Authentication.BaseContext.HttpContext
   - Microsoft.AspNetCore.Authentication.BaseContext.Request
   - Microsoft.AspNetCore.Authentication.BaseContext.Response
@@ -22,7 +22,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Security.git
     id: BaseContext
-    path: src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
+    path: ../aspnet/Security/src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
     startLine: 7
   assemblies:
   - Microsoft.AspNetCore.Authentication
@@ -32,6 +32,8 @@ items:
     content.vb: Public MustInherit Class BaseContext
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.AspNetCore.Authentication.BaseControlContext
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -48,16 +50,16 @@ items:
   - Public
   - MustInherit
   - Class
-- uid: Microsoft.AspNetCore.Authentication.BaseContext.#ctor(Microsoft.AspNetCore.Http.HttpContext)
-  commentId: M:Microsoft.AspNetCore.Authentication.BaseContext.#ctor(Microsoft.AspNetCore.Http.HttpContext)
-  id: '#ctor(Microsoft.AspNetCore.Http.HttpContext)'
+- uid: Microsoft.AspNetCore.Authentication.BaseContext.#ctor(HttpContext)
+  commentId: M:Microsoft.AspNetCore.Authentication.BaseContext.#ctor(HttpContext)
+  id: '#ctor(HttpContext)'
   parent: Microsoft.AspNetCore.Authentication.BaseContext
   langs:
   - csharp
   - vb
   name: BaseContext(HttpContext)
   nameWithType: BaseContext.BaseContext(HttpContext)
-  fullName: Microsoft.AspNetCore.Authentication.BaseContext.BaseContext(Microsoft.AspNetCore.Http.HttpContext)
+  fullName: Microsoft.AspNetCore.Authentication.BaseContext.BaseContext(HttpContext)
   type: Constructor
   source:
     remote:
@@ -65,17 +67,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Security.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
+    path: ../aspnet/Security/src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
     startLine: 9
   assemblies:
   - Microsoft.AspNetCore.Authentication
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: protected BaseContext(HttpContext context)
-    content.vb: Protected Sub New(context As HttpContext)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Http.HttpContext
+      type: HttpContext
+    content.vb: Protected Sub New(context As HttpContext)
   overload: Microsoft.AspNetCore.Authentication.BaseContext.#ctor*
   modifiers.csharp:
   - protected
@@ -98,17 +100,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Security.git
     id: HttpContext
-    path: src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
+    path: ../aspnet/Security/src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
     startLine: 14
   assemblies:
   - Microsoft.AspNetCore.Authentication
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public HttpContext HttpContext { get; }
-    content.vb: Public ReadOnly Property HttpContext As HttpContext
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.HttpContext
+      type: HttpContext
+    content.vb: Public ReadOnly Property HttpContext As HttpContext
   overload: Microsoft.AspNetCore.Authentication.BaseContext.HttpContext*
   modifiers.csharp:
   - public
@@ -133,17 +135,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Security.git
     id: Request
-    path: src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
+    path: ../aspnet/Security/src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
     startLine: 16
   assemblies:
   - Microsoft.AspNetCore.Authentication
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public HttpRequest Request { get; }
-    content.vb: Public ReadOnly Property Request As HttpRequest
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.HttpRequest
+      type: HttpRequest
+    content.vb: Public ReadOnly Property Request As HttpRequest
   overload: Microsoft.AspNetCore.Authentication.BaseContext.Request*
   modifiers.csharp:
   - public
@@ -168,17 +170,17 @@ items:
       branch: master
       repo: https://github.com/aspnet/Security.git
     id: Response
-    path: src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
+    path: ../aspnet/Security/src/Microsoft.AspNetCore.Authentication/Events/BaseContext.cs
     startLine: 21
   assemblies:
   - Microsoft.AspNetCore.Authentication
   namespace: Microsoft.AspNetCore.Authentication
   syntax:
     content: public HttpResponse Response { get; }
-    content.vb: Public ReadOnly Property Response As HttpResponse
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.HttpResponse
+      type: HttpResponse
+    content.vb: Public ReadOnly Property Response As HttpResponse
   overload: Microsoft.AspNetCore.Authentication.BaseContext.Response*
   modifiers.csharp:
   - public
@@ -491,19 +493,11 @@ references:
   name: BaseContext
   nameWithType: BaseContext.BaseContext
   fullName: Microsoft.AspNetCore.Authentication.BaseContext.BaseContext
-- uid: Microsoft.AspNetCore.Http.HttpContext
-  commentId: T:Microsoft.AspNetCore.Http.HttpContext
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: HttpContext
+  isExternal: true
   name: HttpContext
   nameWithType: HttpContext
-  fullName: Microsoft.AspNetCore.Http.HttpContext
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
+  fullName: HttpContext
 - uid: Microsoft.AspNetCore.Authentication.BaseContext.HttpContext*
   commentId: Overload:Microsoft.AspNetCore.Authentication.BaseContext.HttpContext
   isExternal: false
@@ -516,24 +510,20 @@ references:
   name: Request
   nameWithType: BaseContext.Request
   fullName: Microsoft.AspNetCore.Authentication.BaseContext.Request
-- uid: Microsoft.AspNetCore.Http.HttpRequest
-  commentId: T:Microsoft.AspNetCore.Http.HttpRequest
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: HttpRequest
+  isExternal: true
   name: HttpRequest
   nameWithType: HttpRequest
-  fullName: Microsoft.AspNetCore.Http.HttpRequest
+  fullName: HttpRequest
 - uid: Microsoft.AspNetCore.Authentication.BaseContext.Response*
   commentId: Overload:Microsoft.AspNetCore.Authentication.BaseContext.Response
   isExternal: false
   name: Response
   nameWithType: BaseContext.Response
   fullName: Microsoft.AspNetCore.Authentication.BaseContext.Response
-- uid: Microsoft.AspNetCore.Http.HttpResponse
-  commentId: T:Microsoft.AspNetCore.Http.HttpResponse
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: HttpResponse
+  isExternal: true
   name: HttpResponse
   nameWithType: HttpResponse
-  fullName: Microsoft.AspNetCore.Http.HttpResponse
+  fullName: HttpResponse
 shouldSkipMarkup: true

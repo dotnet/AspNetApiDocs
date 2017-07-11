@@ -26,7 +26,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CollectionModelBinder
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 22
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -35,14 +35,17 @@ items:
   example: []
   syntax:
     content: 'public class CollectionModelBinder<TElement> : ICollectionModelBinder, IModelBinder'
-    content.vb: >-
-      Public Class CollectionModelBinder(Of TElement)
-          Implements ICollectionModelBinder, IModelBinder
     typeParameters:
     - id: TElement
       description: Type of elements in the collection.
+    content.vb: >-
+      Public Class CollectionModelBinder(Of TElement)
+          Implements ICollectionModelBinder, IModelBinder
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinder`1
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinder`2
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder
   - Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
@@ -80,7 +83,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 30
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -89,11 +92,11 @@ items:
   example: []
   syntax:
     content: public CollectionModelBinder(IModelBinder elementBinder)
-    content.vb: Public Sub New(elementBinder As IModelBinder)
     parameters:
     - id: elementBinder
       type: Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
       description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder" data-throw-if-not-resolved="false"></xref> for binding elements.
+    content.vb: Public Sub New(elementBinder As IModelBinder)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.#ctor*
   nameWithType.vb: CollectionModelBinder(Of TElement).CollectionModelBinder(IModelBinder)
   modifiers.csharp:
@@ -118,7 +121,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ElementBinder
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 43
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -127,10 +130,10 @@ items:
   example: []
   syntax:
     content: protected IModelBinder ElementBinder { get; }
-    content.vb: Protected ReadOnly Property ElementBinder As IModelBinder
     parameters: []
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
+    content.vb: Protected ReadOnly Property ElementBinder As IModelBinder
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ElementBinder*
   nameWithType.vb: CollectionModelBinder(Of TElement).ElementBinder
   modifiers.csharp:
@@ -157,20 +160,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: BindModelAsync
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 46
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
+  summary: "\nAttempts to bind a model.\n"
   example: []
   syntax:
     content: public virtual Task BindModelAsync(ModelBindingContext bindingContext)
-    content.vb: Public Overridable Function BindModelAsync(bindingContext As ModelBindingContext) As Task
     parameters:
     - id: bindingContext
       type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Threading.Tasks.Task
+      description: "\n<p>\nA <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> which will complete when the model binding process completes.\n</p>\n<p>\nIf model binding was successful, the <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result\" data-throw-if-not-resolved=\"false\"></xref> should have\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult.IsModelSet\" data-throw-if-not-resolved=\"false\"></xref> set to <code>true</code>.\n</p>\n<p>\nA model binder that completes successfully should set <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result\" data-throw-if-not-resolved=\"false\"></xref> to\na value returned from <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult.Success(System.Object)\" data-throw-if-not-resolved=\"false\"></xref>. \n</p>\n"
+    content.vb: Public Overridable Function BindModelAsync(bindingContext As ModelBindingContext) As Task
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.BindModelAsync*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)
@@ -199,20 +205,24 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CanCreateInstance
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 116
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
+  summary: "\nGets an indication whether or not this <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder\" data-throw-if-not-resolved=\"false\"></xref> implementation can create\nan <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <span class=\"paramref\">targetType</span>.\n"
+  remarks: "\nA <code>true</code> return value is necessary for successful model binding if model is initially <code>null</code>.\n"
   example: []
   syntax:
     content: public virtual bool CanCreateInstance(Type targetType)
-    content.vb: Public Overridable Function CanCreateInstance(targetType As Type) As Boolean
     parameters:
     - id: targetType
       type: System.Type
+      description: <xref href="System.Type" data-throw-if-not-resolved="false"></xref> of the model.
     return:
       type: System.Boolean
+      description: "\n<code>true</code> if this <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder\" data-throw-if-not-resolved=\"false\"></xref> implementation can create an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref>\nassignable to <span class=\"paramref\">targetType</span>; <code>false</code> otherwise.\n"
+    content.vb: Public Overridable Function CanCreateInstance(targetType As Type) As Boolean
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CanCreateInstance*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder.CanCreateInstance(System.Type)
@@ -241,24 +251,24 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CreateEmptyCollection
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 135
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
-  summary: "\nCreate an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <em>targetType</em>.\n"
-  remarks: Called when creating a default 'empty' model for a top level bind.
+  summary: "\nCreate an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <span class=\"paramref\">targetType</span>.\n"
+  remarks: Called when creating a default &apos;empty&apos; model for a top level bind.
   example: []
   syntax:
     content: protected virtual object CreateEmptyCollection(Type targetType)
-    content.vb: Protected Overridable Function CreateEmptyCollection(targetType As Type) As Object
     parameters:
     - id: targetType
       type: System.Type
       description: <xref href="System.Type" data-throw-if-not-resolved="false"></xref> of the model.
     return:
       type: System.Object
-      description: An <xref href="System.Object" data-throw-if-not-resolved="false"></xref> assignable to <em>targetType</em>.
+      description: An <xref href="System.Object" data-throw-if-not-resolved="false"></xref> assignable to <span class="paramref">targetType</span>.
+    content.vb: Protected Overridable Function CreateEmptyCollection(targetType As Type) As Object
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CreateEmptyCollection*
   nameWithType.vb: CollectionModelBinder(Of TElement).CreateEmptyCollection(Type)
   modifiers.csharp:
@@ -285,23 +295,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CreateInstance
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 151
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
-  summary: "\nCreate an instance of <em>targetType</em>.\n"
+  summary: "\nCreate an instance of <span class=\"paramref\">targetType</span>.\n"
   example: []
   syntax:
     content: protected object CreateInstance(Type targetType)
-    content.vb: Protected Function CreateInstance(targetType As Type) As Object
     parameters:
     - id: targetType
       type: System.Type
       description: <xref href="System.Type" data-throw-if-not-resolved="false"></xref> of the model.
     return:
       type: System.Object
-      description: An instance of <em>targetType</em>.
+      description: An instance of <span class="paramref">targetType</span>.
+    content.vb: Protected Function CreateInstance(targetType As Type) As Object
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CreateInstance*
   nameWithType.vb: CollectionModelBinder(Of TElement).CreateInstance(Type)
   modifiers.csharp:
@@ -326,17 +336,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ConvertToCollectionType
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 310
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
-  summary: "\nGets an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <em>targetType</em> that contains members from\n<em>collection</em>.\n"
+  summary: "\nGets an <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <span class=\"paramref\">targetType</span> that contains members from\n<span class=\"paramref\">collection</span>.\n"
   remarks: "\nExtensibility point that allows the bound collection to be manipulated or transformed before being\nreturned from the binder.\n"
   example: []
   syntax:
     content: protected virtual object ConvertToCollectionType(Type targetType, IEnumerable<TElement> collection)
-    content.vb: Protected Overridable Function ConvertToCollectionType(targetType As Type, collection As IEnumerable(Of TElement)) As Object
     parameters:
     - id: targetType
       type: System.Type
@@ -346,7 +355,8 @@ items:
       description: "\nCollection of values retrieved from value providers. Or <code>null</code> if nothing was bound.\n"
     return:
       type: System.Object
-      description: "\nAn <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <em>targetType</em>. Or <code>null</code> if nothing was bound.\n"
+      description: "\nAn <xref href=\"System.Object\" data-throw-if-not-resolved=\"false\"></xref> assignable to <span class=\"paramref\">targetType</span>. Or <code>null</code> if nothing was bound.\n"
+    content.vb: Protected Overridable Function ConvertToCollectionType(targetType As Type, collection As IEnumerable(Of TElement)) As Object
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ConvertToCollectionType*
   nameWithType.vb: CollectionModelBinder(Of TElement).ConvertToCollectionType(Type, IEnumerable(Of TElement))
   modifiers.csharp:
@@ -374,16 +384,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CopyToModel
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Binders/CollectionModelBinder.cs
     startLine: 337
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Binders
-  summary: "\nAdds values from <em>sourceCollection</em> to given <em>target</em>.\n"
+  summary: "\nAdds values from <span class=\"paramref\">sourceCollection</span> to given <span class=\"paramref\">target</span>.\n"
   example: []
   syntax:
     content: protected virtual void CopyToModel(object target, IEnumerable<TElement> sourceCollection)
-    content.vb: Protected Overridable Sub CopyToModel(target As Object, sourceCollection As IEnumerable(Of TElement))
     parameters:
     - id: target
       type: System.Object
@@ -391,6 +400,7 @@ items:
     - id: sourceCollection
       type: System.Collections.Generic.IEnumerable{{TElement}}
       description: "\nCollection of values retrieved from value providers. Or <code>null</code> if nothing was bound.\n"
+    content.vb: Protected Overridable Sub CopyToModel(target As Object, sourceCollection As IEnumerable(Of TElement))
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CopyToModel*
   nameWithType.vb: CollectionModelBinder(Of TElement).CopyToModel(Object, IEnumerable(Of TElement))
   modifiers.csharp:
@@ -727,7 +737,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>
   nameWithType.vb: CollectionModelBinder(Of TElement)
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement)
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement)
   name.vb: CollectionModelBinder(Of TElement)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1
@@ -764,7 +774,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.CollectionModelBinder
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.CollectionModelBinder
   nameWithType.vb: CollectionModelBinder(Of TElement).CollectionModelBinder
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CollectionModelBinder
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CollectionModelBinder
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ElementBinder*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ElementBinder
   isExternal: false
@@ -772,7 +782,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.ElementBinder
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.ElementBinder
   nameWithType.vb: CollectionModelBinder(Of TElement).ElementBinder
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).ElementBinder
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).ElementBinder
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.BindModelAsync*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.BindModelAsync
   isExternal: false
@@ -780,7 +790,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.BindModelAsync
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.BindModelAsync
   nameWithType.vb: CollectionModelBinder(Of TElement).BindModelAsync
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).BindModelAsync
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).BindModelAsync
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)
   commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder.BindModelAsync(Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder
@@ -845,7 +855,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.CanCreateInstance
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.CanCreateInstance
   nameWithType.vb: CollectionModelBinder(Of TElement).CanCreateInstance
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CanCreateInstance
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CanCreateInstance
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder.CanCreateInstance(System.Type)
   commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder.CanCreateInstance(System.Type)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.ICollectionModelBinder
@@ -906,7 +916,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.CreateEmptyCollection
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.CreateEmptyCollection
   nameWithType.vb: CollectionModelBinder(Of TElement).CreateEmptyCollection
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CreateEmptyCollection
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CreateEmptyCollection
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CreateInstance*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.CreateInstance
   isExternal: false
@@ -914,7 +924,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.CreateInstance
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.CreateInstance
   nameWithType.vb: CollectionModelBinder(Of TElement).CreateInstance
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CreateInstance
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CreateInstance
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ConvertToCollectionType*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder`1.ConvertToCollectionType
   isExternal: false
@@ -922,7 +932,7 @@ references:
   nameWithType: CollectionModelBinder<TElement>.ConvertToCollectionType
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.ConvertToCollectionType
   nameWithType.vb: CollectionModelBinder(Of TElement).ConvertToCollectionType
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).ConvertToCollectionType
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).ConvertToCollectionType
 - uid: System.Collections.Generic.IEnumerable{{TElement}}
   commentId: T:System.Collections.Generic.IEnumerable{`0}
   parent: System.Collections.Generic
@@ -931,7 +941,7 @@ references:
   nameWithType: IEnumerable<TElement>
   fullName: System.Collections.Generic.IEnumerable<TElement>
   nameWithType.vb: IEnumerable(Of TElement)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of TElement)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TElement)
   name.vb: IEnumerable(Of TElement)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -970,7 +980,7 @@ references:
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
   nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
   name.vb: IEnumerable(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1015,5 +1025,5 @@ references:
   nameWithType: CollectionModelBinder<TElement>.CopyToModel
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder<TElement>.CopyToModel
   nameWithType.vb: CollectionModelBinder(Of TElement).CopyToModel
-  fullname.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CopyToModel
+  fullName.vb: Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinder(Of TElement).CopyToModel
 shouldSkipMarkup: true

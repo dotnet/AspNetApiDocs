@@ -5,10 +5,10 @@ items:
   id: CancellationChangeToken
   parent: Microsoft.Extensions.Primitives
   children:
-  - Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(System.Threading.CancellationToken)
+  - Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(CancellationToken)
   - Microsoft.Extensions.Primitives.CancellationChangeToken.ActiveChangeCallbacks
   - Microsoft.Extensions.Primitives.CancellationChangeToken.HasChanged
-  - Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
+  - Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
   langs:
   - csharp
   - vb
@@ -22,46 +22,39 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: CancellationChangeToken
-    path: src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
     startLine: 11
   assemblies:
   - Microsoft.Extensions.Primitives
   namespace: Microsoft.Extensions.Primitives
-  summary: "\nA <xref href=\"Microsoft.Extensions.Primitives.IChangeToken\" data-throw-if-not-resolved=\"false\"></xref> implementation using <xref href=\"System.Threading.CancellationToken\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nA <xref href=\"Microsoft.Extensions.Primitives.IChangeToken\" data-throw-if-not-resolved=\"false\"></xref> implementation using <see cref=\"!:CancellationToken\"></see>.\n"
   example: []
   syntax:
-    content: 'public class CancellationChangeToken : IChangeToken'
+    content: 'public class CancellationChangeToken : object, IChangeToken'
     content.vb: >-
       Public Class CancellationChangeToken
+          Inherits Object
           Implements IChangeToken
   inheritance:
   - System.Object
   implements:
   - Microsoft.Extensions.Primitives.IChangeToken
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(System.Threading.CancellationToken)
-  commentId: M:Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(System.Threading.CancellationToken)
-  id: '#ctor(System.Threading.CancellationToken)'
+- uid: Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(CancellationToken)
+  commentId: M:Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor(CancellationToken)
+  id: '#ctor(CancellationToken)'
   parent: Microsoft.Extensions.Primitives.CancellationChangeToken
   langs:
   - csharp
   - vb
   name: CancellationChangeToken(CancellationToken)
   nameWithType: CancellationChangeToken.CancellationChangeToken(CancellationToken)
-  fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.CancellationChangeToken(System.Threading.CancellationToken)
+  fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.CancellationChangeToken(CancellationToken)
   type: Constructor
   source:
     remote:
@@ -69,7 +62,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: .ctor
-    path: src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
     startLine: 17
   assemblies:
   - Microsoft.Extensions.Primitives
@@ -78,11 +71,11 @@ items:
   example: []
   syntax:
     content: public CancellationChangeToken(CancellationToken cancellationToken)
-    content.vb: Public Sub New(cancellationToken As CancellationToken)
     parameters:
     - id: cancellationToken
-      type: System.Threading.CancellationToken
-      description: The <xref href="System.Threading.CancellationToken" data-throw-if-not-resolved="false"></xref>.
+      type: CancellationToken
+      description: The <see cref="!:CancellationToken"></see>.
+    content.vb: Public Sub New(cancellationToken As CancellationToken)
   overload: Microsoft.Extensions.Primitives.CancellationChangeToken.#ctor*
   modifiers.csharp:
   - public
@@ -105,18 +98,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: ActiveChangeCallbacks
-    path: src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
     startLine: 23
   assemblies:
   - Microsoft.Extensions.Primitives
   namespace: Microsoft.Extensions.Primitives
+  summary: "\nIndicates if this token will pro-actively raise callbacks. Callbacks are still guaranteed to fire, eventually.\n"
   example: []
   syntax:
     content: public bool ActiveChangeCallbacks { get; }
-    content.vb: Public ReadOnly Property ActiveChangeCallbacks As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property ActiveChangeCallbacks As Boolean
   overload: Microsoft.Extensions.Primitives.CancellationChangeToken.ActiveChangeCallbacks*
   implements:
   - Microsoft.Extensions.Primitives.IChangeToken.ActiveChangeCallbacks
@@ -143,18 +137,19 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: HasChanged
-    path: src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
     startLine: 26
   assemblies:
   - Microsoft.Extensions.Primitives
   namespace: Microsoft.Extensions.Primitives
+  summary: "\nGets a value that indicates if a change has occured.\n"
   example: []
   syntax:
     content: public bool HasChanged { get; }
-    content.vb: Public ReadOnly Property HasChanged As Boolean
     parameters: []
     return:
       type: System.Boolean
+    content.vb: Public ReadOnly Property HasChanged As Boolean
   overload: Microsoft.Extensions.Primitives.CancellationChangeToken.HasChanged*
   implements:
   - Microsoft.Extensions.Primitives.IChangeToken.HasChanged
@@ -164,16 +159,16 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
-  commentId: M:Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
-  id: RegisterChangeCallback(System.Action{System.Object},System.Object)
+- uid: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
+  commentId: M:Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
+  id: RegisterChangeCallback(Action{System.Object},System.Object)
   parent: Microsoft.Extensions.Primitives.CancellationChangeToken
   langs:
   - csharp
   - vb
   name: RegisterChangeCallback(Action<Object>, Object)
   nameWithType: CancellationChangeToken.RegisterChangeCallback(Action<Object>, Object)
-  fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(System.Action<System.Object>, System.Object)
+  fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(Action<System.Object>, System.Object)
   type: Method
   source:
     remote:
@@ -181,31 +176,35 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: RegisterChangeCallback
-    path: src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.Primitives/CancellationChangeToken.cs
     startLine: 31
   assemblies:
   - Microsoft.Extensions.Primitives
   namespace: Microsoft.Extensions.Primitives
+  summary: "\nRegisters for a callback that will be invoked when the entry has changed.\n<xref href=\"Microsoft.Extensions.Primitives.IChangeToken.HasChanged\" data-throw-if-not-resolved=\"false\"></xref> MUST be set before the callback is invoked.\n"
   example: []
   syntax:
     content: public IDisposable RegisterChangeCallback(Action<object> callback, object state)
-    content.vb: Public Function RegisterChangeCallback(callback As Action(Of Object), state As Object) As IDisposable
     parameters:
     - id: callback
-      type: System.Action{System.Object}
+      type: Action{System.Object}
+      description: The <see cref="!:Action&lt;Object>"></see> to invoke.
     - id: state
       type: System.Object
+      description: State to be passed into the callback.
     return:
-      type: System.IDisposable
+      type: IDisposable
+      description: An <see cref="!:IDisposable"></see> that is used to unregister the callback.
+    content.vb: Public Function RegisterChangeCallback(callback As Action(Of Object), state As Object) As IDisposable
   overload: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback*
   implements:
-  - Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
+  - Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
   nameWithType.vb: CancellationChangeToken.RegisterChangeCallback(Action(Of Object), Object)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(System.Action(Of System.Object), System.Object)
+  fullName.vb: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback(Action(Of System.Object), System.Object)
   name.vb: RegisterChangeCallback(Action(Of Object), Object)
 references:
 - uid: Microsoft.Extensions.Primitives.IChangeToken
@@ -215,13 +214,6 @@ references:
   name: IChangeToken
   nameWithType: IChangeToken
   fullName: Microsoft.Extensions.Primitives.IChangeToken
-- uid: System.Threading.CancellationToken
-  commentId: T:System.Threading.CancellationToken
-  parent: System.Threading
-  isExternal: true
-  name: CancellationToken
-  nameWithType: CancellationToken
-  fullName: System.Threading.CancellationToken
 - uid: Microsoft.Extensions.Primitives
   commentId: N:Microsoft.Extensions.Primitives
   isExternal: false
@@ -235,291 +227,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading
-  commentId: N:System.Threading
-  isExternal: false
-  name: System.Threading
-  nameWithType: System.Threading
-  fullName: System.Threading
 - uid: System
   commentId: N:System
   isExternal: false
@@ -538,6 +245,12 @@ references:
   name: CancellationChangeToken
   nameWithType: CancellationChangeToken.CancellationChangeToken
   fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.CancellationChangeToken
+- uid: CancellationToken
+  commentId: '!:CancellationToken'
+  isExternal: true
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: CancellationToken
 - uid: Microsoft.Extensions.Primitives.CancellationChangeToken.ActiveChangeCallbacks*
   commentId: Overload:Microsoft.Extensions.Primitives.CancellationChangeToken.ActiveChangeCallbacks
   isExternal: false
@@ -577,28 +290,28 @@ references:
   name: RegisterChangeCallback
   nameWithType: CancellationChangeToken.RegisterChangeCallback
   fullName: Microsoft.Extensions.Primitives.CancellationChangeToken.RegisterChangeCallback
-- uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
-  commentId: M:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
+- uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
+  commentId: M:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
   parent: Microsoft.Extensions.Primitives.IChangeToken
   isExternal: true
   name: RegisterChangeCallback(Action<Object>, Object)
   nameWithType: IChangeToken.RegisterChangeCallback(Action<Object>, Object)
-  fullName: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action<System.Object>, System.Object)
+  fullName: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action<System.Object>, System.Object)
   nameWithType.vb: IChangeToken.RegisterChangeCallback(Action(Of Object), Object)
-  fullname.vb: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action(Of System.Object), System.Object)
+  fullName.vb: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action(Of System.Object), System.Object)
   name.vb: RegisterChangeCallback(Action(Of Object), Object)
   spec.csharp:
-  - uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
+  - uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
     name: RegisterChangeCallback
     nameWithType: IChangeToken.RegisterChangeCallback
     fullName: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: <
     nameWithType: <
@@ -623,17 +336,17 @@ references:
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(System.Action{System.Object},System.Object)
+  - uid: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback(Action{System.Object},System.Object)
     name: RegisterChangeCallback
     nameWithType: IChangeToken.RegisterChangeCallback
     fullName: Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -657,21 +370,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Action{System.Object}
-  commentId: T:System.Action{System.Object}
-  parent: System
-  definition: System.Action`1
+- uid: Action{System.Object}
+  commentId: '!:Action{System.Object}'
+  definition: Action`1
   name: Action<Object>
   nameWithType: Action<Object>
-  fullName: System.Action<System.Object>
+  fullName: Action<System.Object>
   nameWithType.vb: Action(Of Object)
-  fullname.vb: System.Action(Of System.Object)
+  fullName.vb: Action(Of System.Object)
   name.vb: Action(Of Object)
   spec.csharp:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: <
     nameWithType: <
@@ -685,10 +397,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -701,49 +413,46 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
+- uid: IDisposable
   isExternal: true
   name: IDisposable
   nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: System.Action`1
-  commentId: T:System.Action`1
+  fullName: IDisposable
+- uid: Action`1
   isExternal: true
-  name: Action<T>
-  nameWithType: Action<T>
-  fullName: System.Action<T>
-  nameWithType.vb: Action(Of T)
-  fullname.vb: System.Action(Of T)
-  name.vb: Action(Of T)
+  name: Action<>
+  nameWithType: Action<>
+  fullName: Action<>
+  nameWithType.vb: Action(Of )
+  fullName.vb: Action(Of )
+  name.vb: Action(Of )
   spec.csharp:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Action`1
+  - uid: Action`1
     name: Action
     nameWithType: Action
-    fullName: System.Action
+    fullName: Action
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: T
-    nameWithType: T
-    fullName: T
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )

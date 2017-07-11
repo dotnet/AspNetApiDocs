@@ -21,13 +21,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: DefaultCollectionValidationStrategy
-    path: src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
     startLine: 41
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Internal
   summary: "\nThe default implementation of <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy\" data-throw-if-not-resolved=\"false\"></xref> for a collection.\n"
-  remarks: "\nThis implementation handles cases like:\n<example>\n    Model: IList&lt;Student&gt; \n    Query String: ?students[0].Age=8&amp;students[1].Age=9\n\n    In this case the elements of the collection are identified in the input data set by an incrementing\n    integer index.\n</example>\n\nor:\n\n<example>\n    Model: IDictionary&lt;string, int&gt; \n    Query String: ?students[0].Key=Joey&amp;students[0].Value=8\n\n    In this case the dictionary is treated as a collection of key-value pairs, and the elements of the\n    collection are identified in the input data set by an incrementing integer index.\n</example>\n\nUsing this key format, the enumerator enumerates model objects of type matching\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata\" data-throw-if-not-resolved=\"false\"></xref>. The indices of the elements in the collection are used to\ncompute the model prefix keys.\n"
+  remarks: "\nThis implementation handles cases like:\n<example>\n    Model: IList&lt;Student> \n    Query String: ?students[0].Age=8&amp;students[1].Age=9\n\n    In this case the elements of the collection are identified in the input data set by an incrementing\n    integer index.\n</example>\n\nor:\n\n<example>\n    Model: IDictionary&lt;string, int> \n    Query String: ?students[0].Key=Joey&amp;students[0].Value=8\n\n    In this case the dictionary is treated as a collection of key-value pairs, and the elements of the\n    collection are identified in the input data set by an incrementing integer index.\n</example>\n\nUsing this key format, the enumerator enumerates model objects of type matching\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata\" data-throw-if-not-resolved=\"false\"></xref>. The indices of the elements in the collection are used to\ncompute the model prefix keys.\n"
   example: []
   syntax:
     content: 'public class DefaultCollectionValidationStrategy : IValidationStrategy'
@@ -69,7 +69,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Instance
-    path: src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
     startLine: 49
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -78,9 +78,9 @@ items:
   example: []
   syntax:
     content: public static readonly DefaultCollectionValidationStrategy Instance
-    content.vb: Public Shared ReadOnly Instance As DefaultCollectionValidationStrategy
     return:
       type: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy
+    content.vb: Public Shared ReadOnly Instance As DefaultCollectionValidationStrategy
   modifiers.csharp:
   - public
   - static
@@ -106,24 +106,29 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetChildren
-    path: src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
     startLine: 57
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Internal
+  summary: "\nGets an <xref href=\"System.Collections.Generic.IEnumerator%601\" data-throw-if-not-resolved=\"false\"></xref> containing a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry\" data-throw-if-not-resolved=\"false\"></xref> for\neach child entry of the model object to be validated.\n"
   example: []
   syntax:
     content: public IEnumerator<ValidationEntry> GetChildren(ModelMetadata metadata, string key, object model)
-    content.vb: Public Function GetChildren(metadata As ModelMetadata, key As String, model As Object) As IEnumerator(Of ValidationEntry)
     parameters:
     - id: metadata
       type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata" data-throw-if-not-resolved="false"></xref> associated with <span class="paramref">model</span>.
     - id: key
       type: System.String
+      description: The model prefix associated with <span class="paramref">model</span>.
     - id: model
       type: System.Object
+      description: The model object.
     return:
       type: System.Collections.Generic.IEnumerator{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry}
+      description: An <xref href="System.Collections.Generic.IEnumerator%601" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Function GetChildren(metadata As ModelMetadata, key As String, model As Object) As IEnumerator(Of ValidationEntry)
   overload: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
@@ -148,14 +153,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetEnumeratorForElementType
-    path: src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/Internal/DefaultCollectionValidationStrategy.cs
     startLine: 66
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Internal
   syntax:
     content: public IEnumerator GetEnumeratorForElementType(ModelMetadata metadata, object model)
-    content.vb: Public Function GetEnumeratorForElementType(metadata As ModelMetadata, model As Object) As IEnumerator
     parameters:
     - id: metadata
       type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
@@ -163,6 +167,7 @@ items:
       type: System.Object
     return:
       type: System.Collections.IEnumerator
+    content.vb: Public Function GetEnumeratorForElementType(metadata As ModelMetadata, model As Object) As IEnumerator
   overload: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType*
   modifiers.csharp:
   - public
@@ -597,7 +602,7 @@ references:
   nameWithType: IEnumerator<ValidationEntry>
   fullName: System.Collections.Generic.IEnumerator<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry>
   nameWithType.vb: IEnumerator(Of ValidationEntry)
-  fullname.vb: System.Collections.Generic.IEnumerator(Of Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)
   name.vb: IEnumerator(Of ValidationEntry)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerator`1
@@ -638,7 +643,7 @@ references:
   nameWithType: IEnumerator<T>
   fullName: System.Collections.Generic.IEnumerator<T>
   nameWithType.vb: IEnumerator(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerator(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of T)
   name.vb: IEnumerator(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerator`1

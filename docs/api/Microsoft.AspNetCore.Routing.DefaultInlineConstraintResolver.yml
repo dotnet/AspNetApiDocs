@@ -5,7 +5,7 @@ items:
   id: DefaultInlineConstraintResolver
   parent: Microsoft.AspNetCore.Routing
   children:
-  - Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
+  - Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
   - Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint(System.String)
   langs:
   - csharp
@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Routing.git
     id: DefaultInlineConstraintResolver
-    path: src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
+    path: ../aspnet/Routing/src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
     startLine: 17
   assemblies:
   - Microsoft.AspNetCore.Routing
@@ -50,16 +50,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
-  commentId: M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
-  id: '#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions})'
+- uid: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
+  commentId: M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor(IOptions{Microsoft.AspNetCore.Routing.RouteOptions})
+  id: '#ctor(IOptions{Microsoft.AspNetCore.Routing.RouteOptions})'
   parent: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver
   langs:
   - csharp
   - vb
   name: DefaultInlineConstraintResolver(IOptions<RouteOptions>)
   nameWithType: DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(IOptions<RouteOptions>)
-  fullName: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Routing.RouteOptions>)
+  fullName: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(IOptions<Microsoft.AspNetCore.Routing.RouteOptions>)
   type: Constructor
   source:
     remote:
@@ -67,7 +67,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Routing.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
+    path: ../aspnet/Routing/src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
     startLine: 27
   assemblies:
   - Microsoft.AspNetCore.Routing
@@ -76,18 +76,18 @@ items:
   example: []
   syntax:
     content: public DefaultInlineConstraintResolver(IOptions<RouteOptions> routeOptions)
-    content.vb: Public Sub New(routeOptions As IOptions(Of RouteOptions))
     parameters:
     - id: routeOptions
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions}
+      type: IOptions{Microsoft.AspNetCore.Routing.RouteOptions}
       description: "\nAccessor for <xref href=\"Microsoft.AspNetCore.Routing.RouteOptions\" data-throw-if-not-resolved=\"false\"></xref> containing the constraints of interest.\n"
+    content.vb: Public Sub New(routeOptions As IOptions(Of RouteOptions))
   overload: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.#ctor*
   nameWithType.vb: DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(IOptions(Of RouteOptions))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Routing.RouteOptions))
+  fullName.vb: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.DefaultInlineConstraintResolver(IOptions(Of Microsoft.AspNetCore.Routing.RouteOptions))
   name.vb: DefaultInlineConstraintResolver(IOptions(Of RouteOptions))
 - uid: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint(System.String)
   commentId: M:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint(System.String)
@@ -106,21 +106,24 @@ items:
       branch: master
       repo: https://github.com/aspnet/Routing.git
     id: ResolveConstraint
-    path: src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
+    path: ../aspnet/Routing/src/Microsoft.AspNetCore.Routing/DefaultInlineConstraintResolver.cs
     startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Routing
   namespace: Microsoft.AspNetCore.Routing
+  summary: "\nResolves the inline constraint.\n"
   example:
-  - "\nA typical constraint looks like the following\n\"exampleConstraint(arg1, arg2, 12)\".\nHere if the type registered for exampleConstraint has a single constructor with one argument,\nThe entire string \"arg1, arg2, 12\" will be treated as a single argument.\nIn all other cases arguments are split at comma.\n"
+  - "\nA typical constraint looks like the following\n&quot;exampleConstraint(arg1, arg2, 12)&quot;.\nHere if the type registered for exampleConstraint has a single constructor with one argument,\nThe entire string &quot;arg1, arg2, 12&quot; will be treated as a single argument.\nIn all other cases arguments are split at comma.\n"
   syntax:
     content: public virtual IRouteConstraint ResolveConstraint(string inlineConstraint)
-    content.vb: Public Overridable Function ResolveConstraint(inlineConstraint As String) As IRouteConstraint
     parameters:
     - id: inlineConstraint
       type: System.String
+      description: The inline constraint to resolve.
     return:
-      type: Microsoft.AspNetCore.Routing.IRouteConstraint
+      type: IRouteConstraint
+      description: The <see cref="!:IRouteConstraint"></see> the inline constraint was resolved to.
+    content.vb: Public Overridable Function ResolveConstraint(inlineConstraint As String) As IRouteConstraint
   overload: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint*
   implements:
   - Microsoft.AspNetCore.Routing.IInlineConstraintResolver.ResolveConstraint(System.String)
@@ -455,21 +458,20 @@ references:
   name: DefaultInlineConstraintResolver
   nameWithType: DefaultInlineConstraintResolver.DefaultInlineConstraintResolver
   fullName: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.DefaultInlineConstraintResolver
-- uid: Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions}
-  commentId: T:Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Routing.RouteOptions}
-  parent: Microsoft.Extensions.Options
-  definition: Microsoft.Extensions.Options.IOptions`1
+- uid: IOptions{Microsoft.AspNetCore.Routing.RouteOptions}
+  commentId: '!:IOptions{Microsoft.AspNetCore.Routing.RouteOptions}'
+  definition: IOptions`1
   name: IOptions<RouteOptions>
   nameWithType: IOptions<RouteOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<Microsoft.AspNetCore.Routing.RouteOptions>
+  fullName: IOptions<Microsoft.AspNetCore.Routing.RouteOptions>
   nameWithType.vb: IOptions(Of RouteOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.AspNetCore.Routing.RouteOptions)
+  fullName.vb: IOptions(Of Microsoft.AspNetCore.Routing.RouteOptions)
   name.vb: IOptions(Of RouteOptions)
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: <
     nameWithType: <
@@ -482,10 +484,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -497,49 +499,44 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options.IOptions`1
-  commentId: T:Microsoft.Extensions.Options.IOptions`1
-  isExternal: false
-  name: IOptions<TOptions>
-  nameWithType: IOptions<TOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
-  nameWithType.vb: IOptions(Of TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
-  name.vb: IOptions(Of TOptions)
+- uid: IOptions`1
+  isExternal: true
+  name: IOptions<>
+  nameWithType: IOptions<>
+  fullName: IOptions<>
+  nameWithType.vb: IOptions(Of )
+  fullName.vb: IOptions(Of )
+  name.vb: IOptions(Of )
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
-  isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
 - uid: Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint*
   commentId: Overload:Microsoft.AspNetCore.Routing.DefaultInlineConstraintResolver.ResolveConstraint
   isExternal: false
@@ -592,11 +589,9 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.AspNetCore.Routing.IRouteConstraint
-  commentId: T:Microsoft.AspNetCore.Routing.IRouteConstraint
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
+- uid: IRouteConstraint
+  isExternal: true
   name: IRouteConstraint
   nameWithType: IRouteConstraint
-  fullName: Microsoft.AspNetCore.Routing.IRouteConstraint
+  fullName: IRouteConstraint
 shouldSkipMarkup: true

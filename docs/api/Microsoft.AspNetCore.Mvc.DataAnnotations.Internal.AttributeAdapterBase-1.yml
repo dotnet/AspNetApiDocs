@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: AttributeAdapterBase
-    path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
     startLine: 14
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
@@ -29,16 +29,25 @@ items:
   example: []
   syntax:
     content: 'public abstract class AttributeAdapterBase<TAttribute> : ValidationAttributeAdapter<TAttribute>, IAttributeAdapter, IClientModelValidator where TAttribute : ValidationAttribute'
+    typeParameters:
+    - id: TAttribute
+      description: The type of <xref href="System.ComponentModel.DataAnnotations.ValidationAttribute" data-throw-if-not-resolved="false"></xref> which is being wrapped.
     content.vb: >-
       Public MustInherit Class AttributeAdapterBase(Of TAttribute As ValidationAttribute)
           Inherits ValidationAttributeAdapter(Of TAttribute)
           Implements IAttributeAdapter, IClientModelValidator
-    typeParameters:
-    - id: TAttribute
-      description: The type of <xref href="System.ComponentModel.DataAnnotations.ValidationAttribute" data-throw-if-not-resolved="false"></xref> which is being wrapped.
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter{{TAttribute}}
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.CompareAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataTypeAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MaxLengthAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.MinLengthAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.RangeAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.RegularExpressionAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.RequiredAttributeAdapter
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.StringLengthAttributeAdapter
   implements:
   - Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter
   - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IClientModelValidator
@@ -82,7 +91,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
     startLine: 24
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
@@ -91,7 +100,6 @@ items:
   example: []
   syntax:
     content: public AttributeAdapterBase(TAttribute attribute, IStringLocalizer stringLocalizer)
-    content.vb: Public Sub New(attribute As TAttribute, stringLocalizer As IStringLocalizer)
     parameters:
     - id: attribute
       type: '{TAttribute}'
@@ -99,6 +107,7 @@ items:
     - id: stringLocalizer
       type: Microsoft.Extensions.Localization.IStringLocalizer
       description: The <xref href="Microsoft.Extensions.Localization.IStringLocalizer" data-throw-if-not-resolved="false"></xref> to be used in error generation.
+    content.vb: Public Sub New(attribute As TAttribute, stringLocalizer As IStringLocalizer)
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase`1.#ctor*
   nameWithType.vb: AttributeAdapterBase(Of TAttribute).AttributeAdapterBase(TAttribute, IStringLocalizer)
   modifiers.csharp:
@@ -123,20 +132,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetErrorMessage
-    path: src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.DataAnnotations/Internal/AttributeAdapterBase.cs
     startLine: 30
   assemblies:
   - Microsoft.AspNetCore.Mvc.DataAnnotations
   namespace: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
+  summary: "\nGets the error message.\n"
   example: []
   syntax:
     content: public abstract string GetErrorMessage(ModelValidationContextBase validationContext)
-    content.vb: Public MustOverride Function GetErrorMessage(validationContext As ModelValidationContextBase) As String
     parameters:
     - id: validationContext
       type: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContextBase
+      description: The context to use in message creation.
     return:
       type: System.String
+      description: The localized error message.
+    content.vb: Public MustOverride Function GetErrorMessage(validationContext As ModelValidationContextBase) As String
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase`1.GetErrorMessage*
   implements:
   - Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContextBase)
@@ -156,7 +168,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute)
   name.vb: ValidationAttributeAdapter(Of TAttribute)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1
@@ -214,7 +226,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute)
   name.vb: ValidationAttributeAdapter(Of TAttribute)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1
@@ -266,7 +278,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.Attribute
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.Attribute
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).Attribute
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).Attribute
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).Attribute
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter{{TAttribute}}.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter{`0}.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter{{TAttribute}}
@@ -275,7 +287,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.AddValidation(ClientModelValidationContext)
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).AddValidation(ClientModelValidationContext)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
     name: AddValidation
@@ -314,7 +326,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.MergeAttribute(IDictionary<String, String>, String, String)
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.MergeAttribute(System.Collections.Generic.IDictionary<System.String, System.String>, System.String, System.String)
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).MergeAttribute(IDictionary(Of String, String), String, String)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).MergeAttribute(System.Collections.Generic.IDictionary(Of System.String, System.String), System.String, System.String)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).MergeAttribute(System.Collections.Generic.IDictionary(Of System.String, System.String), System.String, System.String)
   name.vb: MergeAttribute(IDictionary(Of String, String), String, String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.MergeAttribute(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)
@@ -426,7 +438,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.GetErrorMessage(ModelMetadata, Object[])
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object[])
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(ModelMetadata, Object())
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object())
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object())
   name.vb: GetErrorMessage(ModelMetadata, Object())
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object[])
@@ -790,7 +802,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.Attribute
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.Attribute
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).Attribute
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).Attribute
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).Attribute
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   isExternal: false
@@ -798,7 +810,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.AddValidation(ClientModelValidationContext)
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).AddValidation(ClientModelValidationContext)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.AddValidation(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ClientModelValidationContext)
     name: AddValidation
@@ -836,7 +848,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.MergeAttribute(IDictionary<String, String>, String, String)
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.MergeAttribute(System.Collections.Generic.IDictionary<System.String, System.String>, System.String, System.String)
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).MergeAttribute(IDictionary(Of String, String), String, String)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).MergeAttribute(System.Collections.Generic.IDictionary(Of System.String, System.String), System.String, System.String)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).MergeAttribute(System.Collections.Generic.IDictionary(Of System.String, System.String), System.String, System.String)
   name.vb: MergeAttribute(IDictionary(Of String, String), String, String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.MergeAttribute(System.Collections.Generic.IDictionary{System.String,System.String},System.String,System.String)
@@ -947,7 +959,7 @@ references:
   nameWithType: ValidationAttributeAdapter<TAttribute>.GetErrorMessage(ModelMetadata, Object[])
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter<TAttribute>.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object[])
   nameWithType.vb: ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(ModelMetadata, Object())
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object())
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter(Of TAttribute).GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object())
   name.vb: GetErrorMessage(ModelMetadata, Object())
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.ValidationAttributeAdapter`1.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object[])
@@ -1008,7 +1020,7 @@ references:
   nameWithType: AttributeAdapterBase<TAttribute>
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase<TAttribute>
   nameWithType.vb: AttributeAdapterBase(Of TAttribute)
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute)
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute)
   name.vb: AttributeAdapterBase(Of TAttribute)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase`1
@@ -1052,7 +1064,7 @@ references:
   nameWithType: AttributeAdapterBase<TAttribute>.AttributeAdapterBase
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase<TAttribute>.AttributeAdapterBase
   nameWithType.vb: AttributeAdapterBase(Of TAttribute).AttributeAdapterBase
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute).AttributeAdapterBase
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute).AttributeAdapterBase
 - uid: '{TAttribute}'
   commentId: '!:TAttribute'
   definition: TAttribute
@@ -1077,7 +1089,7 @@ references:
   nameWithType: AttributeAdapterBase<TAttribute>.GetErrorMessage
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase<TAttribute>.GetErrorMessage
   nameWithType.vb: AttributeAdapterBase(Of TAttribute).GetErrorMessage
-  fullname.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute).GetErrorMessage
+  fullName.vb: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.AttributeAdapterBase(Of TAttribute).GetErrorMessage
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContextBase)
   commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter.GetErrorMessage(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContextBase)
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.IAttributeAdapter

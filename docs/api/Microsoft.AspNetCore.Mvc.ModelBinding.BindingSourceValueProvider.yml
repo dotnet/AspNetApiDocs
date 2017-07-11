@@ -23,13 +23,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: BindingSourceValueProvider
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 24
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
   summary: "\nA value provider which provides data from a specific <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  remarks: "\n<p>\nA <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> is an <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> base-implementation which\ncan provide data for all parameters and model properties which specify the corresponding\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> implements <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> and will\ninclude or exclude itself from the set of value providers based on the model's associated\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>. Value providers are by-default included; if a model does not\nspecify a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref> then all value providers are valid.\n</p>\n"
+  remarks: "\n<p>\nA <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> is an <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> base-implementation which\ncan provide data for all parameters and model properties which specify the corresponding\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> implements <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider\" data-throw-if-not-resolved=\"false\"></xref> and will\ninclude or exclude itself from the set of value providers based on the model&apos;s associated\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>. Value providers are by-default included; if a model does not\nspecify a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref> then all value providers are valid.\n</p>\n"
   example: []
   syntax:
     content: 'public abstract class BindingSourceValueProvider : IBindingSourceValueProvider, IValueProvider'
@@ -38,6 +38,11 @@ items:
           Implements IBindingSourceValueProvider, IValueProvider
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.FormValueProvider
+  - Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProvider
+  - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider
+  - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider
   - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
@@ -74,7 +79,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 33
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -83,11 +88,11 @@ items:
   example: []
   syntax:
     content: public BindingSourceValueProvider(BindingSource bindingSource)
-    content.vb: Public Sub New(bindingSource As BindingSource)
     parameters:
     - id: bindingSource
       type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
       description: "\nThe <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref>. Must be a single-source (non-composite) with\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.IsGreedy\" data-throw-if-not-resolved=\"false\"></xref> equal to <code>false</code>.\n"
+    content.vb: Public Sub New(bindingSource As BindingSource)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.#ctor*
   modifiers.csharp:
   - public
@@ -110,7 +115,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: BindingSource
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 62
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
@@ -119,10 +124,10 @@ items:
   example: []
   syntax:
     content: protected BindingSource BindingSource { get; }
-    content.vb: Protected ReadOnly Property BindingSource As BindingSource
     parameters: []
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+    content.vb: Protected ReadOnly Property BindingSource As BindingSource
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource*
   modifiers.csharp:
   - protected
@@ -147,20 +152,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ContainsPrefix
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 65
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
+  summary: "\nDetermines whether the collection contains the specified prefix.\n"
   example: []
   syntax:
     content: public abstract bool ContainsPrefix(string prefix)
-    content.vb: Public MustOverride Function ContainsPrefix(prefix As String) As Boolean
     parameters:
     - id: prefix
       type: System.String
+      description: The prefix to search for.
     return:
       type: System.Boolean
+      description: true if the collection contains the specified prefix; otherwise, false.
+    content.vb: Public MustOverride Function ContainsPrefix(prefix As String) As Boolean
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.ContainsPrefix*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
@@ -187,20 +195,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: GetValue
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 68
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
+  summary: "\nRetrieves a value object using the specified key.\n"
   example: []
   syntax:
     content: public abstract ValueProviderResult GetValue(string key)
-    content.vb: Public MustOverride Function GetValue(key As String) As ValueProviderResult
     parameters:
     - id: key
       type: System.String
+      description: The key of the value object to retrieve.
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
+      description: The value object for the specified key. If the exact key is not found, null.
+    content.vb: Public MustOverride Function GetValue(key As String) As ValueProviderResult
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.GetValue*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
@@ -227,20 +238,23 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Filter
-    path: src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/BindingSourceValueProvider.cs
     startLine: 71
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
+  summary: "\nFilters the value provider based on <span class=\"paramref\">bindingSource</span>.\n"
   example: []
   syntax:
     content: public virtual IValueProvider Filter(BindingSource bindingSource)
-    content.vb: Public Overridable Function Filter(bindingSource As BindingSource) As IValueProvider
     parameters:
     - id: bindingSource
       type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource" data-throw-if-not-resolved="false"></xref> associated with a model.
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+      description: "\nThe filtered value provider, or <code>null</code> if the value provider does not match\n<span class=\"paramref\">bindingSource</span>.\n"
+    content.vb: Public Overridable Function Filter(bindingSource As BindingSource) As IValueProvider
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter*
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)

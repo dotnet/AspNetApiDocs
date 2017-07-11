@@ -5,7 +5,7 @@ items:
   id: RoleStore`1
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   children:
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(DbContext,IdentityErrorDescriber)
   langs:
   - csharp
   - vb
@@ -19,7 +19,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: RoleStore
-    path: src/Microsoft.AspNetCore.Identity.EntityFrameworkCore/RoleStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity.EntityFrameworkCore/RoleStore.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore
@@ -27,54 +27,45 @@ items:
   summary: "\nCreates a new instance of a persistence store for roles.\n"
   example: []
   syntax:
-    content: 'public class RoleStore<TRole> : RoleStore<TRole, DbContext, string>, IQueryableRoleStore<TRole>, IRoleClaimStore<TRole>, IRoleStore<TRole>, IDisposable where TRole : IdentityRole<string>'
-    content.vb: >-
-      Public Class RoleStore(Of TRole As IdentityRole(Of String))
-          Inherits RoleStore(Of TRole, DbContext, String)
-          Implements IQueryableRoleStore(Of TRole), IRoleClaimStore(Of TRole), IRoleStore(Of TRole), IDisposable
+    content: 'public class RoleStore<TRole> : RoleStore<TRole, DbContext, string>, IQueryableRoleStore<TRole>, IRoleClaimStore<TRole> where TRole : IdentityRole<string>'
     typeParameters:
     - id: TRole
       description: The type of the class representing a role
+    content.vb: >-
+      Public Class RoleStore(Of TRole As IdentityRole(Of String))
+          Inherits RoleStore(Of TRole, DbContext, String)
+          Implements IQueryableRoleStore(Of TRole), IRoleClaimStore(Of TRole)
   inheritance:
   - System.Object
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String}
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String}
   implements:
-  - Microsoft.AspNetCore.Identity.IQueryableRoleStore{{TRole}}
-  - Microsoft.AspNetCore.Identity.IRoleClaimStore{{TRole}}
-  - Microsoft.AspNetCore.Identity.IRoleStore{{TRole}}
-  - System.IDisposable
+  - IQueryableRoleStore{{TRole}}
+  - IRoleClaimStore{{TRole}}
   inheritedMembers:
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync({TRole},System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
-  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync({TRole},System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
+  - Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
   nameWithType.vb: RoleStore(Of TRole)
   modifiers.csharp:
   - public
@@ -84,16 +75,16 @@ items:
   - Class
   fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole)
   name.vb: RoleStore(Of TRole)
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
-  id: '#ctor(Microsoft.EntityFrameworkCore.DbContext,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)'
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(DbContext,IdentityErrorDescriber)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor(DbContext,IdentityErrorDescriber)
+  id: '#ctor(DbContext,IdentityErrorDescriber)'
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1
   langs:
   - csharp
   - vb
   name: RoleStore(DbContext, IdentityErrorDescriber)
   nameWithType: RoleStore<TRole>.RoleStore(DbContext, IdentityErrorDescriber)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole>.RoleStore(Microsoft.EntityFrameworkCore.DbContext, Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole>.RoleStore(DbContext, IdentityErrorDescriber)
   type: Constructor
   source:
     remote:
@@ -101,26 +92,26 @@ items:
       branch: master
       repo: https://github.com/aspnet/Identity.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Identity.EntityFrameworkCore/RoleStore.cs
+    path: ../aspnet/Identity/src/Microsoft.AspNetCore.Identity.EntityFrameworkCore/RoleStore.cs
     startLine: 21
   assemblies:
   - Microsoft.AspNetCore.Identity.EntityFrameworkCore
   namespace: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   syntax:
     content: public RoleStore(DbContext context, IdentityErrorDescriber describer = null)
-    content.vb: Public Sub New(context As DbContext, describer As IdentityErrorDescriber = Nothing)
     parameters:
     - id: context
-      type: Microsoft.EntityFrameworkCore.DbContext
+      type: DbContext
     - id: describer
-      type: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
+      type: IdentityErrorDescriber
+    content.vb: Public Sub New(context As DbContext, describer As IdentityErrorDescriber = Nothing)
   overload: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`1.#ctor*
   nameWithType.vb: RoleStore(Of TRole).RoleStore(DbContext, IdentityErrorDescriber)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole).RoleStore(Microsoft.EntityFrameworkCore.DbContext, Microsoft.AspNetCore.Identity.IdentityErrorDescriber)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole).RoleStore(DbContext, IdentityErrorDescriber)
 references:
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   commentId: N:Microsoft.AspNetCore.Identity.EntityFrameworkCore
@@ -135,15 +126,15 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
-  commentId: T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  commentId: T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5
   name: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String))
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String))
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String))
   name.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String))
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5
@@ -159,10 +150,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.EntityFrameworkCore.DbContext
+  - uid: DbContext
     name: DbContext
     nameWithType: DbContext
-    fullName: Microsoft.EntityFrameworkCore.DbContext
+    fullName: DbContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -225,10 +216,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.EntityFrameworkCore.DbContext
+  - uid: DbContext
     name: DbContext
     nameWithType: DbContext
-    fullName: Microsoft.EntityFrameworkCore.DbContext
+    fullName: DbContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -277,15 +268,15 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String}
-  commentId: T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String}
+  commentId: T:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String}
   parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3
   name: RoleStore<TRole, DbContext, String>
   nameWithType: RoleStore<TRole, DbContext, String>
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String>
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String>
   nameWithType.vb: RoleStore(Of TRole, DbContext, String)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String)
   name.vb: RoleStore(Of TRole, DbContext, String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3
@@ -301,10 +292,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.EntityFrameworkCore.DbContext
+  - uid: DbContext
     name: DbContext
     nameWithType: DbContext
-    fullName: Microsoft.EntityFrameworkCore.DbContext
+    fullName: DbContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -331,10 +322,10 @@ references:
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: Microsoft.EntityFrameworkCore.DbContext
+  - uid: DbContext
     name: DbContext
     nameWithType: DbContext
-    fullName: Microsoft.EntityFrameworkCore.DbContext
+    fullName: DbContext
     isExternal: true
   - name: ', '
     nameWithType: ', '
@@ -347,21 +338,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IQueryableRoleStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
+- uid: IQueryableRoleStore{{TRole}}
+  commentId: '!:IQueryableRoleStore{`0}'
+  definition: IQueryableRoleStore`1
   name: IQueryableRoleStore<TRole>
   nameWithType: IQueryableRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore<TRole>
+  fullName: IQueryableRoleStore<TRole>
   nameWithType.vb: IQueryableRoleStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IQueryableRoleStore(Of TRole)
+  fullName.vb: IQueryableRoleStore(Of TRole)
   name.vb: IQueryableRoleStore(Of TRole)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
+  - uid: IQueryableRoleStore`1
     name: IQueryableRoleStore
     nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
+    fullName: IQueryableRoleStore
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
@@ -372,10 +363,11 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
+  - uid: IQueryableRoleStore`1
     name: IQueryableRoleStore
     nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
+    fullName: IQueryableRoleStore
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -385,21 +377,21 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleClaimStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleClaimStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
+- uid: IRoleClaimStore{{TRole}}
+  commentId: '!:IRoleClaimStore{`0}'
+  definition: IRoleClaimStore`1
   name: IRoleClaimStore<TRole>
   nameWithType: IRoleClaimStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore<TRole>
+  fullName: IRoleClaimStore<TRole>
   nameWithType.vb: IRoleClaimStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IRoleClaimStore(Of TRole)
+  fullName.vb: IRoleClaimStore(Of TRole)
   name.vb: IRoleClaimStore(Of TRole)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
+  - uid: IRoleClaimStore`1
     name: IRoleClaimStore
     nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
+    fullName: IRoleClaimStore
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
@@ -410,10 +402,11 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
+  - uid: IRoleClaimStore`1
     name: IRoleClaimStore
     nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
+    fullName: IRoleClaimStore
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
@@ -423,65 +416,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleStore{{TRole}}
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleStore{`0}
-  parent: Microsoft.AspNetCore.Identity
-  definition: Microsoft.AspNetCore.Identity.IRoleStore`1
-  name: IRoleStore<TRole>
-  nameWithType: IRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleStore<TRole>
-  nameWithType.vb: IRoleStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IRoleStore(Of TRole)
-  name.vb: IRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.IDisposable
-  commentId: T:System.IDisposable
-  parent: System
-  isExternal: true
-  name: IDisposable
-  nameWithType: IDisposable
-  fullName: System.IDisposable
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String}.CreateRoleClaim(`0,System.Security.Claims.Claim)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String}.CreateRoleClaim(`0,System.Security.Claims.Claim)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3.CreateRoleClaim(`0,System.Security.Claims.Claim)
   name: CreateRoleClaim(TRole, Claim)
   nameWithType: RoleStore<TRole, DbContext, String>.CreateRoleClaim(TRole, Claim)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String).CreateRoleClaim(TRole, Claim)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String).CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String).CreateRoleClaim(TRole, System.Security.Claims.Claim)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
     nameWithType: RoleStore<TRole, DbContext, String>.CreateRoleClaim
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String>.CreateRoleClaim
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String>.CreateRoleClaim
   - name: (
     nameWithType: (
     fullName: (
@@ -503,7 +451,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
     nameWithType: RoleStore(Of TRole, DbContext, String).CreateRoleClaim
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String).CreateRoleClaim
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String).CreateRoleClaim
   - name: (
     nameWithType: (
     fullName: (
@@ -521,47 +469,47 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
-  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
+  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Context
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Context
   name: Context
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.Context
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Context
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Context
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).Context
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Context
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
-  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Context
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
+  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ErrorDescriber
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ErrorDescriber
   name: ErrorDescriber
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ErrorDescriber
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ErrorDescriber
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ErrorDescriber
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ErrorDescriber
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ErrorDescriber
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
-  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ErrorDescriber
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
+  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AutoSaveChanges
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AutoSaveChanges
   name: AutoSaveChanges
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.AutoSaveChanges
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AutoSaveChanges
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AutoSaveChanges
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).AutoSaveChanges
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AutoSaveChanges
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AutoSaveChanges
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
   name: CreateAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.CreateAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).CreateAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
     name: CreateAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.CreateAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -583,7 +531,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
     name: CreateAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).CreateAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -601,20 +549,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.UpdateAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.UpdateAsync(`0,System.Threading.CancellationToken)
   name: UpdateAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.UpdateAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.UpdateAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.UpdateAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).UpdateAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).UpdateAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).UpdateAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.UpdateAsync(`0,System.Threading.CancellationToken)
     name: UpdateAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.UpdateAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.UpdateAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.UpdateAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -636,7 +584,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.UpdateAsync(`0,System.Threading.CancellationToken)
     name: UpdateAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).UpdateAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).UpdateAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).UpdateAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -654,20 +602,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.DeleteAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.DeleteAsync(`0,System.Threading.CancellationToken)
   name: DeleteAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.DeleteAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.DeleteAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.DeleteAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).DeleteAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).DeleteAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).DeleteAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.DeleteAsync(`0,System.Threading.CancellationToken)
     name: DeleteAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.DeleteAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.DeleteAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.DeleteAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -689,7 +637,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.DeleteAsync(`0,System.Threading.CancellationToken)
     name: DeleteAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).DeleteAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).DeleteAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).DeleteAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -707,20 +655,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleIdAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleIdAsync(`0,System.Threading.CancellationToken)
   name: GetRoleIdAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetRoleIdAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleIdAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleIdAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetRoleIdAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleIdAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleIdAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleIdAsync(`0,System.Threading.CancellationToken)
     name: GetRoleIdAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetRoleIdAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleIdAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleIdAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -742,7 +690,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleIdAsync(`0,System.Threading.CancellationToken)
     name: GetRoleIdAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetRoleIdAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleIdAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleIdAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -760,20 +708,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetRoleNameAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleNameAsync(`0,System.Threading.CancellationToken)
   name: GetRoleNameAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetRoleNameAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleNameAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetRoleNameAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleNameAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetRoleNameAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -795,7 +743,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetRoleNameAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -813,20 +761,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
   name: SetRoleNameAsync(TRole, String, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.SetRoleNameAsync(TRole, String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).SetRoleNameAsync(TRole, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetRoleNameAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.SetRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -856,7 +804,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetRoleNameAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).SetRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -882,20 +830,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdFromString(System.String)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdFromString(System.String)
   name: ConvertIdFromString(String)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ConvertIdFromString(String)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdFromString(System.String)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdFromString(System.String)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ConvertIdFromString(String)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdFromString(System.String)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdFromString(System.String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdFromString(System.String)
     name: ConvertIdFromString
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ConvertIdFromString
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdFromString
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdFromString
   - name: (
     nameWithType: (
     fullName: (
@@ -911,7 +859,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdFromString(System.String)
     name: ConvertIdFromString
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ConvertIdFromString
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdFromString
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdFromString
   - name: (
     nameWithType: (
     fullName: (
@@ -923,20 +871,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ConvertIdToString(System.String)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdToString(`2)
   name: ConvertIdToString(String)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ConvertIdToString(String)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdToString(System.String)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdToString(System.String)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ConvertIdToString(String)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdToString(System.String)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdToString(System.String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdToString(`2)
     name: ConvertIdToString
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ConvertIdToString
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdToString
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ConvertIdToString
   - name: (
     nameWithType: (
     fullName: (
@@ -952,7 +900,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdToString(`2)
     name: ConvertIdToString
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ConvertIdToString
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdToString
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ConvertIdToString
   - name: (
     nameWithType: (
     fullName: (
@@ -964,20 +912,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByIdAsync(System.String,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByIdAsync(System.String,System.Threading.CancellationToken)
   name: FindByIdAsync(String, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.FindByIdAsync(String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByIdAsync(System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByIdAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).FindByIdAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByIdAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByIdAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByIdAsync(System.String,System.Threading.CancellationToken)
     name: FindByIdAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.FindByIdAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByIdAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByIdAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1001,7 +949,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByIdAsync(System.String,System.Threading.CancellationToken)
     name: FindByIdAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).FindByIdAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByIdAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByIdAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1021,20 +969,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.FindByNameAsync(System.String,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByNameAsync(System.String,System.Threading.CancellationToken)
   name: FindByNameAsync(String, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.FindByNameAsync(String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByNameAsync(System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByNameAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).FindByNameAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByNameAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByNameAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByNameAsync(System.String,System.Threading.CancellationToken)
     name: FindByNameAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.FindByNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.FindByNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1058,7 +1006,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByNameAsync(System.String,System.Threading.CancellationToken)
     name: FindByNameAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).FindByNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).FindByNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1078,20 +1026,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
   name: GetNormalizedRoleNameAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetNormalizedRoleNameAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetNormalizedRoleNameAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetNormalizedRoleNameAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetNormalizedRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetNormalizedRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetNormalizedRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1113,7 +1061,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetNormalizedRoleNameAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetNormalizedRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetNormalizedRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetNormalizedRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1131,20 +1079,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync({TRole},System.String,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
   name: SetNormalizedRoleNameAsync(TRole, String, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.SetNormalizedRoleNameAsync(TRole, String, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).SetNormalizedRoleNameAsync(TRole, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetNormalizedRoleNameAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.SetNormalizedRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetNormalizedRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.SetNormalizedRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1174,7 +1122,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetNormalizedRoleNameAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).SetNormalizedRoleNameAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetNormalizedRoleNameAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).SetNormalizedRoleNameAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1200,20 +1148,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.ThrowIfDisposed
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ThrowIfDisposed
   name: ThrowIfDisposed()
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ThrowIfDisposed()
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ThrowIfDisposed()
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ThrowIfDisposed()
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ThrowIfDisposed()
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ThrowIfDisposed()
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ThrowIfDisposed()
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ThrowIfDisposed
     name: ThrowIfDisposed
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.ThrowIfDisposed
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ThrowIfDisposed
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.ThrowIfDisposed
   - name: (
     nameWithType: (
     fullName: (
@@ -1224,27 +1172,27 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ThrowIfDisposed
     name: ThrowIfDisposed
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).ThrowIfDisposed
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ThrowIfDisposed
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).ThrowIfDisposed
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Dispose
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Dispose
   name: Dispose()
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.Dispose()
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Dispose()
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Dispose()
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).Dispose()
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Dispose()
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Dispose()
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Dispose
     name: Dispose
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.Dispose
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Dispose
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Dispose
   - name: (
     nameWithType: (
     fullName: (
@@ -1255,27 +1203,27 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Dispose
     name: Dispose
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).Dispose
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Dispose
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Dispose
   - name: (
     nameWithType: (
     fullName: (
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync({TRole},System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync(`0,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync({TRole},System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.GetClaimsAsync(`0,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetClaimsAsync(`0,System.Threading.CancellationToken)
   name: GetClaimsAsync(TRole, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetClaimsAsync(TRole, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetClaimsAsync(TRole, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetClaimsAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetClaimsAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetClaimsAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetClaimsAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetClaimsAsync(`0,System.Threading.CancellationToken)
     name: GetClaimsAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.GetClaimsAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetClaimsAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.GetClaimsAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1297,7 +1245,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetClaimsAsync(`0,System.Threading.CancellationToken)
     name: GetClaimsAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).GetClaimsAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetClaimsAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).GetClaimsAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1315,20 +1263,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
   name: AddClaimAsync(TRole, Claim, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.AddClaimAsync(TRole, Claim, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).AddClaimAsync(TRole, Claim, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: AddClaimAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.AddClaimAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AddClaimAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.AddClaimAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1358,7 +1306,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: AddClaimAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).AddClaimAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AddClaimAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).AddClaimAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1384,20 +1332,20 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync({TRole},System.Security.Claims.Claim,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
   name: RemoveClaimAsync(TRole, Claim, CancellationToken)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.RemoveClaimAsync(TRole, Claim, CancellationToken)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).RemoveClaimAsync(TRole, Claim, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: RemoveClaimAsync
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.RemoveClaimAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.RemoveClaimAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.RemoveClaimAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1427,7 +1375,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: RemoveClaimAsync
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).RemoveClaimAsync
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).RemoveClaimAsync
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).RemoveClaimAsync
   - name: (
     nameWithType: (
     fullName: (
@@ -1453,29 +1401,29 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
-  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
+  commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.Roles
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Roles
   name: Roles
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.Roles
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Roles
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.Roles
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).Roles
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Roles
-- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
-  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim(`0,System.Security.Claims.Claim)
-  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},Microsoft.EntityFrameworkCore.DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).Roles
+- uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim({TRole},System.Security.Claims.Claim)
+  commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{`0,DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}.CreateRoleClaim(`0,System.Security.Claims.Claim)
+  parent: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore{{TRole},DbContext,System.String,Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole{System.String},Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim{System.String}}
   definition: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
   name: CreateRoleClaim(TRole, Claim)
   nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.CreateRoleClaim(TRole, Claim)
-  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
   nameWithType.vb: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).CreateRoleClaim(TRole, Claim)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateRoleClaim(TRole, System.Security.Claims.Claim)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
     nameWithType: RoleStore<TRole, DbContext, String, IdentityUserRole<String>, IdentityRoleClaim<String>>.CreateRoleClaim
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateRoleClaim
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<System.String>, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<System.String>>.CreateRoleClaim
   - name: (
     nameWithType: (
     fullName: (
@@ -1497,7 +1445,7 @@ references:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
     nameWithType: RoleStore(Of TRole, DbContext, String, IdentityUserRole(Of String), IdentityRoleClaim(Of String)).CreateRoleClaim
-    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, Microsoft.EntityFrameworkCore.DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateRoleClaim
+    fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, DbContext, System.String, Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole(Of System.String), Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim(Of System.String)).CreateRoleClaim
   - name: (
     nameWithType: (
     fullName: (
@@ -1515,285 +1463,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1807,7 +1476,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim)
   name.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5
@@ -1892,7 +1561,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey>
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey>
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey)
   name.vb: RoleStore(Of TRole, TContext, TKey)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3
@@ -1946,120 +1615,79 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
-  isExternal: false
-  name: IQueryableRoleStore<TRole>
-  nameWithType: IQueryableRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore<TRole>
-  nameWithType.vb: IQueryableRoleStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IQueryableRoleStore(Of TRole)
-  name.vb: IQueryableRoleStore(Of TRole)
+- uid: IQueryableRoleStore`1
+  isExternal: true
+  name: IQueryableRoleStore<>
+  nameWithType: IQueryableRoleStore<>
+  fullName: IQueryableRoleStore<>
+  nameWithType.vb: IQueryableRoleStore(Of )
+  fullName.vb: IQueryableRoleStore(Of )
+  name.vb: IQueryableRoleStore(Of )
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
+  - uid: IQueryableRoleStore`1
     name: IQueryableRoleStore
     nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
+    fullName: IQueryableRoleStore
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IQueryableRoleStore`1
+  - uid: IQueryableRoleStore`1
     name: IQueryableRoleStore
     nameWithType: IQueryableRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IQueryableRoleStore
+    fullName: IQueryableRoleStore
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Identity
-  commentId: N:Microsoft.AspNetCore.Identity
-  isExternal: false
-  name: Microsoft.AspNetCore.Identity
-  nameWithType: Microsoft.AspNetCore.Identity
-  fullName: Microsoft.AspNetCore.Identity
-- uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleClaimStore`1
-  isExternal: false
-  name: IRoleClaimStore<TRole>
-  nameWithType: IRoleClaimStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore<TRole>
-  nameWithType.vb: IRoleClaimStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IRoleClaimStore(Of TRole)
-  name.vb: IRoleClaimStore(Of TRole)
+- uid: IRoleClaimStore`1
+  isExternal: true
+  name: IRoleClaimStore<>
+  nameWithType: IRoleClaimStore<>
+  fullName: IRoleClaimStore<>
+  nameWithType.vb: IRoleClaimStore(Of )
+  fullName.vb: IRoleClaimStore(Of )
+  name.vb: IRoleClaimStore(Of )
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
+  - uid: IRoleClaimStore`1
     name: IRoleClaimStore
     nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
+    fullName: IRoleClaimStore
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleClaimStore`1
+  - uid: IRoleClaimStore`1
     name: IRoleClaimStore
     nameWithType: IRoleClaimStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleClaimStore
+    fullName: IRoleClaimStore
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-  commentId: T:Microsoft.AspNetCore.Identity.IRoleStore`1
-  isExternal: false
-  name: IRoleStore<TRole>
-  nameWithType: IRoleStore<TRole>
-  fullName: Microsoft.AspNetCore.Identity.IRoleStore<TRole>
-  nameWithType.vb: IRoleStore(Of TRole)
-  fullname.vb: Microsoft.AspNetCore.Identity.IRoleStore(Of TRole)
-  name.vb: IRoleStore(Of TRole)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Identity.IRoleStore`1
-    name: IRoleStore
-    nameWithType: IRoleStore
-    fullName: Microsoft.AspNetCore.Identity.IRoleStore
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: TRole
-    nameWithType: TRole
-    fullName: TRole
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
@@ -2070,7 +1698,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey>.CreateRoleClaim(TRole, Claim)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey).CreateRoleClaim(TRole, Claim)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey).CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey).CreateRoleClaim(TRole, System.Security.Claims.Claim)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`3.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
@@ -2122,7 +1750,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Context
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Context
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Context
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Context
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Context
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ErrorDescriber
   commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ErrorDescriber
   isExternal: false
@@ -2130,7 +1758,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ErrorDescriber
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ErrorDescriber
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ErrorDescriber
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ErrorDescriber
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ErrorDescriber
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AutoSaveChanges
   commentId: P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AutoSaveChanges
   isExternal: false
@@ -2138,7 +1766,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.AutoSaveChanges
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.AutoSaveChanges
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AutoSaveChanges
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AutoSaveChanges
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AutoSaveChanges
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
   commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
   isExternal: true
@@ -2146,7 +1774,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.CreateAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.CreateAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateAsync(`0,System.Threading.CancellationToken)
     name: CreateAsync
@@ -2198,7 +1826,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.UpdateAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.UpdateAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).UpdateAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).UpdateAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).UpdateAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.UpdateAsync(`0,System.Threading.CancellationToken)
     name: UpdateAsync
@@ -2250,7 +1878,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.DeleteAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.DeleteAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).DeleteAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).DeleteAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).DeleteAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.DeleteAsync(`0,System.Threading.CancellationToken)
     name: DeleteAsync
@@ -2302,7 +1930,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetRoleIdAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetRoleIdAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleIdAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleIdAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleIdAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleIdAsync(`0,System.Threading.CancellationToken)
     name: GetRoleIdAsync
@@ -2354,7 +1982,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetRoleNameAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetRoleNameAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleNameAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetRoleNameAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetRoleNameAsync
@@ -2406,7 +2034,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.SetRoleNameAsync(TRole, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetRoleNameAsync(TRole, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetRoleNameAsync
@@ -2474,7 +2102,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ConvertIdFromString(String)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ConvertIdFromString(System.String)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdFromString(String)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdFromString(System.String)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdFromString(System.String)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdFromString(System.String)
     name: ConvertIdFromString
@@ -2514,7 +2142,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ConvertIdToString(TKey)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ConvertIdToString(TKey)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdToString(TKey)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdToString(TKey)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ConvertIdToString(TKey)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ConvertIdToString(`2)
     name: ConvertIdToString
@@ -2550,7 +2178,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.FindByIdAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.FindByIdAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByIdAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByIdAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByIdAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByIdAsync(System.String,System.Threading.CancellationToken)
     name: FindByIdAsync
@@ -2606,7 +2234,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.FindByNameAsync(String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.FindByNameAsync(System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByNameAsync(String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByNameAsync(System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).FindByNameAsync(System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.FindByNameAsync(System.String,System.Threading.CancellationToken)
     name: FindByNameAsync
@@ -2662,7 +2290,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetNormalizedRoleNameAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetNormalizedRoleNameAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetNormalizedRoleNameAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetNormalizedRoleNameAsync(`0,System.Threading.CancellationToken)
     name: GetNormalizedRoleNameAsync
@@ -2714,7 +2342,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.SetNormalizedRoleNameAsync(TRole, String, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetNormalizedRoleNameAsync(TRole, String, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).SetNormalizedRoleNameAsync(TRole, System.String, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.SetNormalizedRoleNameAsync(`0,System.String,System.Threading.CancellationToken)
     name: SetNormalizedRoleNameAsync
@@ -2782,7 +2410,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ThrowIfDisposed()
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.ThrowIfDisposed()
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ThrowIfDisposed()
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ThrowIfDisposed()
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).ThrowIfDisposed()
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.ThrowIfDisposed
     name: ThrowIfDisposed
@@ -2812,7 +2440,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Dispose()
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Dispose()
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Dispose()
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Dispose()
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Dispose()
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.Dispose
     name: Dispose
@@ -2842,7 +2470,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetClaimsAsync(TRole, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.GetClaimsAsync(TRole, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetClaimsAsync(TRole, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetClaimsAsync(TRole, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).GetClaimsAsync(TRole, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.GetClaimsAsync(`0,System.Threading.CancellationToken)
     name: GetClaimsAsync
@@ -2894,7 +2522,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.AddClaimAsync(TRole, Claim, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AddClaimAsync(TRole, Claim, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).AddClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.AddClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: AddClaimAsync
@@ -2962,7 +2590,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.RemoveClaimAsync(TRole, Claim, CancellationToken)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).RemoveClaimAsync(TRole, Claim, CancellationToken)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).RemoveClaimAsync(TRole, System.Security.Claims.Claim, System.Threading.CancellationToken)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.RemoveClaimAsync(`0,System.Security.Claims.Claim,System.Threading.CancellationToken)
     name: RemoveClaimAsync
@@ -3030,7 +2658,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Roles
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.Roles
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Roles
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Roles
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).Roles
 - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
   commentId: M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
   isExternal: true
@@ -3038,7 +2666,7 @@ references:
   nameWithType: RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.CreateRoleClaim(TRole, Claim)
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>.CreateRoleClaim(TRole, System.Security.Claims.Claim)
   nameWithType.vb: RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateRoleClaim(TRole, Claim)
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateRoleClaim(TRole, System.Security.Claims.Claim)
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole, TContext, TKey, TUserRole, TRoleClaim).CreateRoleClaim(TRole, System.Security.Claims.Claim)
   spec.csharp:
   - uid: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore`5.CreateRoleClaim(`0,System.Security.Claims.Claim)
     name: CreateRoleClaim
@@ -3090,25 +2718,15 @@ references:
   nameWithType: RoleStore<TRole>.RoleStore
   fullName: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore<TRole>.RoleStore
   nameWithType.vb: RoleStore(Of TRole).RoleStore
-  fullname.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole).RoleStore
-- uid: Microsoft.EntityFrameworkCore.DbContext
-  commentId: T:Microsoft.EntityFrameworkCore.DbContext
-  parent: Microsoft.EntityFrameworkCore
+  fullName.vb: Microsoft.AspNetCore.Identity.EntityFrameworkCore.RoleStore(Of TRole).RoleStore
+- uid: DbContext
   isExternal: true
   name: DbContext
   nameWithType: DbContext
-  fullName: Microsoft.EntityFrameworkCore.DbContext
-- uid: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
-  commentId: T:Microsoft.AspNetCore.Identity.IdentityErrorDescriber
-  parent: Microsoft.AspNetCore.Identity
-  isExternal: false
+  fullName: DbContext
+- uid: IdentityErrorDescriber
+  isExternal: true
   name: IdentityErrorDescriber
   nameWithType: IdentityErrorDescriber
-  fullName: Microsoft.AspNetCore.Identity.IdentityErrorDescriber
-- uid: Microsoft.EntityFrameworkCore
-  commentId: N:Microsoft.EntityFrameworkCore
-  isExternal: false
-  name: Microsoft.EntityFrameworkCore
-  nameWithType: Microsoft.EntityFrameworkCore
-  fullName: Microsoft.EntityFrameworkCore
+  fullName: IdentityErrorDescriber
 shouldSkipMarkup: true

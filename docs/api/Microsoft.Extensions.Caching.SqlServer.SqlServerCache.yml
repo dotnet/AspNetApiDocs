@@ -5,15 +5,15 @@ items:
   id: SqlServerCache
   parent: Microsoft.Extensions.Caching.SqlServer
   children:
-  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
+  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get(System.String)
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.GetAsync(System.String)
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Refresh(System.String)
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RefreshAsync(System.String)
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Remove(System.String)
   - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RemoveAsync(System.String)
-  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],DistributedCacheEntryOptions)
+  - Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],DistributedCacheEntryOptions)
   langs:
   - csharp
   - vb
@@ -27,7 +27,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: SqlServerCache
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 14
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
@@ -38,35 +38,25 @@ items:
     content: 'public class SqlServerCache : IDistributedCache'
     content.vb: >-
       Public Class SqlServerCache
-          Implements IDistributedCache
+          Inherits IDistributedCache
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  inheritedMembers:
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.ToString
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
-  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
-  id: '#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})'
+- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
+  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor(IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})
+  id: '#ctor(IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions})'
   parent: Microsoft.Extensions.Caching.SqlServer.SqlServerCache
   langs:
   - csharp
   - vb
   name: SqlServerCache(IOptions<SqlServerCacheOptions>)
   nameWithType: SqlServerCache.SqlServerCache(IOptions<SqlServerCacheOptions>)
-  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SqlServerCache(Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions>)
+  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SqlServerCache(IOptions<Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions>)
   type: Constructor
   source:
     remote:
@@ -74,24 +64,24 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: .ctor
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 25
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public SqlServerCache(IOptions<SqlServerCacheOptions> options)
-    content.vb: Public Sub New(options As IOptions(Of SqlServerCacheOptions))
     parameters:
     - id: options
-      type: Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}
+      type: IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}
+    content.vb: Public Sub New(options As IOptions(Of SqlServerCacheOptions))
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor*
   nameWithType.vb: SqlServerCache.SqlServerCache(IOptions(Of SqlServerCacheOptions))
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SqlServerCache(Microsoft.Extensions.Options.IOptions(Of Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions))
+  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SqlServerCache(IOptions(Of Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions))
   name.vb: SqlServerCache(IOptions(Of SqlServerCacheOptions))
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get(System.String)
   commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get(System.String)
@@ -110,22 +100,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: Get
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 78
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public byte[] Get(string key)
-    content.vb: Public Function Get(key As String) As Byte()
     parameters:
     - id: key
       type: System.String
     return:
       type: System.Byte[]
+    content.vb: Public Function Get(key As String) As Byte()
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -147,22 +135,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: GetAsync
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 92
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public Task<byte[]> GetAsync(string key)
-    content.vb: Public Function GetAsync(key As String) As Task(Of Byte())
     parameters:
     - id: key
       type: System.String
     return:
-      type: System.Threading.Tasks.Task{System.Byte[]}
+      type: Task{System.Byte[]}
+    content.vb: Public Function GetAsync(key As String) As Task(Of Byte())
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.GetAsync*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -184,20 +170,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: Refresh
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 106
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public void Refresh(string key)
-    content.vb: Public Sub Refresh(key As String)
     parameters:
     - id: key
       type: System.String
+    content.vb: Public Sub Refresh(key As String)
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Refresh*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -219,22 +203,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: RefreshAsync
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 118
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public Task RefreshAsync(string key)
-    content.vb: Public Function RefreshAsync(key As String) As Task
     parameters:
     - id: key
       type: System.String
     return:
-      type: System.Threading.Tasks.Task
+      type: Task
+    content.vb: Public Function RefreshAsync(key As String) As Task
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RefreshAsync*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -256,20 +238,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: Remove
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 130
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public void Remove(string key)
-    content.vb: Public Sub Remove(key As String)
     parameters:
     - id: key
       type: System.String
+    content.vb: Public Sub Remove(key As String)
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Remove*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -291,36 +271,34 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: RemoveAsync
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 142
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public Task RemoveAsync(string key)
-    content.vb: Public Function RemoveAsync(key As String) As Task
     parameters:
     - id: key
       type: System.String
     return:
-      type: System.Threading.Tasks.Task
+      type: Task
+    content.vb: Public Function RemoveAsync(key As String) As Task
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RemoveAsync*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  id: Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],DistributedCacheEntryOptions)
+  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String,System.Byte[],DistributedCacheEntryOptions)
+  id: Set(System.String,System.Byte[],DistributedCacheEntryOptions)
   parent: Microsoft.Extensions.Caching.SqlServer.SqlServerCache
   langs:
   - csharp
   - vb
   name: Set(String, Byte[], DistributedCacheEntryOptions)
   nameWithType: SqlServerCache.Set(String, Byte[], DistributedCacheEntryOptions)
-  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String, System.Byte[], Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String, System.Byte[], DistributedCacheEntryOptions)
   type: Method
   source:
     remote:
@@ -328,41 +306,39 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: Set
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 154
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public void Set(string key, byte[] value, DistributedCacheEntryOptions options)
-    content.vb: Public Sub Set(key As String, value As Byte(), options As DistributedCacheEntryOptions)
     parameters:
     - id: key
       type: System.String
     - id: value
       type: System.Byte[]
     - id: options
-      type: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
+      type: DistributedCacheEntryOptions
+    content.vb: Public Sub Set(key As String, value As Byte(), options As DistributedCacheEntryOptions)
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
   nameWithType.vb: SqlServerCache.Set(String, Byte(), DistributedCacheEntryOptions)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String, System.Byte(), Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set(System.String, System.Byte(), DistributedCacheEntryOptions)
   name.vb: Set(String, Byte(), DistributedCacheEntryOptions)
-- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  id: SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+- uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],DistributedCacheEntryOptions)
+  commentId: M:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String,System.Byte[],DistributedCacheEntryOptions)
+  id: SetAsync(System.String,System.Byte[],DistributedCacheEntryOptions)
   parent: Microsoft.Extensions.Caching.SqlServer.SqlServerCache
   langs:
   - csharp
   - vb
   name: SetAsync(String, Byte[], DistributedCacheEntryOptions)
   nameWithType: SqlServerCache.SetAsync(String, Byte[], DistributedCacheEntryOptions)
-  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String, System.Byte[], Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+  fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String, System.Byte[], DistributedCacheEntryOptions)
   type: Method
   source:
     remote:
@@ -370,32 +346,30 @@ items:
       branch: master
       repo: https://github.com/aspnet/Caching.git
     id: SetAsync
-    path: src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
+    path: ../aspnet/Caching/src/Microsoft.Extensions.Caching.SqlServer/SqlServerCache.cs
     startLine: 176
   assemblies:
   - Microsoft.Extensions.Caching.SqlServer
   namespace: Microsoft.Extensions.Caching.SqlServer
   syntax:
     content: public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options)
-    content.vb: Public Function SetAsync(key As String, value As Byte(), options As DistributedCacheEntryOptions) As Task
     parameters:
     - id: key
       type: System.String
     - id: value
       type: System.Byte[]
     - id: options
-      type: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
+      type: DistributedCacheEntryOptions
     return:
-      type: System.Threading.Tasks.Task
+      type: Task
+    content.vb: Public Function SetAsync(key As String, value As Byte(), options As DistributedCacheEntryOptions) As Task
   overload: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync*
-  implements:
-  - Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
   nameWithType.vb: SqlServerCache.SetAsync(String, Byte(), DistributedCacheEntryOptions)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String, System.Byte(), Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
+  fullName.vb: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync(System.String, System.Byte(), DistributedCacheEntryOptions)
   name.vb: SetAsync(String, Byte(), DistributedCacheEntryOptions)
 references:
 - uid: Microsoft.Extensions.Caching.SqlServer
@@ -411,325 +385,32 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  commentId: T:Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  parent: Microsoft.Extensions.Caching.Distributed
-  isExternal: false
-  name: IDistributedCache
-  nameWithType: IDistributedCache
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.Extensions.Caching.Distributed
-  commentId: N:Microsoft.Extensions.Caching.Distributed
-  isExternal: false
-  name: Microsoft.Extensions.Caching.Distributed
-  nameWithType: Microsoft.Extensions.Caching.Distributed
-  fullName: Microsoft.Extensions.Caching.Distributed
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.#ctor
   isExternal: false
   name: SqlServerCache
   nameWithType: SqlServerCache.SqlServerCache
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SqlServerCache
-- uid: Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}
-  commentId: T:Microsoft.Extensions.Options.IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}
-  parent: Microsoft.Extensions.Options
-  definition: Microsoft.Extensions.Options.IOptions`1
+- uid: IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}
+  commentId: '!:IOptions{Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions}'
+  definition: IOptions`1
   name: IOptions<SqlServerCacheOptions>
   nameWithType: IOptions<SqlServerCacheOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions>
+  fullName: IOptions<Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions>
   nameWithType.vb: IOptions(Of SqlServerCacheOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions)
+  fullName.vb: IOptions(Of Microsoft.Extensions.Caching.SqlServer.SqlServerCacheOptions)
   name.vb: IOptions(Of SqlServerCacheOptions)
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: <
     nameWithType: <
@@ -742,10 +423,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -757,94 +438,50 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options.IOptions`1
-  commentId: T:Microsoft.Extensions.Options.IOptions`1
-  isExternal: false
-  name: IOptions<TOptions>
-  nameWithType: IOptions<TOptions>
-  fullName: Microsoft.Extensions.Options.IOptions<TOptions>
-  nameWithType.vb: IOptions(Of TOptions)
-  fullname.vb: Microsoft.Extensions.Options.IOptions(Of TOptions)
-  name.vb: IOptions(Of TOptions)
+- uid: IOptions`1
+  isExternal: true
+  name: IOptions<>
+  nameWithType: IOptions<>
+  fullName: IOptions<>
+  nameWithType.vb: IOptions(Of )
+  fullName.vb: IOptions(Of )
+  name.vb: IOptions(Of )
   spec.csharp:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: Microsoft.Extensions.Options.IOptions`1
+  - uid: IOptions`1
     name: IOptions
     nameWithType: IOptions
-    fullName: Microsoft.Extensions.Options.IOptions
+    fullName: IOptions
+    isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TOptions
-    nameWithType: TOptions
-    fullName: TOptions
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.Extensions.Options
-  commentId: N:Microsoft.Extensions.Options
-  isExternal: false
-  name: Microsoft.Extensions.Options
-  nameWithType: Microsoft.Extensions.Options
-  fullName: Microsoft.Extensions.Options
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get
   isExternal: false
   name: Get
   nameWithType: SqlServerCache.Get
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Get
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: Get(String)
-  nameWithType: IDistributedCache.Get(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
-    name: Get
-    nameWithType: IDistributedCache.Get
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get(System.String)
-    name: Get
-    nameWithType: IDistributedCache.Get
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Get
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -857,7 +494,7 @@ references:
   nameWithType: Byte[]
   fullName: System.Byte[]
   nameWithType.vb: Byte()
-  fullname.vb: System.Byte()
+  fullName.vb: System.Byte()
   name.vb: Byte()
   spec.csharp:
   - uid: System.Byte
@@ -883,60 +520,20 @@ references:
   name: GetAsync
   nameWithType: SqlServerCache.GetAsync
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.GetAsync
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: GetAsync(String)
-  nameWithType: IDistributedCache.GetAsync(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
-    name: GetAsync
-    nameWithType: IDistributedCache.GetAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync(System.String)
-    name: GetAsync
-    nameWithType: IDistributedCache.GetAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.GetAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading.Tasks.Task{System.Byte[]}
-  commentId: T:System.Threading.Tasks.Task{System.Byte[]}
-  parent: System.Threading.Tasks
-  definition: System.Threading.Tasks.Task`1
+- uid: Task{System.Byte[]}
+  commentId: '!:Task{System.Byte[]}'
+  definition: Task`1
   name: Task<Byte[]>
   nameWithType: Task<Byte[]>
-  fullName: System.Threading.Tasks.Task<System.Byte[]>
+  fullName: Task<System.Byte[]>
   nameWithType.vb: Task(Of Byte())
-  fullname.vb: System.Threading.Tasks.Task(Of System.Byte())
+  fullName.vb: Task(Of System.Byte())
   name.vb: Task(Of Byte())
   spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
@@ -953,10 +550,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -972,411 +569,88 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Threading.Tasks.Task`1
-  commentId: T:System.Threading.Tasks.Task`1
+- uid: Task`1
   isExternal: true
-  name: Task<TResult>
-  nameWithType: Task<TResult>
-  fullName: System.Threading.Tasks.Task<TResult>
-  nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
-  name.vb: Task(Of TResult)
+  name: Task<>
+  nameWithType: Task<>
+  fullName: Task<>
+  nameWithType.vb: Task(Of )
+  fullName.vb: Task(Of )
+  name.vb: Task(Of )
   spec.csharp:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: <
     nameWithType: <
     fullName: <
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: System.Threading.Tasks.Task`1
+  - uid: Task`1
     name: Task
     nameWithType: Task
-    fullName: System.Threading.Tasks.Task
+    fullName: Task
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: TResult
-    nameWithType: TResult
-    fullName: TResult
+  - name: ''
+    nameWithType: ''
+    fullName: ''
   - name: )
     nameWithType: )
     fullName: )
-- uid: System.Threading.Tasks
-  commentId: N:System.Threading.Tasks
-  isExternal: false
-  name: System.Threading.Tasks
-  nameWithType: System.Threading.Tasks
-  fullName: System.Threading.Tasks
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Refresh*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Refresh
   isExternal: false
   name: Refresh
   nameWithType: SqlServerCache.Refresh
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Refresh
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: Refresh(String)
-  nameWithType: IDistributedCache.Refresh(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
-    name: Refresh
-    nameWithType: IDistributedCache.Refresh
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh(System.String)
-    name: Refresh
-    nameWithType: IDistributedCache.Refresh
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Refresh
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RefreshAsync*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RefreshAsync
   isExternal: false
   name: RefreshAsync
   nameWithType: SqlServerCache.RefreshAsync
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RefreshAsync
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: RefreshAsync(String)
-  nameWithType: IDistributedCache.RefreshAsync(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
-    name: RefreshAsync
-    nameWithType: IDistributedCache.RefreshAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync(System.String)
-    name: RefreshAsync
-    nameWithType: IDistributedCache.RefreshAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RefreshAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Threading.Tasks.Task
-  commentId: T:System.Threading.Tasks.Task
-  parent: System.Threading.Tasks
+- uid: Task
   isExternal: true
   name: Task
   nameWithType: Task
-  fullName: System.Threading.Tasks.Task
+  fullName: Task
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Remove*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Remove
   isExternal: false
   name: Remove
   nameWithType: SqlServerCache.Remove
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Remove
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: Remove(String)
-  nameWithType: IDistributedCache.Remove(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
-    name: Remove
-    nameWithType: IDistributedCache.Remove
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove(System.String)
-    name: Remove
-    nameWithType: IDistributedCache.Remove
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Remove
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RemoveAsync*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RemoveAsync
   isExternal: false
   name: RemoveAsync
   nameWithType: SqlServerCache.RemoveAsync
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.RemoveAsync
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: RemoveAsync(String)
-  nameWithType: IDistributedCache.RemoveAsync(String)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
-    name: RemoveAsync
-    nameWithType: IDistributedCache.RemoveAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync(System.String)
-    name: RemoveAsync
-    nameWithType: IDistributedCache.RemoveAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.RemoveAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set
   isExternal: false
   name: Set
   nameWithType: SqlServerCache.Set
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.Set
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
+- uid: DistributedCacheEntryOptions
   isExternal: true
-  name: Set(String, Byte[], DistributedCacheEntryOptions)
-  nameWithType: IDistributedCache.Set(String, Byte[], DistributedCacheEntryOptions)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String, System.Byte[], Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  nameWithType.vb: IDistributedCache.Set(String, Byte(), DistributedCacheEntryOptions)
-  fullname.vb: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String, System.Byte(), Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  name.vb: Set(String, Byte(), DistributedCacheEntryOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-    name: Set
-    nameWithType: IDistributedCache.Set
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-    name: DistributedCacheEntryOptions
-    nameWithType: DistributedCacheEntryOptions
-    fullName: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-    name: Set
-    nameWithType: IDistributedCache.Set
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.Set
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-    name: DistributedCacheEntryOptions
-    nameWithType: DistributedCacheEntryOptions
-    fullName: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  commentId: T:Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  parent: Microsoft.Extensions.Caching.Distributed
-  isExternal: false
   name: DistributedCacheEntryOptions
   nameWithType: DistributedCacheEntryOptions
-  fullName: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
+  fullName: DistributedCacheEntryOptions
 - uid: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync*
   commentId: Overload:Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync
   isExternal: false
   name: SetAsync
   nameWithType: SqlServerCache.SetAsync
   fullName: Microsoft.Extensions.Caching.SqlServer.SqlServerCache.SetAsync
-- uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  commentId: M:Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  parent: Microsoft.Extensions.Caching.Distributed.IDistributedCache
-  isExternal: true
-  name: SetAsync(String, Byte[], DistributedCacheEntryOptions)
-  nameWithType: IDistributedCache.SetAsync(String, Byte[], DistributedCacheEntryOptions)
-  fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String, System.Byte[], Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  nameWithType.vb: IDistributedCache.SetAsync(String, Byte(), DistributedCacheEntryOptions)
-  fullname.vb: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String, System.Byte(), Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-  name.vb: SetAsync(String, Byte(), DistributedCacheEntryOptions)
-  spec.csharp:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-    name: SetAsync
-    nameWithType: IDistributedCache.SetAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: '[]'
-    nameWithType: '[]'
-    fullName: '[]'
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-    name: DistributedCacheEntryOptions
-    nameWithType: DistributedCacheEntryOptions
-    fullName: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync(System.String,System.Byte[],Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions)
-    name: SetAsync
-    nameWithType: IDistributedCache.SetAsync
-    fullName: Microsoft.Extensions.Caching.Distributed.IDistributedCache.SetAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Byte
-    name: Byte
-    nameWithType: Byte
-    fullName: System.Byte
-    isExternal: true
-  - name: ()
-    nameWithType: ()
-    fullName: ()
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-    name: DistributedCacheEntryOptions
-    nameWithType: DistributedCacheEntryOptions
-    fullName: Microsoft.Extensions.Caching.Distributed.DistributedCacheEntryOptions
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

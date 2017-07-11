@@ -20,7 +20,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: ObjectPoolProvider
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
     startLine: 5
   assemblies:
   - Microsoft.Extensions.ObjectPool
@@ -30,6 +30,9 @@ items:
     content.vb: Public MustInherit Class ObjectPoolProvider
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider
+  - Microsoft.Extensions.ObjectPool.LeakTrackingObjectPoolProvider
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -66,18 +69,18 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: Create
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
     startLine: 7
   assemblies:
   - Microsoft.Extensions.ObjectPool
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public ObjectPool<T> Create<T>()where T : class, new ()'
-    content.vb: Public Function Create(Of T As {Class, New}) As ObjectPool(Of T)
     typeParameters:
     - id: T
     return:
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public Function Create(Of T As {Class, New}) As ObjectPool(Of T)
   overload: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*
   nameWithType.vb: ObjectPoolProvider.Create(Of T)()
   modifiers.csharp:
@@ -103,14 +106,13 @@ items:
       branch: master
       repo: https://github.com/aspnet/Common.git
     id: Create
-    path: src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
+    path: ../aspnet/Common/src/Microsoft.Extensions.ObjectPool/ObjectPoolProvider.cs
     startLine: 12
   assemblies:
   - Microsoft.Extensions.ObjectPool
   namespace: Microsoft.Extensions.ObjectPool
   syntax:
     content: 'public abstract ObjectPool<T> Create<T>(IPooledObjectPolicy<T> policy)where T : class'
-    content.vb: Public MustOverride Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
     parameters:
     - id: policy
       type: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy{{T}}
@@ -118,6 +120,7 @@ items:
     - id: T
     return:
       type: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
+    content.vb: Public MustOverride Function Create(Of T As Class)(policy As IPooledObjectPolicy(Of T)) As ObjectPool(Of T)
   overload: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*
   nameWithType.vb: ObjectPoolProvider.Create(Of T)(IPooledObjectPolicy(Of T))
   modifiers.csharp:
@@ -625,12 +628,9 @@ references:
 - uid: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*
   commentId: Overload:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create
   isExternal: false
-  name: Create<T>
-  nameWithType: ObjectPoolProvider.Create<T>
-  fullName: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create<T>
-  nameWithType.vb: ObjectPoolProvider.Create(Of T)
-  fullname.vb: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create(Of T)
-  name.vb: Create(Of T)
+  name: Create
+  nameWithType: ObjectPoolProvider.Create
+  fullName: Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create
 - uid: Microsoft.Extensions.ObjectPool.ObjectPool{{T}}
   commentId: T:Microsoft.Extensions.ObjectPool.ObjectPool{`0}
   parent: Microsoft.Extensions.ObjectPool
@@ -639,7 +639,7 @@ references:
   nameWithType: ObjectPool<T>
   fullName: Microsoft.Extensions.ObjectPool.ObjectPool<T>
   nameWithType.vb: ObjectPool(Of T)
-  fullname.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T)
+  fullName.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T)
   name.vb: ObjectPool(Of T)
   spec.csharp:
   - uid: Microsoft.Extensions.ObjectPool.ObjectPool`1
@@ -676,7 +676,7 @@ references:
   nameWithType: ObjectPool<T>
   fullName: Microsoft.Extensions.ObjectPool.ObjectPool<T>
   nameWithType.vb: ObjectPool(Of T)
-  fullname.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T)
+  fullName.vb: Microsoft.Extensions.ObjectPool.ObjectPool(Of T)
   name.vb: ObjectPool(Of T)
   spec.csharp:
   - uid: Microsoft.Extensions.ObjectPool.ObjectPool`1
@@ -714,7 +714,7 @@ references:
   nameWithType: IPooledObjectPolicy<T>
   fullName: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy<T>
   nameWithType.vb: IPooledObjectPolicy(Of T)
-  fullname.vb: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy(Of T)
+  fullName.vb: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy(Of T)
   name.vb: IPooledObjectPolicy(Of T)
   spec.csharp:
   - uid: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy`1
@@ -751,7 +751,7 @@ references:
   nameWithType: IPooledObjectPolicy<T>
   fullName: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy<T>
   nameWithType.vb: IPooledObjectPolicy(Of T)
-  fullname.vb: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy(Of T)
+  fullName.vb: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy(Of T)
   name.vb: IPooledObjectPolicy(Of T)
   spec.csharp:
   - uid: Microsoft.Extensions.ObjectPool.IPooledObjectPolicy`1

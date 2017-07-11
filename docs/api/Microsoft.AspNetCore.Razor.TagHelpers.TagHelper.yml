@@ -22,7 +22,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: TagHelper
-    path: src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
     startLine: 11
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
@@ -36,6 +36,18 @@ items:
           Implements ITagHelper
   inheritance:
   - System.Object
+  derivedClasses:
+  - Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelperBase
+  - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.InputTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.LabelTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.OptionTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.TextAreaTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.ValidationMessageTagHelper
+  - Microsoft.AspNetCore.Mvc.TagHelpers.ValidationSummaryTagHelper
   implements:
   - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
   inheritedMembers:
@@ -71,19 +83,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Order
-    path: src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
     startLine: 15
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
+  summary: "\nWhen a set of<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> s are executed, their<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)\" data-throw-if-not-resolved=\"false\"></xref>&apos;s\nare first invoked in the specified <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>; then their\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)\" data-throw-if-not-resolved=\"false\"></xref>&apos;s are invoked in the specified\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>. Lower values are executed first.\n"
   remarks: Default order is <code>0</code>.
   example: []
   syntax:
     content: public virtual int Order { get; }
-    content.vb: Public Overridable ReadOnly Property Order As Integer
     parameters: []
     return:
       type: System.Int32
+    content.vb: Public Overridable ReadOnly Property Order As Integer
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order*
   implements:
   - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order
@@ -112,18 +125,24 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Init
-    path: src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
+  summary: "\nInitializes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span>. Additions to\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.Items\" data-throw-if-not-resolved=\"false\"></xref> should be done within this method to ensure they&apos;re added prior to\nexecuting the children.\n"
+  remarks: >
+    When more than one <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref> runs on the same element,
+
+    <xref href="TagHelperOutput.GetChildContentAsync" data-throw-if-not-resolved="false"></xref> may be invoked prior to <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public virtual void Init(TagHelperContext context)
-    content.vb: Public Overridable Sub Init(context As TagHelperContext)
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
+    content.vb: Public Overridable Sub Init(context As TagHelperContext)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init*
   implements:
   - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
@@ -150,16 +169,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Process
-    path: src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
     startLine: 28
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nSynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <em>context</em> and\n<em>output</em>.\n"
+  summary: "\nSynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
   example: []
   syntax:
     content: public virtual void Process(TagHelperContext context, TagHelperOutput output)
-    content.vb: Public Overridable Sub Process(context As TagHelperContext, output As TagHelperOutput)
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
@@ -167,6 +185,7 @@ items:
     - id: output
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
       description: A stateful HTML element used to generate an HTML tag.
+    content.vb: Public Overridable Sub Process(context As TagHelperContext, output As TagHelperOutput)
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process*
   modifiers.csharp:
   - public
@@ -191,17 +210,16 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: ProcessAsync
-    path: src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/TagHelpers/TagHelper.cs
     startLine: 40
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.TagHelpers
-  summary: "\nAsynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <em>context</em> and\n<em>output</em>.\n"
+  summary: "\nAsynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
   remarks: By default this calls into <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public virtual Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
-    content.vb: Public Overridable Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
@@ -211,7 +229,8 @@ items:
       description: A stateful HTML element used to generate an HTML tag.
     return:
       type: System.Threading.Tasks.Task
-      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion updates the <em>output</em>.
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion updates the <span class="paramref">output</span>.
+    content.vb: Public Overridable Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
   overload: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync*
   implements:
   - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)

@@ -5,7 +5,7 @@ items:
   id: RequestFormReaderExtensions
   parent: Microsoft.AspNetCore.Http
   children:
-  - Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
+  - Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
   langs:
   - csharp
   - vb
@@ -19,7 +19,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/HttpAbstractions.git
     id: RequestFormReaderExtensions
-    path: src/Microsoft.AspNetCore.Http/RequestFormReaderExtensions.cs
+    path: ../aspnet/HttpAbstractions/src/Microsoft.AspNetCore.Http/RequestFormReaderExtensions.cs
     startLine: 10
   assemblies:
   - Microsoft.AspNetCore.Http
@@ -44,9 +44,9 @@ items:
   modifiers.vb:
   - Public
   - Module
-- uid: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
-  commentId: M:Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
-  id: ReadFormAsync(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
+- uid: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
+  commentId: M:Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
+  id: ReadFormAsync(HttpRequest,Microsoft.AspNetCore.Http.Features.FormOptions,System.Threading.CancellationToken)
   isExtensionMethod: true
   parent: Microsoft.AspNetCore.Http.RequestFormReaderExtensions
   langs:
@@ -54,7 +54,7 @@ items:
   - vb
   name: ReadFormAsync(HttpRequest, FormOptions, CancellationToken)
   nameWithType: RequestFormReaderExtensions.ReadFormAsync(HttpRequest, FormOptions, CancellationToken)
-  fullName: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(Microsoft.AspNetCore.Http.HttpRequest, Microsoft.AspNetCore.Http.Features.FormOptions, System.Threading.CancellationToken)
+  fullName: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync(HttpRequest, Microsoft.AspNetCore.Http.Features.FormOptions, System.Threading.CancellationToken)
   type: Method
   source:
     remote:
@@ -62,7 +62,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/HttpAbstractions.git
     id: ReadFormAsync
-    path: src/Microsoft.AspNetCore.Http/RequestFormReaderExtensions.cs
+    path: ../aspnet/HttpAbstractions/src/Microsoft.AspNetCore.Http/RequestFormReaderExtensions.cs
     startLine: 20
   assemblies:
   - Microsoft.AspNetCore.Http
@@ -71,13 +71,9 @@ items:
   example: []
   syntax:
     content: public static Task<IFormCollection> ReadFormAsync(this HttpRequest request, FormOptions options, CancellationToken cancellationToken = null)
-    content.vb: >-
-      <ExtensionAttribute>
-
-      Public Shared Function ReadFormAsync(request As HttpRequest, options As FormOptions, cancellationToken As CancellationToken = Nothing) As Task(Of IFormCollection)
     parameters:
     - id: request
-      type: Microsoft.AspNetCore.Http.HttpRequest
+      type: HttpRequest
       description: The request.
     - id: options
       type: Microsoft.AspNetCore.Http.Features.FormOptions
@@ -86,8 +82,12 @@ items:
       type: System.Threading.CancellationToken
       description: ''
     return:
-      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Http.IFormCollection}
+      type: System.Threading.Tasks.Task{IFormCollection}
       description: The parsed form.
+    content.vb: >-
+      <ExtensionAttribute>
+
+      Public Shared Function ReadFormAsync(request As HttpRequest, options As FormOptions, cancellationToken As CancellationToken = Nothing) As Task(Of IFormCollection)
   overload: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync*
   modifiers.csharp:
   - public
@@ -400,13 +400,11 @@ references:
   name: ReadFormAsync
   nameWithType: RequestFormReaderExtensions.ReadFormAsync
   fullName: Microsoft.AspNetCore.Http.RequestFormReaderExtensions.ReadFormAsync
-- uid: Microsoft.AspNetCore.Http.HttpRequest
-  commentId: T:Microsoft.AspNetCore.Http.HttpRequest
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
+- uid: HttpRequest
+  isExternal: true
   name: HttpRequest
   nameWithType: HttpRequest
-  fullName: Microsoft.AspNetCore.Http.HttpRequest
+  fullName: HttpRequest
 - uid: Microsoft.AspNetCore.Http.Features.FormOptions
   commentId: T:Microsoft.AspNetCore.Http.Features.FormOptions
   parent: Microsoft.AspNetCore.Http.Features
@@ -421,15 +419,15 @@ references:
   name: CancellationToken
   nameWithType: CancellationToken
   fullName: System.Threading.CancellationToken
-- uid: System.Threading.Tasks.Task{Microsoft.AspNetCore.Http.IFormCollection}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.AspNetCore.Http.IFormCollection}
+- uid: System.Threading.Tasks.Task{IFormCollection}
+  commentId: T:System.Threading.Tasks.Task{IFormCollection}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<IFormCollection>
   nameWithType: Task<IFormCollection>
-  fullName: System.Threading.Tasks.Task<Microsoft.AspNetCore.Http.IFormCollection>
+  fullName: System.Threading.Tasks.Task<IFormCollection>
   nameWithType.vb: Task(Of IFormCollection)
-  fullname.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Http.IFormCollection)
+  fullName.vb: System.Threading.Tasks.Task(Of IFormCollection)
   name.vb: Task(Of IFormCollection)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -440,10 +438,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.AspNetCore.Http.IFormCollection
+  - uid: IFormCollection
     name: IFormCollection
     nameWithType: IFormCollection
-    fullName: Microsoft.AspNetCore.Http.IFormCollection
+    fullName: IFormCollection
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -456,10 +455,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Http.IFormCollection
+  - uid: IFormCollection
     name: IFormCollection
     nameWithType: IFormCollection
-    fullName: Microsoft.AspNetCore.Http.IFormCollection
+    fullName: IFormCollection
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -482,7 +482,7 @@ references:
   nameWithType: Task<TResult>
   fullName: System.Threading.Tasks.Task<TResult>
   nameWithType.vb: Task(Of TResult)
-  fullname.vb: System.Threading.Tasks.Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
   name.vb: Task(Of TResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1

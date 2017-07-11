@@ -7,8 +7,8 @@ items:
   children:
   - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.#ctor(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.ITagHelperTypeResolver,Microsoft.AspNetCore.Razor.Runtime.TagHelpers.ITagHelperDescriptorFactory)
   - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.#ctor(System.Boolean)
-  - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,Microsoft.AspNetCore.Razor.SourceLocation,Microsoft.AspNetCore.Razor.ErrorSink)
+  - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
+  - Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,SourceLocation,ErrorSink)
   langs:
   - csharp
   - vb
@@ -22,30 +22,20 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: TagHelperDescriptorResolver
-    path: src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
     startLine: 15
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  summary: "\nUsed to resolve <xref href=\"Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor\" data-throw-if-not-resolved=\"false\"></xref>s.\n"
+  summary: "\nUsed to resolve <see cref=\"!:TagHelperDescriptor\"></see>s.\n"
   example: []
   syntax:
     content: 'public class TagHelperDescriptorResolver : ITagHelperDescriptorResolver'
     content.vb: >-
       Public Class TagHelperDescriptorResolver
-          Implements ITagHelperDescriptorResolver
+          Inherits ITagHelperDescriptorResolver
   inheritance:
   - System.Object
-  implements:
-  - Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -69,7 +59,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
     startLine: 33
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
@@ -78,14 +68,14 @@ items:
   example: []
   syntax:
     content: public TagHelperDescriptorResolver(bool designTime)
-    content.vb: Public Sub New(designTime As Boolean)
     parameters:
     - id: designTime
       type: System.Boolean
       description: >-
-        Indicates whether resolved <xref href="Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor" data-throw-if-not-resolved="false"></xref>s should include
+        Indicates whether resolved <see cref="!:TagHelperDescriptor"></see>s should include
 
         design time specific information.
+    content.vb: Public Sub New(designTime As Boolean)
   overload: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.#ctor*
   modifiers.csharp:
   - public
@@ -108,16 +98,15 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
     startLine: 44
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver\" data-throw-if-not-resolved=\"false\"></xref> class with the\nspecified <em>typeResolver</em>.\n"
+  summary: "\nInstantiates a new instance of <xref href=\"Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver\" data-throw-if-not-resolved=\"false\"></xref> class with the\nspecified <span class=\"paramref\">typeResolver</span>.\n"
   example: []
   syntax:
     content: public TagHelperDescriptorResolver(ITagHelperTypeResolver typeResolver, ITagHelperDescriptorFactory descriptorFactory)
-    content.vb: Public Sub New(typeResolver As ITagHelperTypeResolver, descriptorFactory As ITagHelperDescriptorFactory)
     parameters:
     - id: typeResolver
       type: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.ITagHelperTypeResolver
@@ -125,21 +114,22 @@ items:
     - id: descriptorFactory
       type: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.ITagHelperDescriptorFactory
       description: The <xref href="Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorFactory" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(typeResolver As ITagHelperTypeResolver, descriptorFactory As ITagHelperDescriptorFactory)
   overload: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.#ctor*
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  commentId: M:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  id: Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
+- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
+  commentId: M:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
+  id: Resolve(TagHelperDescriptorResolutionContext)
   parent: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver
   langs:
   - csharp
   - vb
   name: Resolve(TagHelperDescriptorResolutionContext)
   nameWithType: TagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
-  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
+  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
   type: Method
   source:
     remote:
@@ -147,7 +137,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: Resolve
-    path: src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
     startLine: 53
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
@@ -155,29 +145,27 @@ items:
   example: []
   syntax:
     content: public IEnumerable<TagHelperDescriptor> Resolve(TagHelperDescriptorResolutionContext context)
-    content.vb: Public Function Resolve(context As TagHelperDescriptorResolutionContext) As IEnumerable(Of TagHelperDescriptor)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
+      type: TagHelperDescriptorResolutionContext
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor}
+      type: System.Collections.Generic.IEnumerable{TagHelperDescriptor}
+    content.vb: Public Function Resolve(context As TagHelperDescriptorResolutionContext) As IEnumerable(Of TagHelperDescriptor)
   overload: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve*
-  implements:
-  - Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,Microsoft.AspNetCore.Razor.SourceLocation,Microsoft.AspNetCore.Razor.ErrorSink)
-  commentId: M:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,Microsoft.AspNetCore.Razor.SourceLocation,Microsoft.AspNetCore.Razor.ErrorSink)
-  id: ResolveDescriptorsInAssembly(System.String,Microsoft.AspNetCore.Razor.SourceLocation,Microsoft.AspNetCore.Razor.ErrorSink)
+- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,SourceLocation,ErrorSink)
+  commentId: M:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String,SourceLocation,ErrorSink)
+  id: ResolveDescriptorsInAssembly(System.String,SourceLocation,ErrorSink)
   parent: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver
   langs:
   - csharp
   - vb
   name: ResolveDescriptorsInAssembly(String, SourceLocation, ErrorSink)
   nameWithType: TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(String, SourceLocation, ErrorSink)
-  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String, Microsoft.AspNetCore.Razor.SourceLocation, Microsoft.AspNetCore.Razor.ErrorSink)
+  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly(System.String, SourceLocation, ErrorSink)
   type: Method
   source:
     remote:
@@ -185,35 +173,35 @@ items:
       branch: master
       repo: https://github.com/aspnet/Razor.git
     id: ResolveDescriptorsInAssembly
-    path: src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
+    path: ../aspnet/Razor/src/Microsoft.AspNetCore.Razor.Runtime/Runtime/TagHelpers/TagHelperDescriptorResolver.cs
     startLine: 130
   assemblies:
   - Microsoft.AspNetCore.Razor.Runtime
   namespace: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  summary: "\nResolves all <xref href=\"Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor\" data-throw-if-not-resolved=\"false\"></xref>s for <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref>s from the\ngiven <em>assemblyName</em>.\n"
+  summary: "\nResolves all <see cref=\"!:TagHelperDescriptor\"></see>s for <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref>s from the\ngiven <span class=\"paramref\">assemblyName</span>.\n"
   example: []
   syntax:
     content: protected virtual IEnumerable<TagHelperDescriptor> ResolveDescriptorsInAssembly(string assemblyName, SourceLocation documentLocation, ErrorSink errorSink)
-    content.vb: Protected Overridable Function ResolveDescriptorsInAssembly(assemblyName As String, documentLocation As SourceLocation, errorSink As ErrorSink) As IEnumerable(Of TagHelperDescriptor)
     parameters:
     - id: assemblyName
       type: System.String
-      description: "\nThe name of the assembly to resolve <xref href=\"Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor\" data-throw-if-not-resolved=\"false\"></xref>s from.\n"
+      description: "\nThe name of the assembly to resolve <see cref=\"!:TagHelperDescriptor\"></see>s from.\n"
     - id: documentLocation
-      type: Microsoft.AspNetCore.Razor.SourceLocation
-      description: The <xref href="Microsoft.AspNetCore.Razor.SourceLocation" data-throw-if-not-resolved="false"></xref> of the directive.
+      type: SourceLocation
+      description: The <see cref="!:SourceLocation"></see> of the directive.
     - id: errorSink
-      type: Microsoft.AspNetCore.Razor.ErrorSink
+      type: ErrorSink
       description: >-
-        Used to record errors found when resolving <xref href="Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor" data-throw-if-not-resolved="false"></xref>s
+        Used to record errors found when resolving <see cref="!:TagHelperDescriptor"></see>s
 
-        within the given <em>assemblyName</em>.
+        within the given <span class="paramref">assemblyName</span>.
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor}
+      type: System.Collections.Generic.IEnumerable{TagHelperDescriptor}
       description: >-
-        <xref href="Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor" data-throw-if-not-resolved="false"></xref>s for <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref>s from the given
+        <see cref="!:TagHelperDescriptor"></see>s for <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref>s from the given
 
-        <em>assemblyName</em>.
+        <span class="paramref">assemblyName</span>.
+    content.vb: Protected Overridable Function ResolveDescriptorsInAssembly(assemblyName As String, documentLocation As SourceLocation, errorSink As ErrorSink) As IEnumerable(Of TagHelperDescriptor)
   overload: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly*
   modifiers.csharp:
   - protected
@@ -222,13 +210,6 @@ items:
   - Protected
   - Overridable
 references:
-- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
-  commentId: T:Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
-  parent: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  isExternal: false
-  name: TagHelperDescriptor
-  nameWithType: TagHelperDescriptor
-  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
 - uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
   commentId: N:Microsoft.AspNetCore.Razor.Runtime.TagHelpers
   isExternal: false
@@ -242,298 +223,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
-  commentId: T:Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
-  parent: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  isExternal: false
-  name: ITagHelperDescriptorResolver
-  nameWithType: ITagHelperDescriptorResolver
-  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  commentId: N:Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  nameWithType: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
 - uid: System
   commentId: N:System
   isExternal: false
@@ -592,59 +281,21 @@ references:
   name: Resolve
   nameWithType: TagHelperDescriptorResolver.Resolve
   fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.Resolve
-- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  commentId: M:Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  parent: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
-  isExternal: false
-  name: Resolve(TagHelperDescriptorResolutionContext)
-  nameWithType: ITagHelperDescriptorResolver.Resolve(TagHelperDescriptorResolutionContext)
-  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-    name: Resolve
-    nameWithType: ITagHelperDescriptorResolver.Resolve
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-    name: TagHelperDescriptorResolutionContext
-    nameWithType: TagHelperDescriptorResolutionContext
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve(Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext)
-    name: Resolve
-    nameWithType: ITagHelperDescriptorResolver.Resolve
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver.Resolve
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-    name: TagHelperDescriptorResolutionContext
-    nameWithType: TagHelperDescriptorResolutionContext
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-  commentId: T:Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-  parent: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
-  isExternal: false
+- uid: TagHelperDescriptorResolutionContext
+  commentId: '!:TagHelperDescriptorResolutionContext'
+  isExternal: true
   name: TagHelperDescriptorResolutionContext
   nameWithType: TagHelperDescriptorResolutionContext
-  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptorResolutionContext
-- uid: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor}
-  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor}
+  fullName: TagHelperDescriptorResolutionContext
+- uid: System.Collections.Generic.IEnumerable{TagHelperDescriptor}
+  commentId: T:System.Collections.Generic.IEnumerable{TagHelperDescriptor}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
   name: IEnumerable<TagHelperDescriptor>
   nameWithType: IEnumerable<TagHelperDescriptor>
-  fullName: System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor>
+  fullName: System.Collections.Generic.IEnumerable<TagHelperDescriptor>
   nameWithType.vb: IEnumerable(Of TagHelperDescriptor)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of TagHelperDescriptor)
   name.vb: IEnumerable(Of TagHelperDescriptor)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -655,10 +306,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
+  - uid: TagHelperDescriptor
     name: TagHelperDescriptor
     nameWithType: TagHelperDescriptor
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
+    fullName: TagHelperDescriptor
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -671,10 +323,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
+  - uid: TagHelperDescriptor
     name: TagHelperDescriptor
     nameWithType: TagHelperDescriptor
-    fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor
+    fullName: TagHelperDescriptor
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -685,7 +338,7 @@ references:
   nameWithType: IEnumerable<T>
   fullName: System.Collections.Generic.IEnumerable<T>
   nameWithType.vb: IEnumerable(Of T)
-  fullname.vb: System.Collections.Generic.IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
   name.vb: IEnumerable(Of T)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -730,13 +383,6 @@ references:
   name: ITagHelper
   nameWithType: ITagHelper
   fullName: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
-- uid: Microsoft.AspNetCore.Razor.SourceLocation
-  commentId: T:Microsoft.AspNetCore.Razor.SourceLocation
-  parent: Microsoft.AspNetCore.Razor
-  isExternal: false
-  name: SourceLocation
-  nameWithType: SourceLocation
-  fullName: Microsoft.AspNetCore.Razor.SourceLocation
 - uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly*
   commentId: Overload:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperDescriptorResolver.ResolveDescriptorsInAssembly
   isExternal: false
@@ -750,23 +396,20 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.AspNetCore.Razor.ErrorSink
-  commentId: T:Microsoft.AspNetCore.Razor.ErrorSink
-  parent: Microsoft.AspNetCore.Razor
-  isExternal: false
+- uid: SourceLocation
+  isExternal: true
+  name: SourceLocation
+  nameWithType: SourceLocation
+  fullName: SourceLocation
+- uid: ErrorSink
+  isExternal: true
   name: ErrorSink
   nameWithType: ErrorSink
-  fullName: Microsoft.AspNetCore.Razor.ErrorSink
+  fullName: ErrorSink
 - uid: Microsoft.AspNetCore.Razor.TagHelpers
   commentId: N:Microsoft.AspNetCore.Razor.TagHelpers
   isExternal: false
   name: Microsoft.AspNetCore.Razor.TagHelpers
   nameWithType: Microsoft.AspNetCore.Razor.TagHelpers
   fullName: Microsoft.AspNetCore.Razor.TagHelpers
-- uid: Microsoft.AspNetCore.Razor
-  commentId: N:Microsoft.AspNetCore.Razor
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor
-  nameWithType: Microsoft.AspNetCore.Razor
-  fullName: Microsoft.AspNetCore.Razor
 shouldSkipMarkup: true

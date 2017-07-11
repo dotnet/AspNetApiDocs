@@ -23,12 +23,12 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: DistributedCacheTagHelper
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 18
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
-  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;distributed-cache&gt; elements.\n"
+  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;distributed-cache> elements.\n"
   example: []
   syntax:
     content: >-
@@ -103,7 +103,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: CacheKeyPrefix
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 26
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -112,9 +112,9 @@ items:
   example: []
   syntax:
     content: public static readonly string CacheKeyPrefix
-    content.vb: Public Shared ReadOnly CacheKeyPrefix As String
     return:
       type: System.String
+    content.vb: Public Shared ReadOnly CacheKeyPrefix As String
   modifiers.csharp:
   - public
   - static
@@ -140,7 +140,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: .ctor
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 35
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -149,7 +149,6 @@ items:
   example: []
   syntax:
     content: public DistributedCacheTagHelper(IDistributedCacheTagHelperService distributedCacheService, HtmlEncoder htmlEncoder)
-    content.vb: Public Sub New(distributedCacheService As IDistributedCacheTagHelperService, htmlEncoder As HtmlEncoder)
     parameters:
     - id: distributedCacheService
       type: Microsoft.AspNetCore.Mvc.TagHelpers.Cache.IDistributedCacheTagHelperService
@@ -157,6 +156,7 @@ items:
     - id: htmlEncoder
       type: System.Text.Encodings.Web.HtmlEncoder
       description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref>.
+    content.vb: Public Sub New(distributedCacheService As IDistributedCacheTagHelperService, htmlEncoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper.#ctor*
   modifiers.csharp:
   - public
@@ -179,7 +179,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: MemoryCache
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 46
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -188,10 +188,10 @@ items:
   example: []
   syntax:
     content: protected IMemoryCache MemoryCache { get; }
-    content.vb: Protected ReadOnly Property MemoryCache As IMemoryCache
     parameters: []
     return:
       type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+    content.vb: Protected ReadOnly Property MemoryCache As IMemoryCache
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper.MemoryCache*
   modifiers.csharp:
   - protected
@@ -216,7 +216,7 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: Name
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 51
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
@@ -228,13 +228,13 @@ items:
       [HtmlAttributeName("name")]
 
       public string Name { get; set; }
+    parameters: []
+    return:
+      type: System.String
     content.vb: >-
       <HtmlAttributeName("name")>
 
       Public Property Name As String
-    parameters: []
-    return:
-      type: System.String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper.Name*
   attributes:
   - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
@@ -265,22 +265,27 @@ items:
       branch: master
       repo: https://github.com/aspnet/Mvc.git
     id: ProcessAsync
-    path: src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.TagHelpers/DistributedCacheTagHelper.cs
     startLine: 55
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nAsynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
+  remarks: By default this calls into <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)" data-throw-if-not-resolved="false"></xref>.
   example: []
   syntax:
     content: public override Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
-    content.vb: Public Overrides Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
     parameters:
     - id: context
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
     - id: output
       type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+      description: A stateful HTML element used to generate an HTML tag.
     return:
       type: System.Threading.Tasks.Task
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion updates the <span class="paramref">output</span>.
+    content.vb: Public Overrides Function ProcessAsync(context As TagHelperContext, output As TagHelperOutput) As Task
   overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.DistributedCacheTagHelper.ProcessAsync*
   modifiers.csharp:
