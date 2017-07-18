@@ -5,8 +5,8 @@ items:
   id: ExceptionFilterAttribute
   parent: Microsoft.AspNetCore.Mvc.Filters
   children:
-  - Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  - Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+  - Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
+  - Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
   - Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.Order
   langs:
   - csharp
@@ -26,28 +26,27 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Filters
-  summary: "\nAn abstract filter that runs asynchronously after an action has thrown an <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref>. Subclasses\nmust override <xref href=\"Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)\" data-throw-if-not-resolved=\"false\"></xref> but not both.\n"
+  summary: "\nAn abstract filter that runs asynchronously after an action has thrown an <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref>. Subclasses\nmust override <xref href=\"Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)\" data-throw-if-not-resolved=\"false\"></xref> but not both.\n"
   example: []
   syntax:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
 
-      public abstract class ExceptionFilterAttribute : Attribute, _Attribute, IAsyncExceptionFilter, IExceptionFilter, IOrderedFilter, IFilterMetadata
+      public abstract class ExceptionFilterAttribute : Attribute, _Attribute, IAsyncExceptionFilter, IExceptionFilter, IOrderedFilter
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=True, Inherited:=True)>
 
       Public MustInherit Class ExceptionFilterAttribute
           Inherits Attribute
-          Implements _Attribute, IAsyncExceptionFilter, IExceptionFilter, IOrderedFilter, IFilterMetadata
+          Implements _Attribute, IAsyncExceptionFilter, IExceptionFilter, IOrderedFilter
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  - IAsyncExceptionFilter
+  - IExceptionFilter
+  - IOrderedFilter
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
@@ -138,8 +137,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Filters
-  summary: "\nGets the order value for determining the order of execution of filters. Filters execute in\nascending numeric value of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
-  remarks: "\n<p>\nFilters are executed in an ordering determined by an ascending sort of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n</p>\n<p>\nAsynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, surround the execution of subsequent\nfilters of the same filter kind. An asynchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its filter method, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext%2cMicrosoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)\" data-throw-if-not-resolved=\"false\"></xref>,\nexecuted before that of a filter with a higher value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nSynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, have a before-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)\" data-throw-if-not-resolved=\"false\"></xref>, and an after-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)\" data-throw-if-not-resolved=\"false\"></xref>. A synchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its before-method executed before that of a filter with a higher value of\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>. During the after-stage of the filter, a synchronous filter with a lower\nnumeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> value will have its after-method executed after that of a filter with a higher\nvalue of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nIf two filters have the same numeric value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>, then their relative execution order\nis determined by the filter scope.\n</p>\n"
   example: []
   syntax:
     content: public int Order { get; set; }
@@ -148,24 +145,22 @@ items:
       type: System.Int32
     content.vb: Public Property Order As Integer
   overload: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.Order*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  id: OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
+  id: OnExceptionAsync(ExceptionContext)
   parent: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute
   langs:
   - csharp
   - vb
   name: OnExceptionAsync(ExceptionContext)
   nameWithType: ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
   type: Method
   source:
     remote:
@@ -178,37 +173,32 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Filters
-  summary: "\nCalled after an action has thrown an <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public virtual Task OnExceptionAsync(ExceptionContext context)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ExceptionContext" data-throw-if-not-resolved="false"></xref>.
+      type: ExceptionContext
     return:
       type: System.Threading.Tasks.Task
-      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion indicates the filter has executed.
     content.vb: Public Overridable Function OnExceptionAsync(context As ExceptionContext) As Task
   overload: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
   modifiers.csharp:
   - public
   - virtual
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  id: OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
+  id: OnException(ExceptionContext)
   parent: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute
   langs:
   - csharp
   - vb
   name: OnException(ExceptionContext)
   nameWithType: ExceptionFilterAttribute.OnException(ExceptionContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
   type: Method
   source:
     remote:
@@ -221,18 +211,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Filters
-  summary: "\nCalled after an action has thrown an <xref href=\"System.Exception\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public virtual void OnException(ExceptionContext context)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ExceptionContext" data-throw-if-not-resolved="false"></xref>.
+      type: ExceptionContext
     content.vb: Public Overridable Sub OnException(context As ExceptionContext)
   overload: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
   modifiers.csharp:
   - public
   - virtual
@@ -247,10 +233,10 @@ references:
   name: Exception
   nameWithType: Exception
   fullName: System.Exception
-- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException(ExceptionContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync(ExceptionContext)
 - uid: Microsoft.AspNetCore.Mvc.Filters
   commentId: N:Microsoft.AspNetCore.Mvc.Filters
   isExternal: false
@@ -278,34 +264,21 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+- uid: IAsyncExceptionFilter
+  isExternal: true
   name: IAsyncExceptionFilter
   nameWithType: IAsyncExceptionFilter
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+  fullName: IAsyncExceptionFilter
+- uid: IExceptionFilter
+  isExternal: true
   name: IExceptionFilter
   nameWithType: IExceptionFilter
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+  fullName: IExceptionFilter
+- uid: IOrderedFilter
+  isExternal: true
   name: IOrderedFilter
   nameWithType: IOrderedFilter
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: IFilterMetadata
-  nameWithType: IFilterMetadata
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  fullName: IOrderedFilter
 - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   parent: System.Attribute
@@ -3014,13 +2987,6 @@ references:
   name: Order
   nameWithType: ExceptionFilterAttribute.Order
   fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.Order
-- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
-  commentId: P:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
-  parent: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  isExternal: false
-  name: Order
-  nameWithType: IOrderedFilter.Order
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
@@ -3034,50 +3000,11 @@ references:
   name: OnExceptionAsync
   nameWithType: ExceptionFilterAttribute.OnExceptionAsync
   fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnExceptionAsync
-- uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  parent: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter
-  isExternal: false
-  name: OnExceptionAsync(ExceptionContext)
-  nameWithType: IAsyncExceptionFilter.OnExceptionAsync(ExceptionContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-    name: OnExceptionAsync
-    nameWithType: IAsyncExceptionFilter.OnExceptionAsync
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-    name: ExceptionContext
-    nameWithType: ExceptionContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-    name: OnExceptionAsync
-    nameWithType: IAsyncExceptionFilter.OnExceptionAsync
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-    name: ExceptionContext
-    nameWithType: ExceptionContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+- uid: ExceptionContext
+  isExternal: true
   name: ExceptionContext
   nameWithType: ExceptionContext
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
+  fullName: ExceptionContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -3097,41 +3024,4 @@ references:
   name: OnException
   nameWithType: ExceptionFilterAttribute.OnException
   fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionFilterAttribute.OnException
-- uid: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  parent: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter
-  isExternal: false
-  name: OnException(ExceptionContext)
-  nameWithType: IExceptionFilter.OnException(ExceptionContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-    name: OnException
-    nameWithType: IExceptionFilter.OnException
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-    name: ExceptionContext
-    nameWithType: ExceptionContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException(Microsoft.AspNetCore.Mvc.Filters.ExceptionContext)
-    name: OnException
-    nameWithType: IExceptionFilter.OnException
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-    name: ExceptionContext
-    nameWithType: ExceptionContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
-  - name: )
-    nameWithType: )
-    fullName: )
 shouldSkipMarkup: true

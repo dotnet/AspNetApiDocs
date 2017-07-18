@@ -31,20 +31,19 @@ items:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public class FormatFilterAttribute : Attribute, _Attribute, IFilterFactory, IFilterMetadata
+      public class FormatFilterAttribute : Attribute, _Attribute, IFilterFactory
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public Class FormatFilterAttribute
           Inherits Attribute
-          Implements _Attribute, IFilterFactory, IFilterMetadata
+          Implements _Attribute, IFilterFactory
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  - IFilterFactory
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
@@ -133,7 +132,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
-  summary: "\nGets a value that indicates if the result of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)\" data-throw-if-not-resolved=\"false\"></xref>\ncan be reused across requests.\n"
   example: []
   syntax:
     content: public bool IsReusable { get; }
@@ -142,8 +140,6 @@ items:
       type: System.Boolean
     content.vb: Public ReadOnly Property IsReusable As Boolean
   overload: Microsoft.AspNetCore.Mvc.FormatFilterAttribute.IsReusable*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable
   modifiers.csharp:
   - public
   - get
@@ -181,12 +177,10 @@ items:
       type: System.IServiceProvider
       description: The <xref href="System.IServiceProvider" data-throw-if-not-resolved="false"></xref>.
     return:
-      type: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+      type: IFilterMetadata
       description: An instance of <xref href="Microsoft.AspNetCore.Mvc.Formatters.FormatFilter" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function CreateInstance(serviceProvider As IServiceProvider) As IFilterMetadata
   overload: Microsoft.AspNetCore.Mvc.FormatFilterAttribute.CreateInstance*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -226,20 +220,11 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+- uid: IFilterFactory
+  isExternal: true
   name: IFilterFactory
   nameWithType: IFilterFactory
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: IFilterMetadata
-  nameWithType: IFilterMetadata
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  fullName: IFilterFactory
 - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   parent: System.Attribute
@@ -2942,25 +2927,12 @@ references:
   name: System.Runtime.InteropServices
   nameWithType: System.Runtime.InteropServices
   fullName: System.Runtime.InteropServices
-- uid: Microsoft.AspNetCore.Mvc.Filters
-  commentId: N:Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.Filters
-  nameWithType: Microsoft.AspNetCore.Mvc.Filters
-  fullName: Microsoft.AspNetCore.Mvc.Filters
 - uid: Microsoft.AspNetCore.Mvc.FormatFilterAttribute.IsReusable*
   commentId: Overload:Microsoft.AspNetCore.Mvc.FormatFilterAttribute.IsReusable
   isExternal: false
   name: IsReusable
   nameWithType: FormatFilterAttribute.IsReusable
   fullName: Microsoft.AspNetCore.Mvc.FormatFilterAttribute.IsReusable
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable
-  commentId: P:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable
-  parent: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
-  isExternal: false
-  name: IsReusable
-  nameWithType: IFilterFactory.IsReusable
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.IsReusable
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -2987,43 +2959,9 @@ references:
   name: CreateInstance
   nameWithType: FormatFilterAttribute.CreateInstance
   fullName: Microsoft.AspNetCore.Mvc.FormatFilterAttribute.CreateInstance
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
-  parent: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory
+- uid: IFilterMetadata
   isExternal: true
-  name: CreateInstance(IServiceProvider)
-  nameWithType: IFilterFactory.CreateInstance(IServiceProvider)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
-    name: CreateInstance
-    nameWithType: IFilterFactory.CreateInstance
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance(System.IServiceProvider)
-    name: CreateInstance
-    nameWithType: IFilterFactory.CreateInstance
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IServiceProvider
-    name: IServiceProvider
-    nameWithType: IServiceProvider
-    fullName: System.IServiceProvider
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: IFilterMetadata
+  nameWithType: IFilterMetadata
+  fullName: IFilterMetadata
 shouldSkipMarkup: true

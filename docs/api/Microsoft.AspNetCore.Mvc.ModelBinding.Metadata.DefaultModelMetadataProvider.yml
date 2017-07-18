@@ -7,8 +7,8 @@ items:
   children:
   - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ICompositeMetadataDetailsProvider)
   - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateModelMetadata(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails)
-  - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
-  - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(ModelMetadataIdentity)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(ModelMetadataIdentity)
   - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.DetailsProvider
   - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties(System.Type)
   - Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForType(System.Type)
@@ -30,30 +30,17 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
-  summary: "\nA default implementation of <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider\" data-throw-if-not-resolved=\"false\"></xref> based on reflection.\n"
+  summary: "\nA default implementation of <see cref=\"!:IModelMetadataProvider\"></see> based on reflection.\n"
   example: []
   syntax:
     content: 'public class DefaultModelMetadataProvider : IModelMetadataProvider'
     content.vb: >-
       Public Class DefaultModelMetadataProvider
-          Implements IModelMetadataProvider
+          Inherits IModelMetadataProvider
   inheritance:
   - System.Object
   derivedClasses:
   - Microsoft.AspNetCore.Mvc.ModelBinding.EmptyModelMetadataProvider
-  implements:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  inheritedMembers:
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
-  extensionMethods:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(System.Type,System.String)
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(System.Type,System.Object)
   modifiers.csharp:
   - public
   - class
@@ -162,11 +149,9 @@ items:
     - id: modelType
       type: System.Type
     return:
-      type: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata}
+      type: System.Collections.Generic.IEnumerable{ModelMetadata}
     content.vb: Public Overridable Function GetMetadataForProperties(modelType As Type) As IEnumerable(Of ModelMetadata)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties*
-  implements:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
   modifiers.csharp:
   - public
   - virtual
@@ -202,11 +187,9 @@ items:
     - id: modelType
       type: System.Type
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+      type: ModelMetadata
     content.vb: Public Overridable Function GetMetadataForType(modelType As Type) As ModelMetadata
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForType*
-  implements:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
   modifiers.csharp:
   - public
   - virtual
@@ -235,8 +218,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
-  summary: "\nCreates a new <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata\" data-throw-if-not-resolved=\"false\"></xref> from a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails\" data-throw-if-not-resolved=\"false\"></xref>.\n"
-  remarks: "\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider\" data-throw-if-not-resolved=\"false\"></xref> will always create instances of\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata\" data-throw-if-not-resolved=\"false\"></xref> .Override this method to create a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata\" data-throw-if-not-resolved=\"false\"></xref>\nof a different concrete type.\n"
+  summary: "\nCreates a new <see cref=\"!:ModelMetadata\"></see> from a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider\" data-throw-if-not-resolved=\"false\"></xref> will always create instances of\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadata\" data-throw-if-not-resolved=\"false\"></xref> .Override this method to create a <see cref=\"!:ModelMetadata\"></see>\nof a different concrete type.\n"
   example: []
   syntax:
     content: protected virtual ModelMetadata CreateModelMetadata(DefaultMetadataDetails entry)
@@ -245,8 +228,8 @@ items:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails
       description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails" data-throw-if-not-resolved="false"></xref> entry with cached data.
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-      description: A new <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata" data-throw-if-not-resolved="false"></xref> instance.
+      type: ModelMetadata
+      description: A new <see cref="!:ModelMetadata"></see> instance.
     content.vb: Protected Overridable Function CreateModelMetadata(entry As DefaultMetadataDetails) As ModelMetadata
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateModelMetadata*
   modifiers.csharp:
@@ -255,16 +238,16 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
-  id: CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(ModelMetadataIdentity)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(ModelMetadataIdentity)
+  id: CreatePropertyDetails(ModelMetadataIdentity)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider
   langs:
   - csharp
   - vb
   name: CreatePropertyDetails(ModelMetadataIdentity)
   nameWithType: DefaultModelMetadataProvider.CreatePropertyDetails(ModelMetadataIdentity)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails(ModelMetadataIdentity)
   type: Method
   source:
     remote:
@@ -284,8 +267,8 @@ items:
     content: protected virtual DefaultMetadataDetails[] CreatePropertyDetails(ModelMetadataIdentity key)
     parameters:
     - id: key
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity
-      description: "\nThe <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity\" data-throw-if-not-resolved=\"false\"></xref> identifying the model <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+      type: ModelMetadataIdentity
+      description: "\nThe <see cref=\"!:ModelMetadataIdentity\"></see> identifying the model <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails[]
       description: A details object for each property of the model <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
@@ -297,16 +280,16 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
-  id: CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(ModelMetadataIdentity)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(ModelMetadataIdentity)
+  id: CreateTypeDetails(ModelMetadataIdentity)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider
   langs:
   - csharp
   - vb
   name: CreateTypeDetails(ModelMetadataIdentity)
   nameWithType: DefaultModelMetadataProvider.CreateTypeDetails(ModelMetadataIdentity)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateTypeDetails(ModelMetadataIdentity)
   type: Method
   source:
     remote:
@@ -326,8 +309,8 @@ items:
     content: protected virtual DefaultMetadataDetails CreateTypeDetails(ModelMetadataIdentity key)
     parameters:
     - id: key
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity
-      description: "\nThe <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity\" data-throw-if-not-resolved=\"false\"></xref> identifying the model <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+      type: ModelMetadataIdentity
+      description: "\nThe <see cref=\"!:ModelMetadataIdentity\"></see> identifying the model <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     return:
       type: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails
       description: A details object for the model <xref href="System.Type" data-throw-if-not-resolved="false"></xref>.
@@ -340,13 +323,6 @@ items:
   - Protected
   - Overridable
 references:
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: IModelMetadataProvider
-  nameWithType: IModelMetadataProvider
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
   commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
   isExternal: false
@@ -360,563 +336,12 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(System.Type,System.String)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions
-  definition: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-  name: GetMetadataForProperty(Type, String)
-  nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty(Type, String)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(System.Type, System.String)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(System.Type,System.String)
-    name: GetMetadataForProperty
-    nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(System.Type,System.String)
-    name: GetMetadataForProperty
-    nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(System.Type,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-  parent: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions
-  definition: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-  name: GetModelExplorerForType(Type, Object)
-  nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType(Type, Object)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(System.Type, System.Object)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(System.Type,System.Object)
-    name: GetModelExplorerForType
-    nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType
-    fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(System.Type,System.Object)
-    name: GetModelExplorerForType
-    nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType
-    fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding
-  commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.ModelBinding
-  nameWithType: Microsoft.AspNetCore.Mvc.ModelBinding
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-  isExternal: true
-  name: GetMetadataForProperty(IModelMetadataProvider, Type, String)
-  nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty(IModelMetadataProvider, Type, String)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider, System.Type, System.String)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-    name: GetMetadataForProperty
-    nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-    name: IModelMetadataProvider
-    nameWithType: IModelMetadataProvider
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.String)
-    name: GetMetadataForProperty
-    nameWithType: ModelMetadataProviderExtensions.GetMetadataForProperty
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions.GetMetadataForProperty
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-    name: IModelMetadataProvider
-    nameWithType: IModelMetadataProvider
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: ModelMetadataProviderExtensions
-  nameWithType: ModelMetadataProviderExtensions
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadataProviderExtensions
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-  isExternal: true
-  name: GetModelExplorerForType(IModelMetadataProvider, Type, Object)
-  nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType(IModelMetadataProvider, Type, Object)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider, System.Type, System.Object)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-    name: GetModelExplorerForType
-    nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType
-    fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-    name: IModelMetadataProvider
-    nameWithType: IModelMetadataProvider
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType(Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider,System.Type,System.Object)
-    name: GetModelExplorerForType
-    nameWithType: ModelMetadataProviderExtensions.GetModelExplorerForType
-    fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions.GetModelExplorerForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-    name: IModelMetadataProvider
-    nameWithType: IModelMetadataProvider
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions
-  commentId: T:Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions
-  parent: Microsoft.AspNetCore.Mvc.ViewFeatures
-  isExternal: false
-  name: ModelMetadataProviderExtensions
-  nameWithType: ModelMetadataProviderExtensions
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ModelMetadataProviderExtensions
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures
-  commentId: N:Microsoft.AspNetCore.Mvc.ViewFeatures
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.ViewFeatures
-  nameWithType: Microsoft.AspNetCore.Mvc.ViewFeatures
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider
   commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
@@ -949,45 +374,6 @@ references:
   name: GetMetadataForProperties
   nameWithType: DefaultModelMetadataProvider.GetMetadataForProperties
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
-  isExternal: true
-  name: GetMetadataForProperties(Type)
-  nameWithType: IModelMetadataProvider.GetMetadataForProperties(Type)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
-    name: GetMetadataForProperties
-    nameWithType: IModelMetadataProvider.GetMetadataForProperties
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties(System.Type)
-    name: GetMetadataForProperties
-    nameWithType: IModelMetadataProvider.GetMetadataForProperties
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForProperties
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System.Type
   commentId: T:System.Type
   parent: System
@@ -995,15 +381,15 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
-- uid: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata}
-  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata}
+- uid: System.Collections.Generic.IEnumerable{ModelMetadata}
+  commentId: T:System.Collections.Generic.IEnumerable{ModelMetadata}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
   name: IEnumerable<ModelMetadata>
   nameWithType: IEnumerable<ModelMetadata>
-  fullName: System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata>
+  fullName: System.Collections.Generic.IEnumerable<ModelMetadata>
   nameWithType.vb: IEnumerable(Of ModelMetadata)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of ModelMetadata)
   name.vb: IEnumerable(Of ModelMetadata)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -1014,10 +400,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - uid: ModelMetadata
     name: ModelMetadata
     nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    fullName: ModelMetadata
+    isExternal: true
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -1030,10 +417,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - uid: ModelMetadata
     name: ModelMetadata
     nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    fullName: ModelMetadata
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -1088,52 +476,11 @@ references:
   name: GetMetadataForType
   nameWithType: DefaultModelMetadataProvider.GetMetadataForType
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForType
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider
+- uid: ModelMetadata
   isExternal: true
-  name: GetMetadataForType(Type)
-  nameWithType: IModelMetadataProvider.GetMetadataForType(Type)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
-    name: GetMetadataForType
-    nameWithType: IModelMetadataProvider.GetMetadataForType
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType(System.Type)
-    name: GetMetadataForType
-    nameWithType: IModelMetadataProvider.GetMetadataForType
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IModelMetadataProvider.GetMetadataForType
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Type
-    name: Type
-    nameWithType: Type
-    fullName: System.Type
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
   name: ModelMetadata
   nameWithType: ModelMetadata
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  fullName: ModelMetadata
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails
   commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
@@ -1153,13 +500,6 @@ references:
   name: CreateModelMetadata
   nameWithType: DefaultModelMetadataProvider.CreateModelMetadata
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreateModelMetadata
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata
-  isExternal: false
-  name: ModelMetadataIdentity
-  nameWithType: ModelMetadataIdentity
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.ModelMetadataIdentity
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties(System.Type)
   commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.GetMetadataForProperties(System.Type)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider
@@ -1205,6 +545,11 @@ references:
   name: CreatePropertyDetails
   nameWithType: DefaultModelMetadataProvider.CreatePropertyDetails
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultModelMetadataProvider.CreatePropertyDetails
+- uid: ModelMetadataIdentity
+  isExternal: true
+  name: ModelMetadataIdentity
+  nameWithType: ModelMetadataIdentity
+  fullName: ModelMetadataIdentity
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DefaultMetadataDetails[]
   name: DefaultMetadataDetails[]
   nameWithType: DefaultMetadataDetails[]

@@ -5,7 +5,7 @@ items:
   id: RouteValueProvider
   parent: Microsoft.AspNetCore.Mvc.ModelBinding
   children:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(BindingSource,RouteValueDictionary)
   - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.ContainsPrefix(System.String)
   - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.GetValue(System.String)
   - Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.PrefixContainer
@@ -27,7 +27,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nAn <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> adapter for data stored in an <xref href=\"Microsoft.AspNetCore.Routing.RouteValueDictionary\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nAn <see cref=\"!:IValueProvider\"></see> adapter for data stored in an <see cref=\"!:RouteValueDictionary\"></see>.\n"
   example: []
   syntax:
     content: 'public class RouteValueProvider : BindingSourceValueProvider, IBindingSourceValueProvider, IValueProvider'
@@ -40,10 +40,10 @@ items:
   - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider
-  - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+  - IValueProvider
   inheritedMembers:
   - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
-  - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -57,16 +57,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Routing.RouteValueDictionary)
-  id: '#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Routing.RouteValueDictionary)'
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(BindingSource,RouteValueDictionary)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor(BindingSource,RouteValueDictionary)
+  id: '#ctor(BindingSource,RouteValueDictionary)'
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider
   langs:
   - csharp
   - vb
   name: RouteValueProvider(BindingSource, RouteValueDictionary)
   nameWithType: RouteValueProvider.RouteValueProvider(BindingSource, RouteValueDictionary)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.RouteValueProvider(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource, Microsoft.AspNetCore.Routing.RouteValueDictionary)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.RouteValueProvider(BindingSource, RouteValueDictionary)
   type: Constructor
   source:
     remote:
@@ -85,10 +85,10 @@ items:
     content: public RouteValueProvider(BindingSource bindingSource, RouteValueDictionary values)
     parameters:
     - id: bindingSource
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource" data-throw-if-not-resolved="false"></xref> of the data.
+      type: BindingSource
+      description: The <see cref="!:BindingSource"></see> of the data.
     - id: values
-      type: Microsoft.AspNetCore.Routing.RouteValueDictionary
+      type: RouteValueDictionary
       description: The values.
     content.vb: Public Sub New(bindingSource As BindingSource, values As RouteValueDictionary)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor*
@@ -153,7 +153,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nDetermines whether the collection contains the specified prefix.\n"
   example: []
   syntax:
     content: public override bool ContainsPrefix(string key)
@@ -162,7 +161,6 @@ items:
       type: System.String
     return:
       type: System.Boolean
-      description: true if the collection contains the specified prefix; otherwise, false.
     content.vb: Public Overrides Function ContainsPrefix(key As String) As Boolean
   overridden: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.ContainsPrefix(System.String)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.ContainsPrefix*
@@ -194,17 +192,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nRetrieves a value object using the specified key.\n"
   example: []
   syntax:
     content: public override ValueProviderResult GetValue(string key)
     parameters:
     - id: key
       type: System.String
-      description: The key of the value object to retrieve.
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
-      description: The value object for the specified key. If the exact key is not found, null.
+      type: ValueProviderResult
     content.vb: Public Overrides Function GetValue(key As String) As ValueProviderResult
   overridden: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.GetValue(System.String)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.GetValue*
@@ -215,20 +210,6 @@ items:
   - Public
   - Overrides
 references:
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: IValueProvider
-  nameWithType: IValueProvider
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-- uid: Microsoft.AspNetCore.Routing.RouteValueDictionary
-  commentId: T:Microsoft.AspNetCore.Routing.RouteValueDictionary
-  parent: Microsoft.AspNetCore.Routing
-  isExternal: false
-  name: RouteValueDictionary
-  nameWithType: RouteValueDictionary
-  fullName: Microsoft.AspNetCore.Routing.RouteValueDictionary
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding
   commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding
   isExternal: false
@@ -256,6 +237,11 @@ references:
   name: IBindingSourceValueProvider
   nameWithType: IBindingSourceValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider
+- uid: IValueProvider
+  isExternal: true
+  name: IValueProvider
+  nameWithType: IValueProvider
+  fullName: IValueProvider
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
   commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider
@@ -263,40 +249,42 @@ references:
   name: BindingSource
   nameWithType: BindingSourceValueProvider.BindingSource
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider
-  isExternal: false
+  isExternal: true
   name: Filter(BindingSource)
   nameWithType: BindingSourceValueProvider.Filter(BindingSource)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
     name: Filter
     nameWithType: BindingSourceValueProvider.Filter
     fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+  - uid: BindingSource
     name: BindingSource
     nameWithType: BindingSource
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+    fullName: BindingSource
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
     name: Filter
     nameWithType: BindingSourceValueProvider.Filter
     fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter
   - name: (
     nameWithType: (
     fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+  - uid: BindingSource
     name: BindingSource
     nameWithType: BindingSource
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+    fullName: BindingSource
+    isExternal: true
   - name: )
     nameWithType: )
     fullName: )
@@ -579,12 +567,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Routing
-  commentId: N:Microsoft.AspNetCore.Routing
-  isExternal: false
-  name: Microsoft.AspNetCore.Routing
-  nameWithType: Microsoft.AspNetCore.Routing
-  fullName: Microsoft.AspNetCore.Routing
 - uid: System
   commentId: N:System
   isExternal: false
@@ -597,19 +579,22 @@ references:
   name: RouteValueProvider
   nameWithType: RouteValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: BindingSource
-  nameWithType: BindingSource
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.#ctor
   isExternal: false
   name: RouteValueProvider
   nameWithType: RouteValueProvider.RouteValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.RouteValueProvider
+- uid: BindingSource
+  isExternal: true
+  name: BindingSource
+  nameWithType: BindingSource
+  fullName: BindingSource
+- uid: RouteValueDictionary
+  isExternal: true
+  name: RouteValueDictionary
+  nameWithType: RouteValueDictionary
+  fullName: RouteValueDictionary
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.PrefixContainer*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.PrefixContainer
   isExternal: false
@@ -733,11 +718,9 @@ references:
   name: GetValue
   nameWithType: RouteValueProvider.GetValue
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.RouteValueProvider.GetValue
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: ValueProviderResult
+  isExternal: true
   name: ValueProviderResult
   nameWithType: ValueProviderResult
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
+  fullName: ValueProviderResult
 shouldSkipMarkup: true

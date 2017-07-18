@@ -7,7 +7,7 @@ items:
   children:
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.#ctor
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.AddHtmlAttributeValue(System.String,System.Int32,System.Object,System.Int32,System.Int32,System.Boolean)
-  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext,System.String,System.Int32,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
+  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(TagHelperExecutionContext,System.String,System.Int32,HtmlAttributeValueStyle)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginContext(System.Int32,System.Int32,System.Boolean)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginWriteAttribute(System.String,System.String,System.Int32,System.String,System.Int32,System.Int32)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginWriteAttributeTo(System.IO.TextWriter,System.String,System.String,System.Int32,System.String,System.Int32,System.Int32)
@@ -17,7 +17,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.CreateTagHelper``1
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.DefineSection(System.String,Microsoft.AspNetCore.Mvc.Razor.RenderAsyncDelegate)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.DiagnosticSource
-  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext)
+  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(TagHelperExecutionContext)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndContext
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteAttribute
@@ -44,7 +44,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.RenderSectionAsync(System.String,System.Boolean)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.SectionWriters
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.SetAntiforgeryCookieAndHeader
-  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.TempData
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.User
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewBag
@@ -55,9 +55,9 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteLiteral(System.Object)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteLiteralTo(System.IO.TextWriter,System.Object)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteLiteralTo(System.IO.TextWriter,System.String)
+  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,HtmlEncoder,System.Object)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,System.Object)
   - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,System.String)
-  - Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder,System.Object)
   langs:
   - csharp
   - vb
@@ -157,13 +157,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nAn <xref href=\"Microsoft.AspNetCore.Http.HttpContext\" data-throw-if-not-resolved=\"false\"></xref> representing the current request execution.\n"
+  summary: "\nAn <see cref=\"!:HttpContext\"></see> representing the current request execution.\n"
   example: []
   syntax:
     content: public HttpContext Context { get; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Http.HttpContext
+      type: HttpContext
     content.vb: Public ReadOnly Property Context As HttpContext
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context*
   modifiers.csharp:
@@ -239,7 +239,7 @@ items:
     content: public ViewContext ViewContext { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.Rendering.ViewContext
+      type: ViewContext
     content.vb: Public Property ViewContext As ViewContext
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext*
   implements:
@@ -311,13 +311,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nGets the <xref href=\"System.Text.Encodings.Web.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref> to use when this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref>\nhandles non-<xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> C# expressions.\n"
+  summary: "\nGets the <see cref=\"!:System.Text.Encodings.Web.HtmlEncoder\"></see> to use when this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref>\nhandles non-<see cref=\"!:IHtmlContent\"></see> C# expressions.\n"
   example: []
   syntax:
     content: public HtmlEncoder HtmlEncoder { get; set; }
     parameters: []
     return:
-      type: System.Text.Encodings.Web.HtmlEncoder
+      type: HtmlEncoder
     content.vb: Public Property HtmlEncoder As HtmlEncoder
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder*
   modifiers.csharp:
@@ -348,13 +348,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nGets or sets a <xref href=\"System.Diagnostics.DiagnosticSource.%23ctor\" data-throw-if-not-resolved=\"false\"></xref> instance used to instrument the page execution.\n"
+  summary: "\nGets or sets a <see cref=\"!:DiagnosticSource.DiagnosticSource\"></see> instance used to instrument the page execution.\n"
   example: []
   syntax:
     content: public DiagnosticSource DiagnosticSource { get; set; }
     parameters: []
     return:
-      type: System.Diagnostics.DiagnosticSource
+      type: DiagnosticSource
     content.vb: Public Property DiagnosticSource As DiagnosticSource
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.DiagnosticSource*
   modifiers.csharp:
@@ -500,14 +500,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nGets the <xref href=\"Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary\" data-throw-if-not-resolved=\"false\"></xref> from the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nGets the <see cref=\"!:ITempDataDictionary\"></see> from the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   remarks: Returns null if <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext" data-throw-if-not-resolved="false"></xref> is null.
   example: []
   syntax:
     content: public ITempDataDictionary TempData { get; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
+      type: ITempDataDictionary
     content.vb: Public ReadOnly Property TempData As ITempDataDictionary
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.TempData*
   modifiers.csharp:
@@ -544,7 +544,7 @@ items:
     content: public IHtmlContent BodyContent { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Html.IHtmlContent
+      type: IHtmlContent
     content.vb: Public Property BodyContent As IHtmlContent
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BodyContent*
   implements:
@@ -695,7 +695,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nRenders the page and writes the output to the <xref href=\"Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nRenders the page and writes the output to the <see cref=\"!:ViewContext.Writer\"></see>.\n"
   example: []
   syntax:
     content: public abstract Task ExecuteAsync()
@@ -781,17 +781,17 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nCreates and activates a <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nCreates and activates a <see cref=\"!:ITagHelper\"></see>.\n"
   remarks: "\n<span class=\"typeparamref\">TTagHelper</span> must have a parameterless constructor.\n"
   example: []
   syntax:
     content: 'public TTagHelper CreateTagHelper<TTagHelper>()where TTagHelper : ITagHelper'
     typeParameters:
     - id: TTagHelper
-      description: A <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref> type.
+      description: A <see cref="!:ITagHelper"></see> type.
     return:
       type: '{TTagHelper}'
-      description: The activated <xref href="Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper" data-throw-if-not-resolved="false"></xref>.
+      description: The activated <see cref="!:ITagHelper"></see>.
     content.vb: Public Function CreateTagHelper(Of TTagHelper As ITagHelper) As TTagHelper
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.CreateTagHelper*
   nameWithType.vb: RazorPage.CreateTagHelper(Of TTagHelper)()
@@ -801,16 +801,16 @@ items:
   - Public
   fullName.vb: Microsoft.AspNetCore.Mvc.Razor.RazorPage.CreateTagHelper(Of TTagHelper)()
   name.vb: CreateTagHelper(Of TTagHelper)()
-- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
-  id: StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
+  id: StartTagHelperWritingScope(HtmlEncoder)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   langs:
   - csharp
   - vb
   name: StartTagHelperWritingScope(HtmlEncoder)
   nameWithType: RazorPage.StartTagHelperWritingScope(HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
   type: Method
   source:
     remote:
@@ -824,14 +824,14 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
   summary: "\nStarts a new writing scope and optionally overrides <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref> within that scope.\n"
-  remarks: "\nAll writes to the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer\" data-throw-if-not-resolved=\"false\"></xref> after calling this method will\nbe buffered until <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope\" data-throw-if-not-resolved=\"false\"></xref> is called.\n"
+  remarks: "\nAll writes to the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> or <see cref=\"!:ViewContext.Writer\"></see> after calling this method will\nbe buffered until <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope\" data-throw-if-not-resolved=\"false\"></xref> is called.\n"
   example: []
   syntax:
     content: public void StartTagHelperWritingScope(HtmlEncoder encoder)
     parameters:
     - id: encoder
-      type: System.Text.Encodings.Web.HtmlEncoder
-      description: "\nThe <xref href=\"System.Text.Encodings.Web.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref> to use when this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref> handles\nnon-<xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> C# expressions. If <code>null</code>, does not change <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+      type: HtmlEncoder
+      description: "\nThe <see cref=\"!:System.Text.Encodings.Web.HtmlEncoder\"></see> to use when this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref> handles\nnon-<see cref=\"!:IHtmlContent\"></see> C# expressions. If <code>null</code>, does not change <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref>.\n"
     content.vb: Public Sub StartTagHelperWritingScope(encoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope*
   modifiers.csharp:
@@ -860,13 +860,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nEnds the current writing scope that was started by calling <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nEnds the current writing scope that was started by calling <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public TagHelperContent EndTagHelperWritingScope()
     return:
-      type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent
-      description: The buffered <xref href="Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent" data-throw-if-not-resolved="false"></xref>.
+      type: TagHelperContent
+      description: The buffered <see cref="!:TagHelperContent"></see>.
     content.vb: Public Function EndTagHelperWritingScope As TagHelperContent
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope*
   modifiers.csharp:
@@ -895,8 +895,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nStarts a new scope for writing <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> attribute values.\n"
-  remarks: "\nAll writes to the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> or <xref href=\"Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer\" data-throw-if-not-resolved=\"false\"></xref> after calling this method will\nbe buffered until <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> is called.\nThe content will be buffered using a shared <xref href=\"System.IO.StringWriter\" data-throw-if-not-resolved=\"false\"></xref> within this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref>\nNesting of <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> method calls\nis not supported.\n"
+  summary: "\nStarts a new scope for writing <see cref=\"!:ITagHelper\"></see> attribute values.\n"
+  remarks: "\nAll writes to the <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> or <see cref=\"!:ViewContext.Writer\"></see> after calling this method will\nbe buffered until <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> is called.\nThe content will be buffered using a shared <xref href=\"System.IO.StringWriter\" data-throw-if-not-resolved=\"false\"></xref> within this <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage\" data-throw-if-not-resolved=\"false\"></xref>\nNesting of <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute\" data-throw-if-not-resolved=\"false\"></xref> method calls\nis not supported.\n"
   example: []
   syntax:
     content: public void BeginWriteTagHelperAttribute()
@@ -1003,7 +1003,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
   summary: "\nWrites the specified <span class=\"paramref\">value</span> with HTML encoding to <span class=\"paramref\">writer</span>.\n"
-  remarks: "\n<span class=\"paramref\">value</span>s of type <xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> are written using\n<xref href=\"Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter%2cSystem.Text.Encodings.Web.HtmlEncoder)\" data-throw-if-not-resolved=\"false\"></xref>.\nFor all other types, the encoded result of <xref href=\"System.Object.ToString\" data-throw-if-not-resolved=\"false\"></xref> is written to the\n<span class=\"paramref\">writer</span>.\n"
+  remarks: "\n<span class=\"paramref\">value</span>s of type <see cref=\"!:IHtmlContent\"></see> are written using\n<see cref=\"!:IHtmlContent.WriteTo(TextWriter, HtmlEncoder)\"></see>.\nFor all other types, the encoded result of <xref href=\"System.Object.ToString\" data-throw-if-not-resolved=\"false\"></xref> is written to the\n<span class=\"paramref\">writer</span>.\n"
   example: []
   syntax:
     content: public virtual void WriteTo(TextWriter writer, object value)
@@ -1022,16 +1022,16 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder,System.Object)
-  id: WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder,System.Object)
+- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,HtmlEncoder,System.Object)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter,HtmlEncoder,System.Object)
+  id: WriteTo(System.IO.TextWriter,HtmlEncoder,System.Object)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   langs:
   - csharp
   - vb
   name: WriteTo(TextWriter, HtmlEncoder, Object)
   nameWithType: RazorPage.WriteTo(TextWriter, HtmlEncoder, Object)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder, System.Object)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo(System.IO.TextWriter, HtmlEncoder, System.Object)
   type: Method
   source:
     remote:
@@ -1045,7 +1045,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
   summary: "\nWrites the specified <span class=\"paramref\">value</span> with HTML encoding to given <span class=\"paramref\">writer</span>.\n"
-  remarks: "\n<span class=\"paramref\">value</span>s of type <xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> are written using\n<xref href=\"Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter%2cSystem.Text.Encodings.Web.HtmlEncoder)\" data-throw-if-not-resolved=\"false\"></xref>.\nFor all other types, the encoded result of <xref href=\"System.Object.ToString\" data-throw-if-not-resolved=\"false\"></xref> is written to the\n<span class=\"paramref\">writer</span>.\n"
+  remarks: "\n<span class=\"paramref\">value</span>s of type <see cref=\"!:IHtmlContent\"></see> are written using\n<see cref=\"!:IHtmlContent.WriteTo(TextWriter, HtmlEncoder)\"></see>.\nFor all other types, the encoded result of <xref href=\"System.Object.ToString\" data-throw-if-not-resolved=\"false\"></xref> is written to the\n<span class=\"paramref\">writer</span>.\n"
   example: []
   syntax:
     content: public static void WriteTo(TextWriter writer, HtmlEncoder encoder, object value)
@@ -1054,8 +1054,8 @@ items:
       type: System.IO.TextWriter
       description: The <xref href="System.IO.TextWriter" data-throw-if-not-resolved="false"></xref> instance to write to.
     - id: encoder
-      type: System.Text.Encodings.Web.HtmlEncoder
-      description: "\nThe <xref href=\"System.Text.Encodings.Web.HtmlEncoder\" data-throw-if-not-resolved=\"false\"></xref> to use when encoding <span class=\"paramref\">value</span>.\n"
+      type: HtmlEncoder
+      description: "\nThe <see cref=\"!:System.Text.Encodings.Web.HtmlEncoder\"></see> to use when encoding <span class=\"paramref\">value</span>.\n"
     - id: value
       type: System.Object
       description: The <xref href="System.Object" data-throw-if-not-resolved="false"></xref> to write.
@@ -1475,16 +1475,16 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext,System.String,System.Int32,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext,System.String,System.Int32,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
-  id: BeginAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext,System.String,System.Int32,Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
+- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(TagHelperExecutionContext,System.String,System.Int32,HtmlAttributeValueStyle)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(TagHelperExecutionContext,System.String,System.Int32,HtmlAttributeValueStyle)
+  id: BeginAddHtmlAttributeValues(TagHelperExecutionContext,System.String,System.Int32,HtmlAttributeValueStyle)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   langs:
   - csharp
   - vb
   name: BeginAddHtmlAttributeValues(TagHelperExecutionContext, String, Int32, HtmlAttributeValueStyle)
   nameWithType: RazorPage.BeginAddHtmlAttributeValues(TagHelperExecutionContext, String, Int32, HtmlAttributeValueStyle)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext, System.String, System.Int32, Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues(TagHelperExecutionContext, System.String, System.Int32, HtmlAttributeValueStyle)
   type: Method
   source:
     remote:
@@ -1501,13 +1501,13 @@ items:
     content: public void BeginAddHtmlAttributeValues(TagHelperExecutionContext executionContext, string attributeName, int attributeValuesCount, HtmlAttributeValueStyle attributeValueStyle)
     parameters:
     - id: executionContext
-      type: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext
+      type: TagHelperExecutionContext
     - id: attributeName
       type: System.String
     - id: attributeValuesCount
       type: System.Int32
     - id: attributeValueStyle
-      type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
+      type: HtmlAttributeValueStyle
     content.vb: Public Sub BeginAddHtmlAttributeValues(executionContext As TagHelperExecutionContext, attributeName As String, attributeValuesCount As Integer, attributeValueStyle As HtmlAttributeValueStyle)
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues*
   modifiers.csharp:
@@ -1557,16 +1557,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext)
-  id: EndAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext)
+- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(TagHelperExecutionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(TagHelperExecutionContext)
+  id: EndAddHtmlAttributeValues(TagHelperExecutionContext)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   langs:
   - csharp
   - vb
   name: EndAddHtmlAttributeValues(TagHelperExecutionContext)
   nameWithType: RazorPage.EndAddHtmlAttributeValues(TagHelperExecutionContext)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues(TagHelperExecutionContext)
   type: Method
   source:
     remote:
@@ -1583,7 +1583,7 @@ items:
     content: public void EndAddHtmlAttributeValues(TagHelperExecutionContext executionContext)
     parameters:
     - id: executionContext
-      type: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext
+      type: TagHelperExecutionContext
     content.vb: Public Sub EndAddHtmlAttributeValues(executionContext As TagHelperExecutionContext)
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndAddHtmlAttributeValues*
   modifiers.csharp:
@@ -1654,7 +1654,7 @@ items:
   syntax:
     content: protected virtual IHtmlContent RenderBody()
     return:
-      type: Microsoft.AspNetCore.Html.IHtmlContent
+      type: IHtmlContent
       description: The HTML content to render.
     content.vb: Protected Overridable Function RenderBody As IHtmlContent
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.RenderBody*
@@ -1811,9 +1811,9 @@ items:
       type: System.String
       description: The name of the section to render.
     return:
-      type: Microsoft.AspNetCore.Html.HtmlString
+      type: HtmlString
       description: >-
-        Returns <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref> to allow the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to
+        Returns <see cref="!:HtmlString.Empty"></see> to allow the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to
 
         succeed.
     content.vb: Public Function RenderSection(name As String) As HtmlString
@@ -1862,9 +1862,9 @@ items:
       type: System.Boolean
       description: Indicates if this section must be rendered.
     return:
-      type: Microsoft.AspNetCore.Html.HtmlString
+      type: HtmlString
       description: >-
-        Returns <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref> to allow the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to
+        Returns <see cref="!:HtmlString.Empty"></see> to allow the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to
 
         succeed.
     content.vb: Public Function RenderSection(name As String, required As Boolean) As HtmlString
@@ -1910,9 +1910,9 @@ items:
       type: System.String
       description: The section to render.
     return:
-      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Html.HtmlString}
+      type: System.Threading.Tasks.Task{HtmlString}
       description: >-
-        A <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that on completion returns <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref> that
+        A <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that on completion returns <see cref="!:HtmlString.Empty"></see> that
 
         allows the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to succeed.
     content.vb: Public Function RenderSectionAsync(name As String) As Task(Of HtmlString)
@@ -1964,9 +1964,9 @@ items:
 
         (using <code>@section</code>) in the page.
     return:
-      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Html.HtmlString}
+      type: System.Threading.Tasks.Task{HtmlString}
       description: >-
-        A <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that on completion returns <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref> that
+        A <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that on completion returns <see cref="!:HtmlString.Empty"></see> that
 
         allows the <xref href="Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)" data-throw-if-not-resolved="false"></xref> call to succeed.
     content.vb: Public Function RenderSectionAsync(name As String, required As Boolean) As Task(Of HtmlString)
@@ -2040,7 +2040,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nInvokes <xref href=\"System.IO.TextWriter.FlushAsync\" data-throw-if-not-resolved=\"false\"></xref> on <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Stream.FlushAsync\" data-throw-if-not-resolved=\"false\"></xref>\non the response stream, writing out any buffered content to the <xref href=\"Microsoft.AspNetCore.Http.HttpResponse.Body\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nInvokes <xref href=\"System.IO.TextWriter.FlushAsync\" data-throw-if-not-resolved=\"false\"></xref> on <xref href=\"Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output\" data-throw-if-not-resolved=\"false\"></xref> and <xref href=\"Stream.FlushAsync\" data-throw-if-not-resolved=\"false\"></xref>\non the response stream, writing out any buffered content to the <see cref=\"!:HttpResponse.Body\"></see>.\n"
   remarks: >
     The value returned is a token value that allows FlushAsync to work directly in an HTML
 
@@ -2055,11 +2055,11 @@ items:
   syntax:
     content: public Task<HtmlString> FlushAsync()
     return:
-      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Html.HtmlString}
+      type: System.Threading.Tasks.Task{HtmlString}
       description: >-
         A <xref href="System.Threading.Tasks.Task%601" data-throw-if-not-resolved="false"></xref> that represents the asynchronous flush operation and on
 
-        completion returns <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref>.
+        completion returns <see cref="!:HtmlString.Empty"></see>.
     content.vb: Public Function FlushAsync As Task(Of HtmlString)
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.FlushAsync*
   modifiers.csharp:
@@ -2202,8 +2202,8 @@ items:
   syntax:
     content: public virtual HtmlString SetAntiforgeryCookieAndHeader()
     return:
-      type: Microsoft.AspNetCore.Html.HtmlString
-      description: <xref href="Microsoft.AspNetCore.Html.HtmlString.Empty" data-throw-if-not-resolved="false"></xref>.
+      type: HtmlString
+      description: <see cref="!:HtmlString.Empty"></see>.
     content.vb: Public Overridable Function SetAntiforgeryCookieAndHeader As HtmlString
   overload: Microsoft.AspNetCore.Mvc.Razor.RazorPage.SetAntiforgeryCookieAndHeader*
   modifiers.csharp:
@@ -2524,25 +2524,17 @@ references:
   name: RazorPage
   nameWithType: RazorPage.RazorPage
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.RazorPage
-- uid: Microsoft.AspNetCore.Http.HttpContext
-  commentId: T:Microsoft.AspNetCore.Http.HttpContext
-  parent: Microsoft.AspNetCore.Http
-  isExternal: false
-  name: HttpContext
-  nameWithType: HttpContext
-  fullName: Microsoft.AspNetCore.Http.HttpContext
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context
   isExternal: false
   name: Context
   nameWithType: RazorPage.Context
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context
-- uid: Microsoft.AspNetCore.Http
-  commentId: N:Microsoft.AspNetCore.Http
-  isExternal: false
-  name: Microsoft.AspNetCore.Http
-  nameWithType: Microsoft.AspNetCore.Http
-  fullName: Microsoft.AspNetCore.Http
+- uid: HttpContext
+  isExternal: true
+  name: HttpContext
+  nameWithType: HttpContext
+  fullName: HttpContext
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Path*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Path
   isExternal: false
@@ -2576,19 +2568,11 @@ references:
   name: ViewContext
   nameWithType: IRazorPage.ViewContext
   fullName: Microsoft.AspNetCore.Mvc.Razor.IRazorPage.ViewContext
-- uid: Microsoft.AspNetCore.Mvc.Rendering.ViewContext
-  commentId: T:Microsoft.AspNetCore.Mvc.Rendering.ViewContext
-  parent: Microsoft.AspNetCore.Mvc.Rendering
-  isExternal: false
+- uid: ViewContext
+  isExternal: true
   name: ViewContext
   nameWithType: ViewContext
-  fullName: Microsoft.AspNetCore.Mvc.Rendering.ViewContext
-- uid: Microsoft.AspNetCore.Mvc.Rendering
-  commentId: N:Microsoft.AspNetCore.Mvc.Rendering
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.Rendering
-  nameWithType: Microsoft.AspNetCore.Mvc.Rendering
-  fullName: Microsoft.AspNetCore.Mvc.Rendering
+  fullName: ViewContext
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Layout*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Layout
   isExternal: false
@@ -2602,13 +2586,6 @@ references:
   name: Layout
   nameWithType: IRazorPage.Layout
   fullName: Microsoft.AspNetCore.Mvc.Razor.IRazorPage.Layout
-- uid: System.Text.Encodings.Web.HtmlEncoder
-  commentId: T:System.Text.Encodings.Web.HtmlEncoder
-  parent: System.Text.Encodings.Web
-  isExternal: true
-  name: HtmlEncoder
-  nameWithType: HtmlEncoder
-  fullName: System.Text.Encodings.Web.HtmlEncoder
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   commentId: T:Microsoft.AspNetCore.Mvc.Razor.RazorPage
   parent: Microsoft.AspNetCore.Mvc.Razor
@@ -2616,52 +2593,28 @@ references:
   name: RazorPage
   nameWithType: RazorPage
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage
-- uid: Microsoft.AspNetCore.Html.IHtmlContent
-  commentId: T:Microsoft.AspNetCore.Html.IHtmlContent
-  parent: Microsoft.AspNetCore.Html
-  isExternal: false
-  name: IHtmlContent
-  nameWithType: IHtmlContent
-  fullName: Microsoft.AspNetCore.Html.IHtmlContent
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder
   isExternal: false
   name: HtmlEncoder
   nameWithType: RazorPage.HtmlEncoder
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.HtmlEncoder
-- uid: System.Text.Encodings.Web
-  commentId: N:System.Text.Encodings.Web
-  isExternal: false
-  name: System.Text.Encodings.Web
-  nameWithType: System.Text.Encodings.Web
-  fullName: System.Text.Encodings.Web
-- uid: Microsoft.AspNetCore.Html
-  commentId: N:Microsoft.AspNetCore.Html
-  isExternal: false
-  name: Microsoft.AspNetCore.Html
-  nameWithType: Microsoft.AspNetCore.Html
-  fullName: Microsoft.AspNetCore.Html
-- uid: System.Diagnostics.DiagnosticSource.#ctor
-  commentId: M:System.Diagnostics.DiagnosticSource.#ctor
+- uid: HtmlEncoder
+  isExternal: true
+  name: HtmlEncoder
+  nameWithType: HtmlEncoder
+  fullName: HtmlEncoder
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.DiagnosticSource*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.DiagnosticSource
   isExternal: false
   name: DiagnosticSource
   nameWithType: RazorPage.DiagnosticSource
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.DiagnosticSource
-- uid: System.Diagnostics.DiagnosticSource
-  commentId: T:System.Diagnostics.DiagnosticSource
-  parent: System.Diagnostics
+- uid: DiagnosticSource
   isExternal: true
   name: DiagnosticSource
   nameWithType: DiagnosticSource
-  fullName: System.Diagnostics.DiagnosticSource
-- uid: System.Diagnostics
-  commentId: N:System.Diagnostics
-  isExternal: false
-  name: System.Diagnostics
-  nameWithType: System.Diagnostics
-  fullName: System.Diagnostics
+  fullName: DiagnosticSource
 - uid: System.IO.TextWriter
   commentId: T:System.IO.TextWriter
   parent: System.IO
@@ -2706,13 +2659,6 @@ references:
   name: ViewBag
   nameWithType: RazorPage.ViewBag
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewBag
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
-  commentId: T:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
-  parent: Microsoft.AspNetCore.Mvc.ViewFeatures
-  isExternal: false
-  name: ITempDataDictionary
-  nameWithType: ITempDataDictionary
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext
   commentId: P:Microsoft.AspNetCore.Mvc.Razor.RazorPage.ViewContext
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
@@ -2726,12 +2672,12 @@ references:
   name: TempData
   nameWithType: RazorPage.TempData
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.TempData
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures
-  commentId: N:Microsoft.AspNetCore.Mvc.ViewFeatures
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.ViewFeatures
-  nameWithType: Microsoft.AspNetCore.Mvc.ViewFeatures
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures
+- uid: ITempDataDictionary
+  commentId: '!:ITempDataDictionary'
+  isExternal: true
+  name: ITempDataDictionary
+  nameWithType: ITempDataDictionary
+  fullName: ITempDataDictionary
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BodyContent*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.BodyContent
   isExternal: false
@@ -2745,6 +2691,11 @@ references:
   name: BodyContent
   nameWithType: IRazorPage.BodyContent
   fullName: Microsoft.AspNetCore.Mvc.Razor.IRazorPage.BodyContent
+- uid: IHtmlContent
+  isExternal: true
+  name: IHtmlContent
+  nameWithType: IHtmlContent
+  fullName: IHtmlContent
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.IsLayoutBeingRendered*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.IsLayoutBeingRendered
   isExternal: false
@@ -2967,13 +2918,6 @@ references:
   name: InvalidTagHelperIndexerAssignment
   nameWithType: RazorPage.InvalidTagHelperIndexerAssignment
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.InvalidTagHelperIndexerAssignment
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
-  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
-  parent: Microsoft.AspNetCore.Razor.TagHelpers
-  isExternal: false
-  name: ITagHelper
-  nameWithType: ITagHelper
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.CreateTagHelper*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.CreateTagHelper
   isExternal: false
@@ -2986,12 +2930,6 @@ references:
   name: TTagHelper
   nameWithType: TTagHelper
   fullName: TTagHelper
-- uid: Microsoft.AspNetCore.Razor.TagHelpers
-  commentId: N:Microsoft.AspNetCore.Razor.TagHelpers
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor.TagHelpers
-  nameWithType: Microsoft.AspNetCore.Razor.TagHelpers
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers
 - uid: TTagHelper
   isExternal: false
   name: TTagHelper
@@ -3011,8 +2949,6 @@ references:
   name: Output
   nameWithType: RazorPage.Output
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Output
-- uid: Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer
-  commentId: P:Microsoft.AspNetCore.Mvc.Rendering.ViewContext.Writer
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope
   commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
@@ -3048,58 +2984,57 @@ references:
   name: StartTagHelperWritingScope
   nameWithType: RazorPage.StartTagHelperWritingScope
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope
-- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+- uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
   isExternal: true
   name: StartTagHelperWritingScope(HtmlEncoder)
   nameWithType: RazorPage.StartTagHelperWritingScope(HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+  - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
     name: StartTagHelperWritingScope
     nameWithType: RazorPage.StartTagHelperWritingScope
     fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Text.Encodings.Web.HtmlEncoder
+  - uid: HtmlEncoder
     name: HtmlEncoder
     nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
+    fullName: HtmlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(System.Text.Encodings.Web.HtmlEncoder)
+  - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope(HtmlEncoder)
     name: StartTagHelperWritingScope
     nameWithType: RazorPage.StartTagHelperWritingScope
     fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.StartTagHelperWritingScope
   - name: (
     nameWithType: (
     fullName: (
-  - uid: System.Text.Encodings.Web.HtmlEncoder
+  - uid: HtmlEncoder
     name: HtmlEncoder
     nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
+    fullName: HtmlEncoder
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent
-  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent
-  parent: Microsoft.AspNetCore.Razor.TagHelpers
-  isExternal: false
-  name: TagHelperContent
-  nameWithType: TagHelperContent
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope
   isExternal: false
   name: EndTagHelperWritingScope
   nameWithType: RazorPage.EndTagHelperWritingScope
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndTagHelperWritingScope
+- uid: TagHelperContent
+  commentId: '!:TagHelperContent'
+  isExternal: true
+  name: TagHelperContent
+  nameWithType: TagHelperContent
+  fullName: TagHelperContent
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute
   commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.EndWriteTagHelperAttribute
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
@@ -3178,63 +3113,6 @@ references:
   name: Write
   nameWithType: RazorPage.Write
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write
-- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-  parent: Microsoft.AspNetCore.Html.IHtmlContent
-  isExternal: true
-  name: WriteTo(TextWriter, HtmlEncoder)
-  nameWithType: IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-    name: WriteTo
-    nameWithType: IHtmlContent.WriteTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.TextWriter
-    name: TextWriter
-    nameWithType: TextWriter
-    fullName: System.IO.TextWriter
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
-    name: HtmlEncoder
-    nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
-    name: WriteTo
-    nameWithType: IHtmlContent.WriteTo
-    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.IO.TextWriter
-    name: TextWriter
-    nameWithType: TextWriter
-    fullName: System.IO.TextWriter
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Text.Encodings.Web.HtmlEncoder
-    name: HtmlEncoder
-    nameWithType: HtmlEncoder
-    fullName: System.Text.Encodings.Web.HtmlEncoder
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.WriteTo
   isExternal: false
@@ -3302,26 +3180,16 @@ references:
   name: BeginAddHtmlAttributeValues
   nameWithType: RazorPage.BeginAddHtmlAttributeValues
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.BeginAddHtmlAttributeValues
-- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext
-  commentId: T:Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext
-  parent: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  isExternal: false
+- uid: TagHelperExecutionContext
+  isExternal: true
   name: TagHelperExecutionContext
   nameWithType: TagHelperExecutionContext
-  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperExecutionContext
-- uid: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
-  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
-  parent: Microsoft.AspNetCore.Razor.TagHelpers
-  isExternal: false
+  fullName: TagHelperExecutionContext
+- uid: HtmlAttributeValueStyle
+  isExternal: true
   name: HtmlAttributeValueStyle
   nameWithType: HtmlAttributeValueStyle
-  fullName: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle
-- uid: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  commentId: N:Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  isExternal: false
-  name: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  nameWithType: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
-  fullName: Microsoft.AspNetCore.Razor.Runtime.TagHelpers
+  fullName: HtmlAttributeValueStyle
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.AddHtmlAttributeValue*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.RazorPage.AddHtmlAttributeValue
   isExternal: false
@@ -3465,8 +3333,6 @@ references:
   name: IsSectionDefined
   nameWithType: RazorPage.IsSectionDefined
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.IsSectionDefined
-- uid: Microsoft.AspNetCore.Html.HtmlString.Empty
-  commentId: F:Microsoft.AspNetCore.Html.HtmlString.Empty
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)
   commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Write(System.Object)
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage
@@ -3512,13 +3378,11 @@ references:
   name: RenderSection
   nameWithType: RazorPage.RenderSection
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.RenderSection
-- uid: Microsoft.AspNetCore.Html.HtmlString
-  commentId: T:Microsoft.AspNetCore.Html.HtmlString
-  parent: Microsoft.AspNetCore.Html
-  isExternal: false
+- uid: HtmlString
+  isExternal: true
   name: HtmlString
   nameWithType: HtmlString
-  fullName: Microsoft.AspNetCore.Html.HtmlString
+  fullName: HtmlString
 - uid: System.Threading.Tasks.Task`1
   commentId: T:System.Threading.Tasks.Task`1
   isExternal: true
@@ -3564,15 +3428,15 @@ references:
   name: RenderSectionAsync
   nameWithType: RazorPage.RenderSectionAsync
   fullName: Microsoft.AspNetCore.Mvc.Razor.RazorPage.RenderSectionAsync
-- uid: System.Threading.Tasks.Task{Microsoft.AspNetCore.Html.HtmlString}
-  commentId: T:System.Threading.Tasks.Task{Microsoft.AspNetCore.Html.HtmlString}
+- uid: System.Threading.Tasks.Task{HtmlString}
+  commentId: T:System.Threading.Tasks.Task{HtmlString}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<HtmlString>
   nameWithType: Task<HtmlString>
-  fullName: System.Threading.Tasks.Task<Microsoft.AspNetCore.Html.HtmlString>
+  fullName: System.Threading.Tasks.Task<HtmlString>
   nameWithType.vb: Task(Of HtmlString)
-  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Html.HtmlString)
+  fullName.vb: System.Threading.Tasks.Task(Of HtmlString)
   name.vb: Task(Of HtmlString)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -3583,10 +3447,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.AspNetCore.Html.HtmlString
+  - uid: HtmlString
     name: HtmlString
     nameWithType: HtmlString
-    fullName: Microsoft.AspNetCore.Html.HtmlString
+    fullName: HtmlString
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -3600,10 +3464,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Html.HtmlString
+  - uid: HtmlString
     name: HtmlString
     nameWithType: HtmlString
-    fullName: Microsoft.AspNetCore.Html.HtmlString
+    fullName: HtmlString
     isExternal: true
   - name: )
     nameWithType: )
@@ -3654,8 +3518,6 @@ references:
     fullName: )
 - uid: Stream.FlushAsync
   commentId: M:Stream.FlushAsync
-- uid: Microsoft.AspNetCore.Http.HttpResponse.Body
-  commentId: P:Microsoft.AspNetCore.Http.HttpResponse.Body
 - uid: Microsoft.AspNetCore.Mvc.Razor.RazorPage.FlushAsync
   commentId: M:Microsoft.AspNetCore.Mvc.Razor.RazorPage.FlushAsync
   parent: Microsoft.AspNetCore.Mvc.Razor.RazorPage

@@ -9,9 +9,9 @@ items:
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BinderModelName
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BindingSource
-  - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(Microsoft.AspNetCore.Mvc.ActionContext,Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo,System.String)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(ActionContext,IValueProvider,ModelMetadata,BindingInfo,System.String)
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope
-  - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(ModelMetadata,System.String,System.String,System.Object)
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ExitNestedScope
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.FieldName
   - Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.IsTopLevelObject
@@ -51,17 +51,6 @@ items:
           Inherits ModelBindingContext
   inheritance:
   - System.Object
-  - Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  inheritedMembers:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.HttpContext
-  - Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelType
-  - System.Object.ToString
-  - System.Object.Equals(System.Object)
-  - System.Object.Equals(System.Object,System.Object)
-  - System.Object.ReferenceEquals(System.Object,System.Object)
-  - System.Object.GetHashCode
-  - System.Object.GetType
-  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -122,16 +111,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nRepresents the <xref href=\"Microsoft.AspNetCore.Mvc.ActionContext\" data-throw-if-not-resolved=\"false\"></xref> associated with this context.\n"
-  remarks: "\nThe property setter is provided for unit testing purposes only.\n"
   example: []
   syntax:
     content: public override ActionContext ActionContext { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ActionContext
+      type: ActionContext
     content.vb: Public Overrides Property ActionContext As ActionContext
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ActionContext
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext*
   modifiers.csharp:
   - public
@@ -163,7 +149,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the name of the current field being bound.\n"
   example: []
   syntax:
     content: public override string FieldName { get; set; }
@@ -171,7 +156,6 @@ items:
     return:
       type: System.String
     content.vb: Public Overrides Property FieldName As String
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.FieldName
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.FieldName*
   modifiers.csharp:
   - public
@@ -203,8 +187,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the model value for the current operation.\n"
-  remarks: "\nThe <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model\" data-throw-if-not-resolved=\"false\"></xref> will typically be set for a binding operation that works\nagainst a pre-existing model object to update certain properties.\n"
   example: []
   syntax:
     content: public override object Model { get; set; }
@@ -212,7 +194,6 @@ items:
     return:
       type: System.Object
     content.vb: Public Overrides Property Model As Object
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Model*
   modifiers.csharp:
   - public
@@ -244,15 +225,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the metadata for the model associated with this context.\n"
   example: []
   syntax:
     content: public override ModelMetadata ModelMetadata { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+      type: ModelMetadata
     content.vb: Public Overrides Property ModelMetadata As ModelMetadata
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelMetadata
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata*
   modifiers.csharp:
   - public
@@ -284,7 +263,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the name of the model. This property is used as a key for looking up values in\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> during model binding.\n"
   example: []
   syntax:
     content: public override string ModelName { get; set; }
@@ -292,7 +270,6 @@ items:
     return:
       type: System.String
     content.vb: Public Overrides Property ModelName As String
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelName
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelName*
   modifiers.csharp:
   - public
@@ -324,16 +301,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary\" data-throw-if-not-resolved=\"false\"></xref> used to capture <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelState\" data-throw-if-not-resolved=\"false\"></xref> values\nfor properties in the object graph of the model when binding.\n"
-  remarks: "\nThe property setter is provided for unit testing purposes only.\n"
   example: []
   syntax:
     content: public override ModelStateDictionary ModelState { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary
+      type: ModelStateDictionary
     content.vb: Public Overrides Property ModelState As ModelStateDictionary
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelState
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelState*
   modifiers.csharp:
   - public
@@ -365,7 +339,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets a model name which is explicitly set using an <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override string BinderModelName { get; set; }
@@ -373,7 +346,6 @@ items:
     return:
       type: System.String
     content.vb: Public Overrides Property BinderModelName As String
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BinderModelName
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BinderModelName*
   modifiers.csharp:
   - public
@@ -405,15 +377,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets a value which represents the <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource\" data-throw-if-not-resolved=\"false\"></xref> associated with the\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public override BindingSource BindingSource { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+      type: BindingSource
     content.vb: Public Overrides Property BindingSource As BindingSource
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BindingSource
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BindingSource*
   modifiers.csharp:
   - public
@@ -445,8 +415,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets an indication that the current binder is handling the top-level object.\n"
-  remarks: Passed into the model binding system.
   example: []
   syntax:
     content: public override bool IsTopLevelObject { get; set; }
@@ -454,7 +422,6 @@ items:
     return:
       type: System.Boolean
     content.vb: Public Overrides Property IsTopLevelObject As Boolean
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.IsTopLevelObject
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.IsTopLevelObject*
   modifiers.csharp:
   - public
@@ -492,7 +459,7 @@ items:
     content: public IValueProvider OriginalValueProvider { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+      type: IValueProvider
     content.vb: Public Property OriginalValueProvider As IValueProvider
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.OriginalValueProvider*
   modifiers.csharp:
@@ -523,15 +490,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> associated with this context.\n"
   example: []
   syntax:
     content: public override IValueProvider ValueProvider { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+      type: IValueProvider
     content.vb: Public Overrides Property ValueProvider As IValueProvider
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValueProvider
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValueProvider*
   modifiers.csharp:
   - public
@@ -563,15 +528,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets a predicate which will be evaluated for each property to determine if the property\nis eligible for model binding.\n"
   example: []
   syntax:
     content: public override Func<ModelMetadata, bool> PropertyFilter { get; set; }
     parameters: []
     return:
-      type: System.Func{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Boolean}
+      type: System.Func{ModelMetadata,System.Boolean}
     content.vb: Public Overrides Property PropertyFilter As Func(Of ModelMetadata, Boolean)
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.PropertyFilter
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.PropertyFilter*
   modifiers.csharp:
   - public
@@ -603,16 +566,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nGets or sets the <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary\" data-throw-if-not-resolved=\"false\"></xref>. Used for tracking validation state to\ncustomize validation behavior for a model object.\n"
-  remarks: "\nThe property setter is provided for unit testing purposes only.\n"
   example: []
   syntax:
     content: public override ValidationStateDictionary ValidationState { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary
+      type: ValidationStateDictionary
     content.vb: Public Overrides Property ValidationState As ValidationStateDictionary
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValidationState
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValidationState*
   modifiers.csharp:
   - public
@@ -644,15 +604,13 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\n<p>\nGets or sets a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult\" data-throw-if-not-resolved=\"false\"></xref> which represents the result of the model binding process.\n</p>\n<p>\nBefore an <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder\" data-throw-if-not-resolved=\"false\"></xref> is called, <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result\" data-throw-if-not-resolved=\"false\"></xref> will be set to a value indicating\nfailure. The binder should set <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result\" data-throw-if-not-resolved=\"false\"></xref> to a value created with\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult.Success(System.Object)\" data-throw-if-not-resolved=\"false\"></xref> if model binding succeeded.\n</p>\n"
   example: []
   syntax:
     content: public override ModelBindingResult Result { get; set; }
     parameters: []
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult
+      type: ModelBindingResult
     content.vb: Public Overrides Property Result As ModelBindingResult
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Result*
   modifiers.csharp:
   - public
@@ -662,16 +620,16 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(Microsoft.AspNetCore.Mvc.ActionContext,Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo,System.String)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(Microsoft.AspNetCore.Mvc.ActionContext,Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo,System.String)
-  id: CreateBindingContext(Microsoft.AspNetCore.Mvc.ActionContext,Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider,Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo,System.String)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(ActionContext,IValueProvider,ModelMetadata,BindingInfo,System.String)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(ActionContext,IValueProvider,ModelMetadata,BindingInfo,System.String)
+  id: CreateBindingContext(ActionContext,IValueProvider,ModelMetadata,BindingInfo,System.String)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext
   langs:
   - csharp
   - vb
   name: CreateBindingContext(ActionContext, IValueProvider, ModelMetadata, BindingInfo, String)
   nameWithType: DefaultModelBindingContext.CreateBindingContext(ActionContext, IValueProvider, ModelMetadata, BindingInfo, String)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(Microsoft.AspNetCore.Mvc.ActionContext, Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider, Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo, System.String)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext(ActionContext, IValueProvider, ModelMetadata, BindingInfo, System.String)
   type: Method
   source:
     remote:
@@ -690,22 +648,22 @@ items:
     content: public static ModelBindingContext CreateBindingContext(ActionContext actionContext, IValueProvider valueProvider, ModelMetadata metadata, BindingInfo bindingInfo, string modelName)
     parameters:
     - id: actionContext
-      type: Microsoft.AspNetCore.Mvc.ActionContext
+      type: ActionContext
       description: "\nThe <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext\" data-throw-if-not-resolved=\"false\"></xref> associated with the binding operation.\n"
     - id: valueProvider
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider" data-throw-if-not-resolved="false"></xref> to use for binding.
+      type: IValueProvider
+      description: The <see cref="!:IValueProvider"></see> to use for binding.
     - id: metadata
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+      type: ModelMetadata
       description: <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata" data-throw-if-not-resolved="false"></xref> associated with the model.
     - id: bindingInfo
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
-      description: <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo" data-throw-if-not-resolved="false"></xref> associated with the model.
+      type: BindingInfo
+      description: <see cref="!:BindingInfo"></see> associated with the model.
     - id: modelName
       type: System.String
       description: The name of the property or parameter being bound.
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
+      type: ModelBindingContext
       description: A new instance of <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Shared Function CreateBindingContext(actionContext As ActionContext, valueProvider As IValueProvider, metadata As ModelMetadata, bindingInfo As BindingInfo, modelName As String) As ModelBindingContext
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext*
@@ -715,16 +673,16 @@ items:
   modifiers.vb:
   - Public
   - Shared
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-  id: EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(ModelMetadata,System.String,System.String,System.Object)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(ModelMetadata,System.String,System.String,System.Object)
+  id: EnterNestedScope(ModelMetadata,System.String,System.String,System.Object)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext
   langs:
   - csharp
   - vb
   name: EnterNestedScope(ModelMetadata, String, String, Object)
   nameWithType: DefaultModelBindingContext.EnterNestedScope(ModelMetadata, String, String, Object)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.String, System.String, System.Object)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope(ModelMetadata, System.String, System.String, System.Object)
   type: Method
   source:
     remote:
@@ -737,28 +695,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nPushes a layer of state onto this context. Model binders will call this as part of recursion when binding properties\nor collection items.\n"
   example: []
   syntax:
-    content: public override ModelBindingContext.NestedScope EnterNestedScope(ModelMetadata modelMetadata, string fieldName, string modelName, object model)
+    content: public override NestedScope EnterNestedScope(ModelMetadata modelMetadata, string fieldName, string modelName, object model)
     parameters:
     - id: modelMetadata
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-      description: <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata" data-throw-if-not-resolved="false"></xref> to assign to the <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelMetadata" data-throw-if-not-resolved="false"></xref> property.
+      type: ModelMetadata
     - id: fieldName
       type: System.String
-      description: Name to assign to the <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.FieldName" data-throw-if-not-resolved="false"></xref> property.
     - id: modelName
       type: System.String
-      description: Name to assign to the <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelName" data-throw-if-not-resolved="false"></xref> property.
     - id: model
       type: System.Object
-      description: Instance to assign to the <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model" data-throw-if-not-resolved="false"></xref> property.
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope
-      description: A <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope" data-throw-if-not-resolved="false"></xref> scope object which should be used in a using statement where PushContext is called.
-    content.vb: Public Overrides Function EnterNestedScope(modelMetadata As ModelMetadata, fieldName As String, modelName As String, model As Object) As ModelBindingContext.NestedScope
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
+      type: NestedScope
+    content.vb: Public Overrides Function EnterNestedScope(modelMetadata As ModelMetadata, fieldName As String, modelName As String, model As Object) As NestedScope
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope*
   modifiers.csharp:
   - public
@@ -788,15 +739,12 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nPushes a layer of state onto this context. Model binders will call this as part of recursion when binding properties\nor collection items.\n"
   example: []
   syntax:
-    content: public override ModelBindingContext.NestedScope EnterNestedScope()
+    content: public override NestedScope EnterNestedScope()
     return:
-      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope
-      description: A <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope" data-throw-if-not-resolved="false"></xref> scope object which should be used in a using statement where PushContext is called.
-    content.vb: Public Overrides Function EnterNestedScope As ModelBindingContext.NestedScope
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
+      type: NestedScope
+    content.vb: Public Overrides Function EnterNestedScope As NestedScope
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope*
   modifiers.csharp:
   - public
@@ -826,12 +774,10 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nRemoves a layer of state pushed by calling <xref href=\"EnterNestedScope\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: protected override void ExitNestedScope()
     content.vb: Protected Overrides Sub ExitNestedScope
-  overridden: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ExitNestedScope*
   modifiers.csharp:
   - protected
@@ -853,306 +799,6 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: ModelBindingContext
-  nameWithType: ModelBindingContext
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.HttpContext
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.HttpContext
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: HttpContext
-  nameWithType: ModelBindingContext.HttpContext
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.HttpContext
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelType
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelType
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ModelType
-  nameWithType: ModelBindingContext.ModelType
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelType
-- uid: System.Object.ToString
-  commentId: M:System.Object.ToString
-  parent: System.Object
-  isExternal: true
-  name: ToString()
-  nameWithType: Object.ToString()
-  fullName: System.Object.ToString()
-  spec.csharp:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ToString
-    name: ToString
-    nameWithType: Object.ToString
-    fullName: System.Object.ToString
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object)
-  commentId: M:System.Object.Equals(System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object)
-  nameWithType: Object.Equals(Object)
-  fullName: System.Object.Equals(System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.Equals(System.Object,System.Object)
-  commentId: M:System.Object.Equals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: Equals(Object, Object)
-  nameWithType: Object.Equals(Object, Object)
-  fullName: System.Object.Equals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.Equals(System.Object,System.Object)
-    name: Equals
-    nameWithType: Object.Equals
-    fullName: System.Object.Equals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.ReferenceEquals(System.Object,System.Object)
-  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
-  parent: System.Object
-  isExternal: true
-  name: ReferenceEquals(Object, Object)
-  nameWithType: Object.ReferenceEquals(Object, Object)
-  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
-  spec.csharp:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
-    name: ReferenceEquals
-    nameWithType: Object.ReferenceEquals
-    fullName: System.Object.ReferenceEquals
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetHashCode
-  commentId: M:System.Object.GetHashCode
-  parent: System.Object
-  isExternal: true
-  name: GetHashCode()
-  nameWithType: Object.GetHashCode()
-  fullName: System.Object.GetHashCode()
-  spec.csharp:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetHashCode
-    name: GetHashCode
-    nameWithType: Object.GetHashCode
-    fullName: System.Object.GetHashCode
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.GetType
-  commentId: M:System.Object.GetType
-  parent: System.Object
-  isExternal: true
-  name: GetType()
-  nameWithType: Object.GetType()
-  fullName: System.Object.GetType()
-  spec.csharp:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.GetType
-    name: GetType
-    nameWithType: Object.GetType
-    fullName: System.Object.GetType
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: System.Object.MemberwiseClone
-  commentId: M:System.Object.MemberwiseClone
-  parent: System.Object
-  isExternal: true
-  name: MemberwiseClone()
-  nameWithType: Object.MemberwiseClone()
-  fullName: System.Object.MemberwiseClone()
-  spec.csharp:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: System.Object.MemberwiseClone
-    name: MemberwiseClone
-    nameWithType: Object.MemberwiseClone
-    fullName: System.Object.MemberwiseClone
-    isExternal: true
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -1171,39 +817,17 @@ references:
   name: DefaultModelBindingContext
   nameWithType: DefaultModelBindingContext.DefaultModelBindingContext
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.DefaultModelBindingContext
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ActionContext
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ActionContext
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ActionContext
-  nameWithType: ModelBindingContext.ActionContext
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ActionContext
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext
   isExternal: false
   name: ActionContext
   nameWithType: DefaultModelBindingContext.ActionContext
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext
-- uid: Microsoft.AspNetCore.Mvc.ActionContext
-  commentId: T:Microsoft.AspNetCore.Mvc.ActionContext
-  parent: Microsoft.AspNetCore.Mvc
-  isExternal: false
+- uid: ActionContext
+  isExternal: true
   name: ActionContext
   nameWithType: ActionContext
-  fullName: Microsoft.AspNetCore.Mvc.ActionContext
-- uid: Microsoft.AspNetCore.Mvc
-  commentId: N:Microsoft.AspNetCore.Mvc
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc
-  nameWithType: Microsoft.AspNetCore.Mvc
-  fullName: Microsoft.AspNetCore.Mvc
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.FieldName
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.FieldName
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: FieldName
-  nameWithType: ModelBindingContext.FieldName
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.FieldName
+  fullName: ActionContext
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.FieldName*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.FieldName
   isExternal: false
@@ -1217,112 +841,57 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: Model
-  nameWithType: ModelBindingContext.Model
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Model
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Model*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Model
   isExternal: false
   name: Model
   nameWithType: DefaultModelBindingContext.Model
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Model
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelMetadata
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelMetadata
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ModelMetadata
-  nameWithType: ModelBindingContext.ModelMetadata
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelMetadata
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata
   isExternal: false
   name: ModelMetadata
   nameWithType: DefaultModelBindingContext.ModelMetadata
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: ModelMetadata
+  isExternal: true
   name: ModelMetadata
   nameWithType: ModelMetadata
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelName
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelName
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ModelName
-  nameWithType: ModelBindingContext.ModelName
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelName
+  fullName: ModelMetadata
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelName*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelName
   isExternal: false
   name: ModelName
   nameWithType: DefaultModelBindingContext.ModelName
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelName
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelState
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelState
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ModelState
-  nameWithType: ModelBindingContext.ModelState
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ModelState
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelState*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelState
   isExternal: false
   name: ModelState
   nameWithType: DefaultModelBindingContext.ModelState
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelState
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: ModelStateDictionary
+  isExternal: true
   name: ModelStateDictionary
   nameWithType: ModelStateDictionary
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BinderModelName
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BinderModelName
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: BinderModelName
-  nameWithType: ModelBindingContext.BinderModelName
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BinderModelName
+  fullName: ModelStateDictionary
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BinderModelName*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BinderModelName
   isExternal: false
   name: BinderModelName
   nameWithType: DefaultModelBindingContext.BinderModelName
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BinderModelName
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BindingSource
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BindingSource
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: BindingSource
-  nameWithType: ModelBindingContext.BindingSource
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.BindingSource
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BindingSource*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BindingSource
   isExternal: false
   name: BindingSource
   nameWithType: DefaultModelBindingContext.BindingSource
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.BindingSource
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: BindingSource
+  isExternal: true
   name: BindingSource
   nameWithType: BindingSource
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.IsTopLevelObject
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.IsTopLevelObject
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: IsTopLevelObject
-  nameWithType: ModelBindingContext.IsTopLevelObject
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.IsTopLevelObject
+  fullName: BindingSource
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.IsTopLevelObject*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.IsTopLevelObject
   isExternal: false
@@ -1342,48 +911,32 @@ references:
   name: OriginalValueProvider
   nameWithType: DefaultModelBindingContext.OriginalValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.OriginalValueProvider
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: IValueProvider
+  isExternal: true
   name: IValueProvider
   nameWithType: IValueProvider
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValueProvider
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValueProvider
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ValueProvider
-  nameWithType: ModelBindingContext.ValueProvider
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValueProvider
+  fullName: IValueProvider
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValueProvider*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValueProvider
   isExternal: false
   name: ValueProvider
   nameWithType: DefaultModelBindingContext.ValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValueProvider
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.PropertyFilter
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.PropertyFilter
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: PropertyFilter
-  nameWithType: ModelBindingContext.PropertyFilter
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.PropertyFilter
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.PropertyFilter*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.PropertyFilter
   isExternal: false
   name: PropertyFilter
   nameWithType: DefaultModelBindingContext.PropertyFilter
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.PropertyFilter
-- uid: System.Func{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Boolean}
-  commentId: T:System.Func{Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Boolean}
+- uid: System.Func{ModelMetadata,System.Boolean}
+  commentId: T:System.Func{ModelMetadata,System.Boolean}
   parent: System
   definition: System.Func`2
   name: Func<ModelMetadata, Boolean>
   nameWithType: Func<ModelMetadata, Boolean>
-  fullName: System.Func<Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Boolean>
+  fullName: System.Func<ModelMetadata, System.Boolean>
   nameWithType.vb: Func(Of ModelMetadata, Boolean)
-  fullName.vb: System.Func(Of Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Boolean)
+  fullName.vb: System.Func(Of ModelMetadata, System.Boolean)
   name.vb: Func(Of ModelMetadata, Boolean)
   spec.csharp:
   - uid: System.Func`2
@@ -1394,10 +947,11 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - uid: ModelMetadata
     name: ModelMetadata
     nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    fullName: ModelMetadata
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1418,10 +972,11 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - uid: ModelMetadata
     name: ModelMetadata
     nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    fullName: ModelMetadata
+    isExternal: true
   - name: ', '
     nameWithType: ', '
     fullName: ', '
@@ -1484,225 +1039,59 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValidationState
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValidationState
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ValidationState
-  nameWithType: ModelBindingContext.ValidationState
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ValidationState
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValidationState*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValidationState
   isExternal: false
   name: ValidationState
   nameWithType: DefaultModelBindingContext.ValidationState
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ValidationState
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-  isExternal: false
+- uid: ValidationStateDictionary
+  isExternal: true
   name: ValidationStateDictionary
   nameWithType: ValidationStateDictionary
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationStateDictionary
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-  commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-  nameWithType: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result
-  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: Result
-  nameWithType: ModelBindingContext.Result
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.Result
+  fullName: ValidationStateDictionary
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Result*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Result
   isExternal: false
   name: Result
   nameWithType: DefaultModelBindingContext.Result
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.Result
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
+- uid: ModelBindingResult
+  isExternal: true
   name: ModelBindingResult
   nameWithType: ModelBindingResult
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingResult
+  fullName: ModelBindingResult
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext
   commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ActionContext
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata
   commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ModelMetadata
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: BindingInfo
-  nameWithType: BindingInfo
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingInfo
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext
   isExternal: false
   name: CreateBindingContext
   nameWithType: DefaultModelBindingContext.CreateBindingContext
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.CreateBindingContext
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
+- uid: BindingInfo
   isExternal: true
-  name: EnterNestedScope(ModelMetadata, String, String, Object)
-  nameWithType: ModelBindingContext.EnterNestedScope(ModelMetadata, String, String, Object)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.String, System.String, System.Object)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-    name: EnterNestedScope
-    nameWithType: ModelBindingContext.EnterNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-    name: ModelMetadata
-    nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.String,System.Object)
-    name: EnterNestedScope
-    nameWithType: ModelBindingContext.EnterNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-    name: ModelMetadata
-    nameWithType: ModelMetadata
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.String
-    name: String
-    nameWithType: String
-    fullName: System.String
-    isExternal: true
-  - name: ', '
-    nameWithType: ', '
-    fullName: ', '
-  - uid: System.Object
-    name: Object
-    nameWithType: Object
-    fullName: System.Object
-    isExternal: true
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: BindingInfo
+  nameWithType: BindingInfo
+  fullName: BindingInfo
+- uid: ModelBindingContext
+  isExternal: true
+  name: ModelBindingContext
+  nameWithType: ModelBindingContext
+  fullName: ModelBindingContext
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope
   isExternal: false
   name: EnterNestedScope
   nameWithType: DefaultModelBindingContext.EnterNestedScope
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.EnterNestedScope
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope
-  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding
-  isExternal: false
-  name: ModelBindingContext.NestedScope
-  nameWithType: ModelBindingContext.NestedScope
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.NestedScope
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: EnterNestedScope()
-  nameWithType: ModelBindingContext.EnterNestedScope()
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-    name: EnterNestedScope
-    nameWithType: ModelBindingContext.EnterNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-    name: EnterNestedScope
-    nameWithType: ModelBindingContext.EnterNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.EnterNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext
-  isExternal: false
-  name: ExitNestedScope()
-  nameWithType: ModelBindingContext.ExitNestedScope()
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope()
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-    name: ExitNestedScope
-    nameWithType: ModelBindingContext.ExitNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-    name: ExitNestedScope
-    nameWithType: ModelBindingContext.ExitNestedScope
-    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelBindingContext.ExitNestedScope
-  - name: (
-    nameWithType: (
-    fullName: (
-  - name: )
-    nameWithType: )
-    fullName: )
+- uid: NestedScope
+  isExternal: true
+  name: NestedScope
+  nameWithType: NestedScope
+  fullName: NestedScope
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ExitNestedScope*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.DefaultModelBindingContext.ExitNestedScope
   isExternal: false

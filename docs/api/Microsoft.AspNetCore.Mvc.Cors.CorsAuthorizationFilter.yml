@@ -5,8 +5,8 @@ items:
   id: CorsAuthorizationFilter
   parent: Microsoft.AspNetCore.Mvc.Cors
   children:
-  - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(Microsoft.AspNetCore.Cors.Infrastructure.ICorsService,Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider)
-  - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
+  - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(ICorsService,ICorsPolicyProvider)
+  - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Filters.AuthorizationFilterContext)
   - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.Order
   - Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.PolicyName
   langs:
@@ -27,20 +27,19 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Cors
   namespace: Microsoft.AspNetCore.Mvc.Cors
-  summary: "\nA filter that applies the given <xref href=\"Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy\" data-throw-if-not-resolved=\"false\"></xref> and adds appropriate response headers.\n"
+  summary: "\nA filter that applies the given <see cref=\"!:CorsPolicy\"></see> and adds appropriate response headers.\n"
   example: []
   syntax:
-    content: 'public class CorsAuthorizationFilter : ICorsAuthorizationFilter, IAsyncAuthorizationFilter, IOrderedFilter, IFilterMetadata'
+    content: 'public class CorsAuthorizationFilter : ICorsAuthorizationFilter, IAsyncAuthorizationFilter, IOrderedFilter'
     content.vb: >-
       Public Class CorsAuthorizationFilter
-          Implements ICorsAuthorizationFilter, IAsyncAuthorizationFilter, IOrderedFilter, IFilterMetadata
+          Implements ICorsAuthorizationFilter, IAsyncAuthorizationFilter, IOrderedFilter
   inheritance:
   - System.Object
   implements:
   - Microsoft.AspNetCore.Mvc.Cors.Internal.ICorsAuthorizationFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  - IAsyncAuthorizationFilter
+  - IOrderedFilter
   inheritedMembers:
   - System.Object.ToString
   - System.Object.Equals(System.Object)
@@ -55,16 +54,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(Microsoft.AspNetCore.Cors.Infrastructure.ICorsService,Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider)
-  commentId: M:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(Microsoft.AspNetCore.Cors.Infrastructure.ICorsService,Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider)
-  id: '#ctor(Microsoft.AspNetCore.Cors.Infrastructure.ICorsService,Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider)'
+- uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(ICorsService,ICorsPolicyProvider)
+  commentId: M:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor(ICorsService,ICorsPolicyProvider)
+  id: '#ctor(ICorsService,ICorsPolicyProvider)'
   parent: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter
   langs:
   - csharp
   - vb
   name: CorsAuthorizationFilter(ICorsService, ICorsPolicyProvider)
   nameWithType: CorsAuthorizationFilter.CorsAuthorizationFilter(ICorsService, ICorsPolicyProvider)
-  fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.CorsAuthorizationFilter(Microsoft.AspNetCore.Cors.Infrastructure.ICorsService, Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider)
+  fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.CorsAuthorizationFilter(ICorsService, ICorsPolicyProvider)
   type: Constructor
   source:
     remote:
@@ -83,11 +82,11 @@ items:
     content: public CorsAuthorizationFilter(ICorsService corsService, ICorsPolicyProvider policyProvider)
     parameters:
     - id: corsService
-      type: Microsoft.AspNetCore.Cors.Infrastructure.ICorsService
-      description: The <xref href="Microsoft.AspNetCore.Cors.Infrastructure.ICorsService" data-throw-if-not-resolved="false"></xref>.
+      type: ICorsService
+      description: The <see cref="!:ICorsService"></see>.
     - id: policyProvider
-      type: Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider
-      description: The <xref href="Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider" data-throw-if-not-resolved="false"></xref>.
+      type: ICorsPolicyProvider
+      description: The <see cref="!:ICorsPolicyProvider"></see>.
     content.vb: Public Sub New(corsService As ICorsService, policyProvider As ICorsPolicyProvider)
   overload: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor*
   modifiers.csharp:
@@ -116,7 +115,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Cors
   namespace: Microsoft.AspNetCore.Mvc.Cors
-  summary: "\nThe policy name used to fetch a <xref href=\"Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nThe policy name used to fetch a <see cref=\"!:CorsPolicy\"></see>.\n"
   example: []
   syntax:
     content: public string PolicyName { get; set; }
@@ -153,8 +152,6 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Cors
   namespace: Microsoft.AspNetCore.Mvc.Cors
-  summary: "\nGets the order value for determining the order of execution of filters. Filters execute in\nascending numeric value of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
-  remarks: "\n<p>\nFilters are executed in an ordering determined by an ascending sort of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n</p>\n<p>\nAsynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, surround the execution of subsequent\nfilters of the same filter kind. An asynchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its filter method, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext%2cMicrosoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)\" data-throw-if-not-resolved=\"false\"></xref>,\nexecuted before that of a filter with a higher value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nSynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, have a before-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)\" data-throw-if-not-resolved=\"false\"></xref>, and an after-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)\" data-throw-if-not-resolved=\"false\"></xref>. A synchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its before-method executed before that of a filter with a higher value of\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>. During the after-stage of the filter, a synchronous filter with a lower\nnumeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> value will have its after-method executed after that of a filter with a higher\nvalue of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nIf two filters have the same numeric value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>, then their relative execution order\nis determined by the filter scope.\n</p>\n"
   example: []
   syntax:
     content: public int Order { get; }
@@ -163,24 +160,22 @@ items:
       type: System.Int32
     content.vb: Public ReadOnly Property Order As Integer
   overload: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.Order*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
   modifiers.csharp:
   - public
   - get
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-  id: OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
+- uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Filters.AuthorizationFilterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Filters.AuthorizationFilterContext)
+  id: OnAuthorizationAsync(Filters.AuthorizationFilterContext)
   parent: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter
   langs:
   - csharp
   - vb
-  name: OnAuthorizationAsync(AuthorizationFilterContext)
-  nameWithType: CorsAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext)
-  fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
+  name: OnAuthorizationAsync(Filters.AuthorizationFilterContext)
+  nameWithType: CorsAuthorizationFilter.OnAuthorizationAsync(Filters.AuthorizationFilterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync(Filters.AuthorizationFilterContext)
   type: Method
   source:
     remote:
@@ -193,33 +188,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Cors
   namespace: Microsoft.AspNetCore.Mvc.Cors
-  summary: "\nCalled early in the filter pipeline to confirm request is authorized.\n"
   example: []
   syntax:
-    content: public Task OnAuthorizationAsync(AuthorizationFilterContext context)
+    content: public Task OnAuthorizationAsync(Filters.AuthorizationFilterContext context)
     parameters:
     - id: context
-      type: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext" data-throw-if-not-resolved="false"></xref>.
+      type: Filters.AuthorizationFilterContext
     return:
       type: System.Threading.Tasks.Task
-      description: "\nA <xref href=\"System.Threading.Tasks.Task\" data-throw-if-not-resolved=\"false\"></xref> that on completion indicates the filter has executed.\n"
-    content.vb: Public Function OnAuthorizationAsync(context As AuthorizationFilterContext) As Task
+    content.vb: Public Function OnAuthorizationAsync(context As Filters.AuthorizationFilterContext) As Task
   overload: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync*
-  implements:
-  - Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
 references:
-- uid: Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy
-  commentId: T:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy
-  parent: Microsoft.AspNetCore.Cors.Infrastructure
-  isExternal: false
-  name: CorsPolicy
-  nameWithType: CorsPolicy
-  fullName: Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy
 - uid: Microsoft.AspNetCore.Mvc.Cors
   commentId: N:Microsoft.AspNetCore.Mvc.Cors
   isExternal: false
@@ -240,27 +223,16 @@ references:
   name: ICorsAuthorizationFilter
   nameWithType: ICorsAuthorizationFilter
   fullName: Microsoft.AspNetCore.Mvc.Cors.Internal.ICorsAuthorizationFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+- uid: IAsyncAuthorizationFilter
+  isExternal: true
   name: IAsyncAuthorizationFilter
   nameWithType: IAsyncAuthorizationFilter
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
+  fullName: IAsyncAuthorizationFilter
+- uid: IOrderedFilter
+  isExternal: true
   name: IOrderedFilter
   nameWithType: IOrderedFilter
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: IFilterMetadata
-  nameWithType: IFilterMetadata
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  fullName: IOrderedFilter
 - uid: System.Object.ToString
   commentId: M:System.Object.ToString
   parent: System.Object
@@ -540,12 +512,6 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Cors.Infrastructure
-  commentId: N:Microsoft.AspNetCore.Cors.Infrastructure
-  isExternal: false
-  name: Microsoft.AspNetCore.Cors.Infrastructure
-  nameWithType: Microsoft.AspNetCore.Cors.Infrastructure
-  fullName: Microsoft.AspNetCore.Cors.Infrastructure
 - uid: System
   commentId: N:System
   isExternal: false
@@ -558,38 +524,30 @@ references:
   name: Microsoft.AspNetCore.Mvc.Cors.Internal
   nameWithType: Microsoft.AspNetCore.Mvc.Cors.Internal
   fullName: Microsoft.AspNetCore.Mvc.Cors.Internal
-- uid: Microsoft.AspNetCore.Mvc.Filters
-  commentId: N:Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.Filters
-  nameWithType: Microsoft.AspNetCore.Mvc.Filters
-  fullName: Microsoft.AspNetCore.Mvc.Filters
 - uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter
   commentId: T:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter
   isExternal: false
   name: CorsAuthorizationFilter
   nameWithType: CorsAuthorizationFilter
   fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter
-- uid: Microsoft.AspNetCore.Cors.Infrastructure.ICorsService
-  commentId: T:Microsoft.AspNetCore.Cors.Infrastructure.ICorsService
-  parent: Microsoft.AspNetCore.Cors.Infrastructure
-  isExternal: false
-  name: ICorsService
-  nameWithType: ICorsService
-  fullName: Microsoft.AspNetCore.Cors.Infrastructure.ICorsService
-- uid: Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider
-  commentId: T:Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider
-  parent: Microsoft.AspNetCore.Cors.Infrastructure
-  isExternal: false
-  name: ICorsPolicyProvider
-  nameWithType: ICorsPolicyProvider
-  fullName: Microsoft.AspNetCore.Cors.Infrastructure.ICorsPolicyProvider
 - uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.#ctor
   isExternal: false
   name: CorsAuthorizationFilter
   nameWithType: CorsAuthorizationFilter.CorsAuthorizationFilter
   fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.CorsAuthorizationFilter
+- uid: ICorsService
+  commentId: '!:ICorsService'
+  isExternal: true
+  name: ICorsService
+  nameWithType: ICorsService
+  fullName: ICorsService
+- uid: ICorsPolicyProvider
+  commentId: '!:ICorsPolicyProvider'
+  isExternal: true
+  name: ICorsPolicyProvider
+  nameWithType: ICorsPolicyProvider
+  fullName: ICorsPolicyProvider
 - uid: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.PolicyName*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.PolicyName
   isExternal: false
@@ -609,13 +567,6 @@ references:
   name: Order
   nameWithType: CorsAuthorizationFilter.Order
   fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.Order
-- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
-  commentId: P:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
-  parent: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
-  isExternal: false
-  name: Order
-  nameWithType: IOrderedFilter.Order
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
@@ -629,50 +580,12 @@ references:
   name: OnAuthorizationAsync
   nameWithType: CorsAuthorizationFilter.OnAuthorizationAsync
   fullName: Microsoft.AspNetCore.Mvc.Cors.CorsAuthorizationFilter.OnAuthorizationAsync
-- uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-  parent: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter
-  isExternal: false
-  name: OnAuthorizationAsync(AuthorizationFilterContext)
-  nameWithType: IAsyncAuthorizationFilter.OnAuthorizationAsync(AuthorizationFilterContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-  spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-    name: OnAuthorizationAsync
-    nameWithType: IAsyncAuthorizationFilter.OnAuthorizationAsync
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-    name: AuthorizationFilterContext
-    nameWithType: AuthorizationFilterContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-  - name: )
-    nameWithType: )
-    fullName: )
-  spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)
-    name: OnAuthorizationAsync
-    nameWithType: IAsyncAuthorizationFilter.OnAuthorizationAsync
-    fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncAuthorizationFilter.OnAuthorizationAsync
-  - name: (
-    nameWithType: (
-    fullName: (
-  - uid: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-    name: AuthorizationFilterContext
-    nameWithType: AuthorizationFilterContext
-    fullName: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-  - name: )
-    nameWithType: )
-    fullName: )
-- uid: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-  commentId: T:Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
-  parent: Microsoft.AspNetCore.Mvc.Filters
-  isExternal: false
-  name: AuthorizationFilterContext
-  nameWithType: AuthorizationFilterContext
-  fullName: Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext
+- uid: Filters.AuthorizationFilterContext
+  commentId: '!:Filters.AuthorizationFilterContext'
+  isExternal: true
+  name: Filters.AuthorizationFilterContext
+  nameWithType: Filters.AuthorizationFilterContext
+  fullName: Filters.AuthorizationFilterContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
