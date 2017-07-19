@@ -5,8 +5,8 @@ items:
   id: ActionMethodSelectorAttribute
   parent: Microsoft.AspNetCore.Mvc.ActionConstraints
   children:
-  - Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(ActionConstraintContext)
-  - Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(RouteContext,ActionDescriptor)
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(Microsoft.AspNetCore.Routing.RouteContext,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)
   - Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Order
   langs:
   - csharp
@@ -26,25 +26,26 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
-  summary: "\nBase class for attributes which can implement conditional logic to enable or disable an action\nfor a given request. See <see cref=\"!:IActionConstraint\"></see>.\n"
+  summary: "\nBase class for attributes which can implement conditional logic to enable or disable an action\nfor a given request. See <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: >-
       [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public abstract class ActionMethodSelectorAttribute : Attribute, _Attribute, IActionConstraint
+      public abstract class ActionMethodSelectorAttribute : Attribute, _Attribute, IActionConstraint, IActionConstraintMetadata
     content.vb: >-
       <AttributeUsage(AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public MustInherit Class ActionMethodSelectorAttribute
           Inherits Attribute
-          Implements _Attribute, IActionConstraint
+          Implements _Attribute, IActionConstraint, IActionConstraintMetadata
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - IActionConstraint
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
@@ -135,6 +136,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
+  summary: "\nThe constraint order.\n"
+  remarks: "\nConstraints are grouped into stages by the value of <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order\" data-throw-if-not-resolved=\"false\"></xref>. See remarks on\n<xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public int Order { get; set; }
@@ -143,22 +146,24 @@ items:
       type: System.Int32
     content.vb: Public Property Order As Integer
   overload: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Order*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
   modifiers.csharp:
   - public
   - get
   - set
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(ActionConstraintContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(ActionConstraintContext)
-  id: Accept(ActionConstraintContext)
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  id: Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   parent: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute
   langs:
   - csharp
   - vb
   name: Accept(ActionConstraintContext)
   nameWithType: ActionMethodSelectorAttribute.Accept(ActionConstraintContext)
-  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(ActionConstraintContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   type: Method
   source:
     remote:
@@ -171,30 +176,35 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
+  summary: "\nDetermines whether an action is a valid candidate for selection.\n"
   example: []
   syntax:
     content: public bool Accept(ActionConstraintContext context)
     parameters:
     - id: context
-      type: ActionConstraintContext
+      type: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Boolean
+      description: True if the action is valid for selection, otherwise false.
     content.vb: Public Function Accept(context As ActionConstraintContext) As Boolean
   overload: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(RouteContext,ActionDescriptor)
-  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(RouteContext,ActionDescriptor)
-  id: IsValidForRequest(RouteContext,ActionDescriptor)
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(Microsoft.AspNetCore.Routing.RouteContext,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(Microsoft.AspNetCore.Routing.RouteContext,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)
+  id: IsValidForRequest(Microsoft.AspNetCore.Routing.RouteContext,Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)
   parent: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute
   langs:
   - csharp
   - vb
   name: IsValidForRequest(RouteContext, ActionDescriptor)
   nameWithType: ActionMethodSelectorAttribute.IsValidForRequest(RouteContext, ActionDescriptor)
-  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(RouteContext, ActionDescriptor)
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest(Microsoft.AspNetCore.Routing.RouteContext, Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor)
   type: Method
   source:
     remote:
@@ -213,10 +223,10 @@ items:
     content: public abstract bool IsValidForRequest(RouteContext routeContext, ActionDescriptor action)
     parameters:
     - id: routeContext
-      type: RouteContext
+      type: Microsoft.AspNetCore.Routing.RouteContext
       description: The route context.
     - id: action
-      type: ActionDescriptor
+      type: Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor
       description: Information about the action.
     return:
       type: System.Boolean
@@ -230,6 +240,13 @@ items:
   - Public
   - MustOverride
 references:
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: IActionConstraint
+  nameWithType: IActionConstraint
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
 - uid: Microsoft.AspNetCore.Mvc.ActionConstraints
   commentId: N:Microsoft.AspNetCore.Mvc.ActionConstraints
   isExternal: false
@@ -257,11 +274,13 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: IActionConstraint
-  isExternal: true
-  name: IActionConstraint
-  nameWithType: IActionConstraint
-  fullName: IActionConstraint
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: IActionConstraintMetadata
+  nameWithType: IActionConstraintMetadata
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
 - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   parent: System.Attribute
@@ -2970,6 +2989,13 @@ references:
   name: Order
   nameWithType: ActionMethodSelectorAttribute.Order
   fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Order
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  isExternal: false
+  name: Order
+  nameWithType: IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System
@@ -2983,11 +3009,50 @@ references:
   name: Accept
   nameWithType: ActionMethodSelectorAttribute.Accept
   fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.Accept
-- uid: ActionConstraintContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  isExternal: false
+  name: Accept(ActionConstraintContext)
+  nameWithType: IActionConstraint.Accept(ActionConstraintContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+    name: Accept
+    nameWithType: IActionConstraint.Accept
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+    name: ActionConstraintContext
+    nameWithType: ActionConstraintContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+    name: Accept
+    nameWithType: IActionConstraint.Accept
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+    name: ActionConstraintContext
+    nameWithType: ActionConstraintContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
   name: ActionConstraintContext
   nameWithType: ActionConstraintContext
-  fullName: ActionConstraintContext
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -3001,14 +3066,30 @@ references:
   name: IsValidForRequest
   nameWithType: ActionMethodSelectorAttribute.IsValidForRequest
   fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionMethodSelectorAttribute.IsValidForRequest
-- uid: RouteContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Routing.RouteContext
+  commentId: T:Microsoft.AspNetCore.Routing.RouteContext
+  parent: Microsoft.AspNetCore.Routing
+  isExternal: false
   name: RouteContext
   nameWithType: RouteContext
-  fullName: RouteContext
-- uid: ActionDescriptor
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Routing.RouteContext
+- uid: Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor
+  commentId: T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor
+  parent: Microsoft.AspNetCore.Mvc.Abstractions
+  isExternal: false
   name: ActionDescriptor
   nameWithType: ActionDescriptor
-  fullName: ActionDescriptor
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor
+- uid: Microsoft.AspNetCore.Routing
+  commentId: N:Microsoft.AspNetCore.Routing
+  isExternal: false
+  name: Microsoft.AspNetCore.Routing
+  nameWithType: Microsoft.AspNetCore.Routing
+  fullName: Microsoft.AspNetCore.Routing
+- uid: Microsoft.AspNetCore.Mvc.Abstractions
+  commentId: N:Microsoft.AspNetCore.Mvc.Abstractions
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Abstractions
+  nameWithType: Microsoft.AspNetCore.Mvc.Abstractions
+  fullName: Microsoft.AspNetCore.Mvc.Abstractions
 shouldSkipMarkup: true

@@ -5,7 +5,7 @@ items:
   id: QueryStringValueProvider
   parent: Microsoft.AspNetCore.Mvc.ModelBinding
   children:
-  - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(BindingSource,IQueryCollection,System.Globalization.CultureInfo)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Http.IQueryCollection,System.Globalization.CultureInfo)
   - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.ContainsPrefix(System.String)
   - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.Culture
   - Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.GetKeysFromPrefix(System.String)
@@ -29,7 +29,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nAn <see cref=\"!:IValueProvider\"></see> adapter for data stored in an <see cref=\"!:IQueryCollection\"></see>.\n"
+  summary: "\nAn <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider\" data-throw-if-not-resolved=\"false\"></xref> adapter for data stored in an <xref href=\"Microsoft.AspNetCore.Http.IQueryCollection\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: 'public class QueryStringValueProvider : BindingSourceValueProvider, IBindingSourceValueProvider, IEnumerableValueProvider, IValueProvider'
@@ -43,10 +43,10 @@ items:
   implements:
   - Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceValueProvider
   - Microsoft.AspNetCore.Mvc.ModelBinding.IEnumerableValueProvider
-  - IValueProvider
+  - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
   inheritedMembers:
   - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
-  - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+  - Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
   - System.Object.ToString
   - System.Object.Equals(System.Object)
   - System.Object.Equals(System.Object,System.Object)
@@ -60,16 +60,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(BindingSource,IQueryCollection,System.Globalization.CultureInfo)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(BindingSource,IQueryCollection,System.Globalization.CultureInfo)
-  id: '#ctor(BindingSource,IQueryCollection,System.Globalization.CultureInfo)'
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Http.IQueryCollection,System.Globalization.CultureInfo)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Http.IQueryCollection,System.Globalization.CultureInfo)
+  id: '#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,Microsoft.AspNetCore.Http.IQueryCollection,System.Globalization.CultureInfo)'
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider
   langs:
   - csharp
   - vb
   name: QueryStringValueProvider(BindingSource, IQueryCollection, CultureInfo)
   nameWithType: QueryStringValueProvider.QueryStringValueProvider(BindingSource, IQueryCollection, CultureInfo)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.QueryStringValueProvider(BindingSource, IQueryCollection, System.Globalization.CultureInfo)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.QueryStringValueProvider(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource, Microsoft.AspNetCore.Http.IQueryCollection, System.Globalization.CultureInfo)
   type: Constructor
   source:
     remote:
@@ -82,16 +82,16 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
-  summary: "\nCreates a value provider for <see cref=\"!:IQueryCollection\"></see>.\n"
+  summary: "\nCreates a value provider for <xref href=\"Microsoft.AspNetCore.Http.IQueryCollection\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public QueryStringValueProvider(BindingSource bindingSource, IQueryCollection values, CultureInfo culture)
     parameters:
     - id: bindingSource
-      type: BindingSource
-      description: The <see cref="!:BindingSource"></see> for the data.
+      type: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource" data-throw-if-not-resolved="false"></xref> for the data.
     - id: values
-      type: IQueryCollection
+      type: Microsoft.AspNetCore.Http.IQueryCollection
       description: The key value pairs to wrap.
     - id: culture
       type: System.Globalization.CultureInfo
@@ -194,17 +194,22 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
+  summary: "\nDetermines whether the collection contains the specified prefix.\n"
   example: []
   syntax:
     content: public override bool ContainsPrefix(string prefix)
     parameters:
     - id: prefix
       type: System.String
+      description: The prefix to search for.
     return:
       type: System.Boolean
+      description: true if the collection contains the specified prefix; otherwise, false.
     content.vb: Public Overrides Function ContainsPrefix(prefix As String) As Boolean
   overridden: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.ContainsPrefix(System.String)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.ContainsPrefix*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
   modifiers.csharp:
   - public
   - override
@@ -273,17 +278,22 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.ModelBinding
+  summary: "\nRetrieves a value object using the specified key.\n"
   example: []
   syntax:
     content: public override ValueProviderResult GetValue(string key)
     parameters:
     - id: key
       type: System.String
+      description: The key of the value object to retrieve.
     return:
-      type: ValueProviderResult
+      type: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
+      description: The value object for the specified key. If the exact key is not found, null.
     content.vb: Public Overrides Function GetValue(key As String) As ValueProviderResult
   overridden: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.GetValue(System.String)
   overload: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.GetValue*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
   modifiers.csharp:
   - public
   - override
@@ -291,6 +301,20 @@ items:
   - Public
   - Overrides
 references:
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding
+  isExternal: false
+  name: IValueProvider
+  nameWithType: IValueProvider
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+- uid: Microsoft.AspNetCore.Http.IQueryCollection
+  commentId: T:Microsoft.AspNetCore.Http.IQueryCollection
+  parent: Microsoft.AspNetCore.Http
+  isExternal: false
+  name: IQueryCollection
+  nameWithType: IQueryCollection
+  fullName: Microsoft.AspNetCore.Http.IQueryCollection
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding
   commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding
   isExternal: false
@@ -325,11 +349,6 @@ references:
   name: IEnumerableValueProvider
   nameWithType: IEnumerableValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IEnumerableValueProvider
-- uid: IValueProvider
-  isExternal: true
-  name: IValueProvider
-  nameWithType: IValueProvider
-  fullName: IValueProvider
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
   commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider
@@ -337,42 +356,40 @@ references:
   name: BindingSource
   nameWithType: BindingSourceValueProvider.BindingSource
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.BindingSource
-- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
-  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
   parent: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider
-  isExternal: true
+  isExternal: false
   name: Filter(BindingSource)
   nameWithType: BindingSourceValueProvider.Filter(BindingSource)
-  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
     name: Filter
     nameWithType: BindingSourceValueProvider.Filter
     fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter
   - name: (
     nameWithType: (
     fullName: (
-  - uid: BindingSource
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
     name: BindingSource
     nameWithType: BindingSource
-    fullName: BindingSource
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(BindingSource)
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource)
     name: Filter
     nameWithType: BindingSourceValueProvider.Filter
     fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSourceValueProvider.Filter
   - name: (
     nameWithType: (
     fullName: (
-  - uid: BindingSource
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
     name: BindingSource
     nameWithType: BindingSource
-    fullName: BindingSource
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
   - name: )
     nameWithType: )
     fullName: )
@@ -655,28 +672,31 @@ references:
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Http
+  commentId: N:Microsoft.AspNetCore.Http
+  isExternal: false
+  name: Microsoft.AspNetCore.Http
+  nameWithType: Microsoft.AspNetCore.Http
+  fullName: Microsoft.AspNetCore.Http
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding
+  isExternal: false
+  name: BindingSource
+  nameWithType: BindingSource
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource
 - uid: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.#ctor
   isExternal: false
   name: QueryStringValueProvider
   nameWithType: QueryStringValueProvider.QueryStringValueProvider
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.QueryStringValueProvider
-- uid: BindingSource
-  isExternal: true
-  name: BindingSource
-  nameWithType: BindingSource
-  fullName: BindingSource
-- uid: IQueryCollection
-  isExternal: true
-  name: IQueryCollection
-  nameWithType: IQueryCollection
-  fullName: IQueryCollection
 - uid: System.Globalization.CultureInfo
   commentId: T:System.Globalization.CultureInfo
   parent: System.Globalization
@@ -760,6 +780,45 @@ references:
   name: ContainsPrefix
   nameWithType: QueryStringValueProvider.ContainsPrefix
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.ContainsPrefix
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
+  isExternal: true
+  name: ContainsPrefix(String)
+  nameWithType: IValueProvider.ContainsPrefix(String)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
+    name: ContainsPrefix
+    nameWithType: IValueProvider.ContainsPrefix
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix(System.String)
+    name: ContainsPrefix
+    nameWithType: IValueProvider.ContainsPrefix
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.ContainsPrefix
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -981,9 +1040,50 @@ references:
   name: GetValue
   nameWithType: QueryStringValueProvider.GetValue
   fullName: Microsoft.AspNetCore.Mvc.ModelBinding.QueryStringValueProvider.GetValue
-- uid: ValueProviderResult
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider
   isExternal: true
+  name: GetValue(String)
+  nameWithType: IValueProvider.GetValue(String)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
+    name: GetValue
+    nameWithType: IValueProvider.GetValue
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue(System.String)
+    name: GetValue
+    nameWithType: IValueProvider.GetValue
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.IValueProvider.GetValue
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding
+  isExternal: false
   name: ValueProviderResult
   nameWithType: ValueProviderResult
-  fullName: ValueProviderResult
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ValueProviderResult
 shouldSkipMarkup: true

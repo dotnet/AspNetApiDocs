@@ -5,9 +5,9 @@ items:
   id: DataAnnotationsModelValidator
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal
   children:
-  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,IStringLocalizer)
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,Microsoft.Extensions.Localization.IStringLocalizer)
   - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Attribute
-  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(ModelValidationContext)
+  - Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
   langs:
   - csharp
   - vb
@@ -32,25 +32,35 @@ items:
     content: 'public class DataAnnotationsModelValidator : IModelValidator'
     content.vb: >-
       Public Class DataAnnotationsModelValidator
-          Inherits IModelValidator
+          Implements IModelValidator
   inheritance:
   - System.Object
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,IStringLocalizer)
-  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,IStringLocalizer)
-  id: '#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,IStringLocalizer)'
+- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,Microsoft.Extensions.Localization.IStringLocalizer)
+  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,Microsoft.Extensions.Localization.IStringLocalizer)
+  id: '#ctor(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider,System.ComponentModel.DataAnnotations.ValidationAttribute,Microsoft.Extensions.Localization.IStringLocalizer)'
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator
   langs:
   - csharp
   - vb
   name: DataAnnotationsModelValidator(IValidationAttributeAdapterProvider, ValidationAttribute, IStringLocalizer)
   nameWithType: DataAnnotationsModelValidator.DataAnnotationsModelValidator(IValidationAttributeAdapterProvider, ValidationAttribute, IStringLocalizer)
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.DataAnnotationsModelValidator(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, System.ComponentModel.DataAnnotations.ValidationAttribute, IStringLocalizer)
+  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.DataAnnotationsModelValidator(Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider, System.ComponentModel.DataAnnotations.ValidationAttribute, Microsoft.Extensions.Localization.IStringLocalizer)
   type: Constructor
   source:
     remote:
@@ -78,8 +88,8 @@ items:
       type: System.ComponentModel.DataAnnotations.ValidationAttribute
       description: The <xref href="System.ComponentModel.DataAnnotations.ValidationAttribute" data-throw-if-not-resolved="false"></xref> that defines what we&apos;re validating.
     - id: stringLocalizer
-      type: IStringLocalizer
-      description: The <see cref="!:IStringLocalizer"></see> used to create messages.
+      type: Microsoft.Extensions.Localization.IStringLocalizer
+      description: The <xref href="Microsoft.Extensions.Localization.IStringLocalizer" data-throw-if-not-resolved="false"></xref> used to create messages.
     content.vb: Public Sub New(validationAttributeAdapterProvider As IValidationAttributeAdapterProvider, attribute As ValidationAttribute, stringLocalizer As IStringLocalizer)
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.#ctor*
   modifiers.csharp:
@@ -123,16 +133,16 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(ModelValidationContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(ModelValidationContext)
-  id: Validate(ModelValidationContext)
+- uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+  id: Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator
   langs:
   - csharp
   - vb
   name: Validate(ModelValidationContext)
   nameWithType: DataAnnotationsModelValidator.Validate(ModelValidationContext)
-  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(ModelValidationContext)
+  fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
   type: Method
   source:
     remote:
@@ -151,13 +161,15 @@ items:
     content: public IEnumerable<ModelValidationResult> Validate(ModelValidationContext validationContext)
     parameters:
     - id: validationContext
-      type: ModelValidationContext
+      type: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
       description: The context being validated.
     return:
-      type: System.Collections.Generic.IEnumerable{ModelValidationResult}
+      type: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult}
       description: An enumerable of the validation results.
     content.vb: Public Function Validate(validationContext As ModelValidationContext) As IEnumerable(Of ModelValidationResult)
   overload: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -183,6 +195,292 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  isExternal: false
+  name: IModelValidator
+  nameWithType: IModelValidator
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.ComponentModel.DataAnnotations
   commentId: N:System.ComponentModel.DataAnnotations
   isExternal: false
@@ -195,12 +493,25 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  nameWithType: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator
   commentId: T:Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator
   isExternal: false
   name: DataAnnotationsModelValidator
   nameWithType: DataAnnotationsModelValidator
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator
+- uid: Microsoft.Extensions.Localization.IStringLocalizer
+  commentId: T:Microsoft.Extensions.Localization.IStringLocalizer
+  parent: Microsoft.Extensions.Localization
+  isExternal: false
+  name: IStringLocalizer
+  nameWithType: IStringLocalizer
+  fullName: Microsoft.Extensions.Localization.IStringLocalizer
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
   commentId: T:Microsoft.AspNetCore.Mvc.DataAnnotations.IValidationAttributeAdapterProvider
   parent: Microsoft.AspNetCore.Mvc.DataAnnotations
@@ -251,11 +562,12 @@ references:
   name: DataAnnotationsModelValidator
   nameWithType: DataAnnotationsModelValidator.DataAnnotationsModelValidator
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.DataAnnotationsModelValidator
-- uid: IStringLocalizer
-  isExternal: true
-  name: IStringLocalizer
-  nameWithType: IStringLocalizer
-  fullName: IStringLocalizer
+- uid: Microsoft.Extensions.Localization
+  commentId: N:Microsoft.Extensions.Localization
+  isExternal: false
+  name: Microsoft.Extensions.Localization
+  nameWithType: Microsoft.Extensions.Localization
+  fullName: Microsoft.Extensions.Localization
 - uid: Microsoft.AspNetCore.Mvc.DataAnnotations
   commentId: N:Microsoft.AspNetCore.Mvc.DataAnnotations
   isExternal: false
@@ -274,20 +586,59 @@ references:
   name: Validate
   nameWithType: DataAnnotationsModelValidator.Validate
   fullName: Microsoft.AspNetCore.Mvc.DataAnnotations.Internal.DataAnnotationsModelValidator.Validate
-- uid: ModelValidationContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator
+  isExternal: false
+  name: Validate(ModelValidationContext)
+  nameWithType: IModelValidator.Validate(ModelValidationContext)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+    name: Validate
+    nameWithType: IModelValidator.Validate
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+    name: ModelValidationContext
+    nameWithType: ModelValidationContext
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate(Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext)
+    name: Validate
+    nameWithType: IModelValidator.Validate
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IModelValidator.Validate
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+    name: ModelValidationContext
+    nameWithType: ModelValidationContext
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  isExternal: false
   name: ModelValidationContext
   nameWithType: ModelValidationContext
-  fullName: ModelValidationContext
-- uid: System.Collections.Generic.IEnumerable{ModelValidationResult}
-  commentId: T:System.Collections.Generic.IEnumerable{ModelValidationResult}
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationContext
+- uid: System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult}
+  commentId: T:System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerable`1
   name: IEnumerable<ModelValidationResult>
   nameWithType: IEnumerable<ModelValidationResult>
-  fullName: System.Collections.Generic.IEnumerable<ModelValidationResult>
+  fullName: System.Collections.Generic.IEnumerable<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult>
   nameWithType.vb: IEnumerable(Of ModelValidationResult)
-  fullName.vb: System.Collections.Generic.IEnumerable(Of ModelValidationResult)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult)
   name.vb: IEnumerable(Of ModelValidationResult)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerable`1
@@ -298,11 +649,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: ModelValidationResult
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult
     name: ModelValidationResult
     nameWithType: ModelValidationResult
-    fullName: ModelValidationResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -315,11 +665,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: ModelValidationResult
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult
     name: ModelValidationResult
     nameWithType: ModelValidationResult
-    fullName: ModelValidationResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ModelValidationResult
   - name: )
     nameWithType: )
     fullName: )

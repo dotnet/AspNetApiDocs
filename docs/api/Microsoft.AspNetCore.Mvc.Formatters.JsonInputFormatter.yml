@@ -5,10 +5,10 @@ items:
   id: JsonInputFormatter
   parent: Microsoft.AspNetCore.Mvc.Formatters
   children:
-  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(ILogger,JsonSerializerSettings,ArrayPool{System.Char},ObjectPoolProvider)
+  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(Microsoft.Extensions.Logging.ILogger,Newtonsoft.Json.JsonSerializerSettings,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.CreateJsonSerializer
-  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext,System.Text.Encoding)
-  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+  - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
   - Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings
   langs:
   - csharp
@@ -28,33 +28,58 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters
-  summary: "\nA <see cref=\"!:TextInputFormatter\"></see> for JSON content.\n"
+  summary: "\nA <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter\" data-throw-if-not-resolved=\"false\"></xref> for JSON content.\n"
   example: []
   syntax:
-    content: 'public class JsonInputFormatter : TextInputFormatter'
+    content: 'public class JsonInputFormatter : TextInputFormatter, IInputFormatter, IApiRequestFormatMetadataProvider'
     content.vb: >-
       Public Class JsonInputFormatter
           Inherits TextInputFormatter
+          Implements IInputFormatter, IApiRequestFormatMetadataProvider
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
   derivedClasses:
   - Microsoft.AspNetCore.Mvc.Formatters.JsonPatchInputFormatter
+  implements:
+  - Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+  inheritedMembers:
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF8EncodingWithoutBOM
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF16EncodingLittleEndian
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SupportedEncodings
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.SupportedMediaTypes
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(ILogger,JsonSerializerSettings,ArrayPool{System.Char},ObjectPoolProvider)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(ILogger,JsonSerializerSettings,ArrayPool{System.Char},ObjectPoolProvider)
-  id: '#ctor(ILogger,JsonSerializerSettings,ArrayPool{System.Char},ObjectPoolProvider)'
+- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(Microsoft.Extensions.Logging.ILogger,Newtonsoft.Json.JsonSerializerSettings,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor(Microsoft.Extensions.Logging.ILogger,Newtonsoft.Json.JsonSerializerSettings,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
+  id: '#ctor(Microsoft.Extensions.Logging.ILogger,Newtonsoft.Json.JsonSerializerSettings,System.Buffers.ArrayPool{System.Char},Microsoft.Extensions.ObjectPool.ObjectPoolProvider)'
   parent: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   langs:
   - csharp
   - vb
   name: JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool<Char>, ObjectPoolProvider)
   nameWithType: JsonInputFormatter.JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool<Char>, ObjectPoolProvider)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool<System.Char>, ObjectPoolProvider)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.JsonInputFormatter(Microsoft.Extensions.Logging.ILogger, Newtonsoft.Json.JsonSerializerSettings, System.Buffers.ArrayPool<System.Char>, Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   type: Constructor
   source:
     remote:
@@ -73,17 +98,17 @@ items:
     content: public JsonInputFormatter(ILogger logger, JsonSerializerSettings serializerSettings, ArrayPool<char> charPool, ObjectPoolProvider objectPoolProvider)
     parameters:
     - id: logger
-      type: ILogger
-      description: The <see cref="!:ILogger"></see>.
+      type: Microsoft.Extensions.Logging.ILogger
+      description: The <xref href="Microsoft.Extensions.Logging.ILogger" data-throw-if-not-resolved="false"></xref>.
     - id: serializerSettings
-      type: JsonSerializerSettings
-      description: "\nThe <see cref=\"!:JsonSerializerSettings\"></see>. Should be either the application-wide settings\n(<xref href=\"Microsoft.AspNetCore.Mvc.MvcJsonOptions.SerializerSettings\" data-throw-if-not-resolved=\"false\"></xref>) or an instance\n<xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonSerializerSettingsProvider.CreateSerializerSettings\" data-throw-if-not-resolved=\"false\"></xref> initially returned.\n"
+      type: Newtonsoft.Json.JsonSerializerSettings
+      description: "\nThe <xref href=\"Newtonsoft.Json.JsonSerializerSettings\" data-throw-if-not-resolved=\"false\"></xref>. Should be either the application-wide settings\n(<xref href=\"Microsoft.AspNetCore.Mvc.MvcJsonOptions.SerializerSettings\" data-throw-if-not-resolved=\"false\"></xref>) or an instance\n<xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonSerializerSettingsProvider.CreateSerializerSettings\" data-throw-if-not-resolved=\"false\"></xref> initially returned.\n"
     - id: charPool
-      type: ArrayPool{System.Char}
-      description: The <see cref="!:ArrayPool&lt;Char>"></see>.
+      type: System.Buffers.ArrayPool{System.Char}
+      description: The <xref href="System.Buffers.ArrayPool%601" data-throw-if-not-resolved="false"></xref>.
     - id: objectPoolProvider
-      type: ObjectPoolProvider
-      description: The <see cref="!:ObjectPoolProvider"></see>.
+      type: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+      description: The <xref href="Microsoft.Extensions.ObjectPool.ObjectPoolProvider" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub New(logger As ILogger, serializerSettings As JsonSerializerSettings, charPool As ArrayPool(Of Char), objectPoolProvider As ObjectPoolProvider)
   overload: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor*
   nameWithType.vb: JsonInputFormatter.JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool(Of Char), ObjectPoolProvider)
@@ -91,7 +116,7 @@ items:
   - public
   modifiers.vb:
   - Public
-  fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool(Of System.Char), ObjectPoolProvider)
+  fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.JsonInputFormatter(Microsoft.Extensions.Logging.ILogger, Newtonsoft.Json.JsonSerializerSettings, System.Buffers.ArrayPool(Of System.Char), Microsoft.Extensions.ObjectPool.ObjectPoolProvider)
   name.vb: JsonInputFormatter(ILogger, JsonSerializerSettings, ArrayPool(Of Char), ObjectPoolProvider)
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings
   commentId: P:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings
@@ -115,14 +140,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters
-  summary: "\nGets the <see cref=\"!:JsonSerializerSettings\"></see> used to configure the <see cref=\"!:JsonSerializer\"></see>.\n"
-  remarks: "\nAny modifications to the <see cref=\"!:JsonSerializerSettings\"></see> object after this\n<xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter\" data-throw-if-not-resolved=\"false\"></xref> has been used will have no effect.\n"
+  summary: "\nGets the <xref href=\"Newtonsoft.Json.JsonSerializerSettings\" data-throw-if-not-resolved=\"false\"></xref> used to configure the <xref href=\"Newtonsoft.Json.JsonSerializer\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nAny modifications to the <xref href=\"Newtonsoft.Json.JsonSerializerSettings\" data-throw-if-not-resolved=\"false\"></xref> object after this\n<xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter\" data-throw-if-not-resolved=\"false\"></xref> has been used will have no effect.\n"
   example: []
   syntax:
     content: protected JsonSerializerSettings SerializerSettings { get; }
     parameters: []
     return:
-      type: JsonSerializerSettings
+      type: Newtonsoft.Json.JsonSerializerSettings
     content.vb: Protected ReadOnly Property SerializerSettings As JsonSerializerSettings
   overload: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings*
   modifiers.csharp:
@@ -131,16 +156,16 @@ items:
   modifiers.vb:
   - Protected
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext,System.Text.Encoding)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext,System.Text.Encoding)
-  id: ReadRequestBodyAsync(InputFormatterContext,System.Text.Encoding)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+  id: ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
   parent: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   langs:
   - csharp
   - vb
   name: ReadRequestBodyAsync(InputFormatterContext, Encoding)
   nameWithType: JsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext, Encoding)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(InputFormatterContext, System.Text.Encoding)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext, System.Text.Encoding)
   type: Method
   source:
     remote:
@@ -153,17 +178,22 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nReads an object from the request body.\n"
   example: []
   syntax:
     content: public override Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
     parameters:
     - id: context
-      type: InputFormatterContext
+      type: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext" data-throw-if-not-resolved="false"></xref>.
     - id: encoding
       type: System.Text.Encoding
+      description: The <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> used to read the request body.
     return:
-      type: System.Threading.Tasks.Task{InputFormatterResult}
+      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion deserializes the request body.
     content.vb: Public Overrides Function ReadRequestBodyAsync(context As InputFormatterContext, encoding As Encoding) As Task(Of InputFormatterResult)
+  overridden: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
   overload: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync*
   modifiers.csharp:
   - public
@@ -193,14 +223,14 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters
-  summary: "\nCalled during deserialization to get the <see cref=\"!:JsonSerializer\"></see>.\n"
-  remarks: "\nThis method works in tandem with <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)\" data-throw-if-not-resolved=\"false\"></xref> to\nmanage the lifetimes of <see cref=\"!:JsonSerializer\"></see> instances.\n"
+  summary: "\nCalled during deserialization to get the <xref href=\"Newtonsoft.Json.JsonSerializer\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  remarks: "\nThis method works in tandem with <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)\" data-throw-if-not-resolved=\"false\"></xref> to\nmanage the lifetimes of <xref href=\"Newtonsoft.Json.JsonSerializer\" data-throw-if-not-resolved=\"false\"></xref> instances.\n"
   example: []
   syntax:
     content: protected virtual JsonSerializer CreateJsonSerializer()
     return:
-      type: JsonSerializer
-      description: The <see cref="!:JsonSerializer"></see> used during deserialization.
+      type: Newtonsoft.Json.JsonSerializer
+      description: The <xref href="Newtonsoft.Json.JsonSerializer" data-throw-if-not-resolved="false"></xref> used during deserialization.
     content.vb: Protected Overridable Function CreateJsonSerializer As JsonSerializer
   overload: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.CreateJsonSerializer*
   modifiers.csharp:
@@ -209,16 +239,16 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
-  id: ReleaseJsonSerializer(JsonSerializer)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
+  id: ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
   parent: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   langs:
   - csharp
   - vb
   name: ReleaseJsonSerializer(JsonSerializer)
   nameWithType: JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
   type: Method
   source:
     remote:
@@ -232,14 +262,14 @@ items:
   - Microsoft.AspNetCore.Mvc.Formatters.Json
   namespace: Microsoft.AspNetCore.Mvc.Formatters
   summary: "\nReleases the <span class=\"paramref\">serializer</span> instance.\n"
-  remarks: "\nThis method works in tandem with <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)\" data-throw-if-not-resolved=\"false\"></xref> to\nmanage the lifetimes of <see cref=\"!:JsonSerializer\"></see> instances.\n"
+  remarks: "\nThis method works in tandem with <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)\" data-throw-if-not-resolved=\"false\"></xref> to\nmanage the lifetimes of <xref href=\"Newtonsoft.Json.JsonSerializer\" data-throw-if-not-resolved=\"false\"></xref> instances.\n"
   example: []
   syntax:
     content: protected virtual void ReleaseJsonSerializer(JsonSerializer serializer)
     parameters:
     - id: serializer
-      type: JsonSerializer
-      description: The <see cref="!:JsonSerializer"></see> to release.
+      type: Newtonsoft.Json.JsonSerializer
+      description: The <xref href="Newtonsoft.Json.JsonSerializer" data-throw-if-not-resolved="false"></xref> to release.
     content.vb: Protected Overridable Sub ReleaseJsonSerializer(serializer As JsonSerializer)
   overload: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer*
   modifiers.csharp:
@@ -249,6 +279,13 @@ items:
   - Protected
   - Overridable
 references:
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: TextInputFormatter
+  nameWithType: TextInputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
 - uid: Microsoft.AspNetCore.Mvc.Formatters
   commentId: N:Microsoft.AspNetCore.Mvc.Formatters
   isExternal: false
@@ -262,12 +299,627 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: InputFormatter
+  nameWithType: InputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+- uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: IInputFormatter
+  nameWithType: IInputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+- uid: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+  commentId: T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+  parent: Microsoft.AspNetCore.Mvc.ApiExplorer
+  isExternal: false
+  name: IApiRequestFormatMetadataProvider
+  nameWithType: IApiRequestFormatMetadataProvider
+  fullName: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF8EncodingWithoutBOM
+  commentId: F:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF8EncodingWithoutBOM
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: false
+  name: UTF8EncodingWithoutBOM
+  nameWithType: TextInputFormatter.UTF8EncodingWithoutBOM
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF8EncodingWithoutBOM
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF16EncodingLittleEndian
+  commentId: F:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF16EncodingLittleEndian
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: false
+  name: UTF16EncodingLittleEndian
+  nameWithType: TextInputFormatter.UTF16EncodingLittleEndian
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.UTF16EncodingLittleEndian
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SupportedEncodings
+  commentId: P:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SupportedEncodings
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: false
+  name: SupportedEncodings
+  nameWithType: TextInputFormatter.SupportedEncodings
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SupportedEncodings
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: false
+  name: ReadRequestBodyAsync(InputFormatterContext)
+  nameWithType: TextInputFormatter.ReadRequestBodyAsync(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadRequestBodyAsync
+    nameWithType: TextInputFormatter.ReadRequestBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadRequestBodyAsync
+    nameWithType: TextInputFormatter.ReadRequestBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: false
+  name: SelectCharacterEncoding(InputFormatterContext)
+  nameWithType: TextInputFormatter.SelectCharacterEncoding(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: SelectCharacterEncoding
+    nameWithType: TextInputFormatter.SelectCharacterEncoding
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: SelectCharacterEncoding
+    nameWithType: TextInputFormatter.SelectCharacterEncoding
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.SelectCharacterEncoding
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.SupportedMediaTypes
+  commentId: P:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.SupportedMediaTypes
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: false
+  name: SupportedMediaTypes
+  nameWithType: InputFormatter.SupportedMediaTypes
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.SupportedMediaTypes
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: true
+  name: GetDefaultValueForType(Type)
+  nameWithType: InputFormatter.GetDefaultValueForType(Type)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+    name: GetDefaultValueForType
+    nameWithType: InputFormatter.GetDefaultValueForType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
+    name: GetDefaultValueForType
+    nameWithType: InputFormatter.GetDefaultValueForType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: false
+  name: CanRead(InputFormatterContext)
+  nameWithType: InputFormatter.CanRead(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: CanRead
+    nameWithType: InputFormatter.CanRead
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: CanRead
+    nameWithType: InputFormatter.CanRead
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: true
+  name: CanReadType(Type)
+  nameWithType: InputFormatter.CanReadType(Type)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+    name: CanReadType
+    nameWithType: InputFormatter.CanReadType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
+    name: CanReadType
+    nameWithType: InputFormatter.CanReadType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: false
+  name: ReadAsync(InputFormatterContext)
+  nameWithType: InputFormatter.ReadAsync(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadAsync
+    nameWithType: InputFormatter.ReadAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadAsync
+    nameWithType: InputFormatter.ReadAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
+  isExternal: true
+  name: GetSupportedContentTypes(String, Type)
+  nameWithType: InputFormatter.GetSupportedContentTypes(String, Type)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String, System.Type)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
+    name: GetSupportedContentTypes
+    nameWithType: InputFormatter.GetSupportedContentTypes
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
+    name: GetSupportedContentTypes
+    nameWithType: InputFormatter.GetSupportedContentTypes
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ApiExplorer
+  commentId: N:Microsoft.AspNetCore.Mvc.ApiExplorer
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ApiExplorer
+  nameWithType: Microsoft.AspNetCore.Mvc.ApiExplorer
+  fullName: Microsoft.AspNetCore.Mvc.ApiExplorer
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   commentId: T:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   parent: Microsoft.AspNetCore.Mvc.Formatters
@@ -275,40 +927,91 @@ references:
   name: JsonInputFormatter
   nameWithType: JsonInputFormatter
   fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
+- uid: Microsoft.Extensions.Logging.ILogger
+  commentId: T:Microsoft.Extensions.Logging.ILogger
+  parent: Microsoft.Extensions.Logging
+  isExternal: false
+  name: ILogger
+  nameWithType: ILogger
+  fullName: Microsoft.Extensions.Logging.ILogger
+- uid: Newtonsoft.Json.JsonSerializerSettings
+  commentId: T:Newtonsoft.Json.JsonSerializerSettings
+  parent: Newtonsoft.Json
+  isExternal: true
+  name: JsonSerializerSettings
+  nameWithType: JsonSerializerSettings
+  fullName: Newtonsoft.Json.JsonSerializerSettings
 - uid: Microsoft.AspNetCore.Mvc.MvcJsonOptions.SerializerSettings
   commentId: P:Microsoft.AspNetCore.Mvc.MvcJsonOptions.SerializerSettings
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonSerializerSettingsProvider.CreateSerializerSettings
   commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonSerializerSettingsProvider.CreateSerializerSettings
+- uid: System.Buffers.ArrayPool`1
+  commentId: T:System.Buffers.ArrayPool`1
+  isExternal: true
+  name: ArrayPool<T>
+  nameWithType: ArrayPool<T>
+  fullName: System.Buffers.ArrayPool<T>
+  nameWithType.vb: ArrayPool(Of T)
+  fullName.vb: System.Buffers.ArrayPool(Of T)
+  name.vb: ArrayPool(Of T)
+  spec.csharp:
+  - uid: System.Buffers.ArrayPool`1
+    name: ArrayPool
+    nameWithType: ArrayPool
+    fullName: System.Buffers.ArrayPool
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Buffers.ArrayPool`1
+    name: ArrayPool
+    nameWithType: ArrayPool
+    fullName: System.Buffers.ArrayPool
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+  commentId: T:Microsoft.Extensions.ObjectPool.ObjectPoolProvider
+  parent: Microsoft.Extensions.ObjectPool
+  isExternal: false
+  name: ObjectPoolProvider
+  nameWithType: ObjectPoolProvider
+  fullName: Microsoft.Extensions.ObjectPool.ObjectPoolProvider
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.#ctor
   isExternal: false
   name: JsonInputFormatter
   nameWithType: JsonInputFormatter.JsonInputFormatter
   fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.JsonInputFormatter
-- uid: ILogger
-  isExternal: true
-  name: ILogger
-  nameWithType: ILogger
-  fullName: ILogger
-- uid: JsonSerializerSettings
-  isExternal: true
-  name: JsonSerializerSettings
-  nameWithType: JsonSerializerSettings
-  fullName: JsonSerializerSettings
-- uid: ArrayPool{System.Char}
-  commentId: '!:ArrayPool{System.Char}'
-  definition: ArrayPool`1
+- uid: System.Buffers.ArrayPool{System.Char}
+  commentId: T:System.Buffers.ArrayPool{System.Char}
+  parent: System.Buffers
+  definition: System.Buffers.ArrayPool`1
   name: ArrayPool<Char>
   nameWithType: ArrayPool<Char>
-  fullName: ArrayPool<System.Char>
+  fullName: System.Buffers.ArrayPool<System.Char>
   nameWithType.vb: ArrayPool(Of Char)
-  fullName.vb: ArrayPool(Of System.Char)
+  fullName.vb: System.Buffers.ArrayPool(Of System.Char)
   name.vb: ArrayPool(Of Char)
   spec.csharp:
-  - uid: ArrayPool`1
+  - uid: System.Buffers.ArrayPool`1
     name: ArrayPool
     nameWithType: ArrayPool
-    fullName: ArrayPool
+    fullName: System.Buffers.ArrayPool
     isExternal: true
   - name: <
     nameWithType: <
@@ -322,10 +1025,10 @@ references:
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: ArrayPool`1
+  - uid: System.Buffers.ArrayPool`1
     name: ArrayPool
     nameWithType: ArrayPool
-    fullName: ArrayPool
+    fullName: System.Buffers.ArrayPool
     isExternal: true
   - name: '(Of '
     nameWithType: '(Of '
@@ -338,66 +1041,109 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: ObjectPoolProvider
+- uid: Microsoft.Extensions.Logging
+  commentId: N:Microsoft.Extensions.Logging
+  isExternal: false
+  name: Microsoft.Extensions.Logging
+  nameWithType: Microsoft.Extensions.Logging
+  fullName: Microsoft.Extensions.Logging
+- uid: Newtonsoft.Json
+  commentId: N:Newtonsoft.Json
+  isExternal: false
+  name: Newtonsoft.Json
+  nameWithType: Newtonsoft.Json
+  fullName: Newtonsoft.Json
+- uid: Microsoft.Extensions.ObjectPool
+  commentId: N:Microsoft.Extensions.ObjectPool
+  isExternal: false
+  name: Microsoft.Extensions.ObjectPool
+  nameWithType: Microsoft.Extensions.ObjectPool
+  fullName: Microsoft.Extensions.ObjectPool
+- uid: System.Buffers
+  commentId: N:System.Buffers
+  isExternal: false
+  name: System.Buffers
+  nameWithType: System.Buffers
+  fullName: System.Buffers
+- uid: Newtonsoft.Json.JsonSerializer
+  commentId: T:Newtonsoft.Json.JsonSerializer
+  parent: Newtonsoft.Json
   isExternal: true
-  name: ObjectPoolProvider
-  nameWithType: ObjectPoolProvider
-  fullName: ObjectPoolProvider
-- uid: ArrayPool`1
-  isExternal: true
-  name: ArrayPool<>
-  nameWithType: ArrayPool<>
-  fullName: ArrayPool<>
-  nameWithType.vb: ArrayPool(Of )
-  fullName.vb: ArrayPool(Of )
-  name.vb: ArrayPool(Of )
-  spec.csharp:
-  - uid: ArrayPool`1
-    name: ArrayPool
-    nameWithType: ArrayPool
-    fullName: ArrayPool
-    isExternal: true
-  - name: <
-    nameWithType: <
-    fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
-  - name: '>'
-    nameWithType: '>'
-    fullName: '>'
-  spec.vb:
-  - uid: ArrayPool`1
-    name: ArrayPool
-    nameWithType: ArrayPool
-    fullName: ArrayPool
-    isExternal: true
-  - name: '(Of '
-    nameWithType: '(Of '
-    fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
-  - name: )
-    nameWithType: )
-    fullName: )
+  name: JsonSerializer
+  nameWithType: JsonSerializer
+  fullName: Newtonsoft.Json.JsonSerializer
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings
   isExternal: false
   name: SerializerSettings
   nameWithType: JsonInputFormatter.SerializerSettings
   fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.SerializerSettings
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
+  isExternal: true
+  name: ReadRequestBodyAsync(InputFormatterContext, Encoding)
+  nameWithType: TextInputFormatter.ReadRequestBodyAsync(InputFormatterContext, Encoding)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext, System.Text.Encoding)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+    name: ReadRequestBodyAsync
+    nameWithType: TextInputFormatter.ReadRequestBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext,System.Text.Encoding)
+    name: ReadRequestBodyAsync
+    nameWithType: TextInputFormatter.ReadRequestBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter.ReadRequestBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync
   isExternal: false
   name: ReadRequestBodyAsync
   nameWithType: JsonInputFormatter.ReadRequestBodyAsync
   fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReadRequestBodyAsync
-- uid: InputFormatterContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
   name: InputFormatterContext
   nameWithType: InputFormatterContext
-  fullName: InputFormatterContext
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
 - uid: System.Text.Encoding
   commentId: T:System.Text.Encoding
   parent: System.Text
@@ -405,15 +1151,15 @@ references:
   name: Encoding
   nameWithType: Encoding
   fullName: System.Text.Encoding
-- uid: System.Threading.Tasks.Task{InputFormatterResult}
-  commentId: T:System.Threading.Tasks.Task{InputFormatterResult}
+- uid: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<InputFormatterResult>
   nameWithType: Task<InputFormatterResult>
-  fullName: System.Threading.Tasks.Task<InputFormatterResult>
+  fullName: System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult>
   nameWithType.vb: Task(Of InputFormatterResult)
-  fullName.vb: System.Threading.Tasks.Task(Of InputFormatterResult)
+  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult)
   name.vb: Task(Of InputFormatterResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -424,11 +1170,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: InputFormatterResult
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
     name: InputFormatterResult
     nameWithType: InputFormatterResult
-    fullName: InputFormatterResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -441,11 +1186,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: InputFormatterResult
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
     name: InputFormatterResult
     nameWithType: InputFormatterResult
-    fullName: InputFormatterResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
   - name: )
     nameWithType: )
     fullName: )
@@ -500,41 +1244,41 @@ references:
   name: System.Threading.Tasks
   nameWithType: System.Threading.Tasks
   fullName: System.Threading.Tasks
-- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
   parent: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter
   isExternal: true
   name: ReleaseJsonSerializer(JsonSerializer)
   nameWithType: JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
     name: ReleaseJsonSerializer
     nameWithType: JsonInputFormatter.ReleaseJsonSerializer
     fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer
   - name: (
     nameWithType: (
     fullName: (
-  - uid: JsonSerializer
+  - uid: Newtonsoft.Json.JsonSerializer
     name: JsonSerializer
     nameWithType: JsonSerializer
-    fullName: JsonSerializer
+    fullName: Newtonsoft.Json.JsonSerializer
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(JsonSerializer)
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer(Newtonsoft.Json.JsonSerializer)
     name: ReleaseJsonSerializer
     nameWithType: JsonInputFormatter.ReleaseJsonSerializer
     fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer
   - name: (
     nameWithType: (
     fullName: (
-  - uid: JsonSerializer
+  - uid: Newtonsoft.Json.JsonSerializer
     name: JsonSerializer
     nameWithType: JsonSerializer
-    fullName: JsonSerializer
+    fullName: Newtonsoft.Json.JsonSerializer
     isExternal: true
   - name: )
     nameWithType: )
@@ -545,11 +1289,6 @@ references:
   name: CreateJsonSerializer
   nameWithType: JsonInputFormatter.CreateJsonSerializer
   fullName: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.CreateJsonSerializer
-- uid: JsonSerializer
-  isExternal: true
-  name: JsonSerializer
-  nameWithType: JsonSerializer
-  fullName: JsonSerializer
 - uid: Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.JsonInputFormatter.ReleaseJsonSerializer
   isExternal: false

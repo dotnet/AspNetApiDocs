@@ -5,8 +5,8 @@ items:
   id: DefaultCollectionValidationStrategy
   parent: Microsoft.AspNetCore.Mvc.Internal
   children:
-  - Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(ModelMetadata,System.String,System.Object)
-  - Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(ModelMetadata,System.Object)
+  - Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+  - Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object)
   - Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.Instance
   langs:
   - csharp
@@ -26,16 +26,26 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Internal
-  summary: "\nThe default implementation of <see cref=\"!:IValidationStrategy\"></see> for a collection.\n"
-  remarks: "\nThis implementation handles cases like:\n<example>\n    Model: IList&lt;Student> \n    Query String: ?students[0].Age=8&amp;students[1].Age=9\n\n    In this case the elements of the collection are identified in the input data set by an incrementing\n    integer index.\n</example>\n\nor:\n\n<example>\n    Model: IDictionary&lt;string, int> \n    Query String: ?students[0].Key=Joey&amp;students[0].Value=8\n\n    In this case the dictionary is treated as a collection of key-value pairs, and the elements of the\n    collection are identified in the input data set by an incrementing integer index.\n</example>\n\nUsing this key format, the enumerator enumerates model objects of type matching\n<see cref=\"!:ModelMetadata.ElementMetadata\"></see>. The indices of the elements in the collection are used to\ncompute the model prefix keys.\n"
+  summary: "\nThe default implementation of <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy\" data-throw-if-not-resolved=\"false\"></xref> for a collection.\n"
+  remarks: "\nThis implementation handles cases like:\n<example>\n    Model: IList&lt;Student> \n    Query String: ?students[0].Age=8&amp;students[1].Age=9\n\n    In this case the elements of the collection are identified in the input data set by an incrementing\n    integer index.\n</example>\n\nor:\n\n<example>\n    Model: IDictionary&lt;string, int> \n    Query String: ?students[0].Key=Joey&amp;students[0].Value=8\n\n    In this case the dictionary is treated as a collection of key-value pairs, and the elements of the\n    collection are identified in the input data set by an incrementing integer index.\n</example>\n\nUsing this key format, the enumerator enumerates model objects of type matching\n<xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata\" data-throw-if-not-resolved=\"false\"></xref>. The indices of the elements in the collection are used to\ncompute the model prefix keys.\n"
   example: []
   syntax:
     content: 'public class DefaultCollectionValidationStrategy : IValidationStrategy'
     content.vb: >-
       Public Class DefaultCollectionValidationStrategy
-          Inherits IValidationStrategy
+          Implements IValidationStrategy
   inheritance:
   - System.Object
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -79,16 +89,16 @@ items:
   - Public
   - Shared
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(ModelMetadata,System.String,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(ModelMetadata,System.String,System.Object)
-  id: GetChildren(ModelMetadata,System.String,System.Object)
+- uid: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+  commentId: M:Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+  id: GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
   parent: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy
   langs:
   - csharp
   - vb
   name: GetChildren(ModelMetadata, String, Object)
   nameWithType: DefaultCollectionValidationStrategy.GetChildren(ModelMetadata, String, Object)
-  fullName: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(ModelMetadata, System.String, System.Object)
+  fullName: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.String, System.Object)
   type: Method
   source:
     remote:
@@ -101,34 +111,41 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Internal
+  summary: "\nGets an <xref href=\"System.Collections.Generic.IEnumerator%601\" data-throw-if-not-resolved=\"false\"></xref> containing a <xref href=\"Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry\" data-throw-if-not-resolved=\"false\"></xref> for\neach child entry of the model object to be validated.\n"
   example: []
   syntax:
     content: public IEnumerator<ValidationEntry> GetChildren(ModelMetadata metadata, string key, object model)
     parameters:
     - id: metadata
-      type: ModelMetadata
+      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata" data-throw-if-not-resolved="false"></xref> associated with <span class="paramref">model</span>.
     - id: key
       type: System.String
+      description: The model prefix associated with <span class="paramref">model</span>.
     - id: model
       type: System.Object
+      description: The model object.
     return:
-      type: System.Collections.Generic.IEnumerator{ValidationEntry}
+      type: System.Collections.Generic.IEnumerator{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry}
+      description: An <xref href="System.Collections.Generic.IEnumerator%601" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function GetChildren(metadata As ModelMetadata, key As String, model As Object) As IEnumerator(Of ValidationEntry)
   overload: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(ModelMetadata,System.Object)
-  commentId: M:Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(ModelMetadata,System.Object)
-  id: GetEnumeratorForElementType(ModelMetadata,System.Object)
+- uid: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object)
+  commentId: M:Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object)
+  id: GetEnumeratorForElementType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.Object)
   parent: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy
   langs:
   - csharp
   - vb
   name: GetEnumeratorForElementType(ModelMetadata, Object)
   nameWithType: DefaultCollectionValidationStrategy.GetEnumeratorForElementType(ModelMetadata, Object)
-  fullName: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(ModelMetadata, System.Object)
+  fullName: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetEnumeratorForElementType(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.Object)
   type: Method
   source:
     remote:
@@ -145,7 +162,7 @@ items:
     content: public IEnumerator GetEnumeratorForElementType(ModelMetadata metadata, object model)
     parameters:
     - id: metadata
-      type: ModelMetadata
+      type: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
     - id: model
       type: System.Object
     return:
@@ -157,6 +174,20 @@ items:
   modifiers.vb:
   - Public
 references:
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  isExternal: false
+  name: IValidationStrategy
+  nameWithType: IValidationStrategy
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata
+  commentId: P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  isExternal: false
+  name: ElementMetadata
+  nameWithType: ModelMetadata.ElementMetadata
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.ElementMetadata
 - uid: Microsoft.AspNetCore.Mvc.Internal
   commentId: N:Microsoft.AspNetCore.Mvc.Internal
   isExternal: false
@@ -170,12 +201,310 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  nameWithType: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding
+  isExternal: false
+  name: ModelMetadata
+  nameWithType: ModelMetadata
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding
+  commentId: N:Microsoft.AspNetCore.Mvc.ModelBinding
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ModelBinding
+  nameWithType: Microsoft.AspNetCore.Mvc.ModelBinding
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding
 - uid: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy
   commentId: T:Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy
   parent: Microsoft.AspNetCore.Mvc.Internal
@@ -189,11 +518,75 @@ references:
   name: GetChildren
   nameWithType: DefaultCollectionValidationStrategy.GetChildren
   fullName: Microsoft.AspNetCore.Mvc.Internal.DefaultCollectionValidationStrategy.GetChildren
-- uid: ModelMetadata
+- uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+  commentId: M:Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+  parent: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy
   isExternal: true
-  name: ModelMetadata
-  nameWithType: ModelMetadata
-  fullName: ModelMetadata
+  name: GetChildren(ModelMetadata, String, Object)
+  nameWithType: IValidationStrategy.GetChildren(ModelMetadata, String, Object)
+  fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata, System.String, System.Object)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+    name: GetChildren
+    nameWithType: IValidationStrategy.GetChildren
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    name: ModelMetadata
+    nameWithType: ModelMetadata
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren(Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata,System.String,System.Object)
+    name: GetChildren
+    nameWithType: IValidationStrategy.GetChildren
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.IValidationStrategy.GetChildren
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+    name: ModelMetadata
+    nameWithType: ModelMetadata
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.String
   commentId: T:System.String
   parent: System
@@ -201,15 +594,15 @@ references:
   name: String
   nameWithType: String
   fullName: System.String
-- uid: System.Collections.Generic.IEnumerator{ValidationEntry}
-  commentId: T:System.Collections.Generic.IEnumerator{ValidationEntry}
+- uid: System.Collections.Generic.IEnumerator{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry}
+  commentId: T:System.Collections.Generic.IEnumerator{Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IEnumerator`1
   name: IEnumerator<ValidationEntry>
   nameWithType: IEnumerator<ValidationEntry>
-  fullName: System.Collections.Generic.IEnumerator<ValidationEntry>
+  fullName: System.Collections.Generic.IEnumerator<Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry>
   nameWithType.vb: IEnumerator(Of ValidationEntry)
-  fullName.vb: System.Collections.Generic.IEnumerator(Of ValidationEntry)
+  fullName.vb: System.Collections.Generic.IEnumerator(Of Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry)
   name.vb: IEnumerator(Of ValidationEntry)
   spec.csharp:
   - uid: System.Collections.Generic.IEnumerator`1
@@ -220,11 +613,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: ValidationEntry
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry
     name: ValidationEntry
     nameWithType: ValidationEntry
-    fullName: ValidationEntry
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -237,11 +629,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: ValidationEntry
+  - uid: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry
     name: ValidationEntry
     nameWithType: ValidationEntry
-    fullName: ValidationEntry
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ModelBinding.Validation.ValidationEntry
   - name: )
     nameWithType: )
     fullName: )

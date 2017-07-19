@@ -5,12 +5,12 @@ items:
   id: InputFormatter
   parent: Microsoft.AspNetCore.Mvc.Formatters
   children:
-  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanReadType(System.Type)
   - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetDefaultValueForType(System.Type)
   - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes(System.String,System.Type)
-  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(InputFormatterContext)
-  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   - Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.SupportedMediaTypes
   langs:
   - csharp
@@ -36,14 +36,22 @@ items:
     content: 'public abstract class InputFormatter : IInputFormatter, IApiRequestFormatMetadataProvider'
     content.vb: >-
       Public MustInherit Class InputFormatter
-          Inherits IInputFormatter
-          Implements IApiRequestFormatMetadataProvider
+          Implements IInputFormatter, IApiRequestFormatMetadataProvider
   inheritance:
   - System.Object
   derivedClasses:
   - Microsoft.AspNetCore.Mvc.Formatters.TextInputFormatter
   implements:
+  - Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
   - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - abstract
@@ -130,16 +138,16 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(InputFormatterContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(InputFormatterContext)
-  id: CanRead(InputFormatterContext)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  id: CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
   langs:
   - csharp
   - vb
   name: CanRead(InputFormatterContext)
   nameWithType: InputFormatter.CanRead(InputFormatterContext)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   type: Method
   source:
     remote:
@@ -152,16 +160,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nDetermines whether this <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter\" data-throw-if-not-resolved=\"false\"></xref> can deserialize an object of the\n<span class=\"paramref\">context</span>&apos;s <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.ModelType\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public virtual bool CanRead(InputFormatterContext context)
     parameters:
     - id: context
-      type: InputFormatterContext
+      type: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Boolean
+      description: "\n<code>true</code> if this <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter\" data-throw-if-not-resolved=\"false\"></xref> can deserialize an object of the\n<span class=\"paramref\">context</span>&apos;s <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext.ModelType\" data-throw-if-not-resolved=\"false\"></xref>. <code>false</code> otherwise.\n"
     content.vb: Public Overridable Function CanRead(context As InputFormatterContext) As Boolean
   overload: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   modifiers.csharp:
   - public
   - virtual
@@ -209,16 +222,16 @@ items:
   modifiers.vb:
   - Protected
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(InputFormatterContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(InputFormatterContext)
-  id: ReadAsync(InputFormatterContext)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  id: ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
   langs:
   - csharp
   - vb
   name: ReadAsync(InputFormatterContext)
   nameWithType: InputFormatter.ReadAsync(InputFormatterContext)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   type: Method
   source:
     remote:
@@ -231,32 +244,37 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nReads an object from the request body.\n"
   example: []
   syntax:
     content: public virtual Task<InputFormatterResult> ReadAsync(InputFormatterContext context)
     parameters:
     - id: context
-      type: InputFormatterContext
+      type: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext" data-throw-if-not-resolved="false"></xref>.
     return:
-      type: System.Threading.Tasks.Task{InputFormatterResult}
+      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
+      description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion deserializes the request body.
     content.vb: Public Overridable Function ReadAsync(context As InputFormatterContext) As Task(Of InputFormatterResult)
   overload: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   modifiers.csharp:
   - public
   - virtual
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(InputFormatterContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(InputFormatterContext)
-  id: ReadRequestBodyAsync(InputFormatterContext)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  id: ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   parent: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter
   langs:
   - csharp
   - vb
   name: ReadRequestBodyAsync(InputFormatterContext)
   nameWithType: InputFormatter.ReadRequestBodyAsync(InputFormatterContext)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
   type: Method
   source:
     remote:
@@ -275,10 +293,10 @@ items:
     content: public abstract Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context)
     parameters:
     - id: context
-      type: InputFormatterContext
-      description: The <see cref="!:InputFormatterContext"></see>.
+      type: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext" data-throw-if-not-resolved="false"></xref>.
     return:
-      type: System.Threading.Tasks.Task{InputFormatterResult}
+      type: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
       description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> that on completion deserializes the request body.
     content.vb: Public MustOverride Function ReadRequestBodyAsync(context As InputFormatterContext) As Task(Of InputFormatterResult)
   overload: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadRequestBodyAsync*
@@ -310,7 +328,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc.Formatters
-  summary: "\nGets a filtered list of content types which are supported by the <see cref=\"!:Formatters.IInputFormatter\"></see>\nfor the <span class=\"paramref\">objectType</span> and <span class=\"paramref\">contentType</span>.\n"
+  summary: "\nGets a filtered list of content types which are supported by the <xref href=\"Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter\" data-throw-if-not-resolved=\"false\"></xref>\nfor the <span class=\"paramref\">objectType</span> and <span class=\"paramref\">contentType</span>.\n"
   example: []
   syntax:
     content: public virtual IReadOnlyList<string> GetSupportedContentTypes(string contentType, Type objectType)
@@ -323,7 +341,7 @@ items:
       description: "\nThe <xref href=\"System.Type\" data-throw-if-not-resolved=\"false\"></xref> for which the supported content types are desired.\n"
     return:
       type: System.Collections.Generic.IReadOnlyList{System.String}
-      description: Content types which are supported by the <see cref="!:Formatters.IInputFormatter"></see>.
+      description: Content types which are supported by the <xref href="Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Overridable Function GetSupportedContentTypes(contentType As String, objectType As Type) As IReadOnlyList(Of String)
   overload: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.GetSupportedContentTypes*
   implements:
@@ -348,6 +366,13 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: IInputFormatter
+  nameWithType: IInputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
 - uid: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
   commentId: T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
   parent: Microsoft.AspNetCore.Mvc.ApiExplorer
@@ -355,6 +380,285 @@ references:
   name: IApiRequestFormatMetadataProvider
   nameWithType: IApiRequestFormatMetadataProvider
   fullName: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestFormatMetadataProvider
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
@@ -406,11 +710,50 @@ references:
   name: CanRead
   nameWithType: InputFormatter.CanRead
   fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.CanRead
-- uid: InputFormatterContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  isExternal: false
+  name: CanRead(InputFormatterContext)
+  nameWithType: IInputFormatter.CanRead(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: CanRead
+    nameWithType: IInputFormatter.CanRead
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: CanRead
+    nameWithType: IInputFormatter.CanRead
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.CanRead
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
   name: InputFormatterContext
   nameWithType: InputFormatterContext
-  fullName: InputFormatterContext
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System
@@ -430,15 +773,52 @@ references:
   name: ReadAsync
   nameWithType: InputFormatter.ReadAsync
   fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatter.ReadAsync
-- uid: System.Threading.Tasks.Task{InputFormatterResult}
-  commentId: T:System.Threading.Tasks.Task{InputFormatterResult}
+- uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter
+  isExternal: false
+  name: ReadAsync(InputFormatterContext)
+  nameWithType: IInputFormatter.ReadAsync(InputFormatterContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadAsync
+    nameWithType: IInputFormatter.ReadAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync(Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext)
+    name: ReadAsync
+    nameWithType: IInputFormatter.ReadAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IInputFormatter.ReadAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+    name: InputFormatterContext
+    nameWithType: InputFormatterContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
+  commentId: T:System.Threading.Tasks.Task{Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult}
   parent: System.Threading.Tasks
   definition: System.Threading.Tasks.Task`1
   name: Task<InputFormatterResult>
   nameWithType: Task<InputFormatterResult>
-  fullName: System.Threading.Tasks.Task<InputFormatterResult>
+  fullName: System.Threading.Tasks.Task<Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult>
   nameWithType.vb: Task(Of InputFormatterResult)
-  fullName.vb: System.Threading.Tasks.Task(Of InputFormatterResult)
+  fullName.vb: System.Threading.Tasks.Task(Of Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult)
   name.vb: Task(Of InputFormatterResult)
   spec.csharp:
   - uid: System.Threading.Tasks.Task`1
@@ -449,11 +829,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: InputFormatterResult
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
     name: InputFormatterResult
     nameWithType: InputFormatterResult
-    fullName: InputFormatterResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
   - name: '>'
     nameWithType: '>'
     fullName: '>'
@@ -466,11 +845,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: InputFormatterResult
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
     name: InputFormatterResult
     nameWithType: InputFormatterResult
-    fullName: InputFormatterResult
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.InputFormatterResult
   - name: )
     nameWithType: )
     fullName: )

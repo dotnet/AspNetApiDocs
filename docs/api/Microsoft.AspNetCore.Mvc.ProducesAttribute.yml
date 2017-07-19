@@ -8,7 +8,7 @@ items:
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.#ctor(System.String,System.String[])
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.#ctor(System.Type)
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.ContentTypes
-  - Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(ResultExecutingContext)
+  - Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.SetContentTypes(Microsoft.AspNetCore.Mvc.Formatters.MediaTypeCollection)
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.StatusCode
   - Microsoft.AspNetCore.Mvc.ProducesAttribute.Type
@@ -36,27 +36,28 @@ items:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public class ProducesAttribute : ResultFilterAttribute, _Attribute, IResultFilter, IAsyncResultFilter, IOrderedFilter, IApiResponseMetadataProvider
+      public class ProducesAttribute : ResultFilterAttribute, _Attribute, IResultFilter, IAsyncResultFilter, IOrderedFilter, IFilterMetadata, IApiResponseMetadataProvider
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public Class ProducesAttribute
           Inherits ResultFilterAttribute
-          Implements _Attribute, IResultFilter, IAsyncResultFilter, IOrderedFilter, IApiResponseMetadataProvider
+          Implements _Attribute, IResultFilter, IAsyncResultFilter, IOrderedFilter, IFilterMetadata, IApiResponseMetadataProvider
   inheritance:
   - System.Object
   - System.Attribute
   - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - IResultFilter
-  - IAsyncResultFilter
-  - IOrderedFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IResultFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
   - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider
   inheritedMembers:
   - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.Order
-  - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
-  - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext,ResultExecutionDelegate)
+  - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
+  - Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo)
@@ -315,16 +316,16 @@ items:
   modifiers.vb:
   - Public
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(ResultExecutingContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(ResultExecutingContext)
-  id: OnResultExecuting(ResultExecutingContext)
+- uid: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
+  id: OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   parent: Microsoft.AspNetCore.Mvc.ProducesAttribute
   langs:
   - csharp
   - vb
   name: OnResultExecuting(ResultExecutingContext)
   nameWithType: ProducesAttribute.OnResultExecuting(ResultExecutingContext)
-  fullName: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(ResultExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   type: Method
   source:
     remote:
@@ -337,14 +338,16 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nCalled before the action result executes.\n"
   example: []
   syntax:
     content: public override void OnResultExecuting(ResultExecutingContext context)
     parameters:
     - id: context
-      type: ResultExecutingContext
+      type: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Overrides Sub OnResultExecuting(context As ResultExecutingContext)
-  overridden: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
+  overridden: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   overload: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting*
   modifiers.csharp:
   - public
@@ -440,21 +443,34 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: IResultFilter
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResultFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IResultFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IResultFilter
   nameWithType: IResultFilter
-  fullName: IResultFilter
-- uid: IAsyncResultFilter
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResultFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IAsyncResultFilter
   nameWithType: IAsyncResultFilter
-  fullName: IAsyncResultFilter
-- uid: IOrderedFilter
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IOrderedFilter
   nameWithType: IOrderedFilter
-  fullName: IOrderedFilter
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: IFilterMetadata
+  nameWithType: IFilterMetadata
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
 - uid: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider
   commentId: T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider
   parent: Microsoft.AspNetCore.Mvc.ApiExplorer
@@ -469,97 +485,91 @@ references:
   name: Order
   nameWithType: ResultFilterAttribute.Order
   fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.Order
-- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
   parent: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute
-  isExternal: true
+  isExternal: false
   name: OnResultExecuted(ResultExecutedContext)
   nameWithType: ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
     name: OnResultExecuted
     nameWithType: ResultFilterAttribute.OnResultExecuted
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutedContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext
     name: ResultExecutedContext
     nameWithType: ResultExecutedContext
-    fullName: ResultExecutedContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(ResultExecutedContext)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)
     name: OnResultExecuted
     nameWithType: ResultFilterAttribute.OnResultExecuted
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuted
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutedContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext
     name: ResultExecutedContext
     nameWithType: ResultExecutedContext
-    fullName: ResultExecutedContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext,ResultExecutionDelegate)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext,ResultExecutionDelegate)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
   parent: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute
-  isExternal: true
+  isExternal: false
   name: OnResultExecutionAsync(ResultExecutingContext, ResultExecutionDelegate)
   nameWithType: ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext, ResultExecutionDelegate)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext, ResultExecutionDelegate)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext, Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext,ResultExecutionDelegate)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
     name: OnResultExecutionAsync
     nameWithType: ResultFilterAttribute.OnResultExecutionAsync
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutingContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
     name: ResultExecutingContext
     nameWithType: ResultExecutingContext
-    fullName: ResultExecutingContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: ResultExecutionDelegate
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate
     name: ResultExecutionDelegate
     nameWithType: ResultExecutionDelegate
-    fullName: ResultExecutionDelegate
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(ResultExecutingContext,ResultExecutionDelegate)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext,Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate)
     name: OnResultExecutionAsync
     nameWithType: ResultFilterAttribute.OnResultExecutionAsync
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecutionAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutingContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
     name: ResultExecutingContext
     nameWithType: ResultExecutingContext
-    fullName: ResultExecutingContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
   - name: ', '
     nameWithType: ', '
     fullName: ', '
-  - uid: ResultExecutionDelegate
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate
     name: ResultExecutionDelegate
     nameWithType: ResultExecutionDelegate
-    fullName: ResultExecutionDelegate
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate
   - name: )
     nameWithType: )
     fullName: )
@@ -3382,42 +3392,40 @@ references:
   name: Int32
   nameWithType: Int32
   fullName: System.Int32
-- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   parent: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute
-  isExternal: true
+  isExternal: false
   name: OnResultExecuting(ResultExecutingContext)
   nameWithType: ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
-  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
     name: OnResultExecuting
     nameWithType: ResultFilterAttribute.OnResultExecuting
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutingContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
     name: ResultExecutingContext
     nameWithType: ResultExecutingContext
-    fullName: ResultExecutingContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(ResultExecutingContext)
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)
     name: OnResultExecuting
     nameWithType: ResultFilterAttribute.OnResultExecuting
     fullName: Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute.OnResultExecuting
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ResultExecutingContext
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
     name: ResultExecutingContext
     nameWithType: ResultExecutingContext
-    fullName: ResultExecutingContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
   - name: )
     nameWithType: )
     fullName: )
@@ -3427,11 +3435,13 @@ references:
   name: OnResultExecuting
   nameWithType: ProducesAttribute.OnResultExecuting
   fullName: Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting
-- uid: ResultExecutingContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: ResultExecutingContext
   nameWithType: ResultExecutingContext
-  fullName: ResultExecutingContext
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext
 - uid: Microsoft.AspNetCore.Mvc.ProducesAttribute.SetContentTypes*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ProducesAttribute.SetContentTypes
   isExternal: false

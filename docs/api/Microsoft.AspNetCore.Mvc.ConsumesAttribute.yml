@@ -6,11 +6,12 @@ items:
   parent: Microsoft.AspNetCore.Mvc
   children:
   - Microsoft.AspNetCore.Mvc.ConsumesAttribute.#ctor(System.String,System.String[])
-  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(ActionConstraintContext)
+  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   - Microsoft.AspNetCore.Mvc.ConsumesAttribute.ConsumesActionConstraintOrder
   - Microsoft.AspNetCore.Mvc.ConsumesAttribute.ContentTypes
-  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(ResourceExecutingContext)
+  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order
+  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  - Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   - Microsoft.AspNetCore.Mvc.ConsumesAttribute.SetContentTypes(Microsoft.AspNetCore.Mvc.Formatters.MediaTypeCollection)
   langs:
   - csharp
@@ -36,21 +37,23 @@ items:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public class ConsumesAttribute : Attribute, _Attribute, IResourceFilter, IConsumesActionConstraint, IActionConstraint, IApiRequestMetadataProvider
+      public class ConsumesAttribute : Attribute, _Attribute, IResourceFilter, IFilterMetadata, IConsumesActionConstraint, IActionConstraint, IActionConstraintMetadata, IApiRequestMetadataProvider
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public Class ConsumesAttribute
           Inherits Attribute
-          Implements _Attribute, IResourceFilter, IConsumesActionConstraint, IActionConstraint, IApiRequestMetadataProvider
+          Implements _Attribute, IResourceFilter, IFilterMetadata, IConsumesActionConstraint, IActionConstraint, IActionConstraintMetadata, IApiRequestMetadataProvider
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - IResourceFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
   - Microsoft.AspNetCore.Mvc.Internal.IConsumesActionConstraint
-  - IActionConstraint
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
   - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestMetadataProvider
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
@@ -193,6 +196,47 @@ items:
   - Public
   fullName.vb: Microsoft.AspNetCore.Mvc.ConsumesAttribute.ConsumesAttribute(System.String, System.String())
   name.vb: ConsumesAttribute(String, String())
+- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order
+  commentId: P:Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order
+  id: Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order
+  isEii: true
+  parent: Microsoft.AspNetCore.Mvc.ConsumesAttribute
+  langs:
+  - csharp
+  - vb
+  name: IActionConstraint.Order
+  nameWithType: ConsumesAttribute.IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Core/ConsumesAttribute.cs
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Core/ConsumesAttribute.cs
+    startLine: 55
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Core
+  namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nThe constraint order.\n"
+  remarks: "\nConstraints are grouped into stages by the value of <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order\" data-throw-if-not-resolved=\"false\"></xref>. See remarks on\n<xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: int IActionConstraint.Order { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly WriteOnly Property Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order As Integer Implements IActionConstraint.Order
+  overload: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  nameWithType.vb: ConsumesAttribute.Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+  name.vb: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
 - uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.ContentTypes
   commentId: P:Microsoft.AspNetCore.Mvc.ConsumesAttribute.ContentTypes
   id: ContentTypes
@@ -230,16 +274,16 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  id: OnResourceExecuting(ResourceExecutingContext)
+- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  id: OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   parent: Microsoft.AspNetCore.Mvc.ConsumesAttribute
   langs:
   - csharp
   - vb
   name: OnResourceExecuting(ResourceExecutingContext)
   nameWithType: ConsumesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(ResourceExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   type: Method
   source:
     remote:
@@ -252,28 +296,32 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nExecutes the resource filter. Called before execution of the remainder of the pipeline.\n"
   example: []
   syntax:
     content: public void OnResourceExecuting(ResourceExecutingContext context)
     parameters:
     - id: context
-      type: ResourceExecutingContext
+      type: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub OnResourceExecuting(context As ResourceExecutingContext)
   overload: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  id: OnResourceExecuted(ResourceExecutedContext)
+- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  id: OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   parent: Microsoft.AspNetCore.Mvc.ConsumesAttribute
   langs:
   - csharp
   - vb
   name: OnResourceExecuted(ResourceExecutedContext)
   nameWithType: ConsumesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(ResourceExecutedContext)
+  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   type: Method
   source:
     remote:
@@ -286,28 +334,32 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nExecutes the resource filter. Called after execution of the remainder of the pipeline.\n"
   example: []
   syntax:
     content: public void OnResourceExecuted(ResourceExecutedContext context)
     parameters:
     - id: context
-      type: ResourceExecutedContext
+      type: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub OnResourceExecuted(context As ResourceExecutedContext)
   overload: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(ActionConstraintContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(ActionConstraintContext)
-  id: Accept(ActionConstraintContext)
+- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  id: Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   parent: Microsoft.AspNetCore.Mvc.ConsumesAttribute
   langs:
   - csharp
   - vb
   name: Accept(ActionConstraintContext)
   nameWithType: ConsumesAttribute.Accept(ActionConstraintContext)
-  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(ActionConstraintContext)
+  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   type: Method
   source:
     remote:
@@ -320,16 +372,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nDetermines whether an action is a valid candidate for selection.\n"
   example: []
   syntax:
     content: public bool Accept(ActionConstraintContext context)
     parameters:
     - id: context
-      type: ActionConstraintContext
+      type: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Boolean
+      description: True if the action is valid for selection, otherwise false.
     content.vb: Public Function Accept(context As ActionConstraintContext) As Boolean
   overload: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept*
+  implements:
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -402,11 +459,20 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: IResourceFilter
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IResourceFilter
   nameWithType: IResourceFilter
-  fullName: IResourceFilter
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: IFilterMetadata
+  nameWithType: IFilterMetadata
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
 - uid: Microsoft.AspNetCore.Mvc.Internal.IConsumesActionConstraint
   commentId: T:Microsoft.AspNetCore.Mvc.Internal.IConsumesActionConstraint
   parent: Microsoft.AspNetCore.Mvc.Internal
@@ -414,11 +480,20 @@ references:
   name: IConsumesActionConstraint
   nameWithType: IConsumesActionConstraint
   fullName: Microsoft.AspNetCore.Mvc.Internal.IConsumesActionConstraint
-- uid: IActionConstraint
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
   name: IActionConstraint
   nameWithType: IActionConstraint
-  fullName: IActionConstraint
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: IActionConstraintMetadata
+  nameWithType: IActionConstraintMetadata
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraintMetadata
 - uid: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestMetadataProvider
   commentId: T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiRequestMetadataProvider
   parent: Microsoft.AspNetCore.Mvc.ApiExplorer
@@ -3128,12 +3203,24 @@ references:
   name: System.Runtime.InteropServices
   nameWithType: System.Runtime.InteropServices
   fullName: System.Runtime.InteropServices
+- uid: Microsoft.AspNetCore.Mvc.Filters
+  commentId: N:Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Filters
+  nameWithType: Microsoft.AspNetCore.Mvc.Filters
+  fullName: Microsoft.AspNetCore.Mvc.Filters
 - uid: Microsoft.AspNetCore.Mvc.Internal
   commentId: N:Microsoft.AspNetCore.Mvc.Internal
   isExternal: false
   name: Microsoft.AspNetCore.Mvc.Internal
   nameWithType: Microsoft.AspNetCore.Mvc.Internal
   fullName: Microsoft.AspNetCore.Mvc.Internal
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints
+  commentId: N:Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ActionConstraints
+  nameWithType: Microsoft.AspNetCore.Mvc.ActionConstraints
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints
 - uid: Microsoft.AspNetCore.Mvc.ApiExplorer
   commentId: N:Microsoft.AspNetCore.Mvc.ApiExplorer
   isExternal: false
@@ -3191,6 +3278,21 @@ references:
   - name: ()
     nameWithType: ()
     fullName: ()
+- uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order*
+  commentId: Overload:Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft#AspNetCore#Mvc#ActionConstraints#IActionConstraint#Order
+  isExternal: false
+  name: IActionConstraint.Order
+  nameWithType: ConsumesAttribute.IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  nameWithType.vb: ConsumesAttribute.Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  name.vb: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  isExternal: false
+  name: Order
+  nameWithType: IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
 - uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.ContentTypes*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ConsumesAttribute.ContentTypes
   isExternal: false
@@ -3216,33 +3318,150 @@ references:
   name: OnResourceExecuting
   nameWithType: ConsumesAttribute.OnResourceExecuting
   fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuting
-- uid: ResourceExecutingContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  parent: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  isExternal: false
+  name: OnResourceExecuting(ResourceExecutingContext)
+  nameWithType: IResourceFilter.OnResourceExecuting(ResourceExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+    name: OnResourceExecuting
+    nameWithType: IResourceFilter.OnResourceExecuting
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+    name: ResourceExecutingContext
+    nameWithType: ResourceExecutingContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+    name: OnResourceExecuting
+    nameWithType: IResourceFilter.OnResourceExecuting
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+    name: ResourceExecutingContext
+    nameWithType: ResourceExecutingContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: ResourceExecutingContext
   nameWithType: ResourceExecutingContext
-  fullName: ResourceExecutingContext
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
 - uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted
   isExternal: false
   name: OnResourceExecuted
   nameWithType: ConsumesAttribute.OnResourceExecuted
   fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.OnResourceExecuted
-- uid: ResourceExecutedContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  parent: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  isExternal: false
+  name: OnResourceExecuted(ResourceExecutedContext)
+  nameWithType: IResourceFilter.OnResourceExecuted(ResourceExecutedContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+    name: OnResourceExecuted
+    nameWithType: IResourceFilter.OnResourceExecuted
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+    name: ResourceExecutedContext
+    nameWithType: ResourceExecutedContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+    name: OnResourceExecuted
+    nameWithType: IResourceFilter.OnResourceExecuted
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+    name: ResourceExecutedContext
+    nameWithType: ResourceExecutedContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: ResourceExecutedContext
   nameWithType: ResourceExecutedContext
-  fullName: ResourceExecutedContext
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
 - uid: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept
   isExternal: false
   name: Accept
   nameWithType: ConsumesAttribute.Accept
   fullName: Microsoft.AspNetCore.Mvc.ConsumesAttribute.Accept
-- uid: ActionConstraintContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  isExternal: false
+  name: Accept(ActionConstraintContext)
+  nameWithType: IActionConstraint.Accept(ActionConstraintContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+    name: Accept
+    nameWithType: IActionConstraint.Accept
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+    name: ActionConstraintContext
+    nameWithType: ActionConstraintContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+    name: Accept
+    nameWithType: IActionConstraint.Accept
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+    name: ActionConstraintContext
+    nameWithType: ActionConstraintContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
   name: ActionConstraintContext
   nameWithType: ActionConstraintContext
-  fullName: ActionConstraintContext
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
 - uid: System.Boolean
   commentId: T:System.Boolean
   parent: System

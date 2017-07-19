@@ -8,9 +8,9 @@ items:
   - Microsoft.AspNetCore.Mvc.ObjectResult.#ctor(System.Object)
   - Microsoft.AspNetCore.Mvc.ObjectResult.ContentTypes
   - Microsoft.AspNetCore.Mvc.ObjectResult.DeclaredType
-  - Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext)
+  - Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   - Microsoft.AspNetCore.Mvc.ObjectResult.Formatters
-  - Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(ActionContext)
+  - Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(Microsoft.AspNetCore.Mvc.ActionContext)
   - Microsoft.AspNetCore.Mvc.ObjectResult.StatusCode
   - Microsoft.AspNetCore.Mvc.ObjectResult.Value
   langs:
@@ -32,10 +32,11 @@ items:
   - Microsoft.AspNetCore.Mvc.Core
   namespace: Microsoft.AspNetCore.Mvc
   syntax:
-    content: 'public class ObjectResult : ActionResult'
+    content: 'public class ObjectResult : ActionResult, IActionResult'
     content.vb: >-
       Public Class ObjectResult
           Inherits ActionResult
+          Implements IActionResult
   inheritance:
   - System.Object
   - Microsoft.AspNetCore.Mvc.ActionResult
@@ -46,8 +47,17 @@ items:
   - Microsoft.AspNetCore.Mvc.CreatedResult
   - Microsoft.AspNetCore.Mvc.NotFoundObjectResult
   - Microsoft.AspNetCore.Mvc.OkObjectResult
+  implements:
+  - Microsoft.AspNetCore.Mvc.IActionResult
   inheritedMembers:
-  - Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
+  - Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -148,7 +158,7 @@ items:
     content: public FormatterCollection<IOutputFormatter> Formatters { get; set; }
     parameters: []
     return:
-      type: FormatterCollection{IOutputFormatter}
+      type: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection{Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter}
     content.vb: Public Property Formatters As FormatterCollection(Of IOutputFormatter)
   overload: Microsoft.AspNetCore.Mvc.ObjectResult.Formatters*
   modifiers.csharp:
@@ -264,16 +274,16 @@ items:
   - set
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext)
-  id: ExecuteResultAsync(ActionContext)
+- uid: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
+  id: ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   parent: Microsoft.AspNetCore.Mvc.ObjectResult
   langs:
   - csharp
   - vb
   name: ExecuteResultAsync(ActionContext)
   nameWithType: ObjectResult.ExecuteResultAsync(ActionContext)
-  fullName: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(ActionContext)
+  fullName: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   type: Method
   source:
     remote:
@@ -290,11 +300,11 @@ items:
     content: public override Task ExecuteResultAsync(ActionContext context)
     parameters:
     - id: context
-      type: ActionContext
+      type: Microsoft.AspNetCore.Mvc.ActionContext
     return:
       type: System.Threading.Tasks.Task
     content.vb: Public Overrides Function ExecuteResultAsync(context As ActionContext) As Task
-  overridden: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
+  overridden: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   overload: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync*
   modifiers.csharp:
   - public
@@ -302,16 +312,16 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(ActionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(ActionContext)
-  id: OnFormatting(ActionContext)
+- uid: Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(Microsoft.AspNetCore.Mvc.ActionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(Microsoft.AspNetCore.Mvc.ActionContext)
+  id: OnFormatting(Microsoft.AspNetCore.Mvc.ActionContext)
   parent: Microsoft.AspNetCore.Mvc.ObjectResult
   langs:
   - csharp
   - vb
   name: OnFormatting(ActionContext)
   nameWithType: ObjectResult.OnFormatting(ActionContext)
-  fullName: Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(ActionContext)
+  fullName: Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting(Microsoft.AspNetCore.Mvc.ActionContext)
   type: Method
   source:
     remote:
@@ -330,7 +340,7 @@ items:
     content: public virtual void OnFormatting(ActionContext context)
     parameters:
     - id: context
-      type: ActionContext
+      type: Microsoft.AspNetCore.Mvc.ActionContext
     content.vb: Public Overridable Sub OnFormatting(context As ActionContext)
   overload: Microsoft.AspNetCore.Mvc.ObjectResult.OnFormatting*
   modifiers.csharp:
@@ -360,42 +370,326 @@ references:
   name: ActionResult
   nameWithType: ActionResult
   fullName: Microsoft.AspNetCore.Mvc.ActionResult
-- uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
+- uid: Microsoft.AspNetCore.Mvc.IActionResult
+  commentId: T:Microsoft.AspNetCore.Mvc.IActionResult
+  parent: Microsoft.AspNetCore.Mvc
+  isExternal: false
+  name: IActionResult
+  nameWithType: IActionResult
+  fullName: Microsoft.AspNetCore.Mvc.IActionResult
+- uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
   parent: Microsoft.AspNetCore.Mvc.ActionResult
-  isExternal: true
+  isExternal: false
   name: ExecuteResult(ActionContext)
   nameWithType: ActionResult.ExecuteResult(ActionContext)
-  fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
+  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
     name: ExecuteResult
     nameWithType: ActionResult.ExecuteResult
     fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ActionContext
+  - uid: Microsoft.AspNetCore.Mvc.ActionContext
     name: ActionContext
     nameWithType: ActionContext
-    fullName: ActionContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(Microsoft.AspNetCore.Mvc.ActionContext)
+    name: ExecuteResult
+    nameWithType: ActionResult.ExecuteResult
+    fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.ActionContext
+    name: ActionContext
+    nameWithType: ActionContext
+    fullName: Microsoft.AspNetCore.Mvc.ActionContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult(ActionContext)
-    name: ExecuteResult
-    nameWithType: ActionResult.ExecuteResult
-    fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResult
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ActionContext
-    name: ActionContext
-    nameWithType: ActionContext
-    fullName: ActionContext
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
     isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
   - name: )
     nameWithType: )
     fullName: )
@@ -423,87 +717,89 @@ references:
   name: Formatters
   nameWithType: ObjectResult.Formatters
   fullName: Microsoft.AspNetCore.Mvc.ObjectResult.Formatters
-- uid: FormatterCollection{IOutputFormatter}
-  commentId: '!:FormatterCollection{IOutputFormatter}'
-  definition: FormatterCollection`1
+- uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection{Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter}
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection{Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter}
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  definition: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
   name: FormatterCollection<IOutputFormatter>
   nameWithType: FormatterCollection<IOutputFormatter>
-  fullName: FormatterCollection<IOutputFormatter>
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection<Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter>
   nameWithType.vb: FormatterCollection(Of IOutputFormatter)
-  fullName.vb: FormatterCollection(Of IOutputFormatter)
+  fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection(Of Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter)
   name.vb: FormatterCollection(Of IOutputFormatter)
   spec.csharp:
-  - uid: FormatterCollection`1
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
     name: FormatterCollection
     nameWithType: FormatterCollection
-    fullName: FormatterCollection
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection
   - name: <
     nameWithType: <
     fullName: <
-  - uid: IOutputFormatter
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
     name: IOutputFormatter
     nameWithType: IOutputFormatter
-    fullName: IOutputFormatter
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: FormatterCollection`1
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
     name: FormatterCollection
     nameWithType: FormatterCollection
-    fullName: FormatterCollection
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: IOutputFormatter
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
     name: IOutputFormatter
     nameWithType: IOutputFormatter
-    fullName: IOutputFormatter
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
   - name: )
     nameWithType: )
     fullName: )
-- uid: FormatterCollection`1
-  isExternal: true
-  name: FormatterCollection<>
-  nameWithType: FormatterCollection<>
-  fullName: FormatterCollection<>
-  nameWithType.vb: FormatterCollection(Of )
-  fullName.vb: FormatterCollection(Of )
-  name.vb: FormatterCollection(Of )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
+  isExternal: false
+  name: FormatterCollection<TFormatter>
+  nameWithType: FormatterCollection<TFormatter>
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection<TFormatter>
+  nameWithType.vb: FormatterCollection(Of TFormatter)
+  fullName.vb: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection(Of TFormatter)
+  name.vb: FormatterCollection(Of TFormatter)
   spec.csharp:
-  - uid: FormatterCollection`1
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
     name: FormatterCollection
     nameWithType: FormatterCollection
-    fullName: FormatterCollection
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection
   - name: <
     nameWithType: <
     fullName: <
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TFormatter
+    nameWithType: TFormatter
+    fullName: TFormatter
   - name: '>'
     nameWithType: '>'
     fullName: '>'
   spec.vb:
-  - uid: FormatterCollection`1
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection`1
     name: FormatterCollection
     nameWithType: FormatterCollection
-    fullName: FormatterCollection
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.FormatterCollection
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - name: ''
-    nameWithType: ''
-    fullName: ''
+  - name: TFormatter
+    nameWithType: TFormatter
+    fullName: TFormatter
   - name: )
     nameWithType: )
     fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters
+  commentId: N:Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Formatters
+  nameWithType: Microsoft.AspNetCore.Mvc.Formatters
+  fullName: Microsoft.AspNetCore.Mvc.Formatters
 - uid: Microsoft.AspNetCore.Mvc.ObjectResult.ContentTypes*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ObjectResult.ContentTypes
   isExternal: false
@@ -517,12 +813,6 @@ references:
   name: MediaTypeCollection
   nameWithType: MediaTypeCollection
   fullName: Microsoft.AspNetCore.Mvc.Formatters.MediaTypeCollection
-- uid: Microsoft.AspNetCore.Mvc.Formatters
-  commentId: N:Microsoft.AspNetCore.Mvc.Formatters
-  isExternal: false
-  name: Microsoft.AspNetCore.Mvc.Formatters
-  nameWithType: Microsoft.AspNetCore.Mvc.Formatters
-  fullName: Microsoft.AspNetCore.Mvc.Formatters
 - uid: Microsoft.AspNetCore.Mvc.ObjectResult.DeclaredType*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ObjectResult.DeclaredType
   isExternal: false
@@ -625,42 +915,40 @@ references:
   - name: )
     nameWithType: )
     fullName: )
-- uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
+- uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   parent: Microsoft.AspNetCore.Mvc.ActionResult
-  isExternal: true
+  isExternal: false
   name: ExecuteResultAsync(ActionContext)
   nameWithType: ActionResult.ExecuteResultAsync(ActionContext)
-  fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
   spec.csharp:
-  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
+  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
     name: ExecuteResultAsync
     nameWithType: ActionResult.ExecuteResultAsync
     fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ActionContext
+  - uid: Microsoft.AspNetCore.Mvc.ActionContext
     name: ActionContext
     nameWithType: ActionContext
-    fullName: ActionContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ActionContext
   - name: )
     nameWithType: )
     fullName: )
   spec.vb:
-  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(ActionContext)
+  - uid: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)
     name: ExecuteResultAsync
     nameWithType: ActionResult.ExecuteResultAsync
     fullName: Microsoft.AspNetCore.Mvc.ActionResult.ExecuteResultAsync
   - name: (
     nameWithType: (
     fullName: (
-  - uid: ActionContext
+  - uid: Microsoft.AspNetCore.Mvc.ActionContext
     name: ActionContext
     nameWithType: ActionContext
-    fullName: ActionContext
-    isExternal: true
+    fullName: Microsoft.AspNetCore.Mvc.ActionContext
   - name: )
     nameWithType: )
     fullName: )
@@ -670,11 +958,13 @@ references:
   name: ExecuteResultAsync
   nameWithType: ObjectResult.ExecuteResultAsync
   fullName: Microsoft.AspNetCore.Mvc.ObjectResult.ExecuteResultAsync
-- uid: ActionContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.ActionContext
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionContext
+  parent: Microsoft.AspNetCore.Mvc
+  isExternal: false
   name: ActionContext
   nameWithType: ActionContext
-  fullName: ActionContext
+  fullName: Microsoft.AspNetCore.Mvc.ActionContext
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
