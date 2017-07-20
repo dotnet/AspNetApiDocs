@@ -5,12 +5,12 @@ items:
   id: MvcRazorHost
   parent: Microsoft.AspNetCore.Mvc.Razor
   children:
-  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,ITagHelperDescriptorResolver)
+  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver)
   - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(System.String)
   - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.CreateModelExpressionMethod
-  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(CodeGenerator,CodeGeneratorContext)
-  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(ParserBase)
-  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(RazorParser,System.String)
+  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
   - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DefaultInheritedChunks
   - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DefaultModel
   - Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.GenerateCode(System.String,System.IO.Stream)
@@ -46,8 +46,32 @@ items:
           Implements IMvcRazorHost
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Razor.RazorEngineHost
   implements:
   - Microsoft.AspNetCore.Mvc.Razor.IMvcRazorHost
+  inheritedMembers:
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.GeneratedClassContext
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.NamespaceImports
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultBaseClass
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultClassName
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultNamespace
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.StaticHelpers
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.CodeLanguage
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.EnableInstrumentation
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.IsIndentingWithTabs
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.TabSize
+  - Microsoft.AspNetCore.Razor.RazorEngineHost.InstrumentedSourceFilePath
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -90,16 +114,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,ITagHelperDescriptorResolver)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,ITagHelperDescriptorResolver)
-  id: '#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,ITagHelperDescriptorResolver)'
+- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver)
+  id: '#ctor(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache,Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver)'
   parent: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   langs:
   - csharp
   - vb
   name: MvcRazorHost(IChunkTreeCache, ITagHelperDescriptorResolver)
   nameWithType: MvcRazorHost.MvcRazorHost(IChunkTreeCache, ITagHelperDescriptorResolver)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.MvcRazorHost(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache, ITagHelperDescriptorResolver)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.MvcRazorHost(Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache, Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver)
   type: Constructor
   source:
     remote:
@@ -121,8 +145,8 @@ items:
       type: Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache
       description: An <xref href="Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache" data-throw-if-not-resolved="false"></xref> rooted at the application base path.
     - id: resolver
-      type: ITagHelperDescriptorResolver
-      description: The <see cref="!:ITagHelperDescriptorResolver"></see> used to resolve tag helpers on razor views.
+      type: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
+      description: The <xref href="Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver" data-throw-if-not-resolved="false"></xref> used to resolve tag helpers on razor views.
     content.vb: Public Sub New(chunkTreeCache As IChunkTreeCache, resolver As ITagHelperDescriptorResolver)
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.#ctor*
   modifiers.csharp:
@@ -151,13 +175,15 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor.Host
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nThe <xref href=\"Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver\" data-throw-if-not-resolved=\"false\"></xref> used to resolve <xref href=\"Microsoft.AspNetCore.Razor.Compilation.TagHelpers.TagHelperDescriptor\" data-throw-if-not-resolved=\"false\"></xref>s.\n"
   example: []
   syntax:
     content: public override ITagHelperDescriptorResolver TagHelperDescriptorResolver { get; set; }
     parameters: []
     return:
-      type: ITagHelperDescriptorResolver
+      type: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
     content.vb: Public Overrides Property TagHelperDescriptorResolver As ITagHelperDescriptorResolver
+  overridden: Microsoft.AspNetCore.Razor.RazorEngineHost.TagHelperDescriptorResolver
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.TagHelperDescriptorResolver*
   modifiers.csharp:
   - public
@@ -235,7 +261,7 @@ items:
     content: public virtual IReadOnlyList<Chunk> DefaultInheritedChunks { get; }
     parameters: []
     return:
-      type: System.Collections.Generic.IReadOnlyList{Chunk}
+      type: System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Razor.Chunks.Chunk}
     content.vb: Public Overridable ReadOnly Property DefaultInheritedChunks As IReadOnlyList(Of Chunk)
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DefaultInheritedChunks*
   modifiers.csharp:
@@ -307,7 +333,7 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor.Host
   namespace: Microsoft.AspNetCore.Mvc.Razor
-  summary: "\nGets the type name used to represent <see cref=\"!:ITagHelper\"></see> model expression properties.\n"
+  summary: "\nGets the type name used to represent <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> model expression properties.\n"
   example: []
   syntax:
     content: public virtual string ModelExpressionType { get; }
@@ -517,9 +543,9 @@ items:
       type: System.IO.Stream
       description: A <xref href="System.IO.Stream" data-throw-if-not-resolved="false"></xref> that represents the Razor contents.
     return:
-      type: GeneratorResults
+      type: Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults
       description: >
-        A <see cref="!:GeneratorResults"></see> instance that represents the results of code generation.
+        A <xref href="Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults" data-throw-if-not-resolved="false"></xref> instance that represents the results of code generation.
     content.vb: Public Function GenerateCode(rootRelativePath As String, inputStream As Stream) As GeneratorResults
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.GenerateCode*
   implements:
@@ -528,16 +554,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(RazorParser,System.String)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(RazorParser,System.String)
-  id: DecorateRazorParser(RazorParser,System.String)
+- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+  id: DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
   parent: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   langs:
   - csharp
   - vb
   name: DecorateRazorParser(RazorParser, String)
   nameWithType: MvcRazorHost.DecorateRazorParser(RazorParser, String)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(RazorParser, System.String)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser, System.String)
   type: Method
   source:
     remote:
@@ -550,17 +576,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor.Host
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nProvides an opportunity for derived types to modify the instance of <xref href=\"Microsoft.AspNetCore.Razor.Parser.RazorParser\" data-throw-if-not-resolved=\"false\"></xref>\nused by the <xref href=\"Microsoft.AspNetCore.Razor.RazorTemplateEngine\" data-throw-if-not-resolved=\"false\"></xref> to parse the Razor tree.\n"
   example: []
   syntax:
     content: public override RazorParser DecorateRazorParser(RazorParser razorParser, string sourceFileName)
     parameters:
     - id: razorParser
-      type: RazorParser
+      type: Microsoft.AspNetCore.Razor.Parser.RazorParser
     - id: sourceFileName
       type: System.String
+      description: The file name of the Razor file being parsed.
     return:
-      type: RazorParser
+      type: Microsoft.AspNetCore.Razor.Parser.RazorParser
+      description: Either the same code parser, after modifications, or a different code parser.
     content.vb: Public Overrides Function DecorateRazorParser(razorParser As RazorParser, sourceFileName As String) As RazorParser
+  overridden: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser*
   modifiers.csharp:
   - public
@@ -568,16 +598,16 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(ParserBase)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(ParserBase)
-  id: DecorateCodeParser(ParserBase)
+- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  id: DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
   parent: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   langs:
   - csharp
   - vb
   name: DecorateCodeParser(ParserBase)
   nameWithType: MvcRazorHost.DecorateCodeParser(ParserBase)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(ParserBase)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
   type: Method
   source:
     remote:
@@ -590,15 +620,19 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor.Host
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets an instance of the code parser and is provided an opportunity to decorate or replace it\n"
   example: []
   syntax:
     content: public override ParserBase DecorateCodeParser(ParserBase incomingCodeParser)
     parameters:
     - id: incomingCodeParser
-      type: ParserBase
+      type: Microsoft.AspNetCore.Razor.Parser.ParserBase
+      description: The code parser
     return:
-      type: ParserBase
+      type: Microsoft.AspNetCore.Razor.Parser.ParserBase
+      description: Either the same code parser, after modifications, or a different code parser
     content.vb: Public Overrides Function DecorateCodeParser(incomingCodeParser As ParserBase) As ParserBase
+  overridden: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser*
   modifiers.csharp:
   - public
@@ -606,16 +640,16 @@ items:
   modifiers.vb:
   - Public
   - Overrides
-- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(CodeGenerator,CodeGeneratorContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(CodeGenerator,CodeGeneratorContext)
-  id: DecorateCodeGenerator(CodeGenerator,CodeGeneratorContext)
+- uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  id: DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
   parent: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   langs:
   - csharp
   - vb
   name: DecorateCodeGenerator(CodeGenerator, CodeGeneratorContext)
   nameWithType: MvcRazorHost.DecorateCodeGenerator(CodeGenerator, CodeGeneratorContext)
-  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(CodeGenerator, CodeGeneratorContext)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator, Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
   type: Method
   source:
     remote:
@@ -628,17 +662,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Razor.Host
   namespace: Microsoft.AspNetCore.Mvc.Razor
+  summary: "\nGets an instance of the code generator and is provided an opportunity to decorate or replace it\n"
   example: []
   syntax:
     content: public override CodeGenerator DecorateCodeGenerator(CodeGenerator incomingGenerator, CodeGeneratorContext context)
     parameters:
     - id: incomingGenerator
-      type: CodeGenerator
+      type: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
     - id: context
-      type: CodeGeneratorContext
+      type: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+      description: The <xref href="Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext" data-throw-if-not-resolved="false"></xref>.
     return:
-      type: CodeGenerator
+      type: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+      description: Either the same code generator, after modifications, or a different code generator.
     content.vb: Public Overrides Function DecorateCodeGenerator(incomingGenerator As CodeGenerator, context As CodeGeneratorContext) As CodeGenerator
+  overridden: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
   overload: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator*
   modifiers.csharp:
   - public
@@ -660,6 +698,13 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost
+  commentId: T:Microsoft.AspNetCore.Razor.RazorEngineHost
+  parent: Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: RazorEngineHost
+  nameWithType: RazorEngineHost
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost
 - uid: Microsoft.AspNetCore.Mvc.Razor.IMvcRazorHost
   commentId: T:Microsoft.AspNetCore.Mvc.Razor.IMvcRazorHost
   parent: Microsoft.AspNetCore.Mvc.Razor
@@ -667,12 +712,494 @@ references:
   name: IMvcRazorHost
   nameWithType: IMvcRazorHost
   fullName: Microsoft.AspNetCore.Mvc.Razor.IMvcRazorHost
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: CreateMarkupParser()
+  nameWithType: RazorEngineHost.CreateMarkupParser()
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+    name: CreateMarkupParser
+    nameWithType: RazorEngineHost.CreateMarkupParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+    name: CreateMarkupParser
+    nameWithType: RazorEngineHost.CreateMarkupParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.CreateMarkupParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DecorateMarkupParser(ParserBase)
+  nameWithType: RazorEngineHost.DecorateMarkupParser(ParserBase)
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+    name: DecorateMarkupParser
+    nameWithType: RazorEngineHost.DecorateMarkupParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    name: ParserBase
+    nameWithType: ParserBase
+    fullName: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+    name: DecorateMarkupParser
+    nameWithType: RazorEngineHost.DecorateMarkupParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateMarkupParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    name: ParserBase
+    nameWithType: ParserBase
+    fullName: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DecorateChunkGenerator(RazorChunkGenerator)
+  nameWithType: RazorEngineHost.DecorateChunkGenerator(RazorChunkGenerator)
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+    name: DecorateChunkGenerator
+    nameWithType: RazorEngineHost.DecorateChunkGenerator
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator
+    name: RazorChunkGenerator
+    nameWithType: RazorChunkGenerator
+    fullName: Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator(Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator)
+    name: DecorateChunkGenerator
+    nameWithType: RazorEngineHost.DecorateChunkGenerator
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateChunkGenerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator
+    name: RazorChunkGenerator
+    nameWithType: RazorChunkGenerator
+    fullName: Microsoft.AspNetCore.Razor.Chunks.Generators.RazorChunkGenerator
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.GeneratedClassContext
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.GeneratedClassContext
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: GeneratedClassContext
+  nameWithType: RazorEngineHost.GeneratedClassContext
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.GeneratedClassContext
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.NamespaceImports
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.NamespaceImports
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: NamespaceImports
+  nameWithType: RazorEngineHost.NamespaceImports
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.NamespaceImports
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultBaseClass
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultBaseClass
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DefaultBaseClass
+  nameWithType: RazorEngineHost.DefaultBaseClass
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultBaseClass
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DesignTimeMode
+  nameWithType: RazorEngineHost.DesignTimeMode
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DesignTimeMode
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultClassName
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultClassName
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DefaultClassName
+  nameWithType: RazorEngineHost.DefaultClassName
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultClassName
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultNamespace
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultNamespace
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DefaultNamespace
+  nameWithType: RazorEngineHost.DefaultNamespace
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DefaultNamespace
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.StaticHelpers
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.StaticHelpers
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: StaticHelpers
+  nameWithType: RazorEngineHost.StaticHelpers
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.StaticHelpers
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.CodeLanguage
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.CodeLanguage
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: CodeLanguage
+  nameWithType: RazorEngineHost.CodeLanguage
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.CodeLanguage
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.EnableInstrumentation
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.EnableInstrumentation
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: EnableInstrumentation
+  nameWithType: RazorEngineHost.EnableInstrumentation
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.EnableInstrumentation
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.IsIndentingWithTabs
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.IsIndentingWithTabs
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: IsIndentingWithTabs
+  nameWithType: RazorEngineHost.IsIndentingWithTabs
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.IsIndentingWithTabs
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.TabSize
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.TabSize
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: TabSize
+  nameWithType: RazorEngineHost.TabSize
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.TabSize
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.InstrumentedSourceFilePath
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.InstrumentedSourceFilePath
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: InstrumentedSourceFilePath
+  nameWithType: RazorEngineHost.InstrumentedSourceFilePath
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.InstrumentedSourceFilePath
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Razor
+  commentId: N:Microsoft.AspNetCore.Razor
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor
+  nameWithType: Microsoft.AspNetCore.Razor
+  fullName: Microsoft.AspNetCore.Razor
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   commentId: T:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost
   parent: Microsoft.AspNetCore.Mvc.Razor
@@ -700,17 +1227,32 @@ references:
   name: IChunkTreeCache
   nameWithType: IChunkTreeCache
   fullName: Microsoft.AspNetCore.Mvc.Razor.Directives.IChunkTreeCache
-- uid: ITagHelperDescriptorResolver
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
+  commentId: T:Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
+  parent: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+  isExternal: false
   name: ITagHelperDescriptorResolver
   nameWithType: ITagHelperDescriptorResolver
-  fullName: ITagHelperDescriptorResolver
+  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers.ITagHelperDescriptorResolver
 - uid: Microsoft.AspNetCore.Mvc.Razor.Directives
   commentId: N:Microsoft.AspNetCore.Mvc.Razor.Directives
   isExternal: false
   name: Microsoft.AspNetCore.Mvc.Razor.Directives
   nameWithType: Microsoft.AspNetCore.Mvc.Razor.Directives
   fullName: Microsoft.AspNetCore.Mvc.Razor.Directives
+- uid: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+  commentId: N:Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+  nameWithType: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+  fullName: Microsoft.AspNetCore.Razor.Compilation.TagHelpers
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.TagHelperDescriptorResolver
+  commentId: P:Microsoft.AspNetCore.Razor.RazorEngineHost.TagHelperDescriptorResolver
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: TagHelperDescriptorResolver
+  nameWithType: RazorEngineHost.TagHelperDescriptorResolver
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.TagHelperDescriptorResolver
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.TagHelperDescriptorResolver*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.TagHelperDescriptorResolver
   isExternal: false
@@ -729,15 +1271,15 @@ references:
   name: DefaultInheritedChunks
   nameWithType: MvcRazorHost.DefaultInheritedChunks
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DefaultInheritedChunks
-- uid: System.Collections.Generic.IReadOnlyList{Chunk}
-  commentId: T:System.Collections.Generic.IReadOnlyList{Chunk}
+- uid: System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Razor.Chunks.Chunk}
+  commentId: T:System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Razor.Chunks.Chunk}
   parent: System.Collections.Generic
   definition: System.Collections.Generic.IReadOnlyList`1
   name: IReadOnlyList<Chunk>
   nameWithType: IReadOnlyList<Chunk>
-  fullName: System.Collections.Generic.IReadOnlyList<Chunk>
+  fullName: System.Collections.Generic.IReadOnlyList<Microsoft.AspNetCore.Razor.Chunks.Chunk>
   nameWithType.vb: IReadOnlyList(Of Chunk)
-  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Chunk)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of Microsoft.AspNetCore.Razor.Chunks.Chunk)
   name.vb: IReadOnlyList(Of Chunk)
   spec.csharp:
   - uid: System.Collections.Generic.IReadOnlyList`1
@@ -748,10 +1290,10 @@ references:
   - name: <
     nameWithType: <
     fullName: <
-  - uid: Chunk
+  - uid: Microsoft.AspNetCore.Razor.Chunks.Chunk
     name: Chunk
     nameWithType: Chunk
-    fullName: Chunk
+    fullName: Microsoft.AspNetCore.Razor.Chunks.Chunk
     isExternal: true
   - name: '>'
     nameWithType: '>'
@@ -765,10 +1307,10 @@ references:
   - name: '(Of '
     nameWithType: '(Of '
     fullName: '(Of '
-  - uid: Chunk
+  - uid: Microsoft.AspNetCore.Razor.Chunks.Chunk
     name: Chunk
     nameWithType: Chunk
-    fullName: Chunk
+    fullName: Microsoft.AspNetCore.Razor.Chunks.Chunk
     isExternal: true
   - name: )
     nameWithType: )
@@ -824,12 +1366,25 @@ references:
   name: InjectAttribute
   nameWithType: MvcRazorHost.InjectAttribute
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.InjectAttribute
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: ITagHelper
+  nameWithType: ITagHelper
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.ModelExpressionType*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.ModelExpressionType
   isExternal: false
   name: ModelExpressionType
   nameWithType: MvcRazorHost.ModelExpressionType
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.ModelExpressionType
+- uid: Microsoft.AspNetCore.Razor.TagHelpers
+  commentId: N:Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.TagHelpers
+  nameWithType: Microsoft.AspNetCore.Razor.TagHelpers
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.CreateModelExpressionMethod*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.CreateModelExpressionMethod
   isExternal: false
@@ -970,53 +1525,230 @@ references:
   name: Stream
   nameWithType: Stream
   fullName: System.IO.Stream
-- uid: GeneratorResults
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults
+  commentId: T:Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults
+  parent: Microsoft.AspNetCore.Razor.CodeGenerators
+  isExternal: false
   name: GeneratorResults
   nameWithType: GeneratorResults
-  fullName: GeneratorResults
+  fullName: Microsoft.AspNetCore.Razor.CodeGenerators.GeneratorResults
 - uid: System.IO
   commentId: N:System.IO
   isExternal: false
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+- uid: Microsoft.AspNetCore.Razor.CodeGenerators
+  commentId: N:Microsoft.AspNetCore.Razor.CodeGenerators
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.CodeGenerators
+  nameWithType: Microsoft.AspNetCore.Razor.CodeGenerators
+  fullName: Microsoft.AspNetCore.Razor.CodeGenerators
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DecorateRazorParser(RazorParser, String)
+  nameWithType: RazorEngineHost.DecorateRazorParser(RazorParser, String)
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser, System.String)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+    name: DecorateRazorParser
+    nameWithType: RazorEngineHost.DecorateRazorParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.RazorParser
+    name: RazorParser
+    nameWithType: RazorParser
+    fullName: Microsoft.AspNetCore.Razor.Parser.RazorParser
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser(Microsoft.AspNetCore.Razor.Parser.RazorParser,System.String)
+    name: DecorateRazorParser
+    nameWithType: RazorEngineHost.DecorateRazorParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateRazorParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.RazorParser
+    name: RazorParser
+    nameWithType: RazorParser
+    fullName: Microsoft.AspNetCore.Razor.Parser.RazorParser
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser
   isExternal: false
   name: DecorateRazorParser
   nameWithType: MvcRazorHost.DecorateRazorParser
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateRazorParser
-- uid: RazorParser
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.Parser.RazorParser
+  commentId: T:Microsoft.AspNetCore.Razor.Parser.RazorParser
+  parent: Microsoft.AspNetCore.Razor.Parser
+  isExternal: false
   name: RazorParser
   nameWithType: RazorParser
-  fullName: RazorParser
+  fullName: Microsoft.AspNetCore.Razor.Parser.RazorParser
+- uid: Microsoft.AspNetCore.Razor.Parser
+  commentId: N:Microsoft.AspNetCore.Razor.Parser
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.Parser
+  nameWithType: Microsoft.AspNetCore.Razor.Parser
+  fullName: Microsoft.AspNetCore.Razor.Parser
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DecorateCodeParser(ParserBase)
+  nameWithType: RazorEngineHost.DecorateCodeParser(ParserBase)
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+    name: DecorateCodeParser
+    nameWithType: RazorEngineHost.DecorateCodeParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    name: ParserBase
+    nameWithType: ParserBase
+    fullName: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser(Microsoft.AspNetCore.Razor.Parser.ParserBase)
+    name: DecorateCodeParser
+    nameWithType: RazorEngineHost.DecorateCodeParser
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeParser
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    name: ParserBase
+    nameWithType: ParserBase
+    fullName: Microsoft.AspNetCore.Razor.Parser.ParserBase
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser
   isExternal: false
   name: DecorateCodeParser
   nameWithType: MvcRazorHost.DecorateCodeParser
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeParser
-- uid: ParserBase
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.Parser.ParserBase
+  commentId: T:Microsoft.AspNetCore.Razor.Parser.ParserBase
+  parent: Microsoft.AspNetCore.Razor.Parser
+  isExternal: false
   name: ParserBase
   nameWithType: ParserBase
-  fullName: ParserBase
+  fullName: Microsoft.AspNetCore.Razor.Parser.ParserBase
+- uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  commentId: M:Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  parent: Microsoft.AspNetCore.Razor.RazorEngineHost
+  isExternal: true
+  name: DecorateCodeGenerator(CodeGenerator, CodeGeneratorContext)
+  nameWithType: RazorEngineHost.DecorateCodeGenerator(CodeGenerator, CodeGeneratorContext)
+  fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator, Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+    name: DecorateCodeGenerator
+    nameWithType: RazorEngineHost.DecorateCodeGenerator
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+    name: CodeGenerator
+    nameWithType: CodeGenerator
+    fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+    name: CodeGeneratorContext
+    nameWithType: CodeGeneratorContext
+    fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator(Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator,Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext)
+    name: DecorateCodeGenerator
+    nameWithType: RazorEngineHost.DecorateCodeGenerator
+    fullName: Microsoft.AspNetCore.Razor.RazorEngineHost.DecorateCodeGenerator
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+    name: CodeGenerator
+    nameWithType: CodeGenerator
+    fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+    name: CodeGeneratorContext
+    nameWithType: CodeGeneratorContext
+    fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator
   isExternal: false
   name: DecorateCodeGenerator
   nameWithType: MvcRazorHost.DecorateCodeGenerator
   fullName: Microsoft.AspNetCore.Mvc.Razor.MvcRazorHost.DecorateCodeGenerator
-- uid: CodeGenerator
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+  commentId: T:Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+  parent: Microsoft.AspNetCore.Razor.CodeGenerators
+  isExternal: false
   name: CodeGenerator
   nameWithType: CodeGenerator
-  fullName: CodeGenerator
-- uid: CodeGeneratorContext
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGenerator
+- uid: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+  commentId: T:Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
+  parent: Microsoft.AspNetCore.Razor.CodeGenerators
+  isExternal: false
   name: CodeGeneratorContext
   nameWithType: CodeGeneratorContext
-  fullName: CodeGeneratorContext
+  fullName: Microsoft.AspNetCore.Razor.CodeGenerators.CodeGeneratorContext
 shouldSkipMarkup: true

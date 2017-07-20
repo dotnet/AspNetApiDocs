@@ -13,7 +13,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.GetCachedSerializer(System.Type)
   - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.GetSerializableType(System.Type)
   - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WrapperProviderFactories
-  - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext,System.Text.Encoding)
+  - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
   - Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriterSettings
   langs:
   - csharp
@@ -36,12 +36,34 @@ items:
   summary: "\nThis class handles serialization of objects\nto XML using <xref href=\"System.Xml.Serialization.XmlSerializer\" data-throw-if-not-resolved=\"false\"></xref>\n"
   example: []
   syntax:
-    content: 'public class XmlSerializerOutputFormatter : TextOutputFormatter'
+    content: 'public class XmlSerializerOutputFormatter : TextOutputFormatter, IOutputFormatter, IApiResponseTypeMetadataProvider'
     content.vb: >-
       Public Class XmlSerializerOutputFormatter
           Inherits TextOutputFormatter
+          Implements IOutputFormatter, IApiResponseTypeMetadataProvider
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  - Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  implements:
+  - Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
+  - Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseTypeMetadataProvider
+  inheritedMembers:
+  - Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SupportedEncodings
+  - Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.SupportedMediaTypes
+  - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+  - Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -253,15 +275,19 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Xml
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nReturns a value indicating whether or not the given type can be written by this serializer.\n"
   example: []
   syntax:
     content: protected override bool CanWriteType(Type type)
     parameters:
     - id: type
       type: System.Type
+      description: The object type.
     return:
       type: System.Boolean
+      description: <code>true</code> if the type can be written, otherwise <code>false</code>.
     content.vb: Protected Overrides Function CanWriteType(type As Type) As Boolean
+  overridden: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
   overload: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.CanWriteType*
   modifiers.csharp:
   - protected
@@ -354,16 +380,16 @@ items:
   modifiers.vb:
   - Public
   - Overridable
-- uid: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext,System.Text.Encoding)
-  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext,System.Text.Encoding)
-  id: WriteResponseBodyAsync(OutputFormatterWriteContext,System.Text.Encoding)
+- uid: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+  id: WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
   parent: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter
   langs:
   - csharp
   - vb
   name: WriteResponseBodyAsync(OutputFormatterWriteContext, Encoding)
   nameWithType: XmlSerializerOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext, Encoding)
-  fullName: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext, System.Text.Encoding)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext, System.Text.Encoding)
   type: Method
   source:
     remote:
@@ -376,17 +402,22 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.Formatters.Xml
   namespace: Microsoft.AspNetCore.Mvc.Formatters
+  summary: "\nWrites the response body.\n"
   example: []
   syntax:
     content: public override Task WriteResponseBodyAsync(OutputFormatterWriteContext context, Encoding selectedEncoding)
     parameters:
     - id: context
-      type: OutputFormatterWriteContext
+      type: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+      description: The formatter context associated with the call.
     - id: selectedEncoding
       type: System.Text.Encoding
+      description: The <xref href="System.Text.Encoding" data-throw-if-not-resolved="false"></xref> that should be used to write the response.
     return:
       type: System.Threading.Tasks.Task
+      description: A task which can write the response body.
     content.vb: Public Overrides Function WriteResponseBodyAsync(context As OutputFormatterWriteContext, selectedEncoding As Encoding) As Task
+  overridden: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
   overload: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync*
   modifiers.csharp:
   - public
@@ -455,6 +486,567 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: OutputFormatter
+  nameWithType: OutputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: TextOutputFormatter
+  nameWithType: TextOutputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+- uid: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
+  name: IOutputFormatter
+  nameWithType: IOutputFormatter
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter
+- uid: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseTypeMetadataProvider
+  commentId: T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseTypeMetadataProvider
+  parent: Microsoft.AspNetCore.Mvc.ApiExplorer
+  isExternal: false
+  name: IApiResponseTypeMetadataProvider
+  nameWithType: IApiResponseTypeMetadataProvider
+  fullName: Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseTypeMetadataProvider
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SupportedEncodings
+  commentId: P:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SupportedEncodings
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  isExternal: false
+  name: SupportedEncodings
+  nameWithType: TextOutputFormatter.SupportedEncodings
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SupportedEncodings
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  isExternal: false
+  name: SelectCharacterEncoding(OutputFormatterWriteContext)
+  nameWithType: TextOutputFormatter.SelectCharacterEncoding(OutputFormatterWriteContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: SelectCharacterEncoding
+    nameWithType: TextOutputFormatter.SelectCharacterEncoding
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: SelectCharacterEncoding
+    nameWithType: TextOutputFormatter.SelectCharacterEncoding
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.SelectCharacterEncoding
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  isExternal: false
+  name: WriteAsync(OutputFormatterWriteContext)
+  nameWithType: TextOutputFormatter.WriteAsync(OutputFormatterWriteContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteAsync
+    nameWithType: TextOutputFormatter.WriteAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteAsync
+    nameWithType: TextOutputFormatter.WriteAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  isExternal: false
+  name: WriteResponseBodyAsync(OutputFormatterWriteContext)
+  nameWithType: TextOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteResponseBodyAsync
+    nameWithType: TextOutputFormatter.WriteResponseBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteResponseBodyAsync
+    nameWithType: TextOutputFormatter.WriteResponseBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.SupportedMediaTypes
+  commentId: P:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.SupportedMediaTypes
+  parent: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  isExternal: false
+  name: SupportedMediaTypes
+  nameWithType: OutputFormatter.SupportedMediaTypes
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.SupportedMediaTypes
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String,System.Type)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  isExternal: true
+  name: GetSupportedContentTypes(String, Type)
+  nameWithType: OutputFormatter.GetSupportedContentTypes(String, Type)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String, System.Type)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String,System.Type)
+    name: GetSupportedContentTypes
+    nameWithType: OutputFormatter.GetSupportedContentTypes
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes(System.String,System.Type)
+    name: GetSupportedContentTypes
+    nameWithType: OutputFormatter.GetSupportedContentTypes
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.GetSupportedContentTypes
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  isExternal: false
+  name: CanWriteResult(OutputFormatterCanWriteContext)
+  nameWithType: OutputFormatter.CanWriteResult(OutputFormatterCanWriteContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+    name: CanWriteResult
+    nameWithType: OutputFormatter.CanWriteResult
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext
+    name: OutputFormatterCanWriteContext
+    nameWithType: OutputFormatterCanWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext)
+    name: CanWriteResult
+    nameWithType: OutputFormatter.CanWriteResult
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteResult
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext
+    name: OutputFormatterCanWriteContext
+    nameWithType: OutputFormatterCanWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  isExternal: false
+  name: WriteResponseHeaders(OutputFormatterWriteContext)
+  nameWithType: OutputFormatter.WriteResponseHeaders(OutputFormatterWriteContext)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteResponseHeaders
+    nameWithType: OutputFormatter.WriteResponseHeaders
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext)
+    name: WriteResponseHeaders
+    nameWithType: OutputFormatter.WriteResponseHeaders
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.WriteResponseHeaders
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.Xml.Serialization
   commentId: N:System.Xml.Serialization
   isExternal: false
@@ -467,6 +1059,12 @@ references:
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ApiExplorer
+  commentId: N:Microsoft.AspNetCore.Mvc.ApiExplorer
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ApiExplorer
+  nameWithType: Microsoft.AspNetCore.Mvc.ApiExplorer
+  fullName: Microsoft.AspNetCore.Mvc.ApiExplorer
 - uid: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter
   commentId: T:Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter
   isExternal: false
@@ -624,6 +1222,45 @@ references:
   name: Type
   nameWithType: Type
   fullName: System.Type
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter
+  isExternal: true
+  name: CanWriteType(Type)
+  nameWithType: OutputFormatter.CanWriteType(Type)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
+    name: CanWriteType
+    nameWithType: OutputFormatter.CanWriteType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType(System.Type)
+    name: CanWriteType
+    nameWithType: OutputFormatter.CanWriteType
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatter.CanWriteType
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.CanWriteType*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.CanWriteType
   isExternal: false
@@ -669,17 +1306,72 @@ references:
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+- uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+  commentId: M:Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+  parent: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter
+  isExternal: true
+  name: WriteResponseBodyAsync(OutputFormatterWriteContext, Encoding)
+  nameWithType: TextOutputFormatter.WriteResponseBodyAsync(OutputFormatterWriteContext, Encoding)
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext, System.Text.Encoding)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+    name: WriteResponseBodyAsync
+    nameWithType: TextOutputFormatter.WriteResponseBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext,System.Text.Encoding)
+    name: WriteResponseBodyAsync
+    nameWithType: TextOutputFormatter.WriteResponseBodyAsync
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.TextOutputFormatter.WriteResponseBodyAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+    name: OutputFormatterWriteContext
+    nameWithType: OutputFormatterWriteContext
+    fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encoding
+    name: Encoding
+    nameWithType: Encoding
+    fullName: System.Text.Encoding
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync
   isExternal: false
   name: WriteResponseBodyAsync
   nameWithType: XmlSerializerOutputFormatter.WriteResponseBodyAsync
   fullName: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.WriteResponseBodyAsync
-- uid: OutputFormatterWriteContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
+  parent: Microsoft.AspNetCore.Mvc.Formatters
+  isExternal: false
   name: OutputFormatterWriteContext
   nameWithType: OutputFormatterWriteContext
-  fullName: OutputFormatterWriteContext
+  fullName: Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterWriteContext
 - uid: System.Text.Encoding
   commentId: T:System.Text.Encoding
   parent: System.Text

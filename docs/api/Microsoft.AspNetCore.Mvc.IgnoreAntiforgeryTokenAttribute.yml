@@ -30,21 +30,21 @@ items:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public class IgnoreAntiforgeryTokenAttribute : Attribute, _Attribute, IAntiforgeryPolicy, IFilterMetadata, IOrderedFilter
+      public class IgnoreAntiforgeryTokenAttribute : Attribute, _Attribute, IAntiforgeryPolicy, IOrderedFilter, IFilterMetadata
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public Class IgnoreAntiforgeryTokenAttribute
           Inherits Attribute
-          Implements _Attribute, IAntiforgeryPolicy, IFilterMetadata, IOrderedFilter
+          Implements _Attribute, IAntiforgeryPolicy, IOrderedFilter, IFilterMetadata
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
   - Microsoft.AspNetCore.Mvc.ViewFeatures.IAntiforgeryPolicy
-  - IFilterMetadata
-  - IOrderedFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
@@ -133,6 +133,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nGets the order value for determining the order of execution of filters. Filters execute in\nascending numeric value of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n"
+  remarks: "\n<p>\nFilters are executed in an ordering determined by an ascending sort of the <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> property.\n</p>\n<p>\nAsynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, surround the execution of subsequent\nfilters of the same filter kind. An asynchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its filter method, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter.OnActionExecutionAsync(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext%2cMicrosoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate)\" data-throw-if-not-resolved=\"false\"></xref>,\nexecuted before that of a filter with a higher value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nSynchronous filters, such as <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter\" data-throw-if-not-resolved=\"false\"></xref>, have a before-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuting(Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext)\" data-throw-if-not-resolved=\"false\"></xref>, and an after-method, such as\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IActionFilter.OnActionExecuted(Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext)\" data-throw-if-not-resolved=\"false\"></xref>. A synchronous filter with a lower numeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>\nvalue will have its before-method executed before that of a filter with a higher value of\n<xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>. During the after-stage of the filter, a synchronous filter with a lower\nnumeric <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref> value will have its after-method executed after that of a filter with a higher\nvalue of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>.\n</p>\n<p>\nIf two filters have the same numeric value of <xref href=\"Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order\" data-throw-if-not-resolved=\"false\"></xref>, then their relative execution order\nis determined by the filter scope.\n</p>\n"
   example: []
   syntax:
     content: public int Order { get; set; }
@@ -141,6 +143,8 @@ items:
       type: System.Int32
     content.vb: Public Property Order As Integer
   overload: Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute.Order*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
   modifiers.csharp:
   - public
   - get
@@ -182,16 +186,20 @@ references:
   name: IAntiforgeryPolicy
   nameWithType: IAntiforgeryPolicy
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.IAntiforgeryPolicy
-- uid: IFilterMetadata
-  isExternal: true
-  name: IFilterMetadata
-  nameWithType: IFilterMetadata
-  fullName: IFilterMetadata
-- uid: IOrderedFilter
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IOrderedFilter
   nameWithType: IOrderedFilter
-  fullName: IOrderedFilter
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: IFilterMetadata
+  nameWithType: IFilterMetadata
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
 - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   parent: System.Attribute
@@ -2900,12 +2908,25 @@ references:
   name: Microsoft.AspNetCore.Mvc.ViewFeatures
   nameWithType: Microsoft.AspNetCore.Mvc.ViewFeatures
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures
+- uid: Microsoft.AspNetCore.Mvc.Filters
+  commentId: N:Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Filters
+  nameWithType: Microsoft.AspNetCore.Mvc.Filters
+  fullName: Microsoft.AspNetCore.Mvc.Filters
 - uid: Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute.Order*
   commentId: Overload:Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute.Order
   isExternal: false
   name: Order
   nameWithType: IgnoreAntiforgeryTokenAttribute.Order
   fullName: Microsoft.AspNetCore.Mvc.IgnoreAntiforgeryTokenAttribute.Order
+- uid: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
+  parent: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter
+  isExternal: false
+  name: Order
+  nameWithType: IOrderedFilter.Order
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order
 - uid: System.Int32
   commentId: T:System.Int32
   parent: System

@@ -5,8 +5,8 @@ items:
   id: SkipStatusCodePagesAttribute
   parent: Microsoft.AspNetCore.Mvc
   children:
-  - Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  - Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(ResourceExecutingContext)
+  - Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  - Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   langs:
   - csharp
   - vb
@@ -31,19 +31,20 @@ items:
     content: >-
       [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
 
-      public class SkipStatusCodePagesAttribute : Attribute, _Attribute, IResourceFilter
+      public class SkipStatusCodePagesAttribute : Attribute, _Attribute, IResourceFilter, IFilterMetadata
     content.vb: >-
       <AttributeUsage(AttributeTargets.Class Or AttributeTargets.Method, AllowMultiple:=False, Inherited:=True)>
 
       Public Class SkipStatusCodePagesAttribute
           Inherits Attribute
-          Implements _Attribute, IResourceFilter
+          Implements _Attribute, IResourceFilter, IFilterMetadata
   inheritance:
   - System.Object
   - System.Attribute
   implements:
   - System.Runtime.InteropServices._Attribute
-  - IResourceFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  - Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
   inheritedMembers:
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   - System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type,System.Boolean)
@@ -110,16 +111,16 @@ items:
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  id: OnResourceExecuted(ResourceExecutedContext)
+- uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  id: OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   parent: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute
   langs:
   - csharp
   - vb
   name: OnResourceExecuted(ResourceExecutedContext)
   nameWithType: SkipStatusCodePagesAttribute.OnResourceExecuted(ResourceExecutedContext)
-  fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(ResourceExecutedContext)
+  fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   type: Method
   source:
     remote:
@@ -132,28 +133,32 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nExecutes the resource filter. Called after execution of the remainder of the pipeline.\n"
   example: []
   syntax:
     content: public void OnResourceExecuted(ResourceExecutedContext context)
     parameters:
     - id: context
-      type: ResourceExecutedContext
+      type: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub OnResourceExecuted(context As ResourceExecutedContext)
   overload: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  commentId: M:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  id: OnResourceExecuting(ResourceExecutingContext)
+- uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  id: OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   parent: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute
   langs:
   - csharp
   - vb
   name: OnResourceExecuting(ResourceExecutingContext)
   nameWithType: SkipStatusCodePagesAttribute.OnResourceExecuting(ResourceExecutingContext)
-  fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(ResourceExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   type: Method
   source:
     remote:
@@ -166,14 +171,18 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc
+  summary: "\nExecutes the resource filter. Called before execution of the remainder of the pipeline.\n"
   example: []
   syntax:
     content: public void OnResourceExecuting(ResourceExecutingContext context)
     parameters:
     - id: context
-      type: ResourceExecutingContext
+      type: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub OnResourceExecuting(context As ResourceExecutingContext)
   overload: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting*
+  implements:
+  - Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -206,12 +215,20 @@ references:
   name: _Attribute
   nameWithType: _Attribute
   fullName: System.Runtime.InteropServices._Attribute
-- uid: IResourceFilter
-  commentId: '!:IResourceFilter'
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: IResourceFilter
   nameWithType: IResourceFilter
-  fullName: IResourceFilter
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+- uid: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: IFilterMetadata
+  nameWithType: IFilterMetadata
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata
 - uid: System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   commentId: M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)
   parent: System.Attribute
@@ -2914,26 +2931,110 @@ references:
   name: System.Runtime.InteropServices
   nameWithType: System.Runtime.InteropServices
   fullName: System.Runtime.InteropServices
+- uid: Microsoft.AspNetCore.Mvc.Filters
+  commentId: N:Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Filters
+  nameWithType: Microsoft.AspNetCore.Mvc.Filters
+  fullName: Microsoft.AspNetCore.Mvc.Filters
 - uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted*
   commentId: Overload:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted
   isExternal: false
   name: OnResourceExecuted
   nameWithType: SkipStatusCodePagesAttribute.OnResourceExecuted
   fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuted
-- uid: ResourceExecutedContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  parent: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  isExternal: false
+  name: OnResourceExecuted(ResourceExecutedContext)
+  nameWithType: IResourceFilter.OnResourceExecuted(ResourceExecutedContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+    name: OnResourceExecuted
+    nameWithType: IResourceFilter.OnResourceExecuted
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+    name: ResourceExecutedContext
+    nameWithType: ResourceExecutedContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext)
+    name: OnResourceExecuted
+    nameWithType: IResourceFilter.OnResourceExecuted
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+    name: ResourceExecutedContext
+    nameWithType: ResourceExecutedContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: ResourceExecutedContext
   nameWithType: ResourceExecutedContext
-  fullName: ResourceExecutedContext
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutedContext
 - uid: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting*
   commentId: Overload:Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting
   isExternal: false
   name: OnResourceExecuting
   nameWithType: SkipStatusCodePagesAttribute.OnResourceExecuting
   fullName: Microsoft.AspNetCore.Mvc.SkipStatusCodePagesAttribute.OnResourceExecuting
-- uid: ResourceExecutingContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  parent: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter
+  isExternal: false
+  name: OnResourceExecuting(ResourceExecutingContext)
+  nameWithType: IResourceFilter.OnResourceExecuting(ResourceExecutingContext)
+  fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+    name: OnResourceExecuting
+    nameWithType: IResourceFilter.OnResourceExecuting
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+    name: ResourceExecutingContext
+    nameWithType: ResourceExecutingContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting(Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext)
+    name: OnResourceExecuting
+    nameWithType: IResourceFilter.OnResourceExecuting
+    fullName: Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+    name: ResourceExecutingContext
+    nameWithType: ResourceExecutingContext
+    fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  commentId: T:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
+  parent: Microsoft.AspNetCore.Mvc.Filters
+  isExternal: false
   name: ResourceExecutingContext
   nameWithType: ResourceExecutingContext
-  fullName: ResourceExecutingContext
+  fullName: Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext
 shouldSkipMarkup: true

@@ -17,7 +17,7 @@ items:
   - Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.MergeAttributes``2(System.Collections.Generic.IDictionary{``0,``1},System.Boolean)
   - Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.TagName
   - Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.TagRenderMode
-  - Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,HtmlEncoder)
+  - Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   langs:
   - csharp
   - vb
@@ -42,9 +42,19 @@ items:
     content: 'public class TagBuilder : IHtmlContent'
     content.vb: >-
       Public Class TagBuilder
-          Inherits IHtmlContent
+          Implements IHtmlContent
   inheritance:
   - System.Object
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContent
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -152,7 +162,7 @@ items:
     content: public IHtmlContentBuilder InnerHtml { get; }
     parameters: []
     return:
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
     content.vb: Public ReadOnly Property InnerHtml As IHtmlContentBuilder
   overload: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.InnerHtml*
   modifiers.csharp:
@@ -508,16 +518,16 @@ items:
   - Public
   fullName.vb: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.MergeAttributes(Of TKey, TValue)(System.Collections.Generic.IDictionary(Of TKey, TValue), System.Boolean)
   name.vb: MergeAttributes(Of TKey, TValue)(IDictionary(Of TKey, TValue), Boolean)
-- uid: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,HtmlEncoder)
-  id: WriteTo(System.IO.TextWriter,HtmlEncoder)
+- uid: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  id: WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   parent: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder
   langs:
   - csharp
   - vb
   name: WriteTo(TextWriter, HtmlEncoder)
   nameWithType: TagBuilder.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter, HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
   type: Method
   source:
     remote:
@@ -537,9 +547,11 @@ items:
     - id: writer
       type: System.IO.TextWriter
     - id: encoder
-      type: HtmlEncoder
+      type: System.Text.Encodings.Web.HtmlEncoder
     content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -558,12 +570,304 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Html.IHtmlContent
+  commentId: T:Microsoft.AspNetCore.Html.IHtmlContent
+  parent: Microsoft.AspNetCore.Html
+  isExternal: false
+  name: IHtmlContent
+  nameWithType: IHtmlContent
+  fullName: Microsoft.AspNetCore.Html.IHtmlContent
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Html
+  commentId: N:Microsoft.AspNetCore.Html
+  isExternal: false
+  name: Microsoft.AspNetCore.Html
+  nameWithType: Microsoft.AspNetCore.Html
+  fullName: Microsoft.AspNetCore.Html
 - uid: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.#ctor
   isExternal: false
@@ -602,11 +906,13 @@ references:
   name: InnerHtml
   nameWithType: TagBuilder.InnerHtml
   fullName: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.InnerHtml
-- uid: IHtmlContentBuilder
-  isExternal: true
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  commentId: T:Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  parent: Microsoft.AspNetCore.Html
+  isExternal: false
   name: IHtmlContentBuilder
   nameWithType: IHtmlContentBuilder
-  fullName: IHtmlContentBuilder
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
 - uid: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.TagName*
   commentId: Overload:Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.TagName
   isExternal: false
@@ -787,6 +1093,63 @@ references:
   name: WriteTo
   nameWithType: TagBuilder.WriteTo
   fullName: Microsoft.AspNetCore.Mvc.Rendering.TagBuilder.WriteTo
+- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  parent: Microsoft.AspNetCore.Html.IHtmlContent
+  isExternal: true
+  name: WriteTo(TextWriter, HtmlEncoder)
+  nameWithType: IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+    name: WriteTo
+    nameWithType: IHtmlContent.WriteTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.TextWriter
+    name: TextWriter
+    nameWithType: TextWriter
+    fullName: System.IO.TextWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encodings.Web.HtmlEncoder
+    name: HtmlEncoder
+    nameWithType: HtmlEncoder
+    fullName: System.Text.Encodings.Web.HtmlEncoder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+    name: WriteTo
+    nameWithType: IHtmlContent.WriteTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.TextWriter
+    name: TextWriter
+    nameWithType: TextWriter
+    fullName: System.IO.TextWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encodings.Web.HtmlEncoder
+    name: HtmlEncoder
+    nameWithType: HtmlEncoder
+    fullName: System.Text.Encodings.Web.HtmlEncoder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.IO.TextWriter
   commentId: T:System.IO.TextWriter
   parent: System.IO
@@ -794,15 +1157,23 @@ references:
   name: TextWriter
   nameWithType: TextWriter
   fullName: System.IO.TextWriter
-- uid: HtmlEncoder
+- uid: System.Text.Encodings.Web.HtmlEncoder
+  commentId: T:System.Text.Encodings.Web.HtmlEncoder
+  parent: System.Text.Encodings.Web
   isExternal: true
   name: HtmlEncoder
   nameWithType: HtmlEncoder
-  fullName: HtmlEncoder
+  fullName: System.Text.Encodings.Web.HtmlEncoder
 - uid: System.IO
   commentId: N:System.IO
   isExternal: false
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+- uid: System.Text.Encodings.Web
+  commentId: N:System.Text.Encodings.Web
+  isExternal: false
+  name: System.Text.Encodings.Web
+  nameWithType: System.Text.Encodings.Web
+  fullName: System.Text.Encodings.Web
 shouldSkipMarkup: true

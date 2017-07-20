@@ -5,11 +5,11 @@ items:
   id: EnvironmentTagHelper
   parent: Microsoft.AspNetCore.Mvc.TagHelpers
   children:
-  - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(IHostingEnvironment)
+  - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)
   - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.HostingEnvironment
   - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Names
   - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Order
-  - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(TagHelperContext,TagHelperOutput)
+  - Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   langs:
   - csharp
   - vb
@@ -28,31 +28,45 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
-  summary: "\n<see cref=\"!:ITagHelper\"></see> implementation targeting &lt;environment> elements that conditionally renders\ncontent based on the current value of <see cref=\"!:IHostingEnvironment.EnvironmentName\"></see>.\n"
+  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;environment> elements that conditionally renders\ncontent based on the current value of <xref href=\"Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: 'public class EnvironmentTagHelper : TagHelper'
+    content: 'public class EnvironmentTagHelper : TagHelper, ITagHelper'
     content.vb: >-
       Public Class EnvironmentTagHelper
           Inherits TagHelper
+          Implements ITagHelper
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  implements:
+  - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  inheritedMembers:
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(IHostingEnvironment)
-  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(IHostingEnvironment)
-  id: '#ctor(IHostingEnvironment)'
+- uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)
+  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)
+  id: '#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment)'
   parent: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper
   langs:
   - csharp
   - vb
   name: EnvironmentTagHelper(IHostingEnvironment)
   nameWithType: EnvironmentTagHelper.EnvironmentTagHelper(IHostingEnvironment)
-  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.EnvironmentTagHelper(IHostingEnvironment)
+  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.EnvironmentTagHelper(Microsoft.AspNetCore.Hosting.IHostingEnvironment)
   type: Constructor
   source:
     remote:
@@ -71,8 +85,8 @@ items:
     content: public EnvironmentTagHelper(IHostingEnvironment hostingEnvironment)
     parameters:
     - id: hostingEnvironment
-      type: IHostingEnvironment
-      description: The <see cref="!:IHostingEnvironment"></see>.
+      type: Microsoft.AspNetCore.Hosting.IHostingEnvironment
+      description: The <xref href="Microsoft.AspNetCore.Hosting.IHostingEnvironment" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub New(hostingEnvironment As IHostingEnvironment)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor*
   modifiers.csharp:
@@ -101,6 +115,8 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nWhen a set of<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> s are executed, their<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)\" data-throw-if-not-resolved=\"false\"></xref>&apos;s\nare first invoked in the specified <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>; then their\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext%2cMicrosoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)\" data-throw-if-not-resolved=\"false\"></xref>&apos;s are invoked in the specified\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper.Order\" data-throw-if-not-resolved=\"false\"></xref>. Lower values are executed first.\n"
+  remarks: Default order is <code>0</code>.
   example: []
   syntax:
     content: public override int Order { get; }
@@ -108,6 +124,7 @@ items:
     return:
       type: System.Int32
     content.vb: Public Overrides ReadOnly Property Order As Integer
+  overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Order*
   modifiers.csharp:
   - public
@@ -140,7 +157,7 @@ items:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
   summary: "\nA comma separated list of environment names in which the content should be rendered.\n"
-  remarks: "\nThe specified environment names are compared case insensitively to the current value of\n<see cref=\"!:IHostingEnvironment.EnvironmentName\"></see>.\n"
+  remarks: "\nThe specified environment names are compared case insensitively to the current value of\n<xref href=\"Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
     content: public string Names { get; set; }
@@ -181,7 +198,7 @@ items:
     content: protected IHostingEnvironment HostingEnvironment { get; }
     parameters: []
     return:
-      type: IHostingEnvironment
+      type: Microsoft.AspNetCore.Hosting.IHostingEnvironment
     content.vb: Protected ReadOnly Property HostingEnvironment As IHostingEnvironment
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.HostingEnvironment*
   modifiers.csharp:
@@ -190,16 +207,16 @@ items:
   modifiers.vb:
   - Protected
   - ReadOnly
-- uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(TagHelperContext,TagHelperOutput)
-  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(TagHelperContext,TagHelperOutput)
-  id: Process(TagHelperContext,TagHelperOutput)
+- uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  id: Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   parent: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper
   langs:
   - csharp
   - vb
   name: Process(TagHelperContext, TagHelperOutput)
   nameWithType: EnvironmentTagHelper.Process(TagHelperContext, TagHelperOutput)
-  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   type: Method
   source:
     remote:
@@ -212,15 +229,19 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
+  summary: "\nSynchronously executes the <xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" data-throw-if-not-resolved=\"false\"></xref> with the given <span class=\"paramref\">context</span> and\n<span class=\"paramref\">output</span>.\n"
   example: []
   syntax:
     content: public override void Process(TagHelperContext context, TagHelperOutput output)
     parameters:
     - id: context
-      type: TagHelperContext
+      type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+      description: Contains information associated with the current HTML tag.
     - id: output
-      type: TagHelperOutput
+      type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+      description: A stateful HTML element used to generate an HTML tag.
     content.vb: Public Overrides Sub Process(context As TagHelperContext, output As TagHelperOutput)
+  overridden: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process*
   modifiers.csharp:
   - public
@@ -229,6 +250,15 @@ items:
   - Public
   - Overrides
 references:
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: ITagHelper
+  nameWithType: ITagHelper
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+- uid: Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName
+  commentId: P:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers
   commentId: N:Microsoft.AspNetCore.Mvc.TagHelpers
   isExternal: false
@@ -242,6 +272,396 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: TagHelper
+  nameWithType: TagHelper
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  isExternal: true
+  name: Init(TagHelperContext)
+  nameWithType: TagHelper.Init(TagHelperContext)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+    name: Init
+    nameWithType: TagHelper.Init
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+    name: Init
+    nameWithType: TagHelper.Init
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  isExternal: true
+  name: ProcessAsync(TagHelperContext, TagHelperOutput)
+  nameWithType: TagHelper.ProcessAsync(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: ProcessAsync
+    nameWithType: TagHelper.ProcessAsync
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: ProcessAsync
+    nameWithType: TagHelper.ProcessAsync
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.TagHelpers
+  commentId: N:Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.TagHelpers
+  nameWithType: Microsoft.AspNetCore.Razor.TagHelpers
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers
 - uid: System
   commentId: N:System
   isExternal: false
@@ -254,17 +674,32 @@ references:
   name: EnvironmentTagHelper
   nameWithType: EnvironmentTagHelper
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper
+- uid: Microsoft.AspNetCore.Hosting.IHostingEnvironment
+  commentId: T:Microsoft.AspNetCore.Hosting.IHostingEnvironment
+  parent: Microsoft.AspNetCore.Hosting
+  isExternal: false
+  name: IHostingEnvironment
+  nameWithType: IHostingEnvironment
+  fullName: Microsoft.AspNetCore.Hosting.IHostingEnvironment
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.#ctor
   isExternal: false
   name: EnvironmentTagHelper
   nameWithType: EnvironmentTagHelper.EnvironmentTagHelper
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.EnvironmentTagHelper
-- uid: IHostingEnvironment
+- uid: Microsoft.AspNetCore.Hosting
+  commentId: N:Microsoft.AspNetCore.Hosting
+  isExternal: false
+  name: Microsoft.AspNetCore.Hosting
+  nameWithType: Microsoft.AspNetCore.Hosting
+  fullName: Microsoft.AspNetCore.Hosting
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order
+  commentId: P:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
   isExternal: true
-  name: IHostingEnvironment
-  nameWithType: IHostingEnvironment
-  fullName: IHostingEnvironment
+  name: Order
+  nameWithType: TagHelper.Order
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Order
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Order*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Order
   isExternal: false
@@ -297,20 +732,81 @@ references:
   name: HostingEnvironment
   nameWithType: EnvironmentTagHelper.HostingEnvironment
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.HostingEnvironment
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  isExternal: true
+  name: Process(TagHelperContext, TagHelperOutput)
+  nameWithType: TagHelper.Process(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: Process
+    nameWithType: TagHelper.Process
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: Process
+    nameWithType: TagHelper.Process
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Process
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process
   isExternal: false
   name: Process
   nameWithType: EnvironmentTagHelper.Process
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Process
-- uid: TagHelperContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
   name: TagHelperContext
   nameWithType: TagHelperContext
-  fullName: TagHelperContext
-- uid: TagHelperOutput
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
   name: TagHelperOutput
   nameWithType: TagHelperOutput
-  fullName: TagHelperOutput
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
 shouldSkipMarkup: true

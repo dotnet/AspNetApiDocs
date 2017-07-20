@@ -5,7 +5,7 @@ items:
   id: ScriptTagHelper
   parent: Microsoft.AspNetCore.Mvc.TagHelpers
   children:
-  - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(IHostingEnvironment,IMemoryCache,HtmlEncoder,JavaScriptEncoder,IUrlHelperFactory)
+  - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Text.Encodings.Web.HtmlEncoder,System.Text.Encodings.Web.JavaScriptEncoder,Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.AppendVersion
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Cache
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc
@@ -16,7 +16,7 @@ items:
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.HostingEnvironment
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.JavaScriptEncoder
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Order
-  - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(TagHelperContext,TagHelperOutput)
+  - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Src
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcExclude
   - Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcInclude
@@ -38,32 +38,140 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.TagHelpers
   namespace: Microsoft.AspNetCore.Mvc.TagHelpers
-  summary: "\n<see cref=\"!:ITagHelper\"></see> implementation targeting &lt;script> elements that supports fallback src paths.\n"
+  summary: "\n<xref href=\"Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" data-throw-if-not-resolved=\"false\"></xref> implementation targeting &lt;script> elements that supports fallback src paths.\n"
   remarks: "\nThe tag helper won&apos;t process for cases with just the &apos;src&apos; attribute.\n"
   example: []
   syntax:
-    content: 'public class ScriptTagHelper : UrlResolutionTagHelper'
+    content: >-
+      [HtmlTargetElement("script", Attributes = "asp-src-include")]
+
+      [HtmlTargetElement("script", Attributes = "asp-src-exclude")]
+
+      [HtmlTargetElement("script", Attributes = "asp-fallback-src")]
+
+      [HtmlTargetElement("script", Attributes = "asp-fallback-src-include")]
+
+      [HtmlTargetElement("script", Attributes = "asp-fallback-src-exclude")]
+
+      [HtmlTargetElement("script", Attributes = "asp-fallback-test")]
+
+      [HtmlTargetElement("script", Attributes = "asp-append-version")]
+
+      public class ScriptTagHelper : UrlResolutionTagHelper, ITagHelper
     content.vb: >-
+      <HtmlTargetElement("script", Attributes:="asp-src-include")>
+
+      <HtmlTargetElement("script", Attributes:="asp-src-exclude")>
+
+      <HtmlTargetElement("script", Attributes:="asp-fallback-src")>
+
+      <HtmlTargetElement("script", Attributes:="asp-fallback-src-include")>
+
+      <HtmlTargetElement("script", Attributes:="asp-fallback-src-exclude")>
+
+      <HtmlTargetElement("script", Attributes:="asp-fallback-test")>
+
+      <HtmlTargetElement("script", Attributes:="asp-append-version")>
+
       Public Class ScriptTagHelper
           Inherits UrlResolutionTagHelper
+          Implements ITagHelper
   inheritance:
   - System.Object
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  - Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+  implements:
+  - Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  inheritedMembers:
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  - Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-src-include
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-src-exclude
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-fallback-src
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-fallback-src-include
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-fallback-src-exclude
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-fallback-test
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: script
+    namedArguments:
+    - name: Attributes
+      type: System.String
+      value: asp-append-version
   modifiers.csharp:
   - public
   - class
   modifiers.vb:
   - Public
   - Class
-- uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(IHostingEnvironment,IMemoryCache,HtmlEncoder,JavaScriptEncoder,IUrlHelperFactory)
-  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(IHostingEnvironment,IMemoryCache,HtmlEncoder,JavaScriptEncoder,IUrlHelperFactory)
-  id: '#ctor(IHostingEnvironment,IMemoryCache,HtmlEncoder,JavaScriptEncoder,IUrlHelperFactory)'
+- uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Text.Encodings.Web.HtmlEncoder,System.Text.Encodings.Web.JavaScriptEncoder,Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)
+  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Text.Encodings.Web.HtmlEncoder,System.Text.Encodings.Web.JavaScriptEncoder,Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)
+  id: '#ctor(Microsoft.AspNetCore.Hosting.IHostingEnvironment,Microsoft.Extensions.Caching.Memory.IMemoryCache,System.Text.Encodings.Web.HtmlEncoder,System.Text.Encodings.Web.JavaScriptEncoder,Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)'
   parent: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
   langs:
   - csharp
   - vb
   name: ScriptTagHelper(IHostingEnvironment, IMemoryCache, HtmlEncoder, JavaScriptEncoder, IUrlHelperFactory)
   nameWithType: ScriptTagHelper.ScriptTagHelper(IHostingEnvironment, IMemoryCache, HtmlEncoder, JavaScriptEncoder, IUrlHelperFactory)
-  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.ScriptTagHelper(IHostingEnvironment, IMemoryCache, HtmlEncoder, JavaScriptEncoder, IUrlHelperFactory)
+  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.ScriptTagHelper(Microsoft.AspNetCore.Hosting.IHostingEnvironment, Microsoft.Extensions.Caching.Memory.IMemoryCache, System.Text.Encodings.Web.HtmlEncoder, System.Text.Encodings.Web.JavaScriptEncoder, Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory)
   type: Constructor
   source:
     remote:
@@ -82,20 +190,20 @@ items:
     content: public ScriptTagHelper(IHostingEnvironment hostingEnvironment, IMemoryCache cache, HtmlEncoder htmlEncoder, JavaScriptEncoder javaScriptEncoder, IUrlHelperFactory urlHelperFactory)
     parameters:
     - id: hostingEnvironment
-      type: IHostingEnvironment
-      description: The <see cref="!:IHostingEnvironment"></see>.
+      type: Microsoft.AspNetCore.Hosting.IHostingEnvironment
+      description: The <xref href="Microsoft.AspNetCore.Hosting.IHostingEnvironment" data-throw-if-not-resolved="false"></xref>.
     - id: cache
-      type: IMemoryCache
-      description: The <see cref="!:IMemoryCache"></see>.
+      type: Microsoft.Extensions.Caching.Memory.IMemoryCache
+      description: The <xref href="Microsoft.Extensions.Caching.Memory.IMemoryCache" data-throw-if-not-resolved="false"></xref>.
     - id: htmlEncoder
-      type: HtmlEncoder
-      description: The <see cref="!:HtmlEncoder"></see>.
+      type: System.Text.Encodings.Web.HtmlEncoder
+      description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref>.
     - id: javaScriptEncoder
-      type: JavaScriptEncoder
+      type: System.Text.Encodings.Web.JavaScriptEncoder
       description: The <xref href="Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.JavaScriptEncoder" data-throw-if-not-resolved="false"></xref>.
     - id: urlHelperFactory
-      type: IUrlHelperFactory
-      description: The <see cref="!:IUrlHelperFactory"></see>.
+      type: Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory
+      description: The <xref href="Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Sub New(hostingEnvironment As IHostingEnvironment, cache As IMemoryCache, htmlEncoder As HtmlEncoder, javaScriptEncoder As JavaScriptEncoder, urlHelperFactory As IUrlHelperFactory)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor*
   modifiers.csharp:
@@ -131,6 +239,7 @@ items:
     return:
       type: System.Int32
     content.vb: Public Overrides ReadOnly Property Order As Integer
+  overridden: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Order
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Order*
   modifiers.csharp:
   - public
@@ -166,12 +275,24 @@ items:
   remarks: "\nPassed through to the generated HTML in all cases.\n"
   example: []
   syntax:
-    content: public string Src { get; set; }
+    content: >-
+      [HtmlAttributeName("src")]
+
+      public string Src { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property Src As String
+    content.vb: >-
+      <HtmlAttributeName("src")>
+
+      Public Property Src As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Src*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: src
   modifiers.csharp:
   - public
   - get
@@ -203,12 +324,24 @@ items:
   summary: "\nA comma separated list of globbed file patterns of JavaScript scripts to load.\nThe glob patterns are assessed relative to the application&apos;s &apos;webroot&apos; setting.\n"
   example: []
   syntax:
-    content: public string SrcInclude { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-src-include")]
+
+      public string SrcInclude { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property SrcInclude As String
+    content.vb: >-
+      <HtmlAttributeName("asp-src-include")>
+
+      Public Property SrcInclude As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcInclude*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-src-include
   modifiers.csharp:
   - public
   - get
@@ -240,12 +373,24 @@ items:
   summary: "\nA comma separated list of globbed file patterns of JavaScript scripts to exclude from loading.\nThe glob patterns are assessed relative to the application&apos;s &apos;webroot&apos; setting.\nMust be used in conjunction with <xref href=\"Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcInclude\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public string SrcExclude { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-src-exclude")]
+
+      public string SrcExclude { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property SrcExclude As String
+    content.vb: >-
+      <HtmlAttributeName("asp-src-exclude")>
+
+      Public Property SrcExclude As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.SrcExclude*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-src-exclude
   modifiers.csharp:
   - public
   - get
@@ -277,12 +422,24 @@ items:
   summary: "\nThe URL of a Script tag to fallback to in the case the primary one fails.\n"
   example: []
   syntax:
-    content: public string FallbackSrc { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-fallback-src")]
+
+      public string FallbackSrc { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property FallbackSrc As String
+    content.vb: >-
+      <HtmlAttributeName("asp-fallback-src")>
+
+      Public Property FallbackSrc As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrc*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-fallback-src
   modifiers.csharp:
   - public
   - get
@@ -315,12 +472,24 @@ items:
   remarks: "\nA query string &quot;v&quot; with the encoded content of the file is added.\n"
   example: []
   syntax:
-    content: public bool ? AppendVersion { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-append-version")]
+
+      public bool ? AppendVersion { get; set; }
     parameters: []
     return:
       type: System.Nullable{System.Boolean}
-    content.vb: Public Property AppendVersion As Boolean?
+    content.vb: >-
+      <HtmlAttributeName("asp-append-version")>
+
+      Public Property AppendVersion As Boolean?
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.AppendVersion*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-append-version
   modifiers.csharp:
   - public
   - get
@@ -352,12 +521,24 @@ items:
   summary: "\nA comma separated list of globbed file patterns of JavaScript scripts to fallback to in the case the\nprimary one fails.\nThe glob patterns are assessed relative to the application&apos;s &apos;webroot&apos; setting.\n"
   example: []
   syntax:
-    content: public string FallbackSrcInclude { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-fallback-src-include")]
+
+      public string FallbackSrcInclude { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property FallbackSrcInclude As String
+    content.vb: >-
+      <HtmlAttributeName("asp-fallback-src-include")>
+
+      Public Property FallbackSrcInclude As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrcInclude*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-fallback-src-include
   modifiers.csharp:
   - public
   - get
@@ -389,12 +570,24 @@ items:
   summary: "\nA comma separated list of globbed file patterns of JavaScript scripts to exclude from the fallback list, in\nthe case the primary one fails.\nThe glob patterns are assessed relative to the application&apos;s &apos;webroot&apos; setting.\nMust be used in conjunction with <xref href=\"Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrcInclude\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: public string FallbackSrcExclude { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-fallback-src-exclude")]
+
+      public string FallbackSrcExclude { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property FallbackSrcExclude As String
+    content.vb: >-
+      <HtmlAttributeName("asp-fallback-src-exclude")>
+
+      Public Property FallbackSrcExclude As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackSrcExclude*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-fallback-src-exclude
   modifiers.csharp:
   - public
   - get
@@ -426,12 +619,24 @@ items:
   summary: "\nThe script method defined in the primary script to use for the fallback test.\n"
   example: []
   syntax:
-    content: public string FallbackTestExpression { get; set; }
+    content: >-
+      [HtmlAttributeName("asp-fallback-test")]
+
+      public string FallbackTestExpression { get; set; }
     parameters: []
     return:
       type: System.String
-    content.vb: Public Property FallbackTestExpression As String
+    content.vb: >-
+      <HtmlAttributeName("asp-fallback-test")>
+
+      Public Property FallbackTestExpression As String
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.FallbackTestExpression*
+  attributes:
+  - type: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute
+    ctor: Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.#ctor(System.String)
+    arguments:
+    - type: System.String
+      value: asp-fallback-test
   modifiers.csharp:
   - public
   - get
@@ -464,7 +669,7 @@ items:
     content: protected IHostingEnvironment HostingEnvironment { get; }
     parameters: []
     return:
-      type: IHostingEnvironment
+      type: Microsoft.AspNetCore.Hosting.IHostingEnvironment
     content.vb: Protected ReadOnly Property HostingEnvironment As IHostingEnvironment
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.HostingEnvironment*
   modifiers.csharp:
@@ -499,7 +704,7 @@ items:
     content: protected IMemoryCache Cache { get; }
     parameters: []
     return:
-      type: IMemoryCache
+      type: Microsoft.Extensions.Caching.Memory.IMemoryCache
     content.vb: Protected ReadOnly Property Cache As IMemoryCache
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Cache*
   modifiers.csharp:
@@ -534,7 +739,7 @@ items:
     content: protected JavaScriptEncoder JavaScriptEncoder { get; }
     parameters: []
     return:
-      type: JavaScriptEncoder
+      type: System.Text.Encodings.Web.JavaScriptEncoder
     content.vb: Protected ReadOnly Property JavaScriptEncoder As JavaScriptEncoder
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.JavaScriptEncoder*
   modifiers.csharp:
@@ -578,16 +783,16 @@ items:
   - set
   modifiers.vb:
   - Protected
-- uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(TagHelperContext,TagHelperOutput)
-  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(TagHelperContext,TagHelperOutput)
-  id: Process(TagHelperContext,TagHelperOutput)
+- uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  id: Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   parent: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
   langs:
   - csharp
   - vb
   name: Process(TagHelperContext, TagHelperOutput)
   nameWithType: ScriptTagHelper.Process(TagHelperContext, TagHelperOutput)
-  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   type: Method
   source:
     remote:
@@ -605,10 +810,11 @@ items:
     content: public override void Process(TagHelperContext context, TagHelperOutput output)
     parameters:
     - id: context
-      type: TagHelperContext
+      type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
     - id: output
-      type: TagHelperOutput
+      type: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
     content.vb: Public Overrides Sub Process(context As TagHelperContext, output As TagHelperOutput)
+  overridden: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
   overload: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process*
   modifiers.csharp:
   - public
@@ -617,6 +823,13 @@ items:
   - Public
   - Overrides
 references:
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: ITagHelper
+  nameWithType: ITagHelper
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers
   commentId: N:Microsoft.AspNetCore.Mvc.TagHelpers
   isExternal: false
@@ -630,51 +843,495 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: TagHelper
+  nameWithType: TagHelper
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+- uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+  commentId: T:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+  parent: Microsoft.AspNetCore.Mvc.Razor.TagHelpers
+  isExternal: false
+  name: UrlResolutionTagHelper
+  nameWithType: UrlResolutionTagHelper
+  fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  isExternal: true
+  name: Init(TagHelperContext)
+  nameWithType: TagHelper.Init(TagHelperContext)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+    name: Init
+    nameWithType: TagHelper.Init
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext)
+    name: Init
+    nameWithType: TagHelper.Init
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.Init
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  parent: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper
+  isExternal: true
+  name: ProcessAsync(TagHelperContext, TagHelperOutput)
+  nameWithType: TagHelper.ProcessAsync(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: ProcessAsync
+    nameWithType: TagHelper.ProcessAsync
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: ProcessAsync
+    nameWithType: TagHelper.ProcessAsync
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelper.ProcessAsync
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Razor.TagHelpers
+  commentId: N:Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
+  name: Microsoft.AspNetCore.Razor.TagHelpers
+  nameWithType: Microsoft.AspNetCore.Razor.TagHelpers
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers
 - uid: System
   commentId: N:System
   isExternal: false
   name: System
   nameWithType: System
   fullName: System
+- uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers
+  commentId: N:Microsoft.AspNetCore.Mvc.Razor.TagHelpers
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Razor.TagHelpers
+  nameWithType: Microsoft.AspNetCore.Mvc.Razor.TagHelpers
+  fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
   commentId: T:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
   isExternal: false
   name: ScriptTagHelper
   nameWithType: ScriptTagHelper
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper
+- uid: Microsoft.AspNetCore.Hosting.IHostingEnvironment
+  commentId: T:Microsoft.AspNetCore.Hosting.IHostingEnvironment
+  parent: Microsoft.AspNetCore.Hosting
+  isExternal: false
+  name: IHostingEnvironment
+  nameWithType: IHostingEnvironment
+  fullName: Microsoft.AspNetCore.Hosting.IHostingEnvironment
+- uid: Microsoft.Extensions.Caching.Memory.IMemoryCache
+  commentId: T:Microsoft.Extensions.Caching.Memory.IMemoryCache
+  parent: Microsoft.Extensions.Caching.Memory
+  isExternal: false
+  name: IMemoryCache
+  nameWithType: IMemoryCache
+  fullName: Microsoft.Extensions.Caching.Memory.IMemoryCache
+- uid: System.Text.Encodings.Web.HtmlEncoder
+  commentId: T:System.Text.Encodings.Web.HtmlEncoder
+  parent: System.Text.Encodings.Web
+  isExternal: true
+  name: HtmlEncoder
+  nameWithType: HtmlEncoder
+  fullName: System.Text.Encodings.Web.HtmlEncoder
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.JavaScriptEncoder
   commentId: P:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.JavaScriptEncoder
+- uid: Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory
+  commentId: T:Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory
+  parent: Microsoft.AspNetCore.Mvc.Routing
+  isExternal: false
+  name: IUrlHelperFactory
+  nameWithType: IUrlHelperFactory
+  fullName: Microsoft.AspNetCore.Mvc.Routing.IUrlHelperFactory
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.#ctor
   isExternal: false
   name: ScriptTagHelper
   nameWithType: ScriptTagHelper.ScriptTagHelper
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.ScriptTagHelper
-- uid: IHostingEnvironment
-  isExternal: true
-  name: IHostingEnvironment
-  nameWithType: IHostingEnvironment
-  fullName: IHostingEnvironment
-- uid: IMemoryCache
-  isExternal: true
-  name: IMemoryCache
-  nameWithType: IMemoryCache
-  fullName: IMemoryCache
-- uid: HtmlEncoder
-  isExternal: true
-  name: HtmlEncoder
-  nameWithType: HtmlEncoder
-  fullName: HtmlEncoder
-- uid: JavaScriptEncoder
+- uid: System.Text.Encodings.Web.JavaScriptEncoder
+  commentId: T:System.Text.Encodings.Web.JavaScriptEncoder
+  parent: System.Text.Encodings.Web
   isExternal: true
   name: JavaScriptEncoder
   nameWithType: JavaScriptEncoder
-  fullName: JavaScriptEncoder
-- uid: IUrlHelperFactory
-  isExternal: true
-  name: IUrlHelperFactory
-  nameWithType: IUrlHelperFactory
-  fullName: IUrlHelperFactory
+  fullName: System.Text.Encodings.Web.JavaScriptEncoder
+- uid: Microsoft.AspNetCore.Hosting
+  commentId: N:Microsoft.AspNetCore.Hosting
+  isExternal: false
+  name: Microsoft.AspNetCore.Hosting
+  nameWithType: Microsoft.AspNetCore.Hosting
+  fullName: Microsoft.AspNetCore.Hosting
+- uid: Microsoft.Extensions.Caching.Memory
+  commentId: N:Microsoft.Extensions.Caching.Memory
+  isExternal: false
+  name: Microsoft.Extensions.Caching.Memory
+  nameWithType: Microsoft.Extensions.Caching.Memory
+  fullName: Microsoft.Extensions.Caching.Memory
+- uid: System.Text.Encodings.Web
+  commentId: N:System.Text.Encodings.Web
+  isExternal: false
+  name: System.Text.Encodings.Web
+  nameWithType: System.Text.Encodings.Web
+  fullName: System.Text.Encodings.Web
+- uid: Microsoft.AspNetCore.Mvc.Routing
+  commentId: N:Microsoft.AspNetCore.Mvc.Routing
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.Routing
+  nameWithType: Microsoft.AspNetCore.Mvc.Routing
+  fullName: Microsoft.AspNetCore.Mvc.Routing
+- uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Order
+  parent: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+  isExternal: false
+  name: Order
+  nameWithType: UrlResolutionTagHelper.Order
+  fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Order
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Order*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Order
   isExternal: false
@@ -867,20 +1524,79 @@ references:
   name: Microsoft.AspNetCore.Mvc.TagHelpers.Internal
   nameWithType: Microsoft.AspNetCore.Mvc.TagHelpers.Internal
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.Internal
+- uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  commentId: M:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  parent: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper
+  isExternal: true
+  name: Process(TagHelperContext, TagHelperOutput)
+  nameWithType: UrlResolutionTagHelper.Process(TagHelperContext, TagHelperOutput)
+  fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext, Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: Process
+    nameWithType: UrlResolutionTagHelper.Process
+    fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process(Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext,Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput)
+    name: Process
+    nameWithType: UrlResolutionTagHelper.Process
+    fullName: Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper.Process
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    name: TagHelperContext
+    nameWithType: TagHelperContext
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    name: TagHelperOutput
+    nameWithType: TagHelperOutput
+    fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process*
   commentId: Overload:Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process
   isExternal: false
   name: Process
   nameWithType: ScriptTagHelper.Process
   fullName: Microsoft.AspNetCore.Mvc.TagHelpers.ScriptTagHelper.Process
-- uid: TagHelperContext
-  isExternal: true
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
   name: TagHelperContext
   nameWithType: TagHelperContext
-  fullName: TagHelperContext
-- uid: TagHelperOutput
-  isExternal: true
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext
+- uid: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+  commentId: T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
+  parent: Microsoft.AspNetCore.Razor.TagHelpers
+  isExternal: false
   name: TagHelperOutput
   nameWithType: TagHelperOutput
-  fullName: TagHelperOutput
+  fullName: Microsoft.AspNetCore.Razor.TagHelpers.TagHelperOutput
 shouldSkipMarkup: true

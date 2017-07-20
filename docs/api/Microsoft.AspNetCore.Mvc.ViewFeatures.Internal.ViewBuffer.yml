@@ -7,18 +7,18 @@ items:
   children:
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.#ctor(Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope,System.String,System.Int32)
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Append(System.String)
-  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(IHtmlContent)
+  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(System.String)
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Clear
-  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(IHtmlContentBuilder)
-  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(IHtmlContentBuilder)
+  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Pages
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.PartialViewPageSize
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.TagHelperPageSize
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.ViewComponentPageSize
   - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.ViewPageSize
-  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,HtmlEncoder)
-  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,HtmlEncoder)
+  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  - Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   langs:
   - csharp
   - vb
@@ -37,15 +37,27 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
-  summary: "\nAn <see cref=\"!:IHtmlContentBuilder\"></see> that is backed by a buffer provided by <xref href=\"Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  summary: "\nAn <xref href=\"Microsoft.AspNetCore.Html.IHtmlContentBuilder\" data-throw-if-not-resolved=\"false\"></xref> that is backed by a buffer provided by <xref href=\"Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope\" data-throw-if-not-resolved=\"false\"></xref>.\n"
   example: []
   syntax:
-    content: 'public class ViewBuffer : IHtmlContentBuilder'
+    content: 'public class ViewBuffer : IHtmlContentBuilder, IHtmlContentContainer, IHtmlContent'
     content.vb: >-
       Public Class ViewBuffer
-          Inherits IHtmlContentBuilder
+          Implements IHtmlContentBuilder, IHtmlContentContainer, IHtmlContent
   inheritance:
   - System.Object
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  - Microsoft.AspNetCore.Html.IHtmlContentContainer
+  - Microsoft.AspNetCore.Html.IHtmlContent
+  inheritedMembers:
+  - System.Object.ToString
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
   modifiers.csharp:
   - public
   - class
@@ -293,30 +305,35 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nAppends a <see cref=\"!:System.String\"></see> value. The value is treated as unencoded as-provided, and will be HTML\nencoded before writing to output.\n"
   example: []
   syntax:
     content: public IHtmlContentBuilder Append(string unencoded)
     parameters:
     - id: unencoded
       type: System.String
+      description: The <see cref="!:System.String"></see> to append.
     return:
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      description: The <xref href="Microsoft.AspNetCore.Html.IHtmlContentBuilder" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function Append(unencoded As String) As IHtmlContentBuilder
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Append*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(IHtmlContent)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(IHtmlContent)
-  id: AppendHtml(IHtmlContent)
+- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+  id: AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer
   langs:
   - csharp
   - vb
   name: AppendHtml(IHtmlContent)
   nameWithType: ViewBuffer.AppendHtml(IHtmlContent)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(IHtmlContent)
+  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
   type: Method
   source:
     remote:
@@ -329,16 +346,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nAppends an <xref href=\"Microsoft.AspNetCore.Html.IHtmlContent\" data-throw-if-not-resolved=\"false\"></xref> instance.\n"
   example: []
   syntax:
     content: public IHtmlContentBuilder AppendHtml(IHtmlContent content)
     parameters:
     - id: content
-      type: IHtmlContent
+      type: Microsoft.AspNetCore.Html.IHtmlContent
+      description: The <xref href="Microsoft.AspNetCore.Html.IHtmlContent" data-throw-if-not-resolved="false"></xref> to append.
     return:
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      description: The <xref href="Microsoft.AspNetCore.Html.IHtmlContentBuilder" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function AppendHtml(content As IHtmlContent) As IHtmlContentBuilder
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -365,16 +387,21 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nAppends an HTML encoded <see cref=\"!:System.String\"></see> value. The value is treated as HTML encoded as-provided, and\nno further encoding will be performed.\n"
   example: []
   syntax:
     content: public IHtmlContentBuilder AppendHtml(string encoded)
     parameters:
     - id: encoded
       type: System.String
+      description: The HTML encoded <see cref="!:System.String"></see> to append.
     return:
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      description: The <xref href="Microsoft.AspNetCore.Html.IHtmlContentBuilder" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function AppendHtml(encoded As String) As IHtmlContentBuilder
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
   modifiers.csharp:
   - public
   modifiers.vb:
@@ -401,27 +428,31 @@ items:
   assemblies:
   - Microsoft.AspNetCore.Mvc.ViewFeatures
   namespace: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
+  summary: "\nClears the content.\n"
   example: []
   syntax:
     content: public IHtmlContentBuilder Clear()
     return:
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+      description: The <xref href="Microsoft.AspNetCore.Html.IHtmlContentBuilder" data-throw-if-not-resolved="false"></xref>.
     content.vb: Public Function Clear As IHtmlContentBuilder
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Clear*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,HtmlEncoder)
-  id: WriteTo(System.IO.TextWriter,HtmlEncoder)
+- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  id: WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer
   langs:
   - csharp
   - vb
   name: WriteTo(TextWriter, HtmlEncoder)
   nameWithType: ViewBuffer.WriteTo(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter, HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
   type: Method
   source:
     remote:
@@ -441,23 +472,25 @@ items:
     - id: writer
       type: System.IO.TextWriter
     - id: encoder
-      type: HtmlEncoder
+      type: System.Text.Encodings.Web.HtmlEncoder
     content.vb: Public Sub WriteTo(writer As TextWriter, encoder As HtmlEncoder)
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,HtmlEncoder)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,HtmlEncoder)
-  id: WriteToAsync(System.IO.TextWriter,HtmlEncoder)
+- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  id: WriteToAsync(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer
   langs:
   - csharp
   - vb
   name: WriteToAsync(TextWriter, HtmlEncoder)
   nameWithType: ViewBuffer.WriteToAsync(TextWriter, HtmlEncoder)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter, HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteToAsync(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
   type: Method
   source:
     remote:
@@ -479,8 +512,8 @@ items:
       type: System.IO.TextWriter
       description: The <xref href="System.IO.TextWriter" data-throw-if-not-resolved="false"></xref>.
     - id: encoder
-      type: HtmlEncoder
-      description: The <see cref="!:HtmlEncoder"></see>.
+      type: System.Text.Encodings.Web.HtmlEncoder
+      description: The <xref href="System.Text.Encodings.Web.HtmlEncoder" data-throw-if-not-resolved="false"></xref>.
     return:
       type: System.Threading.Tasks.Task
       description: A <xref href="System.Threading.Tasks.Task" data-throw-if-not-resolved="false"></xref> which will complete once content has been written.
@@ -490,16 +523,16 @@ items:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(IHtmlContentBuilder)
-  id: CopyTo(IHtmlContentBuilder)
+- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  id: CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer
   langs:
   - csharp
   - vb
   name: CopyTo(IHtmlContentBuilder)
   nameWithType: ViewBuffer.CopyTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   type: Method
   source:
     remote:
@@ -516,23 +549,25 @@ items:
     content: public void CopyTo(IHtmlContentBuilder destination)
     parameters:
     - id: destination
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
     content.vb: Public Sub CopyTo(destination As IHtmlContentBuilder)
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
-- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(IHtmlContentBuilder)
-  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(IHtmlContentBuilder)
-  id: MoveTo(IHtmlContentBuilder)
+- uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  id: MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer
   langs:
   - csharp
   - vb
   name: MoveTo(IHtmlContentBuilder)
   nameWithType: ViewBuffer.MoveTo(IHtmlContentBuilder)
-  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   type: Method
   source:
     remote:
@@ -549,14 +584,23 @@ items:
     content: public void MoveTo(IHtmlContentBuilder destination)
     parameters:
     - id: destination
-      type: IHtmlContentBuilder
+      type: Microsoft.AspNetCore.Html.IHtmlContentBuilder
     content.vb: Public Sub MoveTo(destination As IHtmlContentBuilder)
   overload: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo*
+  implements:
+  - Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
   modifiers.csharp:
   - public
   modifiers.vb:
   - Public
 references:
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  commentId: T:Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  parent: Microsoft.AspNetCore.Html
+  isExternal: false
+  name: IHtmlContentBuilder
+  nameWithType: IHtmlContentBuilder
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
 - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope
   commentId: T:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.IViewBufferScope
   parent: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal
@@ -577,6 +621,305 @@ references:
   name: Object
   nameWithType: Object
   fullName: System.Object
+- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer
+  commentId: T:Microsoft.AspNetCore.Html.IHtmlContentContainer
+  parent: Microsoft.AspNetCore.Html
+  isExternal: false
+  name: IHtmlContentContainer
+  nameWithType: IHtmlContentContainer
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer
+- uid: Microsoft.AspNetCore.Html.IHtmlContent
+  commentId: T:Microsoft.AspNetCore.Html.IHtmlContent
+  parent: Microsoft.AspNetCore.Html
+  isExternal: false
+  name: IHtmlContent
+  nameWithType: IHtmlContent
+  fullName: Microsoft.AspNetCore.Html.IHtmlContent
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Html
+  commentId: N:Microsoft.AspNetCore.Html
+  isExternal: false
+  name: Microsoft.AspNetCore.Html
+  nameWithType: Microsoft.AspNetCore.Html
+  fullName: Microsoft.AspNetCore.Html
 - uid: System
   commentId: N:System
   isExternal: false
@@ -709,34 +1052,225 @@ references:
   name: Append
   nameWithType: ViewBuffer.Append
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Append
-- uid: IHtmlContentBuilder
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
+  parent: Microsoft.AspNetCore.Html.IHtmlContentBuilder
   isExternal: true
-  name: IHtmlContentBuilder
-  nameWithType: IHtmlContentBuilder
-  fullName: IHtmlContentBuilder
+  name: Append(String)
+  nameWithType: IHtmlContentBuilder.Append(String)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
+    name: Append
+    nameWithType: IHtmlContentBuilder.Append
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append(System.String)
+    name: Append
+    nameWithType: IHtmlContentBuilder.Append
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Append
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml
   isExternal: false
   name: AppendHtml
   nameWithType: ViewBuffer.AppendHtml
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.AppendHtml
-- uid: IHtmlContent
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+  parent: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  isExternal: false
+  name: AppendHtml(IHtmlContent)
+  nameWithType: IHtmlContentBuilder.AppendHtml(IHtmlContent)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+    name: AppendHtml
+    nameWithType: IHtmlContentBuilder.AppendHtml
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent
+    name: IHtmlContent
+    nameWithType: IHtmlContent
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(Microsoft.AspNetCore.Html.IHtmlContent)
+    name: AppendHtml
+    nameWithType: IHtmlContentBuilder.AppendHtml
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent
+    name: IHtmlContent
+    nameWithType: IHtmlContent
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
+  parent: Microsoft.AspNetCore.Html.IHtmlContentBuilder
   isExternal: true
-  name: IHtmlContent
-  nameWithType: IHtmlContent
-  fullName: IHtmlContent
+  name: AppendHtml(String)
+  nameWithType: IHtmlContentBuilder.AppendHtml(String)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
+    name: AppendHtml
+    nameWithType: IHtmlContentBuilder.AppendHtml
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml(System.String)
+    name: AppendHtml
+    nameWithType: IHtmlContentBuilder.AppendHtml
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.AppendHtml
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Clear*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Clear
   isExternal: false
   name: Clear
   nameWithType: ViewBuffer.Clear
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.Clear
+- uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+  parent: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  isExternal: false
+  name: Clear()
+  nameWithType: IHtmlContentBuilder.Clear()
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear()
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+    name: Clear
+    nameWithType: IHtmlContentBuilder.Clear
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+    name: Clear
+    nameWithType: IHtmlContentBuilder.Clear
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder.Clear
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo
   isExternal: false
   name: WriteTo
   nameWithType: ViewBuffer.WriteTo
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.WriteTo
+- uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+  parent: Microsoft.AspNetCore.Html.IHtmlContent
+  isExternal: true
+  name: WriteTo(TextWriter, HtmlEncoder)
+  nameWithType: IHtmlContent.WriteTo(TextWriter, HtmlEncoder)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter, System.Text.Encodings.Web.HtmlEncoder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+    name: WriteTo
+    nameWithType: IHtmlContent.WriteTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.TextWriter
+    name: TextWriter
+    nameWithType: TextWriter
+    fullName: System.IO.TextWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encodings.Web.HtmlEncoder
+    name: HtmlEncoder
+    nameWithType: HtmlEncoder
+    fullName: System.Text.Encodings.Web.HtmlEncoder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo(System.IO.TextWriter,System.Text.Encodings.Web.HtmlEncoder)
+    name: WriteTo
+    nameWithType: IHtmlContent.WriteTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContent.WriteTo
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.IO.TextWriter
+    name: TextWriter
+    nameWithType: TextWriter
+    fullName: System.IO.TextWriter
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Text.Encodings.Web.HtmlEncoder
+    name: HtmlEncoder
+    nameWithType: HtmlEncoder
+    fullName: System.Text.Encodings.Web.HtmlEncoder
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: System.IO.TextWriter
   commentId: T:System.IO.TextWriter
   parent: System.IO
@@ -744,17 +1278,25 @@ references:
   name: TextWriter
   nameWithType: TextWriter
   fullName: System.IO.TextWriter
-- uid: HtmlEncoder
+- uid: System.Text.Encodings.Web.HtmlEncoder
+  commentId: T:System.Text.Encodings.Web.HtmlEncoder
+  parent: System.Text.Encodings.Web
   isExternal: true
   name: HtmlEncoder
   nameWithType: HtmlEncoder
-  fullName: HtmlEncoder
+  fullName: System.Text.Encodings.Web.HtmlEncoder
 - uid: System.IO
   commentId: N:System.IO
   isExternal: false
   name: System.IO
   nameWithType: System.IO
   fullName: System.IO
+- uid: System.Text.Encodings.Web
+  commentId: N:System.Text.Encodings.Web
+  isExternal: false
+  name: System.Text.Encodings.Web
+  nameWithType: System.Text.Encodings.Web
+  fullName: System.Text.Encodings.Web
 - uid: System.Threading.Tasks.Task
   commentId: T:System.Threading.Tasks.Task
   parent: System.Threading.Tasks
@@ -780,10 +1322,84 @@ references:
   name: CopyTo
   nameWithType: ViewBuffer.CopyTo
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.CopyTo
+- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  parent: Microsoft.AspNetCore.Html.IHtmlContentContainer
+  isExternal: false
+  name: CopyTo(IHtmlContentBuilder)
+  nameWithType: IHtmlContentContainer.CopyTo(IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+    name: CopyTo
+    nameWithType: IHtmlContentContainer.CopyTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+    name: IHtmlContentBuilder
+    nameWithType: IHtmlContentBuilder
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+    name: CopyTo
+    nameWithType: IHtmlContentContainer.CopyTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.CopyTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+    name: IHtmlContentBuilder
+    nameWithType: IHtmlContentBuilder
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
 - uid: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo*
   commentId: Overload:Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo
   isExternal: false
   name: MoveTo
   nameWithType: ViewBuffer.MoveTo
   fullName: Microsoft.AspNetCore.Mvc.ViewFeatures.Internal.ViewBuffer.MoveTo
+- uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  commentId: M:Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  parent: Microsoft.AspNetCore.Html.IHtmlContentContainer
+  isExternal: false
+  name: MoveTo(IHtmlContentBuilder)
+  nameWithType: IHtmlContentContainer.MoveTo(IHtmlContentBuilder)
+  fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+  spec.csharp:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+    name: MoveTo
+    nameWithType: IHtmlContentContainer.MoveTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+    name: IHtmlContentBuilder
+    nameWithType: IHtmlContentBuilder
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo(Microsoft.AspNetCore.Html.IHtmlContentBuilder)
+    name: MoveTo
+    nameWithType: IHtmlContentContainer.MoveTo
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentContainer.MoveTo
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+    name: IHtmlContentBuilder
+    nameWithType: IHtmlContentBuilder
+    fullName: Microsoft.AspNetCore.Html.IHtmlContentBuilder
+  - name: )
+    nameWithType: )
+    fullName: )
 shouldSkipMarkup: true
