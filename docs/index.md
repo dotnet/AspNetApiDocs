@@ -43,7 +43,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.CookiePolicy </td>
-   <td></td>
+   <td>Support for defining the behavior of cookies.</td>
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.Cors </td>
@@ -51,7 +51,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.Cryptography.KeyDerivation </td>
-   <td></td>
+   <td>Support for different algorithms for key derivation.</td>
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.DataProtection </td>
@@ -111,7 +111,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.StaticFiles </td>
-   <td></td>
+   <td>Support for serving static files, default files, file extensions, Mime types and directory browsing.</td>
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.TestHost </td>
@@ -123,7 +123,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.AspNetCore.WebUtilities </td>
-   <td></td>
+   <td>Support for working with web requests/responses, including multi-part. Includes common web encodings.</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.Caching.Distributed <br/>
@@ -135,11 +135,11 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.Extensions.Cli.Utils </td>
-   <td></td>
+   <td>Support for Common Command line utilities, including appearance.</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.CommandLineUtils </td>
-   <td></td>
+   <td>Support for Command line parsing utilities</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.Configuration </td>
@@ -151,7 +151,7 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.Extensions.DiagnosticAdapter </td>
-   <td></td>
+   <td>Support for extending the diagnostic adapter.</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.FileProviders </td>
@@ -179,11 +179,11 @@ The following is a list of top level namespaces in the ASP.NET Core class librar
 </tr>
 <tr>
    <td>@Microsoft.Extensions.PlatformAbstractions </td>
-   <td></td>
+   <td>Abstractions for unifying behavior and API.</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.Primitives </td>
-   <td></td>
+   <td>Primatives shared by the frameworks.</td>
 </tr>
 <tr>
    <td>@Microsoft.Extensions.WebEncoders </td>
