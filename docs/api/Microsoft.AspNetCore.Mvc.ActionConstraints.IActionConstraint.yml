@@ -1,0 +1,173 @@
+### YamlMime:ManagedReference
+items:
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  id: IActionConstraint
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  children:
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  - Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  langs:
+  - csharp
+  - vb
+  name: IActionConstraint
+  nameWithType: IActionConstraint
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  type: Interface
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: IActionConstraint
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+    startLine: 36
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
+  summary: "\nSupports conditional logic to determine whether or not an associated action is valid to be selected\nfor the given request.\n"
+  remarks: "\nAction constraints have the secondary effect of making an action with a constraint applied a better\nmatch than one without.\n\nConsider two actions, &apos;A&apos; and &apos;B&apos; with the same action and controller name. Action &apos;A&apos; only allows the\nHTTP POST method (via a constraint) and action &apos;B&apos; has no constraints.\n\nIf an incoming request is a POST, then &apos;A&apos; is considered the best match because it both matches and\nhas a constraint. If an incoming request uses any other verb, &apos;A&apos; will not be valid for selection\ndue to it&apos;s constraint, so &apos;B&apos; is the best match.\n\n\nAction constraints are also grouped according to their order value. Any constraints with the same\ngroup value are considered to be part of the same application policy, and will be executed in the\nsame stage.\n\nStages run in ascending order based on the value of <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order\" data-throw-if-not-resolved=\"false\"></xref>. Given a set of actions which\nare candidates for selection, the next stage to run is the lowest value of <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order\" data-throw-if-not-resolved=\"false\"></xref> for any\nconstraint of any candidate which is greater than the order of the last stage.\n\nOnce the stage order is identified, each action has all of its constraints in that stage executed.\nIf any constraint does not match, then that action is not a candidate for selection. If any actions\nwith constraints in the current state are still candidates, then those are the &apos;best&apos; actions and this\nprocess will repeat with the next stage on the set of &apos;best&apos; actions. If after processing the\nsubsequent stages of the &apos;best&apos; actions no candidates remain, this process will repeat on the set of\n&apos;other&apos; candidate actions from this stage (those without a constraint).\n"
+  example: []
+  syntax:
+    content: 'public interface IActionConstraint : IActionConstraintMetadata'
+    content.vb: >-
+      Public Interface IActionConstraint
+          Inherits IActionConstraintMetadata
+  modifiers.csharp:
+  - public
+  - interface
+  modifiers.vb:
+  - Public
+  - Interface
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  id: Order
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  langs:
+  - csharp
+  - vb
+  name: Order
+  nameWithType: IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  type: Property
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: Order
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+    startLine: 45
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
+  summary: "\nThe constraint order.\n"
+  remarks: "\nConstraints are grouped into stages by the value of <xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order\" data-throw-if-not-resolved=\"false\"></xref>. See remarks on\n<xref href=\"Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint\" data-throw-if-not-resolved=\"false\"></xref>.\n"
+  example: []
+  syntax:
+    content: int Order { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: ReadOnly Property Order As Integer
+  overload: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order*
+  modifiers.csharp:
+  - get
+  modifiers.vb:
+  - ReadOnly
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  commentId: M:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  id: Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  langs:
+  - csharp
+  - vb
+  name: Accept(ActionConstraintContext)
+  nameWithType: IActionConstraint.Accept(ActionConstraintContext)
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept(Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext)
+  type: Method
+  source:
+    remote:
+      path: src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+      branch: master
+      repo: https://github.com/aspnet/Mvc.git
+    id: Accept
+    path: ../aspnet/Mvc/src/Microsoft.AspNetCore.Mvc.Abstractions/ActionConstraints/IActionConstraint.cs
+    startLine: 52
+  assemblies:
+  - Microsoft.AspNetCore.Mvc.Abstractions
+  namespace: Microsoft.AspNetCore.Mvc.ActionConstraints
+  summary: "\nDetermines whether an action is a valid candidate for selection.\n"
+  example: []
+  syntax:
+    content: bool Accept(ActionConstraintContext context)
+    parameters:
+    - id: context
+      type: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+      description: The <xref href="Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext" data-throw-if-not-resolved="false"></xref>.
+    return:
+      type: System.Boolean
+      description: True if the action is valid for selection, otherwise false.
+    content.vb: Function Accept(context As ActionConstraintContext) As Boolean
+  overload: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept*
+references:
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  commentId: P:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  isExternal: false
+  name: Order
+  nameWithType: IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints
+  commentId: N:Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: Microsoft.AspNetCore.Mvc.ActionConstraints
+  nameWithType: Microsoft.AspNetCore.Mvc.ActionConstraints
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: IActionConstraint
+  nameWithType: IActionConstraint
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order*
+  commentId: Overload:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+  isExternal: false
+  name: Order
+  nameWithType: IActionConstraint.Order
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Order
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  name: Int32
+  nameWithType: Int32
+  fullName: System.Int32
+- uid: System
+  commentId: N:System
+  isExternal: false
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  commentId: T:Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+  parent: Microsoft.AspNetCore.Mvc.ActionConstraints
+  isExternal: false
+  name: ActionConstraintContext
+  nameWithType: ActionConstraintContext
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.ActionConstraintContext
+- uid: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept*
+  commentId: Overload:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+  isExternal: false
+  name: Accept
+  nameWithType: IActionConstraint.Accept
+  fullName: Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint.Accept
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean
+shouldSkipMarkup: true
