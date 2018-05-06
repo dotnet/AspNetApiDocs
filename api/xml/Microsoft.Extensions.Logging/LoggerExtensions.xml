@@ -1,4 +1,4 @@
-<Type Name="LoggerExtensions" FullName="Microsoft.Extensions.Logging.LoggerExtensions">
+﻿<Type Name="LoggerExtensions" FullName="Microsoft.Extensions.Logging.LoggerExtensions">
   <TypeSignature Language="C#" Value="public static class LoggerExtensions" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract sealed beforefieldinit LoggerExtensions extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.Extensions.Logging.LoggerExtensions" />
@@ -11,6 +11,8 @@
     <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -35,6 +37,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IDisposable</ReturnType>
@@ -52,12 +56,54 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to create the scope in.</param>
-        <param name="messageFormat">Format string of the scope message.</param>
+        <param name="messageFormat">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats the message and creates a scope.
             </summary>
         <returns>A disposable scope object. Can be null.</returns>
+        <remarks>To be added.</remarks>
+        <example>
+            using(logger.BeginScope("Processing request from {Address}", address))
+            {
+            }
+            </example>
+      </Docs>
+    </Member>
+    <Member MemberName="Log">
+      <MemberSignature Language="C#" Value="public static void Log (this Microsoft.Extensions.Logging.ILogger logger, Microsoft.Extensions.Logging.LogLevel logLevel, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void Log(class Microsoft.Extensions.Logging.ILogger logger, valuetype Microsoft.Extensions.Logging.LogLevel logLevel, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.Log(Microsoft.Extensions.Logging.ILogger,Microsoft.Extensions.Logging.LogLevel,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member Log : Microsoft.Extensions.Logging.ILogger * Microsoft.Extensions.Logging.LogLevel * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.Log (logger, logLevel, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void Log(Microsoft::Extensions::Logging::ILogger ^ logger, Microsoft::Extensions::Logging::LogLevel logLevel, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="logLevel" Type="Microsoft.Extensions.Logging.LogLevel" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="logLevel">Entry will be written on this level.</param>
+        <param name="message">Format string of the log message.</param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes a log message on specified log level.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -73,6 +119,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -90,12 +138,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a critical log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogCritical("Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogCritical">
@@ -109,6 +158,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -128,12 +179,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a critical log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogCritical(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogCritical">
+      <MemberSignature Language="C#" Value="public static void LogCritical (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogCritical(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogCritical(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogCritical : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogCritical (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogCritical(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes a critical log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogCritical(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogCritical">
@@ -147,6 +238,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -168,12 +261,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a critical log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogCritical(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogDebug">
@@ -188,6 +282,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -205,12 +301,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a debug log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogDebug(0, "Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogDebug">
@@ -224,6 +321,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -243,12 +342,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a debug log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogDebug(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogDebug">
+      <MemberSignature Language="C#" Value="public static void LogDebug (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogDebug(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogDebug(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogDebug : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogDebug (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogDebug(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes a debug log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogDebug(exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogDebug">
@@ -262,6 +401,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -283,12 +424,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a debug log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogDebug(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogError">
@@ -303,6 +445,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -320,12 +464,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an error log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogError("Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogError">
@@ -339,6 +484,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -358,12 +505,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an error log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogError(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogError">
+      <MemberSignature Language="C#" Value="public static void LogError (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogError(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogError(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogError : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogError (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogError(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes an error log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogError(exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogError">
@@ -377,6 +564,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -398,12 +587,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an error log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogError(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogInformation">
@@ -418,6 +608,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -435,12 +627,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an informational log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogInformation("Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogInformation">
@@ -454,6 +647,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -473,12 +668,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an informational log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogInformation(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogInformation">
+      <MemberSignature Language="C#" Value="public static void LogInformation (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogInformation(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogInformation : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogInformation (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogInformation(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes an informational log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogInformation(exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogInformation">
@@ -492,6 +727,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -513,12 +750,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes an informational log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogInformation(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogTrace">
@@ -533,6 +771,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -550,12 +790,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a trace log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogTrace("Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogTrace">
@@ -569,6 +810,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -588,12 +831,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a trace log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogTrace(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogTrace">
+      <MemberSignature Language="C#" Value="public static void LogTrace (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogTrace(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogTrace(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogTrace : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogTrace (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogTrace(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes a trace log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogTrace(exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogTrace">
@@ -607,6 +890,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -628,12 +913,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a trace log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogTrace(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogWarning">
@@ -648,6 +934,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -665,12 +953,13 @@
       </Parameters>
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a warning log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogWarning("Processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogWarning">
@@ -684,6 +973,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -703,12 +994,52 @@
       <Docs>
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a warning log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogWarning(0, "Processing request from {Address}", address)</example>
+      </Docs>
+    </Member>
+    <Member MemberName="LogWarning">
+      <MemberSignature Language="C#" Value="public static void LogWarning (this Microsoft.Extensions.Logging.ILogger logger, Exception exception, string message, params object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig void LogWarning(class Microsoft.Extensions.Logging.ILogger logger, class System.Exception exception, string message, object[] args) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning(Microsoft.Extensions.Logging.ILogger,System.Exception,System.String,System.Object[])" />
+      <MemberSignature Language="F#" Value="static member LogWarning : Microsoft.Extensions.Logging.ILogger * Exception * string * obj[] -&gt; unit" Usage="Microsoft.Extensions.Logging.LoggerExtensions.LogWarning (logger, exception, message, args)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static void LogWarning(Microsoft::Extensions::Logging::ILogger ^ logger, Exception ^ exception, System::String ^ message, ... cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logger" Type="Microsoft.Extensions.Logging.ILogger" RefType="this" />
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="message" Type="System.String" />
+        <Parameter Name="args" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
+        <param name="exception">The exception to log.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
+        <param name="args">An object array that contains zero or more objects to format.</param>
+        <summary>
+            Formats and writes a warning log message.
+            </summary>
+        <remarks>To be added.</remarks>
+        <example>logger.LogWarning(exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
     <Member MemberName="LogWarning">
@@ -722,6 +1053,8 @@
         <AssemblyName>Microsoft.Extensions.Logging.Abstractions</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -743,12 +1076,13 @@
         <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILogger" /> to write to.</param>
         <param name="eventId">The event id associated with the log.</param>
         <param name="exception">The exception to log.</param>
-        <param name="message">Format string of the log message.</param>
+        <param name="message">Format string of the log message in message template format. Example: <code>"User {User} logged in from {Address}"</code></param>
         <param name="args">An object array that contains zero or more objects to format.</param>
         <summary>
             Formats and writes a warning log message.
             </summary>
         <remarks>To be added.</remarks>
+        <example>logger.LogWarning(0, exception, "Error while processing request from {Address}", address)</example>
       </Docs>
     </Member>
   </Members>

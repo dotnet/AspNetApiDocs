@@ -1,21 +1,30 @@
-<Type Name="ProducesAttribute" FullName="Microsoft.AspNetCore.Mvc.ProducesAttribute">
-  <TypeSignature Language="C#" Value="public class ProducesAttribute : Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute, Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ProducesAttribute extends Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute implements class Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider, class Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata" />
+﻿<Type Name="ProducesAttribute" FullName="Microsoft.AspNetCore.Mvc.ProducesAttribute">
+  <TypeSignature Language="C#" Value="public class ProducesAttribute : Attribute, Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider, Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter, Microsoft.AspNetCore.Mvc.Filters.IResultFilter" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ProducesAttribute extends System.Attribute implements class Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider, class Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata, class Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter, class Microsoft.AspNetCore.Mvc.Filters.IResultFilter" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Mvc.ProducesAttribute" />
-  <TypeSignature Language="VB.NET" Value="Public Class ProducesAttribute&#xA;Inherits ResultFilterAttribute&#xA;Implements IApiResponseMetadataProvider" />
-  <TypeSignature Language="F#" Value="type ProducesAttribute = class&#xA;    inherit ResultFilterAttribute&#xA;    interface IApiResponseMetadataProvider&#xA;    interface IFilterMetadata" />
-  <TypeSignature Language="C++ CLI" Value="public ref class ProducesAttribute : Microsoft::AspNetCore::Mvc::Filters::ResultFilterAttribute, Microsoft::AspNetCore::Mvc::ApiExplorer::IApiResponseMetadataProvider" />
+  <TypeSignature Language="VB.NET" Value="Public Class ProducesAttribute&#xA;Inherits Attribute&#xA;Implements IApiResponseMetadataProvider, IOrderedFilter, IResultFilter" />
+  <TypeSignature Language="F#" Value="type ProducesAttribute = class&#xA;    inherit Attribute&#xA;    interface IResultFilter&#xA;    interface IFilterMetadata&#xA;    interface IOrderedFilter&#xA;    interface IApiResponseMetadataProvider" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ProducesAttribute : Attribute, Microsoft::AspNetCore::Mvc::ApiExplorer::IApiResponseMetadataProvider, Microsoft::AspNetCore::Mvc::Filters::IOrderedFilter, Microsoft::AspNetCore::Mvc::Filters::IResultFilter" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.AspNetCore.Mvc.Filters.ResultFilterAttribute</BaseTypeName>
+    <BaseTypeName FrameworkAlternate="aspnetcore-2.0">System.Attribute</BaseTypeName>
   </Base>
   <Interfaces>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Mvc.ApiExplorer.IApiResponseMetadataProvider</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Mvc.Filters.IResultFilter</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
@@ -44,6 +53,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="type" Type="System.Type" />
@@ -68,6 +79,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
         <Parameter Name="contentType" Type="System.String" />
@@ -100,6 +113,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Mvc.Formatters.MediaTypeCollection</ReturnType>
@@ -112,19 +127,54 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="OnResultExecuting">
-      <MemberSignature Language="C#" Value="public override void OnResultExecuting (Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext context);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void OnResultExecuting(class Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext context) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)" />
-      <MemberSignature Language="VB.NET" Value="Public Overrides Sub OnResultExecuting (context As ResultExecutingContext)" />
-      <MemberSignature Language="F#" Value="override this.OnResultExecuting : Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext -&gt; unit" Usage="producesAttribute.OnResultExecuting context" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; override void OnResultExecuting(Microsoft::AspNetCore::Mvc::Filters::ResultExecutingContext ^ context);" />
-      <MemberSignature Language="C++ WINRT" Value=" override void OnResultExecuting(Microsoft::AspNetCore::Mvc::Filters::ResultExecutingContext const &amp; context);" />
+    <Member MemberName="OnResultExecuted">
+      <MemberSignature Language="C#" Value="public virtual void OnResultExecuted (Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnResultExecuted(class Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnResultExecuted (context As ResultExecutedContext)" />
+      <MemberSignature Language="F#" Value="abstract member OnResultExecuted : Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext -&gt; unit&#xA;override this.OnResultExecuted : Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext -&gt; unit" Usage="producesAttribute.OnResultExecuted context" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnResultExecuted(Microsoft::AspNetCore::Mvc::Filters::ResultExecutedContext ^ context);" />
+      <MemberSignature Language="C++ WINRT" Value=" virtual void OnResultExecuted(Microsoft::AspNetCore::Mvc::Filters::ResultExecutedContext const &amp; context);" />
       <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted(Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="Microsoft.AspNetCore.Mvc.Filters.ResultExecutedContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="OnResultExecuting">
+      <MemberSignature Language="C#" Value="public virtual void OnResultExecuting (Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void OnResultExecuting(class Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ProducesAttribute.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub OnResultExecuting (context As ResultExecutingContext)" />
+      <MemberSignature Language="F#" Value="abstract member OnResultExecuting : Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext -&gt; unit&#xA;override this.OnResultExecuting : Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext -&gt; unit" Usage="producesAttribute.OnResultExecuting context" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void OnResultExecuting(Microsoft::AspNetCore::Mvc::Filters::ResultExecutingContext ^ context);" />
+      <MemberSignature Language="C++ WINRT" Value=" virtual void OnResultExecuting(Microsoft::AspNetCore::Mvc::Filters::ResultExecutingContext const &amp; context);" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting(Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext)</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -135,6 +185,30 @@
       <Docs>
         <param name="context">To be added.</param>
         <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="Order">
+      <MemberSignature Language="C#" Value="public int Order { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 Order" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.ProducesAttribute.Order" />
+      <MemberSignature Language="VB.NET" Value="Public Property Order As Integer" />
+      <MemberSignature Language="F#" Value="member this.Order : int with get, set" Usage="Microsoft.AspNetCore.Mvc.ProducesAttribute.Order" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Order { int get(); void set(int value); };" />
+      <MemberSignature Language="C++ CX" Value="public:&#xA; property int Order { int get(); void set(int value); };" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
         <inheritdoc />
       </Docs>
@@ -154,6 +228,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
@@ -184,6 +260,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
@@ -208,6 +286,8 @@
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
