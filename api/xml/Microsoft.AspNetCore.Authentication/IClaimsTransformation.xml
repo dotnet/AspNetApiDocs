@@ -2,9 +2,15 @@
   <TypeSignature Language="C#" Value="public interface IClaimsTransformation" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IClaimsTransformation" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Authentication.IClaimsTransformation" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IClaimsTransformation" />
+  <TypeSignature Language="F#" Value="type IClaimsTransformation = interface" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IClaimsTransformation" />
+  <TypeSignature Language="C++ CX" Value="public interface class IClaimsTransformation" />
+  <TypeSignature Language="C++ WINRT" Value="__interface IClaimsTransformation" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Authentication.Abstractions</AssemblyName>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -18,10 +24,14 @@
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;System.Security.Claims.ClaimsPrincipal&gt; TransformAsync (System.Security.Claims.ClaimsPrincipal principal);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class System.Security.Claims.ClaimsPrincipal&gt; TransformAsync(class System.Security.Claims.ClaimsPrincipal principal) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Authentication.IClaimsTransformation.TransformAsync(System.Security.Claims.ClaimsPrincipal)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TransformAsync (principal As ClaimsPrincipal) As Task(Of ClaimsPrincipal)" />
+      <MemberSignature Language="F#" Value="abstract member TransformAsync : System.Security.Claims.ClaimsPrincipal -&gt; System.Threading.Tasks.Task&lt;System.Security.Claims.ClaimsPrincipal&gt;" Usage="iClaimsTransformation.TransformAsync principal" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task&lt;System::Security::Claims::ClaimsPrincipal ^&gt; ^ TransformAsync(System::Security::Claims::ClaimsPrincipal ^ principal);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Authentication.Abstractions</AssemblyName>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.Task&lt;System.Security.Claims.ClaimsPrincipal&gt;</ReturnType>
@@ -32,7 +42,9 @@
       <Docs>
         <param name="principal">The <see cref="T:System.Security.Claims.ClaimsPrincipal" /> to transform.</param>
         <summary>
-            Provides a central transformation point to change the specified principal.
+            Provides a central transformation point to change the specified principal. 
+            Note: this will be run on each AuthenticateAsync call, so its safer to
+            return a new ClaimsPrincipal if your transformation is not idempotent.
             </summary>
         <returns>The transformed principal.</returns>
         <remarks>To be added.</remarks>
