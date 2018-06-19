@@ -86,42 +86,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public ModelAttributes (System.Collections.Generic.IEnumerable&lt;object&gt; typeAttributes, System.Collections.Generic.IEnumerable&lt;object&gt; propertyAttributes, System.Collections.Generic.IEnumerable&lt;object&gt; parameterAttributes);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Collections.Generic.IEnumerable`1&lt;object&gt; typeAttributes, class System.Collections.Generic.IEnumerable`1&lt;object&gt; propertyAttributes, class System.Collections.Generic.IEnumerable`1&lt;object&gt; parameterAttributes) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes.#ctor(System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Object})" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (typeAttributes As IEnumerable(Of Object), propertyAttributes As IEnumerable(Of Object), parameterAttributes As IEnumerable(Of Object))" />
-      <MemberSignature Language="F#" Value="new Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes : seq&lt;obj&gt; * seq&lt;obj&gt; * seq&lt;obj&gt; -&gt; Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" Usage="new Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes (typeAttributes, propertyAttributes, parameterAttributes)" />
-      <MemberType>Constructor</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Parameters>
-        <Parameter Name="typeAttributes" Type="System.Collections.Generic.IEnumerable&lt;System.Object&gt;" />
-        <Parameter Name="propertyAttributes" Type="System.Collections.Generic.IEnumerable&lt;System.Object&gt;" />
-        <Parameter Name="parameterAttributes" Type="System.Collections.Generic.IEnumerable&lt;System.Object&gt;" />
-      </Parameters>
-      <Docs>
-        <param name="typeAttributes">
-            If this instance represents a type, the set of attributes for that type.
-            If this instance represents a property, the set of attributes for the property's <see cref="T:System.Type" />.
-            Otherwise, <c>null</c>.
-            </param>
-        <param name="propertyAttributes">
-            If this instance represents a property, the set of attributes for that property.
-            Otherwise, <c>null</c>.
-            </param>
-        <param name="parameterAttributes">
-            If this instance represents a parameter, the set of attributes for that parameter.
-            Otherwise, <c>null</c>.
-            </param>
-        <summary>
-            Creates a new <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" />.
-            </summary>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="Attributes">
       <MemberSignature Language="C#" Value="public System.Collections.Generic.IReadOnlyList&lt;object&gt; Attributes { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IReadOnlyList`1&lt;object&gt; Attributes" />
@@ -142,7 +106,9 @@
       <Docs>
         <summary>
             Gets the set of all attributes. If this instance represents the attributes for a property, the attributes
-            on the property definition are before those on the property's <see cref="T:System.Type" />.
+            on the property definition are before those on the property's <see cref="T:System.Type" />. If this instance
+            represents the attributes for a parameter, the attributes on the parameter definition are before those on
+            the parameter's <see cref="T:System.Type" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -165,12 +131,15 @@
         <Parameter Name="parameterInfo" Type="System.Reflection.ParameterInfo" />
       </Parameters>
       <Docs>
-        <param name="parameterInfo">The <see cref="T:System.Reflection.ParameterInfo" /> for which attributes need to be resolved.
+        <param name="parameterInfo">
+            The <see cref="T:System.Reflection.ParameterInfo" /> for which attributes need to be resolved.
             </param>
         <summary>
             Gets the attributes for the given <paramref name="parameterInfo" />.
             </summary>
-        <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" /> instance with the attributes of the <see cref="T:System.Reflection.ParameterInfo" />.</returns>
+        <returns>
+            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" /> instance with the attributes of the parameter and its <see cref="T:System.Type" />.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -202,7 +171,9 @@
         <summary>
             Gets the attributes for the given <paramref name="property" />.
             </summary>
-        <returns>A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" /> instance with the attributes of the property.</returns>
+        <returns>
+            A <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes" /> instance with the attributes of the property and its <see cref="T:System.Type" />.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -303,10 +274,10 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets the set of attributes on the <see cref="T:System.Type" />. If this instance represents a property,
-            then <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes.TypeAttributes" /> contains attributes retrieved from
-            <see cref="P:System.Reflection.PropertyInfo.PropertyType" />. If this instance represents a parameter, then
-            the value is <c>null</c>.
+            Gets the set of attributes on the <see cref="T:System.Type" />. If this instance represents a property, then
+            <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinding.ModelAttributes.TypeAttributes" /> contains attributes retrieved from <see cref="P:System.Reflection.PropertyInfo.PropertyType" />.
+            If this instance represents a parameter, then contains attributes retrieved from
+            <see cref="P:System.Reflection.ParameterInfo.ParameterType" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
