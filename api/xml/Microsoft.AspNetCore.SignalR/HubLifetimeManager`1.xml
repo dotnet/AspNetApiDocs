@@ -21,7 +21,9 @@
   <Interfaces />
   <Docs>
     <typeparam name="THub">To be added.</typeparam>
-    <summary>To be added.</summary>
+    <summary>
+            A lifetime manager abstraction for <see cref="T:Microsoft.AspNetCore.SignalR.Hub" /> instances.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -41,12 +43,11 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="AddGroupAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task AddGroupAsync (string connectionId, string groupName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task AddGroupAsync(string connectionId, string groupName) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.AddGroupAsync(System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function AddGroupAsync (connectionId As String, groupName As String) As Task" />
-      <MemberSignature Language="F#" Value="abstract member AddGroupAsync : string * string -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.AddGroupAsync (connectionId, groupName)" />
+    <Member MemberName="AddToGroupAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task AddToGroupAsync (string connectionId, string groupName, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task AddToGroupAsync(string connectionId, string groupName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.AddToGroupAsync(System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member AddToGroupAsync : string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.AddToGroupAsync (connectionId, groupName, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -58,12 +59,16 @@
       <Parameters>
         <Parameter Name="connectionId" Type="System.String" />
         <Parameter Name="groupName" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="connectionId">To be added.</param>
-        <param name="groupName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connectionId">The connection ID to add to a group.</param>
+        <param name="groupName">The group name.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Adds a connection to the specified group.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous add.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -85,9 +90,11 @@
         <Parameter Name="connection" Type="Microsoft.AspNetCore.SignalR.HubConnectionContext" />
       </Parameters>
       <Docs>
-        <param name="connection">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connection">The connection.</param>
+        <summary>
+            Called when a connection is started.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous connect.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -109,18 +116,19 @@
         <Parameter Name="connection" Type="Microsoft.AspNetCore.SignalR.HubConnectionContext" />
       </Parameters>
       <Docs>
-        <param name="connection">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connection">The connection.</param>
+        <summary>
+            Called when a connection is finished.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous disconnect.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="RemoveGroupAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task RemoveGroupAsync (string connectionId, string groupName);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task RemoveGroupAsync(string connectionId, string groupName) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.RemoveGroupAsync(System.String,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function RemoveGroupAsync (connectionId As String, groupName As String) As Task" />
-      <MemberSignature Language="F#" Value="abstract member RemoveGroupAsync : string * string -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.RemoveGroupAsync (connectionId, groupName)" />
+    <Member MemberName="RemoveFromGroupAsync">
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task RemoveFromGroupAsync (string connectionId, string groupName, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task RemoveFromGroupAsync(string connectionId, string groupName, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.RemoveFromGroupAsync(System.String,System.String,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member RemoveFromGroupAsync : string * string * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.RemoveFromGroupAsync (connectionId, groupName, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -132,21 +140,24 @@
       <Parameters>
         <Parameter Name="connectionId" Type="System.String" />
         <Parameter Name="groupName" Type="System.String" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="connectionId">To be added.</param>
-        <param name="groupName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connectionId">The connection ID to remove from a group.</param>
+        <param name="groupName">The group name.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Removes a connection from the specified group.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous remove.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendAllAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendAllAsync (string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAllAsync(string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendAllAsync(System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendAllAsync (methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendAllAsync : string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendAllAsync (methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendAllAsync (string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAllAsync(string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendAllAsync(System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendAllAsync : string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendAllAsync (methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -158,21 +169,24 @@
       <Parameters>
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to all hub connections.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendAllExceptAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendAllExceptAsync (string methodName, object[] args, System.Collections.Generic.IReadOnlyList&lt;string&gt; excludedIds);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAllExceptAsync(string methodName, object[] args, class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; excludedIds) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendAllExceptAsync(System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String})" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendAllExceptAsync (methodName As String, args As Object(), excludedIds As IReadOnlyList(Of String)) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendAllExceptAsync : string * obj[] * System.Collections.Generic.IReadOnlyList&lt;string&gt; -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendAllExceptAsync (methodName, args, excludedIds)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendAllExceptAsync (string methodName, object[] args, System.Collections.Generic.IReadOnlyList&lt;string&gt; excludedConnectionIds, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendAllExceptAsync(string methodName, object[] args, class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; excludedConnectionIds, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendAllExceptAsync(System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendAllExceptAsync : string * obj[] * System.Collections.Generic.IReadOnlyList&lt;string&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendAllExceptAsync (methodName, args, excludedConnectionIds, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -184,23 +198,26 @@
       <Parameters>
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
-        <Parameter Name="excludedIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
+        <Parameter Name="excludedConnectionIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <param name="excludedIds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to all hub connections excluding the specified connections.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendConnectionAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendConnectionAsync (string connectionId, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendConnectionAsync(string connectionId, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendConnectionAsync(System.String,System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendConnectionAsync (connectionId As String, methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendConnectionAsync : string * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendConnectionAsync (connectionId, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendConnectionAsync (string connectionId, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendConnectionAsync(string connectionId, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendConnectionAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendConnectionAsync : string * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendConnectionAsync (connectionId, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -213,22 +230,25 @@
         <Parameter Name="connectionId" Type="System.String" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="connectionId">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connectionId">The connection ID.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified connection.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendConnectionsAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendConnectionsAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; connectionIds, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendConnectionsAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; connectionIds, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendConnectionsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendConnectionsAsync (connectionIds As IReadOnlyList(Of String), methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendConnectionsAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendConnectionsAsync (connectionIds, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendConnectionsAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; connectionIds, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendConnectionsAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; connectionIds, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendConnectionsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendConnectionsAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendConnectionsAsync (connectionIds, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -241,22 +261,25 @@
         <Parameter Name="connectionIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="connectionIds">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="connectionIds">The connection IDs.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified connections.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendGroupAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupAsync (string groupName, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupAsync(string groupName, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupAsync(System.String,System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendGroupAsync (groupName As String, methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendGroupAsync : string * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupAsync (groupName, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupAsync (string groupName, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupAsync(string groupName, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendGroupAsync : string * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupAsync (groupName, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -269,22 +292,25 @@
         <Parameter Name="groupName" Type="System.String" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="groupName">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="groupName">The group name.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified group.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendGroupExceptAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupExceptAsync (string groupName, string methodName, object[] args, System.Collections.Generic.IReadOnlyList&lt;string&gt; excludedIds);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupExceptAsync(string groupName, string methodName, object[] args, class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; excludedIds) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupExceptAsync(System.String,System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String})" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendGroupExceptAsync (groupName As String, methodName As String, args As Object(), excludedIds As IReadOnlyList(Of String)) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendGroupExceptAsync : string * string * obj[] * System.Collections.Generic.IReadOnlyList&lt;string&gt; -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupExceptAsync (groupName, methodName, args, excludedIds)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupExceptAsync (string groupName, string methodName, object[] args, System.Collections.Generic.IReadOnlyList&lt;string&gt; excludedConnectionIds, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupExceptAsync(string groupName, string methodName, object[] args, class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; excludedConnectionIds, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupExceptAsync(System.String,System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendGroupExceptAsync : string * string * obj[] * System.Collections.Generic.IReadOnlyList&lt;string&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupExceptAsync (groupName, methodName, args, excludedConnectionIds, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -297,24 +323,27 @@
         <Parameter Name="groupName" Type="System.String" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
-        <Parameter Name="excludedIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
+        <Parameter Name="excludedConnectionIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="groupName">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <param name="excludedIds">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="groupName">The group name.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="excludedConnectionIds">A collection of connection IDs to exclude.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified group excluding the specified connections.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendGroupsAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupsAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; groupNames, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupsAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; groupNames, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendGroupsAsync (groupNames As IReadOnlyList(Of String), methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendGroupsAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupsAsync (groupNames, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendGroupsAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; groupNames, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendGroupsAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; groupNames, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendGroupsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendGroupsAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendGroupsAsync (groupNames, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -327,22 +356,25 @@
         <Parameter Name="groupNames" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="groupNames">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="groupNames">The group names.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified groups.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendUserAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendUserAsync (string userId, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendUserAsync(string userId, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendUserAsync(System.String,System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendUserAsync (userId As String, methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendUserAsync : string * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendUserAsync (userId, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendUserAsync (string userId, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendUserAsync(string userId, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendUserAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendUserAsync : string * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendUserAsync (userId, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -355,22 +387,25 @@
         <Parameter Name="userId" Type="System.String" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="userId">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="userId">The user ID.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified user.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SendUsersAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendUsersAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; userIds, string methodName, object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendUsersAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; userIds, string methodName, object[] args) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendUsersAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public MustOverride Function SendUsersAsync (userIds As IReadOnlyList(Of String), methodName As String, args As Object()) As Task" />
-      <MemberSignature Language="F#" Value="abstract member SendUsersAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendUsersAsync (userIds, methodName, args)" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task SendUsersAsync (System.Collections.Generic.IReadOnlyList&lt;string&gt; userIds, string methodName, object[] args, System.Threading.CancellationToken cancellationToken = null);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SendUsersAsync(class System.Collections.Generic.IReadOnlyList`1&lt;string&gt; userIds, string methodName, object[] args, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.HubLifetimeManager`1.SendUsersAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SendUsersAsync : System.Collections.Generic.IReadOnlyList&lt;string&gt; * string * obj[] * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="hubLifetimeManager.SendUsersAsync (userIds, methodName, args, cancellationToken)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Core</AssemblyName>
@@ -383,13 +418,17 @@
         <Parameter Name="userIds" Type="System.Collections.Generic.IReadOnlyList&lt;System.String&gt;" />
         <Parameter Name="methodName" Type="System.String" />
         <Parameter Name="args" Type="System.Object[]" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="userIds">To be added.</param>
-        <param name="methodName">To be added.</param>
-        <param name="args">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="userIds">The user IDs.</param>
+        <param name="methodName">The invocation method name.</param>
+        <param name="args">The invocation arguments.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>
+            Sends an invocation message to the specified users.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.Task" /> that represents the asynchronous send.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

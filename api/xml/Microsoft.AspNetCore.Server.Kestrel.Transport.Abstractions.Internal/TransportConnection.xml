@@ -1,9 +1,9 @@
 ﻿<Type Name="TransportConnection" FullName="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection">
-  <TypeSignature Language="C#" Value="public abstract class TransportConnection : Microsoft.AspNetCore.Connections.ConnectionContext, Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature, Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature, Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature, Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature, Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature, Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature, Microsoft.AspNetCore.Http.Features.IFeatureCollection, Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature, System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;Type,object&gt;&gt;" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit TransportConnection extends Microsoft.AspNetCore.Connections.ConnectionContext implements class Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature, class Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature, class Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature, class Microsoft.AspNetCore.Http.Features.IFeatureCollection, class Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature, class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;class System.Type, object&gt;&gt;, class System.Collections.IEnumerable" />
+  <TypeSignature Language="C#" Value="public class TransportConnection : Microsoft.AspNetCore.Connections.ConnectionContext, Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature, Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature, Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature, Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature, Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature, Microsoft.AspNetCore.Http.Features.IFeatureCollection, Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature, Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature, Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature, Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature, System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;Type,object&gt;&gt;" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit TransportConnection extends Microsoft.AspNetCore.Connections.ConnectionContext implements class Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature, class Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature, class Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature, class Microsoft.AspNetCore.Http.Features.IFeatureCollection, class Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature, class Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature, class Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature, class Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature, class System.Collections.Generic.IEnumerable`1&lt;valuetype System.Collections.Generic.KeyValuePair`2&lt;class System.Type, object&gt;&gt;, class System.Collections.IEnumerable" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection" />
-  <TypeSignature Language="VB.NET" Value="Public MustInherit Class TransportConnection&#xA;Inherits ConnectionContext&#xA;Implements IApplicationTransportFeature, IConnectionIdFeature, IConnectionItemsFeature, IConnectionTransportFeature, IEnumerable(Of KeyValuePair(Of Type, Object)), IFeatureCollection, IHttpConnectionFeature, IMemoryPoolFeature, ITransportSchedulerFeature" />
-  <TypeSignature Language="F#" Value="type TransportConnection = class&#xA;    inherit ConnectionContext&#xA;    interface IFeatureCollection&#xA;    interface seq&lt;KeyValuePair&lt;Type, obj&gt;&gt;&#xA;    interface IEnumerable&#xA;    interface IHttpConnectionFeature&#xA;    interface IConnectionIdFeature&#xA;    interface IConnectionTransportFeature&#xA;    interface IConnectionItemsFeature&#xA;    interface IMemoryPoolFeature&#xA;    interface IApplicationTransportFeature&#xA;    interface ITransportSchedulerFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Class TransportConnection&#xA;Inherits ConnectionContext&#xA;Implements IApplicationTransportFeature, IBytesWrittenFeature, IConnectionIdFeature, IConnectionItemsFeature, IConnectionLifetimeFeature, IConnectionTransportFeature, IEnumerable(Of KeyValuePair(Of Type, Object)), IFeatureCollection, IHttpConnectionFeature, IMemoryPoolFeature, ITransportSchedulerFeature" />
+  <TypeSignature Language="F#" Value="type TransportConnection = class&#xA;    inherit ConnectionContext&#xA;    interface IFeatureCollection&#xA;    interface seq&lt;KeyValuePair&lt;Type, obj&gt;&gt;&#xA;    interface IEnumerable&#xA;    interface IHttpConnectionFeature&#xA;    interface IConnectionIdFeature&#xA;    interface IConnectionTransportFeature&#xA;    interface IConnectionItemsFeature&#xA;    interface IMemoryPoolFeature&#xA;    interface IApplicationTransportFeature&#xA;    interface ITransportSchedulerFeature&#xA;    interface IConnectionLifetimeFeature&#xA;    interface IBytesWrittenFeature" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -13,13 +13,13 @@
   </Base>
   <Interfaces>
     <Interface>
-      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature</InterfaceName>
-    </Interface>
-    <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature</InterfaceName>
@@ -28,13 +28,19 @@
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature</InterfaceName>
     </Interface>
     <Interface>
-      <InterfaceName>Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature</InterfaceName>
-    </Interface>
-    <Interface>
       <InterfaceName>Microsoft.AspNetCore.Http.Features.IFeatureCollection</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>System.Collections.Generic.IEnumerable&lt;System.Collections.Generic.KeyValuePair&lt;System.Type,System.Object&gt;&gt;</InterfaceName>
@@ -61,6 +67,29 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Abort">
+      <MemberSignature Language="C#" Value="public virtual void Abort ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Abort() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Abort" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Abort ()" />
+      <MemberSignature Language="F#" Value="abstract member Abort : unit -&gt; unit&#xA;override this.Abort : unit -&gt; unit" Usage="transportConnection.Abort " />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.Abort</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Application">
       <MemberSignature Language="C#" Value="public System.IO.Pipelines.IDuplexPipe Application { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.IDuplexPipe Application" />
@@ -69,7 +98,7 @@
       <MemberSignature Language="F#" Value="member this.Application : System.IO.Pipelines.IDuplexPipe with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Application" />
       <MemberType>Property</MemberType>
       <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application</InterfaceMember>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
@@ -77,6 +106,29 @@
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IO.Pipelines.IDuplexPipe</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectionClosed">
+      <MemberSignature Language="C#" Value="public System.Threading.CancellationToken ConnectionClosed { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Threading.CancellationToken ConnectionClosed" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.ConnectionClosed" />
+      <MemberSignature Language="VB.NET" Value="Public Property ConnectionClosed As CancellationToken" />
+      <MemberSignature Language="F#" Value="member this.ConnectionClosed : System.Threading.CancellationToken with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.ConnectionClosed" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.CancellationToken</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -156,7 +208,7 @@
       <MemberSignature Language="F#" Value="member this.InputWriterScheduler : System.IO.Pipelines.PipeScheduler" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.InputWriterScheduler" />
       <MemberType>Property</MemberType>
       <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler</InterfaceMember>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
@@ -260,29 +312,6 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application">
-      <MemberSignature Language="C#" Value="System.IO.Pipelines.IDuplexPipe Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.IDuplexPipe Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Connections#Features#IApplicationTransportFeature#Application" />
-      <MemberSignature Language="VB.NET" Value=" Property Application As IDuplexPipe Implements IApplicationTransportFeature.Application" />
-      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application" />
-      <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IApplicationTransportFeature.Application</InterfaceMember>
-      </Implements>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.IO.Pipelines.IDuplexPipe</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
     <Member MemberName="Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature.Items">
       <MemberSignature Language="C#" Value="System.Collections.Generic.IDictionary&lt;object,object&gt; Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature.Items { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IDictionary`2&lt;object, object&gt; Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature.Items" />
@@ -299,6 +328,51 @@
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IDictionary&lt;System.Object,System.Object&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.Abort">
+      <MemberSignature Language="C#" Value="void IConnectionLifetimeFeature.Abort ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance void Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.Abort() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Connections#Features#IConnectionLifetimeFeature#Abort" />
+      <MemberSignature Language="VB.NET" Value="Sub Abort () Implements IConnectionLifetimeFeature.Abort" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.Abort</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed">
+      <MemberSignature Language="C#" Value="System.Threading.CancellationToken Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Threading.CancellationToken Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Connections#Features#IConnectionLifetimeFeature#ConnectionClosed" />
+      <MemberSignature Language="VB.NET" Value=" Property ConnectionClosed As CancellationToken Implements IConnectionLifetimeFeature.ConnectionClosed" />
+      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.CancellationToken</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -345,52 +419,6 @@
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Buffers.MemoryPool&lt;System.Byte&gt;</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler">
-      <MemberSignature Language="C#" Value="System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Connections#Features#ITransportSchedulerFeature#InputWriterScheduler" />
-      <MemberSignature Language="VB.NET" Value=" ReadOnly Property InputWriterScheduler As PipeScheduler Implements ITransportSchedulerFeature.InputWriterScheduler" />
-      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler" />
-      <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.InputWriterScheduler</InterfaceMember>
-      </Implements>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.IO.Pipelines.PipeScheduler</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler">
-      <MemberSignature Language="C#" Value="System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Connections#Features#ITransportSchedulerFeature#OutputReaderScheduler" />
-      <MemberSignature Language="VB.NET" Value=" ReadOnly Property OutputReaderScheduler As PipeScheduler Implements ITransportSchedulerFeature.OutputReaderScheduler" />
-      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler" />
-      <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler</InterfaceMember>
-      </Implements>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
-        <AssemblyVersion>2.1.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.IO.Pipelines.PipeScheduler</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
@@ -642,6 +670,98 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application">
+      <MemberSignature Language="C#" Value="System.IO.Pipelines.IDuplexPipe Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.IDuplexPipe Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Server#Kestrel#Transport#Abstractions#Internal#IApplicationTransportFeature#Application" />
+      <MemberSignature Language="VB.NET" Value=" Property Application As IDuplexPipe Implements IApplicationTransportFeature.Application" />
+      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IO.Pipelines.IDuplexPipe</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten">
+      <MemberSignature Language="C#" Value="long Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Server#Kestrel#Transport#Abstractions#Internal#IBytesWrittenFeature#TotalBytesWritten" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property TotalBytesWritten As Long Implements IBytesWrittenFeature.TotalBytesWritten" />
+      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler">
+      <MemberSignature Language="C#" Value="System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Server#Kestrel#Transport#Abstractions#Internal#ITransportSchedulerFeature#InputWriterScheduler" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property InputWriterScheduler As PipeScheduler Implements ITransportSchedulerFeature.InputWriterScheduler" />
+      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IO.Pipelines.PipeScheduler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler">
+      <MemberSignature Language="C#" Value="System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.PipeScheduler Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft#AspNetCore#Server#Kestrel#Transport#Abstractions#Internal#ITransportSchedulerFeature#OutputReaderScheduler" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property OutputReaderScheduler As PipeScheduler Implements ITransportSchedulerFeature.OutputReaderScheduler" />
+      <MemberSignature Language="F#" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IO.Pipelines.PipeScheduler</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Output">
       <MemberSignature Language="C#" Value="public System.IO.Pipelines.PipeReader Output { get; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.IO.Pipelines.PipeReader Output" />
@@ -670,7 +790,7 @@
       <MemberSignature Language="F#" Value="member this.OutputReaderScheduler : System.IO.Pipelines.PipeScheduler" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.OutputReaderScheduler" />
       <MemberType>Property</MemberType>
       <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.ITransportSchedulerFeature.OutputReaderScheduler</InterfaceMember>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
@@ -771,6 +891,29 @@
       <Docs>
         <summary>To be added.</summary>
         <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TotalBytesWritten">
+      <MemberSignature Language="C#" Value="public virtual long TotalBytesWritten { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int64 TotalBytesWritten" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.TotalBytesWritten" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable ReadOnly Property TotalBytesWritten As Long" />
+      <MemberSignature Language="F#" Value="member this.TotalBytesWritten : int64" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.TotalBytesWritten" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int64</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>To be added.</summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
