@@ -1,0 +1,88 @@
+﻿<Type Name="IMergeableAnnotation" FullName="System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation">
+  <TypeSignature Language="C#" Value="public interface IMergeableAnnotation" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IMergeableAnnotation" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IMergeableAnnotation" />
+  <TypeSignature Language="F#" Value="type IMergeableAnnotation = interface" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId="Mergeable")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>
+            Types used as custom annotations can implement this interface to indicate that an attempt to use
+            multiple annotations with the same name on a given table or column may be possible by merging
+            the multiple annotations into one.
+            </summary>
+    <remarks>
+            Normally there can only be one custom annotation with a given name on a given table or
+            column. If a table or column ends up with multiple annotations, for example, because
+            multiple CLR properties map to the same column, then an exception will be thrown.
+            However, if the annotation type implements this interface, then the two annotations will be
+            checked for compatibility using the <see cref="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.IsCompatibleWith(System.Object)" /> method and, if compatible,
+            will be merged into one using the <see cref="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.MergeWith(System.Object)" /> method.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="IsCompatibleWith">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Infrastructure.Annotations.CompatibilityResult IsCompatibleWith (object other);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Data.Entity.Infrastructure.Annotations.CompatibilityResult IsCompatibleWith(object other) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.IsCompatibleWith(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsCompatibleWith (other As Object) As CompatibilityResult" />
+      <MemberSignature Language="F#" Value="abstract member IsCompatibleWith : obj -&gt; System.Data.Entity.Infrastructure.Annotations.CompatibilityResult" Usage="iMergeableAnnotation.IsCompatibleWith other" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.Annotations.CompatibilityResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="other" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="other">The annotation to compare.</param>
+        <summary>
+            Returns true if this annotation does not conflict with the given annotation such that
+            the two can be combined together using the <see cref="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.MergeWith(System.Object)" /> method.
+            </summary>
+        <returns>A CompatibilityResult indicating whether or not this annotation is compatible with the other.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MergeWith">
+      <MemberSignature Language="C#" Value="public object MergeWith (object other);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance object MergeWith(object other) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.MergeWith(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Function MergeWith (other As Object) As Object" />
+      <MemberSignature Language="F#" Value="abstract member MergeWith : obj -&gt; obj" Usage="iMergeableAnnotation.MergeWith other" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Object</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="other" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="other">The annotation to merge with this one.</param>
+        <summary>
+            Merges this annotation with the given annotation and returns a new merged annotation. This method is
+            only expected to succeed if <see cref="M:System.Data.Entity.Infrastructure.Annotations.IMergeableAnnotation.IsCompatibleWith(System.Object)" /> returns true.
+            </summary>
+        <returns>A new merged annotation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

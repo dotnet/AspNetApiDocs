@@ -1,0 +1,63 @@
+﻿<Type Name="IDbConfigurationInterceptor" FullName="System.Data.Entity.Infrastructure.Interception.IDbConfigurationInterceptor">
+  <TypeSignature Language="C#" Value="public interface IDbConfigurationInterceptor : System.Data.Entity.Infrastructure.Interception.IDbInterceptor" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDbConfigurationInterceptor implements class System.Data.Entity.Infrastructure.Interception.IDbInterceptor" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.Infrastructure.Interception.IDbConfigurationInterceptor" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IDbConfigurationInterceptor&#xA;Implements IDbInterceptor" />
+  <TypeSignature Language="F#" Value="type IDbConfigurationInterceptor = interface&#xA;    interface IDbInterceptor" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Data.Entity.Infrastructure.Interception.IDbInterceptor</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            An object that implements this interface can be registered with <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> to
+            receive notifications when Entity Framework loads the application's <see cref="T:System.Data.Entity.DbConfiguration" />.
+            </summary>
+    <remarks>
+            Interceptors can also be registered in the config file of the application.
+            See http://go.microsoft.com/fwlink/?LinkId=260883 for more information about Entity Framework configuration.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Loaded">
+      <MemberSignature Language="C#" Value="public void Loaded (System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs loadedEventArgs, System.Data.Entity.Infrastructure.Interception.DbConfigurationInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Loaded(class System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs loadedEventArgs, class System.Data.Entity.Infrastructure.Interception.DbConfigurationInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.IDbConfigurationInterceptor.Loaded(System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs,System.Data.Entity.Infrastructure.Interception.DbConfigurationInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Loaded (loadedEventArgs As DbConfigurationLoadedEventArgs, interceptionContext As DbConfigurationInterceptionContext)" />
+      <MemberSignature Language="F#" Value="abstract member Loaded : System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs * System.Data.Entity.Infrastructure.Interception.DbConfigurationInterceptionContext -&gt; unit" Usage="iDbConfigurationInterceptor.Loaded (loadedEventArgs, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="loadedEventArgs" Type="System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbConfigurationInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="loadedEventArgs">Arguments to the event that this interceptor mirrors.</param>
+        <param name="interceptionContext">Contextual information about the event.</param>
+        <summary>
+            Occurs during EF initialization after the <see cref="T:System.Data.Entity.DbConfiguration" /> has been constructed but just before
+            it is locked ready for use. Use this event to inspect and/or override services that have been
+            registered before the configuration is locked. Note that an interceptor of this type should be used carefully
+            since it may prevent tooling from discovering the same configuration that is used at runtime.
+            </summary>
+        <remarks>
+            Handlers can only be added before EF starts to use the configuration and so handlers should
+            generally be added as part of application initialization. Do not access the DbConfiguration
+            static methods inside the handler; instead use the the members of <see cref="T:System.Data.Entity.Infrastructure.DependencyResolution.DbConfigurationLoadedEventArgs" />
+            to get current services and/or add overrides.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

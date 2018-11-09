@@ -1,0 +1,572 @@
+﻿<Type Name="DbConnectionDispatcher" FullName="System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher">
+  <TypeSignature Language="C#" Value="public class DbConnectionDispatcher" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DbConnectionDispatcher extends System.Object" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher" />
+  <TypeSignature Language="VB.NET" Value="Public Class DbConnectionDispatcher" />
+  <TypeSignature Language="F#" Value="type DbConnectionDispatcher = class" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Used for dispatching operations to a <see cref="T:System.Data.Common.DbConnection" /> such that any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> will be notified before and after the
+            operation executes.
+            Instances of this class are obtained through the the <see cref="P:System.Data.Entity.Infrastructure.Interception.DbInterception.Dispatch" /> fluent API.
+            </summary>
+    <remarks>
+            This class is used internally by Entity Framework when interacting with <see cref="T:System.Data.Common.DbConnection" />.
+            It is provided publicly so that code that runs outside of the core EF assemblies can opt-in to command
+            interception/tracing. This is typically done by EF providers that are executing commands on behalf of EF.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="BeginTransaction">
+      <MemberSignature Language="C#" Value="public virtual System.Data.Common.DbTransaction BeginTransaction (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Data.Common.DbTransaction BeginTransaction(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.BeginTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function BeginTransaction (connection As DbConnection, interceptionContext As BeginTransactionInterceptionContext) As DbTransaction" />
+      <MemberSignature Language="F#" Value="abstract member BeginTransaction : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext -&gt; System.Data.Common.DbTransaction&#xA;override this.BeginTransaction : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext -&gt; System.Data.Common.DbTransaction" Usage="dbConnectionDispatcher.BeginTransaction (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Common.DbTransaction</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.BeginningTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.BeganTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.Data.Common.DbConnection.BeginTransaction(System.Data.IsolationLevel)" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the result of executing the command is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Close">
+      <MemberSignature Language="C#" Value="public virtual void Close (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Close(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Close(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Close (connection As DbConnection, interceptionContext As DbInterceptionContext)" />
+      <MemberSignature Language="F#" Value="abstract member Close : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit&#xA;override this.Close : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit" Usage="dbConnectionDispatcher.Close (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Closing(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Closed(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.Data.Common.DbConnection.Close" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public virtual void Dispose (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Dispose(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Dispose (connection As DbConnection, interceptionContext As DbInterceptionContext)" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit&#xA;override this.Dispose : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit" Usage="dbConnectionDispatcher.Dispose (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Disposing(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Disposed(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.ComponentModel.Component.Dispose" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="EnlistTransaction">
+      <MemberSignature Language="C#" Value="public virtual void EnlistTransaction (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void EnlistTransaction(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.EnlistTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub EnlistTransaction (connection As DbConnection, interceptionContext As EnlistTransactionInterceptionContext)" />
+      <MemberSignature Language="F#" Value="abstract member EnlistTransaction : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext -&gt; unit&#xA;override this.EnlistTransaction : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext -&gt; unit" Usage="dbConnectionDispatcher.EnlistTransaction (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.EnlistingTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.EnlistedTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.EnlistTransactionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.Data.Common.DbConnection.EnlistTransaction(System.Transactions.Transaction)" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Equals(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function Equals (obj As Object) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.Equals : obj -&gt; bool" Usage="dbConnectionDispatcher.Equals obj" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="GetConnectionString">
+      <MemberSignature Language="C#" Value="public virtual string GetConnectionString (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetConnectionString(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetConnectionString(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetConnectionString (connection As DbConnection, interceptionContext As DbInterceptionContext) As String" />
+      <MemberSignature Language="F#" Value="abstract member GetConnectionString : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string&#xA;override this.GetConnectionString : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string" Usage="dbConnectionDispatcher.GetConnectionString (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionStringGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionStringGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.ConnectionString" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetConnectionTimeout">
+      <MemberSignature Language="C#" Value="public virtual int GetConnectionTimeout (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 GetConnectionTimeout(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetConnectionTimeout(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetConnectionTimeout (connection As DbConnection, interceptionContext As DbInterceptionContext) As Integer" />
+      <MemberSignature Language="F#" Value="abstract member GetConnectionTimeout : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; int&#xA;override this.GetConnectionTimeout : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; int" Usage="dbConnectionDispatcher.GetConnectionTimeout (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionTimeoutGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.Int32})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionTimeoutGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.Int32})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.ConnectionTimeout" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDatabase">
+      <MemberSignature Language="C#" Value="public virtual string GetDatabase (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetDatabase(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetDatabase(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDatabase (connection As DbConnection, interceptionContext As DbInterceptionContext) As String" />
+      <MemberSignature Language="F#" Value="abstract member GetDatabase : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string&#xA;override this.GetDatabase : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string" Usage="dbConnectionDispatcher.GetDatabase (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.DatabaseGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.DatabaseGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.Database" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDataSource">
+      <MemberSignature Language="C#" Value="public virtual string GetDataSource (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetDataSource(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetDataSource(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetDataSource (connection As DbConnection, interceptionContext As DbInterceptionContext) As String" />
+      <MemberSignature Language="F#" Value="abstract member GetDataSource : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string&#xA;override this.GetDataSource : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string" Usage="dbConnectionDispatcher.GetDataSource (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.DataSourceGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.DataSourceGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.DataSource" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetHashCode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetHashCode () As Integer" />
+      <MemberSignature Language="F#" Value="override this.GetHashCode : unit -&gt; int" Usage="dbConnectionDispatcher.GetHashCode " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="GetServerVersion">
+      <MemberSignature Language="C#" Value="public virtual string GetServerVersion (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance string GetServerVersion(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetServerVersion(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetServerVersion (connection As DbConnection, interceptionContext As DbInterceptionContext) As String" />
+      <MemberSignature Language="F#" Value="abstract member GetServerVersion : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string&#xA;override this.GetServerVersion : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; string" Usage="dbConnectionDispatcher.GetServerVersion (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ServerVersionGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ServerVersionGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.String})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.ServerVersion" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetState">
+      <MemberSignature Language="C#" Value="public virtual System.Data.ConnectionState GetState (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Data.ConnectionState GetState(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetState(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function GetState (connection As DbConnection, interceptionContext As DbInterceptionContext) As ConnectionState" />
+      <MemberSignature Language="F#" Value="abstract member GetState : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; System.Data.ConnectionState&#xA;override this.GetState : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; System.Data.ConnectionState" Usage="dbConnectionDispatcher.GetState (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.ConnectionState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.StateGetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.Data.ConnectionState})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.StateGot(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext{System.Data.ConnectionState})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            getting <see cref="P:System.Data.Common.DbConnection.State" />.
+            </summary>
+        <returns>The result of the operation, which may have been modified by interceptors.</returns>
+        <remarks>
+            Note that the value of the property is returned by this method. The result is not available
+            in the interception context passed into this method since the interception context is cloned before
+            being passed to interceptors.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetType">
+      <MemberSignature Language="C#" Value="public Type GetType ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Type GetType() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.GetType" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetType () As Type" />
+      <MemberSignature Language="F#" Value="override this.GetType : unit -&gt; Type" Usage="dbConnectionDispatcher.GetType " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Gets the <see cref="T:System.Type" /> of the current instance.
+            </summary>
+        <returns>The exact runtime type of the current instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Open">
+      <MemberSignature Language="C#" Value="public virtual void Open (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Open(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.Open(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub Open (connection As DbConnection, interceptionContext As DbInterceptionContext)" />
+      <MemberSignature Language="F#" Value="abstract member Open : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit&#xA;override this.Open : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext -&gt; unit" Usage="dbConnectionDispatcher.Open (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Opening(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Opened(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.Data.Common.DbConnection.Open" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OpenAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task OpenAsync (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task OpenAsync(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbInterceptionContext interceptionContext, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.OpenAsync(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbInterceptionContext,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member OpenAsync : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.OpenAsync : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbInterceptionContext * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="dbConnectionDispatcher.OpenAsync (connection, interceptionContext, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbInterceptionContext" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Optional information about the context of the call being made.</param>
+        <param name="cancellationToken">The cancellation token.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Opening(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.Opened(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionInterceptionContext)" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after making a
+            call to <see cref="M:System.Data.Common.DbConnection.Open" />.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetConnectionString">
+      <MemberSignature Language="C#" Value="public virtual void SetConnectionString (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext&lt;string&gt; interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void SetConnectionString(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext`1&lt;string&gt; interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.SetConnectionString(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub SetConnectionString (connection As DbConnection, interceptionContext As DbConnectionPropertyInterceptionContext(Of String))" />
+      <MemberSignature Language="F#" Value="abstract member SetConnectionString : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext&lt;string&gt; -&gt; unit&#xA;override this.SetConnectionString : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext&lt;string&gt; -&gt; unit" Usage="dbConnectionDispatcher.SetConnectionString (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection on which the operation will be executed.</param>
+        <param name="interceptionContext">Information about the context of the call being made, including the value to be set.</param>
+        <summary>
+            Sends <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionStringSetting(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext{System.String})" /> and
+            <see cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.ConnectionStringSet(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.DbConnectionPropertyInterceptionContext{System.String})" /> to any <see cref="T:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor" />
+            registered on <see cref="T:System.Data.Entity.Infrastructure.Interception.DbInterception" /> before/after
+            setting <see cref="P:System.Data.Common.DbConnection.ConnectionString" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.Interception.DbConnectionDispatcher.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="dbConnectionDispatcher.ToString " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+  </Members>
+</Type>

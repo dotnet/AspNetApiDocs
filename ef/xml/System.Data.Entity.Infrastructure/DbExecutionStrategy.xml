@@ -1,0 +1,374 @@
+﻿<Type Name="DbExecutionStrategy" FullName="System.Data.Entity.Infrastructure.DbExecutionStrategy">
+  <TypeSignature Language="C#" Value="public abstract class DbExecutionStrategy : System.Data.Entity.Infrastructure.IDbExecutionStrategy" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit DbExecutionStrategy extends System.Object implements class System.Data.Entity.Infrastructure.IDbExecutionStrategy" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.Infrastructure.DbExecutionStrategy" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class DbExecutionStrategy&#xA;Implements IDbExecutionStrategy" />
+  <TypeSignature Language="F#" Value="type DbExecutionStrategy = class&#xA;    interface IDbExecutionStrategy" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Data.Entity.Infrastructure.IDbExecutionStrategy</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            Provides the base implementation of the retry mechanism for unreliable operations and transient conditions that uses
+            exponentially increasing delays between retries.
+            </summary>
+    <remarks>
+            A new instance will be created each time an operation is executed.
+            The following formula is used to calculate the delay after <c>retryCount</c> number of attempts:
+            <code>min(random(1, 1.1) * (2 ^ retryCount - 1), maxDelay)</code>
+            The <c>retryCount</c> starts at 0.
+            The random factor distributes uniformly the retry attempts from multiple simultaneous operations failing simultaneously.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DbExecutionStrategy ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+            Creates a new instance of <see cref="T:System.Data.Entity.Infrastructure.DbExecutionStrategy" />.
+            </summary>
+        <remarks>
+            The default retry limit is 5, which means that the total amount of time spent between retries is 26 seconds plus the random factor.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DbExecutionStrategy (int maxRetryCount, TimeSpan maxDelay);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(int32 maxRetryCount, valuetype System.TimeSpan maxDelay) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.#ctor(System.Int32,System.TimeSpan)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New (maxRetryCount As Integer, maxDelay As TimeSpan)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.Infrastructure.DbExecutionStrategy : int * TimeSpan -&gt; System.Data.Entity.Infrastructure.DbExecutionStrategy" Usage="new System.Data.Entity.Infrastructure.DbExecutionStrategy (maxRetryCount, maxDelay)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="maxRetryCount" Type="System.Int32" />
+        <Parameter Name="maxDelay" Type="System.TimeSpan" />
+      </Parameters>
+      <Docs>
+        <param name="maxRetryCount"> The maximum number of retry attempts. </param>
+        <param name="maxDelay"> The maximum delay in milliseconds between retries. </param>
+        <summary>
+            Creates a new instance of <see cref="T:System.Data.Entity.Infrastructure.DbExecutionStrategy" /> with the specified limits for number of retries and the delay between retries.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Execute">
+      <MemberSignature Language="C#" Value="public void Execute (Action operation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Execute(class System.Action operation) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.Execute(System.Action)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Execute (operation As Action)" />
+      <MemberSignature Language="F#" Value="abstract member Execute : Action -&gt; unit&#xA;override this.Execute : Action -&gt; unit" Usage="dbExecutionStrategy.Execute operation" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Data.Entity.Infrastructure.IDbExecutionStrategy.Execute(System.Action)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="operation" Type="System.Action" />
+      </Parameters>
+      <Docs>
+        <param name="operation">A delegate representing an executable operation that doesn't return any results.</param>
+        <summary>
+            Repetitively executes the specified operation while it satisfies the current retry policy.
+            </summary>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.RetryLimitExceededException">if the retry delay strategy determines the operation shouldn't be retried anymore</exception>
+        <exception cref="T:System.InvalidOperationException">if this instance was already used to execute an operation</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Execute&lt;TResult&gt;">
+      <MemberSignature Language="C#" Value="public TResult Execute&lt;TResult&gt; (Func&lt;TResult&gt; operation);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !!TResult Execute&lt;TResult&gt;(class System.Func`1&lt;!!TResult&gt; operation) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.Execute``1(System.Func{``0})" />
+      <MemberSignature Language="VB.NET" Value="Public Function Execute(Of TResult) (operation As Func(Of TResult)) As TResult" />
+      <MemberSignature Language="F#" Value="abstract member Execute : Func&lt;'Result&gt; -&gt; 'Result&#xA;override this.Execute : Func&lt;'Result&gt; -&gt; 'Result" Usage="dbExecutionStrategy.Execute operation" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Data.Entity.Infrastructure.IDbExecutionStrategy.Execute``1(System.Func{``0})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TResult</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TResult" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="operation" Type="System.Func&lt;TResult&gt;" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TResult">The type of result expected from the executable operation.</typeparam>
+        <param name="operation">
+            A delegate representing an executable operation that returns the result of type <typeparamref name="TResult" />.
+            </param>
+        <summary>
+            Repetitively executes the specified operation while it satisfies the current retry policy.
+            </summary>
+        <returns>The result from the operation.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.RetryLimitExceededException">if the retry delay strategy determines the operation shouldn't be retried anymore</exception>
+        <exception cref="T:System.InvalidOperationException">if this instance was already used to execute an operation</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ExecuteAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ExecuteAsync (Func&lt;System.Threading.Tasks.Task&gt; operation, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ExecuteAsync(class System.Func`1&lt;class System.Threading.Tasks.Task&gt; operation, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.ExecuteAsync(System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteAsync : Func&lt;System.Threading.Tasks.Task&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.ExecuteAsync : Func&lt;System.Threading.Tasks.Task&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="dbExecutionStrategy.ExecuteAsync (operation, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Data.Entity.Infrastructure.IDbExecutionStrategy.ExecuteAsync(System.Func{System.Threading.Tasks.Task},System.Threading.CancellationToken)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="operation" Type="System.Func&lt;System.Threading.Tasks.Task&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="operation">A function that returns a started task.</param>
+        <param name="cancellationToken">
+            A cancellation token used to cancel the retry operation, but not operations that are already in flight
+            or that already completed successfully.
+            </param>
+        <summary>
+            Repetitively executes the specified asynchronous operation while it satisfies the current retry policy.
+            </summary>
+        <returns>
+            A task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will become faulted and the exception must be observed.
+            </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.RetryLimitExceededException">if the retry delay strategy determines the operation shouldn't be retried anymore</exception>
+        <exception cref="T:System.InvalidOperationException">if this instance was already used to execute an operation</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ExecuteAsync&lt;TResult&gt;">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;TResult&gt; ExecuteAsync&lt;TResult&gt; (Func&lt;System.Threading.Tasks.Task&lt;TResult&gt;&gt; operation, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;!!TResult&gt; ExecuteAsync&lt;TResult&gt;(class System.Func`1&lt;class System.Threading.Tasks.Task`1&lt;!!TResult&gt;&gt; operation, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.ExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member ExecuteAsync : Func&lt;System.Threading.Tasks.Task&lt;'Result&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;'Result&gt;&#xA;override this.ExecuteAsync : Func&lt;System.Threading.Tasks.Task&lt;'Result&gt;&gt; * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;'Result&gt;" Usage="dbExecutionStrategy.ExecuteAsync (operation, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Data.Entity.Infrastructure.IDbExecutionStrategy.ExecuteAsync``1(System.Func{System.Threading.Tasks.Task{``0}},System.Threading.CancellationToken)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;TResult&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TResult" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="operation" Type="System.Func&lt;System.Threading.Tasks.Task&lt;TResult&gt;&gt;" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TResult">
+            The result type of the <see cref="T:System.Threading.Tasks.Task`1" /> returned by <paramref name="operation" />.
+            </typeparam>
+        <param name="operation">
+            A function that returns a started task of type <typeparamref name="TResult" />.
+            </param>
+        <param name="cancellationToken">
+            A cancellation token used to cancel the retry operation, but not operations that are already in flight
+            or that already completed successfully.
+            </param>
+        <summary>
+            Repeatedly executes the specified asynchronous operation while it satisfies the current retry policy.
+            </summary>
+        <returns>
+            A task that will run to completion if the original task completes successfully (either the
+            first time or after retrying transient failures). If the task fails with a non-transient error or
+            the retry limit is reached, the returned task will become faulted and the exception must be observed.
+            </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.RetryLimitExceededException">if the retry delay strategy determines the operation shouldn't be retried anymore</exception>
+        <exception cref="T:System.InvalidOperationException">if this instance was already used to execute an operation</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="GetNextDelay">
+      <MemberSignature Language="C#" Value="protected internal virtual Nullable&lt;TimeSpan&gt; GetNextDelay (Exception lastException);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; GetNextDelay(class System.Exception lastException) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.GetNextDelay(System.Exception)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function GetNextDelay (lastException As Exception) As Nullable(Of TimeSpan)" />
+      <MemberSignature Language="F#" Value="abstract member GetNextDelay : Exception -&gt; Nullable&lt;TimeSpan&gt;&#xA;override this.GetNextDelay : Exception -&gt; Nullable&lt;TimeSpan&gt;" Usage="dbExecutionStrategy.GetNextDelay lastException" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Nullable&lt;System.TimeSpan&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="lastException" Type="System.Exception" />
+      </Parameters>
+      <Docs>
+        <param name="lastException">The exception thrown during the last execution attempt.</param>
+        <summary>
+            Determines whether the operation should be retried and the delay before the next attempt.
+            </summary>
+        <returns>
+            Returns the delay indicating how long to wait for before the next execution attempt if the operation should be retried;
+            <c>null</c> otherwise
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RetriesOnFailure">
+      <MemberSignature Language="C#" Value="public bool RetriesOnFailure { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool RetriesOnFailure" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.Infrastructure.DbExecutionStrategy.RetriesOnFailure" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property RetriesOnFailure As Boolean" />
+      <MemberSignature Language="F#" Value="member this.RetriesOnFailure : bool" Usage="System.Data.Entity.Infrastructure.DbExecutionStrategy.RetriesOnFailure" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:System.Data.Entity.Infrastructure.IDbExecutionStrategy.RetriesOnFailure</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns <c>true</c> to indicate that <see cref="T:System.Data.Entity.Infrastructure.DbExecutionStrategy" /> might retry the execution after a failure.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldRetryOn">
+      <MemberSignature Language="C#" Value="protected internal abstract bool ShouldRetryOn (Exception exception);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool ShouldRetryOn(class System.Exception exception) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.ShouldRetryOn(System.Exception)" />
+      <MemberSignature Language="F#" Value="abstract member ShouldRetryOn : Exception -&gt; bool" Usage="dbExecutionStrategy.ShouldRetryOn exception" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="exception" Type="System.Exception" />
+      </Parameters>
+      <Docs>
+        <param name="exception">The exception object to be verified.</param>
+        <summary>
+            Determines whether the specified exception represents a transient failure that can be compensated by a retry.
+            </summary>
+        <returns>
+          <c>true</c> if the specified exception is considered as transient, otherwise <c>false</c>.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Suspended">
+      <MemberSignature Language="C#" Value="protected internal static bool Suspended { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property bool Suspended" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.Infrastructure.DbExecutionStrategy.Suspended" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Shared Property Suspended As Boolean" />
+      <MemberSignature Language="F#" Value="member this.Suspended : bool with get, set" Usage="System.Data.Entity.Infrastructure.DbExecutionStrategy.Suspended" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+                Indicates whether the strategy is suspended. The strategy is typically suspending while executing to avoid
+                recursive execution from nested operations.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UnwrapAndHandleException&lt;T&gt;">
+      <MemberSignature Language="C#" Value="public static T UnwrapAndHandleException&lt;T&gt; (Exception exception, Func&lt;Exception,T&gt; exceptionHandler);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig !!T UnwrapAndHandleException&lt;T&gt;(class System.Exception exception, class System.Func`2&lt;class System.Exception, !!T&gt; exceptionHandler) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.DbExecutionStrategy.UnwrapAndHandleException``1(System.Exception,System.Func{System.Exception,``0})" />
+      <MemberSignature Language="F#" Value="static member UnwrapAndHandleException : Exception * Func&lt;Exception, 'T&gt; -&gt; 'T" Usage="System.Data.Entity.Infrastructure.DbExecutionStrategy.UnwrapAndHandleException (exception, exceptionHandler)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>T</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="T" />
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="exception" Type="System.Exception" />
+        <Parameter Name="exceptionHandler" Type="System.Func&lt;System.Exception,T&gt;" />
+      </Parameters>
+      <Docs>
+        <typeparam name="T">The type of the unwrapped exception.</typeparam>
+        <param name="exception"> The exception to be unwrapped. </param>
+        <param name="exceptionHandler"> A delegate that will be called with the unwrapped exception. </param>
+        <summary>
+            Recursively gets InnerException from <paramref name="exception" /> as long as it's an
+            <see cref="T:System.Data.Entity.Core.EntityException" />, <see cref="T:System.Data.Entity.Infrastructure.DbUpdateException" /> or <see cref="T:System.Data.Entity.Core.UpdateException" />
+            and passes it to <paramref name="exceptionHandler" /></summary>
+        <returns>
+            The result from <paramref name="exceptionHandler" />.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

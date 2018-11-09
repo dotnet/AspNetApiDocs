@@ -1,0 +1,283 @@
+﻿<Type Name="IDbSet&lt;TEntity&gt;" FullName="System.Data.Entity.IDbSet&lt;TEntity&gt;">
+  <TypeSignature Language="C#" Value="public interface IDbSet&lt;TEntity&gt; : System.Collections.Generic.IEnumerable&lt;TEntity&gt;, System.Linq.IQueryable&lt;TEntity&gt; where TEntity : class" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IDbSet`1&lt;class TEntity&gt; implements class System.Collections.Generic.IEnumerable`1&lt;!TEntity&gt;, class System.Collections.IEnumerable, class System.Linq.IQueryable, class System.Linq.IQueryable`1&lt;!TEntity&gt;" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.IDbSet`1" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IDbSet(Of TEntity)&#xA;Implements IEnumerable(Of TEntity), IQueryable(Of TEntity)" />
+  <TypeSignature Language="F#" Value="type IDbSet&lt;'Entity (requires 'Entity : null)&gt; = interface&#xA;    interface IQueryable&lt;'Entity (requires 'Entity : null)&gt;&#xA;    interface seq&lt;'Entity (requires 'Entity : null)&gt;&#xA;    interface IQueryable&#xA;    interface IEnumerable" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <TypeParameters>
+    <TypeParameter Name="TEntity">
+      <Constraints>
+        <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+      </Constraints>
+    </TypeParameter>
+  </TypeParameters>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Collections.Generic.IEnumerable&lt;T&gt;</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Collections.Generic.IEnumerable&lt;TEntity&gt;</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Collections.IEnumerable</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Linq.IQueryable</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.Linq.IQueryable&lt;TEntity&gt;</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix", Justification="Name is intentional")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <typeparam name="TEntity"> The type that defines the set. </typeparam>
+    <summary>
+            An <see cref="T:System.Data.Entity.IDbSet`1" /> represents the collection of all entities in the context, or that
+            can be queried from the database, of a given type.  <see cref="T:System.Data.Entity.DbSet`1" /> is a concrete
+            implementation of IDbSet.
+            </summary>
+    <remarks>
+      <see cref="T:System.Data.Entity.IDbSet`1" /> was originally intended to allow creation of test doubles (mocks or
+            fakes) for <see cref="T:System.Data.Entity.DbSet`1" />. However, this approach has issues in that adding new members
+            to an interface breaks existing code that already implements the interface without the new members.
+            Therefore, starting with EF6, no new members will be added to this interface and it is recommended
+            that <see cref="T:System.Data.Entity.DbSet`1" /> be used as the base class for test doubles.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Add">
+      <MemberSignature Language="C#" Value="public TEntity Add (TEntity entity);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !TEntity Add(!TEntity entity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Add(`0)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Add (entity As TEntity) As TEntity" />
+      <MemberSignature Language="F#" Value="abstract member Add : 'Entity -&gt; 'Entity" Usage="iDbSet.Add entity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TEntity</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entity" Type="TEntity" />
+      </Parameters>
+      <Docs>
+        <param name="entity"> The entity to add. </param>
+        <summary>
+            Adds the given entity to the context underlying the set in the Added state such that it will
+            be inserted into the database when SaveChanges is called.
+            </summary>
+        <returns> The entity. </returns>
+        <remarks>
+            Note that entities that are already in the context in some other state will have their state set
+            to Added.  Add is a no-op if the entity is already in the context in the Added state.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Attach">
+      <MemberSignature Language="C#" Value="public TEntity Attach (TEntity entity);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !TEntity Attach(!TEntity entity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Attach(`0)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Attach (entity As TEntity) As TEntity" />
+      <MemberSignature Language="F#" Value="abstract member Attach : 'Entity -&gt; 'Entity" Usage="iDbSet.Attach entity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TEntity</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entity" Type="TEntity" />
+      </Parameters>
+      <Docs>
+        <param name="entity"> The entity to attach. </param>
+        <summary>
+            Attaches the given entity to the context underlying the set.  That is, the entity is placed
+            into the context in the Unchanged state, just as if it had been read from the database.
+            </summary>
+        <returns> The entity. </returns>
+        <remarks>
+            Attach is used to repopulate a context with an entity that is known to already exist in the database.
+            SaveChanges will therefore not attempt to insert an attached entity into the database because
+            it is assumed to already be there.
+            Note that entities that are already in the context in some other state will have their state set
+            to Unchanged.  Attach is a no-op if the entity is already in the context in the Unchanged state.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public TEntity Create ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !TEntity Create() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Create" />
+      <MemberSignature Language="VB.NET" Value="Public Function Create () As TEntity" />
+      <MemberSignature Language="F#" Value="abstract member Create : unit -&gt; 'Entity" Usage="iDbSet.Create " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TEntity</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Creates a new instance of an entity for the type of this set.
+            Note that this instance is NOT added or attached to the set.
+            The instance returned will be a proxy if the underlying context is configured to create
+            proxies and the entity type meets the requirements for creating a proxy.
+            </summary>
+        <returns> The entity instance, which may be a proxy. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create&lt;TDerivedEntity&gt;">
+      <MemberSignature Language="C#" Value="public TDerivedEntity Create&lt;TDerivedEntity&gt; () where TDerivedEntity : class, TEntity;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !!TDerivedEntity Create&lt;class (!TEntity) TDerivedEntity&gt;() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Create``1" />
+      <MemberSignature Language="VB.NET" Value="Public Function Create(Of TDerivedEntity As {Class, TEntity}) () As TDerivedEntity" />
+      <MemberSignature Language="F#" Value="abstract member Create : unit -&gt; 'DerivedEntity" Usage="iDbSet.Create " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TDerivedEntity</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TDerivedEntity">
+          <Constraints>
+            <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+            <BaseTypeName>TEntity</BaseTypeName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters />
+      <Docs>
+        <typeparam name="TDerivedEntity"> The type of entity to create. </typeparam>
+        <summary>
+            Creates a new instance of an entity for the type of this set or for a type derived
+            from the type of this set.
+            Note that this instance is NOT added or attached to the set.
+            The instance returned will be a proxy if the underlying context is configured to create
+            proxies and the entity type meets the requirements for creating a proxy.
+            </summary>
+        <returns> The entity instance, which may be a proxy. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Find">
+      <MemberSignature Language="C#" Value="public TEntity Find (params object[] keyValues);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !TEntity Find(object[] keyValues) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Find(System.Object[])" />
+      <MemberSignature Language="VB.NET" Value="Public Function Find (ParamArray keyValues As Object()) As TEntity" />
+      <MemberSignature Language="F#" Value="abstract member Find : obj[] -&gt; 'Entity" Usage="iDbSet.Find keyValues" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TEntity</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="keyValues" Type="System.Object[]">
+          <Attributes>
+            <Attribute>
+              <AttributeName>System.ParamArray</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="keyValues"> The values of the primary key for the entity to be found. </param>
+        <summary>
+            Finds an entity with the given primary key values.
+            If an entity with the given primary key values exists in the context, then it is
+            returned immediately without making a request to the store.  Otherwise, a request
+            is made to the store for an entity with the given primary key values and this entity,
+            if found, is attached to the context and returned.  If no entity is found in the
+            context or the store, then null is returned.
+            </summary>
+        <returns> The entity found, or null. </returns>
+        <remarks>
+            The ordering of composite key values is as defined in the EDM, which is in turn as defined in
+            the designer, by the Code First fluent API, or by the DataMember attribute.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Local">
+      <MemberSignature Language="C#" Value="public System.Collections.ObjectModel.ObservableCollection&lt;TEntity&gt; Local { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.ObjectModel.ObservableCollection`1&lt;!TEntity&gt; Local" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.IDbSet`1.Local" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Local As ObservableCollection(Of TEntity)" />
+      <MemberSignature Language="F#" Value="member this.Local : System.Collections.ObjectModel.ObservableCollection&lt;'Entity (requires 'Entity : null)&gt;" Usage="System.Data.Entity.IDbSet&lt;'Entity (requires 'Entity : null)&gt;.Local" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.ObjectModel.ObservableCollection&lt;TEntity&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1" /> that represents a local view of all Added, Unchanged,
+            and Modified entities in this set.  This local view will stay in sync as entities are added or
+            removed from the context.  Likewise, entities added to or removed from the local view will automatically
+            be added to or removed from the context.
+            </summary>
+        <value> The local view. </value>
+        <remarks>
+            This property can be used for data binding by populating the set with data, for example by using the Load
+            extension method, and then binding to the local data through this property.  For WPF bind to this property
+            directly.  For Windows Forms bind to the result of calling ToBindingList on this property
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Remove">
+      <MemberSignature Language="C#" Value="public TEntity Remove (TEntity entity);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance !TEntity Remove(!TEntity entity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.IDbSet`1.Remove(`0)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Remove (entity As TEntity) As TEntity" />
+      <MemberSignature Language="F#" Value="abstract member Remove : 'Entity -&gt; 'Entity" Usage="iDbSet.Remove entity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>TEntity</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entity" Type="TEntity" />
+      </Parameters>
+      <Docs>
+        <param name="entity"> The entity to remove. </param>
+        <summary>
+            Marks the given entity as Deleted such that it will be deleted from the database when SaveChanges
+            is called.  Note that the entity must exist in the context in some other state before this method
+            is called.
+            </summary>
+        <returns> The entity. </returns>
+        <remarks>
+            Note that if the entity exists in the context in the Added state, then this method
+            will cause it to be detached from the context.  This is because an Added entity is assumed not to
+            exist in the database such that trying to delete it does not make sense.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

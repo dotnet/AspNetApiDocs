@@ -1,0 +1,966 @@
+﻿<Type Name="DbContext" FullName="System.Data.Entity.DbContext">
+  <TypeSignature Language="C#" Value="public class DbContext : IDisposable, System.Data.Entity.Infrastructure.IObjectContextAdapter" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit DbContext extends System.Object implements class System.Data.Entity.Infrastructure.IObjectContextAdapter, class System.IDisposable" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.DbContext" />
+  <TypeSignature Language="VB.NET" Value="Public Class DbContext&#xA;Implements IDisposable, IObjectContextAdapter" />
+  <TypeSignature Language="F#" Value="type DbContext = class&#xA;    interface IDisposable&#xA;    interface IObjectContextAdapter" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.Data.Entity.Infrastructure.IObjectContextAdapter</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>System.IDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            A DbContext instance represents a combination of the Unit Of Work and Repository patterns such that
+            it can be used to query from a database and group together changes that will then be written
+            back to the store as a unit.
+            DbContext is conceptually similar to ObjectContext.
+            </summary>
+    <remarks>
+            DbContext is usually used with a derived type that contains <see cref="T:System.Data.Entity.DbSet`1" /> properties for
+            the root entities of the model. These sets are automatically initialized when the
+            instance of the derived class is created.  This behavior can be modified by applying the
+            <see cref="T:System.Data.Entity.Infrastructure.SuppressDbSetInitializationAttribute" />  attribute to either the entire derived context
+            class, or to individual properties on the class.
+            The Entity Data Model backing the context can be specified in several ways.  When using the Code First
+            approach, the <see cref="T:System.Data.Entity.DbSet`1" /> properties on the derived context are used to build a model
+            by convention.  The protected OnModelCreating method can be overridden to tweak this model.  More
+            control over the model used for the Model First approach can be obtained by creating a <see cref="T:System.Data.Entity.Infrastructure.DbCompiledModel" />
+            explicitly from a <see cref="T:System.Data.Entity.DbModelBuilder" /> and passing this model to one of the DbContext constructors.
+            When using the Database First or Model First approach the Entity Data Model can be created using the
+            Entity Designer (or manually through creation of an EDMX file) and then this model can be specified using
+            entity connection string or an <see cref="T:System.Data.Entity.Core.EntityClient.EntityConnection" /> object.
+            The connection to the database (including the name of the database) can be specified in several ways.
+            If the parameterless DbContext constructor is called from a derived context, then the name of the derived context
+            is used to find a connection string in the app.config or web.config file.  If no connection string is found, then
+            the name is passed to the DefaultConnectionFactory registered on the <see cref="T:System.Data.Entity.Database" /> class.  The connection
+            factory then uses the context name as the database name in a default connection string.  (This default connection
+            string points to .\SQLEXPRESS on the local machine unless a different DefaultConnectionFactory is registered.)
+            Instead of using the derived context name, the connection/database name can also be specified explicitly by
+            passing the name to one of the DbContext constructors that takes a string.  The name can also be passed in
+            the form "name=myname", in which case the name must be found in the config file or an exception will be thrown.
+            Note that the connection found in the app.config or web.config file can be a normal database connection
+            string (not a special Entity Framework connection string) in which case the DbContext will use Code First.
+            However, if the connection found in the config file is a special Entity Framework connection string, then the
+            DbContext will use Database/Model First and the model specified in the connection string will be used.
+            An existing or explicitly created DbConnection can also be used instead of the database/connection name.
+            A <see cref="T:System.Data.Entity.DbModelBuilderVersionAttribute" /> can be applied to a class derived from DbContext to set the
+            version of conventions used by the context when it creates a model. If no attribute is applied then the
+            latest version of conventions will be used.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DbContext ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters />
+      <Docs>
+        <summary>
+            Constructs a new context instance using conventions to create the name of the database to
+            which a connection will be made.  The by-convention name is the full name (namespace + class name)
+            of the derived context class.
+            See the class remarks for how this is used to create a connection.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="protected DbContext (System.Data.Entity.Infrastructure.DbCompiledModel model);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor(class System.Data.Entity.Infrastructure.DbCompiledModel model) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.Data.Entity.Infrastructure.DbCompiledModel)" />
+      <MemberSignature Language="VB.NET" Value="Protected Sub New (model As DbCompiledModel)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : System.Data.Entity.Infrastructure.DbCompiledModel -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext model" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="model" Type="System.Data.Entity.Infrastructure.DbCompiledModel" />
+      </Parameters>
+      <Docs>
+        <param name="model"> The model that will back this context. </param>
+        <summary>
+            Constructs a new context instance using conventions to create the name of the database to
+            which a connection will be made, and initializes it from the given model.
+            The by-convention name is the full name (namespace + class name) of the derived context class.
+            See the class remarks for how this is used to create a connection.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DbContext (string nameOrConnectionString);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string nameOrConnectionString) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (nameOrConnectionString As String)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : string -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext nameOrConnectionString" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="nameOrConnectionString" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="nameOrConnectionString"> Either the database name or a connection string. </param>
+        <summary>
+            Constructs a new context instance using the given string as the name or connection string for the
+            database to which a connection will be made.
+            See the class remarks for how this is used to create a connection.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DbContext (System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Data.Common.DbConnection existingConnection, bool contextOwnsConnection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.Data.Common.DbConnection,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (existingConnection As DbConnection, contextOwnsConnection As Boolean)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : System.Data.Common.DbConnection * bool -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext (existingConnection, contextOwnsConnection)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="existingConnection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="contextOwnsConnection" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="existingConnection"> An existing connection to use for the new context. </param>
+        <param name="contextOwnsConnection">
+            If set to <c>true</c> the connection is disposed when the context is disposed, otherwise the caller must dispose the connection.
+            </param>
+        <summary>
+            Constructs a new context instance using the existing connection to connect to a database.
+            The connection will not be disposed when the context is disposed if <paramref name="contextOwnsConnection" />
+            is <c>false</c>.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DbContext (System.Data.Entity.Core.Objects.ObjectContext objectContext, bool dbContextOwnsObjectContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Data.Entity.Core.Objects.ObjectContext objectContext, bool dbContextOwnsObjectContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.Data.Entity.Core.Objects.ObjectContext,System.Boolean)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : System.Data.Entity.Core.Objects.ObjectContext * bool -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext (objectContext, dbContextOwnsObjectContext)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="objectContext" Type="System.Data.Entity.Core.Objects.ObjectContext" />
+        <Parameter Name="dbContextOwnsObjectContext" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="objectContext"> An existing ObjectContext to wrap with the new context. </param>
+        <param name="dbContextOwnsObjectContext">
+                If set to <c>true</c> the ObjectContext is disposed when the DbContext is disposed, otherwise the caller must dispose the connection.
+            </param>
+        <summary>
+            Constructs a new context instance around an existing ObjectContext.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DbContext (string nameOrConnectionString, System.Data.Entity.Infrastructure.DbCompiledModel model);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string nameOrConnectionString, class System.Data.Entity.Infrastructure.DbCompiledModel model) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.String,System.Data.Entity.Infrastructure.DbCompiledModel)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (nameOrConnectionString As String, model As DbCompiledModel)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : string * System.Data.Entity.Infrastructure.DbCompiledModel -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext (nameOrConnectionString, model)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="nameOrConnectionString" Type="System.String" />
+        <Parameter Name="model" Type="System.Data.Entity.Infrastructure.DbCompiledModel" />
+      </Parameters>
+      <Docs>
+        <param name="nameOrConnectionString"> Either the database name or a connection string. </param>
+        <param name="model"> The model that will back this context. </param>
+        <summary>
+            Constructs a new context instance using the given string as the name or connection string for the
+            database to which a connection will be made, and initializes it from the given model.
+            See the class remarks for how this is used to create a connection.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public DbContext (System.Data.Common.DbConnection existingConnection, System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Data.Common.DbConnection existingConnection, class System.Data.Entity.Infrastructure.DbCompiledModel model, bool contextOwnsConnection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.#ctor(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.DbCompiledModel,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (existingConnection As DbConnection, model As DbCompiledModel, contextOwnsConnection As Boolean)" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.DbContext : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.DbCompiledModel * bool -&gt; System.Data.Entity.DbContext" Usage="new System.Data.Entity.DbContext (existingConnection, model, contextOwnsConnection)" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <Parameters>
+        <Parameter Name="existingConnection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="model" Type="System.Data.Entity.Infrastructure.DbCompiledModel" />
+        <Parameter Name="contextOwnsConnection" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="existingConnection"> An existing connection to use for the new context. </param>
+        <param name="model"> The model that will back this context. </param>
+        <param name="contextOwnsConnection">
+                If set to <c>true</c> the connection is disposed when the context is disposed, otherwise the caller must dispose the connection.
+            </param>
+        <summary>
+            Constructs a new context instance using the existing connection to connect to a database,
+            and initializes it from the given model.
+            The connection will not be disposed when the context is disposed if <paramref name="contextOwnsConnection" />
+            is <c>false</c>.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ChangeTracker">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Infrastructure.DbChangeTracker ChangeTracker { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Entity.Infrastructure.DbChangeTracker ChangeTracker" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.DbContext.ChangeTracker" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property ChangeTracker As DbChangeTracker" />
+      <MemberSignature Language="F#" Value="member this.ChangeTracker : System.Data.Entity.Infrastructure.DbChangeTracker" Usage="System.Data.Entity.DbContext.ChangeTracker" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.DbChangeTracker</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Provides access to features of the context that deal with change tracking of entities.
+            </summary>
+        <value> An object used to access features that deal with change tracking. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Configuration">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Infrastructure.DbContextConfiguration Configuration { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Entity.Infrastructure.DbContextConfiguration Configuration" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.DbContext.Configuration" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Configuration As DbContextConfiguration" />
+      <MemberSignature Language="F#" Value="member this.Configuration : System.Data.Entity.Infrastructure.DbContextConfiguration" Usage="System.Data.Entity.DbContext.Configuration" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.DbContextConfiguration</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Provides access to configuration options for the context.
+            </summary>
+        <value> An object used to access configuration options. </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Database">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Database Database { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Entity.Database Database" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.DbContext.Database" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Database As Database" />
+      <MemberSignature Language="F#" Value="member this.Database : System.Data.Entity.Database" Usage="System.Data.Entity.DbContext.Database" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Database</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Creates a Database instance for this context that allows for creation/deletion/existence checks
+            for the underlying database.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="public void Dispose ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Dispose" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="dbContext.Dispose " />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Calls the protected Dispose method.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Dispose(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub Dispose (disposing As Boolean)" />
+      <MemberSignature Language="F#" Value="abstract member Dispose : bool -&gt; unit&#xA;override this.Dispose : bool -&gt; unit" Usage="dbContext.Dispose disposing" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disposing">
+          <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.
+            </param>
+        <summary>
+            Disposes the context. The underlying <see cref="T:System.Data.Entity.Core.Objects.ObjectContext" /> is also disposed if it was created
+            is by this context or ownership was passed to this context when this context was created.
+            The connection to the database (<see cref="T:System.Data.Common.DbConnection" /> object) is also disposed if it was created
+            is by this context or ownership was passed to this context when this context was created.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Entry">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Infrastructure.DbEntityEntry Entry (object entity);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.Entity.Infrastructure.DbEntityEntry Entry(object entity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Entry(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Entry (entity As Object) As DbEntityEntry" />
+      <MemberSignature Language="F#" Value="member this.Entry : obj -&gt; System.Data.Entity.Infrastructure.DbEntityEntry" Usage="dbContext.Entry entity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.DbEntityEntry</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entity" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="entity"> The entity. </param>
+        <summary>
+            Gets a <see cref="T:System.Data.Entity.Infrastructure.DbEntityEntry" /> object for the given entity providing access to
+            information about the entity and the ability to perform actions on the entity.
+            </summary>
+        <returns> An entry for the entity. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Entry&lt;TEntity&gt;">
+      <MemberSignature Language="C#" Value="public System.Data.Entity.Infrastructure.DbEntityEntry&lt;TEntity&gt; Entry&lt;TEntity&gt; (TEntity entity) where TEntity : class;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Data.Entity.Infrastructure.DbEntityEntry`1&lt;!!TEntity&gt; Entry&lt;class TEntity&gt;(!!TEntity entity) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Entry``1(``0)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Entry(Of TEntity As Class) (entity As TEntity) As DbEntityEntry(Of TEntity)" />
+      <MemberSignature Language="F#" Value="member this.Entry : 'Entity -&gt; System.Data.Entity.Infrastructure.DbEntityEntry&lt;'Entity (requires 'Entity : null)&gt; (requires 'Entity : null)" Usage="dbContext.Entry entity" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.DbEntityEntry&lt;TEntity&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TEntity">
+          <Constraints>
+            <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="entity" Type="TEntity" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TEntity"> The type of the entity. </typeparam>
+        <param name="entity"> The entity. </param>
+        <summary>
+            Gets a <see cref="T:System.Data.Entity.Infrastructure.DbEntityEntry`1" /> object for the given entity providing access to
+            information about the entity and the ability to perform actions on the entity.
+            </summary>
+        <returns> An entry for the entity. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Equals">
+      <MemberSignature Language="C#" Value="public override bool Equals (object obj);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance bool Equals(object obj) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Equals(System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function Equals (obj As Object) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.Equals : obj -&gt; bool" Usage="dbContext.Equals obj" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="obj" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="obj">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="GetHashCode">
+      <MemberSignature Language="C#" Value="public override int GetHashCode ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance int32 GetHashCode() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.GetHashCode" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function GetHashCode () As Integer" />
+      <MemberSignature Language="F#" Value="override this.GetHashCode : unit -&gt; int" Usage="dbContext.GetHashCode " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="GetType">
+      <MemberSignature Language="C#" Value="public Type GetType ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Type GetType() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.GetType" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetType () As Type" />
+      <MemberSignature Language="F#" Value="override this.GetType : unit -&gt; Type" Usage="dbContext.GetType " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Type</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="GetValidationErrors">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Data.Entity.Validation.DbEntityValidationResult&gt; GetValidationErrors ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Collections.Generic.IEnumerable`1&lt;class System.Data.Entity.Validation.DbEntityValidationResult&gt; GetValidationErrors() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.GetValidationErrors" />
+      <MemberSignature Language="VB.NET" Value="Public Function GetValidationErrors () As IEnumerable(Of DbEntityValidationResult)" />
+      <MemberSignature Language="F#" Value="member this.GetValidationErrors : unit -&gt; seq&lt;System.Data.Entity.Validation.DbEntityValidationResult&gt;" Usage="dbContext.GetValidationErrors " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Data.Entity.Validation.DbEntityValidationResult&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Validates tracked entities and returns a Collection of <see cref="T:System.Data.Entity.Validation.DbEntityValidationResult" /> containing validation results.
+            </summary>
+        <returns> Collection of validation results for invalid entities. The collection is never null and must not contain null values or results for valid entities. </returns>
+        <remarks>
+            1. This method calls DetectChanges() to determine states of the tracked entities unless
+            DbContextConfiguration.AutoDetectChangesEnabled is set to false.
+            2. By default only Added on Modified entities are validated. The user is able to change this behavior
+            by overriding ShouldValidateEntity method.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnModelCreating">
+      <MemberSignature Language="C#" Value="protected virtual void OnModelCreating (System.Data.Entity.DbModelBuilder modelBuilder);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void OnModelCreating(class System.Data.Entity.DbModelBuilder modelBuilder) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.OnModelCreating(System.Data.Entity.DbModelBuilder)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub OnModelCreating (modelBuilder As DbModelBuilder)" />
+      <MemberSignature Language="F#" Value="abstract member OnModelCreating : System.Data.Entity.DbModelBuilder -&gt; unit&#xA;override this.OnModelCreating : System.Data.Entity.DbModelBuilder -&gt; unit" Usage="dbContext.OnModelCreating modelBuilder" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="modelBuilder" Type="System.Data.Entity.DbModelBuilder" />
+      </Parameters>
+      <Docs>
+        <param name="modelBuilder"> The builder that defines the model for the context being created. </param>
+        <summary>
+            This method is called when the model for a derived context has been initialized, but
+            before the model has been locked down and used to initialize the context.  The default
+            implementation of this method does nothing, but it can be overridden in a derived class
+            such that the model can be further configured before it is locked down.
+            </summary>
+        <remarks>
+            Typically, this method is called only once when the first instance of a derived context
+            is created.  The model for that context is then cached and is for all further instances of
+            the context in the app domain.  This caching can be disabled by setting the ModelCaching
+            property on the given ModelBuidler, but note that this can seriously degrade performance.
+            More control over caching is provided through use of the DbModelBuilder and DbContextFactory
+            classes directly.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveChanges">
+      <MemberSignature Language="C#" Value="public virtual int SaveChanges ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance int32 SaveChanges() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.SaveChanges" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SaveChanges () As Integer" />
+      <MemberSignature Language="F#" Value="abstract member SaveChanges : unit -&gt; int&#xA;override this.SaveChanges : unit -&gt; int" Usage="dbContext.SaveChanges " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Saves all changes made in this context to the underlying database.
+            </summary>
+        <returns> 
+            The number of state entries written to the underlying database. This can include
+            state entries for entities and/or relationships. Relationship state entries are created for 
+            many-to-many relationships and relationships where there is no foreign key property
+            included in the entity class (often referred to as independent associations).
+            </returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.DbUpdateException">An error occurred sending updates to the database.</exception>
+        <exception cref="T:System.Data.Entity.Infrastructure.DbUpdateConcurrencyException">
+            A database command did not affect the expected number of rows. This usually indicates an optimistic 
+            concurrency violation; that is, a row has been changed in the database since it was queried.
+            </exception>
+        <exception cref="T:System.Data.Entity.Validation.DbEntityValidationException">
+            The save was aborted because validation of entity property values failed.
+            </exception>
+        <exception cref="T:System.NotSupportedException">
+            An attempt was made to use unsupported behavior such as executing multiple asynchronous commands concurrently
+            on the same context instance.</exception>
+        <exception cref="T:System.ObjectDisposedException">The context or connection have been disposed.</exception>
+        <exception cref="T:System.InvalidOperationException">
+            Some error occurred attempting to process entities in the context either before or after sending commands
+            to the database.
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveChangesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;int&gt; SaveChangesAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;int32&gt; SaveChangesAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.SaveChangesAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function SaveChangesAsync () As Task(Of Integer)" />
+      <MemberSignature Language="F#" Value="abstract member SaveChangesAsync : unit -&gt; System.Threading.Tasks.Task&lt;int&gt;&#xA;override this.SaveChangesAsync : unit -&gt; System.Threading.Tasks.Task&lt;int&gt;" Usage="dbContext.SaveChangesAsync " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Asynchronously saves all changes made in this context to the underlying database.
+            </summary>
+        <returns>
+            A task that represents the asynchronous save operation.
+            The task result contains the number of state entries written to the underlying database. This can include
+            state entries for entities and/or relationships. Relationship state entries are created for 
+            many-to-many relationships and relationships where there is no foreign key property
+            included in the entity class (often referred to as independent associations).
+            </returns>
+        <remarks>
+            Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+            that any asynchronous operations have completed before calling another method on this context.
+            </remarks>
+        <exception cref="T:System.Data.Entity.Infrastructure.DbUpdateException">An error occurred sending updates to the database.</exception>
+        <exception cref="T:System.Data.Entity.Infrastructure.DbUpdateConcurrencyException">
+            A database command did not affect the expected number of rows. This usually indicates an optimistic 
+            concurrency violation; that is, a row has been changed in the database since it was queried.
+            </exception>
+        <exception cref="T:System.Data.Entity.Validation.DbEntityValidationException">
+            The save was aborted because validation of entity property values failed.
+            </exception>
+        <exception cref="T:System.NotSupportedException">
+            An attempt was made to use unsupported behavior such as executing multiple asynchronous commands concurrently
+            on the same context instance.</exception>
+        <exception cref="T:System.ObjectDisposedException">The context or connection have been disposed.</exception>
+        <exception cref="T:System.InvalidOperationException">
+            Some error occurred attempting to process entities in the context either before or after sending commands
+            to the database.
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="SaveChangesAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task&lt;int&gt; SaveChangesAsync (System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;int32&gt; SaveChangesAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.SaveChangesAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member SaveChangesAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;int&gt;&#xA;override this.SaveChangesAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;int&gt;" Usage="dbContext.SaveChangesAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId="cancellationToken")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Int32&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">
+            A <see cref="T:System.Threading.CancellationToken" /> to observe while waiting for the task to complete.
+            </param>
+        <summary>
+            Asynchronously saves all changes made in this context to the underlying database.
+            </summary>
+        <returns>
+            A task that represents the asynchronous save operation.
+            The task result contains the number of state entries written to the underlying database. This can include
+            state entries for entities and/or relationships. Relationship state entries are created for 
+            many-to-many relationships and relationships where there is no foreign key property
+            included in the entity class (often referred to as independent associations).
+            </returns>
+        <remarks>
+            Multiple active operations on the same context instance are not supported.  Use 'await' to ensure
+            that any asynchronous operations have completed before calling another method on this context.
+            </remarks>
+        <exception cref="T:System.InvalidOperationException">Thrown if the context has been disposed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="Set">
+      <MemberSignature Language="C#" Value="public virtual System.Data.Entity.DbSet Set (Type entityType);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Data.Entity.DbSet Set(class System.Type entityType) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Set(System.Type)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Set (entityType As Type) As DbSet" />
+      <MemberSignature Language="F#" Value="abstract member Set : Type -&gt; System.Data.Entity.DbSet&#xA;override this.Set : Type -&gt; System.Data.Entity.DbSet" Usage="dbContext.Set entityType" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId="Set")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.DbSet</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entityType" Type="System.Type" />
+      </Parameters>
+      <Docs>
+        <param name="entityType"> The type of entity for which a set should be returned. </param>
+        <summary>
+            Returns a non-generic <see cref="T:System.Data.Entity.DbSet" /> instance for access to entities of the given type in the context
+            and the underlying store.
+            </summary>
+        <returns> A set for the given entity type. </returns>
+        <remarks>
+            Note that Entity Framework requires that this method return the same instance each time that it is called
+            for a given context instance and entity type. Also, the generic <see cref="T:System.Data.Entity.DbSet`1" /> returned by the
+            <see cref="M:System.Data.Entity.DbContext.Set(System.Type)" /> method must wrap the same underlying query and set of entities. These invariants must
+            be maintained if this method is overridden for anything other than creating test doubles for unit testing.
+            See the <see cref="T:System.Data.Entity.DbSet" /> class for more details.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Set&lt;TEntity&gt;">
+      <MemberSignature Language="C#" Value="public virtual System.Data.Entity.DbSet&lt;TEntity&gt; Set&lt;TEntity&gt; () where TEntity : class;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Data.Entity.DbSet`1&lt;!!TEntity&gt; Set&lt;class TEntity&gt;() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.Set``1" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function Set(Of TEntity As Class) () As DbSet(Of TEntity)" />
+      <MemberSignature Language="F#" Value="abstract member Set : unit -&gt; System.Data.Entity.DbSet&lt;'Entity (requires 'Entity : null)&gt; (requires 'Entity : null)&#xA;override this.Set : unit -&gt; System.Data.Entity.DbSet&lt;'Entity (requires 'Entity : null)&gt; (requires 'Entity : null)" Usage="dbContext.Set " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId="Set")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.DbSet&lt;TEntity&gt;</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TEntity">
+          <Constraints>
+            <ParameterAttribute>ReferenceTypeConstraint</ParameterAttribute>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters />
+      <Docs>
+        <typeparam name="TEntity"> The type entity for which a set should be returned. </typeparam>
+        <summary>
+            Returns a <see cref="T:System.Data.Entity.DbSet`1" /> instance for access to entities of the given type in the context
+            and the underlying store.
+            </summary>
+        <returns> A set for the given entity type. </returns>
+        <remarks>
+            Note that Entity Framework requires that this method return the same instance each time that it is called
+            for a given context instance and entity type. Also, the non-generic <see cref="T:System.Data.Entity.DbSet" /> returned by the
+            <see cref="M:System.Data.Entity.DbContext.Set(System.Type)" /> method must wrap the same underlying query and set of entities. These invariants must
+            be maintained if this method is overridden for anything other than creating test doubles for unit testing.
+            See the <see cref="T:System.Data.Entity.DbSet`1" /> class for more details.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldValidateEntity">
+      <MemberSignature Language="C#" Value="protected virtual bool ShouldValidateEntity (System.Data.Entity.Infrastructure.DbEntityEntry entityEntry);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance bool ShouldValidateEntity(class System.Data.Entity.Infrastructure.DbEntityEntry entityEntry) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.ShouldValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function ShouldValidateEntity (entityEntry As DbEntityEntry) As Boolean" />
+      <MemberSignature Language="F#" Value="abstract member ShouldValidateEntity : System.Data.Entity.Infrastructure.DbEntityEntry -&gt; bool&#xA;override this.ShouldValidateEntity : System.Data.Entity.Infrastructure.DbEntityEntry -&gt; bool" Usage="dbContext.ShouldValidateEntity entityEntry" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entityEntry" Type="System.Data.Entity.Infrastructure.DbEntityEntry" />
+      </Parameters>
+      <Docs>
+        <param name="entityEntry"> DbEntityEntry instance that is supposed to be validated. </param>
+        <summary>
+            Extension point allowing the user to override the default behavior of validating only
+            added and modified entities.
+            </summary>
+        <returns> true to proceed with validation; false otherwise. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.Data.Entity.Infrastructure.IObjectContextAdapter.ObjectContext">
+      <MemberSignature Language="C#" Value="System.Data.Entity.Core.Objects.ObjectContext System.Data.Entity.Infrastructure.IObjectContextAdapter.ObjectContext { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Entity.Core.Objects.ObjectContext System.Data.Entity.Infrastructure.IObjectContextAdapter.ObjectContext" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.DbContext.System#Data#Entity#Infrastructure#IObjectContextAdapter#ObjectContext" />
+      <MemberSignature Language="VB.NET" Value=" ReadOnly Property ObjectContext As ObjectContext Implements IObjectContextAdapter.ObjectContext" />
+      <MemberSignature Language="F#" Usage="System.Data.Entity.Infrastructure.IObjectContextAdapter.ObjectContext" />
+      <MemberType>Property</MemberType>
+      <Implements>
+        <InterfaceMember>P:System.Data.Entity.Infrastructure.IObjectContextAdapter.ObjectContext</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Core.Objects.ObjectContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Returns the Entity Framework ObjectContext that is underlying this context.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">Thrown if the context has been disposed.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ToString">
+      <MemberSignature Language="C#" Value="public override string ToString ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string ToString() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.ToString" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function ToString () As String" />
+      <MemberSignature Language="F#" Value="override this.ToString : unit -&gt; string" Usage="dbContext.ToString " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateEntity">
+      <MemberSignature Language="C#" Value="protected virtual System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity (System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, System.Collections.Generic.IDictionary&lt;object,object&gt; items);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Data.Entity.Validation.DbEntityValidationResult ValidateEntity(class System.Data.Entity.Infrastructure.DbEntityEntry entityEntry, class System.Collections.Generic.IDictionary`2&lt;object, object&gt; items) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.DbContext.ValidateEntity(System.Data.Entity.Infrastructure.DbEntityEntry,System.Collections.Generic.IDictionary{System.Object,System.Object})" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function ValidateEntity (entityEntry As DbEntityEntry, items As IDictionary(Of Object, Object)) As DbEntityValidationResult" />
+      <MemberSignature Language="F#" Value="abstract member ValidateEntity : System.Data.Entity.Infrastructure.DbEntityEntry * System.Collections.Generic.IDictionary&lt;obj, obj&gt; -&gt; System.Data.Entity.Validation.DbEntityValidationResult&#xA;override this.ValidateEntity : System.Data.Entity.Infrastructure.DbEntityEntry * System.Collections.Generic.IDictionary&lt;obj, obj&gt; -&gt; System.Data.Entity.Validation.DbEntityValidationResult" Usage="dbContext.ValidateEntity (entityEntry, items)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Validation.DbEntityValidationResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="entityEntry" Type="System.Data.Entity.Infrastructure.DbEntityEntry" />
+        <Parameter Name="items" Type="System.Collections.Generic.IDictionary&lt;System.Object,System.Object&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="entityEntry"> DbEntityEntry instance to be validated. </param>
+        <param name="items">
+            User-defined dictionary containing additional info for custom validation. It will be passed to
+            <see cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+            and will be exposed as
+            <see cref="P:System.ComponentModel.DataAnnotations.ValidationContext.Items" />
+            . This parameter is optional and can be null.
+            </param>
+        <summary>
+            Extension point allowing the user to customize validation of an entity or filter out validation results.
+            Called by <see cref="M:System.Data.Entity.DbContext.GetValidationErrors" />.
+            </summary>
+        <returns> Entity validation result. Possibly null when overridden. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

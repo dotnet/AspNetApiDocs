@@ -1,0 +1,653 @@
+﻿<Type Name="SqlProviderServices" FullName="System.Data.Entity.SqlServer.SqlProviderServices">
+  <TypeSignature Language="C#" Value="public sealed class SqlProviderServices : System.Data.Entity.Core.Common.DbProviderServices" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit SqlProviderServices extends System.Data.Entity.Core.Common.DbProviderServices" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.SqlServer.SqlProviderServices" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class SqlProviderServices&#xA;Inherits DbProviderServices" />
+  <TypeSignature Language="F#" Value="type SqlProviderServices = class&#xA;    inherit DbProviderServices" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Data.Entity.Core.Common.DbProviderServices</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")</AttributeName>
+    </Attribute>
+  </Attributes>
+  <Docs>
+    <summary>
+            The DbProviderServices implementation for the SqlClient provider for SQL Server.
+            </summary>
+    <remarks>
+            Note that instance of this type also resolve additional provider services for Microsoft SQL Server
+            when this type is registered as an EF provider either using an entry in the application's config file
+            or through code-based registration in <see cref="T:System.Data.Entity.DbConfiguration" />.
+            The services resolved are:
+            Requests for <see cref="T:System.Data.Entity.Infrastructure.IDbConnectionFactory" /> are resolved to a Singleton instance of
+            <see cref="T:System.Data.Entity.Infrastructure.SqlConnectionFactory" /> to create connections to SQL Express by default.
+            Requests for <see cref="T:System.Func`1" /> for the invariant name "System.Data.SqlClient"
+            for any server name are resolved to a delegate that returns a <see cref="T:System.Data.Entity.SqlServer.DefaultSqlExecutionStrategy" />
+            to provide a non-retrying policy for SQL Server.
+            Requests for <see cref="T:System.Data.Entity.Migrations.Sql.MigrationSqlGenerator" /> for the invariant name "System.Data.SqlClient" are
+            resolved to <see cref="T:System.Data.Entity.SqlServer.SqlServerMigrationSqlGenerator" /> instances to provide default Migrations SQL
+            generation for SQL Server.
+            Requests for <see cref="T:System.Data.Entity.Spatial.DbSpatialServices" /> for the invariant name "System.Data.SqlClient" are
+            resolved to a Singleton instance of <see cref="T:System.Data.Entity.SqlServer.SqlSpatialServices" /> to provide default spatial
+            services for SQL Server.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CloneDbCommand">
+      <MemberSignature Language="C#" Value="protected override System.Data.Common.DbCommand CloneDbCommand (System.Data.Common.DbCommand fromDbCommand);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Common.DbCommand CloneDbCommand(class System.Data.Common.DbCommand fromDbCommand) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.CloneDbCommand(System.Data.Common.DbCommand)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function CloneDbCommand (fromDbCommand As DbCommand) As DbCommand" />
+      <MemberSignature Language="F#" Value="override this.CloneDbCommand : System.Data.Common.DbCommand -&gt; System.Data.Common.DbCommand" Usage="sqlProviderServices.CloneDbCommand fromDbCommand" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2100:Review SQL queries for security vulnerabilities", Justification="Not changing the CommandText at all - simply providing a clone of the DbCommand with the same CommandText")</AttributeName>
+        </Attribute>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Common.DbCommand</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fromDbCommand" Type="System.Data.Common.DbCommand" />
+      </Parameters>
+      <Docs>
+        <param name="fromDbCommand"> the <see cref="T:System.Data.Common.DbCommand" /> object to clone </param>
+        <summary>
+            See issue 2390 - cloning the DesignTimeVisible property on the
+            <see cref="T:System.Data.SqlClient.SqlCommand" /> can cause deadlocks.
+            So here overriding to provide a method that does not clone DesignTimeVisible.
+            </summary>
+        <returns>a clone of the <see cref="T:System.Data.Common.DbCommand" /></returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CloneDbConnection">
+      <MemberSignature Language="C#" Value="public override System.Data.Common.DbConnection CloneDbConnection (System.Data.Common.DbConnection connection, System.Data.Common.DbProviderFactory factory);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance class System.Data.Common.DbConnection CloneDbConnection(class System.Data.Common.DbConnection connection, class System.Data.Common.DbProviderFactory factory) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.CloneDbConnection(System.Data.Common.DbConnection,System.Data.Common.DbProviderFactory)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function CloneDbConnection (connection As DbConnection, factory As DbProviderFactory) As DbConnection" />
+      <MemberSignature Language="F#" Value="override this.CloneDbConnection : System.Data.Common.DbConnection * System.Data.Common.DbProviderFactory -&gt; System.Data.Common.DbConnection" Usage="sqlProviderServices.CloneDbConnection (connection, factory)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Common.DbConnection</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="factory" Type="System.Data.Common.DbProviderFactory" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The original connection.</param>
+        <param name="factory">The factory to use.</param>
+        <summary>
+            Clones the connection.
+            </summary>
+        <returns>Cloned connection</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateDbCommandDefinition">
+      <MemberSignature Language="C#" Value="protected override System.Data.Entity.Core.Common.DbCommandDefinition CreateDbCommandDefinition (System.Data.Entity.Core.Common.DbProviderManifest providerManifest, System.Data.Entity.Core.Common.CommandTrees.DbCommandTree commandTree);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Entity.Core.Common.DbCommandDefinition CreateDbCommandDefinition(class System.Data.Entity.Core.Common.DbProviderManifest providerManifest, class System.Data.Entity.Core.Common.CommandTrees.DbCommandTree commandTree) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.CreateDbCommandDefinition(System.Data.Entity.Core.Common.DbProviderManifest,System.Data.Entity.Core.Common.CommandTrees.DbCommandTree)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function CreateDbCommandDefinition (providerManifest As DbProviderManifest, commandTree As DbCommandTree) As DbCommandDefinition" />
+      <MemberSignature Language="F#" Value="override this.CreateDbCommandDefinition : System.Data.Entity.Core.Common.DbProviderManifest * System.Data.Entity.Core.Common.CommandTrees.DbCommandTree -&gt; System.Data.Entity.Core.Common.DbCommandDefinition" Usage="sqlProviderServices.CreateDbCommandDefinition (providerManifest, commandTree)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Core.Common.DbCommandDefinition</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="providerManifest" Type="System.Data.Entity.Core.Common.DbProviderManifest" />
+        <Parameter Name="commandTree" Type="System.Data.Entity.Core.Common.CommandTrees.DbCommandTree" />
+      </Parameters>
+      <Docs>
+        <param name="providerManifest"> provider manifest that was determined from metadata </param>
+        <param name="commandTree"> command tree for the statement </param>
+        <summary>
+            Create a Command Definition object, given the connection and command tree
+            </summary>
+        <returns> an executable command definition object </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbCreateDatabase">
+      <MemberSignature Language="C#" Value="protected override void DbCreateDatabase (System.Data.Common.DbConnection connection, Nullable&lt;int&gt; commandTimeout, System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DbCreateDatabase(class System.Data.Common.DbConnection connection, valuetype System.Nullable`1&lt;int32&gt; commandTimeout, class System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbCreateDatabase(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Data.Entity.Core.Metadata.Edm.StoreItemCollection)" />
+      <MemberSignature Language="F#" Value="override this.DbCreateDatabase : System.Data.Common.DbConnection * Nullable&lt;int&gt; * System.Data.Entity.Core.Metadata.Edm.StoreItemCollection -&gt; unit" Usage="sqlProviderServices.DbCreateDatabase (connection, commandTimeout, storeItemCollection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="commandTimeout" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="storeItemCollection" Type="System.Data.Entity.Core.Metadata.Edm.StoreItemCollection" />
+      </Parameters>
+      <Docs>
+        <param name="connection">Connection to a non-existent database that needs to be created and populated with the store objects indicated with the storeItemCollection parameter.</param>
+        <param name="commandTimeout">Execution timeout for any commands needed to create the database.</param>
+        <param name="storeItemCollection">The collection of all store items based on which the script should be created.</param>
+        <summary>
+            Create the database and the database objects.
+            If initial catalog is not specified, but AttachDBFilename is specified, we generate a random database name based on the AttachDBFilename.
+            Note: this causes pollution of the db, as when the connection string is later used, the mdf will get attached under a different name.
+            However if we try to replicate the name under which it would be attached, the following scenario would fail:
+            The file does not exist, but registered with database.
+            The user calls:  If (DatabaseExists) DeleteDatabase
+            CreateDatabase
+            For further details on the behavior when AttachDBFilename is specified see Dev10# 188936
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbCreateDatabaseScript">
+      <MemberSignature Language="C#" Value="protected override string DbCreateDatabaseScript (string providerManifestToken, System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string DbCreateDatabaseScript(string providerManifestToken, class System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbCreateDatabaseScript(System.String,System.Data.Entity.Core.Metadata.Edm.StoreItemCollection)" />
+      <MemberSignature Language="F#" Value="override this.DbCreateDatabaseScript : string * System.Data.Entity.Core.Metadata.Edm.StoreItemCollection -&gt; string" Usage="sqlProviderServices.DbCreateDatabaseScript (providerManifestToken, storeItemCollection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="providerManifestToken" Type="System.String" />
+        <Parameter Name="storeItemCollection" Type="System.Data.Entity.Core.Metadata.Edm.StoreItemCollection" />
+      </Parameters>
+      <Docs>
+        <param name="providerManifestToken"> The provider manifest token identifying the target version. </param>
+        <param name="storeItemCollection"> The structure of the database. </param>
+        <summary>
+            Generates a data definition language (DDL) script that creates schema objects 
+            (tables, primary keys, foreign keys) based on the contents of the StoreItemCollection 
+            parameter and targeted for the version of the database corresponding to the provider manifest token.
+            </summary>
+        <returns>
+            A DDL script that creates schema objects based on the contents of the StoreItemCollection parameter 
+            and targeted for the version of the database corresponding to the provider manifest token.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbDatabaseExists">
+      <MemberSignature Language="C#" Value="protected override bool DbDatabaseExists (System.Data.Common.DbConnection connection, Nullable&lt;int&gt; commandTimeout, System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool DbDatabaseExists(class System.Data.Common.DbConnection connection, valuetype System.Nullable`1&lt;int32&gt; commandTimeout, class System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbDatabaseExists(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Data.Entity.Core.Metadata.Edm.StoreItemCollection)" />
+      <MemberSignature Language="F#" Value="override this.DbDatabaseExists : System.Data.Common.DbConnection * Nullable&lt;int&gt; * System.Data.Entity.Core.Metadata.Edm.StoreItemCollection -&gt; bool" Usage="sqlProviderServices.DbDatabaseExists (connection, commandTimeout, storeItemCollection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="commandTimeout" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="storeItemCollection" Type="System.Data.Entity.Core.Metadata.Edm.StoreItemCollection" />
+      </Parameters>
+      <Docs>
+        <param name="connection">Connection to a database whose existence is checked by this method.</param>
+        <param name="commandTimeout">Execution timeout for any commands needed to determine the existence of the database.</param>
+        <param name="storeItemCollection">The collection of all store items from the model. This parameter is no longer used for determining database existence.</param>
+        <summary>
+            Determines whether the database for the given connection exists.
+            There are three cases:
+            1.  Initial Catalog = X, AttachDBFilename = null:   (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0
+            2.  Initial Catalog = X, AttachDBFilename = F:      if (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0 then <c>true</c>,
+            if not, try to open the connection and then return (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0
+            3.  Initial Catalog = null, AttachDBFilename = F:   Try to open the connection. If that succeeds the result is true, otherwise
+            if the there are no databases corresponding to the given file return <c>false</c>, otherwise throw.
+            Note: We open the connection to cover the scenario when the mdf exists, but is not attached.
+            Given that opening the connection would auto-attach it, it would not be appropriate to return <c>false</c> in this case.
+            Also note that checking for the existence of the file does not work for a remote server.  (Dev11 #290487)
+            For further details on the behavior when AttachDBFilename is specified see Dev10# 188936
+            </summary>
+        <returns>True if the provider can deduce the database only based on the connection.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbDatabaseExists">
+      <MemberSignature Language="C#" Value="protected override bool DbDatabaseExists (System.Data.Common.DbConnection connection, Nullable&lt;int&gt; commandTimeout, Lazy&lt;System.Data.Entity.Core.Metadata.Edm.StoreItemCollection&gt; storeItemCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance bool DbDatabaseExists(class System.Data.Common.DbConnection connection, valuetype System.Nullable`1&lt;int32&gt; commandTimeout, class System.Lazy`1&lt;class System.Data.Entity.Core.Metadata.Edm.StoreItemCollection&gt; storeItemCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbDatabaseExists(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Lazy{System.Data.Entity.Core.Metadata.Edm.StoreItemCollection})" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function DbDatabaseExists (connection As DbConnection, commandTimeout As Nullable(Of Integer), storeItemCollection As Lazy(Of StoreItemCollection)) As Boolean" />
+      <MemberSignature Language="F#" Value="override this.DbDatabaseExists : System.Data.Common.DbConnection * Nullable&lt;int&gt; * Lazy&lt;System.Data.Entity.Core.Metadata.Edm.StoreItemCollection&gt; -&gt; bool" Usage="sqlProviderServices.DbDatabaseExists (connection, commandTimeout, storeItemCollection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="commandTimeout" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="storeItemCollection" Type="System.Lazy&lt;System.Data.Entity.Core.Metadata.Edm.StoreItemCollection&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="connection">Connection to a database whose existence is checked by this method.</param>
+        <param name="commandTimeout">Execution timeout for any commands needed to determine the existence of the database.</param>
+        <param name="storeItemCollection">The collection of all store items from the model. This parameter is no longer used for determining database existence.</param>
+        <summary>
+            Determines whether the database for the given connection exists.
+            There are three cases:
+            1.  Initial Catalog = X, AttachDBFilename = null:   (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0
+            2.  Initial Catalog = X, AttachDBFilename = F:      if (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0 then <c>true</c>,
+            if not, try to open the connection and then return (SELECT Count(*) FROM sys.databases WHERE [name]= X) &gt; 0
+            3.  Initial Catalog = null, AttachDBFilename = F:   Try to open the connection. If that succeeds the result is true, otherwise
+            if the there are no databases corresponding to the given file return <c>false</c>, otherwise throw.
+            Note: We open the connection to cover the scenario when the mdf exists, but is not attached.
+            Given that opening the connection would auto-attach it, it would not be appropriate to return <c>false</c> in this case.
+            Also note that checking for the existence of the file does not work for a remote server.  (Dev11 #290487)
+            For further details on the behavior when AttachDBFilename is specified see Dev10# 188936
+            </summary>
+        <returns>True if the provider can deduce the database only based on the connection.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbDeleteDatabase">
+      <MemberSignature Language="C#" Value="protected override void DbDeleteDatabase (System.Data.Common.DbConnection connection, Nullable&lt;int&gt; commandTimeout, System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void DbDeleteDatabase(class System.Data.Common.DbConnection connection, valuetype System.Nullable`1&lt;int32&gt; commandTimeout, class System.Data.Entity.Core.Metadata.Edm.StoreItemCollection storeItemCollection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbDeleteDatabase(System.Data.Common.DbConnection,System.Nullable{System.Int32},System.Data.Entity.Core.Metadata.Edm.StoreItemCollection)" />
+      <MemberSignature Language="F#" Value="override this.DbDeleteDatabase : System.Data.Common.DbConnection * Nullable&lt;int&gt; * System.Data.Entity.Core.Metadata.Edm.StoreItemCollection -&gt; unit" Usage="sqlProviderServices.DbDeleteDatabase (connection, commandTimeout, storeItemCollection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="commandTimeout" Type="System.Nullable&lt;System.Int32&gt;" />
+        <Parameter Name="storeItemCollection" Type="System.Data.Entity.Core.Metadata.Edm.StoreItemCollection" />
+      </Parameters>
+      <Docs>
+        <param name="connection"> Connection </param>
+        <param name="commandTimeout"> Timeout for internal commands. </param>
+        <param name="storeItemCollection"> Item Collection. </param>
+        <summary>
+            Delete the database for the given connection.
+            There are three cases:
+            1.  If Initial Catalog is specified (X) drop database X
+            2.  Else if AttachDBFilename is specified (F) drop all the databases corresponding to F
+            if none throw
+            3.  If niether the catalog not the file name is specified - throw
+            Note that directly deleting the files does not work for a remote server.  However, even for not attached
+            databases the current logic would work assuming the user does: if (DatabaseExists) DeleteDatabase
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DbGetSpatialServices">
+      <MemberSignature Language="C#" Value="protected override System.Data.Entity.Spatial.DbSpatialServices DbGetSpatialServices (string versionHint);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Entity.Spatial.DbSpatialServices DbGetSpatialServices(string versionHint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.DbGetSpatialServices(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function DbGetSpatialServices (versionHint As String) As DbSpatialServices" />
+      <MemberSignature Language="F#" Value="override this.DbGetSpatialServices : string -&gt; System.Data.Entity.Spatial.DbSpatialServices" Usage="sqlProviderServices.DbGetSpatialServices versionHint" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Obsolete("Return DbSpatialServices from the GetService method. See http://go.microsoft.com/fwlink/?LinkId=260882 for more information.")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Spatial.DbSpatialServices</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="versionHint" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="versionHint"> The manifest token associated with the provider manifest. </param>
+        <summary>
+            Gets a spatial data reader for SQL Server.
+            </summary>
+        <returns> The spatial data reader. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDbProviderManifest">
+      <MemberSignature Language="C#" Value="protected override System.Data.Entity.Core.Common.DbProviderManifest GetDbProviderManifest (string versionHint);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Entity.Core.Common.DbProviderManifest GetDbProviderManifest(string versionHint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.GetDbProviderManifest(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetDbProviderManifest (versionHint As String) As DbProviderManifest" />
+      <MemberSignature Language="F#" Value="override this.GetDbProviderManifest : string -&gt; System.Data.Entity.Core.Common.DbProviderManifest" Usage="sqlProviderServices.GetDbProviderManifest versionHint" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Core.Common.DbProviderManifest</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="versionHint" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="versionHint"> The token information associated with the provider manifest. </param>
+        <summary>
+            Returns the provider manifest by using the specified version information.
+            </summary>
+        <returns> The provider manifest by using the specified version information. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDbProviderManifestToken">
+      <MemberSignature Language="C#" Value="protected override string GetDbProviderManifestToken (System.Data.Common.DbConnection connection);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance string GetDbProviderManifestToken(class System.Data.Common.DbConnection connection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.GetDbProviderManifestToken(System.Data.Common.DbConnection)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetDbProviderManifestToken (connection As DbConnection) As String" />
+      <MemberSignature Language="F#" Value="override this.GetDbProviderManifestToken : System.Data.Common.DbConnection -&gt; string" Usage="sqlProviderServices.GetDbProviderManifestToken connection" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+      </Parameters>
+      <Docs>
+        <param name="connection"> Connection to find manifest token from. </param>
+        <summary>
+            Returns provider manifest token for a given connection.
+            </summary>
+        <returns> The provider manifest token for the specified connection. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetDbSpatialDataReader">
+      <MemberSignature Language="C#" Value="protected override System.Data.Entity.Spatial.DbSpatialDataReader GetDbSpatialDataReader (System.Data.Common.DbDataReader fromReader, string versionHint);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance class System.Data.Entity.Spatial.DbSpatialDataReader GetDbSpatialDataReader(class System.Data.Common.DbDataReader fromReader, string versionHint) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.GetDbSpatialDataReader(System.Data.Common.DbDataReader,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Function GetDbSpatialDataReader (fromReader As DbDataReader, versionHint As String) As DbSpatialDataReader" />
+      <MemberSignature Language="F#" Value="override this.GetDbSpatialDataReader : System.Data.Common.DbDataReader * string -&gt; System.Data.Entity.Spatial.DbSpatialDataReader" Usage="sqlProviderServices.GetDbSpatialDataReader (fromReader, versionHint)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Spatial.DbSpatialDataReader</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fromReader" Type="System.Data.Common.DbDataReader" />
+        <Parameter Name="versionHint" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="fromReader"> The reader where the spatial data came from. </param>
+        <param name="versionHint"> The manifest token associated with the provider manifest. </param>
+        <summary>
+            Gets a spatial data reader for SQL Server.
+            </summary>
+        <returns> The spatial data reader. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Instance">
+      <MemberSignature Language="C#" Value="public static System.Data.Entity.SqlServer.SqlProviderServices Instance { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property class System.Data.Entity.SqlServer.SqlProviderServices Instance" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.SqlServer.SqlProviderServices.Instance" />
+      <MemberSignature Language="VB.NET" Value="Public Shared ReadOnly Property Instance As SqlProviderServices" />
+      <MemberSignature Language="F#" Value="member this.Instance : System.Data.Entity.SqlServer.SqlProviderServices" Usage="System.Data.Entity.SqlServer.SqlProviderServices.Instance" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.SqlServer.SqlProviderServices</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The Singleton instance of the SqlProviderServices type.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ProviderInvariantName">
+      <MemberSignature Language="C#" Value="public const string ProviderInvariantName;" />
+      <MemberSignature Language="ILAsm" Value=".field public static literal string ProviderInvariantName" />
+      <MemberSignature Language="DocId" Value="F:System.Data.Entity.SqlServer.SqlProviderServices.ProviderInvariantName" />
+      <MemberSignature Language="VB.NET" Value="Public Const ProviderInvariantName As String " />
+      <MemberSignature Language="F#" Value="val mutable ProviderInvariantName : string" Usage="System.Data.Entity.SqlServer.SqlProviderServices.ProviderInvariantName" />
+      <MemberType>Field</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            This is the well-known string using in configuration files and code-based configuration as
+            the "provider invariant name" used to specify Microsoft SQL Server for ADO.NET and
+            Entity Framework provider services.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RegisterInfoMessageHandler">
+      <MemberSignature Language="C#" Value="public override void RegisterInfoMessageHandler (System.Data.Common.DbConnection connection, Action&lt;string&gt; handler);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RegisterInfoMessageHandler(class System.Data.Common.DbConnection connection, class System.Action`1&lt;string&gt; handler) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.RegisterInfoMessageHandler(System.Data.Common.DbConnection,System.Action{System.String})" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RegisterInfoMessageHandler (connection As DbConnection, handler As Action(Of String))" />
+      <MemberSignature Language="F#" Value="override this.RegisterInfoMessageHandler : System.Data.Common.DbConnection * Action&lt;string&gt; -&gt; unit" Usage="sqlProviderServices.RegisterInfoMessageHandler (connection, handler)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="handler" Type="System.Action&lt;System.String&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="connection"> The connection to receive information for. </param>
+        <param name="handler"> The handler to process messages. </param>
+        <summary>
+            Registers a handler to process non-error messages coming from the database provider.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SetDbParameterValue">
+      <MemberSignature Language="C#" Value="protected override void SetDbParameterValue (System.Data.Common.DbParameter parameter, System.Data.Entity.Core.Metadata.Edm.TypeUsage parameterType, object value);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void SetDbParameterValue(class System.Data.Common.DbParameter parameter, class System.Data.Entity.Core.Metadata.Edm.TypeUsage parameterType, object value) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.SqlServer.SqlProviderServices.SetDbParameterValue(System.Data.Common.DbParameter,System.Data.Entity.Core.Metadata.Edm.TypeUsage,System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub SetDbParameterValue (parameter As DbParameter, parameterType As TypeUsage, value As Object)" />
+      <MemberSignature Language="F#" Value="override this.SetDbParameterValue : System.Data.Common.DbParameter * System.Data.Entity.Core.Metadata.Edm.TypeUsage * obj -&gt; unit" Usage="sqlProviderServices.SetDbParameterValue (parameter, parameterType, value)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="parameter" Type="System.Data.Common.DbParameter" />
+        <Parameter Name="parameterType" Type="System.Data.Entity.Core.Metadata.Edm.TypeUsage" />
+        <Parameter Name="value" Type="System.Object" />
+      </Parameters>
+      <Docs>
+        <param name="parameter">The parameter.</param>
+        <param name="parameterType">The type of the parameter.</param>
+        <param name="value">The value of the parameter.</param>
+        <summary>
+            Sets the parameter value and appropriate facets for the given <see cref="T:System.Data.Entity.Core.Metadata.Edm.TypeUsage" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SqlServerTypesAssemblyName">
+      <MemberSignature Language="C#" Value="public static string SqlServerTypesAssemblyName { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property string SqlServerTypesAssemblyName" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.SqlServer.SqlProviderServices.SqlServerTypesAssemblyName" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property SqlServerTypesAssemblyName As String" />
+      <MemberSignature Language="F#" Value="member this.SqlServerTypesAssemblyName : string with get, set" Usage="System.Data.Entity.SqlServer.SqlProviderServices.SqlServerTypesAssemblyName" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Set to the full name of the Microsoft.SqlServer.Types assembly to override the default selection
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TruncateDecimalsToScale">
+      <MemberSignature Language="C#" Value="public static bool TruncateDecimalsToScale { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property bool TruncateDecimalsToScale" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.SqlServer.SqlProviderServices.TruncateDecimalsToScale" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property TruncateDecimalsToScale As Boolean" />
+      <MemberSignature Language="F#" Value="member this.TruncateDecimalsToScale : bool with get, set" Usage="System.Data.Entity.SqlServer.SqlProviderServices.TruncateDecimalsToScale" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Get or sets a value indicating whether <see cref="T:System.Decimal" /> parameter values are truncated to 
+            the scale (number of decimal places) defined for their corresponding columns when they are sent 
+            to the database. A value of <c>true</c> indicates that <see cref="T:System.Data.SqlClient.SqlParameter" /> objects 
+            created for <see cref="T:System.Decimal" /> columns will have their <see cref="P:System.Data.SqlClient.SqlParameter.Scale" /> 
+            properties set, which will cause the parameter values to be truncated. If set to <c>false</c> 
+            then the <see cref="P:System.Data.SqlClient.SqlParameter.Scale" /> properties will not be set, avoiding the truncation 
+            behavior of <see cref="T:System.Data.SqlClient.SqlParameter" /> and allowing SQL Server to round values if necessary. 
+            The default value is <c>true</c> to prevent breaking existing applications that depend on this 
+            behavior. 
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseRowNumberOrderingInOffsetQueries">
+      <MemberSignature Language="C#" Value="public static bool UseRowNumberOrderingInOffsetQueries { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property bool UseRowNumberOrderingInOffsetQueries" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.SqlServer.SqlProviderServices.UseRowNumberOrderingInOffsetQueries" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property UseRowNumberOrderingInOffsetQueries As Boolean" />
+      <MemberSignature Language="F#" Value="member this.UseRowNumberOrderingInOffsetQueries : bool with get, set" Usage="System.Data.Entity.SqlServer.SqlProviderServices.UseRowNumberOrderingInOffsetQueries" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value indicating whether the ROW_NUMBER() function is used in sort expression 
+            passed to the ORDER BY clause when OFFSET is present in query. The default value of <c>true</c> 
+            is recommended to obtain query results that are stable for paging operations. The value of 
+            <c>false</c> can be used for compatibility with previous versions of EF and will cause the sort 
+            expression to be passed unmodified to the ORDER BY clause, which can lead to unstable results 
+            if the ordering is ambiguous. 
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            This flag only applies to SQL Server 2012 or later. This flag does not affect queries that have 
+            already been translated to SQL and cached, therefore applications that need to set the value to 
+            <c>false</c> for compatibility should do so before executing any queries.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="UseScopeIdentity">
+      <MemberSignature Language="C#" Value="public static bool UseScopeIdentity { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property bool UseScopeIdentity" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.SqlServer.SqlProviderServices.UseScopeIdentity" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Property UseScopeIdentity As Boolean" />
+      <MemberSignature Language="F#" Value="member this.UseScopeIdentity : bool with get, set" Usage="System.Data.Entity.SqlServer.SqlProviderServices.UseScopeIdentity" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework.SqlServer</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value indicating whether to use the SCOPE_IDENTITY() function to retrieve values 
+            generated by the database for numeric columns during an INSERT operation. The default value of 
+            <c>true</c> is recommended and can provide better performance if all numeric values are generated 
+            using IDENTITY columns. If set to <c>false</c>, an OUTPUT clause will be used instead. An OUTPUT 
+            clause makes it possible to retrieve values generated by sequences or other means.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

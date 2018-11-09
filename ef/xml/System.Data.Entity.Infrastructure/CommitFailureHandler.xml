@@ -1,0 +1,687 @@
+﻿<Type Name="CommitFailureHandler" FullName="System.Data.Entity.Infrastructure.CommitFailureHandler">
+  <TypeSignature Language="C#" Value="public class CommitFailureHandler : System.Data.Entity.Infrastructure.TransactionHandler" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CommitFailureHandler extends System.Data.Entity.Infrastructure.TransactionHandler" />
+  <TypeSignature Language="DocId" Value="T:System.Data.Entity.Infrastructure.CommitFailureHandler" />
+  <TypeSignature Language="VB.NET" Value="Public Class CommitFailureHandler&#xA;Inherits TransactionHandler" />
+  <TypeSignature Language="F#" Value="type CommitFailureHandler = class&#xA;    inherit TransactionHandler" />
+  <AssemblyInfo>
+    <AssemblyName>EntityFramework</AssemblyName>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Data.Entity.Infrastructure.TransactionHandler</BaseTypeName>
+  </Base>
+  <Interfaces />
+  <Docs>
+    <summary>
+            A transaction handler that allows to gracefully recover from connection failures
+            during transaction commit by storing transaction tracing information in the database.
+            It needs to be registered by using <see cref="M:System.Data.Entity.DbConfiguration.SetDefaultTransactionHandler(System.Func{System.Data.Entity.Infrastructure.TransactionHandler})" />.
+            </summary>
+    <remarks>
+            This transaction handler uses <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.TransactionContext" /> to store the transaction information
+            the schema used can be configured by creating a class derived from <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.TransactionContext" />
+            that overrides <see cref="M:System.Data.Entity.DbContext.OnModelCreating(System.Data.Entity.DbModelBuilder)" /> and passing it to the constructor of this class.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CommitFailureHandler ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>
+            Initializes a new instance of the <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" /> class using the default <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.TransactionContext" />.
+            </summary>
+        <remarks>
+            One of the Initialize methods needs to be called before this instance can be used.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public CommitFailureHandler (Func&lt;System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.TransactionContext&gt; transactionContextFactory);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.Func`2&lt;class System.Data.Common.DbConnection, class System.Data.Entity.Infrastructure.TransactionContext&gt; transactionContextFactory) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.#ctor(System.Func{System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.TransactionContext})" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (transactionContextFactory As Func(Of DbConnection, TransactionContext))" />
+      <MemberSignature Language="F#" Value="new System.Data.Entity.Infrastructure.CommitFailureHandler : Func&lt;System.Data.Common.DbConnection, System.Data.Entity.Infrastructure.TransactionContext&gt; -&gt; System.Data.Entity.Infrastructure.CommitFailureHandler" Usage="new System.Data.Entity.Infrastructure.CommitFailureHandler transactionContextFactory" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters>
+        <Parameter Name="transactionContextFactory" Type="System.Func&lt;System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.TransactionContext&gt;" />
+      </Parameters>
+      <Docs>
+        <param name="transactionContextFactory">The transaction context factory.</param>
+        <summary>
+            Initializes a new instance of the <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" /> class.
+            </summary>
+        <remarks>
+            One of the Initialize methods needs to be called before this instance can be used.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="BeganTransaction">
+      <MemberSignature Language="C#" Value="public override void BeganTransaction (System.Data.Common.DbConnection connection, System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void BeganTransaction(class System.Data.Common.DbConnection connection, class System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.BeganTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub BeganTransaction (connection As DbConnection, interceptionContext As BeginTransactionInterceptionContext)" />
+      <MemberSignature Language="F#" Value="override this.BeganTransaction : System.Data.Common.DbConnection * System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext -&gt; unit" Usage="commitFailureHandler.BeganTransaction (connection, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="connection">The connection that began the transaction.</param>
+        <param name="interceptionContext">Contextual information associated with the call.</param>
+        <summary>
+            Stores the tracking information for the new transaction to the database in the same transaction.
+            </summary>
+        <remarks>To be added.</remarks>
+        <altmember cref="M:System.Data.Entity.Infrastructure.Interception.IDbConnectionInterceptor.BeganTransaction(System.Data.Common.DbConnection,System.Data.Entity.Infrastructure.Interception.BeginTransactionInterceptionContext)" />
+      </Docs>
+    </Member>
+    <Member MemberName="BuildDatabaseInitializationScript">
+      <MemberSignature Language="C#" Value="public override string BuildDatabaseInitializationScript ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance string BuildDatabaseInitializationScript() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.BuildDatabaseInitializationScript" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Function BuildDatabaseInitializationScript () As String" />
+      <MemberSignature Language="F#" Value="override this.BuildDatabaseInitializationScript : unit -&gt; string" Usage="commitFailureHandler.BuildDatabaseInitializationScript " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.String</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="ClearTransactionHistory">
+      <MemberSignature Language="C#" Value="public virtual void ClearTransactionHistory ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void ClearTransactionHistory() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.ClearTransactionHistory" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Sub ClearTransactionHistory ()" />
+      <MemberSignature Language="F#" Value="abstract member ClearTransactionHistory : unit -&gt; unit&#xA;override this.ClearTransactionHistory : unit -&gt; unit" Usage="commitFailureHandler.ClearTransactionHistory " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Removes all the transaction history.
+            </summary>
+        <remarks>
+            This method should only be invoked when there are no active transactions to remove any leftover history
+            that was not deleted due to catastrophic failures
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClearTransactionHistoryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ClearTransactionHistoryAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task ClearTransactionHistoryAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.ClearTransactionHistoryAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function ClearTransactionHistoryAsync () As Task" />
+      <MemberSignature Language="F#" Value="member this.ClearTransactionHistoryAsync : unit -&gt; System.Threading.Tasks.Task" Usage="commitFailureHandler.ClearTransactionHistoryAsync " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Asynchronously removes all the transaction history.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>
+            This method should only be invoked when there are no active transactions to remove any leftover history
+            that was not deleted due to catastrophic failures
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ClearTransactionHistoryAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task ClearTransactionHistoryAsync (System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ClearTransactionHistoryAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.ClearTransactionHistoryAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member ClearTransactionHistoryAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.ClearTransactionHistoryAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="commitFailureHandler.ClearTransactionHistoryAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">The cancellation token.</param>
+        <summary>
+            Asynchronously removes all the transaction history.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>
+            This method should only be invoked when there are no active transactions to remove any leftover history
+            that was not deleted due to catastrophic failures
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Committed">
+      <MemberSignature Language="C#" Value="public override void Committed (System.Data.Common.DbTransaction transaction, System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Committed(class System.Data.Common.DbTransaction transaction, class System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.Committed(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Committed (transaction As DbTransaction, interceptionContext As DbTransactionInterceptionContext)" />
+      <MemberSignature Language="F#" Value="override this.Committed : System.Data.Common.DbTransaction * System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext -&gt; unit" Usage="commitFailureHandler.Committed (transaction, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="transaction" Type="System.Data.Common.DbTransaction" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="transaction">The transaction that was commited.</param>
+        <param name="interceptionContext">Contextual information associated with the call.</param>
+        <summary>
+            If there was an exception thrown checks the database for this transaction and rethrows it if not found.
+            Otherwise marks the commit as succeeded and queues the transaction information to be deleted.
+            </summary>
+        <remarks>To be added.</remarks>
+        <altmember cref="M:System.Data.Entity.Infrastructure.Interception.IDbTransactionInterceptor.Committed(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      </Docs>
+    </Member>
+    <Member MemberName="Dispose">
+      <MemberSignature Language="C#" Value="protected override void Dispose (bool disposing);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig virtual instance void Dispose(bool disposing) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.Dispose(System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overrides Sub Dispose (disposing As Boolean)" />
+      <MemberSignature Language="F#" Value="override this.Dispose : bool -&gt; unit" Usage="commitFailureHandler.Dispose disposing" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="disposing" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="disposing">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="Disposed">
+      <MemberSignature Language="C#" Value="public override void Disposed (System.Data.Common.DbTransaction transaction, System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Disposed(class System.Data.Common.DbTransaction transaction, class System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.Disposed(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Disposed (transaction As DbTransaction, interceptionContext As DbTransactionInterceptionContext)" />
+      <MemberSignature Language="F#" Value="override this.Disposed : System.Data.Common.DbTransaction * System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext -&gt; unit" Usage="commitFailureHandler.Disposed (transaction, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="transaction" Type="System.Data.Common.DbTransaction" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="transaction">The transaction that was disposed.</param>
+        <param name="interceptionContext">Contextual information associated with the call.</param>
+        <summary>
+            Stops tracking the transaction that was disposed.
+            </summary>
+        <remarks>To be added.</remarks>
+        <altmember cref="M:System.Data.Entity.Infrastructure.Interception.IDbTransactionInterceptor.Disposed(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      </Docs>
+    </Member>
+    <Member MemberName="FromContext">
+      <MemberSignature Language="C#" Value="public static System.Data.Entity.Infrastructure.CommitFailureHandler FromContext (System.Data.Entity.Core.Objects.ObjectContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Data.Entity.Infrastructure.CommitFailureHandler FromContext(class System.Data.Entity.Core.Objects.ObjectContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.FromContext(System.Data.Entity.Core.Objects.ObjectContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FromContext (context As ObjectContext) As CommitFailureHandler" />
+      <MemberSignature Language="F#" Value="static member FromContext : System.Data.Entity.Core.Objects.ObjectContext -&gt; System.Data.Entity.Infrastructure.CommitFailureHandler" Usage="System.Data.Entity.Infrastructure.CommitFailureHandler.FromContext context" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.CommitFailureHandler</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Data.Entity.Core.Objects.ObjectContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">The context</param>
+        <summary>
+            Gets the <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" /> associated with the <paramref name="context" /> if there is one;
+            otherwise returns <c>null</c>.
+            </summary>
+        <returns>The associated <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="FromContext">
+      <MemberSignature Language="C#" Value="public static System.Data.Entity.Infrastructure.CommitFailureHandler FromContext (System.Data.Entity.DbContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Data.Entity.Infrastructure.CommitFailureHandler FromContext(class System.Data.Entity.DbContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.FromContext(System.Data.Entity.DbContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function FromContext (context As DbContext) As CommitFailureHandler" />
+      <MemberSignature Language="F#" Value="static member FromContext : System.Data.Entity.DbContext -&gt; System.Data.Entity.Infrastructure.CommitFailureHandler" Usage="System.Data.Entity.Infrastructure.CommitFailureHandler.FromContext context" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.CommitFailureHandler</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Data.Entity.DbContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">The context</param>
+        <summary>
+            Gets the <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" /> associated with the <paramref name="context" /> if there is one;
+            otherwise returns <c>null</c>.
+            </summary>
+        <returns>The associated <see cref="T:System.Data.Entity.Infrastructure.CommitFailureHandler" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetExecutionStrategy">
+      <MemberSignature Language="C#" Value="protected virtual System.Data.Entity.Infrastructure.IDbExecutionStrategy GetExecutionStrategy ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Data.Entity.Infrastructure.IDbExecutionStrategy GetExecutionStrategy() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.GetExecutionStrategy" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function GetExecutionStrategy () As IDbExecutionStrategy" />
+      <MemberSignature Language="F#" Value="abstract member GetExecutionStrategy : unit -&gt; System.Data.Entity.Infrastructure.IDbExecutionStrategy&#xA;override this.GetExecutionStrategy : unit -&gt; System.Data.Entity.Infrastructure.IDbExecutionStrategy" Usage="commitFailureHandler.GetExecutionStrategy " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.IDbExecutionStrategy</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Creates a new instance of an <see cref="T:System.Data.Entity.Infrastructure.IDbExecutionStrategy" /> to use for quering the transaction log.
+            If null the default will be used.
+            </summary>
+        <returns> An <see cref="T:System.Data.Entity.Infrastructure.IDbExecutionStrategy" /> instance or null. </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public override void Initialize (System.Data.Entity.Core.Objects.ObjectContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Initialize(class System.Data.Entity.Core.Objects.ObjectContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.Initialize(System.Data.Entity.Core.Objects.ObjectContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Initialize (context As ObjectContext)" />
+      <MemberSignature Language="F#" Value="override this.Initialize : System.Data.Entity.Core.Objects.ObjectContext -&gt; unit" Usage="commitFailureHandler.Initialize context" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Data.Entity.Core.Objects.ObjectContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="Initialize">
+      <MemberSignature Language="C#" Value="public override void Initialize (System.Data.Entity.DbContext context, System.Data.Common.DbConnection connection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void Initialize(class System.Data.Entity.DbContext context, class System.Data.Common.DbConnection connection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.Initialize(System.Data.Entity.DbContext,System.Data.Common.DbConnection)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub Initialize (context As DbContext, connection As DbConnection)" />
+      <MemberSignature Language="F#" Value="override this.Initialize : System.Data.Entity.DbContext * System.Data.Common.DbConnection -&gt; unit" Usage="commitFailureHandler.Initialize (context, connection)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="System.Data.Entity.DbContext" />
+        <Parameter Name="connection" Type="System.Data.Common.DbConnection" />
+      </Parameters>
+      <Docs>
+        <param name="context">To be added.</param>
+        <param name="connection">To be added.</param>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="MarkTransactionForPruning">
+      <MemberSignature Language="C#" Value="protected virtual void MarkTransactionForPruning (System.Data.Entity.Infrastructure.TransactionRow transaction);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void MarkTransactionForPruning(class System.Data.Entity.Infrastructure.TransactionRow transaction) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.MarkTransactionForPruning(System.Data.Entity.Infrastructure.TransactionRow)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub MarkTransactionForPruning (transaction As TransactionRow)" />
+      <MemberSignature Language="F#" Value="abstract member MarkTransactionForPruning : System.Data.Entity.Infrastructure.TransactionRow -&gt; unit&#xA;override this.MarkTransactionForPruning : System.Data.Entity.Infrastructure.TransactionRow -&gt; unit" Usage="commitFailureHandler.MarkTransactionForPruning transaction" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="transaction" Type="System.Data.Entity.Infrastructure.TransactionRow" />
+      </Parameters>
+      <Docs>
+        <param name="transaction">The transaction to be removed from the database.</param>
+        <summary>
+            Adds the specified transaction to the list of transactions that can be removed from the database
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruneTransactionHistory">
+      <MemberSignature Language="C#" Value="public void PruneTransactionHistory ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void PruneTransactionHistory() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.PruneTransactionHistory" />
+      <MemberSignature Language="VB.NET" Value="Public Sub PruneTransactionHistory ()" />
+      <MemberSignature Language="F#" Value="member this.PruneTransactionHistory : unit -&gt; unit" Usage="commitFailureHandler.PruneTransactionHistory " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Removes the transactions marked for deletion.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruneTransactionHistory">
+      <MemberSignature Language="C#" Value="protected virtual void PruneTransactionHistory (bool force, bool useExecutionStrategy);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void PruneTransactionHistory(bool force, bool useExecutionStrategy) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.PruneTransactionHistory(System.Boolean,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub PruneTransactionHistory (force As Boolean, useExecutionStrategy As Boolean)" />
+      <MemberSignature Language="F#" Value="abstract member PruneTransactionHistory : bool * bool -&gt; unit&#xA;override this.PruneTransactionHistory : bool * bool -&gt; unit" Usage="commitFailureHandler.PruneTransactionHistory (force, useExecutionStrategy)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="force" Type="System.Boolean" />
+        <Parameter Name="useExecutionStrategy" Type="System.Boolean" />
+      </Parameters>
+      <Docs>
+        <param name="force">
+            if set to <c>true</c> will remove all the old transactions even if their number does not exceed <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />.
+            </param>
+        <param name="useExecutionStrategy">
+            if set to <c>true</c> the operation will be executed using the associated execution strategy
+            </param>
+        <summary>
+            Removes the transactions marked for deletion if their number exceeds <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruneTransactionHistoryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task PruneTransactionHistoryAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task PruneTransactionHistoryAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.PruneTransactionHistoryAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function PruneTransactionHistoryAsync () As Task" />
+      <MemberSignature Language="F#" Value="member this.PruneTransactionHistoryAsync : unit -&gt; System.Threading.Tasks.Task" Usage="commitFailureHandler.PruneTransactionHistoryAsync " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Asynchronously removes the transactions marked for deletion.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruneTransactionHistoryAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task PruneTransactionHistoryAsync (System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task PruneTransactionHistoryAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.PruneTransactionHistoryAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="member this.PruneTransactionHistoryAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="commitFailureHandler.PruneTransactionHistoryAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">The cancellation token.</param>
+        <summary>
+            Asynchronously removes the transactions marked for deletion.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruneTransactionHistoryAsync">
+      <MemberSignature Language="C#" Value="protected virtual System.Threading.Tasks.Task PruneTransactionHistoryAsync (bool force, bool useExecutionStrategy, System.Threading.CancellationToken cancellationToken);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class System.Threading.Tasks.Task PruneTransactionHistoryAsync(bool force, bool useExecutionStrategy, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.PruneTransactionHistoryAsync(System.Boolean,System.Boolean,System.Threading.CancellationToken)" />
+      <MemberSignature Language="F#" Value="abstract member PruneTransactionHistoryAsync : bool * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&#xA;override this.PruneTransactionHistoryAsync : bool * bool * System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task" Usage="commitFailureHandler.PruneTransactionHistoryAsync (force, useExecutionStrategy, cancellationToken)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>System.Diagnostics.DebuggerStepThrough</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="force" Type="System.Boolean" />
+        <Parameter Name="useExecutionStrategy" Type="System.Boolean" />
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
+      </Parameters>
+      <Docs>
+        <param name="force">
+            if set to <c>true</c> will remove all the old transactions even if their number does not exceed <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />.
+            </param>
+        <param name="useExecutionStrategy">
+            if set to <c>true</c> the operation will be executed using the associated execution strategy
+            </param>
+        <param name="cancellationToken">The cancellation token.</param>
+        <summary>
+            Removes the transactions marked for deletion if their number exceeds <see cref="P:System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />.
+            </summary>
+        <returns>A task that represents the asynchronous operation.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="PruningLimit">
+      <MemberSignature Language="C#" Value="protected virtual int PruningLimit { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 PruningLimit" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable ReadOnly Property PruningLimit As Integer" />
+      <MemberSignature Language="F#" Value="member this.PruningLimit : int" Usage="System.Data.Entity.Infrastructure.CommitFailureHandler.PruningLimit" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the number of transactions to be executed on the context before the transaction log will be cleaned.
+            The default value is 20.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RolledBack">
+      <MemberSignature Language="C#" Value="public override void RolledBack (System.Data.Common.DbTransaction transaction, System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig virtual instance void RolledBack(class System.Data.Common.DbTransaction transaction, class System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext interceptionContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:System.Data.Entity.Infrastructure.CommitFailureHandler.RolledBack(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Overrides Sub RolledBack (transaction As DbTransaction, interceptionContext As DbTransactionInterceptionContext)" />
+      <MemberSignature Language="F#" Value="override this.RolledBack : System.Data.Common.DbTransaction * System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext -&gt; unit" Usage="commitFailureHandler.RolledBack (transaction, interceptionContext)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="transaction" Type="System.Data.Common.DbTransaction" />
+        <Parameter Name="interceptionContext" Type="System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext" />
+      </Parameters>
+      <Docs>
+        <param name="transaction">The transaction that was rolled back.</param>
+        <param name="interceptionContext">Contextual information associated with the call.</param>
+        <summary>
+            Stops tracking the transaction that was rolled back.
+            </summary>
+        <remarks>To be added.</remarks>
+        <altmember cref="M:System.Data.Entity.Infrastructure.Interception.IDbTransactionInterceptor.RolledBack(System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.Interception.DbTransactionInterceptionContext)" />
+      </Docs>
+    </Member>
+    <Member MemberName="TransactionContext">
+      <MemberSignature Language="C#" Value="protected internal System.Data.Entity.Infrastructure.TransactionContext TransactionContext { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Data.Entity.Infrastructure.TransactionContext TransactionContext" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.Infrastructure.CommitFailureHandler.TransactionContext" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend ReadOnly Property TransactionContext As TransactionContext" />
+      <MemberSignature Language="F#" Value="member this.TransactionContext : System.Data.Entity.Infrastructure.TransactionContext" Usage="System.Data.Entity.Infrastructure.CommitFailureHandler.TransactionContext" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Data.Entity.Infrastructure.TransactionContext</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the transaction context.
+            </summary>
+        <value>
+            The transaction context.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Transactions">
+      <MemberSignature Language="C#" Value="protected System.Collections.Generic.Dictionary&lt;System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.TransactionRow&gt; Transactions { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.Dictionary`2&lt;class System.Data.Common.DbTransaction, class System.Data.Entity.Infrastructure.TransactionRow&gt; Transactions" />
+      <MemberSignature Language="DocId" Value="P:System.Data.Entity.Infrastructure.CommitFailureHandler.Transactions" />
+      <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property Transactions As Dictionary(Of DbTransaction, TransactionRow)" />
+      <MemberSignature Language="F#" Value="member this.Transactions : System.Collections.Generic.Dictionary&lt;System.Data.Common.DbTransaction, System.Data.Entity.Infrastructure.TransactionRow&gt;" Usage="System.Data.Entity.Infrastructure.CommitFailureHandler.Transactions" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>EntityFramework</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.Dictionary&lt;System.Data.Common.DbTransaction,System.Data.Entity.Infrastructure.TransactionRow&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            The map between the store transactions and the transaction tracking objects
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
