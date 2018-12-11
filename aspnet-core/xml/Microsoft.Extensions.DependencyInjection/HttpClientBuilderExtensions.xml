@@ -7,6 +7,7 @@
   <AssemblyInfo>
     <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -28,6 +29,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -44,9 +46,15 @@
             </summary>
         <returns>An <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" /> that can be used to configure the client.</returns>
         <remarks>
+          <para>
             The <see paramref="configureHandler" /> delegate should return a new instance of the message handler each time it
             is invoked.
-            </remarks>
+            </para>
+          <para>
+            The <see cref="T:System.IServiceProvider" /> argument provided to <paramref name="configureHandler" /> will be
+            a reference to a scoped service provider that shares the lifetime of the handler being constructed.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddHttpMessageHandler">
@@ -59,6 +67,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -90,6 +99,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -113,7 +123,12 @@
             Adds an additional message handler from the dependency injection container for a named <see cref="T:System.Net.Http.HttpClient" />.
             </summary>
         <returns>An <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" /> that can be used to configure the client.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            The <typeparamref name="THandler" /> will be resolved from a scoped service provider that shares 
+            the lifetime of the handler being constructed.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="AddTypedClient&lt;TClient&gt;">
@@ -126,6 +141,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -161,6 +177,11 @@
             Calling <see cref="M:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddTypedClient``1(Microsoft.Extensions.DependencyInjection.IHttpClientBuilder)" /> will register a typed
             client binding that creates <typeparamref name="TClient" /> using the <see cref="T:Microsoft.Extensions.Http.ITypedHttpClientFactory`1" />.
             </para>
+          <para>
+            The typed client's service dependencies will be resolved from the same service provider
+            that is used to resolve the typed client. It is not possible to access services from the
+            scope bound to the message handler, which is managed independently.
+            </para>
         </remarks>
       </Docs>
     </Member>
@@ -174,6 +195,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -224,6 +246,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -274,6 +297,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -321,6 +345,11 @@
             will register a typed client binding that creates <typeparamref name="TImplementation" /> using the 
             <see cref="T:Microsoft.Extensions.Http.ITypedHttpClientFactory`1" />.
             </para>
+          <para>
+            The typed client's service dependencies will be resolved from the same service provider
+            that is used to resolve the typed client. It is not possible to access services from the
+            scope bound to the message handler, which is managed independently.
+            </para>
         </remarks>
       </Docs>
     </Member>
@@ -334,6 +363,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -349,7 +379,10 @@
             Adds a delegate that will be used to configure a named <see cref="T:System.Net.Http.HttpClient" />.
             </summary>
         <returns>An <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" /> that can be used to configure the client.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The <see cref="T:System.IServiceProvider" /> provided to <paramref name="configureClient" /> will be the
+            same application's root service provider instance.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="ConfigureHttpClient">
@@ -362,6 +395,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -390,6 +424,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -419,6 +454,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -436,9 +472,15 @@
             </summary>
         <returns>An <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" /> that can be used to configure the client.</returns>
         <remarks>
+          <para>
             The <see paramref="configureHandler" /> delegate should return a new instance of the message handler each time it
             is invoked.
-            </remarks>
+            </para>
+          <para>
+            The <see cref="T:System.IServiceProvider" /> argument provided to <paramref name="configureHandler" /> will be
+            a reference to a scoped service provider that shares the lifetime of the handler being constructed.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="ConfigurePrimaryHttpMessageHandler">
@@ -451,6 +493,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -483,6 +526,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -503,11 +547,16 @@
             </typeparam>
         <param name="builder">The <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" />.</param>
         <summary>
-            Configures the primary <see cref="T:System.Net.Http.HttpMessageHandler" /> from the dependency inection container
+            Configures the primary <see cref="T:System.Net.Http.HttpMessageHandler" /> from the dependency injection container
             for a  named <see cref="T:System.Net.Http.HttpClient" />.
             </summary>
         <returns>An <see cref="T:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder" /> that can be used to configure the client.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            The <typeparamref name="THandler" /> will be resolved from a scoped service provider that shares 
+            the lifetime of the handler being constructed.
+            </para>
+        </remarks>
       </Docs>
     </Member>
     <Member MemberName="SetHandlerLifetime">
@@ -520,6 +569,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.Extensions.Http</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.Extensions.DependencyInjection.IHttpClientBuilder</ReturnType>
@@ -544,8 +594,8 @@
             a handler can be pooled before it is scheduled for removal from the pool and disposal.
             </para>
           <para>
-            Pooling of handlers is desirable as each handler typially manages its own underlying HTTP connections; creating
-            more handlers than necessary can result in connection delays. Some handlers also keep connections open indefinitly
+            Pooling of handlers is desirable as each handler typically manages its own underlying HTTP connections; creating
+            more handlers than necessary can result in connection delays. Some handlers also keep connections open indefinitely
             which can prevent the handler from reacting to DNS changes. The value of <paramref name="handlerLifetime" /> should be
             chosen with an understanding of the application's requirement to respond to changes in the network environment.
             </para>
