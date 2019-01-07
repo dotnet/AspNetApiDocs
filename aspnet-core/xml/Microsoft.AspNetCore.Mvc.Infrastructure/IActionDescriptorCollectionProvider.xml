@@ -10,6 +10,7 @@
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -17,13 +18,21 @@
              Provides the currently cached collection of <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor" />.
              </summary>
     <remarks>
+      <para>
              The default implementation internally caches the collection and uses
              <see cref="T:Microsoft.AspNetCore.Mvc.Infrastructure.IActionDescriptorChangeProvider" /> to invalidate this cache, incrementing
              <see cref="P:Microsoft.AspNetCore.Mvc.Infrastructure.ActionDescriptorCollection.Version" /> the collection is reconstructed.
-            
+            </para>
+      <para>
+             To be reactively notified of changes, downcast to <see cref="T:Microsoft.AspNetCore.Mvc.Infrastructure.ActionDescriptorCollectionProvider" /> and
+             subscribe to the change token returned from <see cref="M:Microsoft.AspNetCore.Mvc.Infrastructure.ActionDescriptorCollectionProvider.GetChangeToken" />
+             using <see cref="M:Microsoft.Extensions.Primitives.ChangeToken.OnChange(System.Func{Microsoft.Extensions.Primitives.IChangeToken},System.Action)" />.
+             </para>
+      <para>
              Default consumers of this service, are aware of the version and will recache
              data as appropriate, but rely on the version being unique.
-             </remarks>
+             </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="ActionDescriptors">
@@ -39,6 +48,7 @@
         <AssemblyVersion>1.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Mvc.Infrastructure.ActionDescriptorCollection</ReturnType>
