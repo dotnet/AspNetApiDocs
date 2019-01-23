@@ -1,0 +1,142 @@
+<Type Name="ITimeLimitedDataProtector" FullName="Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector">
+  <TypeSignature Language="C#" Value="public interface ITimeLimitedDataProtector : Microsoft.AspNetCore.DataProtection.IDataProtector" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ITimeLimitedDataProtector implements class Microsoft.AspNetCore.DataProtection.IDataProtectionProvider, class Microsoft.AspNetCore.DataProtection.IDataProtector" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ITimeLimitedDataProtector&#xA;Implements IDataProtector" />
+  <TypeSignature Language="F#" Value="type ITimeLimitedDataProtector = interface&#xA;    interface IDataProtector&#xA;    interface IDataProtectionProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.DataProtection.Extensions</AssemblyName>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.DataProtection.IDataProtectionProvider</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.DataProtection.IDataProtector</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            An interface that can provide data protection services where payloads have
+            a finite lifetime.
+            </summary>
+    <remarks>
+            It is intended that payload lifetimes be somewhat short. Payloads protected
+            via this mechanism are not intended for long-term persistence (e.g., longer
+            than a few weeks).
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CreateProtector">
+      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector CreateProtector (string purpose);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector CreateProtector(string purpose) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.CreateProtector(System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateProtector (purpose As String) As ITimeLimitedDataProtector" />
+      <MemberSignature Language="F#" Value="abstract member CreateProtector : string -&gt; Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" Usage="iTimeLimitedDataProtector.CreateProtector purpose" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection.Extensions</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="purpose" Type="System.String" />
+      </Parameters>
+      <Docs>
+        <param name="purpose">
+            The purpose to be assigned to the newly-created <see cref="T:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" />.
+            </param>
+        <summary>
+            Creates an <see cref="T:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" /> given a purpose.
+            </summary>
+        <returns>An <see cref="T:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" /> tied to the provided purpose.</returns>
+        <remarks>
+            The <paramref name="purpose" /> parameter must be unique for the intended use case; two
+            different <see cref="T:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector" /> instances created with two different <paramref name="purpose" />
+            values will not be able to decipher each other's payloads. The <paramref name="purpose" /> parameter
+            value is not intended to be kept secret.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Protect">
+      <MemberSignature Language="C#" Value="public byte[] Protect (byte[] plaintext, DateTimeOffset expiration);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int8[] Protect(unsigned int8[] plaintext, valuetype System.DateTimeOffset expiration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Protect(System.Byte[],System.DateTimeOffset)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Protect (plaintext As Byte(), expiration As DateTimeOffset) As Byte()" />
+      <MemberSignature Language="F#" Value="abstract member Protect : byte[] * DateTimeOffset -&gt; byte[]" Usage="iTimeLimitedDataProtector.Protect (plaintext, expiration)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection.Extensions</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="plaintext" Type="System.Byte[]" />
+        <Parameter Name="expiration" Type="System.DateTimeOffset" />
+      </Parameters>
+      <Docs>
+        <param name="plaintext">The plaintext data to protect.</param>
+        <param name="expiration">The time when this payload should expire.</param>
+        <summary>
+            Cryptographically protects a piece of plaintext data, expiring the data at
+            the chosen time.
+            </summary>
+        <returns>The protected form of the plaintext data.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Unprotect">
+      <MemberSignature Language="C#" Value="public byte[] Unprotect (byte[] protectedData, out DateTimeOffset expiration);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance unsigned int8[] Unprotect(unsigned int8[] protectedData, [out] valuetype System.DateTimeOffset&amp; expiration) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector.Unprotect(System.Byte[],System.DateTimeOffset@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function Unprotect (protectedData As Byte(), ByRef expiration As DateTimeOffset) As Byte()" />
+      <MemberSignature Language="F#" Value="abstract member Unprotect : byte[] *  -&gt; byte[]" Usage="iTimeLimitedDataProtector.Unprotect (protectedData, expiration)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection.Extensions</AssemblyName>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <AssemblyVersion>1.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.0.0.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Byte[]</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="protectedData" Type="System.Byte[]" />
+        <Parameter Name="expiration" Type="System.DateTimeOffset" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="protectedData">The protected data to unprotect.</param>
+        <param name="expiration">An 'out' parameter which upon a successful unprotect
+            operation receives the expiration date of the payload.</param>
+        <summary>
+            Cryptographically unprotects a piece of protected data.
+            </summary>
+        <returns>The plaintext form of the protected data.</returns>
+        <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+            Thrown if <paramref name="protectedData" /> is invalid, malformed, or expired.
+            </exception>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
