@@ -112,6 +112,7 @@
     <Assembly Name="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SignalR.Redis" Version="1.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SignalR.Specification.Tests" Version="1.1.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="1.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices" Version="2.2.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.2.0.0" />
     <Assembly Name="Microsoft.AspNetCore.StaticFiles" Version="2.2.0.0" />
@@ -21127,6 +21128,61 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.Specification.Tests.ScaleoutHubLifetimeManagerTests`1.WritingToRemoteConnectionThatFailsDoesNotThrow" />
     </Type>
   </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal">
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.GroupAction" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.GroupAction">
+      <Member Id="F:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.GroupAction.Add" />
+      <Member Id="F:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.GroupAction.Remove" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.#ctor(System.Int32,System.String,Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.GroupAction,System.String,System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.Action" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.ConnectionId" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.GroupName" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.Id" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand.ServerName" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation.#ctor(Microsoft.AspNetCore.SignalR.SerializedHubMessage,System.Collections.Generic.IReadOnlyList{System.String})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation.Create(System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String})" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation.ExcludedConnectionIds" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisInvocation.Message" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.#ctor(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.SignalR.Protocol.IHubProtocol})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.ReadAck(System.ReadOnlyMemory{System.Byte})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.ReadGroupCommand(System.ReadOnlyMemory{System.Byte})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.ReadInvocation(System.ReadOnlyMemory{System.Byte})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.ReadSerializedHubMessage(System.ReadOnlyMemory{System.Byte}@)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.WriteAck(System.Int32)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.WriteGroupCommand(Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisGroupCommand)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.WriteInvocation(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal.RedisProtocol.WriteInvocation(System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String})" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis">
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.#ctor(Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager{`0}},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions},Microsoft.AspNetCore.SignalR.IHubProtocolResolver)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.AddToGroupAsync(System.String,System.String,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.Dispose" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.OnConnectedAsync(Microsoft.AspNetCore.SignalR.HubConnectionContext)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.OnDisconnectedAsync(Microsoft.AspNetCore.SignalR.HubConnectionContext)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.RemoveFromGroupAsync(System.String,System.String,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendAllAsync(System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendAllExceptAsync(System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String},System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendConnectionAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendConnectionsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendGroupAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendGroupExceptAsync(System.String,System.String,System.Object[],System.Collections.Generic.IReadOnlyList{System.String},System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendGroupsAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendUserAsync(System.String,System.String,System.Object[],System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisHubLifetimeManager`1.SendUsersAsync(System.Collections.Generic.IReadOnlyList{System.String},System.String,System.Object[],System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions" Id="T:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions.Configuration" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions.ConnectionFactory" />
+    </Type>
+  </Namespace>
   <Namespace Name="Microsoft.AspNetCore.SpaServices.AngularCli">
     <Type Name="Microsoft.AspNetCore.SpaServices.AngularCli.AngularCliBuilder" Id="T:Microsoft.AspNetCore.SpaServices.AngularCli.AngularCliBuilder">
       <Member Id="M:Microsoft.AspNetCore.SpaServices.AngularCli.AngularCliBuilder.#ctor(System.String)" />
@@ -22655,6 +22711,12 @@
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.StackExchangeRedis.RedisCacheOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis(Microsoft.AspNetCore.SignalR.ISignalRServerBuilder)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis(Microsoft.AspNetCore.SignalR.ISignalRServerBuilder,System.Action{Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis(Microsoft.AspNetCore.SignalR.ISignalRServerBuilder,System.String)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis(Microsoft.AspNetCore.SignalR.ISignalRServerBuilder,System.String,System.Action{Microsoft.AspNetCore.SignalR.StackExchangeRedis.RedisOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelper(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder)" />
