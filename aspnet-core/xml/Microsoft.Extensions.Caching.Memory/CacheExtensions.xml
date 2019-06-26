@@ -153,13 +153,13 @@
         <Parameter Name="factory" Type="System.Func&lt;Microsoft.Extensions.Caching.Memory.ICacheEntry,System.Threading.Tasks.Task&lt;TItem&gt;&gt;" />
       </Parameters>
       <Docs>
-        <typeparam name="TItem">To be added.</typeparam>
-        <param name="cache">To be added.</param>
-        <param name="key">To be added.</param>
-        <param name="factory">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <typeparam name="TItem">The type of value being stored.</typeparam>
+        <param name="cache">The cache.</param>
+        <param name="key">The cache key.</param>
+        <param name="factory">A delegate to be conditionally executed. Its result is stored in the cache.</param>
+        <summary>If the key is not found in the cache, this method will asynchronously wait for the factory delegate to complete, then store the results of that method in the cache. After which, it will return said result.</summary>
+        <returns>The cached value or the result of the factor delegate.</returns>
+        <remarks>If GetOrCreateAsync is called multiple times concurrently, the result of the last call to complete will be stored in the cache. This is not necessarily the last call to start.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Set&lt;TItem&gt;">
