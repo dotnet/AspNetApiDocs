@@ -1,12 +1,14 @@
-﻿<Type Name="IEndpointSelectorPolicy" FullName="Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy">
+<Type Name="IEndpointSelectorPolicy" FullName="Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy">
   <TypeSignature Language="C#" Value="public interface IEndpointSelectorPolicy" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IEndpointSelectorPolicy" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy" />
   <TypeSignature Language="VB.NET" Value="Public Interface IEndpointSelectorPolicy" />
   <TypeSignature Language="F#" Value="type IEndpointSelectorPolicy = interface" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IEndpointSelectorPolicy" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
     <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -25,10 +27,12 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})" />
       <MemberSignature Language="VB.NET" Value="Public Function AppliesToEndpoints (endpoints As IReadOnlyList(Of Endpoint)) As Boolean" />
       <MemberSignature Language="F#" Value="abstract member AppliesToEndpoints : System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; -&gt; bool" Usage="iEndpointSelectorPolicy.AppliesToEndpoints endpoints" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; bool AppliesToEndpoints(System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ endpoints);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Boolean</ReturnType>
@@ -49,10 +53,53 @@
       </Docs>
     </Member>
     <Member MemberName="ApplyAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ApplyAsync (Microsoft.AspNetCore.Http.HttpContext httpContext, Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ApplyAsync(class Microsoft.AspNetCore.Http.HttpContext httpContext, class Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.ApplyAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.Matching.CandidateSet)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task ^ ApplyAsync(Microsoft::AspNetCore::Http::HttpContext ^ httpContext, Microsoft::AspNetCore::Routing::Matching::CandidateSet ^ candidates);" />
+      <MemberSignature Language="F#" Value="abstract member ApplyAsync : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.Matching.CandidateSet -&gt; System.Threading.Tasks.Task" Usage="iEndpointSelectorPolicy.ApplyAsync (httpContext, candidates)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="httpContext" Type="Microsoft.AspNetCore.Http.HttpContext" Index="0" FrameworkAlternate="aspnetcore-3.0" />
+        <Parameter Name="candidates" Type="Microsoft.AspNetCore.Routing.Matching.CandidateSet" Index="1" FrameworkAlternate="aspnetcore-3.0" />
+      </Parameters>
+      <Docs>
+        <param name="httpContext">
+            The <see cref="T:Microsoft.AspNetCore.Http.HttpContext" /> associated with the current request.
+            </param>
+        <param name="candidates">The <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateSet" />.</param>
+        <summary>
+            Applies the policy to the <see cref="T:Microsoft.AspNetCore.Routing.Matching.CandidateSet" />.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>
+            Implementations of <see cref="T:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy" /> should implement this method
+            and filter the set of candidates in the <paramref name="candidates" /> by setting
+            <see cref="M:Microsoft.AspNetCore.Routing.Matching.CandidateSet.SetValidity(System.Int32,System.Boolean)" /> to <c>false</c> where desired.
+            </para>
+          <para>
+            To signal an error condition, the <see cref="T:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy" /> should assign the endpoint by
+            calling <see cref="M:Microsoft.AspNetCore.Http.EndpointHttpContextExtensions.SetEndpoint(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.Endpoint)" />
+            and setting <see cref="P:Microsoft.AspNetCore.Http.HttpRequest.RouteValues" /> to an
+            <see cref="T:Microsoft.AspNetCore.Http.Endpoint" /> value that will produce the desired error when executed.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ApplyAsync">
       <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ApplyAsync (Microsoft.AspNetCore.Http.HttpContext httpContext, Microsoft.AspNetCore.Routing.EndpointSelectorContext context, Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ApplyAsync(class Microsoft.AspNetCore.Http.HttpContext httpContext, class Microsoft.AspNetCore.Routing.EndpointSelectorContext context, class Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.ApplyAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.EndpointSelectorContext,Microsoft.AspNetCore.Routing.Matching.CandidateSet)" />
       <MemberSignature Language="F#" Value="abstract member ApplyAsync : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.EndpointSelectorContext * Microsoft.AspNetCore.Routing.Matching.CandidateSet -&gt; System.Threading.Tasks.Task" Usage="iEndpointSelectorPolicy.ApplyAsync (httpContext, context, candidates)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; System::Threading::Tasks::Task ^ ApplyAsync(Microsoft::AspNetCore::Http::HttpContext ^ httpContext, Microsoft::AspNetCore::Routing::EndpointSelectorContext ^ context, Microsoft::AspNetCore::Routing::Matching::CandidateSet ^ candidates);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
@@ -62,9 +109,9 @@
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="httpContext" Type="Microsoft.AspNetCore.Http.HttpContext" />
-        <Parameter Name="context" Type="Microsoft.AspNetCore.Routing.EndpointSelectorContext" />
-        <Parameter Name="candidates" Type="Microsoft.AspNetCore.Routing.Matching.CandidateSet" />
+        <Parameter Name="httpContext" Type="Microsoft.AspNetCore.Http.HttpContext" Index="0" FrameworkAlternate="aspnetcore-2.2" />
+        <Parameter Name="context" Type="Microsoft.AspNetCore.Routing.EndpointSelectorContext" Index="1" FrameworkAlternate="aspnetcore-2.2" />
+        <Parameter Name="candidates" Type="Microsoft.AspNetCore.Routing.Matching.CandidateSet" Index="2" FrameworkAlternate="aspnetcore-2.2" />
       </Parameters>
       <Docs>
         <param name="httpContext">

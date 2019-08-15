@@ -1,9 +1,10 @@
-﻿<Type Name="IApiDescriptionProvider" FullName="Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider">
+<Type Name="IApiDescriptionProvider" FullName="Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider">
   <TypeSignature Language="C#" Value="public interface IApiDescriptionProvider" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IApiDescriptionProvider" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider" />
   <TypeSignature Language="VB.NET" Value="Public Interface IApiDescriptionProvider" />
   <TypeSignature Language="F#" Value="type IApiDescriptionProvider = interface" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IApiDescriptionProvider" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Mvc.ApiExplorer</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -14,11 +15,29 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            Defines a contract for specifying <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescription" /> instances.
+            </summary>
+    <remarks>
+      <para>
+            On the first query for <see cref="T:Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor" />, MVC invokes all registered instances of <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider" />
+            in the ascending sort order of <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order" />. 
+            </para>
+      <para>
+            Each provider has its <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)" /> method
+            called in sequence and given the same instance of <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" />. Then each
+            provider has its <see cref="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)" /> method called in the reverse order. Each instance has
+            an opportunity to add or modify <see cref="P:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext.Results" />.
+            </para>
+      <para>
+            As providers are called in a predefined sequence, each provider has a chance to observe and decorate the
+            result of the providers that have already run. 
+            </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName="OnProvidersExecuted">
@@ -27,6 +46,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuted(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnProvidersExecuted (context As ApiDescriptionProviderContext)" />
       <MemberSignature Language="F#" Value="abstract member OnProvidersExecuted : Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext -&gt; unit" Usage="iApiDescriptionProvider.OnProvidersExecuted context" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnProvidersExecuted(Microsoft::AspNetCore::Mvc::ApiExplorer::ApiDescriptionProviderContext ^ context);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.ApiExplorer</AssemblyName>
@@ -38,12 +58,13 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" FrameworkAlternate="aspnetcore-2.2;aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-2.1" />
+        <Parameter Name="context" Type="Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" />
       </Parameters>
       <Docs>
         <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" />.</param>
@@ -59,6 +80,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.OnProvidersExecuting(Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext)" />
       <MemberSignature Language="VB.NET" Value="Public Sub OnProvidersExecuting (context As ApiDescriptionProviderContext)" />
       <MemberSignature Language="F#" Value="abstract member OnProvidersExecuting : Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext -&gt; unit" Usage="iApiDescriptionProvider.OnProvidersExecuting context" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnProvidersExecuting(Microsoft::AspNetCore::Mvc::ApiExplorer::ApiDescriptionProviderContext ^ context);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.ApiExplorer</AssemblyName>
@@ -70,12 +92,13 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="context" Type="Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" FrameworkAlternate="aspnetcore-2.2;aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-2.1" />
+        <Parameter Name="context" Type="Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" />
       </Parameters>
       <Docs>
         <param name="context">The <see cref="T:Microsoft.AspNetCore.Mvc.ApiExplorer.ApiDescriptionProviderContext" />.</param>
@@ -91,6 +114,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Order As Integer" />
       <MemberSignature Language="F#" Value="member this.Order : int" Usage="Microsoft.AspNetCore.Mvc.ApiExplorer.IApiDescriptionProvider.Order" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int Order { int get(); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.ApiExplorer</AssemblyName>
@@ -102,6 +126,7 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>

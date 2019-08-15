@@ -1,9 +1,10 @@
-﻿<Type Name="ModelBinderAttribute" FullName="Microsoft.AspNetCore.Mvc.ModelBinderAttribute">
+<Type Name="ModelBinderAttribute" FullName="Microsoft.AspNetCore.Mvc.ModelBinderAttribute">
   <TypeSignature Language="C#" Value="public class ModelBinderAttribute : Attribute, Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" />
   <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit ModelBinderAttribute extends System.Attribute implements class Microsoft.AspNetCore.Mvc.ModelBinding.IBinderTypeProviderMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Mvc.ModelBinderAttribute" />
   <TypeSignature Language="VB.NET" Value="Public Class ModelBinderAttribute&#xA;Inherits Attribute&#xA;Implements IBinderTypeProviderMetadata, IModelNameProvider" />
-  <TypeSignature Language="F#" Value="type ModelBinderAttribute = class&#xA;    inherit Attribute&#xA;    interface IModelNameProvider&#xA;    interface IBinderTypeProviderMetadata&#xA;    interface IBindingSourceMetadata" />
+  <TypeSignature Language="F#" Value="type ModelBinderAttribute = class&#xA;    inherit Attribute&#xA;    interface IBinderTypeProviderMetadata&#xA;    interface IBindingSourceMetadata&#xA;    interface IModelNameProvider" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ModelBinderAttribute : Attribute, Microsoft::AspNetCore::Mvc::ModelBinding::IBinderTypeProviderMetadata, Microsoft::AspNetCore::Mvc::ModelBinding::IModelNameProvider" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -11,6 +12,7 @@
     <AssemblyVersion>2.0.0.0</AssemblyVersion>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Attribute</BaseTypeName>
@@ -27,8 +29,11 @@
     </Interface>
   </Interfaces>
   <Attributes>
-    <Attribute FrameworkAlternate="aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2">
+    <Attribute FrameworkAlternate="aspnetcore-2.1;aspnetcore-2.2">
       <AttributeName>System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct | System.AttributeTargets.Enum | System.AttributeTargets.Property | System.AttributeTargets.Parameter, AllowMultiple=false, Inherited=true)</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-3.0">
+      <AttributeName>System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Enum | System.AttributeTargets.Parameter | System.AttributeTargets.Property | System.AttributeTargets.Struct, AllowMultiple=false, Inherited=true)</AttributeName>
     </Attribute>
   </Attributes>
   <Docs>
@@ -43,6 +48,7 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.#ctor" />
       <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ModelBinderAttribute();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
@@ -51,6 +57,7 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -66,22 +73,27 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.#ctor(System.Type)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (binderType As Type)" />
       <MemberSignature Language="F#" Value="new Microsoft.AspNetCore.Mvc.ModelBinderAttribute : Type -&gt; Microsoft.AspNetCore.Mvc.ModelBinderAttribute" Usage="new Microsoft.AspNetCore.Mvc.ModelBinderAttribute binderType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; ModelBinderAttribute(Type ^ binderType);" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters>
-        <Parameter Name="binderType" Type="System.Type" Index="0" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2" />
+        <Parameter Name="binderType" Type="System.Type" Index="0" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0" />
       </Parameters>
       <Docs>
         <param name="binderType">A <see cref="T:System.Type" /> which implements <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder" />.</param>
         <summary>
             Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinderAttribute" />.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Subclass this attribute and set <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BindingSource" /> if <see cref="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Custom" /> is not
+            correct for the specified <paramref name="binderType" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="BinderType">
@@ -90,6 +102,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BinderType" />
       <MemberSignature Language="VB.NET" Value="Public Property BinderType As Type" />
       <MemberSignature Language="F#" Value="member this.BinderType : Type with get, set" Usage="Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BinderType" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Type ^ BinderType { Type ^ get(); void set(Type ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
@@ -98,6 +111,7 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Type</ReturnType>
@@ -105,7 +119,10 @@
       <Docs>
         <summary>To be added.</summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Subclass this attribute and set <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BindingSource" /> if <see cref="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Custom" /> is not
+            correct for the specified (non-<see langword="null" />) <see cref="T:Microsoft.AspNetCore.Mvc.ModelBinding.IModelBinder" /> implementation.
+            </remarks>
         <inheritdoc />
       </Docs>
     </Member>
@@ -115,6 +132,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BindingSource" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Property BindingSource As BindingSource" />
       <MemberSignature Language="F#" Value="member this.BindingSource : Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource with get, set" Usage="Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BindingSource" />
+      <MemberSignature Language="C++ CLI" Value="public:  virtual property Microsoft::AspNetCore::Mvc::ModelBinding::BindingSource ^ BindingSource {  public:&#xA;Microsoft::AspNetCore::Mvc::ModelBinding::BindingSource ^ get(); protected:&#xA; void set(Microsoft::AspNetCore::Mvc::ModelBinding::BindingSource ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
@@ -123,13 +141,17 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>To be added.</summary>
-        <value>To be added.</value>
+        <value>
+            If <see cref="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.BinderType" /> is <see langword="null" />, defaults to <see langword="null" />. Otherwise,
+            defaults to <see cref="F:Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource.Custom" />. May be overridden in a subclass.
+            </value>
         <remarks>To be added.</remarks>
         <inheritdoc />
       </Docs>
@@ -140,6 +162,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.ModelBinderAttribute.Name" />
       <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
       <MemberSignature Language="F#" Value="member this.Name : string with get, set" Usage="Microsoft.AspNetCore.Mvc.ModelBinderAttribute.Name" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::String ^ Name { System::String ^ get(); void set(System::String ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
@@ -148,6 +171,7 @@
         <AssemblyVersion>2.0.0.0</AssemblyVersion>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>

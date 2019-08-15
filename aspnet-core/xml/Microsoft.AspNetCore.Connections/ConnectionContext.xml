@@ -1,20 +1,28 @@
-﻿<Type Name="ConnectionContext" FullName="Microsoft.AspNetCore.Connections.ConnectionContext">
-  <TypeSignature Language="C#" Value="public abstract class ConnectionContext" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ConnectionContext extends System.Object" />
+<Type Name="ConnectionContext" FullName="Microsoft.AspNetCore.Connections.ConnectionContext">
+  <TypeSignature Language="C#" Value="public abstract class ConnectionContext : IAsyncDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit ConnectionContext extends System.Object implements class System.IAsyncDisposable" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Connections.ConnectionContext" />
-  <TypeSignature Language="VB.NET" Value="Public MustInherit Class ConnectionContext" />
-  <TypeSignature Language="F#" Value="type ConnectionContext = class" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class ConnectionContext&#xA;Implements IAsyncDisposable" />
+  <TypeSignature Language="F#" Value="type ConnectionContext = class&#xA;    interface IAsyncDisposable" />
+  <TypeSignature Language="C++ CLI" Value="public ref class ConnectionContext abstract : IAsyncDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
     <AssemblyVersion>2.1.0.0</AssemblyVersion>
     <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
-  <Interfaces />
+  <Interfaces>
+    <Interface>
+      <InterfaceName>System.IAsyncDisposable</InterfaceName>
+    </Interface>
+  </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Encapsulates all information about an individual connection.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -23,11 +31,13 @@
       <MemberSignature Language="ILAsm" Value=".method familyhidebysig specialname rtspecialname instance void .ctor() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.ConnectionContext.#ctor" />
       <MemberSignature Language="VB.NET" Value="Protected Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="protected:&#xA; ConnectionContext();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -41,17 +51,21 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.ConnectionContext.Abort" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Abort ()" />
       <MemberSignature Language="F#" Value="abstract member Abort : unit -&gt; unit&#xA;override this.Abort : unit -&gt; unit" Usage="connectionContext.Abort " />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Abort();" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Aborts the underlying connection.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -61,20 +75,47 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.ConnectionContext.Abort(Microsoft.AspNetCore.Connections.ConnectionAbortedException)" />
       <MemberSignature Language="VB.NET" Value="Public Overridable Sub Abort (abortReason As ConnectionAbortedException)" />
       <MemberSignature Language="F#" Value="abstract member Abort : Microsoft.AspNetCore.Connections.ConnectionAbortedException -&gt; unit&#xA;override this.Abort : Microsoft.AspNetCore.Connections.ConnectionAbortedException -&gt; unit" Usage="connectionContext.Abort abortReason" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Abort(Microsoft::AspNetCore::Connections::ConnectionAbortedException ^ abortReason);" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Void</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="abortReason" Type="Microsoft.AspNetCore.Connections.ConnectionAbortedException" Index="0" FrameworkAlternate="aspnetcore-2.2" />
+        <Parameter Name="abortReason" Type="Microsoft.AspNetCore.Connections.ConnectionAbortedException" Index="0" FrameworkAlternate="aspnetcore-2.2;aspnetcore-3.0" />
       </Parameters>
       <Docs>
-        <param name="abortReason">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="abortReason">An optional <see cref="T:Microsoft.AspNetCore.Connections.ConnectionAbortedException" /> describing the reason the connection is being terminated.</param>
+        <summary>
+            Aborts the underlying connection.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ConnectionClosed">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.CancellationToken ConnectionClosed { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.Threading.CancellationToken ConnectionClosed" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.ConnectionClosed" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property ConnectionClosed As CancellationToken" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Threading::CancellationToken ConnectionClosed { System::Threading::CancellationToken get(); void set(System::Threading::CancellationToken value); };" />
+      <MemberSignature Language="F#" Value="member this.ConnectionClosed : System.Threading.CancellationToken with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.ConnectionClosed" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.CancellationToken</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Triggered when the client connection is closed.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -84,18 +125,46 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.ConnectionId" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Property ConnectionId As String" />
       <MemberSignature Language="F#" Value="member this.ConnectionId : string with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.ConnectionId" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::String ^ ConnectionId { System::String ^ get(); void set(System::String ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a unique identifier to represent this connection in trace logs.
+            </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.ValueTask DisposeAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask DisposeAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.ConnectionContext.DisposeAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DisposeAsync () As ValueTask" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::ValueTask DisposeAsync();" />
+      <MemberSignature Language="F#" Value="abstract member DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask" Usage="connectionContext.DisposeAsync " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Releases resources for the underlying connection.
+            </summary>
+        <returns>A <see cref="T:System.Threading.Tasks.ValueTask" /> that completes when resources have been released.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -105,17 +174,21 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.Features" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride ReadOnly Property Features As IFeatureCollection" />
       <MemberSignature Language="F#" Value="member this.Features : Microsoft.AspNetCore.Http.Features.IFeatureCollection" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.Features" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property Microsoft::AspNetCore::Http::Features::IFeatureCollection ^ Features { Microsoft::AspNetCore::Http::Features::IFeatureCollection ^ get(); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Http.Features.IFeatureCollection</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the collection of features provided by the server and middleware available on this connection.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -126,17 +199,67 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.Items" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Property Items As IDictionary(Of Object, Object)" />
       <MemberSignature Language="F#" Value="member this.Items : System.Collections.Generic.IDictionary&lt;obj, obj&gt; with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.Items" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ Items { System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ get(); void set(System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IDictionary&lt;System.Object,System.Object&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a key/value collection that can be used to share data within the scope of this connection.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="LocalEndPoint">
+      <MemberSignature Language="C#" Value="public virtual System.Net.EndPoint LocalEndPoint { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.EndPoint LocalEndPoint" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.LocalEndPoint" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property LocalEndPoint As EndPoint" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Net::EndPoint ^ LocalEndPoint { System::Net::EndPoint ^ get(); void set(System::Net::EndPoint ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.LocalEndPoint : System.Net.EndPoint with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.LocalEndPoint" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.EndPoint</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the local endpoint for this connection.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RemoteEndPoint">
+      <MemberSignature Language="C#" Value="public virtual System.Net.EndPoint RemoteEndPoint { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Net.EndPoint RemoteEndPoint" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.RemoteEndPoint" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Property RemoteEndPoint As EndPoint" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Net::EndPoint ^ RemoteEndPoint { System::Net::EndPoint ^ get(); void set(System::Net::EndPoint ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RemoteEndPoint : System.Net.EndPoint with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.RemoteEndPoint" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.EndPoint</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the remote endpoint for this connection.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -147,17 +270,21 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.ConnectionContext.Transport" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Property Transport As IDuplexPipe" />
       <MemberSignature Language="F#" Value="member this.Transport : System.IO.Pipelines.IDuplexPipe with get, set" Usage="Microsoft.AspNetCore.Connections.ConnectionContext.Transport" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; abstract property System::IO::Pipelines::IDuplexPipe ^ Transport { System::IO::Pipelines::IDuplexPipe ^ get(); void set(System::IO::Pipelines::IDuplexPipe ^ value); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.IO.Pipelines.IDuplexPipe</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:System.IO.Pipelines.IDuplexPipe" /> that can be used to read or write data on this connection.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

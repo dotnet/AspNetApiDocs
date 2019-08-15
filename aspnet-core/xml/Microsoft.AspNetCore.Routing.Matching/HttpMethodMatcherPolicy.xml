@@ -1,12 +1,14 @@
-﻿<Type Name="HttpMethodMatcherPolicy" FullName="Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy">
-  <TypeSignature Language="C#" Value="public sealed class HttpMethodMatcherPolicy : Microsoft.AspNetCore.Routing.MatcherPolicy, Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy, Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit HttpMethodMatcherPolicy extends Microsoft.AspNetCore.Routing.MatcherPolicy implements class Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy, class Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy" />
+<Type Name="HttpMethodMatcherPolicy" FullName="Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy">
+  <TypeSignature Language="C#" Value="public sealed class HttpMethodMatcherPolicy : Microsoft.AspNetCore.Routing.MatcherPolicy, Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy, Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy, Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit HttpMethodMatcherPolicy extends Microsoft.AspNetCore.Routing.MatcherPolicy implements class Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy, class Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy, class Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy" />
-  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class HttpMethodMatcherPolicy&#xA;Inherits MatcherPolicy&#xA;Implements IEndpointComparerPolicy, INodeBuilderPolicy" />
-  <TypeSignature Language="F#" Value="type HttpMethodMatcherPolicy = class&#xA;    inherit MatcherPolicy&#xA;    interface IEndpointComparerPolicy&#xA;    interface INodeBuilderPolicy" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class HttpMethodMatcherPolicy&#xA;Inherits MatcherPolicy&#xA;Implements IEndpointComparerPolicy, IEndpointSelectorPolicy, INodeBuilderPolicy" />
+  <TypeSignature Language="F#" Value="type HttpMethodMatcherPolicy = class&#xA;    inherit MatcherPolicy&#xA;    interface IEndpointComparerPolicy&#xA;    interface IEndpointSelectorPolicy&#xA;    interface INodeBuilderPolicy" />
+  <TypeSignature Language="C++ CLI" Value="public ref class HttpMethodMatcherPolicy sealed : Microsoft::AspNetCore::Routing::MatcherPolicy, Microsoft::AspNetCore::Routing::Matching::IEndpointComparerPolicy, Microsoft::AspNetCore::Routing::Matching::IEndpointSelectorPolicy, Microsoft::AspNetCore::Routing::Matching::INodeBuilderPolicy" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
     <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>Microsoft.AspNetCore.Routing.MatcherPolicy</BaseTypeName>
@@ -14,6 +16,9 @@
   <Interfaces>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy</InterfaceName>
@@ -32,10 +37,12 @@
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.#ctor" />
       <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; HttpMethodMatcherPolicy();" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -49,6 +56,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})" />
       <MemberSignature Language="VB.NET" Value="Public Function AppliesToEndpoints (endpoints As IReadOnlyList(Of Endpoint)) As Boolean" />
       <MemberSignature Language="F#" Value="abstract member AppliesToEndpoints : System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; -&gt; bool&#xA;override this.AppliesToEndpoints : System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; -&gt; bool" Usage="httpMethodMatcherPolicy.AppliesToEndpoints endpoints" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool AppliesToEndpoints(System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ endpoints);" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})</InterfaceMember>
@@ -61,10 +69,44 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="endpoints" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" />
+        <Parameter Name="endpoints" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" Index="0" FrameworkAlternate="aspnetcore-2.2" />
       </Parameters>
       <Docs>
-        <param name="endpoints"></param>
+        <param name="endpoints">
+        </param>
+        <summary>
+            For framework use only.
+            </summary>
+        <returns />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ApplyAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ApplyAsync (Microsoft.AspNetCore.Http.HttpContext httpContext, Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ApplyAsync(class Microsoft.AspNetCore.Http.HttpContext httpContext, class Microsoft.AspNetCore.Routing.Matching.CandidateSet candidates) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.ApplyAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.Matching.CandidateSet)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::Task ^ ApplyAsync(Microsoft::AspNetCore::Http::HttpContext ^ httpContext, Microsoft::AspNetCore::Routing::Matching::CandidateSet ^ candidates);" />
+      <MemberSignature Language="F#" Value="abstract member ApplyAsync : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.Matching.CandidateSet -&gt; System.Threading.Tasks.Task&#xA;override this.ApplyAsync : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.Matching.CandidateSet -&gt; System.Threading.Tasks.Task" Usage="httpMethodMatcherPolicy.ApplyAsync (httpContext, candidates)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.ApplyAsync(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.Matching.CandidateSet)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="httpContext" Type="Microsoft.AspNetCore.Http.HttpContext" Index="0" FrameworkAlternate="aspnetcore-3.0" />
+        <Parameter Name="candidates" Type="Microsoft.AspNetCore.Routing.Matching.CandidateSet" Index="1" FrameworkAlternate="aspnetcore-3.0" />
+      </Parameters>
+      <Docs>
+        <param name="httpContext">
+        </param>
+        <param name="candidates">
+        </param>
         <summary>
             For framework use only.
             </summary>
@@ -78,6 +120,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.BuildJumpTable(System.Int32,System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Routing.Matching.PolicyJumpTableEdge})" />
       <MemberSignature Language="VB.NET" Value="Public Function BuildJumpTable (exitDestination As Integer, edges As IReadOnlyList(Of PolicyJumpTableEdge)) As PolicyJumpTable" />
       <MemberSignature Language="F#" Value="abstract member BuildJumpTable : int * System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyJumpTableEdge&gt; -&gt; Microsoft.AspNetCore.Routing.Matching.PolicyJumpTable&#xA;override this.BuildJumpTable : int * System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyJumpTableEdge&gt; -&gt; Microsoft.AspNetCore.Routing.Matching.PolicyJumpTable" Usage="httpMethodMatcherPolicy.BuildJumpTable (exitDestination, edges)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual Microsoft::AspNetCore::Routing::Matching::PolicyJumpTable ^ BuildJumpTable(int exitDestination, System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Routing::Matching::PolicyJumpTableEdge&gt; ^ edges);" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.BuildJumpTable(System.Int32,System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Routing.Matching.PolicyJumpTableEdge})</InterfaceMember>
@@ -85,6 +128,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Routing.Matching.PolicyJumpTable</ReturnType>
@@ -94,8 +138,10 @@
         <Parameter Name="edges" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyJumpTableEdge&gt;" />
       </Parameters>
       <Docs>
-        <param name="exitDestination"></param>
-        <param name="edges"></param>
+        <param name="exitDestination">
+        </param>
+        <param name="edges">
+        </param>
         <summary>
             For framework use only.
             </summary>
@@ -109,6 +155,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Comparer" />
       <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Comparer As IComparer(Of Endpoint)" />
       <MemberSignature Language="F#" Value="member this.Comparer : System.Collections.Generic.IComparer&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" Usage="Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Comparer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::IComparer&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ Comparer { System::Collections::Generic::IComparer&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ get(); };" />
       <MemberType>Property</MemberType>
       <Implements>
         <InterfaceMember>P:Microsoft.AspNetCore.Routing.Matching.IEndpointComparerPolicy.Comparer</InterfaceMember>
@@ -116,6 +163,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IComparer&lt;Microsoft.AspNetCore.Http.Endpoint&gt;</ReturnType>
@@ -134,6 +182,7 @@
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.GetEdges(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})" />
       <MemberSignature Language="VB.NET" Value="Public Function GetEdges (endpoints As IReadOnlyList(Of Endpoint)) As IReadOnlyList(Of PolicyNodeEdge)" />
       <MemberSignature Language="F#" Value="abstract member GetEdges : System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; -&gt; System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyNodeEdge&gt;&#xA;override this.GetEdges : System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; -&gt; System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyNodeEdge&gt;" Usage="httpMethodMatcherPolicy.GetEdges endpoints" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Routing::Matching::PolicyNodeEdge&gt; ^ GetEdges(System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ endpoints);" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.GetEdges(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})</InterfaceMember>
@@ -141,6 +190,7 @@
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Routing.Matching.PolicyNodeEdge&gt;</ReturnType>
@@ -149,11 +199,66 @@
         <Parameter Name="endpoints" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" />
       </Parameters>
       <Docs>
-        <param name="endpoints"></param>
+        <param name="endpoints">
+        </param>
         <summary>
             For framework use only.
             </summary>
         <returns />
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.AppliesToEndpoints">
+      <MemberSignature Language="C#" Value="bool IEndpointSelectorPolicy.AppliesToEndpoints (System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; endpoints);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.AppliesToEndpoints(class System.Collections.Generic.IReadOnlyList`1&lt;class Microsoft.AspNetCore.Http.Endpoint&gt; endpoints) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Microsoft#AspNetCore#Routing#Matching#IEndpointSelectorPolicy#AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})" />
+      <MemberSignature Language="VB.NET" Value="Function AppliesToEndpoints (endpoints As IReadOnlyList(Of Endpoint)) As Boolean Implements IEndpointSelectorPolicy.AppliesToEndpoints" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.AppliesToEndpoints(System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ endpoints) = Microsoft::AspNetCore::Routing::Matching::IEndpointSelectorPolicy::AppliesToEndpoints;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.IEndpointSelectorPolicy.AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="endpoints" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" Index="0" FrameworkAlternate="aspnetcore-3.0" />
+      </Parameters>
+      <Docs>
+        <param name="endpoints">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.AppliesToEndpoints">
+      <MemberSignature Language="C#" Value="bool INodeBuilderPolicy.AppliesToEndpoints (System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt; endpoints);" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance bool Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.AppliesToEndpoints(class System.Collections.Generic.IReadOnlyList`1&lt;class Microsoft.AspNetCore.Http.Endpoint&gt; endpoints) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Microsoft#AspNetCore#Routing#Matching#INodeBuilderPolicy#AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})" />
+      <MemberSignature Language="VB.NET" Value="Function AppliesToEndpoints (endpoints As IReadOnlyList(Of Endpoint)) As Boolean Implements INodeBuilderPolicy.AppliesToEndpoints" />
+      <MemberSignature Language="C++ CLI" Value=" virtual bool Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.AppliesToEndpoints(System::Collections::Generic::IReadOnlyList&lt;Microsoft::AspNetCore::Http::Endpoint ^&gt; ^ endpoints) = Microsoft::AspNetCore::Routing::Matching::INodeBuilderPolicy::AppliesToEndpoints;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Routing.Matching.INodeBuilderPolicy.AppliesToEndpoints(System.Collections.Generic.IReadOnlyList{Microsoft.AspNetCore.Http.Endpoint})</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="endpoints" Type="System.Collections.Generic.IReadOnlyList&lt;Microsoft.AspNetCore.Http.Endpoint&gt;" Index="0" FrameworkAlternate="aspnetcore-3.0" />
+      </Parameters>
+      <Docs>
+        <param name="endpoints">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -163,10 +268,12 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Order" />
       <MemberSignature Language="VB.NET" Value="Public Overrides ReadOnly Property Order As Integer" />
       <MemberSignature Language="F#" Value="member this.Order : int" Usage="Microsoft.AspNetCore.Routing.Matching.HttpMethodMatcherPolicy.Order" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property int Order { int get(); };" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Int32</ReturnType>
