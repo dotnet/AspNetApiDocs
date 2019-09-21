@@ -1,9 +1,9 @@
 <Type Name="CircuitOptions" FullName="Microsoft.AspNetCore.Components.Server.CircuitOptions">
-  <TypeSignature Language="C#" Value="public class CircuitOptions" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit CircuitOptions extends System.Object" />
+  <TypeSignature Language="C#" Value="public sealed class CircuitOptions" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi sealed beforefieldinit CircuitOptions extends System.Object" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Components.Server.CircuitOptions" />
-  <TypeSignature Language="VB.NET" Value="Public Class CircuitOptions" />
-  <TypeSignature Language="C++ CLI" Value="public ref class CircuitOptions" />
+  <TypeSignature Language="VB.NET" Value="Public NotInheritable Class CircuitOptions" />
+  <TypeSignature Language="C++ CLI" Value="public ref class CircuitOptions sealed" />
   <TypeSignature Language="F#" Value="type CircuitOptions = class" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Components.Server</AssemblyName>
@@ -15,7 +15,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            Options to configure ASP.NET Core Components.
+            Options to configure circuit handler for server-side Blazor 
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -34,6 +34,65 @@
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DetailedErrors">
+      <MemberSignature Language="C#" Value="public bool DetailedErrors { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool DetailedErrors" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors" />
+      <MemberSignature Language="VB.NET" Value="Public Property DetailedErrors As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool DetailedErrors { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.DetailedErrors : bool with get, set" Usage="Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Server</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value that determines whether or not to send detailed exception messages to JavaScript when an unhandled exception
+            happens on the circuit or when a .NET method invocation through JS interop results in an exception.
+            </summary>
+        <value>Defaults to <c>false</c>.</value>
+        <remarks>
+            This value should only be turned on in development scenarios as turning it on in production might result in the leak of
+            sensitive information to untrusted parties.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DisconnectedCircuitMaxRetained">
+      <MemberSignature Language="C#" Value="public int DisconnectedCircuitMaxRetained { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 DisconnectedCircuitMaxRetained" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained" />
+      <MemberSignature Language="VB.NET" Value="Public Property DisconnectedCircuitMaxRetained As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int DisconnectedCircuitMaxRetained { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.DisconnectedCircuitMaxRetained : int with get, set" Usage="Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Server</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Int32</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value that determines the maximum number of disconnected circuit state details
+            are retained by the server.
+            <para>
+            When a client disconnects, ASP.NET Core Components attempts to retain state on the server for an
+            interval. This allows the client to re-establish a connection to the existing circuit on the server
+            without losing any state in the event of transient connection issues.
+            </para><para>
+            This value determines the maximium number of circuit states retained by the server.
+            <seealso cref="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod" /></para></summary>
+        <value>
+            Defaults to <c>100</c>.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -62,20 +121,45 @@
             without losing any state in the event of transient connection issues.
             </para><para>
             This value determines the maximium duration circuit state is retained by the server before being evicted.
-            <seealso cref="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxRetainedDisconnectedCircuits" /></para></summary>
+            <seealso cref="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained" /></para></summary>
         <value>
             Defaults to <c>3 minutes</c>.
             </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="MaxRetainedDisconnectedCircuits">
-      <MemberSignature Language="C#" Value="public int MaxRetainedDisconnectedCircuits { get; set; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxRetainedDisconnectedCircuits" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxRetainedDisconnectedCircuits" />
-      <MemberSignature Language="VB.NET" Value="Public Property MaxRetainedDisconnectedCircuits As Integer" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxRetainedDisconnectedCircuits { int get(); void set(int value); };" />
-      <MemberSignature Language="F#" Value="member this.MaxRetainedDisconnectedCircuits : int with get, set" Usage="Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxRetainedDisconnectedCircuits" />
+    <Member MemberName="JSInteropDefaultCallTimeout">
+      <MemberSignature Language="C#" Value="public TimeSpan JSInteropDefaultCallTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan JSInteropDefaultCallTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property JSInteropDefaultCallTimeout As TimeSpan" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TimeSpan JSInteropDefaultCallTimeout { TimeSpan get(); void set(TimeSpan value); };" />
+      <MemberSignature Language="F#" Value="member this.JSInteropDefaultCallTimeout : TimeSpan with get, set" Usage="Microsoft.AspNetCore.Components.Server.CircuitOptions.JSInteropDefaultCallTimeout" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Server</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a value that indicates how long the server will wait before timing out an asynchronous JavaScript function invocation.
+            </summary>
+        <value>
+            Defaults to <c>1 minute</c>.
+            </value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="MaxBufferedUnacknowledgedRenderBatches">
+      <MemberSignature Language="C#" Value="public int MaxBufferedUnacknowledgedRenderBatches { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance int32 MaxBufferedUnacknowledgedRenderBatches" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches" />
+      <MemberSignature Language="VB.NET" Value="Public Property MaxBufferedUnacknowledgedRenderBatches As Integer" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property int MaxBufferedUnacknowledgedRenderBatches { int get(); void set(int value); };" />
+      <MemberSignature Language="F#" Value="member this.MaxBufferedUnacknowledgedRenderBatches : int with get, set" Usage="Microsoft.AspNetCore.Components.Server.CircuitOptions.MaxBufferedUnacknowledgedRenderBatches" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components.Server</AssemblyName>
@@ -86,19 +170,15 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets a value that determines the maximum number of disconnected circuit state details
-            are retained by the server.
-            <para>
-            When a client disconnects, ASP.NET Core Components attempts to retain state on the server for an
-            interval. This allows the client to re-establish a connection to the existing circuit on the server
-            without losing any state in the event of transient connection issues.
-            </para><para>
-            This value determines the maximium number of circuit states retained by the server.
-            <seealso cref="P:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod" /></para></summary>
+            Gets or sets the maximum number of render batches that a circuit will buffer until an acknowledgement for the batch is
+            received.
+            </summary>
         <value>
-            Defaults to <c>100</c>.
-            </value>
-        <remarks>To be added.</remarks>
+            Defaults to <c>10</c>.</value>
+        <remarks>
+            When the limit of buffered render batches is reached components will stop rendering and will wait until either the
+            circuit is disconnected and disposed or at least one batch gets acknowledged.
+            </remarks>
       </Docs>
     </Member>
   </Members>

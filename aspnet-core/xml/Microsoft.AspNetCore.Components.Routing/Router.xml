@@ -1,10 +1,10 @@
 <Type Name="Router" FullName="Microsoft.AspNetCore.Components.Routing.Router">
-  <TypeSignature Language="C#" Value="public class Router : IDisposable, Microsoft.AspNetCore.Components.IComponent" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Router extends System.Object implements class Microsoft.AspNetCore.Components.IComponent, class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public class Router : IDisposable, Microsoft.AspNetCore.Components.IComponent, Microsoft.AspNetCore.Components.IHandleAfterRender" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit Router extends System.Object implements class Microsoft.AspNetCore.Components.IComponent, class Microsoft.AspNetCore.Components.IHandleAfterRender, class System.IDisposable" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Components.Routing.Router" />
-  <TypeSignature Language="VB.NET" Value="Public Class Router&#xA;Implements IComponent, IDisposable" />
-  <TypeSignature Language="C++ CLI" Value="public ref class Router : IDisposable, Microsoft::AspNetCore::Components::IComponent" />
-  <TypeSignature Language="F#" Value="type Router = class&#xA;    interface IComponent&#xA;    interface IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public Class Router&#xA;Implements IComponent, IDisposable, IHandleAfterRender" />
+  <TypeSignature Language="C++ CLI" Value="public ref class Router : IDisposable, Microsoft::AspNetCore::Components::IComponent, Microsoft::AspNetCore::Components::IHandleAfterRender" />
+  <TypeSignature Language="F#" Value="type Router = class&#xA;    interface IComponent&#xA;    interface IHandleAfterRender&#xA;    interface IDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
@@ -17,13 +17,15 @@
       <InterfaceName>Microsoft.AspNetCore.Components.IComponent</InterfaceName>
     </Interface>
     <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Components.IHandleAfterRender</InterfaceName>
+    </Interface>
+    <Interface>
       <InterfaceName>System.IDisposable</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
     <summary>
-            A component that displays whichever other component corresponds to the
-            current navigation location.
+            A component that supplies route data corresponding to the current navigation state.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -45,13 +47,42 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="AdditionalAssemblies">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IEnumerable&lt;System.Reflection.Assembly&gt; AdditionalAssemblies { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IEnumerable`1&lt;class System.Reflection.Assembly&gt; AdditionalAssemblies" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies" />
+      <MemberSignature Language="VB.NET" Value="Public Property AdditionalAssemblies As IEnumerable(Of Assembly)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Collections::Generic::IEnumerable&lt;System::Reflection::Assembly ^&gt; ^ AdditionalAssemblies { System::Collections::Generic::IEnumerable&lt;System::Reflection::Assembly ^&gt; ^ get(); void set(System::Collections::Generic::IEnumerable&lt;System::Reflection::Assembly ^&gt; ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.AdditionalAssemblies : seq&lt;System.Reflection.Assembly&gt; with get, set" Usage="Microsoft.AspNetCore.Components.Routing.Router.AdditionalAssemblies" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute>
+          <AttributeName>Microsoft.AspNetCore.Components.Parameter</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IEnumerable&lt;System.Reflection.Assembly&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a collection of additional assemblies that should be searched for components
+            that can match URIs.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="AppAssembly">
-      <MemberSignature Language="C#" Value="public System.Reflection.Assembly AppAssembly { get; }" />
+      <MemberSignature Language="C#" Value="public System.Reflection.Assembly AppAssembly { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance class System.Reflection.Assembly AppAssembly" />
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.AppAssembly" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AppAssembly As Assembly" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Reflection::Assembly ^ AppAssembly { System::Reflection::Assembly ^ get(); };" />
-      <MemberSignature Language="F#" Value="member this.AppAssembly : System.Reflection.Assembly" Usage="Microsoft.AspNetCore.Components.Routing.Router.AppAssembly" />
+      <MemberSignature Language="VB.NET" Value="Public Property AppAssembly As Assembly" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Reflection::Assembly ^ AppAssembly { System::Reflection::Assembly ^ get(); void set(System::Reflection::Assembly ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.AppAssembly : System.Reflection.Assembly with get, set" Usage="Microsoft.AspNetCore.Components.Routing.Router.AppAssembly" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -67,50 +98,21 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the assembly that should be searched, along with its referenced
-            assemblies, for components matching the URI.
+            Gets or sets the assembly that should be searched for components matching the URI.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="AuthorizingContent">
-      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.RenderFragment AuthorizingContent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Components.RenderFragment AuthorizingContent" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.AuthorizingContent" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property AuthorizingContent As RenderFragment" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Components::RenderFragment ^ AuthorizingContent { Microsoft::AspNetCore::Components::RenderFragment ^ get(); };" />
-      <MemberSignature Language="F#" Value="member this.AuthorizingContent : Microsoft.AspNetCore.Components.RenderFragment" Usage="Microsoft.AspNetCore.Components.Routing.Router.AuthorizingContent" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <Attributes>
-        <Attribute>
-          <AttributeName>Microsoft.AspNetCore.Components.Parameter</AttributeName>
-        </Attribute>
-      </Attributes>
-      <ReturnValue>
-        <ReturnType>Microsoft.AspNetCore.Components.RenderFragment</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            The content that will be displayed while asynchronous authorization is in progress.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="Configure">
-      <MemberSignature Language="C#" Value="public void Configure (Microsoft.AspNetCore.Components.RenderHandle renderHandle);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Configure(valuetype Microsoft.AspNetCore.Components.RenderHandle renderHandle) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.Configure(Microsoft.AspNetCore.Components.RenderHandle)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Configure(Microsoft::AspNetCore::Components::RenderHandle renderHandle);" />
-      <MemberSignature Language="F#" Value="abstract member Configure : Microsoft.AspNetCore.Components.RenderHandle -&gt; unit&#xA;override this.Configure : Microsoft.AspNetCore.Components.RenderHandle -&gt; unit" Usage="router.Configure renderHandle" />
+    <Member MemberName="Attach">
+      <MemberSignature Language="C#" Value="public void Attach (Microsoft.AspNetCore.Components.RenderHandle renderHandle);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Attach(valuetype Microsoft.AspNetCore.Components.RenderHandle renderHandle) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.Attach(Microsoft.AspNetCore.Components.RenderHandle)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Attach(Microsoft::AspNetCore::Components::RenderHandle renderHandle);" />
+      <MemberSignature Language="F#" Value="abstract member Attach : Microsoft.AspNetCore.Components.RenderHandle -&gt; unit&#xA;override this.Attach : Microsoft.AspNetCore.Components.RenderHandle -&gt; unit" Usage="router.Attach renderHandle" />
       <MemberType>Method</MemberType>
       <Implements>
-        <InterfaceMember>M:Microsoft.AspNetCore.Components.IComponent.Configure(Microsoft.AspNetCore.Components.RenderHandle)</InterfaceMember>
+        <InterfaceMember>M:Microsoft.AspNetCore.Components.IComponent.Attach(Microsoft.AspNetCore.Components.RenderHandle)</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -154,13 +156,13 @@
         <inheritdoc />
       </Docs>
     </Member>
-    <Member MemberName="NotAuthorizedContent">
-      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.AuthenticationState&gt; NotAuthorizedContent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Components.RenderFragment`1&lt;class Microsoft.AspNetCore.Components.AuthenticationState&gt; NotAuthorizedContent" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.NotAuthorizedContent" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NotAuthorizedContent As RenderFragment(Of AuthenticationState)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Components::RenderFragment&lt;Microsoft::AspNetCore::Components::AuthenticationState ^&gt; ^ NotAuthorizedContent { Microsoft::AspNetCore::Components::RenderFragment&lt;Microsoft::AspNetCore::Components::AuthenticationState ^&gt; ^ get(); };" />
-      <MemberSignature Language="F#" Value="member this.NotAuthorizedContent : Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.AuthenticationState&gt;" Usage="Microsoft.AspNetCore.Components.Routing.Router.NotAuthorizedContent" />
+    <Member MemberName="Found">
+      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.RouteData&gt; Found { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Components.RenderFragment`1&lt;class Microsoft.AspNetCore.Components.RouteData&gt; Found" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.Found" />
+      <MemberSignature Language="VB.NET" Value="Public Property Found As RenderFragment(Of RouteData)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Components::RenderFragment&lt;Microsoft::AspNetCore::Components::RouteData ^&gt; ^ Found { Microsoft::AspNetCore::Components::RenderFragment&lt;Microsoft::AspNetCore::Components::RouteData ^&gt; ^ get(); void set(Microsoft::AspNetCore::Components::RenderFragment&lt;Microsoft::AspNetCore::Components::RouteData ^&gt; ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.Found : Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.RouteData&gt; with get, set" Usage="Microsoft.AspNetCore.Components.Routing.Router.Found" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -172,23 +174,47 @@
         </Attribute>
       </Attributes>
       <ReturnValue>
-        <ReturnType>Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.AuthenticationState&gt;</ReturnType>
+        <ReturnType>Microsoft.AspNetCore.Components.RenderFragment&lt;Microsoft.AspNetCore.Components.RouteData&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The content that will be displayed if the user is not authorized.
+            Gets or sets the content to display when a match is found for the requested route.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="NotFoundContent">
-      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.RenderFragment NotFoundContent { get; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Components.RenderFragment NotFoundContent" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.NotFoundContent" />
-      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property NotFoundContent As RenderFragment" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Components::RenderFragment ^ NotFoundContent { Microsoft::AspNetCore::Components::RenderFragment ^ get(); };" />
-      <MemberSignature Language="F#" Value="member this.NotFoundContent : Microsoft.AspNetCore.Components.RenderFragment" Usage="Microsoft.AspNetCore.Components.Routing.Router.NotFoundContent" />
+    <Member MemberName="Microsoft.AspNetCore.Components.IHandleAfterRender.OnAfterRenderAsync">
+      <MemberSignature Language="C#" Value="System.Threading.Tasks.Task IHandleAfterRender.OnAfterRenderAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance class System.Threading.Tasks.Task Microsoft.AspNetCore.Components.IHandleAfterRender.OnAfterRenderAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.Microsoft#AspNetCore#Components#IHandleAfterRender#OnAfterRenderAsync" />
+      <MemberSignature Language="VB.NET" Value="Function OnAfterRenderAsync () As Task Implements IHandleAfterRender.OnAfterRenderAsync" />
+      <MemberSignature Language="C++ CLI" Value=" virtual System::Threading::Tasks::Task ^ Microsoft.AspNetCore.Components.IHandleAfterRender.OnAfterRenderAsync() = Microsoft::AspNetCore::Components::IHandleAfterRender::OnAfterRenderAsync;" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Components.IHandleAfterRender.OnAfterRenderAsync</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="NotFound">
+      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.RenderFragment NotFound { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Components.RenderFragment NotFound" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Components.Routing.Router.NotFound" />
+      <MemberSignature Language="VB.NET" Value="Public Property NotFound As RenderFragment" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Components::RenderFragment ^ NotFound { Microsoft::AspNetCore::Components::RenderFragment ^ get(); void set(Microsoft::AspNetCore::Components::RenderFragment ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.NotFound : Microsoft.AspNetCore.Components.RenderFragment with get, set" Usage="Microsoft.AspNetCore.Components.Routing.Router.NotFound" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -204,51 +230,22 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the type of the component that should be used as a fallback when no match is found for the requested route.
+            Gets or sets the content to display when no match is found for the requested route.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Render">
-      <MemberSignature Language="C#" Value="protected virtual void Render (Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder builder, Type handler, System.Collections.Generic.IDictionary&lt;string,object&gt; parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Render(class Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder builder, class System.Type handler, class System.Collections.Generic.IDictionary`2&lt;string, object&gt; parameters) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.Render(Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder,System.Type,System.Collections.Generic.IDictionary{System.String,System.Object})" />
-      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub Render (builder As RenderTreeBuilder, handler As Type, parameters As IDictionary(Of String, Object))" />
-      <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual void Render(Microsoft::AspNetCore::Components::RenderTree::RenderTreeBuilder ^ builder, Type ^ handler, System::Collections::Generic::IDictionary&lt;System::String ^, System::Object ^&gt; ^ parameters);" />
-      <MemberSignature Language="F#" Value="abstract member Render : Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder * Type * System.Collections.Generic.IDictionary&lt;string, obj&gt; -&gt; unit&#xA;override this.Render : Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder * Type * System.Collections.Generic.IDictionary&lt;string, obj&gt; -&gt; unit" Usage="router.Render (builder, handler, parameters)" />
-      <MemberType>Method</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
-        <AssemblyVersion>3.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
-      </ReturnValue>
-      <Parameters>
-        <Parameter Name="builder" Type="Microsoft.AspNetCore.Components.RenderTree.RenderTreeBuilder" />
-        <Parameter Name="handler" Type="System.Type" />
-        <Parameter Name="parameters" Type="System.Collections.Generic.IDictionary&lt;System.String,System.Object&gt;" />
-      </Parameters>
-      <Docs>
-        <param name="builder">To be added.</param>
-        <param name="handler">To be added.</param>
-        <param name="parameters">To be added.</param>
-        <summary>To be added.</summary>
-        <remarks>To be added.</remarks>
-        <inheritdoc />
-      </Docs>
-    </Member>
     <Member MemberName="SetParametersAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task SetParametersAsync (Microsoft.AspNetCore.Components.ParameterCollection parameters);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SetParametersAsync(valuetype Microsoft.AspNetCore.Components.ParameterCollection parameters) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterCollection)" />
-      <MemberSignature Language="VB.NET" Value="Public Function SetParametersAsync (parameters As ParameterCollection) As Task" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::Task ^ SetParametersAsync(Microsoft::AspNetCore::Components::ParameterCollection parameters);" />
-      <MemberSignature Language="F#" Value="abstract member SetParametersAsync : Microsoft.AspNetCore.Components.ParameterCollection -&gt; System.Threading.Tasks.Task&#xA;override this.SetParametersAsync : Microsoft.AspNetCore.Components.ParameterCollection -&gt; System.Threading.Tasks.Task" Usage="router.SetParametersAsync parameters" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task SetParametersAsync (Microsoft.AspNetCore.Components.ParameterView parameters);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task SetParametersAsync(valuetype Microsoft.AspNetCore.Components.ParameterView parameters) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Routing.Router.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)" />
+      <MemberSignature Language="VB.NET" Value="Public Function SetParametersAsync (parameters As ParameterView) As Task" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::Task ^ SetParametersAsync(Microsoft::AspNetCore::Components::ParameterView parameters);" />
+      <MemberSignature Language="F#" Value="abstract member SetParametersAsync : Microsoft.AspNetCore.Components.ParameterView -&gt; System.Threading.Tasks.Task&#xA;override this.SetParametersAsync : Microsoft.AspNetCore.Components.ParameterView -&gt; System.Threading.Tasks.Task" Usage="router.SetParametersAsync parameters" />
       <MemberType>Method</MemberType>
       <Implements>
-        <InterfaceMember>M:Microsoft.AspNetCore.Components.IComponent.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterCollection)</InterfaceMember>
+        <InterfaceMember>M:Microsoft.AspNetCore.Components.IComponent.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -258,7 +255,7 @@
         <ReturnType>System.Threading.Tasks.Task</ReturnType>
       </ReturnValue>
       <Parameters>
-        <Parameter Name="parameters" Type="Microsoft.AspNetCore.Components.ParameterCollection" />
+        <Parameter Name="parameters" Type="Microsoft.AspNetCore.Components.ParameterView" />
       </Parameters>
       <Docs>
         <param name="parameters">To be added.</param>
