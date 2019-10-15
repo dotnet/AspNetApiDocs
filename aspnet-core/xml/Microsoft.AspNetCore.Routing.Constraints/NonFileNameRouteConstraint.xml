@@ -1,0 +1,166 @@
+<Type Name="NonFileNameRouteConstraint" FullName="Microsoft.AspNetCore.Routing.Constraints.NonFileNameRouteConstraint">
+  <TypeSignature Language="C#" Value="public class NonFileNameRouteConstraint : Microsoft.AspNetCore.Routing.IRouteConstraint" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit NonFileNameRouteConstraint extends System.Object implements class Microsoft.AspNetCore.Routing.IParameterPolicy, class Microsoft.AspNetCore.Routing.IRouteConstraint" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Routing.Constraints.NonFileNameRouteConstraint" />
+  <TypeSignature Language="VB.NET" Value="Public Class NonFileNameRouteConstraint&#xA;Implements IRouteConstraint" />
+  <TypeSignature Language="C++ CLI" Value="public ref class NonFileNameRouteConstraint : Microsoft::AspNetCore::Routing::IRouteConstraint" />
+  <TypeSignature Language="F#" Value="type NonFileNameRouteConstraint = class&#xA;    interface IParameterPolicy&#xA;    interface IRouteConstraint" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Base>
+    <BaseTypeName>System.Object</BaseTypeName>
+  </Base>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Routing.IParameterPolicy</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.Routing.IRouteConstraint</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            Constrains a route parameter to represent only non-file-name values. Does not validate that
+            the route value contains valid file system characters, or that the value represents
+            an actual file on disk.
+            </summary>
+    <remarks>
+      <para>
+            This constraint can be used to disambiguate requests for dynamic content versus
+            static files served from the application.
+            </para>
+      <para>
+            This constraint determines whether a route value represents a file name by examining
+            the last URL Path segment of the value (delimited by <c>/</c>). The last segment
+            must contain the dot (<c>.</c>) character followed by one or more non-(<c>.</c>) characters.
+            </para>
+      <para>
+            If the route value does not contain a <c>/</c> then the entire value will be interpreted
+            as a the last segment.
+            </para>
+      <para>
+            The <see cref="T:Microsoft.AspNetCore.Routing.Constraints.NonFileNameRouteConstraint" /> does not attempt to validate that the value contains
+            a legal file name for the current operating system.
+            </para>
+      <para>
+        <list type="bullet">
+          <listheader>
+            <term>Examples of route values that will be matched as non-file-names</term>
+            <description>description</description>
+          </listheader>
+          <item>
+            <term>
+              <c>/a/b/c</c>
+            </term>
+            <description>Final segment does not contain a <c>.</c>.</description>
+          </item>
+          <item>
+            <term>
+              <c>/a/b.d/c</c>
+            </term>
+            <description>Final segment does not contain a <c>.</c>.</description>
+          </item>
+          <item>
+            <term>
+              <c>/a/b.d/c/</c>
+            </term>
+            <description>Final segment is empty.</description>
+          </item>
+          <item>
+            <term>
+              <c />
+            </term>
+            <description>Value is empty</description>
+          </item>
+        </list>
+        <list type="bullet">
+          <listheader>
+            <term>Examples of route values that will be rejected as file names</term>
+            <description>description</description>
+          </listheader>
+          <item>
+            <term>
+              <c>/a/b/c.txt</c>
+            </term>
+            <description>Final segment contains a <c>.</c> followed by other characters.</description>
+          </item>
+          <item>
+            <term>
+              <c>/hello.world.txt</c>
+            </term>
+            <description>Final segment contains a <c>.</c> followed by other characters.</description>
+          </item>
+          <item>
+            <term>
+              <c>hello.world.txt</c>
+            </term>
+            <description>Final segment contains a <c>.</c> followed by other characters.</description>
+          </item>
+          <item>
+            <term>
+              <c>.gitignore</c>
+            </term>
+            <description>Final segment contains a <c>.</c> followed by other characters.</description>
+          </item>
+        </list>
+      </para>
+    </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName=".ctor">
+      <MemberSignature Language="C#" Value="public NonFileNameRouteConstraint ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Constraints.NonFileNameRouteConstraint.#ctor" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New ()" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; NonFileNameRouteConstraint();" />
+      <MemberType>Constructor</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Match">
+      <MemberSignature Language="C#" Value="public bool Match (Microsoft.AspNetCore.Http.HttpContext httpContext, Microsoft.AspNetCore.Routing.IRouter route, string routeKey, Microsoft.AspNetCore.Routing.RouteValueDictionary values, Microsoft.AspNetCore.Routing.RouteDirection routeDirection);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool Match(class Microsoft.AspNetCore.Http.HttpContext httpContext, class Microsoft.AspNetCore.Routing.IRouter route, string routeKey, class Microsoft.AspNetCore.Routing.RouteValueDictionary values, valuetype Microsoft.AspNetCore.Routing.RouteDirection routeDirection) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Routing.Constraints.NonFileNameRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual bool Match(Microsoft::AspNetCore::Http::HttpContext ^ httpContext, Microsoft::AspNetCore::Routing::IRouter ^ route, System::String ^ routeKey, Microsoft::AspNetCore::Routing::RouteValueDictionary ^ values, Microsoft::AspNetCore::Routing::RouteDirection routeDirection);" />
+      <MemberSignature Language="F#" Value="abstract member Match : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.IRouter * string * Microsoft.AspNetCore.Routing.RouteValueDictionary * Microsoft.AspNetCore.Routing.RouteDirection -&gt; bool&#xA;override this.Match : Microsoft.AspNetCore.Http.HttpContext * Microsoft.AspNetCore.Routing.IRouter * string * Microsoft.AspNetCore.Routing.RouteValueDictionary * Microsoft.AspNetCore.Routing.RouteDirection -&gt; bool" Usage="nonFileNameRouteConstraint.Match (httpContext, route, routeKey, values, routeDirection)" />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:Microsoft.AspNetCore.Routing.IRouteConstraint.Match(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Routing.IRouter,System.String,Microsoft.AspNetCore.Routing.RouteValueDictionary,Microsoft.AspNetCore.Routing.RouteDirection)</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Routing</AssemblyName>
+        <AssemblyVersion>3.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="httpContext" Type="Microsoft.AspNetCore.Http.HttpContext" />
+        <Parameter Name="route" Type="Microsoft.AspNetCore.Routing.IRouter" />
+        <Parameter Name="routeKey" Type="System.String" />
+        <Parameter Name="values" Type="Microsoft.AspNetCore.Routing.RouteValueDictionary" />
+        <Parameter Name="routeDirection" Type="Microsoft.AspNetCore.Routing.RouteDirection" />
+      </Parameters>
+      <Docs>
+        <param name="httpContext">To be added.</param>
+        <param name="route">To be added.</param>
+        <param name="routeKey">To be added.</param>
+        <param name="values">To be added.</param>
+        <param name="routeDirection">To be added.</param>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inheritdoc />
+      </Docs>
+    </Member>
+  </Members>
+</Type>
