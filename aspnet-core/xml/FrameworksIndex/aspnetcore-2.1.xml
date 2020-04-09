@@ -107,7 +107,7 @@
     <Assembly Name="Microsoft.AspNetCore.SignalR.Core" Version="1.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SignalR" Version="1.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SignalR.MsgPack" Version="1.0.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.SignalR.Protocols.MsgPack" Version="1.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.SignalR.Protocols.MessagePack" Version="1.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SignalR.Redis" Version="1.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices" Version="2.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.0.0" />
@@ -19132,7 +19132,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions" Id="T:Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions">
       <Member Id="M:Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions.SerializationContext" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions.FormatterResolvers" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.SerializedHubMessage" Id="T:Microsoft.AspNetCore.SignalR.SerializedHubMessage">
       <Member Id="M:Microsoft.AspNetCore.SignalR.SerializedHubMessage.#ctor(Microsoft.AspNetCore.SignalR.Protocol.HubMessage)" />
@@ -19216,21 +19216,6 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.TypeBaseEnumerationExtensions.AllBaseTypes(System.Type)" />
     </Type>
   </Namespace>
-  <Namespace Name="Microsoft.AspNetCore.SignalR.Internal.Protocol">
-    <Type Name="Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol" Id="T:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol">
-      <Member Id="F:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.ProtocolName" />
-      <Member Id="F:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.ProtocolVersion" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.#ctor" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions})" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.IsVersionSupported(System.Int32)" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.TryParseMessage(System.Buffers.ReadOnlySequence{System.Byte}@,Microsoft.AspNetCore.SignalR.Internal.IInvocationBinder,Microsoft.AspNetCore.SignalR.Internal.Protocol.HubMessage@)" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.WriteMessage(Microsoft.AspNetCore.SignalR.Internal.Protocol.HubMessage,System.Buffers.IBufferWriter{System.Byte})" />
-      <Member Id="P:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.Name" />
-      <Member Id="P:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.SerializationContext" />
-      <Member Id="P:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.TransferFormat" />
-      <Member Id="P:Microsoft.AspNetCore.SignalR.Internal.Protocol.MessagePackHubProtocol.Version" />
-    </Type>
-  </Namespace>
   <Namespace Name="Microsoft.AspNetCore.SignalR.Protocol">
     <Type Name="Microsoft.AspNetCore.SignalR.Protocol.CancelInvocationMessage" Id="T:Microsoft.AspNetCore.SignalR.Protocol.CancelInvocationMessage">
       <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.CancelInvocationMessage.#ctor(System.String)" />
@@ -19310,6 +19295,17 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.InvocationMessage.#ctor(System.String,System.Object[])" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.InvocationMessage.#ctor(System.String,System.String,System.Object[])" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.InvocationMessage.ToString" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol" Id="T:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol">
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.GetMessageBytes(Microsoft.AspNetCore.SignalR.Protocol.HubMessage)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.IsVersionSupported(System.Int32)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.TryParseMessage(System.Buffers.ReadOnlySequence{System.Byte}@,Microsoft.AspNetCore.SignalR.IInvocationBinder,Microsoft.AspNetCore.SignalR.Protocol.HubMessage@)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.WriteMessage(Microsoft.AspNetCore.SignalR.Protocol.HubMessage,System.Buffers.IBufferWriter{System.Byte})" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.Name" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.TransferFormat" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.Protocol.MessagePackHubProtocol.Version" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.Protocol.PingMessage" Id="T:Microsoft.AspNetCore.SignalR.Protocol.PingMessage">
       <Member Id="F:Microsoft.AspNetCore.SignalR.Protocol.PingMessage.Instance" />
@@ -19888,6 +19884,10 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.JwtBearerExtensions.AddJwtBearer(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.JwtBearerExtensions.AddJwtBearer(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.JwtBearerExtensions.AddJwtBearer(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.String,System.Action{Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.MessagePackProtocolDependencyInjectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.MessagePackProtocolDependencyInjectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.MessagePackProtocolDependencyInjectionExtensions.AddMessagePackProtocol``1(``0)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.MessagePackProtocolDependencyInjectionExtensions.AddMessagePackProtocol``1(``0,System.Action{Microsoft.AspNetCore.SignalR.MessagePackHubProtocolOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.MicrosoftAccountExtensions" Id="T:Microsoft.Extensions.DependencyInjection.MicrosoftAccountExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.MicrosoftAccountExtensions.AddMicrosoftAccount(Microsoft.AspNetCore.Authentication.AuthenticationBuilder)" />
