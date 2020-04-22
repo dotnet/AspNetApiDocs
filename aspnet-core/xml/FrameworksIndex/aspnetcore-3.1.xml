@@ -14,6 +14,9 @@
     <Assembly Name="Microsoft.AspNetCore.Components.Forms" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components.Server" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components.Web" Version="3.1.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication" Version="3.2.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Components.WebAssembly" Version="3.2.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="3.2.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Connections.Abstractions" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.CookiePolicy" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Cors" Version="3.1.0.0" />
@@ -79,10 +82,12 @@
     <Assembly Name="Microsoft.AspNetCore.StaticFiles" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebSockets" Version="3.1.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebUtilities" Version="3.1.0.0" />
+    <Assembly Name="Microsoft.Authentication.WebAssembly.Msal" Version="3.2.0.0" />
     <Assembly Name="Microsoft.CodeAnalysis.Razor" Version="3.1.0.0" />
     <Assembly Name="Microsoft.Extensions.Identity.Core" Version="3.1.0.0" />
     <Assembly Name="Microsoft.Extensions.Identity.Stores" Version="3.1.0.0" />
     <Assembly Name="Microsoft.JSInterop" Version="3.1.0.0" />
+    <Assembly Name="Microsoft.JSInterop.WebAssembly" Version="3.2.0.0" />
     <Assembly Name="Microsoft.Net.Http.Headers" Version="3.1.0.0" />
   </Assemblies>
   <Namespace Name="Microsoft.AspNetCore.Antiforgery">
@@ -1031,6 +1036,10 @@
       <Member Id="M:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Action{Microsoft.AspNetCore.Http.Connections.HttpConnectionDispatcherOptions})" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.ComponentsWebAssemblyApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.ComponentsWebAssemblyApplicationBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.ComponentsWebAssemblyApplicationBuilderExtensions.UseBlazorFrameworkFiles(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.ComponentsWebAssemblyApplicationBuilderExtensions.UseBlazorFrameworkFiles(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Http.PathString)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder" Id="T:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
@@ -1386,6 +1395,9 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.UseWhenExtensions" Id="T:Microsoft.AspNetCore.Builder.UseWhenExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Boolean},System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.WebAssemblyNetDebugProxyAppBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.WebAssemblyNetDebugProxyAppBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.WebAssemblyNetDebugProxyAppBuilderExtensions.UseWebAssemblyDebugging(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.WebSocketMiddlewareExtensions" Id="T:Microsoft.AspNetCore.Builder.WebSocketMiddlewareExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.WebSocketMiddlewareExtensions.UseWebSockets(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
@@ -2281,6 +2293,248 @@
       <Member Id="P:Microsoft.AspNetCore.Components.Web.WheelEventArgs.DeltaX" />
       <Member Id="P:Microsoft.AspNetCore.Components.Web.WheelEventArgs.DeltaY" />
       <Member Id="P:Microsoft.AspNetCore.Components.Web.WheelEventArgs.DeltaZ" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken.Expires" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken.GrantedScopes" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken.Value" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.ReturnUrl" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.Scopes" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken,Microsoft.AspNetCore.Components.NavigationManager,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken@)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken@,System.Boolean)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.RedirectUrl" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.Status" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus.RequiresRedirect" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus.Success" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory`1.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IAccessTokenProviderAccessor)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory`1.CreateUserAsync(`0,Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory`1.TokenProvider" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions.ConfigurationEndpoint" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider.RequestAccessToken" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider.RequestAccessToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.CompleteSignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.CompleteSignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.SignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.SignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.Authority" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.ClientId" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.DefaultScopes" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.MetadataUrl" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.PostLogoutRedirectUri" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.RedirectUri" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.ResponseMode" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.ResponseType" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogIn" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogInCallback" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogInFailed" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogOut" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogOutCallback" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogOutFailed" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.LogOutSucceeded" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.Profile" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.Register" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationActions.IsAction(System.String,System.String)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogInCallbackPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogInFailedPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogInPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogOutCallbackPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogOutFailedPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogOutPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.LogOutSucceededPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.ProfilePath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.RegisterPath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.RemoteProfilePath" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationApplicationPathsOptions.RemoteRegisterPath" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.State" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.Url" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LoginCallbackPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LoginFailedPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LoginPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LogoutCallbackPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LogoutFailedPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LogoutPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.LogoutSucceededPath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.ProfilePath" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.RegisterPath" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationDefaults.#ctor" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1.AuthenticationPaths" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1.ProviderOptions" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions`1.UserOptions" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1.ErrorMessage" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1.State" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationResult`1.Status" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.#ctor(Microsoft.JSInterop.IJSRuntime,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{`2}},Microsoft.AspNetCore.Components.NavigationManager,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory{`1})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.CompleteSignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.CompleteSignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.GetAuthenticatedUser" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.GetAuthenticationStateAsync" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.RequestAccessToken" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.RequestAccessToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.SignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.SignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.JsRuntime" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.Navigation" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.Options" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.UserFactory" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState.ReturnUrl" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus.Failure" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus.OperationCompleted" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus.Redirect" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationStatus.Success" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions.AuthenticationType" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions.NameClaim" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions.RoleClaim" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationUserOptions.ScopeClaim" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView.#ctor" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.OnParametersSetAsync" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.Action" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.ApplicationPaths" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.AuthenticationProvider" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.AuthenticationService" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.AuthenticationState" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.CompletingLoggingIn" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.CompletingLogOut" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.JS" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.LoggingIn" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.LogInFailed" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.LogOut" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.LogOutFailed" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.LogOutSucceeded" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.Navigation" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.OnLogInSucceeded" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.OnLogOutSucceeded" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.Registering" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.RemoteApplicationPathsProvider" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.SignOutManager" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore`1.UserProfile" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount.AdditionalProperties" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutSessionStateManager" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutSessionStateManager">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutSessionStateManager.#ctor(Microsoft.JSInterop.IJSRuntime)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutSessionStateManager.SetSignOutState" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.SignOutSessionStateManager.ValidateSignOutState" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IAccessTokenProviderAccessor" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IAccessTokenProviderAccessor">
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IAccessTokenProviderAccessor.TokenProvider" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IRemoteAuthenticationPathsProvider" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IRemoteAuthenticationPathsProvider">
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal.IRemoteAuthenticationPathsProvider.ApplicationPaths" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment">
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping.#ctor(System.Type,System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping.ComponentType" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping.Selector" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection.Add(System.Type,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection.Add``1(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMappingCollection.AddRange(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Components.WebAssembly.Hosting.RootComponentMapping})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost.DisposeAsync" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost.RunAsync" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost.Configuration" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHost.Services" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Build" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.ConfigureContainer``1(Microsoft.Extensions.DependencyInjection.IServiceProviderFactory{``0},System.Action{``0})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.CreateDefault(System.String[])" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Configuration" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Logging" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.RootComponents" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Services" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsDevelopment(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsEnvironment(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsProduction(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsStaging(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment)" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Http">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Http.FetchCredentialsOption" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Http.FetchCredentialsOption">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Http.FetchCredentialsOption.Include" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Http.FetchCredentialsOption.Omit" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Http.FetchCredentialsOption.SameOrigin" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpMessageHandlerOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpMessageHandlerOptions">
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpMessageHandlerOptions.DefaultCredentials" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Infrastructure">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods.DispatchEvent(Microsoft.AspNetCore.Components.RenderTree.WebEventDescriptor,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods.NotifyLocationChanged(System.String,System.Boolean)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Connections">
@@ -13949,6 +14203,31 @@
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.WebEncoders.GetArraySizeRequiredToEncode(System.Int32)" />
     </Type>
   </Namespace>
+  <Namespace Name="Microsoft.Authentication.WebAssembly.Msal.Models">
+    <Type Name="Microsoft.Authentication.WebAssembly.Msal.Models.MsalCacheOptions" Id="T:Microsoft.Authentication.WebAssembly.Msal.Models.MsalCacheOptions">
+      <Member Id="M:Microsoft.Authentication.WebAssembly.Msal.Models.MsalCacheOptions.#ctor" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalCacheOptions.CacheLocation" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalCacheOptions.StoreAuthStateInCookie" />
+    </Type>
+    <Type Name="Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions" Id="T:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions">
+      <Member Id="M:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions.#ctor" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions.AdditionalScopesToConsent" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions.Authentication" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions.Cache" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions.DefaultAccessTokenScopes" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.Authentication.WebAssembly.Msal">
+    <Type Name="Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions" Id="T:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions">
+      <Member Id="M:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.#ctor" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.Authority" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.ClientId" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.NavigateToLoginRequestUrl" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.PostLogoutRedirectUri" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.RedirectUri" />
+      <Member Id="P:Microsoft.Authentication.WebAssembly.Msal.MsalAuthenticationOptions.ValidateAuthority" />
+    </Type>
+  </Namespace>
   <Namespace Name="Microsoft.CodeAnalysis.Razor">
     <Type Name="Microsoft.CodeAnalysis.Razor.CompilationTagHelperFeature" Id="T:Microsoft.CodeAnalysis.Razor.CompilationTagHelperFeature">
       <Member Id="M:Microsoft.CodeAnalysis.Razor.CompilationTagHelperFeature.#ctor" />
@@ -14056,12 +14335,20 @@
       <Member Id="P:Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder.PartManager" />
       <Member Id="P:Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder.Services" />
     </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder`2" Id="T:Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder`2">
+      <Member Id="P:Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder`2.Services" />
+    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder" Id="T:Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder">
       <Member Id="P:Microsoft.Extensions.DependencyInjection.IServerSideBlazorBuilder.Services" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.JsonProtocolDependencyInjectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.JsonProtocolDependencyInjectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.JsonProtocolDependencyInjectionExtensions.AddJsonProtocol``1(``0)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.JsonProtocolDependencyInjectionExtensions.AddJsonProtocol``1(``0,System.Action{Microsoft.AspNetCore.SignalR.JsonHubProtocolOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.Authentication.WebAssembly.Msal.Models.MsalProviderOptions}})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.MvcApiExplorerMvcCoreBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.MvcApiExplorerMvcCoreBuilderExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.MvcApiExplorerMvcCoreBuilderExtensions.AddApiExplorer(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder)" />
@@ -14228,6 +14515,11 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.PolicyServiceCollectionExtensions.AddAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Authorization.AuthorizationOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.PolicyServiceCollectionExtensions.AddAuthorizationPolicyEvaluator(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
     </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddUserFactory``1(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState,Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddUserFactory``2(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{``0,Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddUserFactory``3(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{``0,``1})" />
+    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions.AddResponseCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions.AddResponseCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions})" />
@@ -14254,6 +14546,19 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelper(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelperLimits(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.Action{Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelperOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelperLimits(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder,System.Action{Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelperOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddRemoteAuthentication``3(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddRemoteAuthentication``3(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{``2}})" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.Extensions.Hosting">
@@ -14334,6 +14639,18 @@
       <Member Id="P:Microsoft.JSInterop.Infrastructure.DotNetInvocationResult.Exception" />
       <Member Id="P:Microsoft.JSInterop.Infrastructure.DotNetInvocationResult.Result" />
       <Member Id="P:Microsoft.JSInterop.Infrastructure.DotNetInvocationResult.Success" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.JSInterop.WebAssembly">
+    <Type Name="Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime" Id="T:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime">
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.#ctor" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.BeginInvokeJS(System.Int64,System.String,System.String)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.EndInvokeDotNet(Microsoft.JSInterop.Infrastructure.DotNetInvocationInfo,Microsoft.JSInterop.Infrastructure.DotNetInvocationResult@|System.Runtime.InteropServices.InAttribute)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.InvokeJS(System.String,System.String)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.InvokeUnmarshalled``1(System.String)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.InvokeUnmarshalled``2(System.String,``0)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.InvokeUnmarshalled``3(System.String,``0,``1)" />
+      <Member Id="M:Microsoft.JSInterop.WebAssembly.WebAssemblyJSRuntime.InvokeUnmarshalled``4(System.String,``0,``1,``2)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.Net.Http.Headers">
