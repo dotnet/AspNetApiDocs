@@ -20,9 +20,6 @@
   </Base>
   <Interfaces>
     <Interface>
-      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionHeartbeatFeature</InterfaceName>
-    </Interface>
-    <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature</InterfaceName>
     </Interface>
     <Interface>
@@ -30,9 +27,6 @@
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature</InterfaceName>
-    </Interface>
-    <Interface>
-      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature</InterfaceName>
     </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature</InterfaceName>
@@ -49,6 +43,9 @@
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature</InterfaceName>
     </Interface>
+    <Interface FrameworkAlternate="aspnetcore-2.1">
+      <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature</InterfaceName>
+    </Interface>
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature</InterfaceName>
     </Interface>
@@ -57,6 +54,12 @@
     </Interface>
     <Interface>
       <InterfaceName>System.Collections.IEnumerable</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="aspnetcore-2.2">
+      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionHeartbeatFeature</InterfaceName>
+    </Interface>
+    <Interface FrameworkAlternate="aspnetcore-2.2">
+      <InterfaceName>Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -110,9 +113,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Abort();" />
       <MemberSignature Language="F#" Value="abstract member Abort : unit -&gt; unit&#xA;override this.Abort : unit -&gt; unit" Usage="transportConnection.Abort " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.Abort</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -158,9 +158,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::IO::Pipelines::IDuplexPipe ^ Application { System::IO::Pipelines::IDuplexPipe ^ get(); void set(System::IO::Pipelines::IDuplexPipe ^ value); };" />
       <MemberSignature Language="F#" Value="member this.Application : System.IO.Pipelines.IDuplexPipe with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Application" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IApplicationTransportFeature.Application</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -183,9 +180,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Threading::CancellationToken ConnectionClosed { System::Threading::CancellationToken get(); void set(System::Threading::CancellationToken value); };" />
       <MemberSignature Language="F#" Value="member this.ConnectionClosed : System.Threading.CancellationToken with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.ConnectionClosed" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeFeature.ConnectionClosed</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -208,9 +202,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property System::Threading::CancellationToken ConnectionClosedRequested { System::Threading::CancellationToken get(); void set(System::Threading::CancellationToken value); };" />
       <MemberSignature Language="F#" Value="member this.ConnectionClosedRequested : System.Threading.CancellationToken with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.ConnectionClosedRequested" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature.ConnectionClosedRequested</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
@@ -233,7 +224,6 @@
       <MemberSignature Language="F#" Value="member this.ConnectionId : string with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.ConnectionId" />
       <MemberType>Property</MemberType>
       <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.ConnectionId</InterfaceMember>
         <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionIdFeature.ConnectionId</InterfaceMember>
       </Implements>
       <AssemblyInfo>
@@ -302,9 +292,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::IO::Pipelines::PipeScheduler ^ InputWriterScheduler { System::IO::Pipelines::PipeScheduler ^ get(); };" />
       <MemberSignature Language="F#" Value="member this.InputWriterScheduler : System.IO.Pipelines.PipeScheduler" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.InputWriterScheduler" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.InputWriterScheduler</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -327,9 +314,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ Items { System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ get(); void set(System::Collections::Generic::IDictionary&lt;System::Object ^, System::Object ^&gt; ^ value); };" />
       <MemberSignature Language="F#" Value="member this.Items : System.Collections.Generic.IDictionary&lt;obj, obj&gt; with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Items" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionItemsFeature.Items</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -374,9 +358,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int LocalPort { int get(); void set(int value); };" />
       <MemberSignature Language="F#" Value="member this.LocalPort : int with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.LocalPort" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.LocalPort</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -399,9 +380,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::Buffers::MemoryPool&lt;System::Byte&gt; ^ MemoryPool { System::Buffers::MemoryPool&lt;System::Byte&gt; ^ get(); };" />
       <MemberSignature Language="F#" Value="member this.MemoryPool : System.Buffers.MemoryPool&lt;byte&gt;" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.MemoryPool" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IMemoryPoolFeature.MemoryPool</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -998,9 +976,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void OnHeartbeat(Action&lt;System::Object ^&gt; ^ action, System::Object ^ state);" />
       <MemberSignature Language="F#" Value="member this.OnHeartbeat : Action&lt;obj&gt; * obj -&gt; unit" Usage="transportConnection.OnHeartbeat (action, state)" />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:Microsoft.AspNetCore.Connections.Features.IConnectionHeartbeatFeature.OnHeartbeat(System.Action{System.Object},System.Object)</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
@@ -1049,9 +1024,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::IO::Pipelines::PipeScheduler ^ OutputReaderScheduler { System::IO::Pipelines::PipeScheduler ^ get(); };" />
       <MemberSignature Language="F#" Value="member this.OutputReaderScheduler : System.IO.Pipelines.PipeScheduler" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.OutputReaderScheduler" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.ITransportSchedulerFeature.OutputReaderScheduler</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -1096,9 +1068,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property int RemotePort { int get(); void set(int value); };" />
       <MemberSignature Language="F#" Value="member this.RemotePort : int with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.RemotePort" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.RemotePort</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -1121,9 +1090,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; void RequestClose();" />
       <MemberSignature Language="F#" Value="member this.RequestClose : unit -&gt; unit" Usage="transportConnection.RequestClose " />
       <MemberType>Method</MemberType>
-      <Implements>
-        <InterfaceMember>M:Microsoft.AspNetCore.Connections.Features.IConnectionLifetimeNotificationFeature.RequestClose</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.2.0.0</AssemblyVersion>
@@ -1218,9 +1184,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property long TotalBytesWritten { long get(); };" />
       <MemberSignature Language="F#" Value="member this.TotalBytesWritten : int64" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.TotalBytesWritten" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.IBytesWrittenFeature.TotalBytesWritten</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>
@@ -1242,9 +1205,6 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual property System::IO::Pipelines::IDuplexPipe ^ Transport { System::IO::Pipelines::IDuplexPipe ^ get(); void set(System::IO::Pipelines::IDuplexPipe ^ value); };" />
       <MemberSignature Language="F#" Value="member this.Transport : System.IO.Pipelines.IDuplexPipe with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions.Internal.TransportConnection.Transport" />
       <MemberType>Property</MemberType>
-      <Implements>
-        <InterfaceMember>P:Microsoft.AspNetCore.Connections.Features.IConnectionTransportFeature.Transport</InterfaceMember>
-      </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Abstractions</AssemblyName>
         <AssemblyVersion>2.1.0.0</AssemblyVersion>

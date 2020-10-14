@@ -9,6 +9,7 @@
     <AssemblyName>Microsoft.JSInterop</AssemblyName>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <AssemblyVersion>3.1.0.0</AssemblyVersion>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Interfaces />
   <Docs>
@@ -19,32 +20,28 @@
   </Docs>
   <Members>
     <Member MemberName="InvokeAsync&lt;TValue&gt;">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;TValue&gt; InvokeAsync&lt;TValue&gt; (string identifier, params object[] args);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;!!TValue&gt; InvokeAsync&lt;TValue&gt;(string identifier, object[] args) cil managed" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask&lt;TValue&gt; InvokeAsync&lt;TValue&gt; (string identifier, object[] args);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask`1&lt;!!TValue&gt; InvokeAsync&lt;TValue&gt;(string identifier, object[] args) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])" />
-      <MemberSignature Language="VB.NET" Value="Public Function InvokeAsync(Of TValue) (identifier As String, ParamArray args As Object()) As Task(Of TValue)" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename TValue&gt;&#xA; System::Threading::Tasks::Task&lt;TValue&gt; ^ InvokeAsync(System::String ^ identifier, ... cli::array &lt;System::Object ^&gt; ^ args);" />
-      <MemberSignature Language="F#" Value="abstract member InvokeAsync : string * obj[] -&gt; System.Threading.Tasks.Task&lt;'Value&gt;" Usage="iJSRuntime.InvokeAsync (identifier, args)" />
+      <MemberSignature Language="VB.NET" Value="Public Function InvokeAsync(Of TValue) (identifier As String, args As Object()) As ValueTask(Of TValue)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA;generic &lt;typename TValue&gt;&#xA; System::Threading::Tasks::ValueTask&lt;TValue&gt; InvokeAsync(System::String ^ identifier, cli::array &lt;System::Object ^&gt; ^ args);" />
+      <MemberSignature Language="F#" Value="abstract member InvokeAsync : string * obj[] -&gt; System.Threading.Tasks.ValueTask&lt;'Value&gt;" Usage="iJSRuntime.InvokeAsync (identifier, args)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.JSInterop</AssemblyName>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
+        <AssemblyVersion>3.1.0.0</AssemblyVersion>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Threading.Tasks.Task&lt;TValue&gt;</ReturnType>
+        <ReturnType>System.Threading.Tasks.ValueTask&lt;TValue&gt;</ReturnType>
       </ReturnValue>
       <TypeParameters>
         <TypeParameter Name="TValue" />
       </TypeParameters>
       <Parameters>
         <Parameter Name="identifier" Type="System.String" />
-        <Parameter Name="args" Type="System.Object[]">
-          <Attributes>
-            <Attribute>
-              <AttributeName>System.ParamArray</AttributeName>
-            </Attribute>
-          </Attributes>
-        </Parameter>
+        <Parameter Name="args" Type="System.Object[]" />
       </Parameters>
       <Docs>
         <typeparam name="TValue">The JSON-serializable return type.</typeparam>
@@ -52,7 +49,9 @@
         <param name="args">JSON-serializable arguments.</param>
         <summary>
             Invokes the specified JavaScript function asynchronously.
-            </summary>
+            <para><see cref="T:Microsoft.JSInterop.JSRuntime" /> will apply timeouts to this operation based on the value configured in <see cref="P:Microsoft.JSInterop.JSRuntime.DefaultAsyncTimeout" />. To dispatch a call with a different timeout, or no timeout,
+            consider using <see cref="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])" />.
+            </para></summary>
         <returns>An instance of <typeparamref name="TValue" /> obtained by JSON-deserializing the return value.</returns>
         <remarks>To be added.</remarks>
       </Docs>
@@ -69,6 +68,7 @@
         <AssemblyName>Microsoft.JSInterop</AssemblyName>
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
         <AssemblyVersion>3.1.0.0</AssemblyVersion>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>System.Threading.Tasks.ValueTask&lt;TValue&gt;</ReturnType>
