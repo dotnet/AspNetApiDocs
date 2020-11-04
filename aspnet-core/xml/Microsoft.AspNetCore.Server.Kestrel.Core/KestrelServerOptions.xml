@@ -93,9 +93,15 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a value that controls whether dynamic compression of response headers is allowed.
+            For more information about the security considerations of HPack dynamic header compression, visit
+            https://tools.ietf.org/html/rfc7541#section-7.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to true.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="AllowSynchronousIO">
@@ -203,7 +209,7 @@
       <Docs>
         <summary>
             Provides a configuration source where endpoints will be loaded from on server start.
-            The default is null.
+            The default is <see langword="null" />.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -233,7 +239,7 @@
         <summary>
             Creates a configuration loader for setting up Kestrel.
             </summary>
-        <returns>To be added.</returns>
+        <returns>A <see cref="T:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader" /> for configuring endpoints.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -260,12 +266,13 @@
         <Parameter Name="config" Type="Microsoft.Extensions.Configuration.IConfiguration" Index="0" FrameworkAlternate="aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="config">To be added.</param>
+        <param name="config">The configuration section for Kestrel.</param>
         <summary>
-            Creates a configuration loader for setting up Kestrel that takes an IConfiguration as input.
+            Creates a configuration loader for setting up Kestrel that takes an <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" /> as input.
             This configuration must be scoped to the configuration section for Kestrel.
+            Call <see cref="M:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Configure(Microsoft.Extensions.Configuration.IConfiguration,System.Boolean)" /> to enable dynamic endpoint binding updates.
             </summary>
-        <returns>To be added.</returns>
+        <returns>A <see cref="T:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader" /> for further endpoint configuration.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -289,10 +296,16 @@
         <Parameter Name="reloadOnChange" Type="System.Boolean" Index="1" FrameworkAlternate="aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="config">To be added.</param>
-        <param name="reloadOnChange">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="config">The configuration section for Kestrel.</param>
+        <param name="reloadOnChange">
+            If <see langword="true" />, Kestrel will dynamically update endpoint bindings when configuration changes.
+            This will only reload endpoints defined in the "Endpoints" section of your <paramref name="config" />. Endpoints defined in code will not be reloaded.
+            </param>
+        <summary>
+            Creates a configuration loader for setting up Kestrel that takes an <see cref="T:Microsoft.Extensions.Configuration.IConfiguration" /> as input.
+            This configuration must be scoped to the configuration section for Kestrel.
+            </summary>
+        <returns>A <see cref="T:Microsoft.AspNetCore.Server.Kestrel.KestrelConfigurationLoader" /> for further endpoint configuration.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -402,9 +415,13 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Controls whether to return the AltSvcHeader from on an HTTP/2 or lower response for HTTP/3
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to false.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Limits">
@@ -454,8 +471,10 @@
         <Parameter Name="endPoint" Type="System.Net.EndPoint" Index="0" FrameworkAlternate="aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="endPoint">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="endPoint" />
+        <summary>
+            Bind to the given endpoint.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -485,7 +504,7 @@
       <Docs>
         <param name="endPoint">To be added.</param>
         <summary>
-            Bind to given IP endpoint.
+            Bind to the given IP endpoint.
             </summary>
         <remarks>To be added.</remarks>
       </Docs>
@@ -512,7 +531,10 @@
       <Docs>
         <param name="endPoint">To be added.</param>
         <param name="configure">To be added.</param>
-        <summary>To be added.</summary>
+        <summary>
+            Bind to the given endpoint.
+            The callback configures endpoint-specific settings.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -872,6 +894,30 @@
             Bind to given Unix domain socket path.
             Specify callback to configure endpoint-specific settings.
             </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="RequestHeaderEncodingSelector">
+      <MemberSignature Language="C#" Value="public Func&lt;string,System.Text.Encoding&gt; RequestHeaderEncodingSelector { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;string, class System.Text.Encoding&gt; RequestHeaderEncodingSelector" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.RequestHeaderEncodingSelector" />
+      <MemberSignature Language="VB.NET" Value="Public Property RequestHeaderEncodingSelector As Func(Of String, Encoding)" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property Func&lt;System::String ^, System::Text::Encoding ^&gt; ^ RequestHeaderEncodingSelector { Func&lt;System::String ^, System::Text::Encoding ^&gt; ^ get(); void set(Func&lt;System::String ^, System::Text::Encoding ^&gt; ^ value); };" />
+      <MemberSignature Language="F#" Value="member this.RequestHeaderEncodingSelector : Func&lt;string, System.Text.Encoding&gt; with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.RequestHeaderEncodingSelector" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Core</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;System.String,System.Text.Encoding&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a callback that returns the <see cref="T:System.Text.Encoding" /> to decode the value for the specified request header name,
+            or <see langword="null" /> to use the default <see cref="T:System.Text.UTF8Encoding" />.
+            </summary>
+        <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

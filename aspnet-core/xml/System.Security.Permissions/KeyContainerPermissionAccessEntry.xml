@@ -13,8 +13,14 @@
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Specifies access rights for specific key containers. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -35,10 +41,11 @@
         <Parameter Name="flags" Type="System.Security.Permissions.KeyContainerPermissionFlags" />
       </Parameters>
       <Docs>
-        <param name="parameters">To be added.</param>
-        <param name="flags">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="parameters">A <see cref="T:System.Security.Cryptography.CspParameters" /> object that contains the cryptographic service provider (CSP) parameters.</param>
+        <param name="flags">A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> class, using the specified cryptographic service provider (CSP) parameters and access permissions.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -58,10 +65,11 @@
         <Parameter Name="flags" Type="System.Security.Permissions.KeyContainerPermissionFlags" />
       </Parameters>
       <Docs>
-        <param name="keyContainerName">To be added.</param>
-        <param name="flags">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="keyContainerName">The name of the key container.</param>
+        <param name="flags">A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> class, using the specified key container name and access permissions.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -85,14 +93,15 @@
         <Parameter Name="flags" Type="System.Security.Permissions.KeyContainerPermissionFlags" />
       </Parameters>
       <Docs>
-        <param name="keyStore">To be added.</param>
-        <param name="providerName">To be added.</param>
-        <param name="providerType">To be added.</param>
-        <param name="keyContainerName">To be added.</param>
-        <param name="keySpec">To be added.</param>
-        <param name="flags">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="keyStore">The name of the key store.</param>
+        <param name="providerName">The name of the provider.</param>
+        <param name="providerType">The type code for the provider. See the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntry.ProviderType" /> property for values.</param>
+        <param name="keyContainerName">The name of the key container.</param>
+        <param name="keySpec">The key specification. See the <see cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntry.KeySpec" /> property for values.</param>
+        <param name="flags">A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> class with the specified property values.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -114,9 +123,10 @@
         <Parameter Name="o" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="o">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="o">The <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object to compare with the current instance.</param>
+        <summary>Determines whether the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object is equal to the current instance.</summary>
+        <returns>
+          <see langword="true" /> if the specified <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> is equal to the current <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -136,8 +146,8 @@
         <ReturnType>System.Security.Permissions.KeyContainerPermissionFlags</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the key container permissions.</summary>
+        <value>A bitwise combination of the <see cref="T:System.Security.Permissions.KeyContainerPermissionFlags" /> values. The default is <see cref="F:System.Security.Permissions.KeyContainerPermissionFlags.NoFlags" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -158,8 +168,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Gets a hash code for the current instance that is suitable for use in hashing algorithms and data structures such as a hash table.</summary>
+        <returns>A hash code for the current <see cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" /> object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -179,9 +189,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the key container name.</summary>
+        <value>The name of the key container.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName="KeySpec">
@@ -200,9 +211,10 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the key specification.</summary>
+        <value>One of the AT_ values defined in the Wincrypt.h header file.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName="KeyStore">
@@ -221,9 +233,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the name of the key store.</summary>
+        <value>The name of the key store.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName="ProviderName">
@@ -242,9 +255,10 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the provider name.</summary>
+        <value>The name of the provider.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
     <Member MemberName="ProviderType">
@@ -263,9 +277,10 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the provider type.</summary>
+        <value>One of the PROV_ values defined in the Wincrypt.h header file.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The resulting entry would have unrestricted access.</exception>
       </Docs>
     </Member>
   </Members>

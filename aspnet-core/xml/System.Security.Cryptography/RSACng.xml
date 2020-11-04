@@ -14,7 +14,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Provides a Cryptography Next Generation (CNG) implementation of the RSA algorithm.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,7 +31,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACng" /> class with a random 2,048-bit key pair.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -51,9 +51,11 @@
         <Parameter Name="keySize" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="keySize">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="keySize">The size of the key to generate in bits.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACng" /> class with a randomly generated key of the specified size.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="keySize" /> is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -72,9 +74,13 @@
         <Parameter Name="key" Type="System.Security.Cryptography.CngKey" />
       </Parameters>
       <Docs>
-        <param name="key">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="key">The key to use for RSA operations.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.RSACng" /> class with the specified key.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="key" /> is not a valid RSA key.</exception>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="key" /> is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Decrypt">
@@ -97,11 +103,19 @@
         <Parameter Name="padding" Type="System.Security.Cryptography.RSAEncryptionPadding" />
       </Parameters>
       <Docs>
-        <param name="data">To be added.</param>
-        <param name="padding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="data">The data to decrypt.</param>
+        <param name="padding">The padding mode.</param>
+        <summary>Decrypts input data using the specified padding mode.</summary>
+        <returns>The decrypted data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="data" /> is <see langword="null" />.
+  
+ -or-  
+  
+ <paramref name="padding" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="padding" />.<see cref="P:System.Security.Cryptography.RSAEncryptionPadding.Mode" /> isn't equal to <see cref="F:System.Security.Cryptography.RSAEncryptionPaddingMode.Pkcs1" /> or <see cref="F:System.Security.Cryptography.RSAEncryptionPaddingMode.Oaep" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -148,11 +162,19 @@
         <Parameter Name="padding" Type="System.Security.Cryptography.RSAEncryptionPadding" />
       </Parameters>
       <Docs>
-        <param name="data">To be added.</param>
-        <param name="padding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="data">The data to encrypt.</param>
+        <param name="padding">The padding mode.</param>
+        <summary>Encrypts the input data using the specified padding.</summary>
+        <returns>The encrypted data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="data" /> is <see langword="null" />.
+  
+ -or-  
+  
+ <paramref name="padding" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="padding" />.<see cref="P:System.Security.Cryptography.RSAEncryptionPadding.Mode" /> isn't equal to <see cref="F:System.Security.Cryptography.RSAEncryptionPaddingMode.Pkcs1" /> or <see cref="F:System.Security.Cryptography.RSAEncryptionPaddingMode.Oaep" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="ExportParameters">
@@ -174,9 +196,10 @@
         <Parameter Name="includePrivateParameters" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="includePrivateParameters">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="includePrivateParameters">
+          <see langword="true" /> to include private parameters; otherwise, <see langword="false" />.</param>
+        <summary>Exports the key used by the RSA object into a <see cref="T:System.Security.Cryptography.RSAParameters" /> object.</summary>
+        <returns>The key used by the RSA object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -257,9 +280,17 @@
         <Parameter Name="parameters" Type="System.Security.Cryptography.RSAParameters" />
       </Parameters>
       <Docs>
-        <param name="parameters">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="parameters">The RSA parameters.</param>
+        <summary>Replaces the existing key that the current instance is working with by creating a new <see cref="T:System.Security.Cryptography.CngKey" /> for the parameters structure.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="parameters" /> contains neither an exponent nor a modulus.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="parameters" /> is not a valid RSA key.  
+  
+ -or-  
+  
+ <paramref name="parameters" /> is a full key pair and the default KSP is used.</exception>
       </Docs>
     </Member>
     <Member MemberName="Key">
@@ -278,8 +309,8 @@
         <ReturnType>System.Security.Cryptography.CngKey</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the key that will be used by the <see cref="T:System.Security.Cryptography.RSACng" /> object for any cryptographic operation that it performs.</summary>
+        <value>The key used by the <see cref="T:System.Security.Cryptography.RSACng" /> object.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -299,8 +330,8 @@
         <ReturnType>System.Security.Cryptography.KeySizes[]</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the key sizes, in bits, that are supported by this implementation of RSA.</summary>
+        <value>An array that contains the key sizes supported by the algorithm.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -325,12 +356,21 @@
         <Parameter Name="padding" Type="System.Security.Cryptography.RSASignaturePadding" />
       </Parameters>
       <Docs>
-        <param name="hash">To be added.</param>
-        <param name="hashAlgorithm">To be added.</param>
-        <param name="padding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="hash">The hash to sign.</param>
+        <param name="hashAlgorithm">The hash algorithm name.</param>
+        <param name="padding">The padding mode.</param>
+        <summary>Signs data that was hashed by using the specified hashing algorithm and padding mode.</summary>
+        <returns>The signed data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="hash" /> is <see langword="null" />.  
+  
+ -or-  
+  
+ <paramref name="padding" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The value of the <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> property of <paramref name="hashAlgorithm" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="padding" /> does not equal <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1" /> or <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pss" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="VerifyHash">
@@ -355,13 +395,31 @@
         <Parameter Name="padding" Type="System.Security.Cryptography.RSASignaturePadding" />
       </Parameters>
       <Docs>
-        <param name="hash">To be added.</param>
-        <param name="signature">To be added.</param>
-        <param name="hashAlgorithm">To be added.</param>
-        <param name="padding">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="hash">The hash to verify.</param>
+        <param name="signature">The signature of the data.</param>
+        <param name="hashAlgorithm">The hash algorithm name.</param>
+        <param name="padding">The padding mode.</param>
+        <summary>Verifies data that was signed and already hashed with the specified algorithm and padding mode.</summary>
+        <returns>
+          <see langword="true" /> if the signature verifies for the hash; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="hash" /> is <see langword="null" />.  
+  
+ -or-  
+  
+ <paramref name="signature" /> is <see langword="null" />.  
+  
+ -or-  
+  
+ <paramref name="padding" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The value of the <see cref="P:System.Security.Cryptography.HashAlgorithmName.Name" /> property of <paramref name="hashAlgorithm" /> is <see langword="null" /> or <see cref="F:System.String.Empty" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">
+          <paramref name="padding" /> does not equal <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pkcs1" /> or <see cref="P:System.Security.Cryptography.RSASignaturePadding.Pss" />.  
+  
+ -or-  
+  
+ The signature is badly formatted. (In the .NET Framework 4.6 and 4.6.1 only; starting with the .NET Framework 4.6.2, the method returns <see langword="false" /> if a signature is badly formatted.</exception>
       </Docs>
     </Member>
   </Members>

@@ -17,8 +17,14 @@
       <InterfaceName>System.Security.Permissions.IUnrestrictedPermission</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Controls access to printers. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -38,8 +44,8 @@
         <Parameter Name="printingLevel" Type="System.Drawing.Printing.PrintingPermissionLevel" />
       </Parameters>
       <Docs>
-        <param name="printingLevel">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="printingLevel">One of the <see cref="T:System.Drawing.Printing.PrintingPermissionLevel" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrintingPermission" /> class with the level of printing access specified.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -59,9 +65,11 @@
         <Parameter Name="state" Type="System.Security.Permissions.PermissionState" />
       </Parameters>
       <Docs>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="state">One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Drawing.Printing.PrintingPermission" /> class with either fully restricted or unrestricted access, as specified.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="state" /> is not a valid <see cref="T:System.Security.Permissions.PermissionState" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -81,8 +89,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates and returns an identical copy of the current permission object.</summary>
+        <returns>A copy of the current permission object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -105,8 +113,8 @@
         <Parameter Name="element" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="element">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="element">The XML encoding to use to reconstruct the security object.</param>
+        <summary>Reconstructs a security object with a specified state from an XML encoding.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -129,10 +137,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission object of the same type as the current permission object.</param>
+        <summary>Creates and returns a permission that is the intersection of the current permission object and a target permission object.</summary>
+        <returns>A new permission object that represents the intersection of the current object and the specified target. This object is <see langword="null" /> if the intersection is empty.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="target" /> is an object that is not of the same type as the current permission object.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -154,10 +164,13 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission object that is to be tested for the subset relationship. This object must be of the same type as the current permission object.</param>
+        <summary>Determines whether the current permission object is a subset of the specified permission.</summary>
+        <returns>
+          <see langword="true" /> if the current permission object is a subset of <paramref name="target" />; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="target" /> is an object that is not of the same type as the current permission object.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -180,8 +193,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Gets a value indicating whether the permission is unrestricted.</summary>
+        <returns>
+          <see langword="true" /> if permission is unrestricted; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -201,8 +215,8 @@
         <ReturnType>System.Drawing.Printing.PrintingPermissionLevel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the code's level of printing access.</summary>
+        <value>One of the <see cref="T:System.Drawing.Printing.PrintingPermissionLevel" /> values.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -223,8 +237,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates an XML encoding of the security object and its current state.</summary>
+        <returns>An XML encoding of the security object, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -247,10 +261,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission object of the same type as the current permission object.</param>
+        <summary>Creates a permission that combines the permission object and the target permission object.</summary>
+        <returns>A new permission object that represents the union of the current permission object and the specified permission object.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="target" /> is an object that is not of the same type as the current permission object.</exception>
       </Docs>
     </Member>
   </Members>

@@ -17,8 +17,14 @@
       <InterfaceName>System.Security.Permissions.IUnrestrictedPermission</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Controls rights to make or accept connections on a transport address.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -38,8 +44,8 @@
         <Parameter Name="state" Type="System.Security.Permissions.PermissionState" />
       </Parameters>
       <Docs>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="state">One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class that allows unrestricted access to the <see cref="T:System.Net.Sockets.Socket" /> or disallows access to the <see cref="T:System.Net.Sockets.Socket" />.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -62,12 +68,14 @@
         <Parameter Name="portNumber" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="access">To be added.</param>
-        <param name="transport">To be added.</param>
-        <param name="hostName">To be added.</param>
-        <param name="portNumber">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="access">One of the <see cref="T:System.Net.NetworkAccess" /> values.</param>
+        <param name="transport">One of the <see cref="T:System.Net.TransportType" /> values.</param>
+        <param name="hostName">The host name for the transport address.</param>
+        <param name="portNumber">The port number for the transport address.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Net.SocketPermission" /> class for the given transport address with the specified permission.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="hostName" /> is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="AcceptList">
@@ -86,8 +94,8 @@
         <ReturnType>System.Collections.IEnumerator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be accepted under this permission instance.</summary>
+        <value>An instance that implements the <see cref="T:System.Collections.IEnumerator" /> interface that contains <see cref="T:System.Net.EndpointPermission" /> instances.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -113,12 +121,14 @@
         <Parameter Name="portNumber" Type="System.Int32" />
       </Parameters>
       <Docs>
-        <param name="access">To be added.</param>
-        <param name="transport">To be added.</param>
-        <param name="hostName">To be added.</param>
-        <param name="portNumber">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="access">One of the <see cref="T:System.Net.NetworkAccess" /> values.</param>
+        <param name="transport">One of the <see cref="T:System.Net.TransportType" /> values.</param>
+        <param name="hostName">The host name for the transport address.</param>
+        <param name="portNumber">The port number for the transport address.</param>
+        <summary>Adds a permission to the set of permissions for a transport address.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="hostName" /> is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="AllPorts">
@@ -138,7 +148,7 @@
       </ReturnValue>
       <MemberValue>-1</MemberValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Defines a constant that represents all ports.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -158,8 +168,8 @@
         <ReturnType>System.Collections.IEnumerator</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets a list of <see cref="T:System.Net.EndpointPermission" /> instances that identifies the endpoints that can be connected to under this permission instance.</summary>
+        <value>An instance that implements the <see cref="T:System.Collections.IEnumerator" /> interface that contains <see cref="T:System.Net.EndpointPermission" /> instances.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -180,8 +190,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates a copy of a <see cref="T:System.Net.SocketPermission" /> instance.</summary>
+        <returns>A new instance of the <see cref="T:System.Net.SocketPermission" /> class that is a copy of the current instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -204,9 +214,11 @@
         <Parameter Name="securityElement" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="securityElement">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="securityElement">The XML encoding used to reconstruct the <see cref="T:System.Net.SocketPermission" /> instance.</param>
+        <summary>Reconstructs a <see cref="T:System.Net.SocketPermission" /> instance for an XML encoding.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="securityElement" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="securityElement" /> is not a permission element for this type.</exception>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -228,10 +240,13 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">The <see cref="T:System.Net.SocketPermission" /> instance to intersect with the current instance.</param>
+        <summary>Returns the logical intersection between two <see cref="T:System.Net.SocketPermission" /> instances.</summary>
+        <returns>The <see cref="T:System.Net.SocketPermission" /> instance that represents the intersection of two <see cref="T:System.Net.SocketPermission" /> instances. If the intersection is empty, the method returns <see langword="null" />. If the <paramref name="target" /> parameter is a null reference, the method returns <see langword="null" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not a <see cref="T:System.Net.SocketPermission" />.</exception>
+        <exception cref="T:System.Security.SecurityException">
+          <see cref="T:System.Net.DnsPermission" /> is not granted to the method caller.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -253,10 +268,14 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A <see cref="T:System.Net.SocketPermission" /> that is to be tested for the subset relationship.</param>
+        <summary>Determines if the current permission is a subset of the specified permission.</summary>
+        <returns>If <paramref name="target" /> is <see langword="null" />, this method returns <see langword="true" /> if the current instance defines no permissions; otherwise, <see langword="false" />. If <paramref name="target" /> is not <see langword="null" />, this method returns <see langword="true" /> if the current instance defines a subset of <paramref name="target" /> permissions; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="target" /> is not a <see cref="T:System.Net.Sockets.SocketException" />.</exception>
+        <exception cref="T:System.Security.SecurityException">
+          <see cref="T:System.Net.DnsPermission" /> is not granted to the method caller.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -279,8 +298,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Checks the overall permission state of the object.</summary>
+        <returns>
+          <see langword="true" /> if the <see cref="T:System.Net.SocketPermission" /> instance is created with the <see langword="Unrestricted" /> value from <see cref="T:System.Security.Permissions.PermissionState" />; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -301,8 +321,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates an XML encoding of a <see cref="T:System.Net.SocketPermission" /> instance and its current state.</summary>
+        <returns>A <see cref="T:System.Security.SecurityElement" /> instance that contains an XML-encoded representation of the <see cref="T:System.Net.SocketPermission" /> instance, including state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -325,10 +345,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">The <see cref="T:System.Net.SocketPermission" /> instance to combine with the current instance.</param>
+        <summary>Returns the logical union between two <see cref="T:System.Net.SocketPermission" /> instances.</summary>
+        <returns>The <see cref="T:System.Net.SocketPermission" /> instance that represents the union of two <see cref="T:System.Net.SocketPermission" /> instances. If <paramref name="target" /> parameter is <see langword="null" />, it returns a copy of the current instance.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="target" /> is not a <see cref="T:System.Net.SocketPermission" />.</exception>
       </Docs>
     </Member>
   </Members>

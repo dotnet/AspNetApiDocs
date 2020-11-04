@@ -23,8 +23,14 @@
       <InterfaceName>System.Security.IStackWalk</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Defines the underlying structure of all code access permissions.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -41,7 +47,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.CodeAccessPermission" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -53,6 +59,9 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Assert();" />
       <MemberSignature Language="F#" Value="abstract member Assert : unit -&gt; unit&#xA;override this.Assert : unit -&gt; unit" Usage="codeAccessPermission.Assert " />
       <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Security.IStackWalk.Assert</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>System.Security.Permissions</AssemblyName>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
@@ -62,8 +71,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Declares that the calling code can access the resource protected by a permission demand through the code that calls this method, even if callers higher in the stack have not been granted permission to access the resource. Using <see cref="M:System.Security.CodeAccessPermission.Assert" /> can create security issues.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.SecurityException">The calling code does not have <see cref="F:System.Security.Permissions.SecurityPermissionFlag.Assertion" />.  
+  
+ -or-  
+  
+ There is already an active <see cref="M:System.Security.CodeAccessPermission.Assert" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -86,8 +100,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>When implemented by a derived class, creates and returns an identical copy of the current permission object.</summary>
+        <returns>A copy of the current permission object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -101,6 +115,7 @@
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:System.Security.IPermission.Demand</InterfaceMember>
+        <InterfaceMember>M:System.Security.IStackWalk.Demand</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>System.Security.Permissions</AssemblyName>
@@ -111,8 +126,13 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Forces a <see cref="T:System.Security.SecurityException" /> at run time if all callers higher in the call stack have not been granted the permission specified by the current instance.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.SecurityException">A caller higher in the call stack does not have the permission specified by the current instance.  
+  
+ -or-  
+  
+ A caller higher in the call stack has called <see cref="M:System.Security.CodeAccessPermission.Deny" /> on the current permission object.</exception>
       </Docs>
     </Member>
     <Member MemberName="Deny">
@@ -123,6 +143,9 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void Deny();" />
       <MemberSignature Language="F#" Value="abstract member Deny : unit -&gt; unit&#xA;override this.Deny : unit -&gt; unit" Usage="codeAccessPermission.Deny " />
       <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Security.IStackWalk.Deny</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>System.Security.Permissions</AssemblyName>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
@@ -138,8 +161,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Prevents callers higher in the call stack from using the code that calls this method to access the resource specified by the current instance.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.SecurityException">There is already an active <see cref="M:System.Security.CodeAccessPermission.Deny" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="Equals">
@@ -161,9 +185,10 @@
         <Parameter Name="obj" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="obj">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="obj">The <see cref="T:System.Security.CodeAccessPermission" /> object to compare with the current <see cref="T:System.Security.CodeAccessPermission" />.</param>
+        <summary>Determines whether the specified <see cref="T:System.Security.CodeAccessPermission" /> object is equal to the current <see cref="T:System.Security.CodeAccessPermission" />.</summary>
+        <returns>
+          <see langword="true" /> if the specified <see cref="T:System.Security.CodeAccessPermission" /> object is equal to the current <see cref="T:System.Security.CodeAccessPermission" />; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -189,9 +214,15 @@
         <Parameter Name="elem" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="elem">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="elem">The XML encoding to use to reconstruct the security object.</param>
+        <summary>When overridden in a derived class, reconstructs a security object with a specified state from an XML encoding.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="elem" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="elem" /> parameter does not contain the XML encoding for an instance of the same type as the current instance.  
+  
+ -or-  
+  
+ The version number of the <paramref name="elem" /> parameter is not supported.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -211,8 +242,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Gets a hash code for the <see cref="T:System.Security.CodeAccessPermission" /> object that is suitable for use in hashing algorithms and data structures such as a hash table.</summary>
+        <returns>A hash code for the current <see cref="T:System.Security.CodeAccessPermission" /> object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -238,10 +269,11 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission to intersect with the current permission. It must be of the same type as the current permission.</param>
+        <summary>When implemented by a derived class, creates and returns a permission that is the intersection of the current permission and the specified permission.</summary>
+        <returns>A new permission that represents the intersection of the current permission and the specified permission. This new permission is <see langword="null" /> if the intersection is empty.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not <see langword="null" /> and is not an instance of the same class as the current permission.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -266,10 +298,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.</param>
+        <summary>When implemented by a derived class, determines whether the current permission is a subset of the specified permission.</summary>
+        <returns>
+          <see langword="true" /> if the current permission is a subset of the specified permission; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not <see langword="null" /> and is not of the same type as the current permission.</exception>
       </Docs>
     </Member>
     <Member MemberName="PermitOnly">
@@ -280,6 +314,9 @@
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual void PermitOnly();" />
       <MemberSignature Language="F#" Value="abstract member PermitOnly : unit -&gt; unit&#xA;override this.PermitOnly : unit -&gt; unit" Usage="codeAccessPermission.PermitOnly " />
       <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.Security.IStackWalk.PermitOnly</InterfaceMember>
+      </Implements>
       <AssemblyInfo>
         <AssemblyName>System.Security.Permissions</AssemblyName>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
@@ -289,8 +326,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Prevents callers higher in the call stack from using the code that calls this method to access all resources except for the resource specified by the current instance.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.SecurityException">There is already an active <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="RevertAll">
@@ -310,8 +348,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Causes all previous overrides for the current frame to be removed and no longer in effect.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">There is no previous <see cref="M:System.Security.CodeAccessPermission.Assert" />, <see cref="M:System.Security.CodeAccessPermission.Deny" />, or <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="RevertAssert">
@@ -331,8 +370,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Causes any previous <see cref="M:System.Security.CodeAccessPermission.Assert" /> for the current frame to be removed and no longer in effect.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">There is no previous <see cref="M:System.Security.CodeAccessPermission.Assert" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="RevertDeny">
@@ -358,8 +398,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Causes any previous <see cref="M:System.Security.CodeAccessPermission.Deny" /> for the current frame to be removed and no longer in effect.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">There is no previous <see cref="M:System.Security.CodeAccessPermission.Deny" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="RevertPermitOnly">
@@ -379,8 +420,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Causes any previous <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> for the current frame to be removed and no longer in effect.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">There is no previous <see cref="M:System.Security.CodeAccessPermission.PermitOnly" /> for the current frame.</exception>
       </Docs>
     </Member>
     <Member MemberName="ToString">
@@ -400,8 +442,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates and returns a string representation of the current permission object.</summary>
+        <returns>A string representation of the current permission object.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -425,8 +467,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>When overridden in a derived class, creates an XML encoding of the security object and its current state.</summary>
+        <returns>An XML encoding of the security object, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -452,10 +494,11 @@
         <Parameter Name="other" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="other">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="other">A permission to combine with the current permission. It must be of the same type as the current permission.</param>
+        <summary>When overridden in a derived class, creates a permission that is the union of the current permission and the specified permission.</summary>
+        <returns>A new permission that represents the union of the current permission and the specified permission.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.NotSupportedException">The <paramref name="other" /> parameter is not <see langword="null" />. This method is only supported at this level when passed <see langword="null" />.</exception>
       </Docs>
     </Member>
   </Members>

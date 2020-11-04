@@ -14,7 +14,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Allows the control and customization of security behavior for application domains.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,7 +31,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.HostSecurityManager" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -56,12 +56,20 @@
         <Parameter Name="context" Type="System.Security.Policy.TrustManagerContext" />
       </Parameters>
       <Docs>
-        <param name="applicationEvidence">To be added.</param>
-        <param name="activatorEvidence">To be added.</param>
-        <param name="context">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="applicationEvidence">The evidence for the application to be activated.</param>
+        <param name="activatorEvidence">Optionally, the evidence for the activating application domain.</param>
+        <param name="context">The trust context.</param>
+        <summary>Determines whether an application should be executed.</summary>
+        <returns>An object that contains trust information about the application.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="applicationEvidence" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">An <see cref="T:System.Runtime.Hosting.ActivationArguments" /> object could not be found in the application evidence.  
+  
+ -or-  
+  
+ The <see cref="P:System.Runtime.Hosting.ActivationArguments.ActivationContext" /> property in the activation arguments is <see langword="null" />.</exception>
+        <exception cref="T:System.InvalidOperationException">The <see cref="T:System.Security.Policy.ApplicationTrust" /> grant set does not contain the minimum request set specified by the <see cref="T:System.ActivationContext" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="DomainPolicy">
@@ -80,9 +88,10 @@
         <ReturnType>System.Security.Policy.PolicyLevel</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>When overridden in a derived class, gets the security policy for the current application domain.</summary>
+        <value>The security policy for the current application domain. The default is <see langword="null" />.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.NotSupportedException">This method uses code access security (CAS) policy, which is obsolete in the .NET Framework 4. To enable CAS policy for compatibility with earlier versions of the .NET Framework, use the &lt;legacyCasPolicy&gt; element.</exception>
       </Docs>
     </Member>
     <Member MemberName="Flags">
@@ -101,8 +110,8 @@
         <ReturnType>System.Security.HostSecurityManagerOptions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the flag representing the security policy components of concern to the host.</summary>
+        <value>One of the enumeration values that specifies security policy components. The default is <see cref="F:System.Security.HostSecurityManagerOptions.AllFlags" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -125,9 +134,9 @@
         <Parameter Name="evidenceType" Type="System.Type" />
       </Parameters>
       <Docs>
-        <param name="evidenceType">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidenceType">The evidence type.</param>
+        <summary>Requests a specific evidence type for the application domain.</summary>
+        <returns>The requested application domain evidence.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -151,10 +160,10 @@
         <Parameter Name="assembly" Type="System.Reflection.Assembly" />
       </Parameters>
       <Docs>
-        <param name="evidenceType">To be added.</param>
-        <param name="assembly">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidenceType">The evidence type.</param>
+        <param name="assembly">The target assembly.</param>
+        <summary>Requests a specific evidence type for the assembly.</summary>
+        <returns>The requested assembly evidence.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -175,8 +184,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Determines which evidence types the host can supply for the application domain, if requested.</summary>
+        <returns>An array of evidence types.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -199,9 +208,9 @@
         <Parameter Name="assembly" Type="System.Reflection.Assembly" />
       </Parameters>
       <Docs>
-        <param name="assembly">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="assembly">The target assembly.</param>
+        <summary>Determines which evidence types the host can supply for the assembly, if requested.</summary>
+        <returns>An array of evidence types.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -224,9 +233,9 @@
         <Parameter Name="inputEvidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="inputEvidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="inputEvidence">Additional evidence to add to the <see cref="T:System.AppDomain" /> evidence.</param>
+        <summary>Provides the application domain evidence for an assembly being loaded.</summary>
+        <returns>The evidence to be used for the <see cref="T:System.AppDomain" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -250,10 +259,10 @@
         <Parameter Name="inputEvidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="loadedAssembly">To be added.</param>
-        <param name="inputEvidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="loadedAssembly">The loaded assembly.</param>
+        <param name="inputEvidence">Additional evidence to add to the assembly evidence.</param>
+        <summary>Provides the assembly evidence for an assembly being loaded.</summary>
+        <returns>The evidence to be used for the assembly.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -282,10 +291,12 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidence">The evidence set used to evaluate policy.</param>
+        <summary>Determines what permissions to grant to code based on the specified evidence.</summary>
+        <returns>The permission set that can be granted by the security system.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="evidence" /> is <see langword="null" />.</exception>
       </Docs>
     </Member>
   </Members>

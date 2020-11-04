@@ -39,9 +39,9 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <typeparam name="TOptions">Specifies which type for of AuthenticationOptions property</typeparam>
+    <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
     <summary>
-            Base class for the per-request work performed by most authentication middleware.
+            An opinionated abstraction for implementing <see cref="T:Microsoft.AspNetCore.Authentication.IAuthenticationHandler" />.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -88,11 +88,13 @@
         <Parameter Name="clock" Type="Microsoft.AspNetCore.Authentication.ISystemClock" Index="3" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
-        <param name="logger">To be added.</param>
-        <param name="encoder">To be added.</param>
-        <param name="clock">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="options">The monitor for the options instance.</param>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
+        <param name="encoder">The <see cref="T:System.Text.Encodings.Web.UrlEncoder" />.</param>
+        <param name="clock">The <see cref="T:Microsoft.AspNetCore.Authentication.ISystemClock" />.</param>
+        <summary>
+            Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -117,7 +119,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -130,6 +132,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="AuthenticateAsync">
@@ -187,19 +190,22 @@
         <Parameter Name="targetPath" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="targetPath">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="targetPath">The path.</param>
+        <summary>
+            Constructs an absolute url for the specified <paramref name="targetPath" />.
+            </summary>
+        <returns>The absolute url.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="ChallengeAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ChallengeAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties properties);" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ChallengeAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties properties);" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ChallengeAsync(class Microsoft.AspNetCore.Authentication.AuthenticationProperties properties) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ChallengeAsync(Microsoft.AspNetCore.Authentication.AuthenticationProperties)" />
       <MemberSignature Language="VB.NET" Value="Public Function ChallengeAsync (properties As AuthenticationProperties) As Task" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::Task ^ ChallengeAsync(Microsoft::AspNetCore::Authentication::AuthenticationProperties ^ properties);" />
       <MemberSignature Language="F#" Value="abstract member ChallengeAsync : Microsoft.AspNetCore.Authentication.AuthenticationProperties -&gt; System.Threading.Tasks.Task&#xA;override this.ChallengeAsync : Microsoft.AspNetCore.Authentication.AuthenticationProperties -&gt; System.Threading.Tasks.Task" Usage="authenticationHandler.ChallengeAsync properties" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ChallengeAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties? properties);" FrameworkAlternate="aspnetcore-5.0" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.AspNetCore.Authentication.IAuthenticationHandler.ChallengeAsync(Microsoft.AspNetCore.Authentication.AuthenticationProperties)</InterfaceMember>
@@ -214,7 +220,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -230,6 +236,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="ChallengeAsync">
@@ -304,8 +311,12 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>
+            Gets the issuer that should be used when any claims are issued.
+            </summary>
+        <value>
+            The <c>ClaimsIssuer</c> configured in <typeparamref name="TOptions" />, if configured, otherwise <see cref="P:Microsoft.AspNetCore.Authentication.AuthenticationScheme.Name" />.
+            </value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -330,7 +341,9 @@
         <ReturnType>Microsoft.AspNetCore.Authentication.ISystemClock</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Authentication.ISystemClock" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -359,7 +372,9 @@
         <ReturnType>Microsoft.AspNetCore.Http.HttpContext</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Http.HttpContext" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -417,18 +432,21 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the absolute current url.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="Events">
-      <MemberSignature Language="C#" Value="protected virtual object Events { get; set; }" />
+      <MemberSignature Language="C#" Value="protected virtual object Events { get; set; }" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1" />
       <MemberSignature Language="ILAsm" Value=".property instance object Events" />
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.Events" />
       <MemberSignature Language="VB.NET" Value="Protected Overridable Property Events As Object" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; virtual property System::Object ^ Events { System::Object ^ get(); void set(System::Object ^ value); };" />
       <MemberSignature Language="F#" Value="member this.Events : obj with get, set" Usage="Microsoft.AspNetCore.Authentication.AuthenticationHandler&lt;'Options (requires 'Options :&gt; Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions and 'Options : (new : unit -&gt; 'Options))&gt;.Events" />
+      <MemberSignature Language="C#" Value="protected virtual object? Events { get; set; }" FrameworkAlternate="aspnetcore-5.0" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Authentication</AssemblyName>
@@ -477,12 +495,13 @@
       </Docs>
     </Member>
     <Member MemberName="ForbidAsync">
-      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ForbidAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties properties);" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ForbidAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties properties);" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task ForbidAsync(class Microsoft.AspNetCore.Authentication.AuthenticationProperties properties) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.ForbidAsync(Microsoft.AspNetCore.Authentication.AuthenticationProperties)" />
       <MemberSignature Language="VB.NET" Value="Public Function ForbidAsync (properties As AuthenticationProperties) As Task" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; virtual System::Threading::Tasks::Task ^ ForbidAsync(Microsoft::AspNetCore::Authentication::AuthenticationProperties ^ properties);" />
       <MemberSignature Language="F#" Value="abstract member ForbidAsync : Microsoft.AspNetCore.Authentication.AuthenticationProperties -&gt; System.Threading.Tasks.Task&#xA;override this.ForbidAsync : Microsoft.AspNetCore.Authentication.AuthenticationProperties -&gt; System.Threading.Tasks.Task" Usage="authenticationHandler.ForbidAsync properties" />
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task ForbidAsync (Microsoft.AspNetCore.Authentication.AuthenticationProperties? properties);" FrameworkAlternate="aspnetcore-5.0" />
       <MemberType>Method</MemberType>
       <Implements>
         <InterfaceMember>M:Microsoft.AspNetCore.Authentication.IAuthenticationHandler.ForbidAsync(Microsoft.AspNetCore.Authentication.AuthenticationProperties)</InterfaceMember>
@@ -497,7 +516,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -513,6 +532,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="GetDescriptions">
@@ -567,8 +587,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Allows derived types to handle authentication.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticateResult" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -623,7 +645,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -870,7 +892,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -944,7 +966,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -1035,7 +1057,9 @@
         <ReturnType>Microsoft.Extensions.Logging.ILogger</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.Extensions.Logging.ILogger" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1067,7 +1091,9 @@
         <ReturnType>TOptions</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the options associated with this authentication handler.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1093,7 +1119,9 @@
         <ReturnType>Microsoft.Extensions.Options.IOptionsMonitor&lt;TOptions&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.Extensions.Options.IOptionsMonitor`1" /> to detect changes to options. 
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1122,7 +1150,9 @@
         <ReturnType>Microsoft.AspNetCore.Http.PathString</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the path as seen by the authentication middleware.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1151,7 +1181,9 @@
         <ReturnType>Microsoft.AspNetCore.Http.PathString</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the path base as seen by the authentication middleware.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1202,7 +1234,9 @@
         <ReturnType>Microsoft.AspNetCore.Http.HttpRequest</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Http.HttpRequest" /> associated with the current request.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1230,9 +1264,11 @@
         <Parameter Name="scheme" Type="System.String" Index="0" FrameworkAlternate="aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="scheme">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="scheme">The scheme to forward. One of ForwardAuthenticate, ForwardChallenge, ForwardForbid, ForwardSignIn, or ForwardSignOut.</param>
+        <summary>
+            Resolves the scheme that this authentication operation is forwarded to.
+            </summary>
+        <returns>The forwarded scheme or <see langword="null" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1260,7 +1296,9 @@
         <ReturnType>Microsoft.AspNetCore.Http.HttpResponse</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Http.HttpResponse" /> associated with the current request.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1286,7 +1324,9 @@
         <ReturnType>Microsoft.AspNetCore.Authentication.AuthenticationScheme</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationScheme" /> asssociated with this authentication handler.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -1445,7 +1485,9 @@
         <ReturnType>System.Text.Encodings.Web.UrlEncoder</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets the <see cref="P:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1.UrlEncoder" />.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
