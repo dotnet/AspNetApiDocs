@@ -13,8 +13,14 @@
     <BaseTypeName>System.Security.CodeAccessPermission</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Represents the identity of a software publisher. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -34,9 +40,11 @@
         <Parameter Name="certificate" Type="System.Security.Cryptography.X509Certificates.X509Certificate" />
       </Parameters>
       <Docs>
-        <param name="certificate">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="certificate">An X.509 certificate representing the software publisher's identity.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.PublisherIdentityPermission" /> class with the specified Authenticode X.509v3 certificate.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="certificate" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="certificate" /> parameter is not a valid certificate.</exception>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
@@ -55,9 +63,10 @@
         <Parameter Name="state" Type="System.Security.Permissions.PermissionState" />
       </Parameters>
       <Docs>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="state">One of the <see cref="T:System.Security.Permissions.PermissionState" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.PublisherIdentityPermission" /> class with the specified <see cref="T:System.Security.Permissions.PermissionState" />.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="state" /> parameter is not a valid value of <see cref="T:System.Security.Permissions.PermissionState" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Certificate">
@@ -76,9 +85,12 @@
         <ReturnType>System.Security.Cryptography.X509Certificates.X509Certificate</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets an Authenticode X.509v3 certificate that represents the identity of the software publisher.</summary>
+        <value>An X.509 certificate representing the identity of the software publisher.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <see cref="P:System.Security.Permissions.PublisherIdentityPermission.Certificate" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <see cref="P:System.Security.Permissions.PublisherIdentityPermission.Certificate" /> is not a valid certificate.</exception>
+        <exception cref="T:System.NotSupportedException">The property cannot be set because the identity is ambiguous.</exception>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -98,8 +110,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates and returns an identical copy of the current permission.</summary>
+        <returns>A copy of the current permission.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -122,9 +134,15 @@
         <Parameter Name="esd" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="esd">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="esd">The XML encoding to use to reconstruct the permission.</param>
+        <summary>Reconstructs a permission with a specified state from an XML encoding.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="esd" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="esd" /> parameter is not a valid permission element.  
+  
+ -or-  
+  
+ The <paramref name="esd" /> parameter's version number is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -146,10 +164,11 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission to intersect with the current permission. It must be of the same type as the current permission.</param>
+        <summary>Creates and returns a permission that is the intersection of the current permission and the specified permission.</summary>
+        <returns>A new permission that represents the intersection of the current permission and the specified permission. This new permission is <see langword="null" /> if the intersection is empty.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not <see langword="null" /> and is not of the same type as the current permission.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -171,10 +190,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.</param>
+        <summary>Determines whether the current permission is a subset of the specified permission.</summary>
+        <returns>
+          <see langword="true" /> if the current permission is a subset of the specified permission; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not <see langword="null" /> and is not of the same type as the current permission.</exception>
       </Docs>
     </Member>
     <Member MemberName="ToXml">
@@ -194,8 +215,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates an XML encoding of the permission and its current state.</summary>
+        <returns>An XML encoding of the permission, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -218,10 +239,15 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission to combine with the current permission. It must be of the same type as the current permission.</param>
+        <summary>Creates a permission that is the union of the current permission and the specified permission.</summary>
+        <returns>A new permission that represents the union of the current permission and the specified permission.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="target" /> parameter is not <see langword="null" /> and is not of the same type as the current permission.  
+  
+ -or-  
+  
+ The two permissions are not equal.</exception>
       </Docs>
     </Member>
   </Members>

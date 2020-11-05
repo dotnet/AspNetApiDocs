@@ -18,9 +18,13 @@
       <AttributeName Language="C#">[System.AttributeUsage(System.AttributeTargets.Assembly | System.AttributeTargets.Class | System.AttributeTargets.Constructor | System.AttributeTargets.Delegate | System.AttributeTargets.Method | System.AttributeTargets.Struct, AllowMultiple=true, Inherited=false)]</AttributeName>
       <AttributeName Language="F#">[&lt;System.AttributeUsage(System.AttributeTargets.Assembly | System.AttributeTargets.Class | System.AttributeTargets.Constructor | System.AttributeTargets.Delegate | System.AttributeTargets.Method | System.AttributeTargets.Struct, AllowMultiple=true, Inherited=false)&gt;]</AttributeName>
     </Attribute>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Allows the use of declarative security actions to determine host protection requirements. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -37,7 +41,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with default values.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -57,9 +61,11 @@
         <Parameter Name="action" Type="System.Security.Permissions.SecurityAction" />
       </Parameters>
       <Docs>
-        <param name="action">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="action">One of the <see cref="T:System.Security.Permissions.SecurityAction" /> values.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Permissions.HostProtectionAttribute" /> class with the specified <see cref="T:System.Security.Permissions.SecurityAction" /> value.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="action" /> is not <see cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="CreatePermission">
@@ -79,8 +85,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates and returns a new host protection permission.</summary>
+        <returns>An <see cref="T:System.Security.IPermission" /> that corresponds to the current attribute.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -100,8 +106,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether external process management is exposed.</summary>
+        <value>
+          <see langword="true" /> if external process management is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -121,8 +128,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether external threading is exposed.</summary>
+        <value>
+          <see langword="true" /> if external threading is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -142,8 +150,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether resources might leak memory if the operation is terminated.</summary>
+        <value>
+          <see langword="true" /> if resources might leak memory on termination; otherwise, <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -163,8 +172,8 @@
         <ReturnType>System.Security.Permissions.HostProtectionResource</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets flags specifying categories of functionality that are potentially harmful to the host.</summary>
+        <value>A bitwise combination of the <see cref="T:System.Security.Permissions.HostProtectionResource" /> values. The default is <see cref="F:System.Security.Permissions.HostProtectionResource.None" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -184,8 +193,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether the security infrastructure is exposed.</summary>
+        <value>
+          <see langword="true" /> if the security infrastructure is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -205,8 +215,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether self-affecting process management is exposed.</summary>
+        <value>
+          <see langword="true" /> if self-affecting process management is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -226,8 +237,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether self-affecting threading is exposed.</summary>
+        <value>
+          <see langword="true" /> if self-affecting threading is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -247,8 +259,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether shared state is exposed.</summary>
+        <value>
+          <see langword="true" /> if shared state is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -268,8 +281,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether synchronization is exposed.</summary>
+        <value>
+          <see langword="true" /> if synchronization is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -289,8 +303,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets a value indicating whether the user interface is exposed.</summary>
+        <value>
+          <see langword="true" /> if the user interface is exposed; otherwise, <see langword="false" />. The default is <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

@@ -1,0 +1,56 @@
+<Type Name="IHttpRequestBodyDetectionFeature" FullName="Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature">
+  <TypeSignature Language="C#" Value="public interface IHttpRequestBodyDetectionFeature" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHttpRequestBodyDetectionFeature" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IHttpRequestBodyDetectionFeature" />
+  <TypeSignature Language="C++ CLI" Value="public interface class IHttpRequestBodyDetectionFeature" />
+  <TypeSignature Language="F#" Value="type IHttpRequestBodyDetectionFeature = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.Http.Features</AssemblyName>
+    <AssemblyVersion>5.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Used to indicate if the request can have a body.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CanHaveBody">
+      <MemberSignature Language="C#" Value="public bool CanHaveBody { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool CanHaveBody" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature.CanHaveBody" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property CanHaveBody As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool CanHaveBody { bool get(); };" />
+      <MemberSignature Language="F#" Value="member this.CanHaveBody : bool" Usage="Microsoft.AspNetCore.Http.Features.IHttpRequestBodyDetectionFeature.CanHaveBody" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Features</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+             Indicates if the request can have a body.
+             </summary>
+        <value>To be added.</value>
+        <remarks>
+             This returns true when:
+             - It's an HTTP/1.x request with a non-zero Content-Length or a 'Transfer-Encoding: chunked' header.
+             - It's an HTTP/2 request that did not set the END_STREAM flag on the initial headers frame.
+             The final request body length may still be zero for the chunked or HTTP/2 scenarios.
+            
+             This returns false when:
+             - It's an HTTP/1.x request with no Content-Length or 'Transfer-Encoding: chunked' header, or the Content-Length is 0.
+             - It's an HTTP/1.x request with Connection: Upgrade (e.g. WebSockets). There is no HTTP request body for these requests and
+               no data should be received until after the upgrade.
+             - It's an HTTP/2 request that set END_STREAM on the initial headers frame.
+             When false, the request body should never return data.
+             </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

@@ -14,7 +14,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Defines a class that provides access to a read side of pipe.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,7 +31,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.IO.Pipelines.PipeReader" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -54,8 +54,8 @@
         <Parameter Name="consumed" Type="System.SequencePosition" />
       </Parameters>
       <Docs>
-        <param name="consumed">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="consumed">Marks the extent of the data that has been successfully processed.</param>
+        <summary>Moves forward the pipeline's read cursor to after the consumed data, marking the data as processed.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -79,9 +79,9 @@
         <Parameter Name="examined" Type="System.SequencePosition" />
       </Parameters>
       <Docs>
-        <param name="consumed">To be added.</param>
-        <param name="examined">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="consumed">Marks the extent of the data that has been successfully processed.</param>
+        <param name="examined">Marks the extent of the data that has been read and examined.</param>
+        <summary>Moves forward the pipeline's read cursor to after the consumed data, marking the data as processed, read and examined.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -103,9 +103,9 @@
         <Parameter Name="leaveOpen" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="leaveOpen">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="leaveOpen">An optional flag that indicates whether disposing the returned <see cref="T:System.IO.Stream" /> leaves <see cref="T:System.IO.Pipelines.PipeReader" /> open (<see langword="true" />) or completes <see cref="T:System.IO.Pipelines.PipeReader" /> (<see langword="false" />).</param>
+        <summary>Returns a <see cref="T:System.IO.Stream" /> representation of the <see cref="T:System.IO.Pipelines.PipeReader" />.</summary>
+        <returns>A stream that represents the <see cref="T:System.IO.Pipelines.PipeReader" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -126,7 +126,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Cancels to currently pending or if none is pending next call to <see cref="M:System.IO.Pipelines.PipeReader.ReadAsync(System.Threading.CancellationToken)" />, without completing the <see cref="T:System.IO.Pipelines.PipeReader" />.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -148,8 +148,8 @@
         <Parameter Name="exception" Type="System.Exception" />
       </Parameters>
       <Docs>
-        <param name="exception">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="exception">Optional <see cref="T:System.Exception" /> indicating a failure that's causing the pipeline to complete.</param>
+        <summary>Signals to the producer that the consumer is done reading.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -171,9 +171,9 @@
         <Parameter Name="exception" Type="System.Exception" />
       </Parameters>
       <Docs>
-        <param name="exception">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="exception">An optional exception that indicates the failure that caused the reader to complete.</param>
+        <summary>Marks the current pipe reader instance as being complete, meaning no more data will be read from it.</summary>
+        <returns>A value task that represents the asynchronous complete operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -196,10 +196,10 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="destination">The pipe writer to which the contents of the current stream will be copied.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>Asynchronously reads the bytes from the <see cref="T:System.IO.Pipelines.PipeReader" /> and writes them to the specified <see cref="T:System.IO.Pipelines.PipeWriter" />, using a specified buffer size and cancellation token.</summary>
+        <returns>A task that represents the asynchronous copy operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -222,10 +222,10 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="destination">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="destination">The stream to which the contents of the current stream will be copied.</param>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="P:System.Threading.CancellationToken.None" />.</param>
+        <summary>Asynchronously reads the bytes from the <see cref="T:System.IO.Pipelines.PipeReader" /> and writes them to the specified stream, using a specified cancellation token.</summary>
+        <returns>A task that represents the asynchronous copy operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -248,10 +248,10 @@
         <Parameter Name="readerOptions" Type="System.IO.Pipelines.StreamPipeReaderOptions" />
       </Parameters>
       <Docs>
-        <param name="stream">To be added.</param>
-        <param name="readerOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="stream">The stream that the pipe reader will wrap.</param>
+        <param name="readerOptions">The options to configure the pipe reader.</param>
+        <summary>Creates a <see cref="T:System.IO.Pipelines.PipeReader" /> wrapping the specified <see cref="T:System.IO.Stream" />.</summary>
+        <returns>A <see cref="T:System.IO.Pipelines.PipeReader" /> that wraps the <see cref="T:System.IO.Stream" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -281,9 +281,9 @@
         <Parameter Name="state" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="callback">To be added.</param>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="callback">The callback to register.</param>
+        <param name="state">The state object to pass to <paramref name="callback" /> when it's invoked.</param>
+        <summary>Registers a callback that executes when the <see cref="T:System.IO.Pipelines.PipeWriter" /> side of the pipe is completed.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -305,9 +305,9 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see langword="default" />.</param>
+        <summary>Asynchronously reads a sequence of bytes from the current <see cref="T:System.IO.Pipelines.PipeReader" />.</summary>
+        <returns>A <see cref="T:System.Threading.Tasks.ValueTask`1" /> representing the asynchronous read operation.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -330,9 +330,10 @@
         <Parameter Name="result" Type="System.IO.Pipelines.ReadResult" RefType="out" />
       </Parameters>
       <Docs>
-        <param name="result">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="result">When this method returns <see langword="true" />, this value is set to a <see cref="T:System.IO.Pipelines.ReadResult" /> instance that represents the result of the read call; otherwise, this value is set to <see langword="default" />.</param>
+        <summary>Attempts to synchronously read data the <see cref="T:System.IO.Pipelines.PipeReader" />.</summary>
+        <returns>
+          <see langword="true" /> if data was available, or if the call was canceled or the writer was completed; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

@@ -14,12 +14,24 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            Represent the registration information associated with an <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> implementation.
+            </summary>
+    <remarks>
+      <para>
+            The health check registration is provided as a separate object so that application developers can customize
+            how health check implementations are configured.
+            </para>
+      <para>
+            The registration is provided to an <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> implementation during execution through
+            <see cref="P:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckContext.Registration" />. This allows a health check implementation to access named
+            options or perform other operations based on the registered name.
+            </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt; tags);" />
+      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt;? tags);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, valuetype System.Nullable`1&lt;valuetype Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus&gt; failureStatus, class System.Collections.Generic.IEnumerable`1&lt;string&gt; tags) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.#ctor(System.String,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck,System.Nullable{Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus},System.Collections.Generic.IEnumerable{System.String})" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, instance As IHealthCheck, failureStatus As Nullable(Of HealthStatus), tags As IEnumerable(Of String))" />
@@ -37,16 +49,21 @@
         <Parameter Name="tags" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="instance">To be added.</param>
-        <param name="failureStatus">To be added.</param>
-        <param name="tags">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="name">The health check name.</param>
+        <param name="instance">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.</param>
+        <param name="failureStatus">
+            The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be reported upon failure of the health check. If the provided value
+            is <c>null</c>, then <see cref="F:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will be reported.
+            </param>
+        <param name="tags">A list of tags that can be used for filtering health checks.</param>
+        <summary>
+            Creates a new <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration" /> for an existing <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Func&lt;IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt; tags);" />
+      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Func&lt;IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt;? tags);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class System.Func`2&lt;class System.IServiceProvider, class Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, valuetype System.Nullable`1&lt;valuetype Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus&gt; failureStatus, class System.Collections.Generic.IEnumerable`1&lt;string&gt; tags) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.#ctor(System.String,System.Func{System.IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck},System.Nullable{Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus},System.Collections.Generic.IEnumerable{System.String})" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, factory As Func(Of IServiceProvider, IHealthCheck), failureStatus As Nullable(Of HealthStatus), tags As IEnumerable(Of String))" />
@@ -64,16 +81,21 @@
         <Parameter Name="tags" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="factory">To be added.</param>
-        <param name="failureStatus">To be added.</param>
-        <param name="tags">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="name">The health check name.</param>
+        <param name="factory">A delegate used to create the <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.</param>
+        <param name="failureStatus">
+            The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be reported when the health check reports a failure. If the provided value
+            is <c>null</c>, then <see cref="F:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will be reported.
+            </param>
+        <param name="tags">A list of tags that can be used for filtering health checks.</param>
+        <summary>
+            Creates a new <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration" /> for an existing <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt; tags, TimeSpan? timeout);" />
+      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt;? tags, TimeSpan? timeout);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck instance, valuetype System.Nullable`1&lt;valuetype Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus&gt; failureStatus, class System.Collections.Generic.IEnumerable`1&lt;string&gt; tags, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.#ctor(System.String,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck,System.Nullable{Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan})" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, instance As IHealthCheck, failureStatus As Nullable(Of HealthStatus), tags As IEnumerable(Of String), timeout As Nullable(Of TimeSpan))" />
@@ -92,17 +114,22 @@
         <Parameter Name="timeout" Type="System.Nullable&lt;System.TimeSpan&gt;" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="instance">To be added.</param>
-        <param name="failureStatus">To be added.</param>
-        <param name="tags">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="name">The health check name.</param>
+        <param name="instance">The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.</param>
+        <param name="failureStatus">
+            The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be reported upon failure of the health check. If the provided value
+            is <c>null</c>, then <see cref="F:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will be reported.
+            </param>
+        <param name="tags">A list of tags that can be used for filtering health checks.</param>
+        <param name="timeout">An optional <see cref="T:System.TimeSpan" /> representing the timeout of the check.</param>
+        <summary>
+            Creates a new <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration" /> for an existing <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Func&lt;IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt; tags, TimeSpan? timeout);" />
+      <MemberSignature Language="C#" Value="public HealthCheckRegistration (string name, Func&lt;IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus? failureStatus, System.Collections.Generic.IEnumerable&lt;string&gt;? tags, TimeSpan? timeout);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string name, class System.Func`2&lt;class System.IServiceProvider, class Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt; factory, valuetype System.Nullable`1&lt;valuetype Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus&gt; failureStatus, class System.Collections.Generic.IEnumerable`1&lt;string&gt; tags, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration.#ctor(System.String,System.Func{System.IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck},System.Nullable{Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.TimeSpan})" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (name As String, factory As Func(Of IServiceProvider, IHealthCheck), failureStatus As Nullable(Of HealthStatus), tags As IEnumerable(Of String), timeout As Nullable(Of TimeSpan))" />
@@ -121,12 +148,17 @@
         <Parameter Name="timeout" Type="System.Nullable&lt;System.TimeSpan&gt;" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="factory">To be added.</param>
-        <param name="failureStatus">To be added.</param>
-        <param name="tags">To be added.</param>
-        <param name="timeout">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="name">The health check name.</param>
+        <param name="factory">A delegate used to create the <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.</param>
+        <param name="failureStatus">
+            The <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be reported when the health check reports a failure. If the provided value
+            is <c>null</c>, then <see cref="F:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus.Unhealthy" /> will be reported.
+            </param>
+        <param name="tags">A list of tags that can be used for filtering health checks.</param>
+        <param name="timeout">An optional <see cref="T:System.TimeSpan" /> representing the timeout of the check.</param>
+        <summary>
+            Creates a new <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration" /> for an existing <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -146,7 +178,9 @@
         <ReturnType>System.Func&lt;System.IServiceProvider,Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets a delegate used to create the <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instance.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -167,7 +201,9 @@
         <ReturnType>Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus" /> that should be reported upon failure of the health check.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -188,7 +224,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the health check name.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -209,7 +247,9 @@
         <ReturnType>System.Collections.Generic.ISet&lt;System.String&gt;</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets a list of tags that can be used for filtering health checks.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -230,7 +270,9 @@
         <ReturnType>System.TimeSpan</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Gets or sets the timeout used for the test.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>

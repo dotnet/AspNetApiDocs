@@ -22,7 +22,7 @@
   <Interfaces />
   <Docs>
     <summary>
-            Used for building policies during application startup.
+            Used for building policies.
             </summary>
     <remarks>To be added.</remarks>
   </Docs>
@@ -50,7 +50,7 @@
         <Parameter Name="policy" Type="Microsoft.AspNetCore.Authorization.AuthorizationPolicy" />
       </Parameters>
       <Docs>
-        <param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> to build.</param>
+        <param name="policy">The <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" /> to copy.</param>
         <summary>
             Creates a new instance of <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder" />.
             </summary>
@@ -203,7 +203,9 @@
         <summary>
             Gets or sets a list authentication schemes the <see cref="P:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.Requirements" /> 
             are evaluated against.
-            </summary>
+            <para>
+            When not specified, the requirements are evaluated against default schemes.
+            </para></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -369,7 +371,7 @@
       <Parameters />
       <Docs>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement" /> to the current instance.
+            Adds <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.DenyAnonymousAuthorizationRequirement" /> to the current instance which enforces that the current user is authenticated.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -401,10 +403,10 @@
         <Parameter Name="claimType" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="claimType">The claim type required, which no restrictions on claim value.</param>
+        <param name="claimType">The claim type required, with no restrictions on claim value.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" /> to the current instance which requires
+            that the current user has the specified claim.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -443,12 +445,12 @@
         <Parameter Name="allowedValues" Type="System.Collections.Generic.IEnumerable&lt;System.String&gt;" Index="1" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="claimType">The claim type required.</param>
         <param name="requiredValues">Values the claim must process one or more of for evaluation to succeed.</param>
+        <param name="claimType">The claim type required.</param>
         <param name="allowedValues">Values the claim must process one or more of for evaluation to succeed.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" /> to the current instance which requires
+            that the current user has the specified claim and that the claim value must be one of the allowed values.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -501,12 +503,12 @@
         </Parameter>
       </Parameters>
       <Docs>
-        <param name="claimType">The claim type required.</param>
         <param name="requiredValues">Values the claim must process one or more of for evaluation to succeed.</param>
+        <param name="claimType">The claim type required.</param>
         <param name="allowedValues">Values the claim must process one or more of for evaluation to succeed.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.ClaimsAuthorizationRequirement" /> to the current instance which requires
+            that the current user has the specified claim and that the claim value must be one of the allowed values.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -571,8 +573,8 @@
       <Docs>
         <param name="roles">The allowed roles.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement" /> to the current instance which enforces that the current user
+            must have at least one of the specified roles.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -613,8 +615,8 @@
       <Docs>
         <param name="roles">The allowed roles.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement" /> to the current instance which enforces that the current user
+            must have at least one of the specified roles.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>
@@ -648,8 +650,7 @@
       <Docs>
         <param name="userName">The user name the current user must possess.</param>
         <summary>
-            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.NameAuthorizationRequirement" />
-            to the current instance.
+            Adds a <see cref="T:Microsoft.AspNetCore.Authorization.Infrastructure.NameAuthorizationRequirement" /> to the current instance which enforces that the current user matches the specified name.
             </summary>
         <returns>A reference to this instance after the operation has completed.</returns>
         <remarks>To be added.</remarks>

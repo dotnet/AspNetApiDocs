@@ -18,7 +18,7 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Encapsulates and propagates all security-related data for execution contexts transferred across threads. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -39,8 +39,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Captures the security context for the current thread.</summary>
+        <returns>The security context for the current thread.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -61,9 +61,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates a copy of the current security context.</summary>
+        <returns>The security context for the current thread.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">The current security context has been previously used, was marshaled across application domains, or was not acquired through the <see cref="M:System.Security.SecurityContext.Capture" /> method.</exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -86,7 +87,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.SecurityContext" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -107,8 +108,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Determines whether the flow of the security context has been suppressed.</summary>
+        <returns>
+          <see langword="true" /> if the flow has been suppressed; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -129,8 +131,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Determines whether the flow of the Windows identity portion of the current security context has been suppressed.</summary>
+        <returns>
+          <see langword="true" /> if the flow has been suppressed; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -151,8 +154,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Restores the flow of the security context across asynchronous threads.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">The security context is <see langword="null" /> or an empty string.</exception>
       </Docs>
     </Member>
     <Member MemberName="Run">
@@ -176,11 +180,21 @@
         <Parameter Name="state" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="securityContext">To be added.</param>
-        <param name="callback">To be added.</param>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="securityContext">The security context to set.</param>
+        <param name="callback">The delegate that represents the method to run in the specified security context.</param>
+        <param name="state">The object to pass to the callback method.</param>
+        <summary>Runs the specified method in the specified security context on the current thread.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">
+          <paramref name="securityContext" /> is <see langword="null" />.  
+  
+ -or-  
+  
+ <paramref name="securityContext" /> was not acquired through a capture operation.  
+  
+ -or-  
+  
+ <paramref name="securityContext" /> has already been used as the argument to a <see cref="M:System.Security.SecurityContext.Run(System.Security.SecurityContext,System.Threading.ContextCallback,System.Object)" /> method call.</exception>
       </Docs>
     </Member>
     <Member MemberName="SuppressFlow">
@@ -200,8 +214,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Suppresses the flow of the security context across asynchronous threads.</summary>
+        <returns>An <see cref="T:System.Threading.AsyncFlowControl" /> structure for restoring the flow.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -222,8 +236,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Suppresses the flow of the Windows identity portion of the current security context across asynchronous threads.</summary>
+        <returns>A structure for restoring the flow.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
