@@ -17,8 +17,14 @@
       <InterfaceName>System.Security.Permissions.IUnrestrictedPermission</InterfaceName>
     </Interface>
   </Interfaces>
+  <Attributes>
+    <Attribute>
+      <AttributeName Language="C#">[System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Obsolete("Code Access Security is not supported or honored by the runtime.", DiagnosticId="SYSLIB0003", UrlFormat="https://aka.ms/dotnet-warnings/{0}")&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Specifies the values that define or are used in <see cref="N:System.Net.PeerToPeer.Collaboration" /> object permissions.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -38,8 +44,8 @@
         <Parameter Name="state" Type="System.Security.Permissions.PermissionState" />
       </Parameters>
       <Docs>
-        <param name="state">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="state">One of the values in the <see cref="T:System.Security.Permissions.PermissionState" /> enumeration.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" />. The initial <see cref="T:System.Security.Permissions.PermissionState" /> for this instance is passed when the constructor is called.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -60,8 +66,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates and returns a copy of the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" />.</summary>
+        <returns>A <see cref="T:System.Object" /> that contains a copy of the current instance of <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -84,9 +90,19 @@
         <Parameter Name="e" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="e">The XML encoding to use to reconstruct the permission.</param>
+        <summary>Represents the XML object model for encoding security objects.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The parameter is not a valid permission element.
+
+-or-
+
+The parameter does not contain a valid type or class.
+
+-or-
+
+The parameter's version number is not supported.</exception>
+        <exception cref="T:System.ArgumentNullException">The parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="Intersect">
@@ -108,10 +124,11 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">Permission to <see cref="M:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission.Intersect(System.Security.IPermission)" /> with the current permission. It must be of the same type as the current permission.</param>
+        <summary>Creates and returns a permission that is the intersection of the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> and the specified <paramref name="target" /> permission.</summary>
+        <returns>A new permission that represents the intersection of the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> and the specified <paramref name="target" /> permission. This new permission is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic) if the intersection is empty.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The target parameter is not a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic) and is not an instance of the same class as the current permission.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsSubsetOf">
@@ -133,10 +150,12 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission.</param>
+        <summary>Determines whether the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> is a subset of the specified <paramref name="target" /> permission.</summary>
+        <returns>
+          <see langword="true" /> if the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> is a subset of the specified permission; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic).</exception>
       </Docs>
     </Member>
     <Member MemberName="IsUnrestricted">
@@ -159,8 +178,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Returns a value specifying whether the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> is unrestricted.</summary>
+        <returns>
+          <see langword="true" /> if the current permission is unrestricted; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -181,8 +201,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates an XML encoding of the <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> and its current state.</summary>
+        <returns>An XML encoding of the permission, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -205,10 +225,11 @@
         <Parameter Name="target" Type="System.Security.IPermission" />
       </Parameters>
       <Docs>
-        <param name="target">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="target">A permission to combine with the current permission. It must be of the same type as the current permission.</param>
+        <summary>Creates a permission that is the union of the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> and the specified <paramref name="target" /> permission.</summary>
+        <returns>A new permission that represents the <see cref="M:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission.Union(System.Security.IPermission)" /> of the current <see cref="T:System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission" /> and the specified permission.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The parameter is a <see langword="null" /> reference (<see langword="Nothing" /> in Visual Basic).</exception>
       </Docs>
     </Member>
   </Members>

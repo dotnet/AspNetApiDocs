@@ -9,8 +9,8 @@
   <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit RemoteAuthenticationHandler`1&lt;.ctor (class Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions) TOptions&gt; extends Microsoft.AspNetCore.Authentication.AuthenticationHandler`1&lt;!TOptions&gt; implements class Microsoft.AspNetCore.Authentication.IAuthenticationHandler, class Microsoft.AspNetCore.Authentication.IAuthenticationRequestHandler" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
   <TypeSignature Language="VB.NET" Value="Public MustInherit Class RemoteAuthenticationHandler(Of TOptions)&#xA;Inherits AuthenticationHandler(Of TOptions)&#xA;Implements IAuthenticationRequestHandler" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
   <TypeSignature Language="C++ CLI" Value="generic &lt;typename TOptions&gt;&#xA; where TOptions : RemoteAuthenticationOptionsgcnew()public ref class RemoteAuthenticationHandler abstract : Microsoft::AspNetCore::Authentication::AuthenticationHandler&lt;TOptions&gt;, Microsoft::AspNetCore::Authentication::IAuthenticationRequestHandler" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
-  <TypeSignature Language="F#" Value="type RemoteAuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt; = class&#xA;    inherit AuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt;&#xA;    interface IAuthenticationRequestHandler&#xA;    interface IAuthenticationHandler" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2" />
-  <TypeSignature Language="F#" Value="type RemoteAuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt; = class&#xA;    inherit AuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt;&#xA;    interface IAuthenticationHandler&#xA;    interface IAuthenticationRequestHandler" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
+  <TypeSignature Language="F#" Value="type RemoteAuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt; = class&#xA;    inherit AuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt;&#xA;    interface IAuthenticationRequestHandler&#xA;    interface IAuthenticationHandler" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-5.0" />
+  <TypeSignature Language="F#" Value="type RemoteAuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt; = class&#xA;    inherit AuthenticationHandler&lt;'Options (requires 'Options :&gt; RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt;&#xA;    interface IAuthenticationHandler&#xA;    interface IAuthenticationRequestHandler" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Authentication</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -44,8 +44,11 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <typeparam name="TOptions">To be added.</typeparam>
-    <summary>To be added.</summary>
+    <typeparam name="TOptions">The type for the options used to configure the authentication handler.</typeparam>
+    <summary>
+            An opinionated abstraction for an <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1" /> that performs authentication using a separately hosted
+            provider.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -91,11 +94,13 @@
         <Parameter Name="clock" Type="Microsoft.AspNetCore.Authentication.ISystemClock" Index="3" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="options">To be added.</param>
-        <param name="logger">To be added.</param>
-        <param name="encoder">To be added.</param>
-        <param name="clock">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="options">The monitor for the options instance.</param>
+        <param name="logger">The <see cref="T:Microsoft.Extensions.Logging.ILoggerFactory" />.</param>
+        <param name="encoder">The <see cref="T:System.Text.Encodings.Web.UrlEncoder" />.</param>
+        <param name="clock">The <see cref="T:Microsoft.AspNetCore.Authentication.ISystemClock" />.</param>
+        <summary>
+            Initializes a new instance of <see cref="T:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -124,6 +129,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="Events">
@@ -179,8 +185,10 @@
         <Parameter Name="properties" Type="Microsoft.AspNetCore.Authentication.AuthenticationProperties" Index="0" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="properties">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="properties" />
+        <summary>
+            Produces a cookie containing a nonce used to correlate the current remote authentication request.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -224,7 +232,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -236,9 +244,11 @@
         <Parameter Name="properties" Type="Microsoft.AspNetCore.Authentication.AuthenticationProperties" Index="0" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="properties">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="properties">The <see cref="T:Microsoft.AspNetCore.Authentication.AuthenticationProperties" />.</param>
+        <summary>
+            Derived types may override this method to handle access denied errors.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Authentication.HandleRequestResult" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -262,7 +272,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -275,6 +285,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="HandleForbiddenAsync">
@@ -305,6 +316,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="HandleForbiddenAsync">
@@ -423,7 +435,7 @@
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0">
+        <Attribute FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1">
           <AttributeName Language="C#">[System.Diagnostics.DebuggerStepThrough]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerStepThrough&gt;]</AttributeName>
         </Attribute>
@@ -433,8 +445,11 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Handles the current authentication request.
+            </summary>
+        <returns>
+          <see langword="true" /> if authentication was handled, otherwise <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -512,18 +527,22 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>
+            Gets a value that determines if the current authentication request should be handled by <see cref="M:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.HandleRequestAsync" />.
+            </summary>
+        <returns>
+          <see langword="true" /> to handle the operation, otherwise <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="SignInScheme">
-      <MemberSignature Language="C#" Value="protected string SignInScheme { get; }" />
+      <MemberSignature Language="C#" Value="protected string SignInScheme { get; }" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1" />
       <MemberSignature Language="ILAsm" Value=".property instance string SignInScheme" />
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1.SignInScheme" />
       <MemberSignature Language="VB.NET" Value="Protected ReadOnly Property SignInScheme As String" />
       <MemberSignature Language="C++ CLI" Value="protected:&#xA; property System::String ^ SignInScheme { System::String ^ get(); };" />
       <MemberSignature Language="F#" Value="member this.SignInScheme : string" Usage="Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler&lt;'Options (requires 'Options :&gt; Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions and 'Options : (new : unit -&gt; 'Options))&gt;.SignInScheme" />
+      <MemberSignature Language="C#" Value="protected string? SignInScheme { get; }" FrameworkAlternate="aspnetcore-5.0" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Authentication</AssemblyName>
@@ -538,7 +557,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            The authentication scheme used by default for signin.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -567,9 +588,11 @@
         <Parameter Name="properties" Type="Microsoft.AspNetCore.Authentication.AuthenticationProperties" Index="0" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="properties">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="properties" />
+        <summary>
+            Validates that the current request correlates wit hthe 
+            </summary>
+        <returns />
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

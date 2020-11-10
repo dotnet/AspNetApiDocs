@@ -14,8 +14,26 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
-    <remarks>To be added.</remarks>
+    <summary>
+            A service which can be used to check the status of <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> instances 
+            registered in the application.
+            </summary>
+    <remarks>
+      <para>
+            The default implementation of <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckService" /> is registered in the dependency
+            injection container as a singleton service by calling 
+            <see cref="M:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />.
+            </para>
+      <para>
+            The <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" /> returned by 
+            <see cref="M:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+            provides a convenience API for registering health checks.
+            </para>
+      <para>
+        <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck" /> implementations can be registered through extension methods provided by
+            <see cref="T:Microsoft.Extensions.DependencyInjection.IHealthChecksBuilder" />.
+            </para>
+    </remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -53,14 +71,19 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> which can be used to cancel the health checks.</param>
+        <summary>
+            Runs all the health checks in the application and returns the aggregated status.
+            </summary>
+        <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1" /> which will complete when all the health checks have been run,
+            yielding a <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport" /> containing the results.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="CheckHealthAsync">
-      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport&gt; CheckHealthAsync (Func&lt;Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration,bool&gt; predicate, System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="C#" Value="public abstract System.Threading.Tasks.Task&lt;Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport&gt; CheckHealthAsync (Func&lt;Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration,bool&gt;? predicate, System.Threading.CancellationToken cancellationToken = default);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task`1&lt;class Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport&gt; CheckHealthAsync(class System.Func`2&lt;class Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration, bool&gt; predicate, valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckService.CheckHealthAsync(System.Func{Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckRegistration,System.Boolean},System.Threading.CancellationToken)" />
       <MemberSignature Language="VB.NET" Value="Public MustOverride Function CheckHealthAsync (predicate As Func(Of HealthCheckRegistration, Boolean), Optional cancellationToken As CancellationToken = Nothing) As Task(Of HealthReport)" />
@@ -78,10 +101,17 @@
         <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" />
       </Parameters>
       <Docs>
-        <param name="predicate">To be added.</param>
-        <param name="cancellationToken">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="predicate">
+            A predicate that can be used to include health checks based on user-defined criteria.
+            </param>
+        <param name="cancellationToken">A <see cref="T:System.Threading.CancellationToken" /> which can be used to cancel the health checks.</param>
+        <summary>
+            Runs the provided health checks and returns the aggregated status
+            </summary>
+        <returns>
+            A <see cref="T:System.Threading.Tasks.Task`1" /> which will complete when all the health checks have been run,
+            yielding a <see cref="T:Microsoft.Extensions.Diagnostics.HealthChecks.HealthReport" /> containing the results.
+            </returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

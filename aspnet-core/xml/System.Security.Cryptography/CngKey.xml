@@ -18,7 +18,7 @@
     </Interface>
   </Interfaces>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Defines the core functionality for keys that are used with Cryptography Next Generation (CNG) objects.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -38,8 +38,8 @@
         <ReturnType>System.Security.Cryptography.CngAlgorithm</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the algorithm that is used by the key.</summary>
+        <value>An object that specifies the name of an encryption algorithm.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -59,8 +59,8 @@
         <ReturnType>System.Security.Cryptography.CngAlgorithmGroup</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the algorithm group that is used by the key.</summary>
+        <value>An object that specifies the name of an encryption algorithm group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -83,10 +83,14 @@
         <Parameter Name="algorithm" Type="System.Security.Cryptography.CngAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="algorithm">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="algorithm">The algorithm that the key will be used with.</param>
+        <summary>Creates a <see cref="T:System.Security.Cryptography.CngKey" /> object that can be used with the specified algorithm.</summary>
+        <returns>An ephemeral key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="algorithm" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -109,11 +113,15 @@
         <Parameter Name="keyName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="algorithm">To be added.</param>
-        <param name="keyName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="algorithm">The algorithm that the key will be used with.</param>
+        <param name="keyName">The key name. If a name is not provided, the key will not be persisted.</param>
+        <summary>Creates a named <see cref="T:System.Security.Cryptography.CngKey" /> object that provides the specified algorithm.</summary>
+        <returns>A persisted or ephemeral key that provides the specified algorithm.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="algorithm" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Create">
@@ -137,12 +145,16 @@
         <Parameter Name="creationParameters" Type="System.Security.Cryptography.CngKeyCreationParameters" />
       </Parameters>
       <Docs>
-        <param name="algorithm">To be added.</param>
-        <param name="keyName">To be added.</param>
-        <param name="creationParameters">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="algorithm">The algorithm that the key will be used with.</param>
+        <param name="keyName">The key name. If a name is not provided, the key will not be persisted.</param>
+        <param name="creationParameters">An object that specifies advanced parameters for the method, including the <see cref="T:System.Security.Cryptography.CngProvider" />.</param>
+        <summary>Creates a named <see cref="T:System.Security.Cryptography.CngKey" /> object that provides the specified algorithm, using the supplied key creation parameters.</summary>
+        <returns>A persisted or ephemeral key that provides the specified algorithm.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="algorithm" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Delete">
@@ -162,8 +174,10 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Removes the key that is associated with the object.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ObjectDisposedException">An attempt was made to access a deleted key.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Dispose">
@@ -186,7 +200,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Releases all resources used by the current instance of the <see cref="T:System.Security.Cryptography.CngKey" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -209,10 +223,15 @@
         <Parameter Name="keyName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The key name.</param>
+        <summary>Checks to see whether a named key exists in the default key storage provider (KSP).</summary>
+        <returns>
+          <see langword="true" /> if the named key exists in the default KSP; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Exists">
@@ -235,11 +254,16 @@
         <Parameter Name="provider" Type="System.Security.Cryptography.CngProvider" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="provider">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The key name.</param>
+        <param name="provider">The KSP to check for the key.</param>
+        <summary>Checks to see whether a named key exists in the specified key storage provider (KSP).</summary>
+        <returns>
+          <see langword="true" /> if the named key exists in the specified provider; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> or <paramref name="provider" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Exists">
@@ -263,12 +287,17 @@
         <Parameter Name="options" Type="System.Security.Cryptography.CngKeyOpenOptions" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="provider">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The key name.</param>
+        <param name="provider">The KSP to search for the key.</param>
+        <param name="options">A bitwise combination of the enumeration values that specify options for opening a key.</param>
+        <summary>Checks to see whether a named key exists in the specified key storage provider (KSP), according to the specified options.</summary>
+        <returns>
+          <see langword="true" /> if the named key exists in the specified provider; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> or <paramref name="provider" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Export">
@@ -290,10 +319,13 @@
         <Parameter Name="format" Type="System.Security.Cryptography.CngKeyBlobFormat" />
       </Parameters>
       <Docs>
-        <param name="format">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="format">An object that specifies the format of the key BLOB.</param>
+        <summary>Exports the key material into a BLOB, in the specified format.</summary>
+        <returns>A BLOB that contains the key material in the specified format.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="format" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors. Typically, the <see cref="P:System.Security.Cryptography.CngKey.ExportPolicy" /> does not allow the key to be exported.</exception>
       </Docs>
     </Member>
     <Member MemberName="ExportPolicy">
@@ -312,8 +344,8 @@
         <ReturnType>System.Security.Cryptography.CngExportPolicies</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the export policy that is used by the key.</summary>
+        <value>An object that specifies the export policy for the key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -337,11 +369,14 @@
         <Parameter Name="options" Type="System.Security.Cryptography.CngPropertyOptions" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="name">The name of the desired property.</param>
+        <param name="options">A bitwise combination of the enumeration values that specify options for the named property.</param>
+        <summary>Gets a property, given a name and a set of property options.</summary>
+        <returns>An object that contains the raw value of the specified property.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="name" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Handle">
@@ -360,8 +395,8 @@
         <ReturnType>Microsoft.Win32.SafeHandles.SafeNCryptKeyHandle</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets a safe handle that represents a native key (NCRYPT_KEY_HANDLE).</summary>
+        <value>A safe handle that represents the key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -385,11 +420,14 @@
         <Parameter Name="options" Type="System.Security.Cryptography.CngPropertyOptions" />
       </Parameters>
       <Docs>
-        <param name="name">To be added.</param>
-        <param name="options">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="name">The property name to check.</param>
+        <param name="options">A bitwise combination of the enumeration values that specify options for the named property.</param>
+        <summary>Checks to see whether the specified property exists on the key.</summary>
+        <returns>
+          <see langword="true" /> if the specified property is found; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="name" /> is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -412,11 +450,15 @@
         <Parameter Name="format" Type="System.Security.Cryptography.CngKeyBlobFormat" />
       </Parameters>
       <Docs>
-        <param name="keyBlob">To be added.</param>
-        <param name="format">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyBlob">An array that contains the key information.</param>
+        <param name="format">An object that specifies the format of the <paramref name="keyBlob" /> array.</param>
+        <summary>Creates a new key by importing the specified key material into the default key storage provider (KSP) and using the specified format.</summary>
+        <returns>A new key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyBlob" /> or <paramref name="format" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Import">
@@ -440,12 +482,16 @@
         <Parameter Name="provider" Type="System.Security.Cryptography.CngProvider" />
       </Parameters>
       <Docs>
-        <param name="keyBlob">To be added.</param>
-        <param name="format">To be added.</param>
-        <param name="provider">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyBlob">An array that contains the key information.</param>
+        <param name="format">An object that specifies the format of the <paramref name="keyBlob" /> array.</param>
+        <param name="provider">The KSP.</param>
+        <summary>Creates a new key by importing the specified key material into the specified key storage provider (KSP), using the specified format.</summary>
+        <returns>A new key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyBlob" />, <paramref name="format" />, or <paramref name="provider" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="IsEphemeral">
@@ -464,8 +510,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the persistence state of the key.</summary>
+        <value>
+          <see langword="true" /> if the key is ephemeral; otherwise, <see langword="false" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -485,8 +532,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the scope (machine or user) of the key.</summary>
+        <value>
+          <see langword="true" /> if the key is available on a machine-wide basis; <see langword="false" /> if the key is only for the current user.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -506,8 +554,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the name of the key.</summary>
+        <value>The name of the key. If the key is ephemeral, the value is <see langword="null" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -527,8 +575,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the key size in bits.</summary>
+        <value>The key size in bits.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -548,8 +596,8 @@
         <ReturnType>System.Security.Cryptography.CngKeyUsages</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the cryptographic operations specified by the key.</summary>
+        <value>A bitwise combination of the enumeration values that specify the usages allowed for the key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -572,10 +620,14 @@
         <Parameter Name="keyName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The name of the key.</param>
+        <summary>Creates an instance of an <see cref="T:System.Security.Cryptography.CngKey" /> object that represents an existing named key.</summary>
+        <returns>An existing key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -598,11 +650,17 @@
         <Parameter Name="keyHandleOpenOptions" Type="System.Security.Cryptography.CngKeyHandleOpenOptions" />
       </Parameters>
       <Docs>
-        <param name="keyHandle">To be added.</param>
-        <param name="keyHandleOpenOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyHandle">A handle to an existing key.</param>
+        <param name="keyHandleOpenOptions">One of the enumeration values that indicates whether <paramref name="keyHandle" /> represents an ephemeral key or a named key.</param>
+        <summary>Creates an instance of an <see cref="T:System.Security.Cryptography.CngKey" /> object by using a handle to an existing key.</summary>
+        <returns>An existing key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyHandle" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">
+          <paramref name="keyHandle" /> is invalid or malformed, or it is already closed. This exception is also thrown if the key is an ephemeral key that is created by the common language runtime (CLR), but the <see cref="F:System.Security.Cryptography.CngKeyHandleOpenOptions.EphemeralKey" /> value is not specified.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -625,11 +683,15 @@
         <Parameter Name="provider" Type="System.Security.Cryptography.CngProvider" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="provider">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The name of the key.</param>
+        <param name="provider">The KSP that contains the key.</param>
+        <summary>Creates an instance of an <see cref="T:System.Security.Cryptography.CngKey" /> object that represents an existing named key, using the specified key storage provider (KSP).</summary>
+        <returns>An existing key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> or <paramref name="provider" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="Open">
@@ -653,12 +715,16 @@
         <Parameter Name="openOptions" Type="System.Security.Cryptography.CngKeyOpenOptions" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="provider">To be added.</param>
-        <param name="openOptions">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyName">The name of the key.</param>
+        <param name="provider">The KSP that contains the key.</param>
+        <param name="openOptions">A bitwise combination of the enumeration values that specify options for opening the key, such as where the key is opened from (machine or user storage) and whether to suppress UI prompting.</param>
+        <summary>Creates an instance of an <see cref="T:System.Security.Cryptography.CngKey" /> object that represents an existing named key, using the specified key storage provider (KSP) and key open options.</summary>
+        <returns>An existing key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">
+          <paramref name="keyName" /> or <paramref name="provider" /> is <see langword="null" />.</exception>
+        <exception cref="T:System.PlatformNotSupportedException">Cryptography Next Generation (CNG) is not supported on this system.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">All other errors.</exception>
       </Docs>
     </Member>
     <Member MemberName="ParentWindowHandle">
@@ -677,8 +743,8 @@
         <ReturnType>System.IntPtr</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the window handle (HWND) that should be used for user interface (UI) prompts caused by accessing the key.</summary>
+        <value>The parent window handle for the key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -698,8 +764,8 @@
         <ReturnType>System.Security.Cryptography.CngProvider</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the key storage provider (KSP) that manages the key.</summary>
+        <value>The KSP that manages the key.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -719,8 +785,8 @@
         <ReturnType>Microsoft.Win32.SafeHandles.SafeNCryptProviderHandle</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets a native handle (an NCRYPT_PROV_HANDLE) to the key storage provider (KSP).</summary>
+        <value>A handle to the KSP.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -743,8 +809,8 @@
         <Parameter Name="property" Type="System.Security.Cryptography.CngProperty" />
       </Parameters>
       <Docs>
-        <param name="property">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="property">The key property to set.</param>
+        <summary>Sets a named property on the key.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -764,8 +830,8 @@
         <ReturnType>System.Security.Cryptography.CngUIPolicy</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets parameters that control the user interface (UI) for accessing the key.</summary>
+        <value>An object that contains configuration parameters for displaying the UI.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -785,8 +851,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the unique name for the key.</summary>
+        <value>An alternate name for the key. If the key is ephemeral, the value is <see langword="null" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

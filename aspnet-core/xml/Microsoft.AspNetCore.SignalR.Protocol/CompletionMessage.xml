@@ -18,17 +18,20 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Represents an invocation that has completed. If there is an error then the invocation didn't complete successfully.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public CompletionMessage (string invocationId, string error, object result, bool hasResult);" />
+      <MemberSignature Language="C#" Value="public CompletionMessage (string invocationId, string error, object result, bool hasResult);" FrameworkAlternate="aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(string invocationId, string error, object result, bool hasResult) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage.#ctor(System.String,System.String,System.Object,System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Sub New (invocationId As String, error As String, result As Object, hasResult As Boolean)" />
       <MemberSignature Language="C++ CLI" Value="public:&#xA; CompletionMessage(System::String ^ invocationId, System::String ^ error, System::Object ^ result, bool hasResult);" />
       <MemberSignature Language="F#" Value="new Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage : string * string * obj * bool -&gt; Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" Usage="new Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage (invocationId, error, result, hasResult)" />
+      <MemberSignature Language="C#" Value="public CompletionMessage (string? invocationId, string error, object result, bool hasResult);" FrameworkAlternate="aspnetcore-5.0" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.SignalR.Common</AssemblyName>
@@ -45,11 +48,13 @@
         <Parameter Name="hasResult" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="invocationId">To be added.</param>
-        <param name="error">To be added.</param>
-        <param name="result">To be added.</param>
-        <param name="hasResult">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="invocationId">The ID of the invocation that has completed.</param>
+        <param name="error">An optional error if the invocation failed.</param>
+        <param name="result">An optional result if the invocation returns a result.</param>
+        <param name="hasResult">Specifies whether the completion contains a result.</param>
+        <summary>
+            Constructs a <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" />.
+            </summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -76,9 +81,12 @@
         <Parameter Name="invocationId" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="invocationId">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="invocationId">The ID of the invocation that is being completed.</param>
+        <summary>
+            Constructs a <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" /> without an error or result.
+            This means the invocation was successful but there is no return value.
+            </summary>
+        <returns>The constructed <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -102,7 +110,9 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Optional error message if the invocation wasn't completed successfully. This must be null if there is a result.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -127,7 +137,9 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Specifies whether the completion contains a result.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -152,7 +164,10 @@
         <ReturnType>System.Object</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Optional result from the invocation. This must be null if there is an error.
+            This can also be null if there wasn't a result from the method invocation.
+            </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
       </Docs>
@@ -181,6 +196,7 @@
         <summary>To be added.</summary>
         <returns>To be added.</returns>
         <remarks>To be added.</remarks>
+        <inheritdoc />
       </Docs>
     </Member>
     <Member MemberName="WithError">
@@ -207,10 +223,12 @@
         <Parameter Name="error" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="invocationId">To be added.</param>
-        <param name="error">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="invocationId">The ID of the invocation that is being completed.</param>
+        <param name="error">The error that occurred during the invocation.</param>
+        <summary>
+            Constructs a <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" /> with an error.
+            </summary>
+        <returns>The constructed <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -238,10 +256,12 @@
         <Parameter Name="payload" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="invocationId">To be added.</param>
-        <param name="payload">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="invocationId">The ID of the invocation that is being completed.</param>
+        <param name="payload">The result from the invocation.</param>
+        <summary>
+            Constructs a <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" /> with a result.
+            </summary>
+        <returns>The constructed <see cref="T:Microsoft.AspNetCore.SignalR.Protocol.CompletionMessage" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

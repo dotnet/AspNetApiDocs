@@ -14,7 +14,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Represents the abstract base class from which all implementations of code groups must derive.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -35,10 +35,16 @@
         <Parameter Name="policy" Type="System.Security.Policy.PolicyStatement" />
       </Parameters>
       <Docs>
-        <param name="membershipCondition">To be added.</param>
-        <param name="policy">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="membershipCondition">A membership condition that tests evidence to determine whether this code group applies policy.</param>
+        <param name="policy">The policy statement for the code group in the form of a permission set and attributes to grant code that matches the membership condition.</param>
+        <summary>Initializes a new instance of <see cref="T:System.Security.Policy.CodeGroup" />.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="membershipCondition" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The type of the <paramref name="membershipCondition" /> parameter is not valid.  
+  
+ -or-  
+  
+ The type of the <paramref name="policy" /> parameter is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="AddChild">
@@ -60,9 +66,11 @@
         <Parameter Name="group" Type="System.Security.Policy.CodeGroup" />
       </Parameters>
       <Docs>
-        <param name="group">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="group">The code group to be added as a child. This new child code group is added to the end of the list.</param>
+        <summary>Adds a child code group to the current code group.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="group" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">The <paramref name="group" /> parameter is not a valid code group.</exception>
       </Docs>
     </Member>
     <Member MemberName="AttributeString">
@@ -81,8 +89,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets a string representation of the attributes of the policy statement for the code group.</summary>
+        <value>A string representation of the attributes of the policy statement for the code group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -102,9 +110,11 @@
         <ReturnType>System.Collections.IList</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets an ordered list of the child code groups of a code group.</summary>
+        <value>A list of child code groups.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">An attempt is made to set this property to <see langword="null" />.</exception>
+        <exception cref="T:System.ArgumentException">An attempt is made to set this property with a list of children that are not <see cref="T:System.Security.Policy.CodeGroup" /> objects.</exception>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -124,8 +134,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>When overridden in a derived class, makes a deep copy of the current code group.</summary>
+        <returns>An equivalent copy of the current code group, including its membership conditions and child code groups.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -149,9 +159,9 @@
         <Parameter Name="level" Type="System.Security.Policy.PolicyLevel" />
       </Parameters>
       <Docs>
-        <param name="element">To be added.</param>
-        <param name="level">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="element">The XML encoding to which to add the serialization.</param>
+        <param name="level">The policy level within which the code group exists.</param>
+        <summary>When overridden in a derived class, serializes properties and internal state specific to a derived code group and adds the serialization to the specified <see cref="T:System.Security.SecurityElement" />.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -171,8 +181,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the description of the code group.</summary>
+        <value>The description of the code group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -195,9 +205,10 @@
         <Parameter Name="o" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="o">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="o">The code group to compare with the current code group.</param>
+        <summary>Determines whether the specified code group is equivalent to the current code group.</summary>
+        <returns>
+          <see langword="true" /> if the specified code group is equivalent to the current code group; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -221,10 +232,12 @@
         <Parameter Name="compareChildren" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="cg">To be added.</param>
-        <param name="compareChildren">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="cg">The code group to compare with the current code group.</param>
+        <param name="compareChildren">
+          <see langword="true" /> to compare child code groups, as well; otherwise, <see langword="false" />.</param>
+        <summary>Determines whether the specified code group is equivalent to the current code group, checking the child code groups as well, if specified.</summary>
+        <returns>
+          <see langword="true" /> if the specified code group is equivalent to the current code group; otherwise, <see langword="false" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -247,9 +260,10 @@
         <Parameter Name="e" Type="System.Security.SecurityElement" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="e">The XML encoding to use to reconstruct the security object.</param>
+        <summary>Reconstructs a security object with a given state from an XML encoding.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="e" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="FromXml">
@@ -272,10 +286,11 @@
         <Parameter Name="level" Type="System.Security.Policy.PolicyLevel" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <param name="level">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="e">The XML encoding to use to reconstruct the security object.</param>
+        <param name="level">The policy level within which the code group exists.</param>
+        <summary>Reconstructs a security object with a given state and policy level from an XML encoding.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="e" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetHashCode">
@@ -295,8 +310,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Gets the hash code of the current code group.</summary>
+        <returns>The hash code of the current code group.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -316,9 +331,10 @@
         <ReturnType>System.Security.Policy.IMembershipCondition</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the code group's membership condition.</summary>
+        <value>The membership condition that determines to which evidence the code group is applicable.</value>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">An attempt is made to set this parameter to <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="MergeLogic">
@@ -337,8 +353,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>When overridden in a derived class, gets the merge logic for the code group.</summary>
+        <value>A description of the merge logic for the code group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -358,8 +374,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the name of the code group.</summary>
+        <value>The name of the code group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -383,9 +399,9 @@
         <Parameter Name="level" Type="System.Security.Policy.PolicyLevel" />
       </Parameters>
       <Docs>
-        <param name="e">To be added.</param>
-        <param name="level">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="e">The XML encoding to use to reconstruct the security object.</param>
+        <param name="level">The policy level within which the code group exists.</param>
+        <summary>When overridden in a derived class, reconstructs properties and internal state specific to a derived code group from the specified <see cref="T:System.Security.SecurityElement" />.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -405,8 +421,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the name of the named permission set for the code group.</summary>
+        <value>The name of a named permission set of the policy level.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -426,8 +442,8 @@
         <ReturnType>System.Security.Policy.PolicyStatement</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the policy statement associated with the code group.</summary>
+        <value>The policy statement for the code group.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -450,9 +466,10 @@
         <Parameter Name="group" Type="System.Security.Policy.CodeGroup" />
       </Parameters>
       <Docs>
-        <param name="group">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="group">The code group to be removed as a child.</param>
+        <summary>Removes the specified child code group.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The <paramref name="group" /> parameter is not an immediate child code group of the current code group.</exception>
       </Docs>
     </Member>
     <Member MemberName="Resolve">
@@ -474,9 +491,9 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidence">The evidence for the assembly.</param>
+        <summary>When overridden in a derived class, resolves policy for the code group and its descendants for a set of evidence.</summary>
+        <returns>A policy statement that consists of the permissions granted by the code group with optional attributes, or <see langword="null" /> if the code group does not apply (the membership condition does not match the specified evidence).</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -499,9 +516,9 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidence">The evidence for the assembly.</param>
+        <summary>When overridden in a derived class, resolves matching code groups.</summary>
+        <returns>A <see cref="T:System.Security.Policy.CodeGroup" /> that is the root of the tree of matching code groups.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -522,8 +539,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Creates an XML encoding of the security object and its current state.</summary>
+        <returns>An XML encoding of the security object, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -546,9 +563,9 @@
         <Parameter Name="level" Type="System.Security.Policy.PolicyLevel" />
       </Parameters>
       <Docs>
-        <param name="level">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="level">The policy level within which the code group exists.</param>
+        <summary>Creates an XML encoding of the security object, its current state, and the policy level within which the code exists.</summary>
+        <returns>An XML encoding of the security object, including any state information.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>

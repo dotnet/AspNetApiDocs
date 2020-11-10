@@ -63,9 +63,9 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Limits the size of the header compression table, in octets, the HPACK decoder on the server can use.
+            Limits the size of the header compression tables, in octets, the HPACK encoder and decoder on the server can use.
             <para>
-            Value must be greater than 0, defaults to 4096
+            Value must be greater than or equal to 0, defaults to 4096
             </para></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -122,6 +122,64 @@
             Indicates how much request body data the server is willing to receive and buffer at a time per stream.
             Note connections are also limited by <see cref="P:Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.InitialConnectionWindowSize" /><para>
             Value must be greater than or equal to 65,535 and less than 2^31, defaults to 96 kb.
+            </para></summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="KeepAlivePingDelay">
+      <MemberSignature Language="C#" Value="public TimeSpan KeepAlivePingDelay { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan KeepAlivePingDelay" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingDelay" />
+      <MemberSignature Language="VB.NET" Value="Public Property KeepAlivePingDelay As TimeSpan" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TimeSpan KeepAlivePingDelay { TimeSpan get(); void set(TimeSpan value); };" />
+      <MemberSignature Language="F#" Value="member this.KeepAlivePingDelay : TimeSpan with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingDelay" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Core</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the keep alive ping delay. The server will send a keep alive ping to the client if it
+            doesn't receive any frames on a connection for this period of time. This property is used together with
+            <see cref="P:Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingTimeout" /> to close broken connections.
+            <para>
+            Delay value must be greater than or equal to 1 second. Set to <see cref="F:System.TimeSpan.MaxValue" /> to
+            disable the keep alive ping.
+            Defaults to <see cref="F:System.TimeSpan.MaxValue" />.
+            </para></summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="KeepAlivePingTimeout">
+      <MemberSignature Language="C#" Value="public TimeSpan KeepAlivePingTimeout { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.TimeSpan KeepAlivePingTimeout" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingTimeout" />
+      <MemberSignature Language="VB.NET" Value="Public Property KeepAlivePingTimeout As TimeSpan" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property TimeSpan KeepAlivePingTimeout { TimeSpan get(); void set(TimeSpan value); };" />
+      <MemberSignature Language="F#" Value="member this.KeepAlivePingTimeout : TimeSpan with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingTimeout" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Core</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.TimeSpan</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the keep alive ping timeout. Keep alive pings are sent when a period of inactivity exceeds
+            the configured <see cref="P:Microsoft.AspNetCore.Server.Kestrel.Core.Http2Limits.KeepAlivePingDelay" /> value. The server will close the connection if it
+            doesn't receive any frames within the timeout.
+            <para>
+            Timeout must be greater than or equal to 1 second. Set to <see cref="F:System.TimeSpan.MaxValue" /> to
+            disable the keep alive ping timeout.
+            Defaults to 20 seconds.
             </para></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>

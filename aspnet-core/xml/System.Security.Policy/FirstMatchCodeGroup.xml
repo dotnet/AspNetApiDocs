@@ -20,7 +20,7 @@
     </Attribute>
   </Attributes>
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Allows security policy to be defined by the union of the policy statement of a code group and that of the first child code group that matches. This class cannot be inherited.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -41,10 +41,15 @@
         <Parameter Name="policy" Type="System.Security.Policy.PolicyStatement" />
       </Parameters>
       <Docs>
-        <param name="membershipCondition">To be added.</param>
-        <param name="policy">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="membershipCondition">A membership condition that tests evidence to determine whether this code group applies policy.</param>
+        <param name="policy">The policy statement for the code group in the form of a permission set and attributes to grant code that matches the membership condition.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Policy.FirstMatchCodeGroup" /> class.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentException">The type of the <paramref name="membershipCondition" /> parameter is not valid.  
+  
+ -or-  
+  
+ The type of the <paramref name="policy" /> parameter is not valid.</exception>
       </Docs>
     </Member>
     <Member MemberName="Copy">
@@ -64,8 +69,8 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <summary>Makes a deep copy of the code group.</summary>
+        <returns>An equivalent copy of the code group, including its membership conditions and child code groups.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -85,8 +90,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets the merge logic.</summary>
+        <value>The string "First Match".</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -109,10 +114,12 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidence">The evidence for the assembly.</param>
+        <summary>Resolves policy for the code group and its descendants for a set of evidence.</summary>
+        <returns>A policy statement consisting of the permissions granted by the code group with optional attributes, or <see langword="null" /> if the code group does not apply (the membership condition does not match the specified evidence).</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="evidence" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Policy.PolicyException">More than one code group (including the parent code group and any child code groups) is marked <see cref="F:System.Security.Policy.PolicyStatementAttribute.Exclusive" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="ResolveMatchingCodeGroups">
@@ -134,10 +141,11 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="evidence">The evidence for the assembly.</param>
+        <summary>Resolves matching code groups.</summary>
+        <returns>A <see cref="T:System.Security.Policy.CodeGroup" /> that is the root of the tree of matching code groups.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The <paramref name="evidence" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
   </Members>

@@ -59,9 +59,13 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            The maximum length of the pending connection queue.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to 512.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="IOQueueCount">
@@ -166,6 +170,35 @@
             </remarks>
       </Docs>
     </Member>
+    <Member MemberName="UnsafePreferInlineScheduling">
+      <MemberSignature Language="C#" Value="public bool UnsafePreferInlineScheduling { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UnsafePreferInlineScheduling" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.UnsafePreferInlineScheduling" />
+      <MemberSignature Language="VB.NET" Value="Public Property UnsafePreferInlineScheduling As Boolean" />
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; property bool UnsafePreferInlineScheduling { bool get(); void set(bool value); };" />
+      <MemberSignature Language="F#" Value="member this.UnsafePreferInlineScheduling : bool with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.UnsafePreferInlineScheduling" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets</AssemblyName>
+        <AssemblyVersion>5.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Inline application and transport continuations instead of dispatching to the threadpool.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            This will run application code on the IO thread which is why this is unsafe.
+            It is recommended to set the DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS environment variable to '1' when using this setting to also inline the completions
+            at the runtime layer as well.
+            This setting can make performance worse if there is expensive work that will end up holding onto the IO thread for longer than needed.
+            Test to make sure this setting helps performance.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="WaitForDataBeforeAllocatingBuffer">
       <MemberSignature Language="C#" Value="public bool WaitForDataBeforeAllocatingBuffer { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool WaitForDataBeforeAllocatingBuffer" />
@@ -182,9 +215,13 @@
         <ReturnType>System.Boolean</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>
+            Wait until there is data available to allocate a buffer. Setting this to false can increase throughput at the cost of increased memory usage.
+            </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to true.
+            </remarks>
       </Docs>
     </Member>
   </Members>

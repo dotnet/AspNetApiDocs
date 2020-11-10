@@ -14,7 +14,7 @@
   </Base>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>Represents the process model for implementing XML encryption.</summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
@@ -31,7 +31,7 @@
       </AssemblyInfo>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -51,8 +51,8 @@
         <Parameter Name="document" Type="System.Xml.XmlDocument" />
       </Parameters>
       <Docs>
-        <param name="document">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="document">An <see cref="T:System.Xml.XmlDocument" /> object used to initialize the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> object.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class using the specified XML document.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -73,9 +73,9 @@
         <Parameter Name="evidence" Type="System.Security.Policy.Evidence" />
       </Parameters>
       <Docs>
-        <param name="document">To be added.</param>
-        <param name="evidence">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="document">An <see cref="T:System.Xml.XmlDocument" /> object used to initialize the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> object.</param>
+        <param name="evidence">An <see cref="T:System.Security.Policy.Evidence" /> object associated with the <see cref="T:System.Xml.XmlDocument" /> object.</param>
+        <summary>Initializes a new instance of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class using the specified XML document and evidence.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -99,10 +99,16 @@
         <Parameter Name="keyObject" Type="System.Object" />
       </Parameters>
       <Docs>
-        <param name="keyName">To be added.</param>
-        <param name="keyObject">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="keyName">The name to map to <paramref name="keyObject" />.</param>
+        <param name="keyObject">The symmetric key to map to <paramref name="keyName" />.</param>
+        <summary>Defines a mapping between a key name and a symmetric key or an asymmetric key.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="keyName" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="keyObject" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="keyObject" /> parameter is not an RSA algorithm or a symmetric key.</exception>
       </Docs>
     </Member>
     <Member MemberName="ClearKeyNameMappings">
@@ -122,7 +128,7 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Resets all key name mapping.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -146,11 +152,16 @@
         <Parameter Name="symmetricAlgorithm" Type="System.Security.Cryptography.SymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="encryptedData">To be added.</param>
-        <param name="symmetricAlgorithm">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="encryptedData">The data to decrypt.</param>
+        <param name="symmetricAlgorithm">The symmetric key used to decrypt <paramref name="encryptedData" />.</param>
+        <summary>Decrypts an <see langword="&lt;EncryptedData&gt;" /> element using the specified symmetric algorithm.</summary>
+        <returns>A byte array that contains the raw decrypted plain text.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="encryptedData" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithm" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="DecryptDocument">
@@ -170,8 +181,9 @@
       </ReturnValue>
       <Parameters />
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Decrypts all <see langword="&lt;EncryptedData&gt;" /> elements of the XML document that were specified during initialization of the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> class.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The cryptographic key used to decrypt the document was not found.</exception>
       </Docs>
     </Member>
     <Member MemberName="DecryptEncryptedKey">
@@ -193,10 +205,12 @@
         <Parameter Name="encryptedKey" Type="System.Security.Cryptography.Xml.EncryptedKey" />
       </Parameters>
       <Docs>
-        <param name="encryptedKey">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="encryptedKey">The <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" /> object that contains the key to retrieve.</param>
+        <summary>Determines the key represented by the <see cref="T:System.Security.Cryptography.Xml.EncryptedKey" /> element.</summary>
+        <returns>A byte array that contains the key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="encryptedKey" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="encryptedKey" /> parameter is not the Triple DES Key Wrap algorithm or the Advanced Encryption Standard (AES) Key Wrap algorithm (also called Rijndael).</exception>
       </Docs>
     </Member>
     <Member MemberName="DecryptKey">
@@ -219,11 +233,17 @@
         <Parameter Name="symmetricAlgorithm" Type="System.Security.Cryptography.SymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="keyData">To be added.</param>
-        <param name="symmetricAlgorithm">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyData">An array of bytes that represents an encrypted <see langword="&lt;EncryptedKey&gt;" /> element.</param>
+        <param name="symmetricAlgorithm">The symmetric key used to decrypt <paramref name="keyData" />.</param>
+        <summary>Decrypts an <see langword="&lt;EncryptedKey&gt;" /> element using a symmetric algorithm.</summary>
+        <returns>A byte array that contains the plain text key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="keyData" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithm" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="symmetricAlgorithm" /> element is not the Triple DES Key Wrap algorithm or the Advanced Encryption Standard (AES) Key Wrap algorithm (also called Rijndael).</exception>
       </Docs>
     </Member>
     <Member MemberName="DecryptKey">
@@ -247,12 +267,17 @@
         <Parameter Name="useOAEP" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="keyData">To be added.</param>
-        <param name="rsa">To be added.</param>
-        <param name="useOAEP">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyData">An array of bytes that represents an encrypted <see langword="&lt;EncryptedKey&gt;" /> element.</param>
+        <param name="rsa">The asymmetric key used to decrypt <paramref name="keyData" />.</param>
+        <param name="useOAEP">A value that specifies whether to use Optimal Asymmetric Encryption Padding (OAEP).</param>
+        <summary>Decrypts an <see langword="&lt;EncryptedKey&gt;" /> element using an asymmetric algorithm.</summary>
+        <returns>A byte array that contains the plain text key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="keyData" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="rsa" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="DocumentEvidence">
@@ -271,8 +296,8 @@
         <ReturnType>System.Security.Policy.Evidence</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the evidence of the <see cref="T:System.Xml.XmlDocument" /> object from which the <see cref="T:System.Security.Cryptography.Xml.EncryptedXml" /> object is constructed.</summary>
+        <value>An <see cref="T:System.Security.Policy.Evidence" /> object.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -292,8 +317,8 @@
         <ReturnType>System.Text.Encoding</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the encoding used for XML encryption.</summary>
+        <value>An <see cref="T:System.Text.Encoding" /> object.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -317,11 +342,17 @@
         <Parameter Name="certificate" Type="System.Security.Cryptography.X509Certificates.X509Certificate2" />
       </Parameters>
       <Docs>
-        <param name="inputElement">To be added.</param>
-        <param name="certificate">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="inputElement">The XML element to encrypt.</param>
+        <param name="certificate">The X.509 certificate to use for encryption.</param>
+        <summary>Encrypts the outer XML of an element using the specified X.509 certificate.</summary>
+        <returns>An <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> element that represents the encrypted XML data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="inputElement" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="certificate" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.NotSupportedException">The value of the <paramref name="certificate" /> parameter does not represent an RSA key algorithm.</exception>
       </Docs>
     </Member>
     <Member MemberName="Encrypt">
@@ -344,11 +375,21 @@
         <Parameter Name="keyName" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="inputElement">To be added.</param>
-        <param name="keyName">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="inputElement">The XML element to encrypt.</param>
+        <param name="keyName">A key name that can be found in the key mapping table.</param>
+        <summary>Encrypts the outer XML of an element using the specified key in the key mapping table.</summary>
+        <returns>An <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object that represents the encrypted XML data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="inputElement" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="keyName" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="keyName" /> parameter does not match a registered key name pair.  
+  
+ -or-  
+  
+ The cryptographic key described by the <paramref name="keyName" /> parameter is not supported.</exception>
       </Docs>
     </Member>
     <Member MemberName="EncryptData">
@@ -371,11 +412,17 @@
         <Parameter Name="symmetricAlgorithm" Type="System.Security.Cryptography.SymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="plaintext">To be added.</param>
-        <param name="symmetricAlgorithm">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="plaintext">The data to encrypt.</param>
+        <param name="symmetricAlgorithm">The symmetric algorithm to use for encryption.</param>
+        <summary>Encrypts data in the specified byte array using the specified symmetric algorithm.</summary>
+        <returns>A byte array of encrypted data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="plaintext" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithm" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The data could not be encrypted using the specified parameters.</exception>
       </Docs>
     </Member>
     <Member MemberName="EncryptData">
@@ -399,12 +446,18 @@
         <Parameter Name="content" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="inputElement">To be added.</param>
-        <param name="symmetricAlgorithm">To be added.</param>
-        <param name="content">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="inputElement">The element or its contents to encrypt.</param>
+        <param name="symmetricAlgorithm">The symmetric algorithm to use for encryption.</param>
+        <param name="content">
+          <see langword="true" /> to encrypt only the contents of the element; <see langword="false" /> to encrypt the entire element.</param>
+        <summary>Encrypts the specified element or its contents using the specified symmetric algorithm.</summary>
+        <returns>A byte array that contains the encrypted data.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="inputElement" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithm" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="EncryptKey">
@@ -427,11 +480,17 @@
         <Parameter Name="symmetricAlgorithm" Type="System.Security.Cryptography.SymmetricAlgorithm" />
       </Parameters>
       <Docs>
-        <param name="keyData">To be added.</param>
-        <param name="symmetricAlgorithm">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyData">The key to encrypt.</param>
+        <param name="symmetricAlgorithm">The symmetric key used to encrypt <paramref name="keyData" />.</param>
+        <summary>Encrypts a key using a symmetric algorithm that a recipient uses to decrypt an <see langword="&lt;EncryptedData&gt;" /> element.</summary>
+        <returns>A byte array that represents the encrypted value of the <paramref name="keyData" /> parameter.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="keyData" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithm" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="symmetricAlgorithm" /> parameter is not the Triple DES Key Wrap algorithm or the Advanced Encryption Standard (AES) Key Wrap algorithm (also called Rijndael).</exception>
       </Docs>
     </Member>
     <Member MemberName="EncryptKey">
@@ -455,12 +514,17 @@
         <Parameter Name="useOAEP" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="keyData">To be added.</param>
-        <param name="rsa">To be added.</param>
-        <param name="useOAEP">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="keyData">The key to encrypt.</param>
+        <param name="rsa">The asymmetric key used to encrypt <paramref name="keyData" />.</param>
+        <param name="useOAEP">A value that specifies whether to use Optimal Asymmetric Encryption Padding (OAEP).</param>
+        <summary>Encrypts the key that a recipient uses to decrypt an <see langword="&lt;EncryptedData&gt;" /> element.</summary>
+        <returns>A byte array that represents the encrypted value of the <paramref name="keyData" /> parameter.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="keyData" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="rsa" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetDecryptionIV">
@@ -483,11 +547,17 @@
         <Parameter Name="symmetricAlgorithmUri" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="encryptedData">To be added.</param>
-        <param name="symmetricAlgorithmUri">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="encryptedData">The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object that contains the initialization vector (IV) to retrieve.</param>
+        <param name="symmetricAlgorithmUri">The Uniform Resource Identifier (URI) that describes the cryptographic algorithm associated with the <paramref name="encryptedData" /> value.</param>
+        <summary>Retrieves the decryption initialization vector (IV) from an <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object.</summary>
+        <returns>A byte array that contains the decryption initialization vector (IV).</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="encryptedData" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The value of the <paramref name="encryptedData" /> parameter has an <see cref="P:System.Security.Cryptography.Xml.EncryptedType.EncryptionMethod" /> property that is null.  
+  
+ -or-  
+  
+ The value of the <paramref name="symmetricAlgorithmUrisymAlgUri" /> parameter is not a supported algorithm.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetDecryptionKey">
@@ -510,11 +580,17 @@
         <Parameter Name="symmetricAlgorithmUri" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="encryptedData">To be added.</param>
-        <param name="symmetricAlgorithmUri">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="encryptedData">The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object that contains the decryption key to retrieve.</param>
+        <param name="symmetricAlgorithmUri">The size of the decryption key to retrieve.</param>
+        <summary>Retrieves the decryption key from the specified <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object.</summary>
+        <returns>A <see cref="T:System.Security.Cryptography.SymmetricAlgorithm" /> object associated with the decryption key.</returns>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="encryptedData" /> parameter is <see langword="null" />.</exception>
+        <exception cref="T:System.Security.Cryptography.CryptographicException">The encryptedData parameter has an <see cref="P:System.Security.Cryptography.Xml.EncryptedType.EncryptionMethod" /> property that is null.  
+  
+ -or-  
+  
+ The encrypted key cannot be retrieved using the specified parameters.</exception>
       </Docs>
     </Member>
     <Member MemberName="GetIdElement">
@@ -537,10 +613,10 @@
         <Parameter Name="idValue" Type="System.String" />
       </Parameters>
       <Docs>
-        <param name="document">To be added.</param>
-        <param name="idValue">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="document">An <see cref="T:System.Xml.XmlDocument" /> object that contains an element with an ID value.</param>
+        <param name="idValue">A string that represents the ID value.</param>
+        <summary>Determines how to resolve internal Uniform Resource Identifier (URI) references.</summary>
+        <returns>An <see cref="T:System.Xml.XmlElement" /> object that contains an ID indicating how internal Uniform Resource Identifiers (URIs) are to be resolved.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -560,8 +636,8 @@
         <ReturnType>System.Security.Cryptography.CipherMode</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the cipher mode used for XML encryption.</summary>
+        <value>One of the <see cref="T:System.Security.Cryptography.CipherMode" /> values.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -581,8 +657,8 @@
         <ReturnType>System.Security.Cryptography.PaddingMode</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the padding mode used for XML encryption.</summary>
+        <value>One of the <see cref="T:System.Security.Cryptography.PaddingMode" /> values that specifies the type of padding used for encryption.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -602,8 +678,8 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the recipient of the encrypted key information.</summary>
+        <value>The recipient of the encrypted key information.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -627,10 +703,15 @@
         <Parameter Name="decryptedData" Type="System.Byte[]" />
       </Parameters>
       <Docs>
-        <param name="inputElement">To be added.</param>
-        <param name="decryptedData">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="inputElement">The <see langword="&lt;EncryptedData&gt;" /> element to replace.</param>
+        <param name="decryptedData">The decrypted data to replace <paramref name="inputElement" /> with.</param>
+        <summary>Replaces an <see langword="&lt;EncryptedData&gt;" /> element with a specified decrypted sequence of bytes.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="inputElement" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="decryptedData" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="ReplaceElement">
@@ -654,11 +735,17 @@
         <Parameter Name="content" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="inputElement">To be added.</param>
-        <param name="encryptedData">To be added.</param>
-        <param name="content">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="inputElement">The element to replace with an <see langword="&lt;EncryptedData&gt;" /> element.</param>
+        <param name="encryptedData">The <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object to replace the <paramref name="inputElement" /> parameter with.</param>
+        <param name="content">
+          <see langword="true" /> to replace only the contents of the element; <see langword="false" /> to replace the entire element.</param>
+        <summary>Replaces the specified element with the specified <see cref="T:System.Security.Cryptography.Xml.EncryptedData" /> object.</summary>
         <remarks>To be added.</remarks>
+        <exception cref="T:System.ArgumentNullException">The value of the <paramref name="inputElement" /> parameter is <see langword="null" />.  
+  
+ -or-  
+  
+ The value of the <paramref name="encryptedData" /> parameter is <see langword="null" />.</exception>
       </Docs>
     </Member>
     <Member MemberName="Resolver">
@@ -677,8 +764,8 @@
         <ReturnType>System.Xml.XmlResolver</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the <see cref="T:System.Xml.XmlResolver" /> object used by the Document Object Model (DOM) to resolve external XML references.</summary>
+        <value>An <see cref="T:System.Xml.XmlResolver" /> object.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -698,8 +785,8 @@
         <ReturnType>System.Int32</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
-        <value>To be added.</value>
+        <summary>Gets or sets the XML digital signature recursion depth to prevent infinite recursion and stack overflow. This might happen if the digital signature XML contains the URI which then points back to the original XML.</summary>
+        <value>Returns <see cref="T:System.Int32" />.</value>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -719,7 +806,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 128-bit Advanced Encryption Standard (AES) Key Wrap algorithm (also known as the Rijndael Key Wrap algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -739,7 +826,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 128-bit Advanced Encryption Standard (AES) algorithm (also known as the Rijndael algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -759,7 +846,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 192-bit Advanced Encryption Standard (AES) Key Wrap algorithm (also known as the Rijndael Key Wrap algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -779,7 +866,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 192-bit Advanced Encryption Standard (AES) algorithm (also known as the Rijndael algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -799,7 +886,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 256-bit Advanced Encryption Standard (AES) Key Wrap algorithm (also known as the Rijndael Key Wrap algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -819,7 +906,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the 256-bit Advanced Encryption Standard (AES) algorithm (also known as the Rijndael algorithm). This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -839,7 +926,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the Digital Encryption Standard (DES) algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -859,7 +946,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for XML encryption element content. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -879,7 +966,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for an XML encryption element. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -899,7 +986,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the XML encryption <see langword="&lt;EncryptedKey&gt;" /> element. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -919,7 +1006,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for XML encryption syntax and processing. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -939,7 +1026,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the RSA Public Key Cryptography Standard (PKCS) Version 1.5 algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -959,7 +1046,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the RSA Optimal Asymmetric Encryption Padding (OAEP) encryption algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -979,7 +1066,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the SHA-256 algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -999,7 +1086,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the SHA-512 algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1019,7 +1106,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the TRIPLEDES key wrap algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -1039,7 +1126,7 @@
         <ReturnType>System.String</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>To be added.</summary>
+        <summary>Represents the namespace Uniform Resource Identifier (URI) for the Triple DES algorithm. This field is constant.</summary>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
