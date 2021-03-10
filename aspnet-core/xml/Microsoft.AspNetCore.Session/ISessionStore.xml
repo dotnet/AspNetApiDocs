@@ -1,9 +1,9 @@
 <Type Name="ISessionStore" FullName="Microsoft.AspNetCore.Session.ISessionStore">
+  <TypeSignature Language="C++ CLI" Value="public interface class ISessionStore" />
   <TypeSignature Language="C#" Value="public interface ISessionStore" />
   <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract ISessionStore" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Session.ISessionStore" />
   <TypeSignature Language="VB.NET" Value="Public Interface ISessionStore" />
-  <TypeSignature Language="C++ CLI" Value="public interface class ISessionStore" />
   <TypeSignature Language="F#" Value="type ISessionStore = interface" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Session</AssemblyName>
@@ -18,16 +18,18 @@
   </AssemblyInfo>
   <Interfaces />
   <Docs>
-    <summary>To be added.</summary>
+    <summary>
+            Storage for sessions that maintain user data while the user browses a web application.
+            </summary>
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
     <Member MemberName="Create">
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::AspNetCore::Http::ISession ^ Create(System::String ^ sessionKey, TimeSpan idleTimeout, Func&lt;bool&gt; ^ tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Http.ISession Create (string sessionKey, TimeSpan idleTimeout, Func&lt;bool&gt; tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.AspNetCore.Http.ISession Create(string sessionKey, valuetype System.TimeSpan idleTimeout, class System.Func`1&lt;bool&gt; tryEstablishSession, bool isNewSessionKey) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Session.ISessionStore.Create(System.String,System.TimeSpan,System.Func{System.Boolean},System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function Create (sessionKey As String, idleTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), isNewSessionKey As Boolean) As ISession" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::AspNetCore::Http::ISession ^ Create(System::String ^ sessionKey, TimeSpan idleTimeout, Func&lt;bool&gt; ^ tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="F#" Value="abstract member Create : string * TimeSpan * Func&lt;bool&gt; * bool -&gt; Microsoft.AspNetCore.Http.ISession" Usage="iSessionStore.Create (sessionKey, idleTimeout, tryEstablishSession, isNewSessionKey)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -55,11 +57,11 @@
       </Docs>
     </Member>
     <Member MemberName="Create">
+      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::AspNetCore::Http::ISession ^ Create(System::String ^ sessionKey, TimeSpan idleTimeout, TimeSpan ioTimeout, Func&lt;bool&gt; ^ tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Http.ISession Create (string sessionKey, TimeSpan idleTimeout, TimeSpan ioTimeout, Func&lt;bool&gt; tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class Microsoft.AspNetCore.Http.ISession Create(string sessionKey, valuetype System.TimeSpan idleTimeout, valuetype System.TimeSpan ioTimeout, class System.Func`1&lt;bool&gt; tryEstablishSession, bool isNewSessionKey) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Session.ISessionStore.Create(System.String,System.TimeSpan,System.TimeSpan,System.Func{System.Boolean},System.Boolean)" />
       <MemberSignature Language="VB.NET" Value="Public Function Create (sessionKey As String, idleTimeout As TimeSpan, ioTimeout As TimeSpan, tryEstablishSession As Func(Of Boolean), isNewSessionKey As Boolean) As ISession" />
-      <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::AspNetCore::Http::ISession ^ Create(System::String ^ sessionKey, TimeSpan idleTimeout, TimeSpan ioTimeout, Func&lt;bool&gt; ^ tryEstablishSession, bool isNewSessionKey);" />
       <MemberSignature Language="F#" Value="abstract member Create : string * TimeSpan * TimeSpan * Func&lt;bool&gt; * bool -&gt; Microsoft.AspNetCore.Http.ISession" Usage="iSessionStore.Create (sessionKey, idleTimeout, ioTimeout, tryEstablishSession, isNewSessionKey)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
@@ -82,13 +84,24 @@
         <Parameter Name="isNewSessionKey" Type="System.Boolean" Index="4" FrameworkAlternate="aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0" />
       </Parameters>
       <Docs>
-        <param name="sessionKey">To be added.</param>
-        <param name="idleTimeout">To be added.</param>
-        <param name="ioTimeout">To be added.</param>
-        <param name="tryEstablishSession">To be added.</param>
-        <param name="isNewSessionKey">To be added.</param>
-        <summary>To be added.</summary>
-        <returns>To be added.</returns>
+        <param name="sessionKey">A unique key used to lookup the session.</param>
+        <param name="idleTimeout">How long the session can be inactive (e.g. not accessed) before it will expire.</param>
+        <param name="ioTimeout">
+            The maximum amount of time <see cref="M:Microsoft.AspNetCore.Http.ISession.LoadAsync(System.Threading.CancellationToken)" /> and
+            <see cref="M:Microsoft.AspNetCore.Http.ISession.CommitAsync(System.Threading.CancellationToken)" /> are allowed take.
+            </param>
+        <param name="tryEstablishSession">
+            A callback invoked during <see cref="M:Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])" /> to verify that modifying the session is currently valid.
+            If the callback returns <see langword="false" />, <see cref="M:Microsoft.AspNetCore.Http.ISession.Set(System.String,System.Byte[])" /> should throw an <see cref="T:System.InvalidOperationException" />.
+            <see cref="T:Microsoft.AspNetCore.Session.SessionMiddleware" /> provides a callback that returns <see langword="false" /> if the session was not established
+            prior to sending the response.
+            </param>
+        <param name="isNewSessionKey">
+          <see langword="true" /> if establishing a new session; <see langword="false" /> if resuming a session.</param>
+        <summary>
+            Create a new or resume an <see cref="T:Microsoft.AspNetCore.Http.ISession" />.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Http.ISession" /> that was created or resumed.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
