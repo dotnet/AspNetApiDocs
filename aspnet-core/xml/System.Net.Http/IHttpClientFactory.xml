@@ -56,8 +56,12 @@
         <remarks>
           <para>
             Each call to <see cref="M:System.Net.Http.IHttpClientFactory.CreateClient(System.String)" /> is guaranteed to return a new <see cref="T:System.Net.Http.HttpClient" />
-            instance. It is generally not necessary to dispose of the <see cref="T:System.Net.Http.HttpClient" /> as the
-            <see cref="T:System.Net.Http.IHttpClientFactory" /> tracks and disposes resources used by the <see cref="T:System.Net.Http.HttpClient" />.
+            instance. Callers may cache the returned <see cref="T:System.Net.Http.HttpClient" /> instance indefinitely or surround
+            its use in a <langword>using</langword> block to dispose it when desired.
+            </para>
+          <para>
+            The default <see cref="T:System.Net.Http.IHttpClientFactory" /> implementation may cache the underlying
+            <see cref="T:System.Net.Http.HttpMessageHandler" /> instances to improve performance.
             </para>
           <para>
             Callers are also free to mutate the returned <see cref="T:System.Net.Http.HttpClient" /> instance's public properties
