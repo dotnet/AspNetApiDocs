@@ -1,9 +1,9 @@
 <Type Name="WebViewManager" FullName="Microsoft.AspNetCore.Components.WebView.WebViewManager">
-  <TypeSignature Language="C#" Value="public abstract class WebViewManager : IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit WebViewManager extends System.Object implements class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public abstract class WebViewManager : IAsyncDisposable" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit WebViewManager extends System.Object implements class System.IAsyncDisposable" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Components.WebView.WebViewManager" />
-  <TypeSignature Language="VB.NET" Value="Public MustInherit Class WebViewManager&#xA;Implements IDisposable" />
-  <TypeSignature Language="F#" Value="type WebViewManager = class&#xA;    interface IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class WebViewManager&#xA;Implements IAsyncDisposable" />
+  <TypeSignature Language="F#" Value="type WebViewManager = class&#xA;    interface IAsyncDisposable" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Components.WebView</AssemblyName>
     <AssemblyVersion>6.0.0.0</AssemblyVersion>
@@ -13,7 +13,7 @@
   </Base>
   <Interfaces>
     <Interface>
-      <InterfaceName>System.IDisposable</InterfaceName>
+      <InterfaceName>System.IAsyncDisposable</InterfaceName>
     </Interface>
   </Interfaces>
   <Docs>
@@ -26,11 +26,11 @@
   </Docs>
   <Members>
     <Member MemberName=".ctor">
-      <MemberSignature Language="C#" Value="public WebViewManager (IServiceProvider provider, Microsoft.AspNetCore.Components.Dispatcher dispatcher, Uri appBaseUri, Microsoft.Extensions.FileProviders.IFileProvider fileProvider, string hostPageRelativePath);" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IServiceProvider provider, class Microsoft.AspNetCore.Components.Dispatcher dispatcher, class System.Uri appBaseUri, class Microsoft.Extensions.FileProviders.IFileProvider fileProvider, string hostPageRelativePath) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.#ctor(System.IServiceProvider,Microsoft.AspNetCore.Components.Dispatcher,System.Uri,Microsoft.Extensions.FileProviders.IFileProvider,System.String)" />
-      <MemberSignature Language="VB.NET" Value="Public Sub New (provider As IServiceProvider, dispatcher As Dispatcher, appBaseUri As Uri, fileProvider As IFileProvider, hostPageRelativePath As String)" />
-      <MemberSignature Language="F#" Value="new Microsoft.AspNetCore.Components.WebView.WebViewManager : IServiceProvider * Microsoft.AspNetCore.Components.Dispatcher * Uri * Microsoft.Extensions.FileProviders.IFileProvider * string -&gt; Microsoft.AspNetCore.Components.WebView.WebViewManager" Usage="new Microsoft.AspNetCore.Components.WebView.WebViewManager (provider, dispatcher, appBaseUri, fileProvider, hostPageRelativePath)" />
+      <MemberSignature Language="C#" Value="public WebViewManager (IServiceProvider provider, Microsoft.AspNetCore.Components.Dispatcher dispatcher, Uri appBaseUri, Microsoft.Extensions.FileProviders.IFileProvider fileProvider, Microsoft.AspNetCore.Components.Web.JSComponentConfigurationStore jsComponents, string hostPageRelativePath);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig specialname rtspecialname instance void .ctor(class System.IServiceProvider provider, class Microsoft.AspNetCore.Components.Dispatcher dispatcher, class System.Uri appBaseUri, class Microsoft.Extensions.FileProviders.IFileProvider fileProvider, class Microsoft.AspNetCore.Components.Web.JSComponentConfigurationStore jsComponents, string hostPageRelativePath) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.#ctor(System.IServiceProvider,Microsoft.AspNetCore.Components.Dispatcher,System.Uri,Microsoft.Extensions.FileProviders.IFileProvider,Microsoft.AspNetCore.Components.Web.JSComponentConfigurationStore,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub New (provider As IServiceProvider, dispatcher As Dispatcher, appBaseUri As Uri, fileProvider As IFileProvider, jsComponents As JSComponentConfigurationStore, hostPageRelativePath As String)" />
+      <MemberSignature Language="F#" Value="new Microsoft.AspNetCore.Components.WebView.WebViewManager : IServiceProvider * Microsoft.AspNetCore.Components.Dispatcher * Uri * Microsoft.Extensions.FileProviders.IFileProvider * Microsoft.AspNetCore.Components.Web.JSComponentConfigurationStore * string -&gt; Microsoft.AspNetCore.Components.WebView.WebViewManager" Usage="new Microsoft.AspNetCore.Components.WebView.WebViewManager (provider, dispatcher, appBaseUri, fileProvider, jsComponents, hostPageRelativePath)" />
       <MemberType>Constructor</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components.WebView</AssemblyName>
@@ -41,6 +41,7 @@
         <Parameter Name="dispatcher" Type="Microsoft.AspNetCore.Components.Dispatcher" />
         <Parameter Name="appBaseUri" Type="System.Uri" />
         <Parameter Name="fileProvider" Type="Microsoft.Extensions.FileProviders.IFileProvider" />
+        <Parameter Name="jsComponents" Type="Microsoft.AspNetCore.Components.Web.JSComponentConfigurationStore" />
         <Parameter Name="hostPageRelativePath" Type="System.String" />
       </Parameters>
       <Docs>
@@ -48,6 +49,7 @@
         <param name="dispatcher">A <see cref="P:Microsoft.AspNetCore.Components.WebView.WebViewManager.Dispatcher" /> instance that can marshal calls to the required thread or sync context.</param>
         <param name="appBaseUri">The base URI for the application. Since this is a webview, the base URI is typically on a private origin such as http://0.0.0.0/ or app://example/</param>
         <param name="fileProvider">Provides static content to the webview.</param>
+        <param name="jsComponents">Describes configuration for adding, removing, and updating root components from JavaScript code.</param>
         <param name="hostPageRelativePath">Path to the host page within the <paramref name="fileProvider" />.</param>
         <summary>
             Constructs an instance of <see cref="T:Microsoft.AspNetCore.Components.WebView.WebViewManager" />.
@@ -107,53 +109,51 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="Dispose">
-      <MemberSignature Language="C#" Value="public void Dispose ();" />
-      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Dispose() cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.Dispose" />
-      <MemberSignature Language="VB.NET" Value="Public Sub Dispose ()" />
-      <MemberSignature Language="F#" Value="abstract member Dispose : unit -&gt; unit&#xA;override this.Dispose : unit -&gt; unit" Usage="webViewManager.Dispose " />
+    <Member MemberName="DisposeAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask DisposeAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask DisposeAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.DisposeAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Function DisposeAsync () As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask" Usage="webViewManager.DisposeAsync " />
       <MemberType>Method</MemberType>
       <Implements>
-        <InterfaceMember>M:System.IDisposable.Dispose</InterfaceMember>
+        <InterfaceMember>M:System.IAsyncDisposable.DisposeAsync</InterfaceMember>
       </Implements>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components.WebView</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
       </ReturnValue>
       <Parameters />
       <Docs>
         <summary>To be added.</summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
         <inheritdoc />
       </Docs>
     </Member>
-    <Member MemberName="Dispose">
-      <MemberSignature Language="C#" Value="protected virtual void Dispose (bool disposing);" />
-      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void Dispose(bool disposing) cil managed" />
-      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.Dispose(System.Boolean)" />
-      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub Dispose (disposing As Boolean)" />
-      <MemberSignature Language="F#" Value="abstract member Dispose : bool -&gt; unit&#xA;override this.Dispose : bool -&gt; unit" Usage="webViewManager.Dispose disposing" />
+    <Member MemberName="DisposeAsyncCore">
+      <MemberSignature Language="C#" Value="protected virtual System.Threading.Tasks.ValueTask DisposeAsyncCore ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask DisposeAsyncCore() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.WebView.WebViewManager.DisposeAsyncCore" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function DisposeAsyncCore () As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member DisposeAsyncCore : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.DisposeAsyncCore : unit -&gt; System.Threading.Tasks.ValueTask" Usage="webViewManager.DisposeAsyncCore " />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components.WebView</AssemblyName>
         <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Void</ReturnType>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
       </ReturnValue>
-      <Parameters>
-        <Parameter Name="disposing" Type="System.Boolean" />
-      </Parameters>
+      <Parameters />
       <Docs>
-        <param name="disposing">
-          <c>true</c> when dispose was called explicitly; <c>false</c> when it is called as part of the finalizer.</param>
         <summary>
             Disposes the current <see cref="T:Microsoft.AspNetCore.Components.WebView.WebViewManager" /> instance.
             </summary>
+        <returns>To be added.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
