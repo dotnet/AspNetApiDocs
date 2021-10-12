@@ -15,6 +15,7 @@
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
     <AssemblyVersion>3.1.0.0</AssemblyVersion>
     <AssemblyVersion>5.0.0.0</AssemblyVersion>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Object</BaseTypeName>
@@ -27,6 +28,35 @@
     <remarks>To be added.</remarks>
   </Docs>
   <Members>
+    <Member MemberName="Use">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Builder.IApplicationBuilder Use (this Microsoft.AspNetCore.Builder.IApplicationBuilder app, Func&lt;Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate,System.Threading.Tasks.Task&gt; middleware);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Builder.IApplicationBuilder Use(class Microsoft.AspNetCore.Builder.IApplicationBuilder app, class System.Func`3&lt;class Microsoft.AspNetCore.Http.HttpContext, class Microsoft.AspNetCore.Http.RequestDelegate, class System.Threading.Tasks.Task&gt; middleware) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Builder.UseExtensions.Use(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function Use (app As IApplicationBuilder, middleware As Func(Of HttpContext, RequestDelegate, Task)) As IApplicationBuilder" />
+      <MemberSignature Language="F#" Value="static member Use : Microsoft.AspNetCore.Builder.IApplicationBuilder * Func&lt;Microsoft.AspNetCore.Http.HttpContext, Microsoft.AspNetCore.Http.RequestDelegate, System.Threading.Tasks.Task&gt; -&gt; Microsoft.AspNetCore.Builder.IApplicationBuilder" Usage="Microsoft.AspNetCore.Builder.UseExtensions.Use (app, middleware)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Abstractions</AssemblyName>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Builder.IApplicationBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="app" Type="Microsoft.AspNetCore.Builder.IApplicationBuilder" Index="0" FrameworkAlternate="aspnetcore-6.0" RefType="this" />
+        <Parameter Name="middleware" Type="System.Func&lt;Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="aspnetcore-6.0" />
+      </Parameters>
+      <Docs>
+        <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> instance.</param>
+        <param name="middleware">A function that handles the request and calls the given next function.</param>
+        <summary>
+            Adds a middleware delegate defined in-line to the application's request pipeline.
+            If you aren't calling the next function, use <see cref="M:Microsoft.AspNetCore.Builder.RunExtensions.Run(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Http.RequestDelegate)" /> instead.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> instance.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Use">
       <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static Microsoft::AspNetCore::Builder::IApplicationBuilder ^ Use(Microsoft::AspNetCore::Builder::IApplicationBuilder ^ app, Func&lt;Microsoft::AspNetCore::Http::HttpContext ^, Func&lt;System::Threading::Tasks::Task ^&gt; ^, System::Threading::Tasks::Task ^&gt; ^ middleware);" />
       <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Builder.IApplicationBuilder Use (this Microsoft.AspNetCore.Builder.IApplicationBuilder app, Func&lt;Microsoft.AspNetCore.Http.HttpContext,Func&lt;System.Threading.Tasks.Task&gt;,System.Threading.Tasks.Task&gt; middleware);" />
@@ -45,6 +75,7 @@
         <AssemblyVersion>3.0.0.0</AssemblyVersion>
         <AssemblyVersion>3.1.0.0</AssemblyVersion>
         <AssemblyVersion>5.0.0.0</AssemblyVersion>
+        <AssemblyVersion>6.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
         <ReturnType>Microsoft.AspNetCore.Builder.IApplicationBuilder</ReturnType>
@@ -55,10 +86,18 @@
       </Parameters>
       <Docs>
         <param name="app">The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> instance.</param>
-        <param name="middleware">A function that handles the request or calls the given next function.</param>
+        <param name="middleware">A function that handles the request and calls the given next function.</param>
         <summary>
             Adds a middleware delegate defined in-line to the application's request pipeline.
-            </summary>
+            If you aren't calling the next function, use <see cref="M:Microsoft.AspNetCore.Builder.RunExtensions.Run(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Http.RequestDelegate)" /> instead.
+            <para>
+            Prefer using <see cref="M:Microsoft.AspNetCore.Builder.UseExtensions.Use(Microsoft.AspNetCore.Builder.IApplicationBuilder,System.Func{Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Http.RequestDelegate,System.Threading.Tasks.Task})" /> for better performance as shown below:
+            <code>
+            app.Use((context, next) =&gt;
+            {
+                return next(context);
+            });
+            </code></para></summary>
         <returns>The <see cref="T:Microsoft.AspNetCore.Builder.IApplicationBuilder" /> instance.</returns>
         <remarks>To be added.</remarks>
       </Docs>
