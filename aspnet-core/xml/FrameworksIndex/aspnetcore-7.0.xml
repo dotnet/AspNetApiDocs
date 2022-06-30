@@ -567,6 +567,9 @@
     <Type Name="Microsoft.AspNetCore.Authentication.IAuthenticateResultFeature" Id="T:Microsoft.AspNetCore.Authentication.IAuthenticateResultFeature">
       <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticateResultFeature.AuthenticateResult" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider" Id="T:Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider">
+      <Member Id="M:Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider.GetAuthenticationSchemeConfiguration(System.String)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.IAuthenticationFeature" Id="T:Microsoft.AspNetCore.Authentication.IAuthenticationFeature">
       <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticationFeature.OriginalPath" />
       <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticationFeature.OriginalPathBase" />
@@ -1875,6 +1878,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.Infrastructure.PassThroughAuthorizationHandler" Id="T:Microsoft.AspNetCore.Authorization.Infrastructure.PassThroughAuthorizationHandler">
       <Member Id="M:Microsoft.AspNetCore.Authorization.Infrastructure.PassThroughAuthorizationHandler.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Authorization.Infrastructure.PassThroughAuthorizationHandler.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Authorization.AuthorizationOptions})" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.Infrastructure.PassThroughAuthorizationHandler.HandleAsync(Microsoft.AspNetCore.Authorization.AuthorizationHandlerContext)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement" Id="T:Microsoft.AspNetCore.Authorization.Infrastructure.RolesAuthorizationRequirement">
@@ -2445,6 +2449,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.WebApplicationBuilder" Id="T:Microsoft.AspNetCore.Builder.WebApplicationBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.WebApplicationBuilder.Build" />
+      <Member Id="P:Microsoft.AspNetCore.Builder.WebApplicationBuilder.Authentication" />
       <Member Id="P:Microsoft.AspNetCore.Builder.WebApplicationBuilder.Configuration" />
       <Member Id="P:Microsoft.AspNetCore.Builder.WebApplicationBuilder.Environment" />
       <Member Id="P:Microsoft.AspNetCore.Builder.WebApplicationBuilder.Host" />
@@ -5358,6 +5363,9 @@
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Http">
+    <Type Name="Microsoft.AspNetCore.Http.AsParametersAttribute" Id="T:Microsoft.AspNetCore.Http.AsParametersAttribute">
+      <Member Id="M:Microsoft.AspNetCore.Http.AsParametersAttribute.#ctor" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Http.BadHttpRequestException" Id="T:Microsoft.AspNetCore.Http.BadHttpRequestException">
       <Member Id="M:Microsoft.AspNetCore.Http.BadHttpRequestException.#ctor(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Http.BadHttpRequestException.#ctor(System.String,System.Exception)" />
@@ -5444,6 +5452,12 @@
       <Member Id="M:Microsoft.AspNetCore.Http.DefaultHttpContextFactory.#ctor(System.IServiceProvider)" />
       <Member Id="M:Microsoft.AspNetCore.Http.DefaultHttpContextFactory.Create(Microsoft.AspNetCore.Http.Features.IFeatureCollection)" />
       <Member Id="M:Microsoft.AspNetCore.Http.DefaultHttpContextFactory.Dispose(Microsoft.AspNetCore.Http.HttpContext)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext" Id="T:Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext">
+      <Member Id="M:Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,System.Object[])" />
+      <Member Id="M:Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext.GetArgument``1(System.Int32)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext.Arguments" />
+      <Member Id="P:Microsoft.AspNetCore.Http.DefaultRouteHandlerInvocationContext.HttpContext" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Endpoint" Id="T:Microsoft.AspNetCore.Http.Endpoint">
       <Member Id="M:Microsoft.AspNetCore.Http.Endpoint.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Http.EndpointMetadataCollection,System.String)" />
@@ -6041,6 +6055,7 @@
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Conflict(System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,Microsoft.Net.Http.Headers.MediaTypeHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,System.String,System.Text.Encoding)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Created(System.String,System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Created(System.Uri,System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.CreatedAtRoute(System.String,System.Object,System.Object)" />
@@ -6064,6 +6079,7 @@
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Stream(System.IO.Pipelines.PipeReader,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Stream(System.IO.Stream,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Text(System.String,System.String,System.Text.Encoding)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Text(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Unauthorized" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.UnprocessableEntity(System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.ValidationProblem(System.Collections.Generic.IDictionary{System.String,System.String[]},System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
@@ -6083,9 +6099,10 @@
       <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddFilter``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.RouteHandlerInvocationContext" Id="T:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext">
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.#ctor(Microsoft.AspNetCore.Http.HttpContext,System.Object[])" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.GetArgument``1(System.Int32)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.Arguments" />
       <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.HttpContext" />
-      <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.Parameters" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.SameSiteMode" Id="T:Microsoft.AspNetCore.Http.SameSiteMode">
       <Member Id="F:Microsoft.AspNetCore.Http.SameSiteMode.Lax" />
@@ -6208,6 +6225,7 @@
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Conflict``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Content(System.String,Microsoft.Net.Http.Headers.MediaTypeHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Content(System.String,System.String,System.Text.Encoding)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Content(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Created(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Created(System.Uri)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Created``1(System.String,``0)" />
@@ -6236,6 +6254,7 @@
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Stream(System.IO.Pipelines.PipeReader,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Stream(System.IO.Stream,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Text(System.String,System.String,System.Text.Encoding)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Text(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.Unauthorized" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.UnprocessableEntity" />
       <Member Id="M:Microsoft.AspNetCore.Http.TypedResults.UnprocessableEntity``1(``0)" />
@@ -17994,6 +18013,7 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.IInvocationBinder.GetParameterTypes(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IInvocationBinder.GetReturnType(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IInvocationBinder.GetStreamItemType(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.IInvocationBinder.GetTarget(System.ReadOnlySpan{System.Byte})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.ISignalRBuilder" Id="T:Microsoft.AspNetCore.SignalR.ISignalRBuilder">
       <Member Id="P:Microsoft.AspNetCore.SignalR.ISignalRBuilder.Services" />
@@ -18535,6 +18555,7 @@
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.#ctor(Microsoft.AspNetCore.WebUtilities.MultipartSection)" />
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.#ctor(Microsoft.AspNetCore.WebUtilities.MultipartSection,Microsoft.Net.Http.Headers.ContentDispositionHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.GetValueAsync" />
+      <Member Id="M:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.GetValueAsync(System.Threading.CancellationToken)" />
       <Member Id="P:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.Name" />
       <Member Id="P:Microsoft.AspNetCore.WebUtilities.FormMultipartSection.Section" />
     </Type>
@@ -18634,6 +18655,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.WebUtilities.MultipartSectionStreamExtensions" Id="T:Microsoft.AspNetCore.WebUtilities.MultipartSectionStreamExtensions">
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.MultipartSectionStreamExtensions.ReadAsStringAsync(Microsoft.AspNetCore.WebUtilities.MultipartSection)" />
+      <Member Id="M:Microsoft.AspNetCore.WebUtilities.MultipartSectionStreamExtensions.ReadAsStringAsync(Microsoft.AspNetCore.WebUtilities.MultipartSection,System.Threading.CancellationToken)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.WebUtilities.QueryHelpers" Id="T:Microsoft.AspNetCore.WebUtilities.QueryHelpers">
       <Member Id="M:Microsoft.AspNetCore.WebUtilities.QueryHelpers.AddQueryString(System.String,System.Collections.Generic.IDictionary{System.String,System.String})" />
