@@ -24,7 +24,7 @@
     <Assembly Name="Microsoft.AspNetCore.AzureAppServices.HostingStartup" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.AzureAppServicesIntegration" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components.Authorization" Version="7.0.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.Components.CustomElements" Version="0.1.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Components.CustomElements" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components.Forms" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Components.Server" Version="7.0.0.0" />
@@ -2285,6 +2285,13 @@
     <Type Name="Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.RateLimiting.RateLimiterOptions)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions.RequireRateLimiting``1(``0,System.String)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapDynamicPageRoute``1(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapDynamicPageRoute``1(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.Object)" />
@@ -3498,8 +3505,8 @@
       <Member Id="M:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs.Type" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Components.Web.CustomElementJSComponentExtensions" Id="T:Microsoft.AspNetCore.Components.Web.CustomElementJSComponentExtensions">
-      <Member Id="M:Microsoft.AspNetCore.Components.Web.CustomElementJSComponentExtensions.RegisterAsCustomElement``1(Microsoft.AspNetCore.Components.Web.IJSComponentConfiguration,System.String)" />
+    <Type Name="Microsoft.AspNetCore.Components.Web.CustomElementsJSComponentConfigurationExtensions" Id="T:Microsoft.AspNetCore.Components.Web.CustomElementsJSComponentConfigurationExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.Web.CustomElementsJSComponentConfigurationExtensions.RegisterCustomElement``1(Microsoft.AspNetCore.Components.Web.IJSComponentConfiguration,System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Web.DataTransfer" Id="T:Microsoft.AspNetCore.Components.Web.DataTransfer">
       <Member Id="M:Microsoft.AspNetCore.Components.Web.DataTransfer.#ctor" />
@@ -15645,8 +15652,8 @@
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.OpenApi">
     <Type Name="Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions" Id="T:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions">
-      <Member Id="M:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions.WithOpenApi(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
-      <Member Id="M:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions.WithOpenApi(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Func{Microsoft.OpenApi.Models.OpenApiOperation,Microsoft.OpenApi.Models.OpenApiOperation})" />
+      <Member Id="M:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions.WithOpenApi``1(``0)" />
+      <Member Id="M:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions.WithOpenApi``1(``0,System.Func{Microsoft.OpenApi.Models.OpenApiOperation,Microsoft.OpenApi.Models.OpenApiOperation})" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Owin">
@@ -15771,15 +15778,30 @@
     <Type Name="Microsoft.AspNetCore.Owin.WebSocketAdapter" Id="T:Microsoft.AspNetCore.Owin.WebSocketAdapter" />
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.RateLimiting">
+    <Type Name="Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1" Id="T:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1">
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1.GetPartition(Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1.OnRejected" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.RateLimiting.OnRejectedContext" Id="T:Microsoft.AspNetCore.RateLimiting.OnRejectedContext">
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.OnRejectedContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.OnRejectedContext.HttpContext" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.OnRejectedContext.Lease" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.RateLimiting.RateLimiterOptions" Id="T:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions">
       <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.DefaultRejectionStatusCode" />
-      <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.Limiter" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.AddPolicy``1(System.String,Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy{``0})" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.AddPolicy``1(System.String,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.RateLimiting.RateLimitPartition{``0}})" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.AddPolicy``2(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.GlobalLimiter" />
       <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.OnRejected" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.RejectionStatusCode" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.RateLimiting.RateLimitingApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.RateLimiting.RateLimitingApplicationBuilderExtensions">
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimitingApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimitingApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.RateLimiting.RateLimiterOptions)" />
+    <Type Name="Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions" Id="T:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions">
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddConcurrencyLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.ConcurrencyLimiterOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddFixedWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.FixedWindowRateLimiterOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddNoLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddSlidingWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.SlidingWindowRateLimiterOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddTokenBucketLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.TokenBucketRateLimiterOptions)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Razor.Hosting">
