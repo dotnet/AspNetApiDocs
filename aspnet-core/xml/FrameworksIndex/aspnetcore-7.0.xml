@@ -93,10 +93,12 @@
     <Assembly Name="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.OpenApi" Version="7.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.OutputCaching" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Owin" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.RateLimiting" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Razor" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Razor.Runtime" Version="7.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.RequestDecompression" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.ResponseCaching.Abstractions" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.ResponseCaching" Version="7.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.ResponseCompression" Version="7.0.0.0" />
@@ -325,6 +327,9 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions" Id="T:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt(Microsoft.AspNetCore.Authentication.AuthenticationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Authentication.AuthenticationConfigurationProviderExtensions" Id="T:Microsoft.AspNetCore.Authentication.AuthenticationConfigurationProviderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Authentication.AuthenticationConfigurationProviderExtensions.GetSchemeConfiguration(Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider,System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.AuthenticationFeature" Id="T:Microsoft.AspNetCore.Authentication.AuthenticationFeature">
       <Member Id="M:Microsoft.AspNetCore.Authentication.AuthenticationFeature.#ctor" />
@@ -568,7 +573,7 @@
       <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticateResultFeature.AuthenticateResult" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider" Id="T:Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider">
-      <Member Id="M:Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider.GetAuthenticationSchemeConfiguration(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticationConfigurationProvider.AuthenticationConfiguration" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.IAuthenticationFeature" Id="T:Microsoft.AspNetCore.Authentication.IAuthenticationFeature">
       <Member Id="P:Microsoft.AspNetCore.Authentication.IAuthenticationFeature.OriginalPath" />
@@ -1019,12 +1024,16 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.Cookies.ITicketStore" Id="T:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore">
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RemoveAsync(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RemoveAsync(System.String,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RemoveAsync(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket)" />
+      <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RenewAsync(System.String,Microsoft.AspNetCore.Authentication.AuthenticationTicket,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RetrieveAsync(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RetrieveAsync(System.String,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.RetrieveAsync(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.StoreAsync(Microsoft.AspNetCore.Authentication.AuthenticationTicket)" />
+      <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.StoreAsync(Microsoft.AspNetCore.Authentication.AuthenticationTicket,Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore.StoreAsync(Microsoft.AspNetCore.Authentication.AuthenticationTicket,System.Threading.CancellationToken)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authentication.Cookies.PostConfigureCookieAuthenticationOptions" Id="T:Microsoft.AspNetCore.Authentication.Cookies.PostConfigureCookieAuthenticationOptions">
@@ -2081,10 +2090,10 @@
     <Type Name="Microsoft.AspNetCore.Builder.EndpointBuilder" Id="T:Microsoft.AspNetCore.Builder.EndpointBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.EndpointBuilder.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Builder.EndpointBuilder.Build" />
+      <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.DisplayName" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.Metadata" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.RequestDelegate" />
-      <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.ServiceProvider" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.EndpointRouteBuilderExtensions.Map(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,Microsoft.AspNetCore.Routing.Patterns.RoutePattern,Microsoft.AspNetCore.Http.RequestDelegate)" />
@@ -2274,6 +2283,9 @@
       <Member Id="M:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.String,System.Object,System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute(Microsoft.AspNetCore.Routing.IRouteBuilder,System.String,System.String,System.String,System.Object,System.Object,System.Object)" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.OutputCacheApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.OutputCacheApplicationBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.OutputCacheApplicationBuilderExtensions.UseOutputCache(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Builder.OwinExtensions" Id="T:Microsoft.AspNetCore.Builder.OwinExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.OwinExtensions.UseBuilder(System.Action{System.Func{System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task},System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task}}})" />
       <Member Id="M:Microsoft.AspNetCore.Builder.OwinExtensions.UseBuilder(System.Action{System.Func{System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task},System.Func{System.Collections.Generic.IDictionary{System.String,System.Object},System.Threading.Tasks.Task}}},System.Action{Microsoft.AspNetCore.Builder.IApplicationBuilder})" />
@@ -2301,6 +2313,9 @@
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions.UseRequestDecompression(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RequestLocalizationOptions" Id="T:Microsoft.AspNetCore.Builder.RequestLocalizationOptions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.#ctor" />
@@ -2766,6 +2781,37 @@
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactory.CreateInferred``1(System.Object,System.Func{``0,System.Threading.Tasks.Task},``0)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions" Id="T:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Boolean},System.Boolean,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateOnly},System.DateOnly,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateOnly},System.DateOnly,System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateTime},System.DateTime,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateTime},System.DateTime,System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateTimeOffset},System.DateTimeOffset,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.DateTimeOffset},System.DateTimeOffset,System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Decimal},System.Decimal,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Double},System.Double,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Int16},System.Int16,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Int32},System.Int32,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Int64},System.Int64,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Boolean}},System.Nullable{System.Boolean},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateOnly}},System.Nullable{System.DateOnly},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateOnly}},System.Nullable{System.DateOnly},System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateTime}},System.Nullable{System.DateTime},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateTime}},System.Nullable{System.DateTime},System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateTimeOffset}},System.Nullable{System.DateTimeOffset},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.DateTimeOffset}},System.Nullable{System.DateTimeOffset},System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Decimal}},System.Nullable{System.Decimal},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Double}},System.Nullable{System.Double},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Int16}},System.Nullable{System.Int16},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Int32}},System.Nullable{System.Int32},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Int64}},System.Nullable{System.Int64},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.Single}},System.Nullable{System.Single},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.TimeOnly}},System.Nullable{System.TimeOnly},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Nullable{System.TimeOnly}},System.Nullable{System.TimeOnly},System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.Single},System.Single,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.String},System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.TimeOnly},System.TimeOnly,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{System.TimeOnly},System.TimeOnly,System.String,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.Boolean},System.Boolean,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.DateOnly},System.DateOnly,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.DateOnly},System.DateOnly,System.String,System.Globalization.CultureInfo)" />
@@ -2797,6 +2843,7 @@
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.String},System.String,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.TimeOnly},System.TimeOnly,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{System.TimeOnly},System.TimeOnly,System.String,System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder``1(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,Microsoft.AspNetCore.Components.EventCallback{``0},``0,System.Globalization.CultureInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Components.EventCallbackFactoryBinderExtensions.CreateBinder``1(Microsoft.AspNetCore.Components.EventCallbackFactory,System.Object,System.Action{``0},``0,System.Globalization.CultureInfo)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.EventCallbackFactoryEventArgsExtensions" Id="T:Microsoft.AspNetCore.Components.EventCallbackFactoryEventArgsExtensions">
@@ -2989,8 +3036,12 @@
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Components.CompilerServices">
     <Type Name="Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers" Id="T:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers">
+      <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback``1(System.Object,Microsoft.AspNetCore.Components.EventCallback{``0},``0)" />
       <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback``1(System.Object,System.Action{``0},``0)" />
       <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.CreateInferredEventCallback``1(System.Object,System.Func{``0,System.Threading.Tasks.Task},``0)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.InvokeAsynchronousDelegate(System.Action)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.InvokeAsynchronousDelegate(System.Func{System.Threading.Tasks.Task})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.InvokeSynchronousDelegate(System.Action)" />
       <Member Id="M:Microsoft.AspNetCore.Components.CompilerServices.RuntimeHelpers.TypeCheck``1(``0)" />
     </Type>
   </Namespace>
@@ -5410,6 +5461,7 @@
       <Member Id="M:Microsoft.AspNetCore.Http.CookieBuilder.Build(Microsoft.AspNetCore.Http.HttpContext,System.DateTimeOffset)" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.Domain" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.Expiration" />
+      <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.Extensions" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieBuilder.MaxAge" />
@@ -5420,8 +5472,11 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.CookieOptions" Id="T:Microsoft.AspNetCore.Http.CookieOptions">
       <Member Id="M:Microsoft.AspNetCore.Http.CookieOptions.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Http.CookieOptions.#ctor(Microsoft.AspNetCore.Http.CookieOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.CookieOptions.CreateCookieHeader(System.String,System.String)" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.Domain" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.Expires" />
+      <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.Extensions" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.HttpOnly" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.IsEssential" />
       <Member Id="P:Microsoft.AspNetCore.Http.CookieOptions.MaxAge" />
@@ -5753,6 +5808,9 @@
       <Member Id="M:Microsoft.AspNetCore.Http.HttpValidationProblemDetails.#ctor(System.Collections.Generic.IDictionary{System.String,System.String[]})" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpValidationProblemDetails.Errors" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Http.IBindableFromHttpContext`1" Id="T:Microsoft.AspNetCore.Http.IBindableFromHttpContext`1">
+      <Member Id="M:Microsoft.AspNetCore.Http.IBindableFromHttpContext`1.BindAsync(Microsoft.AspNetCore.Http.HttpContext,System.Reflection.ParameterInfo)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Http.IFormCollection" Id="T:Microsoft.AspNetCore.Http.IFormCollection">
       <Member Id="M:Microsoft.AspNetCore.Http.IFormCollection.ContainsKey(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Http.IFormCollection.TryGetValue(System.String,Microsoft.Extensions.Primitives.StringValues@)" />
@@ -5934,13 +5992,15 @@
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.Accepts``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Boolean,System.String,System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.Accepts``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.String,System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.ExcludeFromDescription(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.ExcludeFromDescription``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.Produces(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Int32,System.Type,System.String,System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.Produces``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Int32,System.String,System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.ProducesProblem(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Int32,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.ProducesValidationProblem(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Int32,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithDescription(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithSummary(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithDescription``1(``0,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithSummary``1(``0,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithTags(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.Http.OpenApiRouteHandlerBuilderExtensions.WithTags``1(``0,System.String[])" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.PathString" Id="T:Microsoft.AspNetCore.Http.PathString">
       <Member Id="F:Microsoft.AspNetCore.Http.PathString.Empty" />
@@ -6023,7 +6083,7 @@
     <Type Name="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" Id="T:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions">
       <Member Id="M:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.DisableInferBodyFromParameters" />
-      <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.InitialEndpointMetadata" />
+      <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointMetadata" />
       <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.RouteHandlerFilterFactories" />
       <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.RouteParameterNames" />
       <Member Id="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.ServiceProvider" />
@@ -6054,27 +6114,37 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Results" Id="T:Microsoft.AspNetCore.Http.Results">
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Accepted(System.String,System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Accepted``1(System.String,``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.AcceptedAtRoute(System.String,System.Object,System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.AcceptedAtRoute``1(System.String,System.Object,``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.BadRequest(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.BadRequest``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Bytes(System.Byte[],System.String,System.String,System.Boolean,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Bytes(System.ReadOnlyMemory{System.Byte},System.String,System.String,System.Boolean,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Challenge(Microsoft.AspNetCore.Authentication.AuthenticationProperties,System.Collections.Generic.IList{System.String})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Conflict(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Conflict``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,Microsoft.Net.Http.Headers.MediaTypeHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,System.String,System.Text.Encoding)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Content(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Created(System.String,System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Created(System.Uri,System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Created``1(System.String,``0)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Created``1(System.Uri,``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.CreatedAtRoute(System.String,System.Object,System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.CreatedAtRoute``1(System.String,System.Object,``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.File(System.Byte[],System.String,System.String,System.Boolean,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.File(System.IO.Stream,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.File(System.String,System.String,System.String,System.Nullable{System.DateTimeOffset},Microsoft.Net.Http.Headers.EntityTagHeaderValue,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Forbid(Microsoft.AspNetCore.Authentication.AuthenticationProperties,System.Collections.Generic.IList{System.String})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Json(System.Object,System.Text.Json.JsonSerializerOptions,System.String,System.Nullable{System.Int32})" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Json``1(``0,System.Text.Json.JsonSerializerOptions,System.String,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.LocalRedirect(System.String,System.Boolean,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.NoContent" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.NotFound(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.NotFound``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Ok(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.Ok``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Problem(Microsoft.AspNetCore.Mvc.ProblemDetails)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Problem(System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Redirect(System.String,System.Boolean,System.Boolean)" />
@@ -6089,21 +6159,25 @@
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Text(System.String,System.String,System.Text.Encoding,System.Nullable{System.Int32})" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.Unauthorized" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.UnprocessableEntity(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Results.UnprocessableEntity``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Http.Results.ValidationProblem(System.Collections.Generic.IDictionary{System.String,System.String[]},System.String,System.String,System.Nullable{System.Int32},System.String,System.String,System.Collections.Generic.IDictionary{System.String,System.Object})" />
       <Member Id="P:Microsoft.AspNetCore.Http.Results.Empty" />
       <Member Id="P:Microsoft.AspNetCore.Http.Results.Extensions" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.RouteHandlerContext" Id="T:Microsoft.AspNetCore.Http.RouteHandlerContext">
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerContext.#ctor(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.EndpointMetadataCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerContext.#ctor(System.Reflection.MethodInfo,System.Collections.Generic.IList{System.Object},System.IServiceProvider)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerContext.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerContext.EndpointMetadata" />
       <Member Id="P:Microsoft.AspNetCore.Http.RouteHandlerContext.MethodInfo" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate" Id="T:Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate" />
     <Type Name="Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions" Id="T:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions">
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddFilter(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,Microsoft.AspNetCore.Http.IRouteHandlerFilter)" />
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddFilter(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Func{Microsoft.AspNetCore.Http.RouteHandlerContext,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate})" />
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddFilter(Microsoft.AspNetCore.Builder.RouteHandlerBuilder,System.Func{Microsoft.AspNetCore.Http.RouteHandlerInvocationContext,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate,System.Threading.Tasks.ValueTask{System.Object}})" />
-      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddFilter``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``1(``0,Microsoft.AspNetCore.Http.IRouteHandlerFilter)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``1(``0,System.Func{Microsoft.AspNetCore.Http.RouteHandlerContext,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate})" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``1(``0,System.Func{Microsoft.AspNetCore.Http.RouteHandlerInvocationContext,Microsoft.AspNetCore.Http.RouteHandlerFilterDelegate,System.Threading.Tasks.ValueTask{System.Object}})" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerFilterExtensions.AddRouteHandlerFilter``2(``0)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.RouteHandlerInvocationContext" Id="T:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext">
       <Member Id="M:Microsoft.AspNetCore.Http.RouteHandlerInvocationContext.#ctor" />
@@ -6552,6 +6626,11 @@
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.LocalPort" />
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.RemoteIpAddress" />
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature.RemotePort" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Http.Features.IHttpExtendedConnectFeature" Id="T:Microsoft.AspNetCore.Http.Features.IHttpExtendedConnectFeature">
+      <Member Id="M:Microsoft.AspNetCore.Http.Features.IHttpExtendedConnectFeature.AcceptAsync" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpExtendedConnectFeature.IsExtendedConnect" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpExtendedConnectFeature.Protocol" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature" Id="T:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature">
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature.IsReadOnly" />
@@ -7026,15 +7105,15 @@
   <Namespace Name="Microsoft.AspNetCore.Http.Metadata">
     <Type Name="Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext" Id="T:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext">
       <Member Id="M:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext.#ctor(System.Reflection.MethodInfo,System.Collections.Generic.IList{System.Object},System.IServiceProvider)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext.EndpointMetadata" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext.Method" />
-      <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointMetadataContext.Services" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext" Id="T:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext">
       <Member Id="M:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext.#ctor(System.Reflection.ParameterInfo,System.Collections.Generic.IList{System.Object},System.IServiceProvider)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext.EndpointMetadata" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext.Parameter" />
-      <Member Id="P:Microsoft.AspNetCore.Http.Metadata.EndpointParameterMetadataContext.Services" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata">
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata.ContentTypes" />
@@ -7073,6 +7152,9 @@
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IProducesResponseTypeMetadata.ContentTypes" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IProducesResponseTypeMetadata.StatusCode" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IProducesResponseTypeMetadata.Type" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Http.Metadata.IRequestSizeLimitMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IRequestSizeLimitMetadata">
+      <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IRequestSizeLimitMetadata.MaxRequestBodySize" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Metadata.ISkipStatusCodePagesMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.ISkipStatusCodePagesMetadata" />
     <Type Name="Microsoft.AspNetCore.Http.Metadata.ITagsMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.ITagsMetadata">
@@ -7119,6 +7201,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions" Id="T:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions">
       <Member Id="M:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions.AdditionalRequestHeaders" />
       <Member Id="P:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions.FileName" />
       <Member Id="P:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions.FileSizeLimit" />
       <Member Id="P:Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions.FlushInterval" />
@@ -9731,6 +9814,7 @@
       <Member Id="M:Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute.CreateInstance(System.IServiceProvider)" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute.IsReusable" />
+      <Member Id="P:Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute.Microsoft#AspNetCore#Http#Metadata#IRequestSizeLimitMetadata#MaxRequestBodySize" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.DisableRequestSizeLimitAttribute.Order" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.EmptyResult" Id="T:Microsoft.AspNetCore.Mvc.EmptyResult">
@@ -10159,6 +10243,7 @@
       <Member Id="M:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute.#ctor(System.Int64)" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute.CreateInstance(System.IServiceProvider)" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute.IsReusable" />
+      <Member Id="P:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute.Microsoft#AspNetCore#Http#Metadata#IRequestSizeLimitMetadata#MaxRequestBodySize" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute.Order" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.RequireHttpsAttribute" Id="T:Microsoft.AspNetCore.Mvc.RequireHttpsAttribute">
@@ -15656,6 +15741,77 @@
       <Member Id="M:Microsoft.AspNetCore.OpenApi.OpenApiRouteHandlerBuilderExtensions.WithOpenApi``1(``0,System.Func{Microsoft.OpenApi.Models.OpenApiOperation,Microsoft.OpenApi.Models.OpenApiOperation})" />
     </Type>
   </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.OutputCaching">
+    <Type Name="Microsoft.AspNetCore.OutputCaching.CacheVaryByRules" Id="T:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.Headers" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.QueryKeys" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.VaryByCustom" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.VaryByPrefix" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.IOutputCacheFeature" Id="T:Microsoft.AspNetCore.OutputCaching.IOutputCacheFeature">
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.IOutputCacheFeature.Context" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy" Id="T:Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy.CacheRequestAsync(Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy.ServeFromCacheAsync(Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy.ServeResponseAsync(Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.IOutputCacheStore" Id="T:Microsoft.AspNetCore.OutputCaching.IOutputCacheStore">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCacheStore.EvictByTagAsync(System.String,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCacheStore.GetAsync(System.String,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.IOutputCacheStore.SetAsync(System.String,System.Byte[],System.String[],System.TimeSpan,System.Threading.CancellationToken)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute" Id="T:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.Duration" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.NoStore" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.PolicyName" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByHeaders" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByQueryKeys" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.OutputCacheContext" Id="T:Microsoft.AspNetCore.OutputCaching.OutputCacheContext">
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowCacheLookup" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowCacheStorage" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowLocking" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.CacheVaryByRules" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.EnableOutputCaching" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.HttpContext" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.ResponseExpirationTimeSpan" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.ResponseTime" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.Tags" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.OutputCacheOptions" Id="T:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.AddBasePolicy(Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.AddBasePolicy(System.Action{Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.AddPolicy(System.String,Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.AddPolicy(System.String,System.Action{Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder})" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.ApplicationServices" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.DefaultExpirationTimeSpan" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.MaximumBodySize" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.SizeLimit" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheOptions.UseCaseSensitivePaths" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder" Id="T:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AddPolicy(System.Type)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AddPolicy``1" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AllowLocking(System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Clear" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Expire(System.TimeSpan)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.NoCache" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Tag(System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByHeader(System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByQuery(System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Collections.Generic.KeyValuePair{System.String,System.String}})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.String})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.KeyValuePair{System.String,System.String}}})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.String}})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.With(System.Func{Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Boolean})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.With(System.Func{Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Boolean}})" />
+    </Type>
+  </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Owin">
     <Type Name="Microsoft.AspNetCore.Owin.IOwinEnvironmentFeature" Id="T:Microsoft.AspNetCore.Owin.IOwinEnvironmentFeature">
       <Member Id="P:Microsoft.AspNetCore.Owin.IOwinEnvironmentFeature.Environment" />
@@ -16068,6 +16224,18 @@
       <Member Id="F:Microsoft.AspNetCore.Razor.TagHelpers.TagStructure.WithoutEndTag" />
     </Type>
   </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.RequestDecompression">
+    <Type Name="Microsoft.AspNetCore.RequestDecompression.IDecompressionProvider" Id="T:Microsoft.AspNetCore.RequestDecompression.IDecompressionProvider">
+      <Member Id="M:Microsoft.AspNetCore.RequestDecompression.IDecompressionProvider.GetDecompressionStream(System.IO.Stream)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.RequestDecompression.IRequestDecompressionProvider" Id="T:Microsoft.AspNetCore.RequestDecompression.IRequestDecompressionProvider">
+      <Member Id="M:Microsoft.AspNetCore.RequestDecompression.IRequestDecompressionProvider.GetDecompressionStream(Microsoft.AspNetCore.Http.HttpContext)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions" Id="T:Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions">
+      <Member Id="M:Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions.DecompressionProviders" />
+    </Type>
+  </Namespace>
   <Namespace Name="Microsoft.AspNetCore.ResponseCaching">
     <Type Name="Microsoft.AspNetCore.ResponseCaching.IResponseCachingFeature" Id="T:Microsoft.AspNetCore.ResponseCaching.IResponseCachingFeature">
       <Member Id="P:Microsoft.AspNetCore.ResponseCaching.IResponseCachingFeature.VaryByQueryKeys" />
@@ -16207,7 +16375,9 @@
   <Namespace Name="Microsoft.AspNetCore.Routing">
     <Type Name="Microsoft.AspNetCore.Routing.CompositeEndpointDataSource" Id="T:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource">
       <Member Id="M:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.#ctor(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Routing.EndpointDataSource})" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.Dispose" />
       <Member Id="M:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.GetChangeToken" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.GetEndpointGroup(Microsoft.AspNetCore.Routing.RouteGroupContext)" />
       <Member Id="P:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.DataSources" />
       <Member Id="P:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.Endpoints" />
     </Type>
@@ -16234,6 +16404,7 @@
     <Type Name="Microsoft.AspNetCore.Routing.EndpointDataSource" Id="T:Microsoft.AspNetCore.Routing.EndpointDataSource">
       <Member Id="M:Microsoft.AspNetCore.Routing.EndpointDataSource.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Routing.EndpointDataSource.GetChangeToken" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.EndpointDataSource.GetEndpointGroup(Microsoft.AspNetCore.Routing.RouteGroupContext)" />
       <Member Id="P:Microsoft.AspNetCore.Routing.EndpointDataSource.Endpoints" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.EndpointGroupNameAttribute" Id="T:Microsoft.AspNetCore.Routing.EndpointGroupNameAttribute">
@@ -16251,13 +16422,6 @@
     <Type Name="Microsoft.AspNetCore.Routing.ExcludeFromDescriptionAttribute" Id="T:Microsoft.AspNetCore.Routing.ExcludeFromDescriptionAttribute">
       <Member Id="M:Microsoft.AspNetCore.Routing.ExcludeFromDescriptionAttribute.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Routing.ExcludeFromDescriptionAttribute.ExcludeFromDescription" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Routing.GroupRouteBuilder" Id="T:Microsoft.AspNetCore.Routing.GroupRouteBuilder">
-      <Member Id="M:Microsoft.AspNetCore.Routing.GroupRouteBuilder.Microsoft#AspNetCore#Builder#IEndpointConventionBuilder#Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
-      <Member Id="M:Microsoft.AspNetCore.Routing.GroupRouteBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#CreateApplicationBuilder" />
-      <Member Id="P:Microsoft.AspNetCore.Routing.GroupRouteBuilder.GroupPrefix" />
-      <Member Id="P:Microsoft.AspNetCore.Routing.GroupRouteBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#DataSources" />
-      <Member Id="P:Microsoft.AspNetCore.Routing.GroupRouteBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#ServiceProvider" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.HostAttribute" Id="T:Microsoft.AspNetCore.Routing.HostAttribute">
       <Member Id="M:Microsoft.AspNetCore.Routing.HostAttribute.#ctor(System.String)" />
@@ -16509,6 +16673,18 @@
       <Member Id="M:Microsoft.AspNetCore.Routing.RouteEndpointBuilder.Build" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteEndpointBuilder.Order" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteEndpointBuilder.RoutePattern" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Routing.RouteGroupBuilder" Id="T:Microsoft.AspNetCore.Routing.RouteGroupBuilder">
+      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Builder#IEndpointConventionBuilder#Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#CreateApplicationBuilder" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#DataSources" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#ServiceProvider" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Routing.RouteGroupContext" Id="T:Microsoft.AspNetCore.Routing.RouteGroupContext">
+      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupContext.#ctor(Microsoft.AspNetCore.Routing.Patterns.RoutePattern,System.Collections.Generic.IReadOnlyList{System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder}},System.IServiceProvider)" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.ApplicationServices" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.Conventions" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.Prefix" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.RouteHandler" Id="T:Microsoft.AspNetCore.Routing.RouteHandler">
       <Member Id="M:Microsoft.AspNetCore.Routing.RouteHandler.#ctor(Microsoft.AspNetCore.Http.RequestDelegate)" />
@@ -17988,7 +18164,8 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubActivator`1.Release(`0)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.IHubCallerClients" Id="T:Microsoft.AspNetCore.SignalR.IHubCallerClients">
-      <Member Id="M:Microsoft.AspNetCore.SignalR.IHubCallerClients.Single(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.IHubCallerClients.Client(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.SignalR.IHubCallerClients.Caller" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.IHubCallerClients`1" Id="T:Microsoft.AspNetCore.SignalR.IHubCallerClients`1">
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubCallerClients`1.OthersInGroup(System.String)" />
@@ -17996,7 +18173,7 @@
       <Member Id="P:Microsoft.AspNetCore.SignalR.IHubCallerClients`1.Others" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.IHubClients" Id="T:Microsoft.AspNetCore.SignalR.IHubClients">
-      <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients.Single(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients.Client(System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.SignalR.IHubClients`1" Id="T:Microsoft.AspNetCore.SignalR.IHubClients`1">
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.AllExcept(System.Collections.Generic.IReadOnlyList{System.String})" />
@@ -18005,7 +18182,6 @@
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.Group(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.GroupExcept(System.String,System.Collections.Generic.IReadOnlyList{System.String})" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.Groups(System.Collections.Generic.IReadOnlyList{System.String})" />
-      <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.Single(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.User(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.SignalR.IHubClients`1.Users(System.Collections.Generic.IReadOnlyList{System.String})" />
       <Member Id="P:Microsoft.AspNetCore.SignalR.IHubClients`1.All" />
@@ -19097,6 +19273,16 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.Action{Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect(Microsoft.AspNetCore.Authentication.AuthenticationBuilder,System.String,System.String,System.Action{Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions})" />
     </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions.CacheOutput``1(``0)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions.CacheOutput``1(``0,Microsoft.AspNetCore.OutputCaching.IOutputCachePolicy)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions.CacheOutput``1(``0,System.Action{Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheConventionBuilderExtensions.CacheOutput``1(``0,System.String)" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.OutputCacheServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.OutputCacheServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheServiceCollectionExtensions.AddOutputCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.OutputCacheServiceCollectionExtensions.AddOutputCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.OutputCaching.OutputCacheOptions})" />
+    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.Add(Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection,Microsoft.AspNetCore.Mvc.ApplicationModels.IParameterModelBaseConvention)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AddAreaPageRoute(Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection,System.String,System.String,System.String)" />
@@ -19137,6 +19323,10 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddAccountClaimsPrincipalFactory``1(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationState,Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddAccountClaimsPrincipalFactory``2(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{``0,Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RemoteAuthenticationBuilderExtensions.AddAccountClaimsPrincipalFactory``3(Microsoft.Extensions.DependencyInjection.IRemoteAuthenticationBuilder{``0,``1})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions.AddRequestDecompression(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions.AddRequestDecompression(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions.AddRequestLocalization(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Builder.RequestLocalizationOptions})" />
@@ -19555,6 +19745,7 @@
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.Origin" />
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.Path" />
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.Pragma" />
+      <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.Protocol" />
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.ProxyAuthenticate" />
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.ProxyAuthorization" />
       <Member Id="F:Microsoft.Net.Http.Headers.HeaderNames.ProxyConnection" />
