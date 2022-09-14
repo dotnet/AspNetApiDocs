@@ -72,7 +72,7 @@
             </summary>
         <value>To be added.</value>
         <remarks>
-            Defaults to 512.
+            Defaults to 512 pending connections.
             </remarks>
       </Docs>
     </Member>
@@ -102,6 +102,9 @@
             <see cref="T:System.Net.Sockets.Socket" />. Please note that <see cref="M:Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(System.Net.EndPoint)" />
             calls <see cref="M:System.Net.Sockets.Socket.Bind(System.Net.EndPoint)" /> as part of its implementation, so implementors
             using this method do not need to call it again.
+            </remarks>
+        <remarks>
+            Defaults to <see cref="M:Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(System.Net.EndPoint)" />.
             </remarks>
       </Docs>
     </Member>
@@ -191,9 +194,14 @@
       <Docs>
         <summary>
             Gets or sets the maximum unconsumed incoming bytes the transport will buffer.
-            </summary>
+            <para>
+            A value of <see langword="null" /> or 0 disables backpressure entirely allowing unlimited buffering.
+            Unlimited server buffering is a security risk given untrusted clients.
+            </para></summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to 1 MiB.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="MaxWriteBufferSize">
@@ -218,9 +226,14 @@
       <Docs>
         <summary>
             Gets or sets the maximum outgoing bytes the transport will buffer before applying write backpressure.
-            </summary>
+            <para>
+            A value of <see langword="null" /> or 0 disables backpressure entirely allowing unlimited buffering.
+            Unlimited server buffering is a security risk given untrusted clients.
+            </para></summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Defaults to 64 KiB.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="NoDelay">
@@ -280,6 +293,9 @@
             at the runtime layer as well.
             This setting can make performance worse if there is expensive work that will end up holding onto the IO thread for longer than needed.
             Test to make sure this setting helps performance.
+            </remarks>
+        <remarks>
+            Defaults to false.
             </remarks>
       </Docs>
     </Member>

@@ -135,6 +135,7 @@
     <Assembly Name="Microsoft.JSInterop" Version="7.0.0.0" />
     <Assembly Name="Microsoft.JSInterop.WebAssembly" Version="7.0.0.0" />
     <Assembly Name="Microsoft.Net.Http.Headers" Version="7.0.0.0" />
+    <Assembly Name="System.Threading.RateLimiting" Version="7.0.0.0" />
   </Assemblies>
   <Namespace Name="Microsoft.AspNetCore.Antiforgery">
     <Type Name="Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions" Id="T:Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions">
@@ -1753,6 +1754,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.AuthorizationMiddleware" Id="T:Microsoft.AspNetCore.Authorization.AuthorizationMiddleware">
       <Member Id="M:Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider)" />
+      <Member Id="M:Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider,System.IServiceProvider)" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.AuthorizationOptions" Id="T:Microsoft.AspNetCore.Authorization.AuthorizationOptions">
@@ -1829,6 +1831,7 @@
       <Member Id="M:Microsoft.AspNetCore.Authorization.DefaultAuthorizationPolicyProvider.GetDefaultPolicyAsync" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.DefaultAuthorizationPolicyProvider.GetFallbackPolicyAsync" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.DefaultAuthorizationPolicyProvider.GetPolicyAsync(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.Authorization.DefaultAuthorizationPolicyProvider.AllowsCachingPolicies" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.DefaultAuthorizationService" Id="T:Microsoft.AspNetCore.Authorization.DefaultAuthorizationService">
       <Member Id="M:Microsoft.AspNetCore.Authorization.DefaultAuthorizationService.#ctor(Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider,Microsoft.AspNetCore.Authorization.IAuthorizationHandlerProvider,Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Authorization.DefaultAuthorizationService},Microsoft.AspNetCore.Authorization.IAuthorizationHandlerContextFactory,Microsoft.AspNetCore.Authorization.IAuthorizationEvaluator,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Authorization.AuthorizationOptions})" />
@@ -1855,6 +1858,7 @@
       <Member Id="M:Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider.GetDefaultPolicyAsync" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider.GetFallbackPolicyAsync" />
       <Member Id="M:Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider.GetPolicyAsync(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider.AllowsCachingPolicies" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Authorization.IAuthorizationRequirement" Id="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirement" />
     <Type Name="Microsoft.AspNetCore.Authorization.IAuthorizationService" Id="T:Microsoft.AspNetCore.Authorization.IAuthorizationService">
@@ -1977,6 +1981,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ComponentEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.ComponentEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.ComponentEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.ComponentEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)" />
@@ -2016,6 +2021,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder" Id="T:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.ConnectionEndpointRouteBuilderExtensions.MapConnectionHandler``1(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
@@ -2025,6 +2031,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ControllerActionEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.ControllerActionEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.ControllerActionEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.ControllerActionEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String,System.String,System.String,System.Object,System.Object,System.Object)" />
@@ -2105,6 +2112,7 @@
       <Member Id="M:Microsoft.AspNetCore.Builder.EndpointBuilder.Build" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.DisplayName" />
+      <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.FilterFactories" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.Metadata" />
       <Member Id="P:Microsoft.AspNetCore.Builder.EndpointBuilder.RequestDelegate" />
     </Type>
@@ -2231,6 +2239,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.HubEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.HubEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.HubEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.HubEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.HubEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.HubEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.HubEndpointRouteBuilderExtensions.MapHub``1(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
@@ -2246,6 +2255,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.IEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.IEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.IHubEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.IHubEndpointConventionBuilder" />
     <Type Name="Microsoft.AspNetCore.Builder.IISOptions" Id="T:Microsoft.AspNetCore.Builder.IISOptions">
@@ -2313,13 +2323,19 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.PageActionEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterApplicationBuilderExtensions.UseRateLimiter(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.RateLimiting.RateLimiterOptions)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions.DisableRateLimiting``1(``0)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions.RequireRateLimiting``1(``0,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterEndpointConventionBuilderExtensions.RequireRateLimiting``2(``0,Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy{``1})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.RateLimiterServiceCollectionExtensions" Id="T:Microsoft.AspNetCore.Builder.RateLimiterServiceCollectionExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RateLimiterServiceCollectionExtensions.AddRateLimiter(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.RateLimiting.RateLimiterOptions})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapDynamicPageRoute``1(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
@@ -2367,6 +2383,7 @@
     <Type Name="Microsoft.AspNetCore.Builder.RouteHandlerBuilder" Id="T:Microsoft.AspNetCore.Builder.RouteHandlerBuilder">
       <Member Id="M:Microsoft.AspNetCore.Builder.RouteHandlerBuilder.#ctor(System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Builder.IEndpointConventionBuilder})" />
       <Member Id="M:Microsoft.AspNetCore.Builder.RouteHandlerBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.RouteHandlerBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RouterMiddleware" Id="T:Microsoft.AspNetCore.Builder.RouterMiddleware">
       <Member Id="M:Microsoft.AspNetCore.Builder.RouterMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.AspNetCore.Routing.IRouter)" />
@@ -2934,6 +2951,7 @@
       <Member Id="E:Microsoft.AspNetCore.Components.NavigationManager.LocationChanged" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.EnsureInitialized" />
+      <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.HandleLocationChangingHandlerException(System.Exception,Microsoft.AspNetCore.Components.Routing.LocationChangingContext)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.Initialize(System.String,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo(System.String,Microsoft.AspNetCore.Components.NavigationOptions)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo(System.String,System.Boolean)" />
@@ -2941,6 +2959,9 @@
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NavigateToCore(System.String,Microsoft.AspNetCore.Components.NavigationOptions)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NavigateToCore(System.String,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NotifyLocationChanged(System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.NotifyLocationChangingAsync(System.String,System.String,System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.RegisterLocationChangingHandler(System.Func{Microsoft.AspNetCore.Components.Routing.LocationChangingContext,System.Threading.Tasks.ValueTask})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.SetNavigationLockState(System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.ToAbsoluteUri(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Components.NavigationManager.ToBaseRelativePath(System.String)" />
       <Member Id="P:Microsoft.AspNetCore.Components.NavigationManager.BaseUri" />
@@ -3474,9 +3495,25 @@
       <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted" />
       <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.Routing.LocationChangingContext" Id="T:Microsoft.AspNetCore.Components.Routing.LocationChangingContext">
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.PreventNavigation" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.CancellationToken" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.HistoryEntryState" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.IsNavigationIntercepted" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.LocationChangingContext.TargetLocation" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.Routing.NavigationContext" Id="T:Microsoft.AspNetCore.Components.Routing.NavigationContext">
       <Member Id="P:Microsoft.AspNetCore.Components.Routing.NavigationContext.CancellationToken" />
       <Member Id="P:Microsoft.AspNetCore.Components.Routing.NavigationContext.Path" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.Routing.NavigationLock" Id="T:Microsoft.AspNetCore.Components.Routing.NavigationLock">
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NavigationLock.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NavigationLock.Microsoft#AspNetCore#Components#IComponent#Attach(Microsoft.AspNetCore.Components.RenderHandle)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NavigationLock.Microsoft#AspNetCore#Components#IComponent#SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NavigationLock.System#IAsyncDisposable#DisposeAsync" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.NavigationLock.ConfirmExternalNavigation" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Routing.NavigationLock.OnBeforeInternalNavigation" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Routing.NavLink" Id="T:Microsoft.AspNetCore.Components.Routing.NavLink">
       <Member Id="M:Microsoft.AspNetCore.Components.Routing.NavLink.#ctor" />
@@ -3803,6 +3840,7 @@
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.#ctor(Microsoft.AspNetCore.Components.NavigationManager,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult,System.Collections.Generic.IEnumerable{System.String})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect(System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions.#ctor" />
@@ -3811,7 +3849,10 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResultStatus,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken,System.String,Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken@)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.InteractionOptions" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.InteractiveRequestUrl" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.RedirectUrl" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.Status" />
     </Type>
@@ -3841,11 +3882,31 @@
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider.RequestAccessToken" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider.RequestAccessToken(Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenRequestOptions)" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractionType" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractionType">
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractionType.GetToken" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractionType.SignIn" />
+      <Member Id="F:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractionType.SignOut" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.TryAddAdditionalParameter``1(System.String,``0)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.TryGetAdditionalParameter``1(System.String,``0@)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.TryRemoveAdditionalParameter(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.Interaction" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.ReturnUrl" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions.Scopes" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.CompleteSignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.CompleteSignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.SignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IRemoteAuthenticationService`1.SignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions.NavigateToLogin(Microsoft.AspNetCore.Components.NavigationManager,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions.NavigateToLogin(Microsoft.AspNetCore.Components.NavigationManager,System.String,Microsoft.AspNetCore.Components.WebAssembly.Authentication.InteractiveRequestOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions.NavigateToLogout(Microsoft.AspNetCore.Components.NavigationManager,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.NavigationManagerExtensions.NavigateToLogout(Microsoft.AspNetCore.Components.NavigationManager,System.String,System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions.#ctor" />
@@ -3888,6 +3949,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.InteractiveRequest" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.State" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext`1.Url" />
     </Type>
@@ -3917,6 +3979,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.#ctor(Microsoft.JSInterop.IJSRuntime,Microsoft.Extensions.Options.IOptionsSnapshot{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{`2}},Microsoft.AspNetCore.Components.NavigationManager,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory{`1})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.#ctor(Microsoft.JSInterop.IJSRuntime,Microsoft.Extensions.Options.IOptionsSnapshot{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{`2}},Microsoft.AspNetCore.Components.NavigationManager,Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory{`1},Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService{`0,`1,`2}})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.CompleteSignInAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.CompleteSignOutAsync(Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationContext{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationService`3.GetAuthenticatedUser" />
@@ -4080,6 +4143,7 @@
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods.NotifyLocationChanged(System.String,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods.NotifyLocationChanged(System.String,System.String,System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Infrastructure.JSInteropMethods.NotifyLocationChangingAsync(System.String,System.String,System.Boolean)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Server">
@@ -4267,6 +4331,18 @@
       <Member Id="M:Microsoft.AspNetCore.Connections.MultiplexedConnectionContext.ConnectAsync(Microsoft.AspNetCore.Http.Features.IFeatureCollection,System.Threading.CancellationToken)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Connections.MultiplexedConnectionDelegate" Id="T:Microsoft.AspNetCore.Connections.MultiplexedConnectionDelegate" />
+    <Type Name="Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext" Id="T:Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext">
+      <Member Id="M:Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext.ClientHelloInfo" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext.Connection" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackContext.State" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions" Id="T:Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions">
+      <Member Id="M:Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions.ApplicationProtocols" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions.OnConnection" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.TlsConnectionCallbackOptions.OnConnectionState" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Connections.TransferFormat" Id="T:Microsoft.AspNetCore.Connections.TransferFormat">
       <Member Id="F:Microsoft.AspNetCore.Connections.TransferFormat.Binary" />
       <Member Id="F:Microsoft.AspNetCore.Connections.TransferFormat.Text" />
@@ -4326,6 +4402,9 @@
     <Type Name="Microsoft.AspNetCore.Connections.Features.IStreamAbortFeature" Id="T:Microsoft.AspNetCore.Connections.Features.IStreamAbortFeature">
       <Member Id="M:Microsoft.AspNetCore.Connections.Features.IStreamAbortFeature.AbortRead(System.Int64,Microsoft.AspNetCore.Connections.ConnectionAbortedException)" />
       <Member Id="M:Microsoft.AspNetCore.Connections.Features.IStreamAbortFeature.AbortWrite(System.Int64,Microsoft.AspNetCore.Connections.ConnectionAbortedException)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Connections.Features.IStreamClosedFeature" Id="T:Microsoft.AspNetCore.Connections.Features.IStreamClosedFeature">
+      <Member Id="M:Microsoft.AspNetCore.Connections.Features.IStreamClosedFeature.OnClosed(System.Action{System.Object},System.Object)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Connections.Features.IStreamDirectionFeature" Id="T:Microsoft.AspNetCore.Connections.Features.IStreamDirectionFeature">
       <Member Id="P:Microsoft.AspNetCore.Connections.Features.IStreamDirectionFeature.CanRead" />
@@ -5558,11 +5637,11 @@
     <Type Name="Microsoft.AspNetCore.Http.EndpointFilterDelegate" Id="T:Microsoft.AspNetCore.Http.EndpointFilterDelegate" />
     <Type Name="Microsoft.AspNetCore.Http.EndpointFilterExtensions" Id="T:Microsoft.AspNetCore.Http.EndpointFilterExtensions">
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``1(``0,Microsoft.AspNetCore.Http.IEndpointFilter)" />
-      <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``1(``0,System.Func{Microsoft.AspNetCore.Http.EndpointFilterFactoryContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate,Microsoft.AspNetCore.Http.EndpointFilterDelegate})" />
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``1(``0,System.Func{Microsoft.AspNetCore.Http.EndpointFilterInvocationContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate,System.Threading.Tasks.ValueTask{System.Object}})" />
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``1(Microsoft.AspNetCore.Builder.RouteHandlerBuilder)" />
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``1(Microsoft.AspNetCore.Routing.RouteGroupBuilder)" />
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilter``2(``0)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterExtensions.AddEndpointFilterFactory``1(``0,System.Func{Microsoft.AspNetCore.Http.EndpointFilterFactoryContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate,Microsoft.AspNetCore.Http.EndpointFilterDelegate})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.EndpointFilterFactoryContext" Id="T:Microsoft.AspNetCore.Http.EndpointFilterFactoryContext">
       <Member Id="M:Microsoft.AspNetCore.Http.EndpointFilterFactoryContext.#ctor(System.Reflection.MethodInfo,System.Collections.Generic.IList{System.Object},System.IServiceProvider)" />
@@ -6756,6 +6835,10 @@
       <Member Id="M:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature.AcceptAsync(Microsoft.AspNetCore.Http.WebSocketAcceptContext)" />
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature.IsWebSocketRequest" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Http.Features.IHttpWebTransportFeature" Id="T:Microsoft.AspNetCore.Http.Features.IHttpWebTransportFeature">
+      <Member Id="M:Microsoft.AspNetCore.Http.Features.IHttpWebTransportFeature.AcceptAsync(System.Threading.CancellationToken)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Features.IHttpWebTransportFeature.IsWebTransportRequest" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Http.Features.IItemsFeature" Id="T:Microsoft.AspNetCore.Http.Features.IItemsFeature">
       <Member Id="P:Microsoft.AspNetCore.Http.Features.IItemsFeature.Items" />
     </Type>
@@ -6802,6 +6885,12 @@
       <Member Id="P:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature.CanTrack" />
       <Member Id="P:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature.HasConsent" />
       <Member Id="P:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature.IsConsentNeeded" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Http.Features.IWebTransportSession" Id="T:Microsoft.AspNetCore.Http.Features.IWebTransportSession">
+      <Member Id="M:Microsoft.AspNetCore.Http.Features.IWebTransportSession.Abort(System.Int32)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Features.IWebTransportSession.AcceptStreamAsync(System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.Features.IWebTransportSession.OpenUnidirectionalStreamAsync(System.Threading.CancellationToken)" />
+      <Member Id="P:Microsoft.AspNetCore.Http.Features.IWebTransportSession.SessionId" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.Features.QueryFeature" Id="T:Microsoft.AspNetCore.Http.Features.QueryFeature">
       <Member Id="M:Microsoft.AspNetCore.Http.Features.QueryFeature.#ctor(Microsoft.AspNetCore.Http.Features.IFeatureCollection)" />
@@ -12896,6 +12985,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProvider" Id="T:Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProvider">
       <Member Id="M:Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProvider.#ctor(Microsoft.AspNetCore.Mvc.ModelBinding.BindingSource,System.Collections.Generic.IDictionary{System.String,Microsoft.Extensions.Primitives.StringValues},System.Globalization.CultureInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProvider.GetValue(System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProviderFactory" Id="T:Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProviderFactory">
       <Member Id="M:Microsoft.AspNetCore.Mvc.ModelBinding.JQueryFormValueProviderFactory.#ctor" />
@@ -14394,6 +14484,10 @@
       <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.CheckBoxHiddenInputRenderMode.Inline" />
       <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.CheckBoxHiddenInputRenderMode.None" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Mvc.Rendering.FormInputRenderMode" Id="T:Microsoft.AspNetCore.Mvc.Rendering.FormInputRenderMode">
+      <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.FormInputRenderMode.AlwaysUseCurrentCulture" />
+      <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.FormInputRenderMode.DetectCultureFromInputType" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.Rendering.FormMethod" Id="T:Microsoft.AspNetCore.Mvc.Rendering.FormMethod">
       <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Get" />
       <Member Id="F:Microsoft.AspNetCore.Mvc.Rendering.FormMethod.Post" />
@@ -15561,6 +15655,7 @@
       <Member Id="M:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.CheckBoxHiddenInputRenderMode" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.ClientValidationEnabled" />
+      <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.FormInputRenderMode" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.Html5DateRenderingMode" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.IdAttributeDotReplacement" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelperOptions.ValidationMessageElement" />
@@ -15842,8 +15937,9 @@
   <Namespace Name="Microsoft.AspNetCore.OutputCaching">
     <Type Name="Microsoft.AspNetCore.OutputCaching.CacheVaryByRules" Id="T:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules">
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.Headers" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.HeaderNames" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.QueryKeys" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.RouteValueNames" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.VaryByCustom" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.CacheVaryByRules.VaryByPrefix" />
     </Type>
@@ -15865,10 +15961,12 @@
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.Duration" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.NoStore" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.PolicyName" />
-      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByHeaders" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByHeaderNames" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByQueryKeys" />
+      <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheAttribute.VaryByRouteValueNames" />
     </Type>
     <Type Name="Microsoft.AspNetCore.OutputCaching.OutputCacheContext" Id="T:Microsoft.AspNetCore.OutputCaching.OutputCacheContext">
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowCacheLookup" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowCacheStorage" />
       <Member Id="P:Microsoft.AspNetCore.OutputCaching.OutputCacheContext.AllowLocking" />
@@ -15896,18 +15994,20 @@
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AddPolicy(System.Type)" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AddPolicy``1" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.AllowLocking(System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Cache" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Clear" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Expire(System.TimeSpan)" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.NoCache" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.Tag(System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByHeader(System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByQuery(System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByRouteValue(System.String[])" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Collections.Generic.KeyValuePair{System.String,System.String}})" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.String})" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Collections.Generic.KeyValuePair{System.String,System.String}}})" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.VaryByValue(System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.String}})" />
       <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.With(System.Func{Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Boolean})" />
-      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.With(System.Func{Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken,System.Threading.Tasks.Task{System.Boolean}})" />
+      <Member Id="M:Microsoft.AspNetCore.OutputCaching.OutputCachePolicyBuilder.With(System.Func{Microsoft.AspNetCore.OutputCaching.OutputCacheContext,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{System.Boolean}})" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Owin">
@@ -16032,6 +16132,13 @@
     <Type Name="Microsoft.AspNetCore.Owin.WebSocketAdapter" Id="T:Microsoft.AspNetCore.Owin.WebSocketAdapter" />
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.RateLimiting">
+    <Type Name="Microsoft.AspNetCore.RateLimiting.DisableRateLimitingAttribute" Id="T:Microsoft.AspNetCore.RateLimiting.DisableRateLimitingAttribute">
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.DisableRateLimitingAttribute.#ctor" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.RateLimiting.EnableRateLimitingAttribute" Id="T:Microsoft.AspNetCore.RateLimiting.EnableRateLimitingAttribute">
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.EnableRateLimitingAttribute.#ctor(System.String)" />
+      <Member Id="P:Microsoft.AspNetCore.RateLimiting.EnableRateLimitingAttribute.PolicyName" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1" Id="T:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1">
       <Member Id="M:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1.GetPartition(Microsoft.AspNetCore.Http.HttpContext)" />
       <Member Id="P:Microsoft.AspNetCore.RateLimiting.IRateLimiterPolicy`1.OnRejected" />
@@ -16051,11 +16158,10 @@
       <Member Id="P:Microsoft.AspNetCore.RateLimiting.RateLimiterOptions.RejectionStatusCode" />
     </Type>
     <Type Name="Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions" Id="T:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions">
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddConcurrencyLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.ConcurrencyLimiterOptions)" />
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddFixedWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.FixedWindowRateLimiterOptions)" />
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddNoLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddSlidingWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.SlidingWindowRateLimiterOptions)" />
-      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddTokenBucketLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Threading.RateLimiting.TokenBucketRateLimiterOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddConcurrencyLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Action{System.Threading.RateLimiting.ConcurrencyLimiterOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddFixedWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Action{System.Threading.RateLimiting.FixedWindowRateLimiterOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddSlidingWindowLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Action{System.Threading.RateLimiting.SlidingWindowRateLimiterOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.RateLimiting.RateLimiterOptionsExtensions.AddTokenBucketLimiter(Microsoft.AspNetCore.RateLimiting.RateLimiterOptions,System.String,System.Action{System.Threading.RateLimiting.TokenBucketRateLimiterOptions})" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Razor.Hosting">
@@ -16774,14 +16880,16 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.RouteGroupBuilder" Id="T:Microsoft.AspNetCore.Routing.RouteGroupBuilder">
       <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Builder#IEndpointConventionBuilder#Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Builder#IEndpointConventionBuilder#Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
       <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#CreateApplicationBuilder" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#DataSources" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupBuilder.Microsoft#AspNetCore#Routing#IEndpointRouteBuilder#ServiceProvider" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.RouteGroupContext" Id="T:Microsoft.AspNetCore.Routing.RouteGroupContext">
-      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupContext.#ctor(Microsoft.AspNetCore.Routing.Patterns.RoutePattern,System.Collections.Generic.IReadOnlyList{System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder}},System.IServiceProvider)" />
+      <Member Id="M:Microsoft.AspNetCore.Routing.RouteGroupContext.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.ApplicationServices" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.Conventions" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.FinallyConventions" />
       <Member Id="P:Microsoft.AspNetCore.Routing.RouteGroupContext.Prefix" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.RouteHandler" Id="T:Microsoft.AspNetCore.Routing.RouteHandler">
@@ -17124,6 +17232,7 @@
       <Member Id="P:Microsoft.AspNetCore.Routing.Patterns.RoutePatternException.Pattern" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory" Id="T:Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory">
+      <Member Id="M:Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory.Combine(Microsoft.AspNetCore.Routing.Patterns.RoutePattern,Microsoft.AspNetCore.Routing.Patterns.RoutePattern)" />
       <Member Id="M:Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory.Constraint(Microsoft.AspNetCore.Routing.IRouteConstraint)" />
       <Member Id="M:Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory.Constraint(System.Object)" />
       <Member Id="M:Microsoft.AspNetCore.Routing.Patterns.RoutePatternFactory.Constraint(System.String)" />
@@ -17729,6 +17838,7 @@
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.HandshakeTimeout" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.OnAuthenticate" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ServerCertificate" />
+      <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ServerCertificateChain" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ServerCertificateSelector" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.SslProtocols" />
     </Type>
@@ -17752,7 +17862,8 @@
     <Type Name="Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions" Id="T:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions">
       <Member Id="M:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.Backlog" />
-      <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.IdleTimeout" />
+      <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.DefaultCloseErrorCode" />
+      <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.DefaultStreamErrorCode" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.MaxBidirectionalStreamCount" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.MaxReadBufferSize" />
       <Member Id="P:Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.QuicTransportOptions.MaxUnidirectionalStreamCount" />
@@ -19129,6 +19240,9 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HeaderPropagationServiceCollectionExtensions.AddHeaderPropagation(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HeaderPropagationServiceCollectionExtensions.AddHeaderPropagation(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.HeaderPropagation.HeaderPropagationOptions})" />
     </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions.ConfigureHttpJsonOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Http.Json.JsonOptions})" />
+    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions.AddW3CLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.HttpLogging.W3CLoggerOptions})" />
@@ -19439,9 +19553,6 @@
     <Type Name="Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions.AddResponseCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.ResponseCachingServicesExtensions.AddResponseCaching(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions})" />
-    </Type>
-    <Type Name="Microsoft.Extensions.DependencyInjection.RouteHandlerJsonServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RouteHandlerJsonServiceExtensions">
-      <Member Id="M:Microsoft.Extensions.DependencyInjection.RouteHandlerJsonServiceExtensions.ConfigureRouteHandlerJsonOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Http.Json.JsonOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
@@ -20046,6 +20157,170 @@
   <Namespace Name="System.Security.Claims">
     <Type Name="System.Security.Claims.PrincipalExtensions" Id="T:System.Security.Claims.PrincipalExtensions">
       <Member Id="M:System.Security.Claims.PrincipalExtensions.FindFirstValue(System.Security.Claims.ClaimsPrincipal,System.String)" />
+    </Type>
+  </Namespace>
+  <Namespace Name="System.Threading.RateLimiting">
+    <Type Name="System.Threading.RateLimiting.ConcurrencyLimiter" Id="T:System.Threading.RateLimiting.ConcurrencyLimiter">
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.#ctor(System.Threading.RateLimiting.ConcurrencyLimiterOptions)" />
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.AcquireAsyncCore(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.AttemptAcquireCore(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiter.GetStatistics" />
+      <Member Id="P:System.Threading.RateLimiting.ConcurrencyLimiter.IdleDuration" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.ConcurrencyLimiterOptions" Id="T:System.Threading.RateLimiting.ConcurrencyLimiterOptions">
+      <Member Id="M:System.Threading.RateLimiting.ConcurrencyLimiterOptions.#ctor" />
+      <Member Id="P:System.Threading.RateLimiting.ConcurrencyLimiterOptions.PermitLimit" />
+      <Member Id="P:System.Threading.RateLimiting.ConcurrencyLimiterOptions.QueueLimit" />
+      <Member Id="P:System.Threading.RateLimiting.ConcurrencyLimiterOptions.QueueProcessingOrder" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.FixedWindowRateLimiter" Id="T:System.Threading.RateLimiting.FixedWindowRateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.#ctor(System.Threading.RateLimiting.FixedWindowRateLimiterOptions)" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.AcquireAsyncCore(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.AttemptAcquireCore(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.GetStatistics" />
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiter.TryReplenish" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiter.IdleDuration" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiter.IsAutoReplenishing" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiter.ReplenishmentPeriod" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.FixedWindowRateLimiterOptions" Id="T:System.Threading.RateLimiting.FixedWindowRateLimiterOptions">
+      <Member Id="M:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.#ctor" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.AutoReplenishment" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.PermitLimit" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.QueueLimit" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.QueueProcessingOrder" />
+      <Member Id="P:System.Threading.RateLimiting.FixedWindowRateLimiterOptions.Window" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.MetadataName" Id="T:System.Threading.RateLimiting.MetadataName">
+      <Member Id="M:System.Threading.RateLimiting.MetadataName.Create``1(System.String)" />
+      <Member Id="P:System.Threading.RateLimiting.MetadataName.ReasonPhrase" />
+      <Member Id="P:System.Threading.RateLimiting.MetadataName.RetryAfter" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.MetadataName`1" Id="T:System.Threading.RateLimiting.MetadataName`1">
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.#ctor(System.String)" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.Equals(System.Object)" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.Equals(System.Threading.RateLimiting.MetadataName{`0})" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.GetHashCode" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.op_Equality(System.Threading.RateLimiting.MetadataName{`0},System.Threading.RateLimiting.MetadataName{`0})" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.op_Inequality(System.Threading.RateLimiting.MetadataName{`0},System.Threading.RateLimiting.MetadataName{`0})" />
+      <Member Id="M:System.Threading.RateLimiting.MetadataName`1.ToString" />
+      <Member Id="P:System.Threading.RateLimiting.MetadataName`1.Name" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.PartitionedRateLimiter" Id="T:System.Threading.RateLimiting.PartitionedRateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter.Create``2(System.Func{``0,System.Threading.RateLimiting.RateLimitPartition{``1}},System.Collections.Generic.IEqualityComparer{``1})" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter.CreateChained``1(System.Threading.RateLimiting.PartitionedRateLimiter{``0}[])" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.PartitionedRateLimiter`1" Id="T:System.Threading.RateLimiting.PartitionedRateLimiter`1">
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.#ctor" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.AcquireAsync(`0,System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.AcquireAsyncCore(`0,System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.AttemptAcquire(`0,System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.AttemptAcquireCore(`0,System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.Dispose" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.DisposeAsync" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.GetStatistics(`0)" />
+      <Member Id="M:System.Threading.RateLimiting.PartitionedRateLimiter`1.WithTranslatedKey``1(System.Func{``0,`0},System.Boolean)" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.QueueProcessingOrder" Id="T:System.Threading.RateLimiting.QueueProcessingOrder">
+      <Member Id="F:System.Threading.RateLimiting.QueueProcessingOrder.NewestFirst" />
+      <Member Id="F:System.Threading.RateLimiting.QueueProcessingOrder.OldestFirst" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.RateLimiter" Id="T:System.Threading.RateLimiting.RateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.#ctor" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.AcquireAsync(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.AcquireAsyncCore(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.AttemptAcquire(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.AttemptAcquireCore(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.Dispose" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.DisposeAsync" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimiter.GetStatistics" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimiter.IdleDuration" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.RateLimiterStatistics" Id="T:System.Threading.RateLimiting.RateLimiterStatistics">
+      <Member Id="M:System.Threading.RateLimiting.RateLimiterStatistics.#ctor" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimiterStatistics.CurrentAvailablePermits" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimiterStatistics.CurrentQueuedCount" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimiterStatistics.TotalFailedLeases" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimiterStatistics.TotalSuccessfulLeases" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.RateLimitLease" Id="T:System.Threading.RateLimiting.RateLimitLease">
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.#ctor" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.Dispose" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.GetAllMetadata" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.TryGetMetadata(System.String,System.Object@)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitLease.TryGetMetadata``1(System.Threading.RateLimiting.MetadataName{``0},``0@)" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimitLease.IsAcquired" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimitLease.MetadataNames" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.RateLimitPartition" Id="T:System.Threading.RateLimiting.RateLimitPartition">
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.Get``1(``0,System.Func{``0,System.Threading.RateLimiting.RateLimiter})" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.GetConcurrencyLimiter``1(``0,System.Func{``0,System.Threading.RateLimiting.ConcurrencyLimiterOptions})" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.GetFixedWindowLimiter``1(``0,System.Func{``0,System.Threading.RateLimiting.FixedWindowRateLimiterOptions})" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.GetNoLimiter``1(``0)" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.GetSlidingWindowLimiter``1(``0,System.Func{``0,System.Threading.RateLimiting.SlidingWindowRateLimiterOptions})" />
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition.GetTokenBucketLimiter``1(``0,System.Func{``0,System.Threading.RateLimiting.TokenBucketRateLimiterOptions})" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.RateLimitPartition`1" Id="T:System.Threading.RateLimiting.RateLimitPartition`1">
+      <Member Id="M:System.Threading.RateLimiting.RateLimitPartition`1.#ctor(`0,System.Func{`0,System.Threading.RateLimiting.RateLimiter})" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimitPartition`1.Factory" />
+      <Member Id="P:System.Threading.RateLimiting.RateLimitPartition`1.PartitionKey" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.ReplenishingRateLimiter" Id="T:System.Threading.RateLimiting.ReplenishingRateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.ReplenishingRateLimiter.#ctor" />
+      <Member Id="M:System.Threading.RateLimiting.ReplenishingRateLimiter.TryReplenish" />
+      <Member Id="P:System.Threading.RateLimiting.ReplenishingRateLimiter.IsAutoReplenishing" />
+      <Member Id="P:System.Threading.RateLimiting.ReplenishingRateLimiter.ReplenishmentPeriod" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.SlidingWindowRateLimiter" Id="T:System.Threading.RateLimiting.SlidingWindowRateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.#ctor(System.Threading.RateLimiting.SlidingWindowRateLimiterOptions)" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.AcquireAsyncCore(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.AttemptAcquireCore(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.GetStatistics" />
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiter.TryReplenish" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiter.IdleDuration" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiter.IsAutoReplenishing" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiter.ReplenishmentPeriod" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.SlidingWindowRateLimiterOptions" Id="T:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions">
+      <Member Id="M:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.#ctor" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.AutoReplenishment" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.PermitLimit" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.QueueLimit" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.QueueProcessingOrder" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.SegmentsPerWindow" />
+      <Member Id="P:System.Threading.RateLimiting.SlidingWindowRateLimiterOptions.Window" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.TokenBucketRateLimiter" Id="T:System.Threading.RateLimiting.TokenBucketRateLimiter">
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.#ctor(System.Threading.RateLimiting.TokenBucketRateLimiterOptions)" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.AcquireAsyncCore(System.Int32,System.Threading.CancellationToken)" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.AttemptAcquireCore(System.Int32)" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.Dispose(System.Boolean)" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.DisposeAsyncCore" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.GetStatistics" />
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiter.TryReplenish" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiter.IdleDuration" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiter.IsAutoReplenishing" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiter.ReplenishmentPeriod" />
+    </Type>
+    <Type Name="System.Threading.RateLimiting.TokenBucketRateLimiterOptions" Id="T:System.Threading.RateLimiting.TokenBucketRateLimiterOptions">
+      <Member Id="M:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.#ctor" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.AutoReplenishment" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.QueueLimit" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.QueueProcessingOrder" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.ReplenishmentPeriod" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.TokenLimit" />
+      <Member Id="P:System.Threading.RateLimiting.TokenBucketRateLimiterOptions.TokensPerPeriod" />
     </Type>
   </Namespace>
 </Framework>
