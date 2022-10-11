@@ -43,11 +43,13 @@
   </Docs>
   <Members>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (Delegate handler, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default);" />
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (Delegate handler, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default);" FrameworkAlternate="aspnetcore-6.0" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Http.RequestDelegateResult Create(class System.Delegate handler, class Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (handler As Delegate, Optional options As RequestDelegateFactoryOptions = Nothing) As RequestDelegateResult" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (handler As Delegate, Optional options As RequestDelegateFactoryOptions = Nothing) As RequestDelegateResult" FrameworkAlternate="aspnetcore-6.0" />
       <MemberSignature Language="F#" Value="static member Create : Delegate * Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions -&gt; Microsoft.AspNetCore.Http.RequestDelegateResult" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactory.Create (handler, options)" />
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (Delegate handler, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options);" FrameworkAlternate="aspnetcore-7.0" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (handler As Delegate, options As RequestDelegateFactoryOptions) As RequestDelegateResult" FrameworkAlternate="aspnetcore-7.0" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
@@ -78,11 +80,54 @@
       </Docs>
     </Member>
     <Member MemberName="Create">
-      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (System.Reflection.MethodInfo methodInfo, Func&lt;Microsoft.AspNetCore.Http.HttpContext,object&gt;? targetFactory = default, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default);" />
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (Delegate handler, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default, Microsoft.AspNetCore.Http.RequestDelegateMetadataResult? metadataResult = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Http.RequestDelegateResult Create(class System.Delegate handler, class Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions options, class Microsoft.AspNetCore.Http.RequestDelegateMetadataResult metadataResult) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (handler As Delegate, Optional options As RequestDelegateFactoryOptions = Nothing, Optional metadataResult As RequestDelegateMetadataResult = Nothing) As RequestDelegateResult" />
+      <MemberSignature Language="F#" Value="static member Create : Delegate * Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions * Microsoft.AspNetCore.Http.RequestDelegateMetadataResult -&gt; Microsoft.AspNetCore.Http.RequestDelegateResult" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactory.Create (handler, options, metadataResult)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-7.0">
+          <AttributeName Language="C#">[System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Http.RequestDelegateResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="handler" Type="System.Delegate" Index="0" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="options" Type="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" Index="1" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="metadataResult" Type="Microsoft.AspNetCore.Http.RequestDelegateMetadataResult" Index="2" FrameworkAlternate="aspnetcore-7.0" />
+      </Parameters>
+      <Docs>
+        <param name="handler">A request handler with any number of custom parameters that often produces a response with its return value.</param>
+        <param name="options">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" /> used to configure the behavior of the handler.</param>
+        <param name="metadataResult">
+            The result returned from <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" /> if that was used to inferring metadata before creating the final RequestDelegate.
+            If <see langword="null" />, this call to <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" /> method will infer the metadata that
+            <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" /> would have inferred for the same <see cref="P:System.Delegate.Method" /> and populate <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointBuilder" />
+            with that metadata. Otherwise, this metadata inference will be skipped as this step has already been done.
+            </param>
+        <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" /> implementation for <paramref name="handler" />.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegateResult" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (System.Reflection.MethodInfo methodInfo, Func&lt;Microsoft.AspNetCore.Http.HttpContext,object&gt;? targetFactory = default, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default);" FrameworkAlternate="aspnetcore-6.0" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Http.RequestDelegateResult Create(class System.Reflection.MethodInfo methodInfo, class System.Func`2&lt;class Microsoft.AspNetCore.Http.HttpContext, object&gt; targetFactory, class Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions options) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Reflection.MethodInfo,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Object},Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" />
-      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (methodInfo As MethodInfo, Optional targetFactory As Func(Of HttpContext, Object) = Nothing, Optional options As RequestDelegateFactoryOptions = Nothing) As RequestDelegateResult" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (methodInfo As MethodInfo, Optional targetFactory As Func(Of HttpContext, Object) = Nothing, Optional options As RequestDelegateFactoryOptions = Nothing) As RequestDelegateResult" FrameworkAlternate="aspnetcore-6.0" />
       <MemberSignature Language="F#" Value="static member Create : System.Reflection.MethodInfo * Func&lt;Microsoft.AspNetCore.Http.HttpContext, obj&gt; * Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions -&gt; Microsoft.AspNetCore.Http.RequestDelegateResult" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactory.Create (methodInfo, targetFactory, options)" />
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (System.Reflection.MethodInfo methodInfo, Func&lt;Microsoft.AspNetCore.Http.HttpContext,object&gt;? targetFactory, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options);" FrameworkAlternate="aspnetcore-7.0" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (methodInfo As MethodInfo, targetFactory As Func(Of HttpContext, Object), options As RequestDelegateFactoryOptions) As RequestDelegateResult" FrameworkAlternate="aspnetcore-7.0" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
@@ -111,6 +156,84 @@
             Creates a <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" /> implementation for <paramref name="methodInfo" />.
             </summary>
         <returns>The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Create">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateResult Create (System.Reflection.MethodInfo methodInfo, Func&lt;Microsoft.AspNetCore.Http.HttpContext,object&gt;? targetFactory = default, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default, Microsoft.AspNetCore.Http.RequestDelegateMetadataResult? metadataResult = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Http.RequestDelegateResult Create(class System.Reflection.MethodInfo methodInfo, class System.Func`2&lt;class Microsoft.AspNetCore.Http.HttpContext, object&gt; targetFactory, class Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions options, class Microsoft.AspNetCore.Http.RequestDelegateMetadataResult metadataResult) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Reflection.MethodInfo,System.Func{Microsoft.AspNetCore.Http.HttpContext,System.Object},Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function Create (methodInfo As MethodInfo, Optional targetFactory As Func(Of HttpContext, Object) = Nothing, Optional options As RequestDelegateFactoryOptions = Nothing, Optional metadataResult As RequestDelegateMetadataResult = Nothing) As RequestDelegateResult" />
+      <MemberSignature Language="F#" Value="static member Create : System.Reflection.MethodInfo * Func&lt;Microsoft.AspNetCore.Http.HttpContext, obj&gt; * Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions * Microsoft.AspNetCore.Http.RequestDelegateMetadataResult -&gt; Microsoft.AspNetCore.Http.RequestDelegateResult" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactory.Create (methodInfo, targetFactory, options, metadataResult)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-7.0">
+          <AttributeName Language="C#">[System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Http.RequestDelegateResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="methodInfo" Type="System.Reflection.MethodInfo" Index="0" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="targetFactory" Type="System.Func&lt;Microsoft.AspNetCore.Http.HttpContext,System.Object&gt;" Index="1" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="options" Type="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" Index="2" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="metadataResult" Type="Microsoft.AspNetCore.Http.RequestDelegateMetadataResult" Index="3" FrameworkAlternate="aspnetcore-7.0" />
+      </Parameters>
+      <Docs>
+        <param name="methodInfo">A request handler with any number of custom parameters that often produces a response with its return value.</param>
+        <param name="targetFactory">Creates the <see langword="this" /> for the non-static method.</param>
+        <param name="options">The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" /> used to configure the behavior of the handler.</param>
+        <param name="metadataResult">
+            The result returned from <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" /> if that was used to inferring metadata before creating the final RequestDelegate.
+            If <see langword="null" />, this call to <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" /> method will infer the metadata that
+            <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" /> would have inferred for the same <see cref="P:System.Delegate.Method" /> and populate <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointBuilder" />
+            with that metadata. Otherwise, this metadata inference will be skipped as this step has already been done.
+            </param>
+        <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" /> implementation for <paramref name="methodInfo" />.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="InferMetadata">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Http.RequestDelegateMetadataResult InferMetadata (System.Reflection.MethodInfo methodInfo, Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions? options = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Http.RequestDelegateMetadataResult InferMetadata(class System.Reflection.MethodInfo methodInfo, class Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions options) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function InferMetadata (methodInfo As MethodInfo, Optional options As RequestDelegateFactoryOptions = Nothing) As RequestDelegateMetadataResult" />
+      <MemberSignature Language="F#" Value="static member InferMetadata : System.Reflection.MethodInfo * Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions -&gt; Microsoft.AspNetCore.Http.RequestDelegateMetadataResult" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactory.InferMetadata (methodInfo, options)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
+        <AssemblyVersion>7.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-7.0">
+          <AttributeName Language="C#">[System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Diagnostics.CodeAnalysis.RequiresUnreferencedCode("RequestDelegateFactory performs object creation, serialization and deserialization on the delegates and its parameters. This cannot be statically analyzed.")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Http.RequestDelegateMetadataResult</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="methodInfo" Type="System.Reflection.MethodInfo" Index="0" FrameworkAlternate="aspnetcore-7.0" />
+        <Parameter Name="options" Type="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions" Index="1" FrameworkAlternate="aspnetcore-7.0" />
+      </Parameters>
+      <Docs>
+        <param name="methodInfo">The <see cref="T:System.Reflection.MethodInfo" /> for the route handler to be passed to <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />.</param>
+        <param name="options">The options that will be used when calling <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />.</param>
+        <summary>
+            Returns metadata inferred automatically for the <see cref="T:Microsoft.AspNetCore.Http.RequestDelegate" /> created by <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />.
+            This includes metadata inferred by <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointMetadataProvider" /> and <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointParameterMetadataProvider" /> implemented by parameter and return types to the <paramref name="methodInfo" />.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Http.RequestDelegateMetadataResult" /> to be passed to <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions,Microsoft.AspNetCore.Http.RequestDelegateMetadataResult)" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
