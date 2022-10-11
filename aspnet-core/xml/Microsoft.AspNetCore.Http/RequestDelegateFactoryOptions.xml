@@ -60,52 +60,32 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
-    <Member MemberName="EndpointFilterFactories">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IReadOnlyList&lt;Func&lt;Microsoft.AspNetCore.Http.EndpointFilterFactoryContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate,Microsoft.AspNetCore.Http.EndpointFilterDelegate&gt;&gt;? EndpointFilterFactories { get; init; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IReadOnlyList`1&lt;class System.Func`3&lt;class Microsoft.AspNetCore.Http.EndpointFilterFactoryContext, class Microsoft.AspNetCore.Http.EndpointFilterDelegate, class Microsoft.AspNetCore.Http.EndpointFilterDelegate&gt;&gt; EndpointFilterFactories" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointFilterFactories" />
-      <MemberSignature Language="VB.NET" Value="Public Property EndpointFilterFactories As IReadOnlyList(Of Func(Of EndpointFilterFactoryContext, EndpointFilterDelegate, EndpointFilterDelegate))" />
-      <MemberSignature Language="F#" Value="member this.EndpointFilterFactories : System.Collections.Generic.IReadOnlyList&lt;Func&lt;Microsoft.AspNetCore.Http.EndpointFilterFactoryContext, Microsoft.AspNetCore.Http.EndpointFilterDelegate, Microsoft.AspNetCore.Http.EndpointFilterDelegate&gt;&gt; with get, set" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointFilterFactories" />
+    <Member MemberName="EndpointBuilder">
+      <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Builder.EndpointBuilder? EndpointBuilder { get; init; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class Microsoft.AspNetCore.Builder.EndpointBuilder EndpointBuilder" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointBuilder" />
+      <MemberSignature Language="VB.NET" Value="Public Property EndpointBuilder As EndpointBuilder" />
+      <MemberSignature Language="F#" Value="member this.EndpointBuilder : Microsoft.AspNetCore.Builder.EndpointBuilder with get, set" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointBuilder" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
         <AssemblyVersion>7.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <ReturnValue>
-        <ReturnType>System.Collections.Generic.IReadOnlyList&lt;System.Func&lt;Microsoft.AspNetCore.Http.EndpointFilterFactoryContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate,Microsoft.AspNetCore.Http.EndpointFilterDelegate&gt;&gt;</ReturnType>
+        <ReturnType>Microsoft.AspNetCore.Builder.EndpointBuilder</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
-            The list of filters that must run in the pipeline for a given route handler.
-            </summary>
-        <value>To be added.</value>
-        <remarks>To be added.</remarks>
-      </Docs>
-    </Member>
-    <Member MemberName="EndpointMetadata">
-      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;object&gt;? EndpointMetadata { get; init; }" />
-      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;object&gt; EndpointMetadata" />
-      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointMetadata" />
-      <MemberSignature Language="VB.NET" Value="Public Property EndpointMetadata As IList(Of Object)" />
-      <MemberSignature Language="F#" Value="member this.EndpointMetadata : System.Collections.Generic.IList&lt;obj&gt; with get, set" Usage="Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions.EndpointMetadata" />
-      <MemberType>Property</MemberType>
-      <AssemblyInfo>
-        <AssemblyName>Microsoft.AspNetCore.Http.Extensions</AssemblyName>
-        <AssemblyVersion>7.0.0.0</AssemblyVersion>
-      </AssemblyInfo>
-      <ReturnValue>
-        <ReturnType>System.Collections.Generic.IList&lt;System.Object&gt;</ReturnType>
-      </ReturnValue>
-      <Docs>
-        <summary>
-            The mutable initial endpoint metadata to add as part of the creation of the <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.RequestDelegate" />. In most cases,
-            this should come from <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.Metadata" />.
+            The mutable <see cref="T:Microsoft.AspNetCore.Builder.EndpointBuilder" /> used to assist in the creation of the <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.RequestDelegate" />.
+            This is primarily used to run <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.FilterFactories" /> and populate inferred <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.Metadata" />.
+            The <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.RequestDelegate" /> must be <see langword="null" />. After the call to <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" />,
+            <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.RequestDelegate" /> will be the same as <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.RequestDelegate" />.
             </summary>
         <value>To be added.</value>
         <remarks>
-            This metadata will be included in <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.EndpointMetadata" /><b>before</b> most metadata inferred during creation of the
-            <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.RequestDelegate" /> and <b>before</b> any metadata provided by types in the delegate signature that implement
-            <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointMetadataProvider" /> or <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointParameterMetadataProvider" />. The exception to this general rule is the
+            Any metadata already in <see cref="P:Microsoft.AspNetCore.Builder.EndpointBuilder.Metadata" /> will be included in <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.EndpointMetadata" /><b>before</b>
+            most metadata inferred during creation of the <see cref="P:Microsoft.AspNetCore.Http.RequestDelegateResult.RequestDelegate" /> and <b>before</b> any metadata provided by types in
+            the delegate signature that implement <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointMetadataProvider" /> or <see cref="T:Microsoft.AspNetCore.Http.Metadata.IEndpointParameterMetadataProvider" />. The exception to this general rule is the
             <see cref="T:Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata" /> that <see cref="M:Microsoft.AspNetCore.Http.RequestDelegateFactory.Create(System.Delegate,Microsoft.AspNetCore.Http.RequestDelegateFactoryOptions)" /> infers automatically
             without any custom metadata providers which instead is inserted at the start to give it lower precedence. Custom metadata providers can choose to
             insert their metadata at the start to give lower precedence, but this is unusual.
