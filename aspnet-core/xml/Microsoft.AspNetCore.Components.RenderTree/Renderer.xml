@@ -98,6 +98,34 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="AddPendingTask">
+      <MemberSignature Language="C#" Value="protected virtual void AddPendingTask (Microsoft.AspNetCore.Components.Rendering.ComponentState? componentState, System.Threading.Tasks.Task task);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance void AddPendingTask(class Microsoft.AspNetCore.Components.Rendering.ComponentState componentState, class System.Threading.Tasks.Task task) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.AddPendingTask(Microsoft.AspNetCore.Components.Rendering.ComponentState,System.Threading.Tasks.Task)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Sub AddPendingTask (componentState As ComponentState, task As Task)" />
+      <MemberSignature Language="F#" Value="abstract member AddPendingTask : Microsoft.AspNetCore.Components.Rendering.ComponentState * System.Threading.Tasks.Task -&gt; unit&#xA;override this.AddPendingTask : Microsoft.AspNetCore.Components.Rendering.ComponentState * System.Threading.Tasks.Task -&gt; unit" Usage="renderer.AddPendingTask (componentState, task)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="componentState" Type="Microsoft.AspNetCore.Components.Rendering.ComponentState" Index="0" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="task" Type="System.Threading.Tasks.Task" Index="1" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="componentState">The <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" /> for the component associated with this pending task, if any.</param>
+        <param name="task">The <see cref="T:System.Threading.Tasks.Task" />.</param>
+        <summary>
+            Notifies the renderer that there is a pending task associated with a component. The
+            renderer is regarded as quiescent when all such tasks have completed.
+            </summary>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="AssignRootComponentId">
       <MemberSignature Language="C++ CLI" Value="protected public:&#xA; int AssignRootComponentId(Microsoft::AspNetCore::Components::IComponent ^ component);" />
       <MemberSignature Language="C#" Value="protected internal int AssignRootComponentId (Microsoft.AspNetCore.Components.IComponent component);" />
@@ -128,6 +156,38 @@
             an identifier that is unique within the scope of the <see cref="T:Microsoft.AspNetCore.Components.RenderTree.Renderer" />.
             </summary>
         <returns>The component's assigned identifier.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateComponentState">
+      <MemberSignature Language="C#" Value="protected virtual Microsoft.AspNetCore.Components.Rendering.ComponentState CreateComponentState (int componentId, Microsoft.AspNetCore.Components.IComponent component, Microsoft.AspNetCore.Components.Rendering.ComponentState? parentComponentState);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance class Microsoft.AspNetCore.Components.Rendering.ComponentState CreateComponentState(int32 componentId, class Microsoft.AspNetCore.Components.IComponent component, class Microsoft.AspNetCore.Components.Rendering.ComponentState parentComponentState) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.CreateComponentState(System.Int32,Microsoft.AspNetCore.Components.IComponent,Microsoft.AspNetCore.Components.Rendering.ComponentState)" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function CreateComponentState (componentId As Integer, component As IComponent, parentComponentState As ComponentState) As ComponentState" />
+      <MemberSignature Language="F#" Value="abstract member CreateComponentState : int * Microsoft.AspNetCore.Components.IComponent * Microsoft.AspNetCore.Components.Rendering.ComponentState -&gt; Microsoft.AspNetCore.Components.Rendering.ComponentState&#xA;override this.CreateComponentState : int * Microsoft.AspNetCore.Components.IComponent * Microsoft.AspNetCore.Components.Rendering.ComponentState -&gt; Microsoft.AspNetCore.Components.Rendering.ComponentState" Usage="renderer.CreateComponentState (componentId, component, parentComponentState)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Components.Rendering.ComponentState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="componentId" Type="System.Int32" Index="0" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="component" Type="Microsoft.AspNetCore.Components.IComponent" Index="1" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="parentComponentState" Type="Microsoft.AspNetCore.Components.Rendering.ComponentState" Index="2" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="componentId">The ID of the newly-created component.</param>
+        <param name="component">The component instance.</param>
+        <param name="parentComponentState">The <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" /> associated with the parent component, or null if this is a root component.</param>
+        <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" /> instance to track state associated with a newly-instantiated component.
+            This is called before the component is initialized and tracked within the <see cref="T:Microsoft.AspNetCore.Components.RenderTree.Renderer" />. Subclasses
+            may override this method to use their own subclasses of <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" />.
+            </summary>
+        <returns>A <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" /> for the new component.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -189,6 +249,41 @@
         <param name="eventHandlerId">The <see cref="P:Microsoft.AspNetCore.Components.RenderTree.RenderTreeFrame.AttributeEventHandlerId" /> value from the original event attribute.</param>
         <param name="eventArgs">Arguments to be passed to the event handler.</param>
         <param name="fieldInfo">Information that the renderer can use to update the state of the existing render tree to match the UI.</param>
+        <summary>
+            Notifies the renderer that an event has occurred.
+            </summary>
+        <returns>
+            A <see cref="T:System.Threading.Tasks.Task" /> which will complete once all asynchronous processing related to the event
+            has completed.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="DispatchEventAsync">
+      <MemberSignature Language="C#" Value="public virtual System.Threading.Tasks.Task DispatchEventAsync (ulong eventHandlerId, Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo? fieldInfo, EventArgs eventArgs, bool quiesce);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Threading.Tasks.Task DispatchEventAsync(unsigned int64 eventHandlerId, class Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo fieldInfo, class System.EventArgs eventArgs, bool quiesce) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.DispatchEventAsync(System.UInt64,Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo,System.EventArgs,System.Boolean)" />
+      <MemberSignature Language="VB.NET" Value="Public Overridable Function DispatchEventAsync (eventHandlerId As ULong, fieldInfo As EventFieldInfo, eventArgs As EventArgs, quiesce As Boolean) As Task" />
+      <MemberSignature Language="F#" Value="abstract member DispatchEventAsync : uint64 * Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo * EventArgs * bool -&gt; System.Threading.Tasks.Task&#xA;override this.DispatchEventAsync : uint64 * Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo * EventArgs * bool -&gt; System.Threading.Tasks.Task" Usage="renderer.DispatchEventAsync (eventHandlerId, fieldInfo, eventArgs, quiesce)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventHandlerId" Type="System.UInt64" Index="0" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="fieldInfo" Type="Microsoft.AspNetCore.Components.RenderTree.EventFieldInfo" Index="1" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="eventArgs" Type="System.EventArgs" Index="2" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="quiesce" Type="System.Boolean" Index="3" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="eventHandlerId">The <see cref="P:Microsoft.AspNetCore.Components.RenderTree.RenderTreeFrame.AttributeEventHandlerId" /> value from the original event attribute.</param>
+        <param name="eventArgs">Arguments to be passed to the event handler.</param>
+        <param name="fieldInfo">Information that the renderer can use to update the state of the existing render tree to match the UI.</param>
+        <param name="quiesce">Whether to wait for quiescence or not.</param>
         <summary>
             Notifies the renderer that an event has occurred.
             </summary>
@@ -315,6 +410,32 @@
             if it exists.
             </summary>
         <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="GetComponentState">
+      <MemberSignature Language="C#" Value="protected Microsoft.AspNetCore.Components.Rendering.ComponentState GetComponentState (int componentId);" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig instance class Microsoft.AspNetCore.Components.Rendering.ComponentState GetComponentState(int32 componentId) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.GetComponentState(System.Int32)" />
+      <MemberSignature Language="VB.NET" Value="Protected Function GetComponentState (componentId As Integer) As ComponentState" />
+      <MemberSignature Language="F#" Value="member this.GetComponentState : int -&gt; Microsoft.AspNetCore.Components.Rendering.ComponentState" Usage="renderer.GetComponentState componentId" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Components.Rendering.ComponentState</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="componentId" Type="System.Int32" Index="0" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="componentId">The component ID</param>
+        <summary>
+            Gets the <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" /> associated with the specified component.
+            </summary>
+        <returns>The corresponding <see cref="T:Microsoft.AspNetCore.Components.Rendering.ComponentState" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -593,6 +714,59 @@
              Rendering a root component is an asynchronous operation. Clients may choose to not await the returned task to
              start, but not wait for the entire render to complete.
              </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="ShouldTrackNamedEventHandlers">
+      <MemberSignature Language="C#" Value="protected internal virtual bool ShouldTrackNamedEventHandlers ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance bool ShouldTrackNamedEventHandlers() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.ShouldTrackNamedEventHandlers" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function ShouldTrackNamedEventHandlers () As Boolean" />
+      <MemberSignature Language="F#" Value="abstract member ShouldTrackNamedEventHandlers : unit -&gt; bool&#xA;override this.ShouldTrackNamedEventHandlers : unit -&gt; bool" Usage="renderer.ShouldTrackNamedEventHandlers " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Indicates whether named event handlers should be tracked.
+            </summary>
+        <returns>
+          <c>true</c> if named event handlers should be tracked; <c>false</c> otherwise.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TrackNamedEventId">
+      <MemberSignature Language="C#" Value="protected internal virtual void TrackNamedEventId (ulong eventHandlerId, int componentId, string eventHandlerName);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance void TrackNamedEventId(unsigned int64 eventHandlerId, int32 componentId, string eventHandlerName) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.TrackNamedEventId(System.UInt64,System.Int32,System.String)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Sub TrackNamedEventId (eventHandlerId As ULong, componentId As Integer, eventHandlerName As String)" />
+      <MemberSignature Language="F#" Value="abstract member TrackNamedEventId : uint64 * int * string -&gt; unit&#xA;override this.TrackNamedEventId : uint64 * int * string -&gt; unit" Usage="renderer.TrackNamedEventId (eventHandlerId, componentId, eventHandlerName)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="eventHandlerId" Type="System.UInt64" Index="0" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="componentId" Type="System.Int32" Index="1" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="eventHandlerName" Type="System.String" Index="2" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="eventHandlerId">The event handler ID associated with the named event.</param>
+        <param name="componentId">The component ID defining the name.</param>
+        <param name="eventHandlerName">The event name.</param>
+        <summary>
+            Tracks named events defined during rendering.
+            </summary>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="UnhandledSynchronizationException">

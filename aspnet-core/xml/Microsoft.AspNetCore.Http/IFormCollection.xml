@@ -187,12 +187,26 @@
                 The element with the specified key, or <c>StringValues.Empty</c> if the key is not present.
             </value>
         <remarks>
-          <see cref="T:Microsoft.AspNetCore.Http.IFormCollection" /> has a different indexer contract than
+          <para>
+            <see cref="T:Microsoft.AspNetCore.Http.IFormCollection" /> has a different indexer contract than
                 <see cref="T:System.Collections.Generic.IDictionary`2" />, as it will return <c>StringValues.Empty</c> for missing entries
                 rather than throwing an Exception.
-            </remarks>
+                </para>
+          <para>
+                This indexer can only be used on POST requests. Otherwise an exception of type
+                <see cref="T:System.InvalidOperationException" /> is thrown.
+                </para>
+          <para>
+                Invoking this property could result in thread exhaustion since it's wrapping an asynchronous implementation.
+                The <c>HttpRequest.ReadFormAsync(CancellationToken)</c> method can get the form without blocking.
+                For more information, see <see href="https://aka.ms/aspnet/forms-async" />.
+                </para>
+        </remarks>
         <exception cref="T:System.ArgumentNullException">
                 key is null.
+            </exception>
+        <exception cref="T:System.InvalidOperationException">
+                incorrect content-type.
             </exception>
       </Docs>
     </Member>
