@@ -3,6 +3,7 @@
   <Assemblies>
     <Assembly Name="Microsoft.AspNetCore.Antiforgery" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="8.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.AsyncState" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.Abstractions" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.BearerToken" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.Certificate" Version="8.0.0.0" />
@@ -35,6 +36,7 @@
     <Assembly Name="Microsoft.AspNetCore.Components.WebView" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.ConcurrencyLimiter" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Connections.Abstractions" Version="8.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.ConnectionTimeout" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.CookiePolicy" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Cors" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Cryptography.Internal" Version="8.0.0.0" />
@@ -51,6 +53,7 @@
     <Assembly Name="Microsoft.AspNetCore" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.Swagger" Version="0.8.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.HeaderParsing" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.HeaderPropagation" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.HostFiltering" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Hosting.Abstractions" Version="8.0.0.0" />
@@ -128,6 +131,8 @@
     <Assembly Name="Microsoft.AspNetCore.SpaProxy" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices.Extensions" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.StaticFiles" Version="8.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Telemetry" Version="8.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Telemetry.Middleware" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.TestHost" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebSockets" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebUtilities" Version="8.0.0.0" />
@@ -295,6 +300,11 @@
       <Member Id="F:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.IdentityServerJwtConstants.IdentityServerJwtBearerScheme" />
       <Member Id="F:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.IdentityServerJwtConstants.IdentityServerJwtScheme" />
       <Member Id="M:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.IdentityServerJwtConstants.#ctor" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.AsyncState">
+    <Type Name="Microsoft.AspNetCore.AsyncState.AsyncStateHttpContextExtensions" Id="T:Microsoft.AspNetCore.AsyncState.AsyncStateHttpContextExtensions">
+      <Member Id="M:Microsoft.AspNetCore.AsyncState.AsyncStateHttpContextExtensions.AddAsyncStateHttpContext(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Authentication">
@@ -4398,6 +4408,15 @@
       <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionResetException.#ctor(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionResetException.#ctor(System.String,System.Exception)" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Connections.ConnectionTimeoutExtensions" Id="T:Microsoft.AspNetCore.Connections.ConnectionTimeoutExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionTimeoutExtensions.AddConnectionTimeout(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionTimeoutExtensions.AddConnectionTimeout(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Connections.ConnectionTimeoutOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionTimeoutExtensions.UseConnectionTimeout(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Connections.ConnectionTimeoutOptions" Id="T:Microsoft.AspNetCore.Connections.ConnectionTimeoutOptions">
+      <Member Id="M:Microsoft.AspNetCore.Connections.ConnectionTimeoutOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Connections.ConnectionTimeoutOptions.Timeout" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Connections.DefaultConnectionContext" Id="T:Microsoft.AspNetCore.Connections.DefaultConnectionContext">
       <Member Id="M:Microsoft.AspNetCore.Connections.DefaultConnectionContext.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Connections.DefaultConnectionContext.#ctor(System.String)" />
@@ -5288,6 +5307,81 @@
       <Member Id="M:Microsoft.AspNetCore.Grpc.JsonTranscoding.GrpcJsonTranscodingOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Grpc.JsonTranscoding.GrpcJsonTranscodingOptions.JsonSettings" />
       <Member Id="P:Microsoft.AspNetCore.Grpc.JsonTranscoding.GrpcJsonTranscodingOptions.TypeRegistry" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.HeaderParsing">
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.CommonHeaders" Id="T:Microsoft.AspNetCore.HeaderParsing.CommonHeaders">
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Accept" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.AcceptEncoding" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.AcceptLanguage" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.CacheControl" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.ContentDisposition" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.ContentType" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Cookie" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Date" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Host" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.IfMatch" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.IfModifiedSince" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.IfNoneMatch" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.IfRange" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.IfUnmodifiedSince" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Range" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.Referer" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.CommonHeaders.XForwardedFor" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderKey`1" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderKey`1">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderKey`1.ToString" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderKey`1.Name" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderParser`1" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderParser`1">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParser`1.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParser`1.TryParse(Microsoft.Extensions.Primitives.StringValues,`0@,System.String@)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.AddHeaderParsing(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.AddHeaderParsing(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.AddHeaderParsing(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.GetHeaderParsing(Microsoft.AspNetCore.Http.HttpRequest)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.TryGetHeaderValue``1(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.HeaderParsing.HeaderKey{``0},``0@)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingExtensions.TryGetHeaderValue``1(Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.HeaderParsing.HeaderKey{``0},``0@,Microsoft.AspNetCore.HeaderParsing.ParsingResult@)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderParsingFeature" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderParsingFeature">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingFeature.TryGetHeaderValue``1(Microsoft.AspNetCore.HeaderParsing.HeaderKey{``0},``0@)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingFeature.TryGetHeaderValue``1(Microsoft.AspNetCore.HeaderParsing.HeaderKey{``0},``0@,Microsoft.AspNetCore.HeaderParsing.ParsingResult@)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions.DefaultMaxCachedValuesPerHeader" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions.DefaultValues" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderParsingOptions.MaxCachedValuesPerHeader" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1" Id="T:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.#ctor(System.String,Microsoft.AspNetCore.HeaderParsing.HeaderParser{`0},System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.#ctor(System.String,System.Type,System.Boolean)" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.Cacheable" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.HeaderName" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.ParserInstance" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HeaderSetup`1.ParserType" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.HostHeaderValue" Id="T:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.#ctor(System.String,System.Nullable{System.Int32})" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.Equals(Microsoft.AspNetCore.HeaderParsing.HostHeaderValue)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.Equals(System.Object)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.GetHashCode" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.op_Equality(Microsoft.AspNetCore.HeaderParsing.HostHeaderValue,Microsoft.AspNetCore.HeaderParsing.HostHeaderValue)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.op_Inequality(Microsoft.AspNetCore.HeaderParsing.HostHeaderValue,Microsoft.AspNetCore.HeaderParsing.HostHeaderValue)" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.ToString" />
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.TryParse(System.String,Microsoft.AspNetCore.HeaderParsing.HostHeaderValue@)" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.Host" />
+      <Member Id="P:Microsoft.AspNetCore.HeaderParsing.HostHeaderValue.Port" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.IHeaderRegistry" Id="T:Microsoft.AspNetCore.HeaderParsing.IHeaderRegistry">
+      <Member Id="M:Microsoft.AspNetCore.HeaderParsing.IHeaderRegistry.Register``1(Microsoft.AspNetCore.HeaderParsing.HeaderSetup{``0})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.HeaderParsing.ParsingResult" Id="T:Microsoft.AspNetCore.HeaderParsing.ParsingResult">
+      <Member Id="F:Microsoft.AspNetCore.HeaderParsing.ParsingResult.Error" />
+      <Member Id="F:Microsoft.AspNetCore.HeaderParsing.ParsingResult.NotFound" />
+      <Member Id="F:Microsoft.AspNetCore.HeaderParsing.ParsingResult.Success" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.HeaderPropagation">
@@ -19091,6 +19185,112 @@
       <Member Id="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.RedirectToAppendTrailingSlash" />
       <Member Id="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.RequestPath" />
       <Member Id="P:Microsoft.AspNetCore.StaticFiles.Infrastructure.SharedOptionsBase.SharedOptions" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Telemetry">
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions" Id="T:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions">
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.Duration" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.Host" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.Method" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.Path" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.RequestBody" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.RequestHeaderPrefix" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.ResponseBody" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.ResponseHeaderPrefix" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.StatusCode" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpLoggingDimensions.DimensionNames" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions" Id="T:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions.AddHttpLogEnricher``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Telemetry.LoggingOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpLoggingServiceExtensions.UseHttpLoggingMiddleware(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder" Id="T:Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder.#ctor(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder.Services" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions" Id="T:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions.AddHttpMetering(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions.AddHttpMetering(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions.AddMetricEnricher(Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder,Microsoft.AspNetCore.Telemetry.IIncomingRequestMetricEnricher)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions.AddMetricEnricher``1(Microsoft.AspNetCore.Telemetry.HttpMeteringBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpMeteringExtensions.UseHttpMetering(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpTracingExtensions" Id="T:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTraceEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Telemetry.IHttpTraceEnricher)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTraceEnricher(OpenTelemetry.Trace.TracerProviderBuilder,Microsoft.AspNetCore.Telemetry.IHttpTraceEnricher)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTraceEnricher``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTraceEnricher``1(OpenTelemetry.Trace.TracerProviderBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTracing(OpenTelemetry.Trace.TracerProviderBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTracing(OpenTelemetry.Trace.TracerProviderBuilder,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingExtensions.AddHttpTracing(OpenTelemetry.Trace.TracerProviderBuilder,System.Action{Microsoft.AspNetCore.Telemetry.HttpTracingOptions})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.HttpTracingOptions" Id="T:Microsoft.AspNetCore.Telemetry.HttpTracingOptions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.HttpTracingOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpTracingOptions.ExcludePathStartsWith" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpTracingOptions.IncludePath" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpTracingOptions.RequestPathParameterRedactionMode" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.HttpTracingOptions.RouteParameterDataClasses" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.IHttpLogEnricher" Id="T:Microsoft.AspNetCore.Telemetry.IHttpLogEnricher">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.IHttpLogEnricher.Enrich(Microsoft.Extensions.Telemetry.Enrichment.IEnrichmentPropertyBag,Microsoft.AspNetCore.Http.HttpRequest,Microsoft.AspNetCore.Http.HttpResponse)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.IHttpTraceEnricher" Id="T:Microsoft.AspNetCore.Telemetry.IHttpTraceEnricher">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.IHttpTraceEnricher.Enrich(System.Diagnostics.Activity,Microsoft.AspNetCore.Http.HttpRequest)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.IIncomingRequestMetricEnricher" Id="T:Microsoft.AspNetCore.Telemetry.IIncomingRequestMetricEnricher">
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.IIncomingRequestMetricEnricher.DimensionNames" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.IncomingPathLoggingMode" Id="T:Microsoft.AspNetCore.Telemetry.IncomingPathLoggingMode">
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.IncomingPathLoggingMode.Formatted" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.IncomingPathLoggingMode.Structured" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.LoggingOptions" Id="T:Microsoft.AspNetCore.Telemetry.LoggingOptions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.LoggingOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.BodySizeLimit" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.ExcludePathStartsWith" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.LogBody" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.LogRequestStart" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RequestBodyContentTypes" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RequestBodyReadTimeout" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RequestHeadersDataClasses" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RequestPathLoggingMode" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RequestPathParameterRedactionMode" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.ResponseBodyContentTypes" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.ResponseHeadersDataClasses" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.LoggingOptions.RouteParameterDataClasses" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants" Id="T:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants">
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants.ElapsedResponseProcessed" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants.ElapsedTillEntryMiddleware" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants.ElapsedTillFinished" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants.ElapsedTillHeaders" />
+      <Member Id="F:Microsoft.AspNetCore.Telemetry.RequestCheckpointConstants.ElapsedTillPipelineExitMiddleware" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestCheckpointExtensions" Id="T:Microsoft.AspNetCore.Telemetry.RequestCheckpointExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestCheckpointExtensions.AddRequestCheckpoint(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestCheckpointExtensions.UseRequestCheckpoint(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestHeadersEnricherExtensions" Id="T:Microsoft.AspNetCore.Telemetry.RequestHeadersEnricherExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestHeadersEnricherExtensions.AddRequestHeadersLogEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestHeadersEnricherExtensions.AddRequestHeadersLogEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestHeadersEnricherExtensions.AddRequestHeadersLogEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Telemetry.RequestHeadersLogEnricherOptions})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestHeadersLogEnricherOptions" Id="T:Microsoft.AspNetCore.Telemetry.RequestHeadersLogEnricherOptions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestHeadersLogEnricherOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.RequestHeadersLogEnricherOptions.HeadersDataClasses" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions" Id="T:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryExtensions.UseRequestLatencyTelemetry(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryOptions" Id="T:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryOptions">
+      <Member Id="M:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Telemetry.RequestLatencyTelemetryOptions.LatencyDataExportTimeout" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.TestHost">
