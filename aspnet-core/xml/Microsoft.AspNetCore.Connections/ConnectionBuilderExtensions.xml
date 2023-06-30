@@ -64,6 +64,35 @@
       </Docs>
     </Member>
     <Member MemberName="Use">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Connections.IConnectionBuilder Use (this Microsoft.AspNetCore.Connections.IConnectionBuilder connectionBuilder, Func&lt;Microsoft.AspNetCore.Connections.ConnectionContext,Microsoft.AspNetCore.Connections.ConnectionDelegate,System.Threading.Tasks.Task&gt; middleware);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Connections.IConnectionBuilder Use(class Microsoft.AspNetCore.Connections.IConnectionBuilder connectionBuilder, class System.Func`3&lt;class Microsoft.AspNetCore.Connections.ConnectionContext, class Microsoft.AspNetCore.Connections.ConnectionDelegate, class System.Threading.Tasks.Task&gt; middleware) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.ConnectionBuilderExtensions.Use(Microsoft.AspNetCore.Connections.IConnectionBuilder,System.Func{Microsoft.AspNetCore.Connections.ConnectionContext,Microsoft.AspNetCore.Connections.ConnectionDelegate,System.Threading.Tasks.Task})" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function Use (connectionBuilder As IConnectionBuilder, middleware As Func(Of ConnectionContext, ConnectionDelegate, Task)) As IConnectionBuilder" />
+      <MemberSignature Language="F#" Value="static member Use : Microsoft.AspNetCore.Connections.IConnectionBuilder * Func&lt;Microsoft.AspNetCore.Connections.ConnectionContext, Microsoft.AspNetCore.Connections.ConnectionDelegate, System.Threading.Tasks.Task&gt; -&gt; Microsoft.AspNetCore.Connections.IConnectionBuilder" Usage="Microsoft.AspNetCore.Connections.ConnectionBuilderExtensions.Use (connectionBuilder, middleware)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Connections.Abstractions</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Connections.IConnectionBuilder</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="connectionBuilder" Type="Microsoft.AspNetCore.Connections.IConnectionBuilder" Index="0" FrameworkAlternate="aspnetcore-8.0" RefType="this" />
+        <Parameter Name="middleware" Type="System.Func&lt;Microsoft.AspNetCore.Connections.ConnectionContext,Microsoft.AspNetCore.Connections.ConnectionDelegate,System.Threading.Tasks.Task&gt;" Index="1" FrameworkAlternate="aspnetcore-8.0" />
+      </Parameters>
+      <Docs>
+        <param name="connectionBuilder">The <see cref="T:Microsoft.AspNetCore.Connections.IConnectionBuilder" />.</param>
+        <param name="middleware">The middleware to add to the <see cref="T:Microsoft.AspNetCore.Connections.IConnectionBuilder" />.</param>
+        <summary>
+            Add the given <paramref name="middleware" /> to the connection.
+            If you aren't calling the next function, use <see cref="M:Microsoft.AspNetCore.Connections.ConnectionBuilderExtensions.Run(Microsoft.AspNetCore.Connections.IConnectionBuilder,System.Func{Microsoft.AspNetCore.Connections.ConnectionContext,System.Threading.Tasks.Task})" /> instead.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Connections.IConnectionBuilder" />.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Use">
       <MemberSignature Language="C++ CLI" Value="public:&#xA;[System::Runtime::CompilerServices::Extension]&#xA; static Microsoft::AspNetCore::Connections::IConnectionBuilder ^ Use(Microsoft::AspNetCore::Connections::IConnectionBuilder ^ connectionBuilder, Func&lt;Microsoft::AspNetCore::Connections::ConnectionContext ^, Func&lt;System::Threading::Tasks::Task ^&gt; ^, System::Threading::Tasks::Task ^&gt; ^ middleware);" />
       <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Connections.IConnectionBuilder Use (this Microsoft.AspNetCore.Connections.IConnectionBuilder connectionBuilder, Func&lt;Microsoft.AspNetCore.Connections.ConnectionContext,Func&lt;System.Threading.Tasks.Task&gt;,System.Threading.Tasks.Task&gt; middleware);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Connections.IConnectionBuilder Use(class Microsoft.AspNetCore.Connections.IConnectionBuilder connectionBuilder, class System.Func`3&lt;class Microsoft.AspNetCore.Connections.ConnectionContext, class System.Func`1&lt;class System.Threading.Tasks.Task&gt;, class System.Threading.Tasks.Task&gt; middleware) cil managed" />
@@ -94,7 +123,15 @@
         <param name="middleware">The middleware to add to the <see cref="T:Microsoft.AspNetCore.Connections.IConnectionBuilder" />.</param>
         <summary>
             Add the given <paramref name="middleware" /> to the connection.
-            </summary>
+            If you aren't calling the next function, use <see cref="M:Microsoft.AspNetCore.Connections.ConnectionBuilderExtensions.Run(Microsoft.AspNetCore.Connections.IConnectionBuilder,System.Func{Microsoft.AspNetCore.Connections.ConnectionContext,System.Threading.Tasks.Task})" /> instead.
+            <para>
+            Prefer using <see cref="M:Microsoft.AspNetCore.Connections.ConnectionBuilderExtensions.Use(Microsoft.AspNetCore.Connections.IConnectionBuilder,System.Func{Microsoft.AspNetCore.Connections.ConnectionContext,Microsoft.AspNetCore.Connections.ConnectionDelegate,System.Threading.Tasks.Task})" /> for better performance as shown below:
+            <code>
+            builder.Use((context, next) =&gt;
+            {
+                return next(context);
+            });
+            </code></para></summary>
         <returns>The <see cref="T:Microsoft.AspNetCore.Connections.IConnectionBuilder" />.</returns>
         <remarks>To be added.</remarks>
       </Docs>

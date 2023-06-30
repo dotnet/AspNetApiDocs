@@ -1,0 +1,106 @@
+<Type Name="IHttpSysRequestTimingFeature" FullName="Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature">
+  <TypeSignature Language="C#" Value="public interface IHttpSysRequestTimingFeature" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHttpSysRequestTimingFeature" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IHttpSysRequestTimingFeature" />
+  <TypeSignature Language="F#" Value="type IHttpSysRequestTimingFeature = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.Server.HttpSys</AssemblyName>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            This exposes the Http.Sys HTTP_REQUEST_TIMING_INFO extensibility point which contains request processing timestamp data from Http.Sys.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Timestamps">
+      <MemberSignature Language="C#" Value="public ReadOnlySpan&lt;long&gt; Timestamps { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance valuetype System.ReadOnlySpan`1&lt;int64&gt; Timestamps" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature.Timestamps" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property Timestamps As ReadOnlySpan(Of Long)" />
+      <MemberSignature Language="F#" Value="member this.Timestamps : ReadOnlySpan&lt;int64&gt;" Usage="Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature.Timestamps" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.HttpSys</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.ReadOnlySpan&lt;System.Int64&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets all Http.Sys timing timestamps
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            These timestamps were obtained using QueryPerformanceCounter <see href="https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter" /> and the timestamp frequency can be obtained via QueryPerformanceFrequency <see href="https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancefrequency" />.
+            The index of the timing can be cast to <see cref="T:Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType" /> to know what the timing represents.
+            The value may be 0 if the timing is not available for the current request.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetElapsedTime">
+      <MemberSignature Language="C#" Value="public bool TryGetElapsedTime (Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType startingTimestampType, Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType endingTimestampType, out TimeSpan elapsed);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TryGetElapsedTime(valuetype Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType startingTimestampType, valuetype Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType endingTimestampType, [out] valuetype System.TimeSpan&amp; elapsed) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature.TryGetElapsedTime(Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType,Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType,System.TimeSpan@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TryGetElapsedTime (startingTimestampType As HttpSysRequestTimingType, endingTimestampType As HttpSysRequestTimingType, ByRef elapsed As TimeSpan) As Boolean" />
+      <MemberSignature Language="F#" Value="abstract member TryGetElapsedTime : Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType * Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType * TimeSpan -&gt; bool" Usage="iHttpSysRequestTimingFeature.TryGetElapsedTime (startingTimestampType, endingTimestampType, elapsed)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.HttpSys</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="startingTimestampType" Type="Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType" />
+        <Parameter Name="endingTimestampType" Type="Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType" />
+        <Parameter Name="elapsed" Type="System.TimeSpan" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="startingTimestampType">The timestamp type marking the beginning of the time period.</param>
+        <param name="endingTimestampType">The timestamp type marking the end of the time period.</param>
+        <param name="elapsed">A <see cref="T:System.TimeSpan" /> for the elapsed time between the starting and ending timestamps.</param>
+        <summary>
+            Gets the elapsed time between the two given timings.
+            </summary>
+        <returns>True if both given timings were set (i.e., non-zero).</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TryGetTimestamp">
+      <MemberSignature Language="C#" Value="public bool TryGetTimestamp (Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType timestampType, out long timestamp);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance bool TryGetTimestamp(valuetype Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType timestampType, [out] int64&amp; timestamp) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Server.HttpSys.IHttpSysRequestTimingFeature.TryGetTimestamp(Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType,System.Int64@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function TryGetTimestamp (timestampType As HttpSysRequestTimingType, ByRef timestamp As Long) As Boolean" />
+      <MemberSignature Language="F#" Value="abstract member TryGetTimestamp : Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType * int64 -&gt; bool" Usage="iHttpSysRequestTimingFeature.TryGetTimestamp (timestampType, timestamp)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.HttpSys</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="timestampType" Type="Microsoft.AspNetCore.Server.HttpSys.HttpSysRequestTimingType" />
+        <Parameter Name="timestamp" Type="System.Int64" RefType="out" />
+      </Parameters>
+      <Docs>
+        <param name="timestampType">The timestamp type to get.</param>
+        <param name="timestamp">The value of the timestamp if set.</param>
+        <summary>
+            Gets the timestamp for the given timing.
+            </summary>
+        <returns>True if the given timing was set (i.e., non-zero).</returns>
+        <remarks>
+            These timestamps were obtained using QueryPerformanceCounter <see href="https://learn.microsoft.com/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter" /> and the timestamp frequency can be obtained via QueryPerformanceFrequency <see href="https://learn.microsoft.com/windows/win32/api/profileapi/nf-profileapi-queryperformancefrequency" />.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>

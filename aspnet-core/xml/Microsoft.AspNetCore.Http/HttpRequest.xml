@@ -23,6 +23,16 @@
     <BaseTypeName>System.Object</BaseTypeName>
   </Base>
   <Interfaces />
+  <Attributes>
+    <Attribute FrameworkAlternate="aspnetcore-8.0">
+      <AttributeName Language="C#">[System.Diagnostics.DebuggerDisplay("{DebuggerToString(),nq}")]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerDisplay("{DebuggerToString(),nq}")&gt;]</AttributeName>
+    </Attribute>
+    <Attribute FrameworkAlternate="aspnetcore-8.0">
+      <AttributeName Language="C#">[System.Diagnostics.DebuggerTypeProxy(typeof(Microsoft.AspNetCore.Http.HttpRequest+HttpRequestDebugView))]</AttributeName>
+      <AttributeName Language="F#">[&lt;System.Diagnostics.DebuggerTypeProxy(typeof(Microsoft.AspNetCore.Http.HttpRequest+HttpRequestDebugView))&gt;]</AttributeName>
+    </Attribute>
+  </Attributes>
   <Docs>
     <summary>
             Represents the incoming side of an individual HTTP request.
@@ -248,7 +258,16 @@
             Gets or sets the request body as a form.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+                Invoking this property could result in thread exhaustion since it's wrapping an asynchronous implementation.
+                To prevent this the method <see cref="M:Microsoft.AspNetCore.Http.HttpRequest.ReadFormAsync(System.Threading.CancellationToken)" /> can be used.
+                For more information, see <see href="https://aka.ms/aspnet/forms-async" />.
+                </para>
+        </remarks>
+        <exception cref="T:System.InvalidOperationException">
+                incorrect content-type.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="HasFormContentType">
@@ -654,6 +673,9 @@
             </summary>
         <returns />
         <remarks>To be added.</remarks>
+        <exception cref="T:System.InvalidOperationException">
+                incorrect content-type.
+            </exception>
       </Docs>
     </Member>
     <Member MemberName="RouteValues">
