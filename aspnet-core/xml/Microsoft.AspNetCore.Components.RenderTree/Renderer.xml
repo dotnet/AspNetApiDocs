@@ -717,11 +717,11 @@
       </Docs>
     </Member>
     <Member MemberName="ResolveComponentForRenderMode">
-      <MemberSignature Language="C#" Value="protected internal virtual Microsoft.AspNetCore.Components.IComponent ResolveComponentForRenderMode (Type componentType, int? parentComponentId, Microsoft.AspNetCore.Components.IComponentActivator componentActivator, Microsoft.AspNetCore.Components.IComponentRenderMode componentTypeRenderMode);" />
-      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class Microsoft.AspNetCore.Components.IComponent ResolveComponentForRenderMode(class System.Type componentType, valuetype System.Nullable`1&lt;int32&gt; parentComponentId, class Microsoft.AspNetCore.Components.IComponentActivator componentActivator, class Microsoft.AspNetCore.Components.IComponentRenderMode componentTypeRenderMode) cil managed" />
+      <MemberSignature Language="C#" Value="protected internal virtual Microsoft.AspNetCore.Components.IComponent ResolveComponentForRenderMode (Type componentType, int? parentComponentId, Microsoft.AspNetCore.Components.IComponentActivator componentActivator, Microsoft.AspNetCore.Components.IComponentRenderMode renderMode);" />
+      <MemberSignature Language="ILAsm" Value=".method familyorassemblyhidebysig newslot virtual instance class Microsoft.AspNetCore.Components.IComponent ResolveComponentForRenderMode(class System.Type componentType, valuetype System.Nullable`1&lt;int32&gt; parentComponentId, class Microsoft.AspNetCore.Components.IComponentActivator componentActivator, class Microsoft.AspNetCore.Components.IComponentRenderMode renderMode) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.ResolveComponentForRenderMode(System.Type,System.Nullable{System.Int32},Microsoft.AspNetCore.Components.IComponentActivator,Microsoft.AspNetCore.Components.IComponentRenderMode)" />
-      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function ResolveComponentForRenderMode (componentType As Type, parentComponentId As Nullable(Of Integer), componentActivator As IComponentActivator, componentTypeRenderMode As IComponentRenderMode) As IComponent" />
-      <MemberSignature Language="F#" Value="abstract member ResolveComponentForRenderMode : Type * Nullable&lt;int&gt; * Microsoft.AspNetCore.Components.IComponentActivator * Microsoft.AspNetCore.Components.IComponentRenderMode -&gt; Microsoft.AspNetCore.Components.IComponent&#xA;override this.ResolveComponentForRenderMode : Type * Nullable&lt;int&gt; * Microsoft.AspNetCore.Components.IComponentActivator * Microsoft.AspNetCore.Components.IComponentRenderMode -&gt; Microsoft.AspNetCore.Components.IComponent" Usage="renderer.ResolveComponentForRenderMode (componentType, parentComponentId, componentActivator, componentTypeRenderMode)" />
+      <MemberSignature Language="VB.NET" Value="Protected Friend Overridable Function ResolveComponentForRenderMode (componentType As Type, parentComponentId As Nullable(Of Integer), componentActivator As IComponentActivator, renderMode As IComponentRenderMode) As IComponent" />
+      <MemberSignature Language="F#" Value="abstract member ResolveComponentForRenderMode : Type * Nullable&lt;int&gt; * Microsoft.AspNetCore.Components.IComponentActivator * Microsoft.AspNetCore.Components.IComponentRenderMode -&gt; Microsoft.AspNetCore.Components.IComponent&#xA;override this.ResolveComponentForRenderMode : Type * Nullable&lt;int&gt; * Microsoft.AspNetCore.Components.IComponentActivator * Microsoft.AspNetCore.Components.IComponentRenderMode -&gt; Microsoft.AspNetCore.Components.IComponent" Usage="renderer.ResolveComponentForRenderMode (componentType, parentComponentId, componentActivator, renderMode)" />
       <MemberType>Method</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
@@ -741,17 +741,18 @@
         </Parameter>
         <Parameter Name="parentComponentId" Type="System.Nullable&lt;System.Int32&gt;" Index="1" FrameworkAlternate="aspnetcore-8.0" />
         <Parameter Name="componentActivator" Type="Microsoft.AspNetCore.Components.IComponentActivator" Index="2" FrameworkAlternate="aspnetcore-8.0" />
-        <Parameter Name="componentTypeRenderMode" Type="Microsoft.AspNetCore.Components.IComponentRenderMode" Index="3" FrameworkAlternate="aspnetcore-8.0" />
+        <Parameter Name="renderMode" Type="Microsoft.AspNetCore.Components.IComponentRenderMode" Index="3" FrameworkAlternate="aspnetcore-8.0" />
       </Parameters>
       <Docs>
         <param name="componentType">The type of component that was requested.</param>
         <param name="parentComponentId">The parent component ID, or null if it is a root component.</param>
         <param name="componentActivator">An <see cref="T:Microsoft.AspNetCore.Components.IComponentActivator" /> that should be used when instantiating component objects.</param>
-        <param name="componentTypeRenderMode">The <see cref="T:Microsoft.AspNetCore.Components.IComponentRenderMode" /> declared on <paramref name="componentType" />.</param>
+        <param name="renderMode">The <see cref="T:Microsoft.AspNetCore.Components.IComponentRenderMode" /> declared on <paramref name="componentType" /> or at the call site (for example, by the parent component).</param>
         <summary>
             Determines how to handle an <see cref="T:Microsoft.AspNetCore.Components.IComponentRenderMode" /> when obtaining a component instance.
-            This is only called for components that have specified a render mode. Subclasses may override this
-            method to return a component of a different type, or throw, depending on whether the renderer
+            This is only called when a render mode is specified either at the call site or on the component type.
+            
+            Subclasses may override this method to return a component of a different type, or throw, depending on whether the renderer
             supports the render mode and how it implements that support.
             </summary>
         <returns>An <see cref="T:Microsoft.AspNetCore.Components.IComponent" /> instance.</returns>
