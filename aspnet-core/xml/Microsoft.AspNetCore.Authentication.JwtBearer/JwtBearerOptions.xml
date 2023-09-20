@@ -526,8 +526,8 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.MapInboundClaims" /> property on the default instance of <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler" /> in SecurityTokenValidators, which is used when determining
-            whether or not to map claim types that are extracted when validating a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken" />.
+            Gets or sets the <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.MapInboundClaims" /> property on the default instance of <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler" /> in SecurityTokenValidators, or <see cref="T:Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler" /> in TokenHandlers, which is used when determining
+            whether or not to map claim types that are extracted when validating a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken" /> or a <see cref="T:Microsoft.IdentityModel.JsonWebTokens.JsonWebToken" />.
             <para>If this is set to true, the Claim Type is set to the JSON claim 'name' after translating using this mapping. Otherwise, no mapping occurs.</para><para>The default value is true.</para></summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -754,12 +754,40 @@
         <AssemblyVersion>7.0.5.0</AssemblyVersion>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-8.0">
+          <AttributeName Language="C#">[System.Obsolete("SecurityTokenValidators is no longer used by default. Use TokenHandlers instead. To continue using SecurityTokenValidators, set UseSecurityTokenValidators to true. See https://aka.ms/aspnetcore8/security-token-changes")]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Obsolete("SecurityTokenValidators is no longer used by default. Use TokenHandlers instead. To continue using SecurityTokenValidators, set UseSecurityTokenValidators to true. See https://aka.ms/aspnetcore8/security-token-changes")&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.Collections.Generic.IList&lt;Microsoft.IdentityModel.Tokens.ISecurityTokenValidator&gt;</ReturnType>
       </ReturnValue>
       <Docs>
         <summary>
             Gets the ordered list of <see cref="T:Microsoft.IdentityModel.Tokens.ISecurityTokenValidator" /> used to validate access tokens.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="TokenHandlers">
+      <MemberSignature Language="C#" Value="public System.Collections.Generic.IList&lt;Microsoft.IdentityModel.Tokens.TokenHandler&gt; TokenHandlers { get; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Collections.Generic.IList`1&lt;class Microsoft.IdentityModel.Tokens.TokenHandler&gt; TokenHandlers" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.TokenHandlers" />
+      <MemberSignature Language="VB.NET" Value="Public ReadOnly Property TokenHandlers As IList(Of TokenHandler)" />
+      <MemberSignature Language="F#" Value="member this.TokenHandlers : System.Collections.Generic.IList&lt;Microsoft.IdentityModel.Tokens.TokenHandler&gt;" Usage="Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.TokenHandlers" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Authentication.JwtBearer</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Collections.Generic.IList&lt;Microsoft.IdentityModel.Tokens.TokenHandler&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets the ordered list of <see cref="T:Microsoft.IdentityModel.Tokens.TokenHandler" /> used to validate access tokens.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
@@ -803,6 +831,33 @@
         <value>To be added.</value>
         <remarks>Contains the types and definitions required for validating a token.</remarks>
         <exception cref="T:System.ArgumentNullException">if 'value' is null.</exception>
+      </Docs>
+    </Member>
+    <Member MemberName="UseSecurityTokenValidators">
+      <MemberSignature Language="C#" Value="public bool UseSecurityTokenValidators { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool UseSecurityTokenValidators" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.UseSecurityTokenValidators" />
+      <MemberSignature Language="VB.NET" Value="Public Property UseSecurityTokenValidators As Boolean" />
+      <MemberSignature Language="F#" Value="member this.UseSecurityTokenValidators : bool with get, set" Usage="Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.UseSecurityTokenValidators" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Authentication.JwtBearer</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets whether <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.TokenHandlers" /> or <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions.SecurityTokenValidators" /> will be used to validate the inbound token.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            The advantages of using TokenHandlers are:
+            <para>There is an Async model.</para><para>The default token handler is a <see cref="T:Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler" /> which is faster than a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler" />.</para><para>There is an ability to make use of a Last-Known-Good model for metadata that protects applications when metadata is published with errors.</para>
+            SecurityTokenValidators can be used when <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.TokenValidatedContext.SecurityToken" /> needs a <see cref="T:System.IdentityModel.Tokens.Jwt.JwtSecurityToken" />.
+            When using TokenHandlers, <see cref="P:Microsoft.AspNetCore.Authentication.JwtBearer.TokenValidatedContext.SecurityToken" /> will be a <see cref="T:Microsoft.IdentityModel.JsonWebTokens.JsonWebToken" />. 
+            </remarks>
       </Docs>
     </Member>
   </Members>
