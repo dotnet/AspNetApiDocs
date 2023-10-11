@@ -1,0 +1,87 @@
+<Type Name="IHttpLoggingInterceptor" FullName="Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor">
+  <TypeSignature Language="C#" Value="public interface IHttpLoggingInterceptor" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IHttpLoggingInterceptor" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IHttpLoggingInterceptor" />
+  <TypeSignature Language="F#" Value="type IHttpLoggingInterceptor = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.HttpLogging</AssemblyName>
+    <AssemblyVersion>8.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Callbacks used to extend the HttpLogging middleware.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="OnRequestAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask OnRequestAsync (Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext logContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask OnRequestAsync(class Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext logContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnRequestAsync (logContext As HttpLoggingInterceptorContext) As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member OnRequestAsync : Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext -&gt; System.Threading.Tasks.ValueTask" Usage="iHttpLoggingInterceptor.OnRequestAsync logContext" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.HttpLogging</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logContext" Type="Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext" />
+      </Parameters>
+      <Docs>
+        <param name="logContext">To be added.</param>
+        <summary>
+            A callback to customize the logging of the request and response.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            This is called when the request is first received and can be used to configure both request and response options. All settings will carry over to
+            <see cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" /> except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+            will be cleared after logging the request. <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.LoggingFields" /> may be changed per request to control the logging behavior.
+            If no request fields are enabled, and the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> collection is empty, no request logging will occur.
+            If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the request to response
+            and be logged together.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnResponseAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.ValueTask OnResponseAsync (Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext logContext);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask OnResponseAsync(class Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext logContext) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnResponseAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnResponseAsync (logContext As HttpLoggingInterceptorContext) As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member OnResponseAsync : Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext -&gt; System.Threading.Tasks.ValueTask" Usage="iHttpLoggingInterceptor.OnResponseAsync logContext" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.HttpLogging</AssemblyName>
+        <AssemblyVersion>8.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="logContext" Type="Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext" />
+      </Parameters>
+      <Docs>
+        <param name="logContext">To be added.</param>
+        <summary>
+            A callback to customize the logging of the response.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+            This is called when the first write to the response happens, or the response ends without a write, just before anything is sent to the client. Settings are carried
+            over from <see cref="M:Microsoft.AspNetCore.HttpLogging.IHttpLoggingInterceptor.OnRequestAsync(Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext)" /> (except the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />) and response settings may
+            still be modified. Changes to request settings will have no effect. If no response fields are enabled, and the <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" />
+            collection is empty, no response logging will occur.
+            If <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions.CombineLogs" /> is enabled then <see cref="P:Microsoft.AspNetCore.HttpLogging.HttpLoggingInterceptorContext.Parameters" /> will carry over from the request to response
+            and be logged together. <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.RequestBody" /> and <see cref="F:Microsoft.AspNetCore.HttpLogging.HttpLoggingFields.ResponseBody" />  can also be disabled in OnResponseAsync to prevent
+            logging any buffered body data.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
