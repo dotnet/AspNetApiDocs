@@ -132,6 +132,7 @@
     <Assembly Name="Microsoft.AspNetCore.SignalR.StackExchangeRedis" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaProxy" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.SpaServices.Extensions" Version="9.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.StaticAssets" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.StaticFiles" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Telemetry" Version="8.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Telemetry.Middleware" Version="8.0.0.0" />
@@ -2466,6 +2467,9 @@
       <Member Id="M:Microsoft.AspNetCore.Builder.SpaProxyingExtensions.UseProxyToSpaDevelopmentServer(Microsoft.AspNetCore.SpaServices.ISpaBuilder,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.SpaProxyingExtensions.UseProxyToSpaDevelopmentServer(Microsoft.AspNetCore.SpaServices.ISpaBuilder,System.Uri)" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.StaticAssetsEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.StaticAssetsEndpointRouteBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.StaticAssetsEndpointRouteBuilderExtensions.MapStaticAssets(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.String)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Builder.StaticFileExtensions" Id="T:Microsoft.AspNetCore.Builder.StaticFileExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
       <Member Id="M:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Builder.StaticFileOptions)" />
@@ -2625,6 +2629,12 @@
       <Member Id="P:Microsoft.AspNetCore.Components.Authorization.AuthenticationState.User" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Authorization.AuthenticationStateChangedHandler" Id="T:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateChangedHandler" />
+    <Type Name="Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData" Id="T:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData">
+      <Member Id="M:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData.Claims" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData.NameClaimType" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateData.RoleClaimType" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider" Id="T:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider">
       <Member Id="E:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.AuthenticationStateChanged" />
       <Member Id="M:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.#ctor" />
@@ -2804,6 +2814,13 @@
       <Member Id="M:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)" />
       <Member Id="M:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender" />
       <Member Id="M:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged" />
+      <Member Id="P:Microsoft.AspNetCore.Components.ComponentBase.AssignedRenderMode" />
+      <Member Id="P:Microsoft.AspNetCore.Components.ComponentBase.Platform" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.ComponentPlatform" Id="T:Microsoft.AspNetCore.Components.ComponentPlatform">
+      <Member Id="M:Microsoft.AspNetCore.Components.ComponentPlatform.#ctor(System.String,System.Boolean)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.ComponentPlatform.IsInteractive" />
+      <Member Id="P:Microsoft.AspNetCore.Components.ComponentPlatform.Name" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Dispatcher" Id="T:Microsoft.AspNetCore.Components.Dispatcher">
       <Member Id="M:Microsoft.AspNetCore.Components.Dispatcher.#ctor" />
@@ -3132,6 +3149,8 @@
       <Member Id="P:Microsoft.AspNetCore.Components.RenderHandle.Dispatcher" />
       <Member Id="P:Microsoft.AspNetCore.Components.RenderHandle.IsInitialized" />
       <Member Id="P:Microsoft.AspNetCore.Components.RenderHandle.IsRenderingOnMetadataUpdate" />
+      <Member Id="P:Microsoft.AspNetCore.Components.RenderHandle.Platform" />
+      <Member Id="P:Microsoft.AspNetCore.Components.RenderHandle.RenderMode" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.RenderModeAttribute" Id="T:Microsoft.AspNetCore.Components.RenderModeAttribute">
       <Member Id="M:Microsoft.AspNetCore.Components.RenderModeAttribute.#ctor" />
@@ -3218,6 +3237,7 @@
   <Namespace Name="Microsoft.AspNetCore.Components.Endpoints.Infrastructure">
     <Type Name="Microsoft.AspNetCore.Components.Endpoints.Infrastructure.ComponentEndpointConventionBuilderHelper" Id="T:Microsoft.AspNetCore.Components.Endpoints.Infrastructure.ComponentEndpointConventionBuilderHelper">
       <Member Id="M:Microsoft.AspNetCore.Components.Endpoints.Infrastructure.ComponentEndpointConventionBuilderHelper.AddRenderMode(Microsoft.AspNetCore.Builder.RazorComponentsEndpointConventionBuilder,Microsoft.AspNetCore.Components.IComponentRenderMode)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Endpoints.Infrastructure.ComponentEndpointConventionBuilderHelper.GetEndpointRouteBuilder(Microsoft.AspNetCore.Builder.RazorComponentsEndpointConventionBuilder)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Endpoints.Infrastructure.RenderModeEndpointProvider" Id="T:Microsoft.AspNetCore.Components.Endpoints.Infrastructure.RenderModeEndpointProvider">
       <Member Id="M:Microsoft.AspNetCore.Components.Endpoints.Infrastructure.RenderModeEndpointProvider.#ctor" />
@@ -3533,6 +3553,7 @@
       <Member Id="M:Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.TryCreateScopeQualifiedEventName(System.Int32,System.String,System.String@)" />
       <Member Id="M:Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.UpdateDisplayAsync(Microsoft.AspNetCore.Components.RenderTree.RenderBatch@|System.Runtime.InteropServices.InAttribute)" />
       <Member Id="M:Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.WriteComponentHtml(System.Int32,System.IO.TextWriter)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.ComponentPlatform" />
       <Member Id="P:Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure.StaticHtmlRenderer.Dispatcher" />
     </Type>
   </Namespace>
@@ -3788,6 +3809,7 @@
       <Member Id="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.RenderRootComponentAsync(System.Int32,Microsoft.AspNetCore.Components.ParameterView)" />
       <Member Id="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.ResolveComponentForRenderMode(System.Type,System.Nullable{System.Int32},Microsoft.AspNetCore.Components.IComponentActivator,Microsoft.AspNetCore.Components.IComponentRenderMode)" />
       <Member Id="M:Microsoft.AspNetCore.Components.RenderTree.Renderer.UpdateDisplayAsync(Microsoft.AspNetCore.Components.RenderTree.RenderBatch@|System.Runtime.InteropServices.InAttribute)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.RenderTree.Renderer.ComponentPlatform" />
       <Member Id="P:Microsoft.AspNetCore.Components.RenderTree.Renderer.Dispatcher" />
       <Member Id="P:Microsoft.AspNetCore.Components.RenderTree.Renderer.ElementReferenceContext" />
     </Type>
@@ -4351,6 +4373,10 @@
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions.ConfigurationEndpoint" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthenticationStateDeserializationOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthenticationStateDeserializationOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthenticationStateDeserializationOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthenticationStateDeserializationOptions.DeserializationCallback" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.#ctor(Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider,Microsoft.AspNetCore.Components.NavigationManager)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.String)" />
@@ -4630,6 +4656,11 @@
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Server">
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions.SerializationCallback" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions.SerializeAllClaims" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Server.TargetPickerUi" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Server.TargetPickerUi">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Server.TargetPickerUi.#ctor(System.String,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Server.TargetPickerUi.Display(Microsoft.AspNetCore.Http.HttpContext)" />
@@ -4639,6 +4670,7 @@
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Server.WebAssemblyComponentsEndpointOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Server.WebAssemblyComponentsEndpointOptions.PathPrefix" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Server.WebAssemblyComponentsEndpointOptions.ServeMultithreadingHeaders" />
+      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Server.WebAssemblyComponentsEndpointOptions.StaticAssetsManifestPath" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Services">
@@ -13377,6 +13409,11 @@
       <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.MvcOptions},Microsoft.Extensions.Logging.ILoggerFactory)" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultOutputFormatterSelector.SelectFormatter(Microsoft.AspNetCore.Mvc.Formatters.OutputFormatterCanWriteContext,System.Collections.Generic.IList{Microsoft.AspNetCore.Mvc.Formatters.IOutputFormatter},Microsoft.AspNetCore.Mvc.Formatters.MediaTypeCollection)" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory" Id="T:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory">
+      <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Mvc.ApiBehaviorOptions},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Http.ProblemDetailsOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory.CreateProblemDetails(Microsoft.AspNetCore.Http.HttpContext,System.Nullable{System.Int32},System.String,System.String,System.String,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultProblemDetailsFactory.CreateValidationProblemDetails(Microsoft.AspNetCore.Http.HttpContext,Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary,System.Nullable{System.Int32},System.String,System.String,System.String,System.String)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Mvc.Infrastructure.DefaultStatusCodeAttribute" Id="T:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultStatusCodeAttribute">
       <Member Id="M:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultStatusCodeAttribute.#ctor(System.Int32)" />
       <Member Id="P:Microsoft.AspNetCore.Mvc.Infrastructure.DefaultStatusCodeAttribute.StatusCode" />
@@ -17597,6 +17634,11 @@
       <Member Id="P:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.DataSources" />
       <Member Id="P:Microsoft.AspNetCore.Routing.CompositeEndpointDataSource.Endpoints" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Routing.ContentEncodingMetadata" Id="T:Microsoft.AspNetCore.Routing.ContentEncodingMetadata">
+      <Member Id="M:Microsoft.AspNetCore.Routing.ContentEncodingMetadata.#ctor(System.String,System.Double)" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.ContentEncodingMetadata.Quality" />
+      <Member Id="P:Microsoft.AspNetCore.Routing.ContentEncodingMetadata.Value" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions" Id="T:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions">
       <Member Id="M:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction(Microsoft.AspNetCore.Routing.LinkGenerator,Microsoft.AspNetCore.Http.HttpContext,System.String,System.String,System.Object,System.Nullable{Microsoft.AspNetCore.Http.PathString},Microsoft.AspNetCore.Http.FragmentString,Microsoft.AspNetCore.Routing.LinkOptions)" />
       <Member Id="M:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction(Microsoft.AspNetCore.Routing.LinkGenerator,System.String,System.String,System.Object,Microsoft.AspNetCore.Http.PathString,Microsoft.AspNetCore.Http.FragmentString,Microsoft.AspNetCore.Routing.LinkOptions)" />
@@ -19808,6 +19850,17 @@
       <Member Id="P:Microsoft.AspNetCore.SpaServices.StaticFiles.SpaStaticFilesOptions.RootPath" />
     </Type>
   </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.StaticAssets.Infrastructure">
+    <Type Name="Microsoft.AspNetCore.StaticAssets.Infrastructure.StaticAssetsEndpointDataSourceHelper" Id="T:Microsoft.AspNetCore.StaticAssets.Infrastructure.StaticAssetsEndpointDataSourceHelper">
+      <Member Id="M:Microsoft.AspNetCore.StaticAssets.Infrastructure.StaticAssetsEndpointDataSourceHelper.IsStaticAssetsDataSource(Microsoft.AspNetCore.Routing.EndpointDataSource,System.String)" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.StaticAssets">
+    <Type Name="Microsoft.AspNetCore.StaticAssets.StaticAssetsEndpointConventionBuilder" Id="T:Microsoft.AspNetCore.StaticAssets.StaticAssetsEndpointConventionBuilder">
+      <Member Id="M:Microsoft.AspNetCore.StaticAssets.StaticAssetsEndpointConventionBuilder.Add(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+      <Member Id="M:Microsoft.AspNetCore.StaticAssets.StaticAssetsEndpointConventionBuilder.Finally(System.Action{Microsoft.AspNetCore.Builder.EndpointBuilder})" />
+    </Type>
+  </Namespace>
   <Namespace Name="Microsoft.AspNetCore.StaticFiles">
     <Type Name="Microsoft.AspNetCore.StaticFiles.DefaultFilesMiddleware" Id="T:Microsoft.AspNetCore.StaticFiles.DefaultFilesMiddleware">
       <Member Id="M:Microsoft.AspNetCore.StaticFiles.DefaultFilesMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.AspNetCore.Hosting.IWebHostEnvironment,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Builder.DefaultFilesOptions})" />
@@ -20312,17 +20365,11 @@
       <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.#ctor" />
       <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.GetOrCreateAsync``1(System.String,System.Func{System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``0}},Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryOptions,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.GetOrCreateAsync``2(System.String,``0,System.Func{``0,System.Threading.CancellationToken,System.Threading.Tasks.ValueTask{``1}},Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryOptions,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveKeyAsync(System.String,System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveKeysAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveTagAsync(System.String,System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveTagsAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveAsync(System.String,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveByTagAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.RemoveByTagAsync(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCache.SetAsync``1(System.String,``0,Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryOptions,System.Collections.Generic.IReadOnlyCollection{System.String},System.Threading.CancellationToken)" />
-    </Type>
-    <Type Name="Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions" Id="T:Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions">
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions.WithSerializer``1(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder,Microsoft.Extensions.Caching.Hybrid.IHybridCacheSerializer{``0})" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions.WithSerializer``2(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions.WithSerializerFactory(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder,Microsoft.Extensions.Caching.Hybrid.IHybridCacheSerializerFactory)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheBuilderExtensions.WithSerializerFactory``1(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder)" />
     </Type>
     <Type Name="Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryFlags" Id="T:Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryFlags">
       <Member Id="F:Microsoft.Extensions.Caching.Hybrid.HybridCacheEntryFlags.DisableCompression" />
@@ -20348,10 +20395,6 @@
       <Member Id="P:Microsoft.Extensions.Caching.Hybrid.HybridCacheOptions.MaximumKeyLength" />
       <Member Id="P:Microsoft.Extensions.Caching.Hybrid.HybridCacheOptions.MaximumPayloadBytes" />
       <Member Id="P:Microsoft.Extensions.Caching.Hybrid.HybridCacheOptions.ReportTagMetrics" />
-    </Type>
-    <Type Name="Microsoft.Extensions.Caching.Hybrid.HybridCacheServiceExtensions" Id="T:Microsoft.Extensions.Caching.Hybrid.HybridCacheServiceExtensions">
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheServiceExtensions.AddHybridCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
-      <Member Id="M:Microsoft.Extensions.Caching.Hybrid.HybridCacheServiceExtensions.AddHybridCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.Hybrid.HybridCacheOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder" Id="T:Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder">
       <Member Id="P:Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder.Services" />
@@ -20518,6 +20561,16 @@
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.HttpServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpServiceCollectionExtensions.AddHttpContextAccessor(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions.AddSerializer``1(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder,Microsoft.Extensions.Caching.Hybrid.IHybridCacheSerializer{``0})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions.AddSerializer``2(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions.AddSerializerFactory(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder,Microsoft.Extensions.Caching.Hybrid.IHybridCacheSerializerFactory)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheBuilderExtensions.AddSerializerFactory``1(Microsoft.Extensions.Caching.Hybrid.IHybridCacheBuilder)" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.HybridCacheServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HybridCacheServiceExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheServiceExtensions.AddHybridCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HybridCacheServiceExtensions.AddHybridCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.Extensions.Caching.Hybrid.HybridCacheOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores``1(Microsoft.AspNetCore.Identity.IdentityBuilder)" />
@@ -20894,6 +20947,7 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions}})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``2(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.ApiAuthorizationProviderOptions}})" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddAuthenticationStateDeserialization(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthenticationStateDeserializationOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication``2(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions}})" />
@@ -20901,6 +20955,7 @@
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddRemoteAuthentication``3(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions{``2}})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.WebAssemblyRazorComponentsBuilderExtensions" Id="T:Microsoft.Extensions.DependencyInjection.WebAssemblyRazorComponentsBuilderExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyRazorComponentsBuilderExtensions.AddAuthenticationStateSerialization(Microsoft.Extensions.DependencyInjection.IRazorComponentsBuilder,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Server.AuthenticationStateSerializationOptions})" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.WebAssemblyRazorComponentsBuilderExtensions.AddInteractiveWebAssemblyComponents(Microsoft.Extensions.DependencyInjection.IRazorComponentsBuilder)" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.WsFederationExtensions" Id="T:Microsoft.Extensions.DependencyInjection.WsFederationExtensions">
