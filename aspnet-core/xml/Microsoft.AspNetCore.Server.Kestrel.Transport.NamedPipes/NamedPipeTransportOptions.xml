@@ -47,6 +47,61 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="CreateDefaultNamedPipeServerStream">
+      <MemberSignature Language="C#" Value="public static System.IO.Pipes.NamedPipeServerStream CreateDefaultNamedPipeServerStream (Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.IO.Pipes.NamedPipeServerStream CreateDefaultNamedPipeServerStream(class Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateDefaultNamedPipeServerStream(Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CreateDefaultNamedPipeServerStream (context As CreateNamedPipeServerStreamContext) As NamedPipeServerStream" />
+      <MemberSignature Language="F#" Value="static member CreateDefaultNamedPipeServerStream : Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext -&gt; System.IO.Pipes.NamedPipeServerStream" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateDefaultNamedPipeServerStream context" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes</AssemblyName>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IO.Pipes.NamedPipeServerStream</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext" Index="0" FrameworkAlternate="aspnetcore-9.0" />
+      </Parameters>
+      <Docs>
+        <param name="context">A <see cref="T:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext" />.</param>
+        <summary>
+            Creates a default instance of <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> for the given
+            <see cref="T:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext" /> that can be used by a connection listener
+            to listen for inbound requests.
+            </summary>
+        <returns>
+            A <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> instance.
+            </returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="CreateNamedPipeServerStream">
+      <MemberSignature Language="C#" Value="public Func&lt;Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext,System.IO.Pipes.NamedPipeServerStream&gt; CreateNamedPipeServerStream { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;class Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext, class System.IO.Pipes.NamedPipeServerStream&gt; CreateNamedPipeServerStream" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateNamedPipeServerStream" />
+      <MemberSignature Language="VB.NET" Value="Public Property CreateNamedPipeServerStream As Func(Of CreateNamedPipeServerStreamContext, NamedPipeServerStream)" />
+      <MemberSignature Language="F#" Value="member this.CreateNamedPipeServerStream : Func&lt;Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext, System.IO.Pipes.NamedPipeServerStream&gt; with get, set" Usage="Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateNamedPipeServerStream" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes</AssemblyName>
+        <AssemblyVersion>9.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext,System.IO.Pipes.NamedPipeServerStream&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            A function used to create a new <see cref="T:System.IO.Pipes.NamedPipeServerStream" /> to listen with. If
+            not set, <see cref="M:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateDefaultNamedPipeServerStream(Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext)" /> is used.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            Defaults to <see cref="M:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateDefaultNamedPipeServerStream(Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.CreateNamedPipeServerStreamContext)" />.
+            </remarks>
+      </Docs>
+    </Member>
     <Member MemberName="CurrentUserOnly">
       <MemberSignature Language="C#" Value="public bool CurrentUserOnly { get; set; }" />
       <MemberSignature Language="ILAsm" Value=".property instance bool CurrentUserOnly" />
@@ -187,10 +242,18 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets the security information that determines the access control and audit security for pipes.
+            Gets or sets the security information that determines the default access control and audit security for pipes.
             </summary>
         <value>To be added.</value>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            Defaults to <c>null</c>, which is no pipe security.
+            </para>
+          <para>
+            Configuring <see cref="P:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.PipeSecurity" /> sets the default access control and audit security for pipes.
+            If per-endpoint security is needed then <see cref="P:Microsoft.AspNetCore.Server.Kestrel.Transport.NamedPipes.NamedPipeTransportOptions.CreateNamedPipeServerStream" /> can be configured
+            to create streams with different security settings.</para>
+        </remarks>
       </Docs>
     </Member>
   </Members>

@@ -1,1 +1,1 @@
-API PR's ( *api/autoapi/...* ) should not be made here. Changes to API documentation should be made in the source repository against the triple slash /// comments. 
+API PR's ( *api/autoapi/...* ) should ***NOT*** be made here. Changes to API documentation should be made in the [source repository](https://github.com/dotnet/aspnetcore/tree/main/src)  against the triple slash /// comments. 
