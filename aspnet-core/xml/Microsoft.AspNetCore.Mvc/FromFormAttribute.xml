@@ -5,10 +5,10 @@
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Mvc.FromFormAttribute" />
   <TypeSignature Language="VB.NET" Value="Public Class FromFormAttribute&#xA;Inherits Attribute&#xA;Implements IBindingSourceMetadata, IModelNameProvider" FrameworkAlternate="aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0" />
   <TypeSignature Language="F#" Value="type FromFormAttribute = class&#xA;    inherit Attribute&#xA;    interface IBindingSourceMetadata&#xA;    interface IModelNameProvider" FrameworkAlternate="aspnetcore-1.0;aspnetcore-1.1;aspnetcore-2.0;aspnetcore-2.1;aspnetcore-2.2;aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0" />
-  <TypeSignature Language="C#" Value="public class FromFormAttribute : Attribute, Microsoft.AspNetCore.Http.Metadata.IFromFormMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" FrameworkAlternate="aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit FromFormAttribute extends System.Attribute implements class Microsoft.AspNetCore.Http.Metadata.IFromFormMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" FrameworkAlternate="aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
-  <TypeSignature Language="VB.NET" Value="Public Class FromFormAttribute&#xA;Inherits Attribute&#xA;Implements IBindingSourceMetadata, IFromFormMetadata, IModelNameProvider" FrameworkAlternate="aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
-  <TypeSignature Language="F#" Value="type FromFormAttribute = class&#xA;    inherit Attribute&#xA;    interface IBindingSourceMetadata&#xA;    interface IModelNameProvider&#xA;    interface IFromFormMetadata" FrameworkAlternate="aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="C#" Value="public class FromFormAttribute : Attribute, Microsoft.AspNetCore.Http.Metadata.IFromFormMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceMetadata, Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" FrameworkAlternate="aspnetcore-10.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi beforefieldinit FromFormAttribute extends System.Attribute implements class Microsoft.AspNetCore.Http.Metadata.IFromFormMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IBindingSourceMetadata, class Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider" FrameworkAlternate="aspnetcore-10.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="VB.NET" Value="Public Class FromFormAttribute&#xA;Inherits Attribute&#xA;Implements IBindingSourceMetadata, IFromFormMetadata, IModelNameProvider" FrameworkAlternate="aspnetcore-10.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="F#" Value="type FromFormAttribute = class&#xA;    inherit Attribute&#xA;    interface IBindingSourceMetadata&#xA;    interface IModelNameProvider&#xA;    interface IFromFormMetadata" FrameworkAlternate="aspnetcore-10.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -23,6 +23,7 @@
     <AssemblyVersion>7.0.0.0</AssemblyVersion>
     <AssemblyVersion>8.0.0.0</AssemblyVersion>
     <AssemblyVersion>9.0.0.0</AssemblyVersion>
+    <AssemblyVersion>10.0.0.0</AssemblyVersion>
   </AssemblyInfo>
   <Base>
     <BaseTypeName>System.Attribute</BaseTypeName>
@@ -34,7 +35,7 @@
     <Interface>
       <InterfaceName>Microsoft.AspNetCore.Mvc.ModelBinding.IModelNameProvider</InterfaceName>
     </Interface>
-    <Interface FrameworkAlternate="aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0">
+    <Interface FrameworkAlternate="aspnetcore-10.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0">
       <InterfaceName>Microsoft.AspNetCore.Http.Metadata.IFromFormMetadata</InterfaceName>
     </Interface>
   </Interfaces>
@@ -46,9 +47,23 @@
   </Attributes>
   <Docs>
     <summary>
-            Specifies that a parameter or property should be bound using form-data in the request body.
-            </summary>
-    <remarks>To be added.</remarks>
+             Specifies that a parameter or property should be bound using form-data in the request body.
+             </summary>
+    <remarks>
+             Binds a parameter or property to a field in a form-data request body with the same name,
+             or the name specified in the <see cref="P:Microsoft.AspNetCore.Mvc.FromFormAttribute.Name" /> property.
+             Form parameter names are matched case-insensitively.
+            
+             For more information about parameter binding see
+             <see href="https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis/parameter-binding">Parameter binding</see>.
+             </remarks>
+    <example>
+             In this example, the value of the 'name' field in the form-data request body is bound to the name parameter,
+             and the value of the 'age' field is bound to the age parameter.
+             <code>
+             app.MapPost("/from-form", ([FromForm] string name, [FromForm] int age)
+                 =&gt; new { Name = name, Age = age });
+             </code></example>
   </Docs>
   <Members>
     <Member MemberName=".ctor">
@@ -72,6 +87,7 @@
         <AssemblyVersion>7.0.0.0</AssemblyVersion>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Parameters />
       <Docs>
@@ -104,9 +120,10 @@
         <AssemblyVersion>7.0.0.0</AssemblyVersion>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-8.0;aspnetcore-9.0">
+        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-8.0;aspnetcore-9.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
         </Attribute>
@@ -128,7 +145,7 @@
       <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Mvc.FromFormAttribute.Name" />
       <MemberSignature Language="VB.NET" Value="Public Property Name As String" />
       <MemberSignature Language="F#" Value="member this.Name : string with get, set" Usage="Microsoft.AspNetCore.Mvc.FromFormAttribute.Name" />
-      <MemberSignature Language="C#" Value="public string? Name { get; set; }" FrameworkAlternate="aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+      <MemberSignature Language="C#" Value="public string? Name { get; set; }" FrameworkAlternate="aspnetcore-10.0;aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
       <MemberType>Property</MemberType>
       <AssemblyInfo>
         <AssemblyName>Microsoft.AspNetCore.Mvc.Core</AssemblyName>
@@ -144,9 +161,10 @@
         <AssemblyVersion>7.0.0.0</AssemblyVersion>
         <AssemblyVersion>8.0.0.0</AssemblyVersion>
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-8.0;aspnetcore-9.0">
+        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-8.0;aspnetcore-9.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(2)&gt;]</AttributeName>
         </Attribute>
