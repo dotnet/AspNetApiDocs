@@ -1,0 +1,69 @@
+<Type Name="IForwarderHttpClientFactory" FullName="Yarp.ReverseProxy.Forwarder.IForwarderHttpClientFactory">
+  <TypeSignature Language="C#" Value="public interface IForwarderHttpClientFactory" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract IForwarderHttpClientFactory" FrameworkAlternate="yarp-1.0;yarp-1.1;yarp-2.0" />
+  <TypeSignature Language="DocId" Value="T:Yarp.ReverseProxy.Forwarder.IForwarderHttpClientFactory" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IForwarderHttpClientFactory" />
+  <TypeSignature Language="F#" Value="type IForwarderHttpClientFactory = interface" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract beforefieldinit IForwarderHttpClientFactory" FrameworkAlternate="yarp-2.1;yarp-2.2" />
+  <AssemblyInfo>
+    <AssemblyName>Yarp.ReverseProxy</AssemblyName>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.1.2.0</AssemblyVersion>
+    <AssemblyVersion>2.0.1.0</AssemblyVersion>
+    <AssemblyVersion>2.1.0.0</AssemblyVersion>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            Provides a method to create instances of <see cref="T:System.Net.Http.HttpMessageInvoker" />
+            for forwarding requests to an upstream server.
+            </summary>
+    <remarks>
+            This is somewhat similarly to `System.Net.Http.IHttpClientFactory`,
+            except that this factory class is meant for direct use,
+            which the forwarder requires in order to keep separate pools for each cluster.
+            </remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="CreateClient">
+      <MemberSignature Language="C#" Value="public System.Net.Http.HttpMessageInvoker CreateClient (Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext context);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.Net.Http.HttpMessageInvoker CreateClient(class Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext context) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Yarp.ReverseProxy.Forwarder.IForwarderHttpClientFactory.CreateClient(Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext)" />
+      <MemberSignature Language="VB.NET" Value="Public Function CreateClient (context As ForwarderHttpClientContext) As HttpMessageInvoker" />
+      <MemberSignature Language="F#" Value="abstract member CreateClient : Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext -&gt; System.Net.Http.HttpMessageInvoker" Usage="iForwarderHttpClientFactory.CreateClient context" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Yarp.ReverseProxy</AssemblyName>
+        <AssemblyVersion>1.0.1.0</AssemblyVersion>
+        <AssemblyVersion>1.1.2.0</AssemblyVersion>
+        <AssemblyVersion>2.0.1.0</AssemblyVersion>
+        <AssemblyVersion>2.1.0.0</AssemblyVersion>
+        <AssemblyVersion>2.2.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Net.Http.HttpMessageInvoker</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="context" Type="Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext" />
+      </Parameters>
+      <Docs>
+        <param name="context">An <see cref="T:Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext" /> carrying old and new cluster configurations.</param>
+        <summary>
+            Creates and configures an <see cref="T:System.Net.Http.HttpMessageInvoker" /> instance
+            that can be used for forwarding requests to an upstream server.
+            </summary>
+        <returns>To be added.</returns>
+        <remarks>
+          <para>
+            A call to <see cref="M:Yarp.ReverseProxy.Forwarder.IForwarderHttpClientFactory.CreateClient(Yarp.ReverseProxy.Forwarder.ForwarderHttpClientContext)" /> can return either
+            a new <see cref="T:System.Net.Http.HttpMessageInvoker" /> instance or an old one if the configuration has not changed.
+            If the old configuration is null, a new <see cref="T:System.Net.Http.HttpMessageInvoker" /> is always created.
+            The returned <see cref="T:System.Net.Http.HttpMessageInvoker" /> instance MUST NOT be disposed
+            because it can be used concurrently by several in-flight requests.
+            </para>
+        </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
