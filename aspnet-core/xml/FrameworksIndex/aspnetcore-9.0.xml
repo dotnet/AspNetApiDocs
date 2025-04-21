@@ -49,6 +49,7 @@
     <Assembly Name="Microsoft.AspNetCore.Diagnostics" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.2.0" />
     <Assembly Name="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="9.0.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Diagnostics.Middleware" Version="9.2.0.0" />
     <Assembly Name="Microsoft.AspNetCore" Version="9.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="9.0.2.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.Swagger" Version="0.9.2.0" />
@@ -2203,6 +2204,10 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RequestDecompressionBuilderExtensions.UseRequestDecompression(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Builder.RequestLatencyTelemetryApplicationBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.RequestLatencyTelemetryApplicationBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Builder.RequestLatencyTelemetryApplicationBuilderExtensions.UseRequestCheckpoint(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Builder.RequestLatencyTelemetryApplicationBuilderExtensions.UseRequestLatencyTelemetry(Microsoft.AspNetCore.Builder.IApplicationBuilder)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.RequestLocalizationOptions" Id="T:Microsoft.AspNetCore.Builder.RequestLocalizationOptions">
       <Member Id="M:Microsoft.AspNetCore.Builder.RequestLocalizationOptions.#ctor" />
@@ -5581,6 +5586,53 @@
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.Predicate" />
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResponseWriter" />
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions.ResultStatusCodes" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Diagnostics.Latency">
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants" Id="T:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants">
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants.ElapsedResponseProcessed" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants.ElapsedTillEntryMiddleware" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants.ElapsedTillFinished" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants.ElapsedTillHeaders" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Latency.RequestCheckpointConstants.ElapsedTillPipelineExitMiddleware" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Latency.RequestLatencyTelemetryOptions" Id="T:Microsoft.AspNetCore.Diagnostics.Latency.RequestLatencyTelemetryOptions">
+      <Member Id="M:Microsoft.AspNetCore.Diagnostics.Latency.RequestLatencyTelemetryOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Latency.RequestLatencyTelemetryOptions.LatencyDataExportTimeout" />
+    </Type>
+  </Namespace>
+  <Namespace Name="Microsoft.AspNetCore.Diagnostics.Logging">
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames" Id="T:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames">
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.Duration" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.Host" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.Method" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.Path" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.RequestBody" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.RequestHeaderPrefix" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.ResponseBody" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.ResponseHeaderPrefix" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.StatusCode" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.HttpLoggingTagNames.DimensionNames" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Logging.IHttpLogEnricher" Id="T:Microsoft.AspNetCore.Diagnostics.Logging.IHttpLogEnricher">
+      <Member Id="M:Microsoft.AspNetCore.Diagnostics.Logging.IHttpLogEnricher.Enrich(Microsoft.Extensions.Diagnostics.Enrichment.IEnrichmentTagCollector,Microsoft.AspNetCore.Http.HttpContext)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Logging.IncomingPathLoggingMode" Id="T:Microsoft.AspNetCore.Diagnostics.Logging.IncomingPathLoggingMode">
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.IncomingPathLoggingMode.Formatted" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.Logging.IncomingPathLoggingMode.Structured" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions" Id="T:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions">
+      <Member Id="M:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.ExcludePathStartsWith" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.RequestHeadersDataClasses" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.RequestPathLoggingMode" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.RequestPathParameterRedactionMode" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.ResponseHeadersDataClasses" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions.RouteParameterDataClasses" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.Logging.RequestHeadersLogEnricherOptions" Id="T:Microsoft.AspNetCore.Diagnostics.Logging.RequestHeadersLogEnricherOptions">
+      <Member Id="M:Microsoft.AspNetCore.Diagnostics.Logging.RequestHeadersLogEnricherOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.Logging.RequestHeadersLogEnricherOptions.HeadersDataClasses" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Grpc.JsonTranscoding">
@@ -20417,6 +20469,11 @@
     <Type Name="Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpJsonServiceExtensions.ConfigureHttpJsonOptions(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Http.Json.JsonOptions})" />
     </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.HttpLoggingServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpLoggingServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServiceCollectionExtensions.AddHttpLogEnricher``1(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServiceCollectionExtensions.AddHttpLoggingRedaction(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServiceCollectionExtensions.AddHttpLoggingRedaction(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Diagnostics.Logging.LoggingRedactionOptions})" />
+    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.HttpLoggingServicesExtensions.AddHttpLogging(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.HttpLogging.HttpLoggingOptions})" />
@@ -20735,6 +20792,16 @@
     <Type Name="Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions.AddRequestDecompression(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestDecompressionServiceExtensions.AddRequestDecompression(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.RequestDecompression.RequestDecompressionOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.RequestHeadersEnricherServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestHeadersEnricherServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestHeadersEnricherServiceCollectionExtensions.AddRequestHeadersLogEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestHeadersEnricherServiceCollectionExtensions.AddRequestHeadersLogEnricher(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Diagnostics.Logging.RequestHeadersLogEnricherOptions})" />
+    </Type>
+    <Type Name="Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions">
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions.AddRequestCheckpoint(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)" />
+      <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLatencyTelemetryServiceCollectionExtensions.AddRequestLatencyTelemetry(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Diagnostics.Latency.RequestLatencyTelemetryOptions})" />
     </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.RequestLocalizationServiceCollectionExtensions.AddRequestLocalization(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.Builder.RequestLocalizationOptions})" />
