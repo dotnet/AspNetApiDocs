@@ -2,7 +2,7 @@
 <Framework Name="aspnetcore-10.0">
   <Assemblies>
     <Assembly Name="Microsoft.AspNetCore.Antiforgery" Version="10.0.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.AsyncState" Version="9.7.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.AsyncState" Version="9.8.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.Abstractions" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.BearerToken" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Authentication.Certificate" Version="10.0.0.0" />
@@ -50,11 +50,11 @@
     <Assembly Name="Microsoft.AspNetCore.Diagnostics" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="10.0.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.Diagnostics.Middleware" Version="9.7.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Diagnostics.Middleware" Version="9.8.0.0" />
     <Assembly Name="Microsoft.AspNetCore" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Grpc.Swagger" Version="0.10.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.HeaderParsing" Version="9.7.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.HeaderParsing" Version="9.8.0.0" />
     <Assembly Name="Microsoft.AspNetCore.HeaderPropagation" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.HostFiltering" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.Hosting.Abstractions" Version="10.0.0.0" />
@@ -136,11 +136,11 @@
     <Assembly Name="Microsoft.AspNetCore.StaticAssets" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.StaticFiles" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.TestHost" Version="10.0.0.0" />
-    <Assembly Name="Microsoft.AspNetCore.Testing" Version="9.7.0.0" />
+    <Assembly Name="Microsoft.AspNetCore.Testing" Version="9.8.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebSockets" Version="10.0.0.0" />
     <Assembly Name="Microsoft.AspNetCore.WebUtilities" Version="10.0.0.0" />
     <Assembly Name="Microsoft.Authentication.WebAssembly.Msal" Version="10.0.0.0" />
-    <Assembly Name="Microsoft.Extensions.Caching.Hybrid" Version="9.7.0.0" />
+    <Assembly Name="Microsoft.Extensions.Caching.Hybrid" Version="9.8.0.0" />
     <Assembly Name="Microsoft.Extensions.Features" Version="10.0.0.0" />
     <Assembly Name="Microsoft.Extensions.Identity.Core" Version="10.0.0.0" />
     <Assembly Name="Microsoft.Extensions.Identity.Stores" Version="10.0.0.0" />
@@ -148,7 +148,6 @@
     <Assembly Name="Microsoft.JSInterop.WebAssembly" Version="10.0.0.0" />
     <Assembly Name="Microsoft.Net.Http.Headers" Version="10.0.0.0" />
     <Assembly Name="System.Formats.Cbor" Version="10.0.0.0" />
-    <Assembly Name="System.Threading.AccessControl" Version="10.0.0.0" />
     <Assembly Name="System.Threading.RateLimiting" Version="10.0.0.0" />
   </Assemblies>
   <Namespace Name="Microsoft.AspNetCore.Antiforgery">
@@ -2048,6 +2047,7 @@
       <Member Id="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.ExceptionHandler" />
       <Member Id="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.ExceptionHandlingPath" />
       <Member Id="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.StatusCodeSelector" />
+      <Member Id="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.SuppressDiagnosticsCallback" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Builder.FallbackEndpointRouteBuilderExtensions" Id="T:Microsoft.AspNetCore.Builder.FallbackEndpointRouteBuilderExtensions">
       <Member Id="F:Microsoft.AspNetCore.Builder.FallbackEndpointRouteBuilderExtensions.DefaultPattern" />
@@ -2962,11 +2962,6 @@
       <Member Id="P:Microsoft.AspNetCore.Components.LayoutView.ChildContent" />
       <Member Id="P:Microsoft.AspNetCore.Components.LayoutView.Layout" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Components.LinkPreload" Id="T:Microsoft.AspNetCore.Components.LinkPreload">
-      <Member Id="M:Microsoft.AspNetCore.Components.LinkPreload.#ctor" />
-      <Member Id="M:Microsoft.AspNetCore.Components.LinkPreload.Microsoft#AspNetCore#Components#IComponent#Attach(Microsoft.AspNetCore.Components.RenderHandle)" />
-      <Member Id="M:Microsoft.AspNetCore.Components.LinkPreload.Microsoft#AspNetCore#Components#IComponent#SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)" />
-    </Type>
     <Type Name="Microsoft.AspNetCore.Components.LocationChangeException" Id="T:Microsoft.AspNetCore.Components.LocationChangeException">
       <Member Id="M:Microsoft.AspNetCore.Components.LocationChangeException.#ctor(System.String,System.Exception)" />
     </Type>
@@ -3037,6 +3032,8 @@
     <Type Name="Microsoft.AspNetCore.Components.OwningComponentBase" Id="T:Microsoft.AspNetCore.Components.OwningComponentBase">
       <Member Id="M:Microsoft.AspNetCore.Components.OwningComponentBase.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Components.OwningComponentBase.Dispose(System.Boolean)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.OwningComponentBase.DisposeAsyncCore" />
+      <Member Id="M:Microsoft.AspNetCore.Components.OwningComponentBase.System#IAsyncDisposable#DisposeAsync" />
       <Member Id="M:Microsoft.AspNetCore.Components.OwningComponentBase.System#IDisposable#Dispose" />
       <Member Id="P:Microsoft.AspNetCore.Components.OwningComponentBase.IsDisposed" />
       <Member Id="P:Microsoft.AspNetCore.Components.OwningComponentBase.ScopedServices" />
@@ -3078,6 +3075,14 @@
       <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentState.RegisterOnPersisting(System.Func{System.Threading.Tasks.Task})" />
       <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentState.RegisterOnPersisting(System.Func{System.Threading.Tasks.Task},Microsoft.AspNetCore.Components.IComponentRenderMode)" />
       <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentState.TryTakeFromJson``1(System.String,``0@)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.PersistentComponentStateSerializer`1" Id="T:Microsoft.AspNetCore.Components.PersistentComponentStateSerializer`1">
+      <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentStateSerializer`1.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentStateSerializer`1.Persist(`0,System.Buffers.IBufferWriter{System.Byte})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.PersistentComponentStateSerializer`1.Restore(System.Buffers.ReadOnlySequence{System.Byte})" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.PersistentStateAttribute" Id="T:Microsoft.AspNetCore.Components.PersistentStateAttribute">
+      <Member Id="M:Microsoft.AspNetCore.Components.PersistentStateAttribute.#ctor" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.PersistingComponentStateSubscription" Id="T:Microsoft.AspNetCore.Components.PersistingComponentStateSubscription">
       <Member Id="M:Microsoft.AspNetCore.Components.PersistingComponentStateSubscription.Dispose" />
@@ -3123,6 +3128,11 @@
       <Member Id="P:Microsoft.AspNetCore.Components.ResourceAssetProperty.Name" />
       <Member Id="P:Microsoft.AspNetCore.Components.ResourceAssetProperty.Value" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.ResourcePreloader" Id="T:Microsoft.AspNetCore.Components.ResourcePreloader">
+      <Member Id="M:Microsoft.AspNetCore.Components.ResourcePreloader.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.ResourcePreloader.Microsoft#AspNetCore#Components#IComponent#Attach(Microsoft.AspNetCore.Components.RenderHandle)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.ResourcePreloader.Microsoft#AspNetCore#Components#IComponent#SetParametersAsync(Microsoft.AspNetCore.Components.ParameterView)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.RouteAttribute" Id="T:Microsoft.AspNetCore.Components.RouteAttribute">
       <Member Id="M:Microsoft.AspNetCore.Components.RouteAttribute.#ctor(System.String)" />
       <Member Id="P:Microsoft.AspNetCore.Components.RouteAttribute.Template" />
@@ -3149,9 +3159,6 @@
       <Member Id="M:Microsoft.AspNetCore.Components.SupplyParameterFromFormAttribute.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Components.SupplyParameterFromFormAttribute.FormName" />
       <Member Id="P:Microsoft.AspNetCore.Components.SupplyParameterFromFormAttribute.Name" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Components.SupplyParameterFromPersistentComponentStateAttribute" Id="T:Microsoft.AspNetCore.Components.SupplyParameterFromPersistentComponentStateAttribute">
-      <Member Id="M:Microsoft.AspNetCore.Components.SupplyParameterFromPersistentComponentStateAttribute.#ctor" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.SupplyParameterFromQueryAttribute" Id="T:Microsoft.AspNetCore.Components.SupplyParameterFromQueryAttribute">
       <Member Id="M:Microsoft.AspNetCore.Components.SupplyParameterFromQueryAttribute.#ctor" />
@@ -3397,6 +3404,12 @@
       <Member Id="P:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs.File" />
       <Member Id="P:Microsoft.AspNetCore.Components.Forms.InputFileChangeEventArgs.FileCount" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.Forms.InputHidden" Id="T:Microsoft.AspNetCore.Components.Forms.InputHidden">
+      <Member Id="M:Microsoft.AspNetCore.Components.Forms.InputHidden.#ctor" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Forms.InputHidden.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Forms.InputHidden.TryParseValueFromString(System.String,System.String@,System.String@)" />
+      <Member Id="P:Microsoft.AspNetCore.Components.Forms.InputHidden.Element" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.Forms.InputNumber`1" Id="T:Microsoft.AspNetCore.Components.Forms.InputNumber`1">
       <Member Id="M:Microsoft.AspNetCore.Components.Forms.InputNumber`1.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Components.Forms.InputNumber`1.BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder)" />
@@ -3540,6 +3553,9 @@
       <Member Id="M:Microsoft.AspNetCore.Components.Infrastructure.ComponentStatePersistenceManager.SetPlatformRenderMode(Microsoft.AspNetCore.Components.IComponentRenderMode)" />
       <Member Id="P:Microsoft.AspNetCore.Components.Infrastructure.ComponentStatePersistenceManager.State" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Components.Infrastructure.PersistentStateProviderServiceCollectionExtensions" Id="T:Microsoft.AspNetCore.Components.Infrastructure.PersistentStateProviderServiceCollectionExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.Infrastructure.PersistentStateProviderServiceCollectionExtensions.AddSupplyValueFromPersistentComponentStateProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Components.Infrastructure.RegisterPersistentComponentStateServiceCollectionExtensions" Id="T:Microsoft.AspNetCore.Components.Infrastructure.RegisterPersistentComponentStateServiceCollectionExtensions">
       <Member Id="M:Microsoft.AspNetCore.Components.Infrastructure.RegisterPersistentComponentStateServiceCollectionExtensions.AddPersistentServiceRegistration``1(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.AspNetCore.Components.IComponentRenderMode)" />
     </Type>
@@ -3681,6 +3697,7 @@
     <Type Name="Microsoft.AspNetCore.Components.Rendering.ComponentState" Id="T:Microsoft.AspNetCore.Components.Rendering.ComponentState">
       <Member Id="M:Microsoft.AspNetCore.Components.Rendering.ComponentState.#ctor(Microsoft.AspNetCore.Components.RenderTree.Renderer,System.Int32,Microsoft.AspNetCore.Components.IComponent,Microsoft.AspNetCore.Components.Rendering.ComponentState)" />
       <Member Id="M:Microsoft.AspNetCore.Components.Rendering.ComponentState.DisposeAsync" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Rendering.ComponentState.GetComponentKey" />
       <Member Id="P:Microsoft.AspNetCore.Components.Rendering.ComponentState.Component" />
       <Member Id="P:Microsoft.AspNetCore.Components.Rendering.ComponentState.ComponentId" />
       <Member Id="P:Microsoft.AspNetCore.Components.Rendering.ComponentState.LogicalParentComponentState" />
@@ -3941,7 +3958,7 @@
       <Member Id="F:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Routing.NotFoundEventArgs" Id="T:Microsoft.AspNetCore.Components.Routing.NotFoundEventArgs">
-      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NotFoundEventArgs.#ctor(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Components.Routing.NotFoundEventArgs.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Components.Routing.NotFoundEventArgs.Path" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.Routing.RazorComponentsEndpointHttpContextExtensions" Id="T:Microsoft.AspNetCore.Components.Routing.RazorComponentsEndpointHttpContextExtensions">
@@ -4581,11 +4598,16 @@
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Build" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.ConfigureContainer``1(Microsoft.Extensions.DependencyInjection.IServiceProviderFactory{``0},System.Action{``0})" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.CreateDefault(System.String[])" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.UseServiceProviderOptions(Microsoft.Extensions.DependencyInjection.ServiceProviderOptions)" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Configuration" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Logging" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.RootComponents" />
       <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.Services" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilderExtensions" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilderExtensions">
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilderExtensions.UseDefaultServiceProvider(Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder,System.Action{Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment,Microsoft.Extensions.DependencyInjection.ServiceProviderOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilderExtensions.UseDefaultServiceProvider(Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder,System.Action{Microsoft.Extensions.DependencyInjection.ServiceProviderOptions})" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostConfiguration" Id="T:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostConfiguration">
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostConfiguration.#ctor" />
@@ -4606,24 +4628,6 @@
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsEnvironment(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsProduction(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment)" />
       <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostEnvironmentExtensions.IsStaging(Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment)" />
-    </Type>
-  </Namespace>
-  <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.HotReload">
-    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload" Id="T:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload">
-      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.ApplyHotReloadDelta(System.String,System.Byte[],System.Byte[],System.Byte[],System.Int32[])" />
-      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.ApplyHotReloadDeltas(Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta[],System.Int32)" />
-      <Member Id="M:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.GetApplyUpdateCapabilities" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload/Delta" Id="T:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta">
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta.ILDelta" />
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta.MetadataDelta" />
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta.ModuleId" />
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta.PdbDelta" />
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.Delta.UpdatedTypes" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload/LogEntry" Id="T:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.LogEntry">
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.LogEntry.Message" />
-      <Member Id="P:Microsoft.AspNetCore.Components.WebAssembly.HotReload.WebAssemblyHotReload.LogEntry.Severity" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.AspNetCore.Components.WebAssembly.Http">
@@ -5604,6 +5608,13 @@
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.ErrorContext.Exception" />
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.ErrorContext.HttpContext" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.ExceptionHandledType" Id="T:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType">
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType.ExceptionHandlerDelegate" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType.ExceptionHandlerService" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType.ExceptionHandlingPath" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType.ProblemDetailsService" />
+      <Member Id="F:Microsoft.AspNetCore.Diagnostics.ExceptionHandledType.Unhandled" />
+    </Type>
     <Type Name="Microsoft.AspNetCore.Diagnostics.ExceptionHandlerFeature" Id="T:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerFeature">
       <Member Id="M:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerFeature.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerFeature.Endpoint" />
@@ -5614,6 +5625,12 @@
     <Type Name="Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware" Id="T:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware">
       <Member Id="M:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Builder.ExceptionHandlerOptions},System.Diagnostics.DiagnosticListener)" />
       <Member Id="M:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.Invoke(Microsoft.AspNetCore.Http.HttpContext)" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext" Id="T:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext">
+      <Member Id="M:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext.Exception" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext.ExceptionHandledBy" />
+      <Member Id="P:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext.HttpContext" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Diagnostics.ICompilationException" Id="T:Microsoft.AspNetCore.Diagnostics.ICompilationException">
       <Member Id="P:Microsoft.AspNetCore.Diagnostics.ICompilationException.CompilationFailures" />
@@ -7984,6 +8001,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1" Id="T:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1">
       <Member Id="M:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1.ExecuteAsync(Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1.Microsoft#AspNetCore#Http#Metadata#IEndpointMetadataProvider#PopulateMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Builder.EndpointBuilder)" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1.ContentType" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1.JsonSerializerOptions" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.JsonHttpResult`1.Microsoft#AspNetCore#Http#IValueHttpResult#Value" />
@@ -8036,6 +8054,7 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult" Id="T:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult">
       <Member Id="M:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult.ExecuteAsync(Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult.Microsoft#AspNetCore#Http#Metadata#IEndpointMetadataProvider#PopulateMetadata(System.Reflection.MethodInfo,Microsoft.AspNetCore.Builder.EndpointBuilder)" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult.ContentType" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult.Microsoft#AspNetCore#Http#IStatusCodeHttpResult#StatusCode" />
       <Member Id="P:Microsoft.AspNetCore.Http.HttpResults.ProblemHttpResult.Microsoft#AspNetCore#Http#IValueHttpResult#Value" />
@@ -8221,6 +8240,7 @@
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata.IsOptional" />
       <Member Id="P:Microsoft.AspNetCore.Http.Metadata.IAcceptsMetadata.RequestType" />
     </Type>
+    <Type Name="Microsoft.AspNetCore.Http.Metadata.IApiEndpointMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IApiEndpointMetadata" />
     <Type Name="Microsoft.AspNetCore.Http.Metadata.IDisableHttpMetricsMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IDisableHttpMetricsMetadata" />
     <Type Name="Microsoft.AspNetCore.Http.Metadata.IDisableValidationMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IDisableValidationMetadata" />
     <Type Name="Microsoft.AspNetCore.Http.Metadata.IEndpointDescriptionMetadata" Id="T:Microsoft.AspNetCore.Http.Metadata.IEndpointDescriptionMetadata">
@@ -8495,13 +8515,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.AspNetUserManager`1.#ctor(Microsoft.AspNetCore.Identity.IUserStore{`0},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.AspNetCore.Identity.IPasswordHasher{`0},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IUserValidator{`0}},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Identity.IPasswordValidator{`0}},Microsoft.AspNetCore.Identity.ILookupNormalizer,Microsoft.AspNetCore.Identity.IdentityErrorDescriber,System.IServiceProvider,Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.UserManager{`0}})" />
       <Member Id="P:Microsoft.AspNetCore.Identity.AspNetUserManager`1.CancellationToken" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria" Id="T:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria">
-      <Member Id="M:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria.AuthenticatorAttachment" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria.RequireResidentKey" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria.ResidentKey" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.AuthenticatorSelectionCriteria.UserVerification" />
-    </Type>
     <Type Name="Microsoft.AspNetCore.Identity.AuthenticatorTokenProvider`1" Id="T:Microsoft.AspNetCore.Identity.AuthenticatorTokenProvider`1">
       <Member Id="M:Microsoft.AspNetCore.Identity.AuthenticatorTokenProvider`1.#ctor" />
       <Member Id="M:Microsoft.AspNetCore.Identity.AuthenticatorTokenProvider`1.CanGenerateTwoFactorTokenAsync(Microsoft.AspNetCore.Identity.UserManager{`0},`0)" />
@@ -8530,15 +8543,6 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.DataProtectorTokenProvider`1.Name" />
       <Member Id="P:Microsoft.AspNetCore.Identity.DataProtectorTokenProvider`1.Options" />
       <Member Id="P:Microsoft.AspNetCore.Identity.DataProtectorTokenProvider`1.Protector" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1" Id="T:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1">
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.#ctor(Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.IsValidOriginAsync(Microsoft.AspNetCore.Identity.PasskeyOriginInfo,Microsoft.AspNetCore.Http.HttpContext)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.PerformAssertionAsync(Microsoft.AspNetCore.Identity.PasskeyAssertionContext{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.PerformAssertionCoreAsync(Microsoft.AspNetCore.Identity.PasskeyAssertionContext{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.PerformAttestationAsync(Microsoft.AspNetCore.Identity.PasskeyAttestationContext{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.PerformAttestationCoreAsync(Microsoft.AspNetCore.Identity.PasskeyAttestationContext{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPasskeyHandler`1.VerifyAttestationStatementAsync(System.ReadOnlyMemory{System.Byte},System.ReadOnlyMemory{System.Byte},Microsoft.AspNetCore.Http.HttpContext)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.DefaultPersonalDataProtector" Id="T:Microsoft.AspNetCore.Identity.DefaultPersonalDataProtector">
       <Member Id="M:Microsoft.AspNetCore.Identity.DefaultPersonalDataProtector.#ctor(Microsoft.AspNetCore.Identity.ILookupProtectorKeyRing,Microsoft.AspNetCore.Identity.ILookupProtector)" />
@@ -8647,12 +8651,37 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.IdentityOptions.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.ClaimsIdentity" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.Lockout" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.Passkey" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.Password" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.SignIn" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.Stores" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.Tokens" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityOptions.User" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Identity.IdentityPasskeyData" Id="T:Microsoft.AspNetCore.Identity.IdentityPasskeyData">
+      <Member Id="M:Microsoft.AspNetCore.Identity.IdentityPasskeyData.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.AttestationObject" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.ClientDataJson" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.CreatedAt" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.IsBackedUp" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.IsBackupEligible" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.IsUserVerified" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.Name" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.PublicKey" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.SignCount" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyData.Transports" />
+    </Type>
+    <Type Name="Microsoft.AspNetCore.Identity.IdentityPasskeyOptions" Id="T:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions">
+      <Member Id="M:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.AttestationConveyancePreference" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.AuthenticatorAttachment" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.AuthenticatorTimeout" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.ChallengeSize" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.IsAllowedAlgorithm" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.ResidentKeyRequirement" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.ServerDomain" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.UserVerificationRequirement" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.ValidateOrigin" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityPasskeyOptions.VerifyAttestationStatement" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IdentityResult" Id="T:Microsoft.AspNetCore.Identity.IdentityResult">
       <Member Id="M:Microsoft.AspNetCore.Identity.IdentityResult.#ctor" />
@@ -8732,17 +8761,8 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IdentityUserPasskey`1" Id="T:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1">
       <Member Id="M:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.AttestationObject" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.ClientDataJson" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.CreatedAt" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.CredentialId" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.IsBackedUp" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.IsBackupEligible" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.IsUserVerified" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.Name" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.PublicKey" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.SignCount" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.Transports" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.Data" />
       <Member Id="P:Microsoft.AspNetCore.Identity.IdentityUserPasskey`1.UserId" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IdentityUserRole`1" Id="T:Microsoft.AspNetCore.Identity.IdentityUserRole`1">
@@ -8776,8 +8796,10 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.ILookupProtectorKeyRing.Item(System.String)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IPasskeyHandler`1" Id="T:Microsoft.AspNetCore.Identity.IPasskeyHandler`1">
-      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.PerformAssertionAsync(Microsoft.AspNetCore.Identity.PasskeyAssertionContext{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.PerformAttestationAsync(Microsoft.AspNetCore.Identity.PasskeyAttestationContext{`0})" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.MakeCreationOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyUserEntity,Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.MakeRequestOptionsAsync(`0,Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.PerformAssertionAsync(Microsoft.AspNetCore.Identity.PasskeyAssertionContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.IPasskeyHandler`1.PerformAttestationAsync(Microsoft.AspNetCore.Identity.PasskeyAttestationContext)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IPasswordHasher`1" Id="T:Microsoft.AspNetCore.Identity.IPasswordHasher`1">
       <Member Id="M:Microsoft.AspNetCore.Identity.IPasswordHasher`1.HashPassword(`0,System.String)" />
@@ -8868,11 +8890,11 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserLoginStore`1.RemoveLoginAsync(`0,System.String,System.String,System.Threading.CancellationToken)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IUserPasskeyStore`1" Id="T:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1">
+      <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.AddOrUpdatePasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.FindByPasskeyIdAsync(System.Byte[],System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.FindPasskeyAsync(`0,System.Byte[],System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.GetPasskeysAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.RemovePasskeyAsync(`0,System.Byte[],System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasskeyStore`1.SetPasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.IUserPasswordStore`1" Id="T:Microsoft.AspNetCore.Identity.IUserPasswordStore`1">
       <Member Id="M:Microsoft.AspNetCore.Identity.IUserPasswordStore`1.GetPasswordHashAsync(`0,System.Threading.CancellationToken)" />
@@ -8931,13 +8953,11 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.LockoutOptions.DefaultLockoutTimeSpan" />
       <Member Id="P:Microsoft.AspNetCore.Identity.LockoutOptions.MaxFailedAccessAttempts" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1" Id="T:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.CredentialJson" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.HttpContext" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.OriginalOptionsJson" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.User" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext`1.UserManager" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyAssertionContext" Id="T:Microsoft.AspNetCore.Identity.PasskeyAssertionContext">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAssertionContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext.AssertionState" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext.CredentialJson" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionContext.HttpContext" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.PasskeyAssertionResult" Id="T:Microsoft.AspNetCore.Identity.PasskeyAssertionResult">
       <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAssertionResult.Fail``1(Microsoft.AspNetCore.Identity.PasskeyException)" />
@@ -8949,72 +8969,56 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionResult`1.Succeeded" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAssertionResult`1.User" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1" Id="T:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1.CredentialJson" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1.HttpContext" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1.OriginalOptionsJson" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext`1.UserManager" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyAttestationContext" Id="T:Microsoft.AspNetCore.Identity.PasskeyAttestationContext">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext.AttestationState" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext.CredentialJson" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationContext.HttpContext" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.PasskeyAttestationResult" Id="T:Microsoft.AspNetCore.Identity.PasskeyAttestationResult">
       <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Fail(Microsoft.AspNetCore.Identity.PasskeyException)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Success(Microsoft.AspNetCore.Identity.UserPasskeyInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Success(Microsoft.AspNetCore.Identity.UserPasskeyInfo,Microsoft.AspNetCore.Identity.PasskeyUserEntity)" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Failure" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Passkey" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.Succeeded" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationResult.UserEntity" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyCreationArgs" Id="T:Microsoft.AspNetCore.Identity.PasskeyCreationArgs">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyCreationArgs.#ctor(Microsoft.AspNetCore.Identity.PasskeyUserEntity)" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationArgs.Attestation" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationArgs.AuthenticatorSelection" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationArgs.Extensions" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationArgs.UserEntity" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext" Id="T:Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext.AttestationObject" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext.ClientDataHash" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyAttestationStatementVerificationContext.HttpContext" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyCreationOptions" Id="T:Microsoft.AspNetCore.Identity.PasskeyCreationOptions">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyCreationOptions.#ctor(Microsoft.AspNetCore.Identity.PasskeyUserEntity,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyCreationOptions.AsJson" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyCreationOptions.ToString" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationOptions.UserEntity" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyCreationOptionsResult" Id="T:Microsoft.AspNetCore.Identity.PasskeyCreationOptionsResult">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyCreationOptionsResult.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationOptionsResult.AttestationState" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyCreationOptionsResult.CreationOptionsJson" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.PasskeyException" Id="T:Microsoft.AspNetCore.Identity.PasskeyException">
       <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyException.#ctor(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyException.#ctor(System.String,System.Exception)" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyOptions" Id="T:Microsoft.AspNetCore.Identity.PasskeyOptions">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyOptions.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.AllowCrossOriginIframes" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.AllowCurrentOrigin" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.AllowedOrigins" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.BackedUpCredentialPolicy" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.BackupEligibleCredentialPolicy" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.ChallengeSize" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.ServerDomain" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOptions.Timeout" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyHandler`1" Id="T:Microsoft.AspNetCore.Identity.PasskeyHandler`1">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyHandler`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityPasskeyOptions})" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyHandler`1.MakeCreationOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyUserEntity,Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyHandler`1.MakeRequestOptionsAsync(`0,Microsoft.AspNetCore.Http.HttpContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyHandler`1.PerformAssertionAsync(Microsoft.AspNetCore.Identity.PasskeyAssertionContext)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyHandler`1.PerformAttestationAsync(Microsoft.AspNetCore.Identity.PasskeyAttestationContext)" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyOptions/CredentialBackupPolicy" Id="T:Microsoft.AspNetCore.Identity.PasskeyOptions.CredentialBackupPolicy">
-      <Member Id="F:Microsoft.AspNetCore.Identity.PasskeyOptions.CredentialBackupPolicy.Allowed" />
-      <Member Id="F:Microsoft.AspNetCore.Identity.PasskeyOptions.CredentialBackupPolicy.Disallowed" />
-      <Member Id="F:Microsoft.AspNetCore.Identity.PasskeyOptions.CredentialBackupPolicy.Required" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext" Id="T:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext.CrossOrigin" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext.HttpContext" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext.Origin" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginValidationContext.TopOrigin" />
     </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyOriginInfo" Id="T:Microsoft.AspNetCore.Identity.PasskeyOriginInfo">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyOriginInfo.#ctor(System.String,System.Boolean)" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginInfo.CrossOrigin" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyOriginInfo.Origin" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1" Id="T:Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1.#ctor" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1.Extensions" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1.User" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestArgs`1.UserVerification" />
-    </Type>
-    <Type Name="Microsoft.AspNetCore.Identity.PasskeyRequestOptions" Id="T:Microsoft.AspNetCore.Identity.PasskeyRequestOptions">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyRequestOptions.#ctor(System.String,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyRequestOptions.AsJson" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyRequestOptions.ToString" />
-      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestOptions.UserId" />
+    <Type Name="Microsoft.AspNetCore.Identity.PasskeyRequestOptionsResult" Id="T:Microsoft.AspNetCore.Identity.PasskeyRequestOptionsResult">
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyRequestOptionsResult.#ctor" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestOptionsResult.AssertionState" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyRequestOptionsResult.RequestOptionsJson" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.PasskeyUserEntity" Id="T:Microsoft.AspNetCore.Identity.PasskeyUserEntity">
-      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyUserEntity.#ctor(System.String,System.String,System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.PasskeyUserEntity.#ctor" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyUserEntity.DisplayName" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyUserEntity.Id" />
       <Member Id="P:Microsoft.AspNetCore.Identity.PasskeyUserEntity.Name" />
@@ -9154,18 +9158,13 @@
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.SignInManager`1" Id="T:Microsoft.AspNetCore.Identity.SignInManager`1">
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.IUserClaimsPrincipalFactory{`0},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.SignInManager{`0}},Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider,Microsoft.AspNetCore.Identity.IUserConfirmation{`0})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.#ctor(Microsoft.AspNetCore.Identity.UserManager{`0},Microsoft.AspNetCore.Http.IHttpContextAccessor,Microsoft.AspNetCore.Identity.IUserClaimsPrincipalFactory{`0},Microsoft.Extensions.Options.IOptions{Microsoft.AspNetCore.Identity.IdentityOptions},Microsoft.Extensions.Logging.ILogger{Microsoft.AspNetCore.Identity.SignInManager{`0}},Microsoft.AspNetCore.Authentication.IAuthenticationSchemeProvider,Microsoft.AspNetCore.Identity.IUserConfirmation{`0},Microsoft.AspNetCore.Identity.IPasskeyHandler{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.CanSignInAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.CheckPasswordSignInAsync(`0,System.String,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ConfigureExternalAuthenticationProperties(System.String,System.String,System.String)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ConfigurePasskeyCreationOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyCreationArgs)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ConfigurePasskeyRequestOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyRequestArgs{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.CreateUserPrincipalAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ExternalLoginSignInAsync(System.String,System.String,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ExternalLoginSignInAsync(System.String,System.String,System.Boolean,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ForgetTwoFactorClientAsync" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.GeneratePasskeyCreationOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyCreationArgs)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.GeneratePasskeyRequestOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyRequestArgs{`0})" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalAuthenticationSchemesAsync" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.GetExternalLoginInfoAsync(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.GetTwoFactorAuthenticationUserAsync" />
@@ -9174,17 +9173,17 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.IsTwoFactorClientRememberedAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.IsTwoFactorEnabledAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.LockedOut(`0)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PasskeySignInAsync(System.String,Microsoft.AspNetCore.Identity.PasskeyRequestOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.MakePasskeyCreationOptionsAsync(Microsoft.AspNetCore.Identity.PasskeyUserEntity)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.MakePasskeyRequestOptionsAsync(`0)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PasskeySignInAsync(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(`0,System.String,System.Boolean,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PasswordSignInAsync(System.String,System.String,System.Boolean,System.Boolean)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PerformPasskeyAssertionAsync(System.String,Microsoft.AspNetCore.Identity.PasskeyRequestOptions)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PerformPasskeyAttestationAsync(System.String,Microsoft.AspNetCore.Identity.PasskeyCreationOptions)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PerformPasskeyAssertionAsync(System.String)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PerformPasskeyAttestationAsync(System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.PreSignInCheck(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.RefreshSignInAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.RememberTwoFactorClientAsync(`0)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.ResetLockout(`0)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.RetrievePasskeyCreationOptionsAsync" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.RetrievePasskeyRequestOptionsAsync" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.SignInAsync(`0,Microsoft.AspNetCore.Authentication.AuthenticationProperties,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.SignInAsync(`0,System.Boolean,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.SignInManager`1.SignInOrTwoFactorAsync(`0,System.Boolean,System.String,System.Boolean)" />
@@ -9294,6 +9293,7 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddClaimAsync(`0,System.Security.Claims.Claim)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddClaimsAsync(`0,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddLoginAsync(`0,Microsoft.AspNetCore.Identity.UserLoginInfo)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddOrUpdatePasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddPasswordAsync(`0,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddToRoleAsync(`0,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.AddToRolesAsync(`0,System.Collections.Generic.IEnumerable{System.String})" />
@@ -9372,7 +9372,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetEmailAsync(`0,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetLockoutEnabledAsync(`0,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetLockoutEndDateAsync(`0,System.Nullable{System.DateTimeOffset})" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetPasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetPhoneNumberAsync(`0,System.String)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetTwoFactorEnabledAsync(`0,System.Boolean)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.UserManager`1.SetUserNameAsync(`0,System.String)" />
@@ -9396,6 +9395,7 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.Options" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.PasswordHasher" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.PasswordValidators" />
+      <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.ServiceProvider" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.Store" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.SupportsQueryableUsers" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserManager`1.SupportsUserAuthenticationTokens" />
@@ -9420,7 +9420,7 @@
       <Member Id="P:Microsoft.AspNetCore.Identity.UserOptions.RequireUniqueEmail" />
     </Type>
     <Type Name="Microsoft.AspNetCore.Identity.UserPasskeyInfo" Id="T:Microsoft.AspNetCore.Identity.UserPasskeyInfo">
-      <Member Id="M:Microsoft.AspNetCore.Identity.UserPasskeyInfo.#ctor(System.Byte[],System.Byte[],System.String,System.DateTimeOffset,System.UInt32,System.String[],System.Boolean,System.Boolean,System.Boolean,System.Byte[],System.Byte[])" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.UserPasskeyInfo.#ctor(System.Byte[],System.Byte[],System.DateTimeOffset,System.UInt32,System.String[],System.Boolean,System.Boolean,System.Boolean,System.Byte[],System.Byte[])" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserPasskeyInfo.AttestationObject" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserPasskeyInfo.ClientDataJson" />
       <Member Id="P:Microsoft.AspNetCore.Identity.UserPasskeyInfo.CreatedAt" />
@@ -9678,6 +9678,7 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.#ctor(`1,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.AddClaimsAsync(`0,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.AddLoginAsync(`0,Microsoft.AspNetCore.Identity.UserLoginInfo,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.AddOrUpdatePasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.AddUserTokenAsync(`5)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.CreateAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.CreateUserPasskey(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo)" />
@@ -9692,8 +9693,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.FindUserAsync(`2,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.FindUserLoginAsync(`2,System.String,System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.FindUserLoginAsync(System.String,System.String,System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.FindUserPasskeyAsync(`2,System.Byte[],System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.FindUserPasskeyByIdAsync(System.Byte[],System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.GetClaimsAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.GetLoginsAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.GetPasskeysAsync(`0,System.Threading.CancellationToken)" />
@@ -9704,7 +9703,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.RemoveUserTokenAsync(`5)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.ReplaceClaimAsync(`0,System.Security.Claims.Claim,System.Security.Claims.Claim,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.SaveChanges(System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.SetPasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.UpdateAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.AutoSaveChanges" />
       <Member Id="P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserOnlyStore`7.Context" />
@@ -9725,6 +9723,7 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.#ctor(`2,Microsoft.AspNetCore.Identity.IdentityErrorDescriber)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AddClaimsAsync(`0,System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AddLoginAsync(`0,Microsoft.AspNetCore.Identity.UserLoginInfo,System.Threading.CancellationToken)" />
+      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AddOrUpdatePasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AddToRoleAsync(`0,System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AddUserTokenAsync(`7)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.CreateAsync(`0,System.Threading.CancellationToken)" />
@@ -9741,8 +9740,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserAsync(`3,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserLoginAsync(`3,System.String,System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserLoginAsync(System.String,System.String,System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserPasskeyAsync(`3,System.Byte[],System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserPasskeyByIdAsync(System.Byte[],System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.FindUserRoleAsync(`3,`3,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.GetClaimsAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.GetLoginsAsync(`0,System.Threading.CancellationToken)" />
@@ -9758,7 +9755,6 @@
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.RemoveUserTokenAsync(`7)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.ReplaceClaimAsync(`0,System.Security.Claims.Claim,System.Security.Claims.Claim,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.SaveChanges(System.Threading.CancellationToken)" />
-      <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.SetPasskeyAsync(`0,Microsoft.AspNetCore.Identity.UserPasskeyInfo,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.UpdateAsync(`0,System.Threading.CancellationToken)" />
       <Member Id="P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.AutoSaveChanges" />
       <Member Id="P:Microsoft.AspNetCore.Identity.EntityFrameworkCore.UserStore`10.Context" />
@@ -16720,6 +16716,7 @@
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.CreateHost(Microsoft.Extensions.Hosting.IHostBuilder)" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.CreateHostBuilder" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.CreateServer(Microsoft.AspNetCore.Hosting.IWebHostBuilder)" />
+      <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.CreateServer(System.IServiceProvider)" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.CreateWebHostBuilder" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.Dispose" />
       <Member Id="M:Microsoft.AspNetCore.Mvc.Testing.WebApplicationFactory`1.Dispose(System.Boolean)" />
@@ -21339,9 +21336,6 @@
     <Type Name="Microsoft.Extensions.DependencyInjection.StackExchangeRedisOutputCacheServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.StackExchangeRedisOutputCacheServiceCollectionExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.StackExchangeRedisOutputCacheServiceCollectionExtensions.AddStackExchangeRedisOutputCache(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.AspNetCore.OutputCaching.StackExchangeRedis.RedisOutputCacheOptions})" />
     </Type>
-    <Type Name="Microsoft.Extensions.DependencyInjection.SupplyParameterFromPersistentComponentStateProviderServiceCollectionExtensions" Id="T:Microsoft.Extensions.DependencyInjection.SupplyParameterFromPersistentComponentStateProviderServiceCollectionExtensions">
-      <Member Id="M:Microsoft.Extensions.DependencyInjection.SupplyParameterFromPersistentComponentStateProviderServiceCollectionExtensions.AddSupplyValueFromPersistentComponentStateProvider(Microsoft.Extensions.DependencyInjection.IServiceCollection)" />
-    </Type>
     <Type Name="Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions" Id="T:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions">
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelper(Microsoft.Extensions.DependencyInjection.IMvcCoreBuilder)" />
       <Member Id="M:Microsoft.Extensions.DependencyInjection.TagHelperServicesExtensions.AddCacheTagHelperLimits(Microsoft.Extensions.DependencyInjection.IMvcBuilder,System.Action{Microsoft.AspNetCore.Mvc.TagHelpers.CacheTagHelperOptions})" />
@@ -21421,13 +21415,13 @@
     <Type Name="Microsoft.JSInterop.IJSInProcessObjectReference" Id="T:Microsoft.JSInterop.IJSInProcessObjectReference">
       <Member Id="M:Microsoft.JSInterop.IJSInProcessObjectReference.GetValue``1(System.String)" />
       <Member Id="M:Microsoft.JSInterop.IJSInProcessObjectReference.Invoke``1(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSInProcessObjectReference.InvokeNew(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSInProcessObjectReference.InvokeConstructor(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSInProcessObjectReference.SetValue``1(System.String,``0)" />
     </Type>
     <Type Name="Microsoft.JSInterop.IJSInProcessRuntime" Id="T:Microsoft.JSInterop.IJSInProcessRuntime">
       <Member Id="M:Microsoft.JSInterop.IJSInProcessRuntime.GetValue``1(System.String)" />
       <Member Id="M:Microsoft.JSInterop.IJSInProcessRuntime.Invoke``1(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSInProcessRuntime.InvokeNew(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSInProcessRuntime.InvokeConstructor(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSInProcessRuntime.SetValue``1(System.String,``0)" />
     </Type>
     <Type Name="Microsoft.JSInterop.IJSObjectReference" Id="T:Microsoft.JSInterop.IJSObjectReference">
@@ -21435,8 +21429,8 @@
       <Member Id="M:Microsoft.JSInterop.IJSObjectReference.GetValueAsync``1(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeAsync``1(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeNewAsync(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeNewAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeConstructorAsync(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSObjectReference.InvokeConstructorAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSObjectReference.SetValueAsync``1(System.String,``0)" />
       <Member Id="M:Microsoft.JSInterop.IJSObjectReference.SetValueAsync``1(System.String,``0,System.Threading.CancellationToken)" />
     </Type>
@@ -21445,8 +21439,8 @@
       <Member Id="M:Microsoft.JSInterop.IJSRuntime.GetValueAsync``1(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeNewAsync(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeNewAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeConstructorAsync(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.IJSRuntime.InvokeConstructorAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.IJSRuntime.SetValueAsync``1(System.String,``0)" />
       <Member Id="M:Microsoft.JSInterop.IJSRuntime.SetValueAsync``1(System.String,``0,System.Threading.CancellationToken)" />
     </Type>
@@ -21474,10 +21468,10 @@
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.#ctor" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.GetValue``1(System.String)" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.Invoke``1(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.InvokeConstructor(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.InvokeJS(Microsoft.JSInterop.Infrastructure.JSInvocationInfo@|System.Runtime.InteropServices.InAttribute)" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.InvokeJS(System.String,System.String)" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.InvokeJS(System.String,System.String,Microsoft.JSInterop.JSCallResultType,System.Int64)" />
-      <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.InvokeNew(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSInProcessRuntime.SetValue``1(System.String,``0)" />
     </Type>
     <Type Name="Microsoft.JSInterop.JSInProcessRuntimeExtensions" Id="T:Microsoft.JSInterop.JSInProcessRuntimeExtensions">
@@ -21489,15 +21483,17 @@
       <Member Id="P:Microsoft.JSInterop.JSInvokableAttribute.Identifier" />
     </Type>
     <Type Name="Microsoft.JSInterop.JSObjectReferenceExtensions" Id="T:Microsoft.JSInterop.JSObjectReferenceExtensions">
+      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.GetValueAsync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan)" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSObjectReference,System.String,System.TimeSpan,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSObjectReferenceExtensions.SetValueAsync``1(Microsoft.JSInterop.IJSObjectReference,System.String,``0,System.TimeSpan)" />
     </Type>
     <Type Name="Microsoft.JSInterop.JSRuntime" Id="T:Microsoft.JSInterop.JSRuntime">
       <Member Id="M:Microsoft.JSInterop.JSRuntime.#ctor" />
@@ -21510,8 +21506,8 @@
       <Member Id="M:Microsoft.JSInterop.JSRuntime.GetValueAsync``1(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeAsync``1(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeNewAsync(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeNewAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeConstructorAsync(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntime.InvokeConstructorAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntime.ReadJSDataAsStreamAsync(Microsoft.JSInterop.IJSStreamReference,System.Int64,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.JSRuntime.ReceiveByteArray(System.Int32,System.Byte[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntime.SendByteArray(System.Int32,System.Byte[])" />
@@ -21522,15 +21518,17 @@
       <Member Id="P:Microsoft.JSInterop.JSRuntime.JsonSerializerOptions" />
     </Type>
     <Type Name="Microsoft.JSInterop.JSRuntimeExtensions" Id="T:Microsoft.JSInterop.JSRuntimeExtensions">
+      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.GetValueAsync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan)" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeAsync``1(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeNewAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeConstructorAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync(Microsoft.JSInterop.IJSRuntime,System.String,System.TimeSpan,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.JSRuntimeExtensions.SetValueAsync``1(Microsoft.JSInterop.IJSRuntime,System.String,``0,System.TimeSpan)" />
     </Type>
   </Namespace>
   <Namespace Name="Microsoft.JSInterop.Implementation">
@@ -21539,7 +21537,7 @@
       <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.Dispose" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.GetValue``1(System.String)" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.Invoke``1(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.InvokeNew(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.InvokeConstructor(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSInProcessObjectReference.SetValue``1(System.String,``0)" />
     </Type>
     <Type Name="Microsoft.JSInterop.Implementation.JSObjectReference" Id="T:Microsoft.JSInterop.Implementation.JSObjectReference">
@@ -21549,8 +21547,8 @@
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.GetValueAsync``1(System.String,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeAsync``1(System.String,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeAsync``1(System.String,System.Threading.CancellationToken,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeNewAsync(System.String,System.Object[])" />
-      <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeNewAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeConstructorAsync(System.String,System.Object[])" />
+      <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.InvokeConstructorAsync(System.String,System.Threading.CancellationToken,System.Object[])" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.SetValueAsync``1(System.String,``0)" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.SetValueAsync``1(System.String,``0,System.Threading.CancellationToken)" />
       <Member Id="M:Microsoft.JSInterop.Implementation.JSObjectReference.ThrowIfDisposed" />
@@ -21587,9 +21585,9 @@
     </Type>
     <Type Name="Microsoft.JSInterop.Infrastructure.IJSVoidResult" Id="T:Microsoft.JSInterop.Infrastructure.IJSVoidResult" />
     <Type Name="Microsoft.JSInterop.Infrastructure.JSCallType" Id="T:Microsoft.JSInterop.Infrastructure.JSCallType">
+      <Member Id="F:Microsoft.JSInterop.Infrastructure.JSCallType.ConstructorCall" />
       <Member Id="F:Microsoft.JSInterop.Infrastructure.JSCallType.FunctionCall" />
       <Member Id="F:Microsoft.JSInterop.Infrastructure.JSCallType.GetValue" />
-      <Member Id="F:Microsoft.JSInterop.Infrastructure.JSCallType.NewCall" />
       <Member Id="F:Microsoft.JSInterop.Infrastructure.JSCallType.SetValue" />
     </Type>
     <Type Name="Microsoft.JSInterop.Infrastructure.JSInvocationInfo" Id="T:Microsoft.JSInterop.Infrastructure.JSInvocationInfo">
@@ -22121,149 +22119,9 @@
       <Member Id="P:System.Formats.Cbor.CborWriter.IsWriteCompleted" />
     </Type>
   </Namespace>
-  <Namespace Name="System.Security.AccessControl">
-    <Type Name="System.Security.AccessControl.EventWaitHandleAccessRule" Id="T:System.Security.AccessControl.EventWaitHandleAccessRule">
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleAccessRule.#ctor(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="P:System.Security.AccessControl.EventWaitHandleAccessRule.EventWaitHandleRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.EventWaitHandleAuditRule" Id="T:System.Security.AccessControl.EventWaitHandleAuditRule">
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.EventWaitHandleRights,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="P:System.Security.AccessControl.EventWaitHandleAuditRule.EventWaitHandleRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.EventWaitHandleRights" Id="T:System.Security.AccessControl.EventWaitHandleRights">
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.Delete" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.FullControl" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
-      <Member Id="F:System.Security.AccessControl.EventWaitHandleRights.TakeOwnership" />
-    </Type>
-    <Type Name="System.Security.AccessControl.EventWaitHandleSecurity" Id="T:System.Security.AccessControl.EventWaitHandleSecurity">
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.#ctor" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.AddAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleAll(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleAll(System.Security.AccessControl.EventWaitHandleAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.ResetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAccessRule(System.Security.AccessControl.EventWaitHandleAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.EventWaitHandleSecurity.SetAuditRule(System.Security.AccessControl.EventWaitHandleAuditRule)" />
-      <Member Id="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRightType" />
-      <Member Id="P:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleType" />
-      <Member Id="P:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleType" />
-    </Type>
-    <Type Name="System.Security.AccessControl.MutexAccessRule" Id="T:System.Security.AccessControl.MutexAccessRule">
-      <Member Id="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.MutexAccessRule.#ctor(System.String,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="P:System.Security.AccessControl.MutexAccessRule.MutexRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.MutexAuditRule" Id="T:System.Security.AccessControl.MutexAuditRule">
-      <Member Id="M:System.Security.AccessControl.MutexAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.MutexRights,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="P:System.Security.AccessControl.MutexAuditRule.MutexRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.MutexRights" Id="T:System.Security.AccessControl.MutexRights">
-      <Member Id="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.Delete" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.FullControl" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.Modify" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.Synchronize" />
-      <Member Id="F:System.Security.AccessControl.MutexRights.TakeOwnership" />
-    </Type>
-    <Type Name="System.Security.AccessControl.MutexSecurity" Id="T:System.Security.AccessControl.MutexSecurity">
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.#ctor" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.AddAccessRule(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.AddAuditRule(System.Security.AccessControl.MutexAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRule(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleAll(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRule(System.Security.AccessControl.MutexAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleAll(System.Security.AccessControl.MutexAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.MutexAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.ResetAccessRule(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.SetAccessRule(System.Security.AccessControl.MutexAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.MutexSecurity.SetAuditRule(System.Security.AccessControl.MutexAuditRule)" />
-      <Member Id="P:System.Security.AccessControl.MutexSecurity.AccessRightType" />
-      <Member Id="P:System.Security.AccessControl.MutexSecurity.AccessRuleType" />
-      <Member Id="P:System.Security.AccessControl.MutexSecurity.AuditRuleType" />
-    </Type>
-    <Type Name="System.Security.AccessControl.SemaphoreAccessRule" Id="T:System.Security.AccessControl.SemaphoreAccessRule">
-      <Member Id="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.String,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="P:System.Security.AccessControl.SemaphoreAccessRule.SemaphoreRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.SemaphoreAuditRule" Id="T:System.Security.AccessControl.SemaphoreAuditRule">
-      <Member Id="M:System.Security.AccessControl.SemaphoreAuditRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="P:System.Security.AccessControl.SemaphoreAuditRule.SemaphoreRights" />
-    </Type>
-    <Type Name="System.Security.AccessControl.SemaphoreRights" Id="T:System.Security.AccessControl.SemaphoreRights">
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.Delete" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.FullControl" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.Modify" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
-      <Member Id="F:System.Security.AccessControl.SemaphoreRights.TakeOwnership" />
-    </Type>
-    <Type Name="System.Security.AccessControl.SemaphoreSecurity" Id="T:System.Security.AccessControl.SemaphoreSecurity">
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.#ctor" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.#ctor(System.String,System.Security.AccessControl.AccessControlSections)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.AddAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.AddAuditRule(System.Security.AccessControl.SemaphoreAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleAll(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRule(System.Security.AccessControl.SemaphoreAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleAll(System.Security.AccessControl.SemaphoreAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.ResetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.SetAccessRule(System.Security.AccessControl.SemaphoreAccessRule)" />
-      <Member Id="M:System.Security.AccessControl.SemaphoreSecurity.SetAuditRule(System.Security.AccessControl.SemaphoreAuditRule)" />
-      <Member Id="P:System.Security.AccessControl.SemaphoreSecurity.AccessRightType" />
-      <Member Id="P:System.Security.AccessControl.SemaphoreSecurity.AccessRuleType" />
-      <Member Id="P:System.Security.AccessControl.SemaphoreSecurity.AuditRuleType" />
-    </Type>
-  </Namespace>
   <Namespace Name="System.Security.Claims">
     <Type Name="System.Security.Claims.PrincipalExtensions" Id="T:System.Security.Claims.PrincipalExtensions">
       <Member Id="M:System.Security.Claims.PrincipalExtensions.FindFirstValue(System.Security.Claims.ClaimsPrincipal,System.String)" />
-    </Type>
-  </Namespace>
-  <Namespace Name="System.Threading">
-    <Type Name="System.Threading.EventWaitHandleAcl" Id="T:System.Threading.EventWaitHandleAcl">
-      <Member Id="M:System.Threading.EventWaitHandleAcl.Create(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
-      <Member Id="M:System.Threading.EventWaitHandleAcl.OpenExisting(System.String,System.Security.AccessControl.EventWaitHandleRights)" />
-      <Member Id="M:System.Threading.EventWaitHandleAcl.TryOpenExisting(System.String,System.Security.AccessControl.EventWaitHandleRights,System.Threading.EventWaitHandle@)" />
-    </Type>
-    <Type Name="System.Threading.MutexAcl" Id="T:System.Threading.MutexAcl">
-      <Member Id="M:System.Threading.MutexAcl.Create(System.Boolean,System.String,System.Boolean@,System.Security.AccessControl.MutexSecurity)" />
-      <Member Id="M:System.Threading.MutexAcl.OpenExisting(System.String,System.Security.AccessControl.MutexRights)" />
-      <Member Id="M:System.Threading.MutexAcl.TryOpenExisting(System.String,System.Security.AccessControl.MutexRights,System.Threading.Mutex@)" />
-    </Type>
-    <Type Name="System.Threading.SemaphoreAcl" Id="T:System.Threading.SemaphoreAcl">
-      <Member Id="M:System.Threading.SemaphoreAcl.Create(System.Int32,System.Int32,System.String,System.Boolean@,System.Security.AccessControl.SemaphoreSecurity)" />
-      <Member Id="M:System.Threading.SemaphoreAcl.OpenExisting(System.String,System.Security.AccessControl.SemaphoreRights)" />
-      <Member Id="M:System.Threading.SemaphoreAcl.TryOpenExisting(System.String,System.Security.AccessControl.SemaphoreRights,System.Threading.Semaphore@)" />
-    </Type>
-    <Type Name="System.Threading.ThreadingAclExtensions" Id="T:System.Threading.ThreadingAclExtensions">
-      <Member Id="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.EventWaitHandle)" />
-      <Member Id="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Mutex)" />
-      <Member Id="M:System.Threading.ThreadingAclExtensions.GetAccessControl(System.Threading.Semaphore)" />
-      <Member Id="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.EventWaitHandle,System.Security.AccessControl.EventWaitHandleSecurity)" />
-      <Member Id="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Mutex,System.Security.AccessControl.MutexSecurity)" />
-      <Member Id="M:System.Threading.ThreadingAclExtensions.SetAccessControl(System.Threading.Semaphore,System.Security.AccessControl.SemaphoreSecurity)" />
     </Type>
   </Namespace>
   <Namespace Name="System.Threading.RateLimiting">
