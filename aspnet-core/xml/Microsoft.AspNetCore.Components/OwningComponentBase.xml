@@ -1,10 +1,14 @@
 <Type Name="OwningComponentBase" FullName="Microsoft.AspNetCore.Components.OwningComponentBase">
   <TypeSignature Language="C++ CLI" Value="public ref class OwningComponentBase abstract : Microsoft::AspNetCore::Components::ComponentBase, IDisposable" />
-  <TypeSignature Language="C#" Value="public abstract class OwningComponentBase : Microsoft.AspNetCore.Components.ComponentBase, IDisposable" />
-  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit OwningComponentBase extends Microsoft.AspNetCore.Components.ComponentBase implements class System.IDisposable" />
+  <TypeSignature Language="C#" Value="public abstract class OwningComponentBase : Microsoft.AspNetCore.Components.ComponentBase, IAsyncDisposable, IDisposable" FrameworkAlternate="aspnetcore-10.0" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit OwningComponentBase extends Microsoft.AspNetCore.Components.ComponentBase implements class System.IAsyncDisposable, class System.IDisposable" FrameworkAlternate="aspnetcore-10.0" />
   <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Components.OwningComponentBase" />
-  <TypeSignature Language="VB.NET" Value="Public MustInherit Class OwningComponentBase&#xA;Inherits ComponentBase&#xA;Implements IDisposable" />
-  <TypeSignature Language="F#" Value="type OwningComponentBase = class&#xA;    inherit ComponentBase&#xA;    interface IDisposable" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class OwningComponentBase&#xA;Inherits ComponentBase&#xA;Implements IAsyncDisposable, IDisposable" FrameworkAlternate="aspnetcore-10.0" />
+  <TypeSignature Language="F#" Value="type OwningComponentBase = class&#xA;    inherit ComponentBase&#xA;    interface IDisposable&#xA;    interface IAsyncDisposable" FrameworkAlternate="aspnetcore-10.0" />
+  <TypeSignature Language="C#" Value="public abstract class OwningComponentBase : Microsoft.AspNetCore.Components.ComponentBase, IDisposable" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="ILAsm" Value=".class public auto ansi abstract beforefieldinit OwningComponentBase extends Microsoft.AspNetCore.Components.ComponentBase implements class System.IDisposable" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="VB.NET" Value="Public MustInherit Class OwningComponentBase&#xA;Inherits ComponentBase&#xA;Implements IDisposable" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
+  <TypeSignature Language="F#" Value="type OwningComponentBase = class&#xA;    inherit ComponentBase&#xA;    interface IDisposable" FrameworkAlternate="aspnetcore-3.0;aspnetcore-3.1;aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0;aspnetcore-8.0;aspnetcore-9.0" />
   <AssemblyInfo>
     <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
     <AssemblyVersion>3.0.0.0</AssemblyVersion>
@@ -22,12 +26,15 @@
     <BaseTypeName>Microsoft.AspNetCore.Components.ComponentBase</BaseTypeName>
   </Base>
   <Interfaces>
+    <Interface FrameworkAlternate="aspnetcore-10.0">
+      <InterfaceName>System.IAsyncDisposable</InterfaceName>
+    </Interface>
     <Interface>
       <InterfaceName>System.IDisposable</InterfaceName>
     </Interface>
   </Interfaces>
   <Attributes>
-    <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-8.0;aspnetcore-9.0">
+    <Attribute FrameworkAlternate="aspnetcore-8.0;aspnetcore-9.0">
       <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(0)]</AttributeName>
       <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(0)&gt;]</AttributeName>
     </Attribute>
@@ -94,10 +101,35 @@
         <Parameter Name="disposing" Type="System.Boolean" />
       </Parameters>
       <Docs>
-        <param name="disposing">To be added.</param>
-        <summary>To be added.</summary>
+        <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        <summary>
+            Releases the service scope used by the component.
+            </summary>
         <remarks>To be added.</remarks>
         <inheritdoc />
+      </Docs>
+    </Member>
+    <Member MemberName="DisposeAsyncCore">
+      <MemberSignature Language="C#" Value="protected virtual System.Threading.Tasks.ValueTask DisposeAsyncCore ();" />
+      <MemberSignature Language="ILAsm" Value=".method familyhidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask DisposeAsyncCore() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.OwningComponentBase.DisposeAsyncCore" />
+      <MemberSignature Language="VB.NET" Value="Protected Overridable Function DisposeAsyncCore () As ValueTask" />
+      <MemberSignature Language="F#" Value="abstract member DisposeAsyncCore : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.DisposeAsyncCore : unit -&gt; System.Threading.Tasks.ValueTask" Usage="owningComponentBase.DisposeAsyncCore " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Asynchronously releases the service scope used by the component.
+            </summary>
+        <returns>A task that represents the asynchronous dispose operation.</returns>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
     <Member MemberName="IsDisposed">
@@ -149,6 +181,12 @@
         <AssemblyVersion>9.0.0.0</AssemblyVersion>
         <AssemblyVersion>10.0.0.0</AssemblyVersion>
       </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-10.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
       <ReturnValue>
         <ReturnType>System.IServiceProvider</ReturnType>
       </ReturnValue>
@@ -158,6 +196,31 @@
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="System.IAsyncDisposable.DisposeAsync">
+      <MemberSignature Language="C#" Value="System.Threading.Tasks.ValueTask IAsyncDisposable.DisposeAsync ();" />
+      <MemberSignature Language="ILAsm" Value=".method hidebysig newslot virtual instance valuetype System.Threading.Tasks.ValueTask System.IAsyncDisposable.DisposeAsync() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.OwningComponentBase.System#IAsyncDisposable#DisposeAsync" />
+      <MemberSignature Language="VB.NET" Value="Function DisposeAsync () As ValueTask Implements IAsyncDisposable.DisposeAsync" />
+      <MemberSignature Language="F#" Value="abstract member System.IAsyncDisposable.DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask&#xA;override this.System.IAsyncDisposable.DisposeAsync : unit -&gt; System.Threading.Tasks.ValueTask" Usage="owningComponentBase.System.IAsyncDisposable.DisposeAsync " />
+      <MemberType>Method</MemberType>
+      <Implements>
+        <InterfaceMember>M:System.IAsyncDisposable.DisposeAsync</InterfaceMember>
+      </Implements>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components</AssemblyName>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.ValueTask</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>To be added.</summary>
+        <returns>To be added.</returns>
+        <remarks>To be added.</remarks>
+        <inhertidoc />
       </Docs>
     </Member>
     <Member MemberName="System.IDisposable.Dispose">
@@ -189,6 +252,7 @@
       <Docs>
         <summary>To be added.</summary>
         <remarks>To be added.</remarks>
+        <inhertidoc />
       </Docs>
     </Member>
   </Members>

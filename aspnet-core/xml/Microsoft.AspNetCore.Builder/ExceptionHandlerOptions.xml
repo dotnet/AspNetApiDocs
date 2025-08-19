@@ -220,12 +220,49 @@
       </ReturnValue>
       <Docs>
         <summary>
-            Gets or sets a delegate used to map an exception to a http status code.
+            Gets or sets a delegate used to map an exception to an HTTP status code.
             </summary>
         <value>To be added.</value>
         <remarks>
             If <see cref="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.StatusCodeSelector" /> is <c>null</c>, the default exception status code 500 is used.
             </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="SuppressDiagnosticsCallback">
+      <MemberSignature Language="C#" Value="public Func&lt;Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext,bool&gt;? SuppressDiagnosticsCallback { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;class Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext, bool&gt; SuppressDiagnosticsCallback" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.SuppressDiagnosticsCallback" />
+      <MemberSignature Language="VB.NET" Value="Public Property SuppressDiagnosticsCallback As Func(Of ExceptionHandlerSuppressDiagnosticsContext, Boolean)" />
+      <MemberSignature Language="F#" Value="member this.SuppressDiagnosticsCallback : Func&lt;Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext, bool&gt; with get, set" Usage="Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.SuppressDiagnosticsCallback" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Diagnostics</AssemblyName>
+        <AssemblyVersion>10.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-10.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1 })&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Microsoft.AspNetCore.Diagnostics.ExceptionHandlerSuppressDiagnosticsContext,System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets a callback that can return <see langword="true" /> to suppress diagnostics in <see cref="T:Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware" />.
+            <para>
+            If <see cref="P:Microsoft.AspNetCore.Builder.ExceptionHandlerOptions.SuppressDiagnosticsCallback" /> is <c>null</c>, the default behavior is to suppress diagnostics if the exception was handled by
+            an <see cref="T:Microsoft.AspNetCore.Diagnostics.IExceptionHandler" /> service instance registered in the DI container.
+            To always record diagnostics for handled exceptions, set a callback that returns <see langword="false" />.
+            </para><para>
+            This callback is only run if the exception was handled by the middleware.
+            Unhandled exceptions and exceptions thrown after the response has started are always logged.
+            </para><para>
+            Suppressed diagnostics include:
+            </para><list type="bullet"><item><description>Logging <c>UnhandledException</c> to <see cref="T:Microsoft.Extensions.Logging.ILogger" />.</description></item><item><description>Writing the <c>Microsoft.AspNetCore.Diagnostics.HandledException</c> event to <see cref="T:System.Diagnostics.Tracing.EventSource" />.</description></item><item><description>Adding the <c>error.type</c> tag to the <c>http.server.request.duration</c> metric.</description></item></list></summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
       </Docs>
     </Member>
   </Members>
