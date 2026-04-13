@@ -1,0 +1,131 @@
+<Type Name="ISpanAuthenticatedEncryptor" FullName="Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor">
+  <TypeSignature Language="C#" Value="public interface ISpanAuthenticatedEncryptor : Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.IAuthenticatedEncryptor" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract beforefieldinit ISpanAuthenticatedEncryptor implements class Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.IAuthenticatedEncryptor" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ISpanAuthenticatedEncryptor&#xA;Implements IAuthenticatedEncryptor" />
+  <TypeSignature Language="F#" Value="type ISpanAuthenticatedEncryptor = interface&#xA;    interface IAuthenticatedEncryptor" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.DataProtection</AssemblyName>
+    <AssemblyVersion>11.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.IAuthenticatedEncryptor</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            Provides an authenticated encryption and decryption routine via a span-based API.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Decrypt&lt;TWriter&gt;">
+      <MemberSignature Language="C#" Value="public void Decrypt&lt;TWriter&gt; (ReadOnlySpan&lt;byte&gt; ciphertext, ReadOnlySpan&lt;byte&gt; additionalAuthenticatedData, ref TWriter destination) where TWriter : System.Buffers.IBufferWriter&lt;byte&gt;, allows ref struct;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Decrypt&lt;(class System.Buffers.IBufferWriter`1&lt;unsigned int8&gt;) TWriter&gt;(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; ciphertext, valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; additionalAuthenticatedData, !!TWriter&amp; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor.Decrypt``1(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},``0@)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Decrypt(Of TWriter As IBufferWriter(Of Byte)) (ciphertext As ReadOnlySpan(Of Byte), additionalAuthenticatedData As ReadOnlySpan(Of Byte), ByRef destination As TWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Decrypt : ReadOnlySpan&lt;byte&gt; * ReadOnlySpan&lt;byte&gt; * 'Writer -&gt; unit (requires 'Writer :&gt; System.Buffers.IBufferWriter&lt;byte&gt;)" Usage="iSpanAuthenticatedEncryptor.Decrypt (ciphertext, additionalAuthenticatedData, destination)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TWriter">
+          <Constraints>
+            <ParameterAttribute>AllowByRefLike</ParameterAttribute>
+            <InterfaceName>System.Buffers.IBufferWriter&lt;System.Byte&gt;</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="ciphertext" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="additionalAuthenticatedData" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="destination" Type="TWriter" RefType="ref">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <typeparam name="TWriter">The type of buffer writer to write the plaintext to.</typeparam>
+        <param name="ciphertext">The ciphertext (including authentication tag) to decrypt.</param>
+        <param name="additionalAuthenticatedData">
+            Any ancillary data which was used during computation of the authentication tag.
+            The same AAD must have been specified in the corresponding call to <see cref="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor.Encrypt``1(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},``0@)" />.
+            </param>
+        <param name="destination">The buffer writer to which the decrypted plaintext will be written.</param>
+        <summary>
+            Validates the authentication tag of and decrypts a blob of encrypted data, writing the result to a buffer writer.
+            </summary>
+        <remarks>
+            This method provides an optimized, streaming alternative to <see cref="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.IAuthenticatedEncryptor.Decrypt(System.ArraySegment{System.Byte},System.ArraySegment{System.Byte})" />.
+            Rather than allocating an intermediate buffer, the plaintext is written directly to the provided buffer writer,
+            which can improve performance and reduce memory allocation pressure.
+            The buffer writer is advanced by the total number of bytes written to it.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Encrypt&lt;TWriter&gt;">
+      <MemberSignature Language="C#" Value="public void Encrypt&lt;TWriter&gt; (ReadOnlySpan&lt;byte&gt; plaintext, ReadOnlySpan&lt;byte&gt; additionalAuthenticatedData, ref TWriter destination) where TWriter : System.Buffers.IBufferWriter&lt;byte&gt;, allows ref struct;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Encrypt&lt;(class System.Buffers.IBufferWriter`1&lt;unsigned int8&gt;) TWriter&gt;(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; plaintext, valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; additionalAuthenticatedData, !!TWriter&amp; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor.Encrypt``1(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},``0@)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Encrypt(Of TWriter As IBufferWriter(Of Byte)) (plaintext As ReadOnlySpan(Of Byte), additionalAuthenticatedData As ReadOnlySpan(Of Byte), ByRef destination As TWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Encrypt : ReadOnlySpan&lt;byte&gt; * ReadOnlySpan&lt;byte&gt; * 'Writer -&gt; unit (requires 'Writer :&gt; System.Buffers.IBufferWriter&lt;byte&gt;)" Usage="iSpanAuthenticatedEncryptor.Encrypt (plaintext, additionalAuthenticatedData, destination)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TWriter">
+          <Constraints>
+            <ParameterAttribute>AllowByRefLike</ParameterAttribute>
+            <InterfaceName>System.Buffers.IBufferWriter&lt;System.Byte&gt;</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="plaintext" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="additionalAuthenticatedData" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="destination" Type="TWriter" RefType="ref">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <typeparam name="TWriter">The type of buffer writer to write the ciphertext to.</typeparam>
+        <param name="plaintext">The plaintext to encrypt. This input may be zero bytes in length.</param>
+        <param name="additionalAuthenticatedData">
+            A piece of data which will not be included in the returned ciphertext
+            but which will still be covered by the authentication tag. This input may be zero bytes in length.
+            The same AAD must be specified in the corresponding call to <see cref="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ISpanAuthenticatedEncryptor.Decrypt``1(System.ReadOnlySpan{System.Byte},System.ReadOnlySpan{System.Byte},``0@)" />.
+            </param>
+        <param name="destination">The buffer writer to which the ciphertext (including authentication tag) will be written.</param>
+        <summary>
+            Encrypts and authenticates a piece of plaintext data and writes the result to a buffer writer.
+            </summary>
+        <remarks>
+            This method provides an optimized, streaming alternative to <see cref="M:Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.IAuthenticatedEncryptor.Encrypt(System.ArraySegment{System.Byte},System.ArraySegment{System.Byte})" />.
+            Rather than allocating an intermediate buffer, the ciphertext is written directly to the provided buffer writer,
+            which can improve performance and reduce memory allocation pressure.
+            The buffer writer is advanced by the total number of bytes written to it.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
