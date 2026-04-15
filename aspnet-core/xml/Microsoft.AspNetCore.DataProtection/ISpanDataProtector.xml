@@ -1,0 +1,124 @@
+<Type Name="ISpanDataProtector" FullName="Microsoft.AspNetCore.DataProtection.ISpanDataProtector">
+  <TypeSignature Language="C#" Value="public interface ISpanDataProtector : Microsoft.AspNetCore.DataProtection.IDataProtector" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract beforefieldinit ISpanDataProtector implements class Microsoft.AspNetCore.DataProtection.IDataProtectionProvider, class Microsoft.AspNetCore.DataProtection.IDataProtector" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.DataProtection.ISpanDataProtector" />
+  <TypeSignature Language="VB.NET" Value="Public Interface ISpanDataProtector&#xA;Implements IDataProtector" />
+  <TypeSignature Language="F#" Value="type ISpanDataProtector = interface&#xA;    interface IDataProtector&#xA;    interface IDataProtectionProvider" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.DataProtection.Abstractions</AssemblyName>
+    <AssemblyVersion>11.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.DataProtection.IDataProtectionProvider</InterfaceName>
+    </Interface>
+    <Interface>
+      <InterfaceName>Microsoft.AspNetCore.DataProtection.IDataProtector</InterfaceName>
+    </Interface>
+  </Interfaces>
+  <Docs>
+    <summary>
+            An interface that can provide data protection services.
+            Is an optimized version of <see cref="T:Microsoft.AspNetCore.DataProtection.IDataProtector" />.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="Protect&lt;TWriter&gt;">
+      <MemberSignature Language="C#" Value="public void Protect&lt;TWriter&gt; (ReadOnlySpan&lt;byte&gt; plaintext, ref TWriter destination) where TWriter : System.Buffers.IBufferWriter&lt;byte&gt;, allows ref struct;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Protect&lt;(class System.Buffers.IBufferWriter`1&lt;unsigned int8&gt;) TWriter&gt;(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; plaintext, !!TWriter&amp; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.ISpanDataProtector.Protect``1(System.ReadOnlySpan{System.Byte},``0@)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Protect(Of TWriter As IBufferWriter(Of Byte)) (plaintext As ReadOnlySpan(Of Byte), ByRef destination As TWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Protect : ReadOnlySpan&lt;byte&gt; * 'Writer -&gt; unit (requires 'Writer :&gt; System.Buffers.IBufferWriter&lt;byte&gt;)" Usage="iSpanDataProtector.Protect (plaintext, destination)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection.Abstractions</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TWriter">
+          <Constraints>
+            <ParameterAttribute>AllowByRefLike</ParameterAttribute>
+            <InterfaceName>System.Buffers.IBufferWriter&lt;System.Byte&gt;</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="plaintext" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="destination" Type="TWriter" RefType="ref">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <typeparam name="TWriter">The type of buffer writer to write the protected data to.</typeparam>
+        <param name="plaintext">The plaintext data to protect.</param>
+        <param name="destination">The buffer writer to which the protected data will be written.</param>
+        <summary>
+            Cryptographically protects a piece of plaintext data and writes the result to a buffer writer.
+            </summary>
+        <remarks>
+            This method provides an optimized, streaming alternative to <see cref="M:Microsoft.AspNetCore.DataProtection.IDataProtector.Protect(System.Byte[])" />.
+            Rather than allocating an intermediate buffer, the protected data is written directly to the provided
+            buffer writer, which can improve performance and reduce memory allocation pressure.
+            The buffer writer is advanced by the total number of bytes written to it.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="Unprotect&lt;TWriter&gt;">
+      <MemberSignature Language="C#" Value="public void Unprotect&lt;TWriter&gt; (ReadOnlySpan&lt;byte&gt; protectedData, ref TWriter destination) where TWriter : System.Buffers.IBufferWriter&lt;byte&gt;, allows ref struct;" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance void Unprotect&lt;(class System.Buffers.IBufferWriter`1&lt;unsigned int8&gt;) TWriter&gt;(valuetype System.ReadOnlySpan`1&lt;unsigned int8&gt; protectedData, !!TWriter&amp; destination) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.DataProtection.ISpanDataProtector.Unprotect``1(System.ReadOnlySpan{System.Byte},``0@)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub Unprotect(Of TWriter As IBufferWriter(Of Byte)) (protectedData As ReadOnlySpan(Of Byte), ByRef destination As TWriter)" />
+      <MemberSignature Language="F#" Value="abstract member Unprotect : ReadOnlySpan&lt;byte&gt; * 'Writer -&gt; unit (requires 'Writer :&gt; System.Buffers.IBufferWriter&lt;byte&gt;)" Usage="iSpanDataProtector.Unprotect (protectedData, destination)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.DataProtection.Abstractions</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TWriter">
+          <Constraints>
+            <ParameterAttribute>AllowByRefLike</ParameterAttribute>
+            <InterfaceName>System.Buffers.IBufferWriter&lt;System.Byte&gt;</InterfaceName>
+          </Constraints>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="protectedData" Type="System.ReadOnlySpan&lt;System.Byte&gt;" />
+        <Parameter Name="destination" Type="TWriter" RefType="ref">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(1)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(1)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <typeparam name="TWriter">The type of buffer writer to write the unprotected data to.</typeparam>
+        <param name="protectedData">The protected data to unprotect.</param>
+        <param name="destination">The buffer writer to which the unprotected plaintext will be written.</param>
+        <summary>
+            Cryptographically unprotects a piece of protected data and writes the result to a buffer writer.
+            </summary>
+        <remarks>
+            This method provides an optimized, streaming alternative to <see cref="M:Microsoft.AspNetCore.DataProtection.IDataProtector.Unprotect(System.Byte[])" />.
+            Rather than allocating an intermediate buffer, the unprotected plaintext is written directly to the provided
+            buffer writer, which can improve performance and reduce memory allocation pressure.
+            The buffer writer is advanced by the total number of bytes written to it.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
