@@ -719,5 +719,57 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="UseTlsClientHelloListener">
+      <MemberSignature Language="C#" Value="public static Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions UseTlsClientHelloListener (this Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions listenOptions, Action&lt;Microsoft.AspNetCore.Connections.ConnectionContext,System.Buffers.ReadOnlySequence&lt;byte&gt;&gt; tlsClientHelloBytesCallback, TimeSpan? timeout = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions UseTlsClientHelloListener(class Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions listenOptions, class System.Action`2&lt;class Microsoft.AspNetCore.Connections.ConnectionContext, valuetype System.Buffers.ReadOnlySequence`1&lt;unsigned int8&gt;&gt; tlsClientHelloBytesCallback, valuetype System.Nullable`1&lt;valuetype System.TimeSpan&gt; timeout) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Hosting.ListenOptionsHttpsExtensions.UseTlsClientHelloListener(Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions,System.Action{Microsoft.AspNetCore.Connections.ConnectionContext,System.Buffers.ReadOnlySequence{System.Byte}},System.Nullable{System.TimeSpan})" />
+      <MemberSignature Language="VB.NET" Value="&lt;Extension()&gt;&#xA;Public Function UseTlsClientHelloListener (listenOptions As ListenOptions, tlsClientHelloBytesCallback As Action(Of ConnectionContext, ReadOnlySequence(Of Byte)), Optional timeout As Nullable(Of TimeSpan) = Nothing) As ListenOptions" />
+      <MemberSignature Language="F#" Value="static member UseTlsClientHelloListener : Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions * Action&lt;Microsoft.AspNetCore.Connections.ConnectionContext, System.Buffers.ReadOnlySequence&lt;byte&gt;&gt; * Nullable&lt;TimeSpan&gt; -&gt; Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions" Usage="Microsoft.AspNetCore.Hosting.ListenOptionsHttpsExtensions.UseTlsClientHelloListener (listenOptions, tlsClientHelloBytesCallback, timeout)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Core</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Server.Kestrel.Https</AssemblyName>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="listenOptions" Type="Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions" Index="0" FrameworkAlternate="aspnetcore-11.0" RefType="this" />
+        <Parameter Name="tlsClientHelloBytesCallback" Type="System.Action&lt;Microsoft.AspNetCore.Connections.ConnectionContext,System.Buffers.ReadOnlySequence&lt;System.Byte&gt;&gt;" Index="1" FrameworkAlternate="aspnetcore-11.0">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 1, 0 })]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 1, 0 })&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="timeout" Type="System.Nullable&lt;System.TimeSpan&gt;" Index="2" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <param name="listenOptions">The <see cref="T:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions" /> to configure.</param>
+        <param name="tlsClientHelloBytesCallback">
+            The callback to invoke with the <see cref="T:Microsoft.AspNetCore.Connections.ConnectionContext" /> and the raw TLS Client Hello bytes
+            (still wrapped in the TLS record layer fragment).
+            </param>
+        <param name="timeout">
+            The maximum time to wait for the TLS Client Hello message. Defaults to 8 seconds if not specified.
+            </param>
+        <summary>
+            Adds a connection middleware that sniffs the TLS Client Hello message and invokes <paramref name="tlsClientHelloBytesCallback" />
+            with the raw bytes before the TLS handshake is performed.
+            This must be called before <c>UseHttps()</c> so that the middleware runs prior to the TLS handshake.
+            </summary>
+        <returns>The <see cref="T:Microsoft.AspNetCore.Server.Kestrel.Core.ListenOptions" />.</returns>
+        <remarks>
+            Note that this timeout is additive with the TLS handshake timeout (default 10 seconds).
+            A slow client could take up to the sum of both timeouts (e.g. 8 + 10 = 18 seconds by default)
+            before the connection is aborted. Consider reducing each timeout accordingly
+            (e.g. 5 seconds for the Client Hello and 5 seconds for the handshake) to keep the total time bounded.
+            </remarks>
+      </Docs>
+    </Member>
   </Members>
 </Type>
