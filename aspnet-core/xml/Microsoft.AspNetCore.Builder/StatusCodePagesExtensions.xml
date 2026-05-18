@@ -73,8 +73,11 @@
       <Docs>
         <param name="app" />
         <summary>
-            Adds a StatusCodePages middleware with a default response handler that checks for responses with status codes
-            between 400 and 599 that do not have a body.
+            Adds a <see cref="T:Microsoft.AspNetCore.Diagnostics.StatusCodePagesMiddleware" /> with the default response handler.
+            The middleware checks for responses with status codes between 400 and 599 that do not have a body and,
+            when an <see cref="T:Microsoft.AspNetCore.Http.IProblemDetailsService" /> is available, attempts to generate a
+            <see cref="T:Microsoft.AspNetCore.Mvc.ProblemDetails" /> response. If the service is unavailable or cannot write the response,
+            it generates a plain text response that includes the status code.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
@@ -118,6 +121,9 @@
         <summary>
             Adds a StatusCodePages middleware with the given options that checks for responses with status codes
             between 400 and 599 that do not have a body.
+            If <see cref="P:Microsoft.AspNetCore.Builder.StatusCodePagesOptions.HandleAsync" /> uses its default value, it attempts to generate a
+            <see cref="T:Microsoft.AspNetCore.Mvc.ProblemDetails" /> response using <see cref="T:Microsoft.AspNetCore.Http.IProblemDetailsService" />
+            and falls back to a plain text response that includes the status code.
             </summary>
         <returns />
         <remarks>To be added.</remarks>
