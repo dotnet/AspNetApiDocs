@@ -76,6 +76,58 @@
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
+    <Member MemberName="AddValidationTask">
+      <MemberSignature Language="C#" Value="public void AddValidationTask (in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier, System.Threading.Tasks.Task task, System.Threading.CancellationTokenSource cts);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance void AddValidationTask([in]valuetype Microsoft.AspNetCore.Components.Forms.FieldIdentifier&amp; fieldIdentifier, class System.Threading.Tasks.Task task, class System.Threading.CancellationTokenSource cts) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.AddValidationTask(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@,System.Threading.Tasks.Task,System.Threading.CancellationTokenSource)" />
+      <MemberSignature Language="VB.NET" Value="Public Sub AddValidationTask (ByRef fieldIdentifier As FieldIdentifier, task As Task, cts As CancellationTokenSource)" />
+      <MemberSignature Language="F#" Value="member this.AddValidationTask : FieldIdentifier * System.Threading.Tasks.Task * System.Threading.CancellationTokenSource -&gt; unit" Usage="editContext.AddValidationTask (fieldIdentifier, task, cts)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Void</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fieldIdentifier" Type="Microsoft.AspNetCore.Components.Forms.FieldIdentifier" RefType="ref" Index="0" FrameworkAlternate="aspnetcore-11.0">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IsReadOnly&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="task" Type="System.Threading.Tasks.Task" Index="1" FrameworkAlternate="aspnetcore-11.0" />
+        <Parameter Name="cts" Type="System.Threading.CancellationTokenSource" Index="2" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <param name="fieldIdentifier">Identifies the field being validated.</param>
+        <param name="task">The async validation task to track.</param>
+        <param name="cts">The <see cref="T:System.Threading.CancellationTokenSource" /> that can cancel the task.</param>
+        <summary>
+            Registers an async validation task for a specific field. The task is tracked for
+            pending/faulted state queries via <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" />
+            and <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" />. If a task is already tracked
+            for this field, the previously registered <see cref="T:System.Threading.CancellationTokenSource" /> is cancelled
+            and the new task replaces it. The <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" /> takes ownership of the supplied
+            <paramref name="cts" />: it will be cancelled if a subsequent validation supersedes this one,
+            and disposed once <paramref name="task" /> completes.
+            </summary>
+        <remarks>
+            If <paramref name="task" /> is already completed, it is settled synchronously: the field is
+            not parked in the pending state, a faulted task is surfaced via
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" />, and <paramref name="cts" /> is disposed.
+            <para>
+            Validators backing <paramref name="task" /> are expected to clear any prior validation
+            messages for the field up-front (before awaiting), and to avoid writing partial results
+            to a <see cref="T:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore" /> on a path that may subsequently throw. If a
+            validator does write partial state and then throws, those messages remain in the store
+            until cleared by a subsequent successful validation.
+            </para></remarks>
+      </Docs>
+    </Member>
     <Member MemberName="Field">
       <MemberSignature Language="C++ CLI" Value="public:&#xA; Microsoft::AspNetCore::Components::Forms::FieldIdentifier Field(System::String ^ fieldName);" />
       <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Components.Forms.FieldIdentifier Field (string fieldName);" />
@@ -142,9 +194,13 @@
         <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-11.0;aspnetcore-8.0;aspnetcore-9.0">
+        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-8.0;aspnetcore-9.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__27))]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__27))&gt;]</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="aspnetcore-11.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__32))]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__32))&gt;]</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__23))]</AttributeName>
@@ -191,9 +247,13 @@
         <AssemblyVersion>11.0.0.0</AssemblyVersion>
       </AssemblyInfo>
       <Attributes>
-        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-11.0;aspnetcore-8.0;aspnetcore-9.0">
+        <Attribute FrameworkAlternate="aspnetcore-10.0;aspnetcore-8.0;aspnetcore-9.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__28))]</AttributeName>
           <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__28))&gt;]</AttributeName>
+        </Attribute>
+        <Attribute FrameworkAlternate="aspnetcore-11.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__33))]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__33))&gt;]</AttributeName>
         </Attribute>
         <Attribute FrameworkAlternate="aspnetcore-5.0;aspnetcore-6.0;aspnetcore-7.0">
           <AttributeName Language="C#">[System.Runtime.CompilerServices.IteratorStateMachine(typeof(Microsoft.AspNetCore.Components.Forms.EditContext+&lt;GetValidationMessages&gt;d__24))]</AttributeName>
@@ -433,6 +493,213 @@
             Determines whether the specified fields in this <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" /> has no associated validation messages.
             </summary>
         <returns>True if the field has no associated validation messages after validation; otherwise false.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationFaulted">
+      <MemberSignature Language="C#" Value="public bool IsValidationFaulted ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationFaulted() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationFaulted () As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationFaulted : unit -&gt; bool" Usage="editContext.IsValidationFaulted " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns <c>true</c> if the most recent <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> pass observed an
+            unhandled exception from any <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" /> handler. A subsequent
+            successful <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> pass clears the flag; a caller-cancelled pass
+            preserves it. Use this to detect that validation itself failed (not just produced validation messages).
+            For per-field validator faults from <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.AddValidationTask(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@,System.Threading.Tasks.Task,System.Threading.CancellationTokenSource)" />, use the <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" /> overload.
+            </summary>
+        <returns>
+          <c>true</c> if the most recent <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> pass faulted; otherwise <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationFaulted">
+      <MemberSignature Language="C#" Value="public bool IsValidationFaulted (in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationFaulted([in]valuetype Microsoft.AspNetCore.Components.Forms.FieldIdentifier&amp; fieldIdentifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationFaulted (ByRef fieldIdentifier As FieldIdentifier) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationFaulted : FieldIdentifier -&gt; bool" Usage="editContext.IsValidationFaulted fieldIdentifier" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fieldIdentifier" Type="Microsoft.AspNetCore.Components.Forms.FieldIdentifier" RefType="ref" Index="0" FrameworkAlternate="aspnetcore-11.0">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IsReadOnly&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="fieldIdentifier">Identifies the field to query.</param>
+        <summary>
+            Returns <c>true</c> if the specified field's last async validation faulted
+            (threw a non-cancellation exception).
+            </summary>
+        <returns>
+          <c>true</c> if the field's last async validation faulted; otherwise <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationFaulted&lt;TField&gt;">
+      <MemberSignature Language="C#" Value="public bool IsValidationFaulted&lt;TField&gt; (System.Linq.Expressions.Expression&lt;Func&lt;TField&gt;&gt; accessor);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationFaulted&lt;TField&gt;(class System.Linq.Expressions.Expression`1&lt;class System.Func`1&lt;!!TField&gt;&gt; accessor) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted``1(System.Linq.Expressions.Expression{System.Func{``0}})" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationFaulted(Of TField) (accessor As Expression(Of Func(Of TField))) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationFaulted : System.Linq.Expressions.Expression&lt;Func&lt;'Field&gt;&gt; -&gt; bool" Usage="editContext.IsValidationFaulted accessor" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TField">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(2)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="accessor" Type="System.Linq.Expressions.Expression&lt;System.Func&lt;TField&gt;&gt;" Index="0" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TField">The type of the field.</typeparam>
+        <param name="accessor">An expression that identifies the field, e.g. <c>() =&gt; model.Email</c>.</param>
+        <summary>
+            Returns <c>true</c> if the field identified by the <paramref name="accessor" /> expression's
+            last async validation faulted (threw a non-cancellation exception).
+            </summary>
+        <returns>
+          <c>true</c> if the field's last async validation faulted; otherwise <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationPending">
+      <MemberSignature Language="C#" Value="public bool IsValidationPending ();" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationPending() cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationPending () As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationPending : unit -&gt; bool" Usage="editContext.IsValidationPending " />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters />
+      <Docs>
+        <summary>
+            Returns <c>true</c> if a form-level <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> pass is currently in flight.
+            Suitable for driving form-wide UI such as disabling a submit button or showing a
+            "validating..." indicator for the current submission. Does not consider field-level pending
+            tasks (those are superseded when the next form-level pass starts); use the
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" /> overload for per-field state.
+            </summary>
+        <returns>
+          <c>true</c> if a form-level validation pass is in progress; otherwise <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationPending">
+      <MemberSignature Language="C#" Value="public bool IsValidationPending (in Microsoft.AspNetCore.Components.Forms.FieldIdentifier fieldIdentifier);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationPending([in]valuetype Microsoft.AspNetCore.Components.Forms.FieldIdentifier&amp; fieldIdentifier) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationPending (ByRef fieldIdentifier As FieldIdentifier) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationPending : FieldIdentifier -&gt; bool" Usage="editContext.IsValidationPending fieldIdentifier" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="fieldIdentifier" Type="Microsoft.AspNetCore.Components.Forms.FieldIdentifier" RefType="ref" Index="0" FrameworkAlternate="aspnetcore-11.0">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.IsReadOnly]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.IsReadOnly&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="fieldIdentifier">Identifies the field to query.</param>
+        <summary>
+            Returns <c>true</c> if the specified field has a pending async validation task.
+            A task is "pending" until the framework's observer has settled its outcome and cleared the
+            slot (i.e., not only until the task itself completes) so a consumer that waits for
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" /> to become <c>false</c> is guaranteed
+            to also see the final <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" /> value.
+            </summary>
+        <returns>
+          <c>true</c> if async validation is in progress for the field; otherwise <c>false</c>.</returns>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="IsValidationPending&lt;TField&gt;">
+      <MemberSignature Language="C#" Value="public bool IsValidationPending&lt;TField&gt; (System.Linq.Expressions.Expression&lt;Func&lt;TField&gt;&gt; accessor);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance bool IsValidationPending&lt;TField&gt;(class System.Linq.Expressions.Expression`1&lt;class System.Func`1&lt;!!TField&gt;&gt; accessor) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending``1(System.Linq.Expressions.Expression{System.Func{``0}})" />
+      <MemberSignature Language="VB.NET" Value="Public Function IsValidationPending(Of TField) (accessor As Expression(Of Func(Of TField))) As Boolean" />
+      <MemberSignature Language="F#" Value="member this.IsValidationPending : System.Linq.Expressions.Expression&lt;Func&lt;'Field&gt;&gt; -&gt; bool" Usage="editContext.IsValidationPending accessor" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <TypeParameters>
+        <TypeParameter Name="TField">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(2)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </TypeParameter>
+      </TypeParameters>
+      <Parameters>
+        <Parameter Name="accessor" Type="System.Linq.Expressions.Expression&lt;System.Func&lt;TField&gt;&gt;" Index="0" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <typeparam name="TField">The type of the field.</typeparam>
+        <param name="accessor">An expression that identifies the field, e.g. <c>() =&gt; model.Email</c>.</param>
+        <summary>
+            Returns <c>true</c> if the field identified by the <paramref name="accessor" /> expression
+            has a pending async validation task.
+            </summary>
+        <returns>
+          <c>true</c> if async validation is in progress for the field; otherwise <c>false</c>.</returns>
         <remarks>To be added.</remarks>
       </Docs>
     </Member>
@@ -710,9 +977,54 @@
       </ReturnValue>
       <Docs>
         <summary>
-            An event that is raised when validation is requested.
+            An event that is raised when validation is requested. Validator components subscribe
+            to this event to perform synchronous validation.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            For a given source of validation, a validator component should subscribe to exactly one
+            of <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested" /> or <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" />.
+            Subscribing to both causes the same validator to run twice on <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" />,
+            with the second pass overwriting the first.
+            <para>
+            New validator implementations are recommended to subscribe to
+            <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" /> instead. This event remains supported for
+            existing sync validators and continues to be raised by both <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" /> and
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" />.
+            </para></remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnValidationRequestedAsync">
+      <MemberSignature Language="C#" Value="public event Func&lt;object,Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs,System.Threading.Tasks.Task&gt;? OnValidationRequestedAsync;" />
+      <MemberSignature Language="ILAsm" Value=".event class System.Func`3&lt;object, class Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs, class System.Threading.Tasks.Task&gt; OnValidationRequestedAsync" />
+      <MemberSignature Language="DocId" Value="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" />
+      <MemberSignature Language="VB.NET" Value="Public Event OnValidationRequestedAsync As Func(Of Object, ValidationRequestedEventArgs, Task) " />
+      <MemberSignature Language="F#" Value="member this.OnValidationRequestedAsync : Func&lt;obj, Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs, System.Threading.Tasks.Task&gt; " Usage="member this.OnValidationRequestedAsync : System.Func&lt;System.obj, Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs, System.Threading.Tasks.Task&gt; " />
+      <MemberType>Event</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-11.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1, 1, 1 })]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1, 1, 1 })&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;System.Object,Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs,System.Threading.Tasks.Task&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            An async event that is raised when validation is requested. Validator components
+            subscribe to this event to perform async validation (e.g., database lookups, remote API calls).
+            Handlers are awaited by <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" />. <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" /> also invokes
+            these handlers but requires each to complete synchronously; if any returns an incomplete
+            <see cref="T:System.Threading.Tasks.Task" />, <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" /> throws <see cref="T:System.InvalidOperationException" />.
+            </summary>
+        <remarks>
+            For a given source of validation, a validator component should subscribe to exactly one
+            of <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested" /> or <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" />.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="OnValidationStateChanged">
@@ -844,7 +1156,71 @@
             Validates this <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" />.
             </summary>
         <returns>True if there are no validation messages after validation; otherwise false.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            Validation must not be re-entered. Do not call <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" /> or
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> from inside an <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested" />,
+            <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" />, or <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationStateChanged" />
+            handler attached to the same <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" />; doing so produces undefined
+            behavior (in particular, it can cause infinite recursion via the validator's own
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.NotifyValidationStateChanged" /> calls).
+            </remarks>
+        <exception cref="T:System.InvalidOperationException">
+            Thrown when an <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" /> handler does not complete synchronously.
+            Use <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> instead when async validators are registered.
+            </exception>
+      </Docs>
+    </Member>
+    <Member MemberName="ValidateAsync">
+      <MemberSignature Language="C#" Value="public System.Threading.Tasks.Task&lt;bool&gt; ValidateAsync (System.Threading.CancellationToken cancellationToken = default);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig instance class System.Threading.Tasks.Task`1&lt;bool&gt; ValidateAsync(valuetype System.Threading.CancellationToken cancellationToken) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" />
+      <MemberSignature Language="VB.NET" Value="Public Function ValidateAsync (Optional cancellationToken As CancellationToken = Nothing) As Task(Of Boolean)" />
+      <MemberSignature Language="F#" Value="member this.ValidateAsync : System.Threading.CancellationToken -&gt; System.Threading.Tasks.Task&lt;bool&gt;" Usage="editContext.ValidateAsync cancellationToken" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Components.Forms</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;System.Boolean&gt;</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="cancellationToken" Type="System.Threading.CancellationToken" Index="0" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <param name="cancellationToken">A token that signals cancellation of this validation pass.
+            The token is exposed to async handlers via <see cref="P:Microsoft.AspNetCore.Components.Forms.ValidationRequestedEventArgs.CancellationToken" />.
+            If the caller cancels the token, this method throws <see cref="T:System.OperationCanceledException" />;
+            the form is not marked as faulted in that case and the previous form-level fault state is preserved.
+            The token bounds the in-flight pass only; field-level validation tasks that start independently
+            during the awaited window (for example, from user edits) are not linked to this token and
+            continue running.</param>
+        <summary>
+            Validates this <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" /> asynchronously.
+            Cancels any pending field-level async validation tasks, invokes the synchronous
+            <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested" /> handlers, then invokes and awaits the asynchronous
+            <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" /> handlers concurrently. Exceptions from synchronous
+            handlers propagate to the caller, matching <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" />. Any non-cancellation
+            exception thrown by an asynchronous handler is contained: the form is marked as faulted
+            (observable via the parameterless <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted" />) and the method
+            returns <c>false</c>.
+            While the asynchronous portion is in flight, the parameterless
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationPending" /> returns <c>true</c> so applications can show a global
+            "validating..." indicator without wrapping the call themselves. The form-level
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsValidationFaulted" /> result is updated only when a pass completes; it is
+            preserved across caller-cancelled passes.
+            </summary>
+        <returns>True if there are no validation messages after validation and no async handler
+            faulted; otherwise false.</returns>
+        <remarks>
+            Validation must not be re-entered. Do not call <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.Validate" /> or
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.ValidateAsync(System.Threading.CancellationToken)" /> from inside an <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequested" />,
+            <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationRequestedAsync" />, or <see cref="E:Microsoft.AspNetCore.Components.Forms.EditContext.OnValidationStateChanged" />
+            handler attached to the same <see cref="T:Microsoft.AspNetCore.Components.Forms.EditContext" />; doing so produces undefined
+            behavior.
+            </remarks>
+        <exception cref="T:System.OperationCanceledException">Thrown when <paramref name="cancellationToken" />
+            is cancelled before or during the validation pass.</exception>
       </Docs>
     </Member>
   </Members>
