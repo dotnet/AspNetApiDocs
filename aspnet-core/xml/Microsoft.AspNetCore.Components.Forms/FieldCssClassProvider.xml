@@ -93,7 +93,15 @@
         <param name="fieldIdentifier">The <see cref="T:Microsoft.AspNetCore.Components.Forms.FieldIdentifier" />.</param>
         <summary>
             Gets a string that indicates the status of the specified field as a CSS class.
-            </summary>
+            The result is one of <c>"valid"</c>, <c>"invalid"</c>, <c>"pending"</c>, or <c>"faulted"</c>,
+            optionally prefixed with <c>"modified "</c> when
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.IsModified(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@)" /> is <c>true</c>.
+            <list type="bullet"><item><c>"pending"</c> is emitted while an async validation task registered via
+            <see cref="M:Microsoft.AspNetCore.Components.Forms.EditContext.AddValidationTask(Microsoft.AspNetCore.Components.Forms.FieldIdentifier@,System.Threading.Tasks.Task,System.Threading.CancellationTokenSource)" /> is in flight, and supersedes valid/invalid
+            since the outcome is not yet known.</item><item><c>"faulted"</c> is emitted when the field's last async validation threw a
+            non-cancellation exception, and supersedes valid/invalid since the infrastructure
+            failed to determine validity.</item><item><c>"valid"</c> or <c>"invalid"</c> reflects whether any validation messages exist
+            for the field once no pending or faulted state applies.</item></list></summary>
         <returns>A CSS class name string.</returns>
         <remarks>To be added.</remarks>
       </Docs>
