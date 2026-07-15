@@ -190,6 +190,30 @@
             </remarks>
       </Docs>
     </Member>
+    <Member MemberName="EnableAuthenticationRefresh">
+      <MemberSignature Language="C#" Value="public bool EnableAuthenticationRefresh { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance bool EnableAuthenticationRefresh" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.Connections.HttpConnectionDispatcherOptions.EnableAuthenticationRefresh" />
+      <MemberSignature Language="VB.NET" Value="Public Property EnableAuthenticationRefresh As Boolean" />
+      <MemberSignature Language="F#" Value="member this.EnableAuthenticationRefresh : bool with get, set" Usage="Microsoft.AspNetCore.Http.Connections.HttpConnectionDispatcherOptions.EnableAuthenticationRefresh" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Connections</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Boolean</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            When set to <c>true</c>, enables the <c>/refresh</c> endpoint that allows clients to refresh their
+            authentication token without disconnecting. The server will re-authenticate the request and update
+            the connection's <see cref="T:System.Security.Claims.ClaimsPrincipal" />.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
     <Member MemberName="LongPolling">
       <MemberSignature Language="C++ CLI" Value="public:&#xA; property Microsoft::AspNetCore::Http::Connections::LongPollingOptions ^ LongPolling { Microsoft::AspNetCore::Http::Connections::LongPollingOptions ^ get(); };" />
       <MemberSignature Language="C#" Value="public Microsoft.AspNetCore.Http.Connections.LongPollingOptions LongPolling { get; }" />
@@ -249,6 +273,37 @@
         <summary>
             Gets or sets the minimum protocol version supported by the server.
             The default value is 0, the lowest possible protocol version.
+            </summary>
+        <value>To be added.</value>
+        <remarks>To be added.</remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnAuthenticationRefresh">
+      <MemberSignature Language="C#" Value="public Func&lt;Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext,System.Threading.Tasks.ValueTask&lt;bool&gt;&gt;? OnAuthenticationRefresh { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;class Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext, valuetype System.Threading.Tasks.ValueTask`1&lt;bool&gt;&gt; OnAuthenticationRefresh" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Http.Connections.HttpConnectionDispatcherOptions.OnAuthenticationRefresh" />
+      <MemberSignature Language="VB.NET" Value="Public Property OnAuthenticationRefresh As Func(Of AuthenticationRefreshContext, ValueTask(Of Boolean))" />
+      <MemberSignature Language="F#" Value="member this.OnAuthenticationRefresh : Func&lt;Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext, System.Threading.Tasks.ValueTask&lt;bool&gt;&gt; with get, set" Usage="Microsoft.AspNetCore.Http.Connections.HttpConnectionDispatcherOptions.OnAuthenticationRefresh" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Connections</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <Attributes>
+        <Attribute FrameworkAlternate="aspnetcore-11.0">
+          <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1, 0 })]</AttributeName>
+          <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 2, 1, 0 })&gt;]</AttributeName>
+        </Attribute>
+      </Attributes>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Microsoft.AspNetCore.Http.Connections.AuthenticationRefreshContext,System.Threading.Tasks.ValueTask&lt;System.Boolean&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            An optional callback invoked when the <c>/refresh</c> endpoint has successfully re-authenticated
+            the request but before the connection's user is replaced. Return <c>true</c> to accept the new
+            principal, or <c>false</c> to reject the refresh. When rejected, the endpoint responds with
+            HTTP 403 and the connection's current user remains in place.
             </summary>
         <value>To be added.</value>
         <remarks>To be added.</remarks>
