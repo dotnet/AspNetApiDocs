@@ -270,6 +270,54 @@
       </Docs>
     </Member>
     <Member MemberName="CombineAsync">
+      <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Authorization.AuthorizationPolicy?&gt; CombineAsync (Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider policyProvider, System.Collections.Generic.IEnumerable&lt;object&gt; metadata);" />
+      <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt; CombineAsync(class Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider policyProvider, class System.Collections.Generic.IEnumerable`1&lt;object&gt; metadata) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider,System.Collections.Generic.IEnumerable{System.Object})" />
+      <MemberSignature Language="VB.NET" Value="Public Shared Function CombineAsync (policyProvider As IAuthorizationPolicyProvider, metadata As IEnumerable(Of Object)) As Task(Of AuthorizationPolicy)" />
+      <MemberSignature Language="F#" Value="static member CombineAsync : Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider * seq&lt;obj&gt; -&gt; System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt;" Usage="Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync (policyProvider, metadata)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Authorization</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt;</ReturnType>
+        <Attributes>
+          <Attribute>
+            <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 2 })]</AttributeName>
+            <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 2 })&gt;]</AttributeName>
+          </Attribute>
+        </Attributes>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="policyProvider" Type="Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider" Index="0" FrameworkAlternate="aspnetcore-11.0" />
+        <Parameter Name="metadata" Type="System.Collections.Generic.IEnumerable&lt;System.Object&gt;" Index="1" FrameworkAlternate="aspnetcore-11.0" />
+      </Parameters>
+      <Docs>
+        <param name="policyProvider">A <see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider" /> which provides the policies to combine.</param>
+        <param name="metadata">
+            The endpoint metadata. Items implementing <see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizeData" />, <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" />,
+            or <see cref="T:Microsoft.AspNetCore.Authorization.IAuthorizationRequirementData" /> contribute to the result; other items are ignored.
+            </param>
+        <summary>
+            Combines the authorization metadata associated with an endpoint into a single <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" />.
+            </summary>
+        <returns>
+            The combined <see cref="T:Microsoft.AspNetCore.Authorization.AuthorizationPolicy" />, or <see langword="null" /> if no authorization
+            metadata is present and no fallback policy is configured.
+            </returns>
+        <remarks>
+            This applies the same logic as the authorization middleware, so the effective policy can be computed
+            consistently outside of it (for example in SignalR, Blazor, or MVC).
+            </remarks>
+        <example>
+          <code>
+            var policy = await AuthorizationPolicy.CombineAsync(policyProvider, endpoint.Metadata);
+            </code>
+        </example>
+      </Docs>
+    </Member>
+    <Member MemberName="CombineAsync">
       <MemberSignature Language="C#" Value="public static System.Threading.Tasks.Task&lt;Microsoft.AspNetCore.Authorization.AuthorizationPolicy?&gt; CombineAsync (Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider policyProvider, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Authorization.IAuthorizeData&gt; authorizeData, System.Collections.Generic.IEnumerable&lt;Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt; policies);" />
       <MemberSignature Language="ILAsm" Value=".method public static hidebysig class System.Threading.Tasks.Task`1&lt;class Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt; CombineAsync(class Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider policyProvider, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.AspNetCore.Authorization.IAuthorizeData&gt; authorizeData, class System.Collections.Generic.IEnumerable`1&lt;class Microsoft.AspNetCore.Authorization.AuthorizationPolicy&gt; policies) cil managed" />
       <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Authorization.AuthorizationPolicy.CombineAsync(Microsoft.AspNetCore.Authorization.IAuthorizationPolicyProvider,System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Authorization.IAuthorizeData},System.Collections.Generic.IEnumerable{Microsoft.AspNetCore.Authorization.AuthorizationPolicy})" />
