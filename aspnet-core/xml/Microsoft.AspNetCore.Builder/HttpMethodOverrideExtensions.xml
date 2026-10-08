@@ -123,7 +123,18 @@
             is used when a client is limited to sending GET or POST methods but wants to invoke other HTTP methods.
             </summary>
         <returns>To be added.</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+          <para>
+            When <see cref="P:Microsoft.AspNetCore.Builder.HttpMethodOverrideOptions.FormFieldName" /> is set and the request has a form content type,
+            this middleware reads the incoming POST form before later middleware runs. The request method is overridden
+            only if the configured form field is present and has a non-empty value.
+            </para>
+          <para>
+            ASP.NET Core antiforgery middleware validates tokens only for HTTP POST, PUT, and PATCH requests. If you need
+            validation for an overridden method outside that set (for example, DELETE), resolve IAntiforgery from DI and
+            call ValidateRequestAsync or IsRequestValidAsync in the endpoint handler.
+            </para>
+        </remarks>
       </Docs>
     </Member>
   </Members>

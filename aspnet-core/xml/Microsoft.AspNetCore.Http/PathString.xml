@@ -91,7 +91,9 @@
             Initialize the path string with a given value. This value must be in unescaped format. Use
             PathString.FromUriComponent(value) if you have a path value which is in an escaped format.
             </summary>
-        <remarks>To be added.</remarks>
+        <remarks>
+            The value, when non-empty, must begin with either a forward slash ('/') or a backslash ('\').
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -131,7 +133,12 @@
             Adds two PathString instances into a combined PathString value.
             </summary>
         <returns>The combined PathString value</returns>
-        <remarks>To be added.</remarks>
+        <remarks>
+            If this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> ends with a separator ('/' or '\') and <paramref name="other" />
+            begins with the same separator, one of them is trimmed to avoid duplicating the boundary.
+            Mixed separators (e.g. trailing '/' followed by leading '\') are preserved as-is so that the
+            original characters are not silently normalized away.
+            </remarks>
       </Docs>
     </Member>
     <Member MemberName="Add">
@@ -878,6 +885,9 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a".
             </remarks>
       </Docs>
     </Member>
@@ -926,6 +936,10 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a", and <paramref name="remaining" /> will be "\b"
+            (the original character is preserved, not normalized).
             </remarks>
       </Docs>
     </Member>
@@ -974,6 +988,9 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a".
             </remarks>
       </Docs>
     </Member>
@@ -1023,6 +1040,10 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a", and <paramref name="remaining" /> will be "\b"
+            (the original character is preserved, not normalized).
             </remarks>
       </Docs>
     </Member>
@@ -1073,6 +1094,10 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a", and <paramref name="remaining" /> will be "\b"
+            (the original character is preserved, not normalized).
             </remarks>
       </Docs>
     </Member>
@@ -1124,6 +1149,10 @@
             must either exactly match or include a trailing slash. For instance, for a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a/b",
             this method will return <c>true</c> for "/a", but will return <c>false</c> for "/a/".
             Whereas, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a//b/" will return <c>true</c> when compared with "/a/".
+            A backslash ('\') in this <see cref="T:Microsoft.AspNetCore.Http.PathString" /> is treated as equivalent to a forward slash ('/')
+            for the purpose of segment boundary detection. For example, a <see cref="T:Microsoft.AspNetCore.Http.PathString" /> of "/a\b"
+            will return <c>true</c> when compared with "/a", and <paramref name="remaining" /> will be "\b"
+            (the original character is preserved, not normalized).
             </remarks>
       </Docs>
     </Member>
