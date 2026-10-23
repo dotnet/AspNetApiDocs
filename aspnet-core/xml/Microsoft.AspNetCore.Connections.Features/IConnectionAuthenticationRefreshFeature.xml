@@ -1,0 +1,94 @@
+<Type Name="IConnectionAuthenticationRefreshFeature" FullName="Microsoft.AspNetCore.Connections.Features.IConnectionAuthenticationRefreshFeature">
+  <TypeSignature Language="C#" Value="public interface IConnectionAuthenticationRefreshFeature" />
+  <TypeSignature Language="ILAsm" Value=".class public interface auto ansi abstract beforefieldinit IConnectionAuthenticationRefreshFeature" />
+  <TypeSignature Language="DocId" Value="T:Microsoft.AspNetCore.Connections.Features.IConnectionAuthenticationRefreshFeature" />
+  <TypeSignature Language="VB.NET" Value="Public Interface IConnectionAuthenticationRefreshFeature" />
+  <TypeSignature Language="F#" Value="type IConnectionAuthenticationRefreshFeature = interface" />
+  <AssemblyInfo>
+    <AssemblyName>Microsoft.AspNetCore.Http.Abstractions</AssemblyName>
+    <AssemblyVersion>11.0.0.0</AssemblyVersion>
+  </AssemblyInfo>
+  <Interfaces />
+  <Docs>
+    <summary>
+            A feature that allows components to validate and observe authentication refreshes on a connection.
+            </summary>
+    <remarks>To be added.</remarks>
+  </Docs>
+  <Members>
+    <Member MemberName="OnAuthenticationRefresh">
+      <MemberSignature Language="C#" Value="public Func&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext,System.Threading.Tasks.Task&lt;bool&gt;&gt; OnAuthenticationRefresh { get; set; }" />
+      <MemberSignature Language="ILAsm" Value=".property instance class System.Func`2&lt;class Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext, class System.Threading.Tasks.Task`1&lt;bool&gt;&gt; OnAuthenticationRefresh" />
+      <MemberSignature Language="DocId" Value="P:Microsoft.AspNetCore.Connections.Features.IConnectionAuthenticationRefreshFeature.OnAuthenticationRefresh" />
+      <MemberSignature Language="VB.NET" Value="Public Property OnAuthenticationRefresh As Func(Of AuthenticationRefreshContext, Task(Of Boolean))" />
+      <MemberSignature Language="F#" Value="member this.OnAuthenticationRefresh : Func&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext, System.Threading.Tasks.Task&lt;bool&gt;&gt; with get, set" Usage="Microsoft.AspNetCore.Connections.Features.IConnectionAuthenticationRefreshFeature.OnAuthenticationRefresh" />
+      <MemberType>Property</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Abstractions</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.Func&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext,System.Threading.Tasks.Task&lt;System.Boolean&gt;&gt;</ReturnType>
+      </ReturnValue>
+      <Docs>
+        <summary>
+            Gets or sets the callback invoked before authentication is refreshed.
+            </summary>
+        <value>To be added.</value>
+        <remarks>
+            The callback must return <see langword="true" /> for the refresh to proceed. It is invoked without
+            holding the user update lock and may perform asynchronous work, but should complete quickly.
+            An exception thrown by the callback rejects the refresh and is not propagated to the caller.
+            Setting this property replaces any previously configured callback.
+            </remarks>
+      </Docs>
+    </Member>
+    <Member MemberName="OnAuthenticationRefreshed">
+      <MemberSignature Language="C#" Value="public IDisposable OnAuthenticationRefreshed (Action&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext,object?&gt; callback, object? state);" />
+      <MemberSignature Language="ILAsm" Value=".method public hidebysig newslot virtual instance class System.IDisposable OnAuthenticationRefreshed(class System.Action`2&lt;class Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext, object&gt; callback, object state) cil managed" />
+      <MemberSignature Language="DocId" Value="M:Microsoft.AspNetCore.Connections.Features.IConnectionAuthenticationRefreshFeature.OnAuthenticationRefreshed(System.Action{Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext,System.Object},System.Object)" />
+      <MemberSignature Language="VB.NET" Value="Public Function OnAuthenticationRefreshed (callback As Action(Of AuthenticationRefreshContext, Object), state As Object) As IDisposable" />
+      <MemberSignature Language="F#" Value="abstract member OnAuthenticationRefreshed : Action&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext, obj&gt; * obj -&gt; IDisposable" Usage="iConnectionAuthenticationRefreshFeature.OnAuthenticationRefreshed (callback, state)" />
+      <MemberType>Method</MemberType>
+      <AssemblyInfo>
+        <AssemblyName>Microsoft.AspNetCore.Http.Abstractions</AssemblyName>
+        <AssemblyVersion>11.0.0.0</AssemblyVersion>
+      </AssemblyInfo>
+      <ReturnValue>
+        <ReturnType>System.IDisposable</ReturnType>
+      </ReturnValue>
+      <Parameters>
+        <Parameter Name="callback" Type="System.Action&lt;Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext,System.Object&gt;">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 1, 2 })]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(new System.Byte[] { 1, 1, 2 })&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+        <Parameter Name="state" Type="System.Object">
+          <Attributes>
+            <Attribute>
+              <AttributeName Language="C#">[System.Runtime.CompilerServices.Nullable(2)]</AttributeName>
+              <AttributeName Language="F#">[&lt;System.Runtime.CompilerServices.Nullable(2)&gt;]</AttributeName>
+            </Attribute>
+          </Attributes>
+        </Parameter>
+      </Parameters>
+      <Docs>
+        <param name="callback">The callback to invoke with the refresh context and associated <paramref name="state" />.</param>
+        <param name="state">The state to pass to <paramref name="callback" />.</param>
+        <summary>
+            Registers a callback to be invoked after authentication is refreshed.
+            </summary>
+        <returns>An <see cref="T:System.IDisposable" /> that can be disposed to unregister the callback.</returns>
+        <remarks>
+            Callbacks should be quick and avoid blocking; the callback is invoked on the thread that performed the update.
+            Exceptions thrown from callbacks are not propagated to the caller of the update.
+            The previous principal may own resources that are disposed when the authentication-refresh request completes,
+            so callbacks must not access <see cref="P:Microsoft.AspNetCore.Connections.Features.AuthenticationRefreshContext.PreviousUser" /> after returning.
+            </remarks>
+      </Docs>
+    </Member>
+  </Members>
+</Type>
